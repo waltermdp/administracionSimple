@@ -1,0 +1,15 @@
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\obj\x86\Debug\manDB.vbprojResolveAssemblyReference.cache
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\obj\x86\Debug\manDB.Resources.resources
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\obj\x86\Debug\manDB.vbproj.GenerateResource.Cache
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\manDB.dll
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\manDB.pdb
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\manDB.xml
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\libCommon.dll
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\libCommon.pdb
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\libCommon.xml
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\obj\x86\Debug\manDB.dll
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\obj\x86\Debug\manDB.xml
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\obj\x86\Debug\manDB.pdb
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\libDB.dll
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\libDB.pdb
+c:\repositorio\personal\smallAdmin\SourceCode\manDB\bin\x86\Debug\libDB.xml

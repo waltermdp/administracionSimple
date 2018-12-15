@@ -1,0 +1,12 @@
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\Debug\libDB.dll
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\Debug\libDB.pdb
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\Debug\libDB.xml
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\Debug\libCommon.dll
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\Debug\libCommon.pdb
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\Debug\libCommon.xml
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.Resources.resources
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.vbproj.GenerateResource.Cache
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.dll
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.xml
+C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.pdb

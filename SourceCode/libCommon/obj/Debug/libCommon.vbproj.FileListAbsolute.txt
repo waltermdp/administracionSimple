@@ -1,0 +1,8 @@
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\bin\Debug\libCommon.dll
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\bin\Debug\libCommon.pdb
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\bin\Debug\libCommon.xml
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\Debug\libCommon.Resources.resources
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\Debug\libCommon.vbproj.GenerateResource.Cache
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\Debug\libCommon.dll
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\Debug\libCommon.xml
+C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\Debug\libCommon.pdb

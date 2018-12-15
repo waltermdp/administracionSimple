@@ -1,0 +1,17 @@
+C:\repositorio\personal\smallAdmin\smallAdmin\bin\Debug\smallAdmin.exe.config
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\smallAdmin.exe.config
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\smallAdmin.exe
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\smallAdmin.pdb
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\smallAdmin.xml
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\libCommon.dll
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\libDB.dll
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\libCommon.pdb
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\libCommon.xml
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\libDB.pdb
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\bin\Debug\libDB.xml
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\Debug\smallAdmin.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\Debug\main.Resources.resources
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\Debug\smallAdmin.vbproj.GenerateResource.Cache
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\Debug\smallAdmin.exe
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\Debug\smallAdmin.xml
+C:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\Debug\smallAdmin.pdb
