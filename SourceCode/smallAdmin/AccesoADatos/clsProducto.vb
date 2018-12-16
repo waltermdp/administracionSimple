@@ -76,9 +76,9 @@ Public Class clsProducto
         End Try
 
         Try
-          vInfoProducto.Precio = CInt(IIf(IsDBNull(.Item("Precio")), -1, .Item("Precio")))
+          vInfoProducto.Precio = CDec(IIf(IsDBNull(.Item("Precio")), 0, .Item("Precio")))
         Catch ex As Exception
-          vInfoProducto.Precio = -1
+          vInfoProducto.Precio = 0
           Call Print_msg(ex.Message)
         End Try
 

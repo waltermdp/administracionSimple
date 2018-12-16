@@ -5,7 +5,7 @@
   Private m_GuidProducto As Guid
   Private m_GuidPago As Guid
   Private m_NumCuota As Integer
-  Private m_ValorCuota As Integer
+  Private m_ValorCuota As Double
   Private m_VencimientoCuota As Date
   Private m_FechaPago As Date
   Private m_EstadoPago As Integer
@@ -49,11 +49,11 @@
     End Set
   End Property
 
-  Public Property ValorCuota As Integer
+  Public Property ValorCuota As Double
     Get
       Return m_ValorCuota
     End Get
-    Set(value As Integer)
+    Set(value As Double)
       m_ValorCuota = value
     End Set
   End Property

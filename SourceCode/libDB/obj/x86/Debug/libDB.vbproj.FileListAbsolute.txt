@@ -10,3 +10,15 @@ c:\repositorio\personal\smallAdmin\SourceCode\libDB\bin\x86\Debug\libCommon.xml
 c:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\x86\Debug\libDB.dll
 c:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\x86\Debug\libDB.xml
 c:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\x86\Debug\libDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.Resources.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.GenerateResource.Cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.pdb

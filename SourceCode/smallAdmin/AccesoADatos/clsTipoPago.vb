@@ -4,7 +4,7 @@ Public Class clsTipoPago
 
   Private m_GuidTipoPago As Guid
   Private m_Nombre As String
-
+  Private m_PermiteCuotas As Boolean
   'TODO: VALIDAR
 
   Public Property Nombre As String
@@ -25,11 +25,20 @@ Public Class clsTipoPago
     End Set
   End Property
 
+  Public Property PermiteCuotas As Boolean
+    Get
+      Return m_PermiteCuotas
+    End Get
+    Set(value As Boolean)
+      m_PermiteCuotas = value
+    End Set
+  End Property
 
   Public Sub New()
     Try
       m_Nombre = ""
       m_GuidTipoPago = Guid.Empty
+      m_PermiteCuotas = False
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

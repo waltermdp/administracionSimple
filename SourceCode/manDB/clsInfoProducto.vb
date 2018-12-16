@@ -7,7 +7,7 @@
   Private m_GuidProducto As Guid
   Private m_GuidTipoPago As Guid
   Private m_TotalCuotas As Integer
-  Private m_Precio As Integer
+  Private m_Precio As Decimal
   Private m_CuotasDebe As Integer
   Private m_FechaPrimerPago As Date
   Private m_FechaVenta As Date
@@ -76,11 +76,11 @@
     End Set
   End Property
 
-  Public Property Precio As Integer
+  Public Property Precio As Decimal
     Get
       Return m_Precio
     End Get
-    Set(value As Integer)
+    Set(value As Decimal)
       m_Precio = value
     End Set
   End Property

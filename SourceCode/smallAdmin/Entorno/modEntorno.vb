@@ -14,8 +14,15 @@ Module Entorno
   Public Function init() As Result
     Try
       NameDB = "bdcli.mdb"
-      'App_path = My.Application.Info.DirectoryPath
-      App_path = "c:\repositorio\personal\smallAdmin\work\"
+      App_path = My.Application.Info.DirectoryPath
+      If App_path.Contains("SourceCode") Then
+        Dim tmop As String = App_path.Substring(0, App_path.IndexOf("SourceCode"))
+        App_path = IO.Path.Combine(tmop, "work")
+      End If
+
+
+      'App_path = "c:\repositorio\personal\smallAdmin\work\"
+
 
       DB_path = IO.Path.Combine(App_path, NameDB)
       If IO.File.Exists(DB_path) = False Then
@@ -69,6 +76,8 @@ Module Entorno
         For i = 0 To rListTipoListaPago.Count - 1
           auxstr = rListTipoListaPago(i).Nombre
           WriteLine(Fila, auxstr)
+          auxstr = CInt(rListTipoListaPago(i).PermiteCuotas).ToString
+          WriteLine(Fila, auxstr)
           auxstr = CStr(rListTipoListaPago(i).GuidTipo.ToString)
           WriteLine(Fila, auxstr)
           
@@ -120,8 +129,16 @@ Module Entorno
             Input(Fila, auxstr)
             auxTipoPago.Nombre = auxstr
             Input(Fila, auxstr)
+            Dim aux As Integer = CInt(auxstr)
+            If aux <= 0 Then
+              auxTipoPago.PermiteCuotas = False
+            Else
+              auxTipoPago.PermiteCuotas = True
+            End If
+
+            Input(Fila, auxstr)
             auxTipoPago.GuidTipo = New Guid(auxstr)
-            
+
             rListTipoPago.Add(auxTipoPago)
           Catch ex As Exception
             objResult = Result.ErrorEx

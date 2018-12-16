@@ -33,7 +33,7 @@ Public Class frmVenta
       cmbCuotas.DataSource = g_Cuotas
       cmbTipoPago.DataSource = g_TipoPago
       datePrimerPago.Value = Today
-
+      txtPrecio.Text = 0
       m_hayCambios = False
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -64,12 +64,19 @@ Public Class frmVenta
     Try
 
       Dim auxValue As String = CType(sender, TextBox).Text
-      If Not IsMoneyFormat(auxValue) Then
-        m_Producto.ListaPagos.Clear()
-        Exit Sub
+      'Dim dec As Decimal
+      'Dim esCorrecto As Boolean = Decimal.TryParse(auxValue, dec)
+      'If (esCorrecto) Then
+      '  txtPrecio.Text = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", dec)
+
+
+      'End If
+      'Exit Sub
+      Dim dec As Decimal
+      If text2decimal(auxValue, dec) Then
+        Call GenerarPlanCuotas()
       End If
       
-      Call GenerarPlanCuotas()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -79,6 +86,13 @@ Public Class frmVenta
     Try
       If value = String.Empty Then Return False
       If value.Trim = String.Empty Then Return False
+      Dim dec As Decimal
+      Dim esCorrecto As Boolean = Decimal.TryParse(value, dec)
+      If (esCorrecto) Then
+        value = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", dec)
+      End If
+
+
       If Not IsNumeric(value) Then
         Return False
       Else
@@ -106,26 +120,48 @@ Public Class frmVenta
 
   Private Sub cmbTipoPago_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTipoPago.SelectedIndexChanged
     Try
+      Dim tipoPago As clsTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago)
+      If Not tipoPago.PermiteCuotas Then
+        cmbCuotas.SelectedItem = g_Cuotas(0)
+        cmbCuotas.Enabled = False
+      Else
+        cmbCuotas.Enabled = True
+      End If
       Call GenerarPlanCuotas()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
+  Private Function text2decimal(ByVal vText As String, ByRef rValor As Decimal) As Boolean
+    Try
+      Dim esCorrecto As Boolean = Decimal.TryParse(vText, rValor)
+      If esCorrecto = False Then Return False
+
+      Dim auxString As String = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", rValor)
+      rValor = FormatNumber(rValor, 2)
+      Return True
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
   Private Sub GenerarPlanCuotas()
     Try
-      If txtPrecio.Text = String.Empty Then Exit Sub
-      If Not IsNumeric(txtPrecio.Text) Then Exit Sub
+      'If txtPrecio.Text = String.Empty Then Exit Sub
+      'If Not IsNumeric(txtPrecio.Text) Then Exit Sub
       If cmbCuotas.SelectedIndex < 0 Then Exit Sub
       If cmbTipoPago.SelectedIndex < 0 Then Exit Sub
-
       m_Producto.ListaPagos.Clear()
       Dim auxCuotas As Integer = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
-      Dim auxPrecio As Integer
+      Dim auxPrecio As Decimal
+      If text2decimal(txtPrecio.Text, auxPrecio) = False Then Exit Sub
+      Dim auxPrecioCuota As Decimal
       If auxCuotas = 0 Then
-        auxPrecio = CInt(txtPrecio.Text)
+        auxPrecioCuota = auxPrecio
       Else
-        auxPrecio = CSng(CInt(txtPrecio.Text) / auxCuotas)
+        auxPrecioCuota = CuotasIguales(auxPrecio, auxCuotas)
       End If
 
       Dim auxPago As New clsInfoPagos
@@ -139,7 +175,7 @@ Public Class frmVenta
         auxPago.FechaPago = Nothing ' Vencimiento(auxCuotas, datePrimerPago.Value)
         auxPago.VencimientoCuota = Vencimiento(i, datePrimerPago.Value)
         auxPago.NumCuota = i
-        auxPago.ValorCuota = auxPrecio
+        auxPago.ValorCuota = auxPrecioCuota
         m_Producto.ListaPagos.Add(auxPago)
       Next
       m_Producto.FechaPrimerPago = Vencimiento(auxCuotas, datePrimerPago.Value)
@@ -150,6 +186,17 @@ Public Class frmVenta
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Function CuotasIguales(ByVal vPrecio As Decimal, ByVal cuotas As Integer) As Decimal
+    Try
+      Dim valorCuota As Decimal
+      text2decimal(CDec(vPrecio / cuotas).ToString, valorCuota)
+      Return valorCuota
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return 0
+    End Try
+  End Function
 
   Private Function Vencimiento(ByVal Cuota As Integer, ByVal PrimerPago As Date) As Date
     Try
@@ -169,13 +216,17 @@ Public Class frmVenta
     End Try
   End Sub
 
+
   Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
     Try
+
       With m_Producto
         .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
         .GuidTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago).GuidTipo
         .FechaVenta = DateVenta.Value
-        .Precio = CInt(txtPrecio.Text)
+
+
+        .Precio = CDec(txtPrecio.Text)
         .GuidVendedor = New Guid("09c216f0-a4a0-41d7-ab18-08c403968cf5")
       End With
 

@@ -125,9 +125,9 @@ Public Class clsPago
         End Try
 
         Try
-          vInfoPago.ValorCuota = CInt(IIf(IsDBNull(.Item("ValorCuota")), -1, .Item("ValorCuota")))
+          vInfoPago.ValorCuota = CDbl(IIf(IsDBNull(.Item("ValorCuota")), 0, .Item("ValorCuota")))
         Catch ex As Exception
-          vInfoPago.ValorCuota = -1
+          vInfoPago.ValorCuota = 0
           Call Print_msg(ex.Message)
         End Try
 
