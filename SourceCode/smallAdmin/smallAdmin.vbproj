@@ -103,6 +103,7 @@
     <Compile Include="AccesoADatos\Listas\clsListDatabase.vb" />
     <Compile Include="AccesoADatos\clsPersona.vb" />
     <Compile Include="AccesoADatos\Listas\clsListProductos.vb" />
+    <Compile Include="clsImportPago.vb" />
     <Compile Include="Entorno\modEntorno.vb" />
     <Compile Include="Form\frmCliente.Designer.vb">
       <DependentUpon>frmCliente.vb</DependentUpon>
@@ -114,6 +115,12 @@
       <DependentUpon>frmDeben.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\frmDeben.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmPreviewAplicarPago.Designer.vb">
+      <DependentUpon>frmPreviewAplicarPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmPreviewAplicarPago.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmVenta.Designer.vb">
@@ -152,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDeben.resx">
       <DependentUpon>frmDeben.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmPreviewAplicarPago.resx">
+      <DependentUpon>frmPreviewAplicarPago.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmVenta.resx">
       <DependentUpon>frmVenta.vb</DependentUpon>

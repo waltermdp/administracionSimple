@@ -219,17 +219,13 @@ Public Class frmVenta
 
   Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
     Try
-
       With m_Producto
         .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
         .GuidTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago).GuidTipo
         .FechaVenta = DateVenta.Value
-
-
         .Precio = CDec(txtPrecio.Text)
         .GuidVendedor = New Guid("09c216f0-a4a0-41d7-ab18-08c403968cf5")
       End With
-
       m_hayCambios = True
       Me.Close()
     Catch ex As Exception

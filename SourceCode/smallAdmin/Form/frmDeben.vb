@@ -49,4 +49,11 @@ Public Class frmDeben
   End Sub
  
 
+  Private Sub btnPagos_Click(sender As Object, e As EventArgs) Handles btnPagos.Click
+    Try
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class
