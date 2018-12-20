@@ -41,6 +41,9 @@ C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\o
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCliente.resources
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmDeben.resources
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVenta.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.main.resources
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.Resources.resources
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.GenerateResource.Cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmPreviewAplicarPago.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedorData.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedores.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmListaClientes.resources

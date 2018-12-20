@@ -23,13 +23,12 @@ Partial Class frmDeben
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
-    Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnPagos = New System.Windows.Forms.Button()
     Me.dateInicio = New System.Windows.Forms.DateTimePicker()
     Me.btnBack = New System.Windows.Forms.Button()
-    Me.bsDeben = New System.Windows.Forms.BindingSource(Me.components)
     Me.dgvData = New System.Windows.Forms.DataGridView()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -39,11 +38,12 @@ Partial Class frmDeben
     Me.PrecioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuotasDebeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsDeben = New System.Windows.Forms.BindingSource(Me.components)
     Me.ComboBox1 = New System.Windows.Forms.ComboBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.dateFin = New System.Windows.Forms.DateTimePicker()
     Me.btnBuscar = New System.Windows.Forms.Button()
-    Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+    Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
     Me.Label2 = New System.Windows.Forms.Label()
     Me.Label3 = New System.Windows.Forms.Label()
     Me.Label4 = New System.Windows.Forms.Label()
@@ -52,8 +52,10 @@ Partial Class frmDeben
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.Panel1 = New System.Windows.Forms.Panel()
     Me.Button1 = New System.Windows.Forms.Button()
-    CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.Button2 = New System.Windows.Forms.Button()
+    Me.btnListaClientes = New System.Windows.Forms.Button()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.GroupBox1.SuspendLayout()
     Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
@@ -69,23 +71,19 @@ Partial Class frmDeben
     '
     'dateInicio
     '
-    Me.dateInicio.Location = New System.Drawing.Point(52, 34)
+    Me.dateInicio.Location = New System.Drawing.Point(124, 33)
     Me.dateInicio.Name = "dateInicio"
     Me.dateInicio.Size = New System.Drawing.Size(200, 20)
     Me.dateInicio.TabIndex = 2
     '
     'btnBack
     '
-    Me.btnBack.Location = New System.Drawing.Point(52, 451)
+    Me.btnBack.Location = New System.Drawing.Point(124, 450)
     Me.btnBack.Name = "btnBack"
     Me.btnBack.Size = New System.Drawing.Size(75, 23)
     Me.btnBack.TabIndex = 3
     Me.btnBack.Text = "Volver"
     Me.btnBack.UseVisualStyleBackColor = True
-    '
-    'bsDeben
-    '
-    Me.bsDeben.DataSource = GetType(manDB.clsInfoProducto)
     '
     'dgvData
     '
@@ -96,42 +94,42 @@ Partial Class frmDeben
     Me.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None
     Me.dgvData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-    DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.dgvData.ColumnHeadersHeight = 24
     Me.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
     Me.dgvData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.GuidVendedorDataGridViewTextBoxColumn, Me.IdProductoDataGridViewTextBoxColumn, Me.TotalCuotasDataGridViewTextBoxColumn, Me.PrecioDataGridViewTextBoxColumn, Me.CuotasDebeDataGridViewTextBoxColumn, Me.FechaVentaDataGridViewTextBoxColumn})
     Me.dgvData.DataSource = Me.bsDeben
-    DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle5
+    DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+    DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle2
     Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData.EnableHeadersVisualStyles = False
     Me.dgvData.GridColor = System.Drawing.Color.White
-    Me.dgvData.Location = New System.Drawing.Point(52, 188)
+    Me.dgvData.Location = New System.Drawing.Point(124, 175)
     Me.dgvData.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvData.MultiSelect = False
     Me.dgvData.Name = "dgvData"
     Me.dgvData.ReadOnly = True
-    DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-    DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-    DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-    DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-    DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+    DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+    DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+    DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+    DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+    DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
     Me.dgvData.RowHeadersVisible = False
     Me.dgvData.RowTemplate.Height = 24
     Me.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None
@@ -196,6 +194,10 @@ Partial Class frmDeben
     Me.FechaVentaDataGridViewTextBoxColumn.Name = "FechaVentaDataGridViewTextBoxColumn"
     Me.FechaVentaDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'bsDeben
+    '
+    Me.bsDeben.DataSource = GetType(manDB.clsInfoProducto)
+    '
     'ComboBox1
     '
     Me.ComboBox1.FormattingEnabled = True
@@ -215,27 +217,27 @@ Partial Class frmDeben
     '
     'dateFin
     '
-    Me.dateFin.Location = New System.Drawing.Point(299, 34)
+    Me.dateFin.Location = New System.Drawing.Point(371, 33)
     Me.dateFin.Name = "dateFin"
     Me.dateFin.Size = New System.Drawing.Size(200, 20)
     Me.dateFin.TabIndex = 28
     '
     'btnBuscar
     '
-    Me.btnBuscar.Location = New System.Drawing.Point(547, 18)
+    Me.btnBuscar.Location = New System.Drawing.Point(619, 17)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(85, 43)
     Me.btnBuscar.TabIndex = 29
     Me.btnBuscar.Text = "Button1"
     Me.btnBuscar.UseVisualStyleBackColor = True
     '
-    'ComboBox2
+    'cmbTipoPago
     '
-    Me.ComboBox2.FormattingEnabled = True
-    Me.ComboBox2.Location = New System.Drawing.Point(301, 5)
-    Me.ComboBox2.Name = "ComboBox2"
-    Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-    Me.ComboBox2.TabIndex = 30
+    Me.cmbTipoPago.FormattingEnabled = True
+    Me.cmbTipoPago.Location = New System.Drawing.Point(301, 5)
+    Me.cmbTipoPago.Name = "cmbTipoPago"
+    Me.cmbTipoPago.Size = New System.Drawing.Size(121, 21)
+    Me.cmbTipoPago.TabIndex = 30
     '
     'Label2
     '
@@ -249,7 +251,7 @@ Partial Class frmDeben
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(49, 18)
+    Me.Label3.Location = New System.Drawing.Point(121, 17)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(32, 13)
     Me.Label3.TabIndex = 32
@@ -258,7 +260,7 @@ Partial Class frmDeben
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(296, 18)
+    Me.Label4.Location = New System.Drawing.Point(368, 17)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(21, 13)
     Me.Label4.TabIndex = 33
@@ -290,7 +292,7 @@ Partial Class frmDeben
     '
     Me.GroupBox1.Controls.Add(Me.RadioButton1)
     Me.GroupBox1.Controls.Add(Me.RadioButton2)
-    Me.GroupBox1.Location = New System.Drawing.Point(52, 71)
+    Me.GroupBox1.Location = New System.Drawing.Point(124, 70)
     Me.GroupBox1.Name = "GroupBox1"
     Me.GroupBox1.Size = New System.Drawing.Size(200, 44)
     Me.GroupBox1.TabIndex = 36
@@ -301,11 +303,11 @@ Partial Class frmDeben
     '
     Me.Panel1.Controls.Add(Me.Button1)
     Me.Panel1.Controls.Add(Me.Label2)
-    Me.Panel1.Controls.Add(Me.ComboBox2)
+    Me.Panel1.Controls.Add(Me.cmbTipoPago)
     Me.Panel1.Controls.Add(Me.Label1)
     Me.Panel1.Controls.Add(Me.ComboBox1)
     Me.Panel1.Controls.Add(Me.btnPagos)
-    Me.Panel1.Location = New System.Drawing.Point(267, 80)
+    Me.Panel1.Location = New System.Drawing.Point(339, 79)
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Size = New System.Drawing.Size(650, 93)
     Me.Panel1.TabIndex = 37
@@ -319,11 +321,31 @@ Partial Class frmDeben
     Me.Button1.Text = "ExportarPagos"
     Me.Button1.UseVisualStyleBackColor = True
     '
+    'Button2
+    '
+    Me.Button2.Location = New System.Drawing.Point(12, 395)
+    Me.Button2.Name = "Button2"
+    Me.Button2.Size = New System.Drawing.Size(109, 23)
+    Me.Button2.TabIndex = 38
+    Me.Button2.Text = "ListaVendedores"
+    Me.Button2.UseVisualStyleBackColor = True
+    '
+    'btnListaClientes
+    '
+    Me.btnListaClientes.Location = New System.Drawing.Point(12, 366)
+    Me.btnListaClientes.Name = "btnListaClientes"
+    Me.btnListaClientes.Size = New System.Drawing.Size(109, 23)
+    Me.btnListaClientes.TabIndex = 39
+    Me.btnListaClientes.Text = "ListaClientes"
+    Me.btnListaClientes.UseVisualStyleBackColor = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(953, 476)
+    Me.ClientSize = New System.Drawing.Size(1091, 476)
+    Me.Controls.Add(Me.btnListaClientes)
+    Me.Controls.Add(Me.Button2)
     Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.Label4)
@@ -335,8 +357,8 @@ Partial Class frmDeben
     Me.Controls.Add(Me.dateInicio)
     Me.Name = "frmDeben"
     Me.Text = "frmDeben"
-    CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).EndInit()
     Me.GroupBox1.ResumeLayout(False)
     Me.GroupBox1.PerformLayout()
     Me.Panel1.ResumeLayout(False)
@@ -364,7 +386,7 @@ Partial Class frmDeben
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents dateFin As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnBuscar As System.Windows.Forms.Button
-  Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+  Friend WithEvents cmbTipoPago As System.Windows.Forms.ComboBox
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents Label3 As System.Windows.Forms.Label
   Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -373,4 +395,6 @@ Partial Class frmDeben
   Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
   Friend WithEvents Panel1 As System.Windows.Forms.Panel
   Friend WithEvents Button1 As System.Windows.Forms.Button
+  Friend WithEvents Button2 As System.Windows.Forms.Button
+  Friend WithEvents btnListaClientes As System.Windows.Forms.Button
 End Class

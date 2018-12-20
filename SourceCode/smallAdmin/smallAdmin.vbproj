@@ -98,6 +98,7 @@
     <Compile Include="AccesoADatos\clsPago.vb" />
     <Compile Include="AccesoADatos\clsProducto.vb" />
     <Compile Include="AccesoADatos\clsTipoPago.vb" />
+    <Compile Include="AccesoADatos\clsVendedor.vb" />
     <Compile Include="AccesoADatos\Listas\clsListPagos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListVendedores.vb" />
     <Compile Include="AccesoADatos\Listas\clsListDatabase.vb" />
@@ -123,17 +124,29 @@
     <Compile Include="Form\frmPreviewAplicarPago.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmVendedorData.Designer.vb">
+      <DependentUpon>frmVendedorData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmVendedorData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmVendedores.Designer.vb">
+      <DependentUpon>frmVendedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmVendedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmVenta.Designer.vb">
       <DependentUpon>frmVenta.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\frmVenta.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\main.vb">
+    <Compile Include="Form\frmListaClientes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\main.Designer.vb">
-      <DependentUpon>main.vb</DependentUpon>
+    <Compile Include="Form\frmListaClientes.Designer.vb">
+      <DependentUpon>frmListaClientes.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modulos\modCommon.vb" />
@@ -163,11 +176,17 @@
     <EmbeddedResource Include="Form\frmPreviewAplicarPago.resx">
       <DependentUpon>frmPreviewAplicarPago.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmVendedorData.resx">
+      <DependentUpon>frmVendedorData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmVendedores.resx">
+      <DependentUpon>frmVendedores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmVenta.resx">
       <DependentUpon>frmVenta.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\main.resx">
-      <DependentUpon>main.vb</DependentUpon>
+    <EmbeddedResource Include="Form\frmListaClientes.resx">
+      <DependentUpon>frmListaClientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -184,6 +203,7 @@
     <None Include="My Project\DataSources\manDB.clsInfoDatabase.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoPagos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoProducto.datasource" />
+    <None Include="My Project\DataSources\manDB.clsInfoVendedor.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

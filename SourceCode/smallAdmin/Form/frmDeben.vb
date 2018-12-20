@@ -13,7 +13,12 @@ Public Class frmDeben
 
   Private Sub frmDeben_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
+      Dim vResult As libCommon.Comunes.Result
 
+      vResult = Entorno.init
+      If vResult <> Result.OK Then
+        MsgBox("No continua application, error init")
+      End If
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -51,9 +56,40 @@ Public Class frmDeben
 
   Private Sub btnPagos_Click(sender As Object, e As EventArgs) Handles btnPagos.Click
     Try
-
+      If cmbTipoPago.SelectedIndex < 0 Then
+        MsgBox("Debe Seleccionar un tipo de pago")
+        Exit Sub
+      End If
+      Dim tipoPago As clsTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago)
+      Using objForm As New frmPreviewAplicarPago(tipoPago)
+        objForm.ShowDialog()
+        Call ProductList_RefreshData()
+      End Using
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Try
+      Using objForm As New frmVendedores
+        objForm.ShowDialog()
+      End Using
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnListaClientes_Click(sender As Object, e As EventArgs) Handles btnListaClientes.Click
+    Try
+      Using objForm As New frmListaClientes
+        objForm.ShowDialog()
+      End Using
+      Call MostrarDeben()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
 End Class

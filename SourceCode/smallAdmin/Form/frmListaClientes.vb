@@ -1,27 +1,21 @@
 ﻿Imports libCommon.Comunes
 Imports manDB
-Public Class main
+Public Class frmListaClientes
 
   Private m_CurrentSortColumnName As String
   Private m_CurrentSortDirection As String
   Private m_CurrentSortColumn As DataGridViewColumn
   Private WithEvents m_objDatabaseList As clsListDatabase = Nothing
 
-
-  Private WithEvents m_objVendedorList As clsListVendedores = Nothing
   Private Const CONST_COUNT_PACS_FOR_PAGE As Integer = 10
 
   Private m_objPersona_Current As clsInfoPersona = Nothing
 
-  
+
 
   Private Sub main_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
-      Dim vResult As libCommon.Comunes.Result
-      vResult = Entorno.init
-      If vResult <> Result.OK Then
-        MsgBox("No continua application, error init")
-      End If
+
 
       m_CurrentSortColumnName = "Nombre"
       m_CurrentSortDirection = "DESC"
@@ -46,32 +40,10 @@ Public Class main
       Dim strFilterUser As String = ""
 
       If m_objDatabaseList IsNot Nothing Then m_objDatabaseList.Dispose()
-      'If m_objProductList IsNot Nothing Then m_objProductList.Dispose()
-      'If m_objVendedorList IsNot Nothing Then m_objVendedorList.Dispose()
-
 
       Dim objResult As Result
-     
+
       m_objDatabaseList = New clsListDatabase(Entorno.DB_SLocal_ConnectionString, CONST_COUNT_PACS_FOR_PAGE)
-      'm_objVisitList = New clsListBancos(clsList(Of Global.DllEDCS.clsInfoBco).E_Source.sLocal, CONST_COUNT_VISITS_FOR_PAGE)
-      'm_objProfPacList = New clsListProfPac(clsList(Of Global.DllEDCS.clsInfoProfesional).E_Source.sLocal)
-
-      'm_objDatabaseList.Cfg_Filtro = "WHERE Acceso=" & CInt(clsClienteDataAccess.E_Modo.Privado).ToString & " AND " & strFilterUser
-
-      'SetColorDefecto(dgvData, True)
-      'SetColorDefecto(dgvVisits, True)
-
-
-
-
-      'Asocio el Control de Paginación y la Grilla a la Base de Datos
-      'm_objDatabaseList.LinkCtrl(CType(UcControlPaginadoV1, libDB.Paginado.IPaginado))
-      'UcControlPaginadoV1.IsCurrentMoving = AddressOf Attend_PaginateV1CurrentMoving
-      'UcControlPaginadoV1.CurrentBeforeChange = AddressOf Attend_PaginateV1CurrentBeforeChange
-      'UcControlPaginadoV1.CurrentAfterChange = AddressOf Attend_PaginateV1CurrentAfterChange
-
-      'm_objVisitList.LinkCtrl(CType(UcControlPaginadoV2, libDB.Paginado.IPaginado))
-      'UcControlPaginadoV2.IsCurrentMoving = AddressOf Attend_PaginateV2CurrentMoving
 
 
       '///////////////TODO_A: OJO ver order by. Agregar icono asc desc //////////////////////////////////////
@@ -82,7 +54,6 @@ Public Class main
 
 
       bsInfoCliente.DataSource = m_objDatabaseList.Binding
-      'ClsInfoBcoBindingSource.DataSource = m_objVisitList.Binding
 
       m_objPersona_Current = Nothing
       Call Refresh_InfoCliente()
@@ -114,9 +85,6 @@ Public Class main
 
       If dgvData1.SelectedRows.Count <> 1 Then Exit Sub
 
-      'Cada vez que se actualizen los Datos automáticamente
-      'If m_blnRefresh_By_Paginated_Or_Sort = True Then Exit Sub
-      'If m_blnRefresh_By_Delete = True Then Exit Sub
       Call Refresh_Selection(dgvData1.SelectedRows(0).Index)
 
     Catch ex As Exception
@@ -135,7 +103,7 @@ Public Class main
 
   Private Sub bsInfoCliente_ListChanged(sender As Object, e As System.ComponentModel.ListChangedEventArgs) Handles bsInfoCliente.ListChanged
     Try
-      Dim i As Integer = 0
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -253,10 +221,7 @@ Public Class main
       objDialog.ShowDialog()
       objDialog.Dispose()
 
-      'Salgo guardando
-
-
-      'Call RefreshDatabse
+      Call MostrarClientes()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -269,24 +234,20 @@ Public Class main
       objDialog.ShowDialog()
       objDialog.Dispose()
 
-      'Salgo guardando
-
-
-      'Call refreshDatabase
+      Call MostrarClientes()
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
 
- 
 
 
-  Private Sub btnDeben_Click(sender As Object, e As EventArgs) Handles btnDeben.Click
+
+
+  Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
     Try
-      Using objForm As New frmDeben
-        objForm.ShowDialog()
-      End Using
+      Me.Close()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

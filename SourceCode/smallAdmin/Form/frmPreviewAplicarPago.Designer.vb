@@ -24,6 +24,8 @@ Partial Class frmPreviewAplicarPago
     Private Sub InitializeComponent()
     Me.lstPagoAplicar = New System.Windows.Forms.ListView()
     Me.lblTipo = New System.Windows.Forms.Label()
+    Me.btnAplicar = New System.Windows.Forms.Button()
+    Me.btnCancelar = New System.Windows.Forms.Button()
     Me.SuspendLayout()
     '
     'lstPagoAplicar
@@ -43,11 +45,31 @@ Partial Class frmPreviewAplicarPago
     Me.lblTipo.TabIndex = 1
     Me.lblTipo.Text = "Label1"
     '
+    'btnAplicar
+    '
+    Me.btnAplicar.Location = New System.Drawing.Point(38, 332)
+    Me.btnAplicar.Name = "btnAplicar"
+    Me.btnAplicar.Size = New System.Drawing.Size(75, 35)
+    Me.btnAplicar.TabIndex = 2
+    Me.btnAplicar.Text = "Aplicar y salir"
+    Me.btnAplicar.UseVisualStyleBackColor = True
+    '
+    'btnCancelar
+    '
+    Me.btnCancelar.Location = New System.Drawing.Point(480, 344)
+    Me.btnCancelar.Name = "btnCancelar"
+    Me.btnCancelar.Size = New System.Drawing.Size(75, 23)
+    Me.btnCancelar.TabIndex = 3
+    Me.btnCancelar.Text = "Cancelar"
+    Me.btnCancelar.UseVisualStyleBackColor = True
+    '
     'frmPreviewAplicarPago
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(587, 415)
+    Me.Controls.Add(Me.btnCancelar)
+    Me.Controls.Add(Me.btnAplicar)
     Me.Controls.Add(Me.lblTipo)
     Me.Controls.Add(Me.lstPagoAplicar)
     Me.Name = "frmPreviewAplicarPago"
@@ -58,4 +80,6 @@ Partial Class frmPreviewAplicarPago
   End Sub
   Friend WithEvents lstPagoAplicar As System.Windows.Forms.ListView
   Friend WithEvents lblTipo As System.Windows.Forms.Label
+  Friend WithEvents btnAplicar As System.Windows.Forms.Button
+  Friend WithEvents btnCancelar As System.Windows.Forms.Button
 End Class
