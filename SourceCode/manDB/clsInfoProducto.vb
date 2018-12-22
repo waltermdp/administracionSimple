@@ -12,6 +12,8 @@
   Private m_FechaPrimerPago As Date
   Private m_FechaVenta As Date
   Private m_listPagos As New List(Of clsInfoPagos)
+  Private m_Cuenta As clsInfoCuenta
+  Private m_listArticulos As New List(Of clsInfoArticulos)
 
   Public Property ListaPagos As List(Of clsInfoPagos)
     Get
@@ -112,6 +114,23 @@
     End Set
   End Property
 
+  Public Property Cuenta As clsInfoCuenta
+    Get
+      Return m_Cuenta
+    End Get
+    Set(value As clsInfoCuenta)
+      m_Cuenta = value
+    End Set
+  End Property
+
+  Public Property ListaArticulos As List(Of clsInfoArticulos)
+    Get
+      Return m_listArticulos
+    End Get
+    Set(value As List(Of clsInfoArticulos))
+      m_listArticulos = value.ToList
+    End Set
+  End Property
   Public Sub New()
     MyBase.New()
     IdProducto = -1
@@ -124,6 +143,8 @@
     FechaPrimerPago = Nothing
     FechaVenta = Nothing
     m_listPagos.Clear()
+    Cuenta = New clsInfoCuenta
+    m_listArticulos.Clear()
   End Sub
 
 
@@ -138,6 +159,8 @@
     'Clonación Superficial
     objResult = CType(Me.MemberwiseClone, clsInfoProducto)
     objResult.ListaPagos = Me.ListaPagos
+    objResult.Cuenta = Me.Cuenta
+    objResult.ListaArticulos = Me.ListaArticulos
     Return objResult
 
   End Function

@@ -47,3 +47,4 @@ C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\o
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedorData.resources
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedores.resources
 C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmListaClientes.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCuenta.resources

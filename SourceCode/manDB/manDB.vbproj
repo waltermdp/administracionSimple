@@ -84,11 +84,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsInfoArticulos.vb" />
+    <Compile Include="clsInfoCuenta.vb" />
     <Compile Include="clsInfoPagos.vb" />
     <Compile Include="clsInfoCliente.vb" />
     <Compile Include="clsInfoDatabase.vb" />
     <Compile Include="clsInfoPersona.vb" />
     <Compile Include="clsInfoProducto.vb" />
+    <Compile Include="clsInfoRelArtProd.vb" />
     <Compile Include="clsInfoVendedor.vb" />
     <Compile Include="clsList.vb" />
     <Compile Include="modGlobales.vb" />

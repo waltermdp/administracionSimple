@@ -114,7 +114,7 @@ Public Class frmCliente
   End Sub
 
 
-  Private Sub btnAgregarProducto_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAgregarProducto.MouseClick
+  Private Sub btnAgregarProducto_MouseClick(sender As Object, e As MouseEventArgs)
     Try
       Dim lProducto As New clsInfoProducto
 
@@ -150,4 +150,10 @@ Public Class frmCliente
       Print_msg(ex.Message)
     End Try
   End Sub
+
+
+
+ 
+
+
 End Class

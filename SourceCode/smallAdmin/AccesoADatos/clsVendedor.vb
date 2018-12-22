@@ -168,46 +168,36 @@ Public Class clsVendedor
             strSQL.Append("(")
 
             strSQL.Append("[GuidVendedor],")
-            'strSQL.Append("[GuidOwner],")
+            strSQL.Append("[Nombre],")
             strSQL.Append("[Apellido],")
-            strSQL.Append("[Nombre]")
-            'strSQL.Append("[NHC],")
-            'strSQL.Append("[DNI],")
-            'strSQL.Append("[FechaNac],")
-            'strSQL.Append("[Telefono1],")
-            'strSQL.Append("[Email1],")
-            'strSQL.Append("[Ciudad],")
-            'strSQL.Append("[ProvEstado],")
-            'strSQL.Append("[CodPost],")
-            'strSQL.Append("[Calle1],")
-            'strSQL.Append("[NumCalle1],")
-            'strSQL.Append("[Fecha],")
-            'strSQL.Append("[Institucion],")
-            'strSQL.Append("[Comentarios],")
-            'strSQL.Append("[PathPac],")
-            'strSQL.Append("[Acceso]")
+            strSQL.Append("[NunmVendedor],")
+            strSQL.Append("[Ciudad],")
+            strSQL.Append("[Provincia],")
+            strSQL.Append("[CodigoPostal],")
+            strSQL.Append("[ID],")
+            strSQL.Append("[Grupo],")
+            strSQL.Append("[Tel1],")
+            strSQL.Append("[Tel2],")
+            strSQL.Append("[Email],")
+            strSQL.Append("[Categoria],")
+            strSQL.Append("[Comentario]")
 
             strSQL.Append(") VALUES (")
 
             strSQL.Append("""{" & .GuidVendedor.ToString & "}"",")
-            'strSQL.Append("""{" & .GuidOwner.ToString & "}"",")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Apellido) & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.NHC) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.DNI) & """,")
-            'strSQL.Append("""" & .FechaNac & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.Telefono1) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.Email1) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.Ciudad) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.ProvEstado) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.CodPost) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.Calle1) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.NumCalle1) & """,")
-            'strSQL.Append("""" & .Fecha & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.Institucion) & """,")
-            'strSQL.Append("""" & libDB.clsDB_Access.Field_Correcting(.Comentarios) & """,")
-            'strSQL.Append("""" & .PathPac & """,")
-            'strSQL.Append("""" & .Acceso & """")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.NumVendedor) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Ciudad) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Provincia) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.CodigoPostal) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.ID) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Grupo) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Tel1) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Tel2) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Email) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Categoria) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Comentario) & """")
 
             strSQL.Append(")")
 
@@ -227,25 +217,20 @@ Public Class clsVendedor
             'Update
             strSQL.Append("UPDATE [Vendedores] SET ")
             strSQL.Append("[GuidVendedor]=""{" & .GuidVendedor.ToString & "}"",")
-            'strSQL.Append("[GuidOwner]=""{" & .GuidOwner.ToString & "}"",")
             strSQL.Append("[Nombre]=""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
-            strSQL.Append("[Apellido]=""" & libDB.clsAcceso.Field_Correcting(.Apellido) & """")
-            'strSQL.Append("[DNI]=""" & libDB.clsDB_Access.Field_Correcting(.DNI) & """,")
-            'strSQL.Append("[NHC]=""" & libDB.clsDB_Access.Field_Correcting(.NHC) & """,")
-            'strSQL.Append("[FechaNac]=""" & .FechaNac & """,")
-            'strSQL.Append("[Telefono1]=""" & libDB.clsDB_Access.Field_Correcting(.Telefono1) & """,")
-            'strSQL.Append("[Email1]=""" & libDB.clsDB_Access.Field_Correcting(.Email1) & """,")
-            'strSQL.Append("[Ciudad]=""" & libDB.clsDB_Access.Field_Correcting(.Ciudad) & """,")
-            'strSQL.Append("[ProvEstado]=""" & libDB.clsDB_Access.Field_Correcting(.ProvEstado) & """,")
-            'strSQL.Append("[CodPost]=""" & libDB.clsDB_Access.Field_Correcting(.CodPost) & """,")
-            'strSQL.Append("[Calle1]=""" & libDB.clsDB_Access.Field_Correcting(.Calle1) & """,")
-            'strSQL.Append("[NumCalle1]=""" & libDB.clsDB_Access.Field_Correcting(.NumCalle1) & """,")
-            'strSQL.Append("[Fecha]=""" & .Fecha & """,")
-            'strSQL.Append("[Institucion]=""" & libDB.clsDB_Access.Field_Correcting(.Institucion) & """,")
-            'strSQL.Append("[Comentarios]=""" & libDB.clsDB_Access.Field_Correcting(.Comentarios) & """,")
-            'strSQL.Append("[PathPac] = """ & .PathPac & """,")
-
-            'strSQL.Append("[Acceso]=""" & .Acceso & """")
+            strSQL.Append("[Apellido]=""" & libDB.clsAcceso.Field_Correcting(.Apellido) & """,")
+            strSQL.Append("[NumVendedor]=""" & libDB.clsAcceso.Field_Correcting(.NumVendedor) & """,")
+            strSQL.Append("[Ciudad]=""" & libDB.clsAcceso.Field_Correcting(.Ciudad) & """,")
+            strSQL.Append("[Provincia]=""" & libDB.clsAcceso.Field_Correcting(.Provincia) & """,")
+            strSQL.Append("[CodigoPostal]=""" & libDB.clsAcceso.Field_Correcting(.CodigoPostal) & """,")
+            strSQL.Append("[ID]=""" & libDB.clsAcceso.Field_Correcting(.ID) & """,")
+            strSQL.Append("[Grupo]=""" & libDB.clsAcceso.Field_Correcting(.Grupo) & """,")
+            strSQL.Append("[Tel1]=""" & libDB.clsAcceso.Field_Correcting(.Tel1) & """,")
+            strSQL.Append("[Tel2]=""" & libDB.clsAcceso.Field_Correcting(.Tel2) & """,")
+            strSQL.Append("[Email]=""" & libDB.clsAcceso.Field_Correcting(.Email) & """,")
+            strSQL.Append("[Categoria]=""" & libDB.clsAcceso.Field_Correcting(.Categoria) & """,")
+            strSQL.Append("[Comentario]=""" & libDB.clsAcceso.Field_Correcting(.Comentario) & """")
+           
             strSQL.Append(" WHERE [IdVendedor]=" & .IdVendedor)
 
             objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)
@@ -412,152 +397,95 @@ Public Class clsVendedor
         End Try
 
         Try
-          vInfoVendedor.Apellido = CStr(IIf(IsDBNull(.Item("Apellido")), "", .Item("Apellido")))
-        Catch ex As Exception
-          vInfoVendedor.Apellido = ""
-          Call Print_msg(ex.Message)
-        End Try
-
-
-        'Try
-        '  vInfoPersona.Calle1 = CStr(IIf(IsDBNull(.Item("Calle1")), "", .Item("Calle1")))
-        'Catch ex As Exception
-        '  vInfoPersona.Calle1 = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-
-        'Try
-        '  vInfoPersona.Ciudad = CStr(IIf(IsDBNull(.Item("Ciudad")), "", .Item("Ciudad")))
-        'Catch ex As Exception
-        '  vInfoPersona.Ciudad = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.CodPost = CStr(IIf(IsDBNull(.Item("CodPost")), "", .Item("CodPost")))
-        'Catch ex As Exception
-        '  vInfoPersona.CodPost = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-
-        '  If Entorno.cEndoSOLO Then
-        '    vInfoPersona.Comentarios = CStr(IIf(IsDBNull(.Item("Comentarios")), "", .Item("Comentarios")))
-        '    EnterEndoSOLO2Manager(vInfoPersona.Comentarios)
-        '  Else
-        '    vInfoPersona.Comentarios = CStr(IIf(IsDBNull(.Item("Comentarios")), "", .Item("Comentarios")))
-        '  End If
-
-        'Catch ex As Exception
-        '  vInfoPersona.Comentarios = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.DNI = CStr(IIf(IsDBNull(.Item("DNI")), "", .Item("DNI")))
-        'Catch ex As Exception
-        '  vInfoPersona.DNI = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.Email1 = CStr(IIf(IsDBNull(.Item("Email1")), "", .Item("Email1")))
-        'Catch ex As Exception
-        '  vInfoPersona.Email1 = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.Fecha = CDate(IIf(IsDBNull(.Item("Fecha")), Nothing, .Item("Fecha")))
-        'Catch ex As Exception
-        '  vInfoPersona.Fecha = Date.Today
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.FechaNac = CDate(IIf(IsDBNull(.Item("FechaNac")), Nothing, .Item("FechaNac")))
-        'Catch ex As Exception
-        '  vInfoPersona.FechaNac = Date.Today
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-
-        '  If Entorno.cEndoSOLO Then
-        '    vInfoPersona.GuidPac = CType(IIf(IsDBNull(.Item("GuidPac")), Nothing, New Guid(CStr(.Item("GuidPac")))), Guid)
-        '  Else
-        '    vInfoPersona.GuidPac = CType(IIf(IsDBNull(.Item("GuidPac")), Nothing, .Item("GuidPac")), Guid)
-        '  End If
-
-        'Catch ex As Exception
-        '  vInfoPersona.GuidPac = Nothing
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-
-
-
-        'Try
-        '  vInfoPersona.Acceso = CInt(IIf(IsDBNull(.Item("Acceso")), Nothing, .Item("Acceso")))
-        'Catch ex As Exception
-        '  vInfoPersona.Acceso = Nothing
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.Institucion = CStr(IIf(IsDBNull(.Item("Institucion")), "", .Item("Institucion")))
-        'Catch ex As Exception
-        '  vInfoPersona.Institucion = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-        'Try
-        '  vInfoPersona.NHC = CStr(IIf(IsDBNull(.Item("NHC")), "", .Item("NHC")))
-
-        'Catch ex As Exception
-        '  vInfoPersona.NHC = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
-
-
-        Try
           vInfoVendedor.Nombre = CStr(IIf(IsDBNull(.Item("Nombre")), "", .Item("Nombre")))
         Catch ex As Exception
           vInfoVendedor.Nombre = ""
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfoVendedor.Apellido = CStr(IIf(IsDBNull(.Item("Apellido")), "", .Item("Apellido")))
+        Catch ex As Exception
+          vInfoVendedor.Apellido = ""
+          Call Print_msg(ex.Message)
+        End Try
 
-        'Try
-        '  vInfoPersona.NumCalle1 = CStr(IIf(IsDBNull(.Item("NumCalle1")), "", .Item("NumCalle1")))
-        'Catch ex As Exception
-        '  vInfoPersona.NumCalle1 = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
+        Try
+          vInfoVendedor.NumVendedor = CStr(IIf(IsDBNull(.Item("NumVendedor")), "", .Item("NumVendedor")))
+        Catch ex As Exception
+          vInfoVendedor.NumVendedor = ""
+          Call Print_msg(ex.Message)
+        End Try
 
-        'Try
-        '  vInfoPersona.PathPac = CStr(IIf(IsDBNull(.Item("PathPac")), "", .Item("PathPac")))
-        'Catch ex As Exception
-        '  vInfoPersona.PathPac = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
+        Try
+          vInfoVendedor.Ciudad = CStr(IIf(IsDBNull(.Item("Ciudad")), "", .Item("Ciudad")))
+        Catch ex As Exception
+          vInfoVendedor.Ciudad = ""
+          Call Print_msg(ex.Message)
+        End Try
 
-        'Try
-        '  vInfoPersona.ProvEstado = CStr(IIf(IsDBNull(.Item("ProvEstado")), "", .Item("ProvEstado")))
-        'Catch ex As Exception
-        '  vInfoPersona.ProvEstado = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
+        Try
+          vInfoVendedor.Provincia = CStr(IIf(IsDBNull(.Item("Provincia")), "", .Item("Provincia")))
+        Catch ex As Exception
+          vInfoVendedor.Provincia = ""
+          Call Print_msg(ex.Message)
+        End Try
 
-        'Try
-        '  vInfoPersona.Telefono1 = CStr(IIf(IsDBNull(.Item("Telefono1")), "", .Item("Telefono1")))
-        'Catch ex As Exception
-        '  vInfoPersona.Telefono1 = ""
-        '  Call libCommon.Debug.Print_MsgBox(ex)
-        'End Try
+        Try
+          vInfoVendedor.CodigoPostal = CStr(IIf(IsDBNull(.Item("CodigoPostal")), "", .Item("CodigoPostal")))
+        Catch ex As Exception
+          vInfoVendedor.CodigoPostal = ""
+          Call Print_msg(ex.Message)
+        End Try
 
+        Try
+          vInfoVendedor.ID = CStr(IIf(IsDBNull(.Item("ID")), "", .Item("ID")))
+        Catch ex As Exception
+          vInfoVendedor.ID = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoVendedor.Grupo = CStr(IIf(IsDBNull(.Item("Grupo")), "", .Item("Grupo")))
+        Catch ex As Exception
+          vInfoVendedor.Grupo = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoVendedor.Tel1 = CStr(IIf(IsDBNull(.Item("Tel1")), "", .Item("Tel1")))
+        Catch ex As Exception
+          vInfoVendedor.Tel1 = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoVendedor.Tel2 = CStr(IIf(IsDBNull(.Item("Tel2")), "", .Item("Tel2")))
+        Catch ex As Exception
+          vInfoVendedor.Tel2 = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoVendedor.Email = CStr(IIf(IsDBNull(.Item("Email")), "", .Item("Email")))
+        Catch ex As Exception
+          vInfoVendedor.Email = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoVendedor.Categoria = CStr(IIf(IsDBNull(.Item("Categoria")), "", .Item("Categoria")))
+        Catch ex As Exception
+          vInfoVendedor.Categoria = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoVendedor.Comentario = CStr(IIf(IsDBNull(.Item("Comentario")), "", .Item("Comentario")))
+        Catch ex As Exception
+          vInfoVendedor.Comentario = ""
+          Call Print_msg(ex.Message)
+        End Try
       End With
 
       Return Result.OK
