@@ -3,10 +3,14 @@ Imports libCommon.Comunes
 Public Class frmVenta
 
   Private m_Producto As clsInfoProducto
-
-
   Private m_skip As Boolean
   Private m_hayCambios As Boolean
+
+  Private m_CurrentClient As clsInfoCliente
+  Private m_CurrentVendedor As clsInfoVendedor
+  Private m_lstArticulos As clsListArticulos
+  Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
+
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
     ' This call is required by the designer.
@@ -15,8 +19,12 @@ Public Class frmVenta
       If vProducto Is Nothing Then
         m_Producto = New clsInfoProducto
         m_Producto.GuidProducto = Guid.NewGuid
+        m_CurrentClient = Nothing
+        m_CurrentVendedor = Nothing
       Else
         m_Producto = vProducto.Clone
+        m_CurrentClient = New clsInfoCliente
+        m_CurrentVendedor = New clsInfoVendedor
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -28,17 +36,73 @@ Public Class frmVenta
   Private Sub frmVenta_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
       m_skip = True
-
+      Dim vResult As Result = Result.NOK
       DateVenta.Value = Today
       cmbCuotas.DataSource = g_Cuotas
       cmbTipoPago.DataSource = g_TipoPago
       datePrimerPago.Value = Today
       txtPrecio.Text = 0
       m_hayCambios = False
+
+      If m_CurrentClient Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub
+      If m_CurrentClient IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing Then
+        vResult = clsCliente.Cliente_Load(m_Producto.GuidCliente, m_CurrentClient)
+        If vResult <> Result.OK Then
+          Call Print_msg("Falloo carga de cliente")
+        End If
+        vResult = clsVendedor.Load(m_Producto.GuidVendedor, m_CurrentVendedor)
+        If vResult <> Result.OK Then
+          Call Print_msg("Falloo carga de vendedor")
+        End If
+        Exit Sub
+      End If
+      Call Print_msg("Incongruencia de cliente and vendedor, deben o no existir ambos ")
+      gpVenta.Enabled = False
     Catch ex As Exception
       Print_msg(ex.Message)
     Finally
       m_skip = False
+    End Try
+  End Sub
+
+  Private Sub frmVenta_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Try
+      Call Refresh_infoClientVendedor()
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub FillClientData()
+    Try
+      With m_CurrentClient
+        txtNombreCliente.Text = .Personal.ToString
+        txtDNICliente.Text = .Personal.DNI
+      End With
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub FillVendedorData()
+    Try
+      With m_CurrentVendedor
+        txtNombreVendedor.Text = .ToString
+        txtDNIVendedor.Text = .ID
+      End With
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Refresh_infoClientVendedor()
+    Try
+      If m_CurrentClient IsNot Nothing Then Call FillClientData()
+      If m_CurrentVendedor IsNot Nothing Then Call FillVendedorData()
+      Call PermitirVenta()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
     End Try
   End Sub
 
@@ -76,7 +140,7 @@ Public Class frmVenta
       If text2decimal(auxValue, dec) Then
         Call GenerarPlanCuotas()
       End If
-      
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -232,4 +296,122 @@ Public Class frmVenta
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub btnNewClient_MouseClick(sender As Object, e As MouseEventArgs) Handles btnNewClient.MouseClick
+    Try
+      Using objForm As New frmCliente(frmCliente.E_Modo.Nuevo)
+        objForm.ShowDialog()
+        Call objForm.GetClient(m_CurrentClient)
+      End Using
+      Call Refresh_infoClientVendedor()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSelectClient_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSelectClient.MouseClick
+    Try
+      Using objForm As New frmListaClientes
+        objForm.ShowDialog()
+        objForm.GetClienteSelected(m_CurrentClient)
+      End Using
+      Call Refresh_infoClientVendedor()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSelectVendedor_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSelectVendedor.MouseClick
+    Try
+      Using objForm As New frmVendedores
+        objForm.ShowDialog()
+        objForm.GetVendedorSelected(m_CurrentVendedor)
+      End Using
+      Call Refresh_infoClientVendedor()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub PermitirVenta()
+    Try
+      If Not (m_CurrentClient IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing) Then
+        gpVenta.Enabled = False
+        Exit Sub
+      End If
+      gpVenta.Enabled = True
+      Call FillListArticulos()
+      Call LoadArticulosVendidos()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+  Private Sub FillListArticulos()
+    Try
+      If m_lstArticulos IsNot Nothing Then m_lstArticulos.Dispose()
+
+      m_lstArticulos = New clsListArticulos()
+      bsArticulos.DataSource = m_lstArticulos.Binding
+      m_lstArticulos.RefreshData()
+      bsArticulos.ResetBindings(False)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub LoadArticulosVendidos()
+    Try
+      If clsRelArtProd.Load(m_lstArticulosVendidos, m_Producto.GuidProducto) <> Result.OK Then
+        MsgBox("Fallo carga de articulos vendidos")
+        Exit Sub
+      End If
+      lstArticulosVendidos.Items.Clear()
+      lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnAddArticulo_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAddArticulo.MouseClick
+    Try
+      If lstArticulos.SelectedIndex < 0 Then Exit Sub
+
+      If m_lstArticulosVendidos.Exists(Function(c) c.Equals(CType(lstArticulos.SelectedItem, clsInfoArticulos))) Then
+        Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.Equals(CType(lstArticulos.SelectedItem, clsInfoArticulos)))
+        m_lstArticulosVendidos(index).CantidadArticulos += 1
+      Else
+        Dim auxArticulo As New clsInfoArticuloVendido
+        auxArticulo.copy(CType(lstArticulos.SelectedItem, clsInfoArticulos))
+        auxArticulo.CantidadArticulos = 1
+        m_lstArticulosVendidos.Add(auxArticulo)
+      End If
+      lstArticulosVendidos.Items.Clear()
+      lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnRemoveArticulo_MouseClick(sender As Object, e As MouseEventArgs) Handles btnRemoveArticulo.MouseClick
+    Try
+      If lstArticulosVendidos.SelectedIndex < 0 Then Exit Sub
+      Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.Equals(CType(lstArticulosVendidos.SelectedItem, clsInfoArticuloVendido)))
+      If m_lstArticulosVendidos(index).CantidadArticulos > 1 Then
+        m_lstArticulosVendidos(index).CantidadArticulos -= 1
+      Else
+        m_lstArticulosVendidos.RemoveAt(index)
+      End If
+      
+      lstArticulosVendidos.Items.Clear()
+      lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
 End Class

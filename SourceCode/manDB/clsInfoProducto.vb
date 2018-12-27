@@ -13,7 +13,7 @@
   Private m_FechaVenta As Date
   Private m_listPagos As New List(Of clsInfoPagos)
   Private m_Cuenta As clsInfoCuenta
-  Private m_listArticulos As New List(Of clsInfoArticulos)
+  Private m_listArticulos As New List(Of clsInfoArticuloVendido)
 
   Public Property ListaPagos As List(Of clsInfoPagos)
     Get
@@ -123,11 +123,11 @@
     End Set
   End Property
 
-  Public Property ListaArticulos As List(Of clsInfoArticulos)
+  Public Property ListaArticulos As List(Of clsInfoArticuloVendido)
     Get
       Return m_listArticulos
     End Get
-    Set(value As List(Of clsInfoArticulos))
+    Set(value As List(Of clsInfoArticuloVendido))
       m_listArticulos = value.ToList
     End Set
   End Property

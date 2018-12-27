@@ -52,8 +52,11 @@ Partial Class frmDeben
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.Panel1 = New System.Windows.Forms.Panel()
     Me.Button1 = New System.Windows.Forms.Button()
-    Me.Button2 = New System.Windows.Forms.Button()
+    Me.btnLstVendedores = New System.Windows.Forms.Button()
     Me.btnListaClientes = New System.Windows.Forms.Button()
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnEditarVenta = New System.Windows.Forms.Button()
+    Me.btnArticulos = New System.Windows.Forms.Button()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.GroupBox1.SuspendLayout()
@@ -78,11 +81,11 @@ Partial Class frmDeben
     '
     'btnBack
     '
-    Me.btnBack.Location = New System.Drawing.Point(124, 450)
+    Me.btnBack.Location = New System.Drawing.Point(12, 441)
     Me.btnBack.Name = "btnBack"
     Me.btnBack.Size = New System.Drawing.Size(75, 23)
     Me.btnBack.TabIndex = 3
-    Me.btnBack.Text = "Volver"
+    Me.btnBack.Text = "Cerrar"
     Me.btnBack.UseVisualStyleBackColor = True
     '
     'dgvData
@@ -321,14 +324,14 @@ Partial Class frmDeben
     Me.Button1.Text = "ExportarPagos"
     Me.Button1.UseVisualStyleBackColor = True
     '
-    'Button2
+    'btnLstVendedores
     '
-    Me.Button2.Location = New System.Drawing.Point(12, 395)
-    Me.Button2.Name = "Button2"
-    Me.Button2.Size = New System.Drawing.Size(109, 23)
-    Me.Button2.TabIndex = 38
-    Me.Button2.Text = "ListaVendedores"
-    Me.Button2.UseVisualStyleBackColor = True
+    Me.btnLstVendedores.Location = New System.Drawing.Point(12, 395)
+    Me.btnLstVendedores.Name = "btnLstVendedores"
+    Me.btnLstVendedores.Size = New System.Drawing.Size(109, 23)
+    Me.btnLstVendedores.TabIndex = 38
+    Me.btnLstVendedores.Text = "ListaVendedores"
+    Me.btnLstVendedores.UseVisualStyleBackColor = True
     '
     'btnListaClientes
     '
@@ -339,13 +342,43 @@ Partial Class frmDeben
     Me.btnListaClientes.Text = "ListaClientes"
     Me.btnListaClientes.UseVisualStyleBackColor = True
     '
+    'btnNuevo
+    '
+    Me.btnNuevo.Location = New System.Drawing.Point(12, 175)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(109, 34)
+    Me.btnNuevo.TabIndex = 40
+    Me.btnNuevo.Text = "Venta Nueva"
+    Me.btnNuevo.UseVisualStyleBackColor = True
+    '
+    'btnEditarVenta
+    '
+    Me.btnEditarVenta.Location = New System.Drawing.Point(12, 215)
+    Me.btnEditarVenta.Name = "btnEditarVenta"
+    Me.btnEditarVenta.Size = New System.Drawing.Size(109, 30)
+    Me.btnEditarVenta.TabIndex = 41
+    Me.btnEditarVenta.Text = "Modificar Venta"
+    Me.btnEditarVenta.UseVisualStyleBackColor = True
+    '
+    'btnArticulos
+    '
+    Me.btnArticulos.Location = New System.Drawing.Point(12, 337)
+    Me.btnArticulos.Name = "btnArticulos"
+    Me.btnArticulos.Size = New System.Drawing.Size(109, 23)
+    Me.btnArticulos.TabIndex = 42
+    Me.btnArticulos.Text = "Articulos"
+    Me.btnArticulos.UseVisualStyleBackColor = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(1091, 476)
+    Me.Controls.Add(Me.btnArticulos)
+    Me.Controls.Add(Me.btnEditarVenta)
+    Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.btnListaClientes)
-    Me.Controls.Add(Me.Button2)
+    Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.Label4)
@@ -395,6 +428,9 @@ Partial Class frmDeben
   Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
   Friend WithEvents Panel1 As System.Windows.Forms.Panel
   Friend WithEvents Button1 As System.Windows.Forms.Button
-  Friend WithEvents Button2 As System.Windows.Forms.Button
+  Friend WithEvents btnLstVendedores As System.Windows.Forms.Button
   Friend WithEvents btnListaClientes As System.Windows.Forms.Button
+  Friend WithEvents btnNuevo As System.Windows.Forms.Button
+  Friend WithEvents btnEditarVenta As System.Windows.Forms.Button
+  Friend WithEvents btnArticulos As System.Windows.Forms.Button
 End Class

@@ -111,6 +111,18 @@ Public Class frmVendedores
     End Try
   End Sub
 
+  Public Sub GetVendedorSelected(ByRef rVendedor As manDB.clsInfoVendedor)
+    Try
+      If m_objVendedorCurrent Is Nothing Then
+        rVendedor = Nothing
+        Exit Sub
+      End If
+      rVendedor = m_objVendedorCurrent.Clone
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
     Try
       Me.Close()

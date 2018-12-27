@@ -26,7 +26,7 @@ Public Class clsPersona
             strSQL.Append("[GuidCliente],")
             strSQL.Append("[Nombre],")
             strSQL.Append("[Apellido],")
-            strSQL.Append("[DNI],")
+            strSQL.Append("[ID],")
             strSQL.Append("[FechaNac],")
             strSQL.Append("[Calle],")
             strSQL.Append("[NumCalle],")
@@ -85,7 +85,7 @@ Public Class clsPersona
             strSQL.Append("[GuidCliente]=""{" & .GuidCliente.ToString & "}"",")
             strSQL.Append("[Nombre]=""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("[Apellido]=""" & libDB.clsAcceso.Field_Correcting(.Apellido) & """,")
-            strSQL.Append("[DNI]=""" & libDB.clsAcceso.Field_Correcting(.DNI) & """,")
+            strSQL.Append("[ID]=""" & libDB.clsAcceso.Field_Correcting(.DNI) & """,")
             strSQL.Append("[FechaNac]=""" & .FechaNac & """,")
             strSQL.Append("[Calle]=""" & libDB.clsAcceso.Field_Correcting(.Calle) & """,")
             strSQL.Append("[NumCalle]=""" & libDB.clsAcceso.Field_Correcting(.NumCalle) & """,")
@@ -283,7 +283,7 @@ Public Class clsPersona
         End Try
 
         Try
-          vInfoPersona.DNI = CStr(IIf(IsDBNull(.Item("DNI")), "", .Item("DNI")))
+          vInfoPersona.DNI = CStr(IIf(IsDBNull(.Item("ID")), "", .Item("ID")))
         Catch ex As Exception
           vInfoPersona.DNI = ""
           Call Print_msg(ex.Message)
@@ -305,7 +305,7 @@ Public Class clsPersona
 
 
         Try
-          vInfoPersona.NumCalle = CStr(IIf(IsDBNull(.Item("NunmCalle")), "", .Item("NumCalle")))
+          vInfoPersona.NumCalle = CStr(IIf(IsDBNull(.Item("NumCalle")), "", .Item("NumCalle")))
         Catch ex As Exception
           vInfoPersona.NumCalle = ""
           Call Print_msg(ex.Message)
@@ -354,14 +354,14 @@ Public Class clsPersona
         End Try
 
         Try
-          vInfoPersona.Calle2 = CStr(IIf(IsDBNull(.Item("Calle")), "", .Item("Calle")))
+          vInfoPersona.Calle2 = CStr(IIf(IsDBNull(.Item("Calle2")), "", .Item("Calle2")))
         Catch ex As Exception
           vInfoPersona.Calle = ""
           Call Print_msg(ex.Message)
         End Try
 
         Try
-          vInfoPersona.NumCalle2 = CStr(IIf(IsDBNull(.Item("NunmCalle")), "", .Item("NumCalle")))
+          vInfoPersona.NumCalle2 = CStr(IIf(IsDBNull(.Item("NumCalle2")), "", .Item("NumCalle2")))
         Catch ex As Exception
           vInfoPersona.NumCalle = ""
           Call Print_msg(ex.Message)

@@ -10,8 +10,7 @@ Public Class frmCliente
   End Enum
 
   Private m_Modo As E_Modo
-
-  Private LCliente As clsInfoCliente
+  Private m_Cliente As clsInfoCliente
 
   Public Sub New(ByVal vModo As E_Modo)
     Try
@@ -25,7 +24,7 @@ Public Class frmCliente
 
   Private Sub Refresh_InfoCurrentCliente()
     Try
-      With LCliente.Personal
+      With m_Cliente.Personal
         txtApellido.Text = CStr(IIf(.Apellido = "--" And m_Modo = E_Modo.Nuevo, "", .Apellido))
         txtNombre.Text = CStr(IIf(.Nombre = "--" And m_Modo = E_Modo.Nuevo, "", .Nombre))
       End With
@@ -41,7 +40,7 @@ Public Class frmCliente
     Try
 
 
-      With LCliente.Personal
+      With m_Cliente.Personal
         .Apellido = txtApellido.Text.Trim
         If .Apellido = "" Then .Apellido = "--"
 
@@ -61,16 +60,13 @@ Public Class frmCliente
     Try
       Dim vResult As libCommon.Comunes.Result
       Call Save_InfoCurrentCliente()
-      If m_Modo = E_Modo.Edicion Then
 
-      Else 'nuevo
-
-      End If
-      vResult = clsCliente.SavePersonal(LCliente)
+      vResult = clsCliente.SavePersonal(m_Cliente)
       If vResult <> Result.OK Then
         MsgBox("No se guardo")
         Exit Sub
       End If
+
       Me.Close()
       Exit Sub
     Catch ex As Exception
@@ -80,15 +76,29 @@ Public Class frmCliente
 
   Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
     Try
+      m_Cliente = Nothing
       Me.Close()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
+  Public Sub GetClient(ByRef rCliente As clsInfoCliente)
+    Try
+      If m_Cliente IsNot Nothing Then
+        rCliente = m_Cliente.Clone
+      Else
+        rCliente = Nothing
+      End If
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub frmCliente_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
-      LCliente = New clsInfoCliente()
+      m_Cliente = New clsInfoCliente()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -99,11 +109,11 @@ Public Class frmCliente
     Try
 
       If m_Modo = E_Modo.Edicion Then
-        LCliente = gCliente.clone
+        m_Cliente = gCliente.clone
 
       Else 'nuevo
-        LCliente = New clsInfoCliente
-        LCliente.Personal.GuidCliente = Guid.NewGuid
+        m_Cliente = New clsInfoCliente
+        m_Cliente.Personal.GuidCliente = Guid.NewGuid
       End If
 
       Call Refresh_InfoCurrentCliente()
@@ -122,10 +132,9 @@ Public Class frmCliente
         objVenta.ShowDialog()
         If objVenta.HayCambios Then
           objVenta.getCambios(lProducto)
-          lProducto.GuidCliente = LCliente.Personal.GuidCliente
-          LCliente.ListaProductos.Add(lProducto)
+          lProducto.GuidCliente = m_Cliente.Personal.GuidCliente
+          m_Cliente.ListaProductos.Add(lProducto)
         End If
-
       End Using
 
       Call Refresh_InfoCurrentCliente()
@@ -139,7 +148,7 @@ Public Class frmCliente
       'If m_objProductList IsNot Nothing Then m_objProductList.Dispose()
       'm_objProductList = New clsListProductos()
 
-      bsinfoProductos.DataSource = LCliente.ListaProductos  'm_objProductList.Binding
+      bsinfoProductos.DataSource = m_Cliente.ListaProductos  'm_objProductList.Binding
       'm_objPersona_Current = Nothing
       'Call Refresh_InfoCliente()
 

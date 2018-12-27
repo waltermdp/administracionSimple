@@ -64,12 +64,10 @@
 #Region "Overrides"
 
   Public Overrides Function ToString() As String
-    Return Nombre
+    Return String.Format("{0}, ({1})", Nombre, Codigo)
   End Function
 
-  'Las Igualdades se establecen a partir del campo Guid
-  'OJO!!! si no se incluye esta sobrecarga, la búsqueda implementada en Find
-  'en clsList no arroja resultados
+
   Public Overrides Function Equals(ByVal obj As Object) As Boolean
 
     If obj.GetType Is GetType(clsInfoArticulos) Then
@@ -93,7 +91,7 @@
 
     'Clonación Superficial
     objResult = CType(Me.MemberwiseClone, clsInfoArticulos)
-    
+
     Return objResult
 
   End Function

@@ -9,6 +9,7 @@
       ErrorInt = -2
       OK = 255
       NOK = 254
+      CANCEL = 253
     End Enum
 
     Public Sub Print_msg(ByVal campo As String)

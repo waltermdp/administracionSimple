@@ -36,11 +36,6 @@ Partial Class frmVenta
     Me.Label5 = New System.Windows.Forms.Label()
     Me.datePrimerPago = New System.Windows.Forms.DateTimePicker()
     Me.dgvCuotas = New System.Windows.Forms.DataGridView()
-    Me.bsCuotas = New System.Windows.Forms.BindingSource(Me.components)
-    Me.cmbVendedor = New System.Windows.Forms.ComboBox()
-    Me.Label6 = New System.Windows.Forms.Label()
-    Me.chkEditarCuotas = New System.Windows.Forms.CheckBox()
-    Me.ListBox1 = New System.Windows.Forms.ListBox()
     Me.IdPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,13 +44,38 @@ Partial Class frmVenta
     Me.VencimientoCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.EstadoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsCuotas = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label6 = New System.Windows.Forms.Label()
+    Me.chkEditarCuotas = New System.Windows.Forms.CheckBox()
+    Me.Label7 = New System.Windows.Forms.Label()
+    Me.btnSelectClient = New System.Windows.Forms.Button()
+    Me.btnNewClient = New System.Windows.Forms.Button()
+    Me.btnSelectVendedor = New System.Windows.Forms.Button()
+    Me.txtNombreCliente = New System.Windows.Forms.TextBox()
+    Me.Label8 = New System.Windows.Forms.Label()
+    Me.txtDNICliente = New System.Windows.Forms.TextBox()
+    Me.Label9 = New System.Windows.Forms.Label()
+    Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
+    Me.Label10 = New System.Windows.Forms.Label()
+    Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
+    Me.Label11 = New System.Windows.Forms.Label()
+    Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.btnRemoveArticulo = New System.Windows.Forms.Button()
+    Me.btnAddArticulo = New System.Windows.Forms.Button()
+    Me.lstArticulosVendidos = New System.Windows.Forms.ListBox()
+    Me.txtBuscarArticulo = New System.Windows.Forms.TextBox()
+    Me.lstArticulos = New System.Windows.Forms.ListBox()
+    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label12 = New System.Windows.Forms.Label()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.gpVenta.SuspendLayout()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtPrecio
     '
-    Me.txtPrecio.Location = New System.Drawing.Point(227, 120)
+    Me.txtPrecio.Location = New System.Drawing.Point(588, 323)
     Me.txtPrecio.Name = "txtPrecio"
     Me.txtPrecio.Size = New System.Drawing.Size(100, 20)
     Me.txtPrecio.TabIndex = 0
@@ -63,7 +83,7 @@ Partial Class frmVenta
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(224, 105)
+    Me.Label1.Location = New System.Drawing.Point(585, 308)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(37, 13)
     Me.Label1.TabIndex = 2
@@ -71,7 +91,7 @@ Partial Class frmVenta
     '
     'DateVenta
     '
-    Me.DateVenta.Location = New System.Drawing.Point(95, 39)
+    Me.DateVenta.Location = New System.Drawing.Point(19, 42)
     Me.DateVenta.Name = "DateVenta"
     Me.DateVenta.Size = New System.Drawing.Size(200, 20)
     Me.DateVenta.TabIndex = 4
@@ -79,7 +99,7 @@ Partial Class frmVenta
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(92, 105)
+    Me.Label3.Location = New System.Drawing.Point(462, 308)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(70, 13)
     Me.Label3.TabIndex = 6
@@ -87,7 +107,7 @@ Partial Class frmVenta
     '
     'btnSave
     '
-    Me.btnSave.Location = New System.Drawing.Point(84, 403)
+    Me.btnSave.Location = New System.Drawing.Point(79, 694)
     Me.btnSave.Name = "btnSave"
     Me.btnSave.Size = New System.Drawing.Size(75, 23)
     Me.btnSave.TabIndex = 7
@@ -96,7 +116,7 @@ Partial Class frmVenta
     '
     'btnCancel
     '
-    Me.btnCancel.Location = New System.Drawing.Point(186, 403)
+    Me.btnCancel.Location = New System.Drawing.Point(160, 694)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(75, 23)
     Me.btnCancel.TabIndex = 8
@@ -107,7 +127,7 @@ Partial Class frmVenta
     '
     Me.cmbCuotas.FormattingEnabled = True
     Me.cmbCuotas.Items.AddRange(New Object() {"Contado", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-    Me.cmbCuotas.Location = New System.Drawing.Point(337, 121)
+    Me.cmbCuotas.Location = New System.Drawing.Point(691, 323)
     Me.cmbCuotas.Name = "cmbCuotas"
     Me.cmbCuotas.Size = New System.Drawing.Size(121, 21)
     Me.cmbCuotas.TabIndex = 9
@@ -115,7 +135,7 @@ Partial Class frmVenta
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(334, 105)
+    Me.Label4.Location = New System.Drawing.Point(688, 307)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(40, 13)
     Me.Label4.TabIndex = 10
@@ -124,7 +144,7 @@ Partial Class frmVenta
     'cmbTipoPago
     '
     Me.cmbTipoPago.FormattingEnabled = True
-    Me.cmbTipoPago.Location = New System.Drawing.Point(95, 120)
+    Me.cmbTipoPago.Location = New System.Drawing.Point(465, 324)
     Me.cmbTipoPago.Name = "cmbTipoPago"
     Me.cmbTipoPago.Size = New System.Drawing.Size(112, 21)
     Me.cmbTipoPago.TabIndex = 11
@@ -132,7 +152,7 @@ Partial Class frmVenta
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(92, 23)
+    Me.Label2.Location = New System.Drawing.Point(16, 26)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(65, 13)
     Me.Label2.TabIndex = 12
@@ -141,7 +161,7 @@ Partial Class frmVenta
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(488, 105)
+    Me.Label5.Location = New System.Drawing.Point(462, 348)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(91, 13)
     Me.Label5.TabIndex = 13
@@ -149,7 +169,7 @@ Partial Class frmVenta
     '
     'datePrimerPago
     '
-    Me.datePrimerPago.Location = New System.Drawing.Point(491, 121)
+    Me.datePrimerPago.Location = New System.Drawing.Point(465, 364)
     Me.datePrimerPago.Name = "datePrimerPago"
     Me.datePrimerPago.Size = New System.Drawing.Size(200, 20)
     Me.datePrimerPago.TabIndex = 14
@@ -160,49 +180,10 @@ Partial Class frmVenta
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
-    Me.dgvCuotas.Location = New System.Drawing.Point(95, 150)
+    Me.dgvCuotas.Location = New System.Drawing.Point(126, 335)
     Me.dgvCuotas.Name = "dgvCuotas"
-    Me.dgvCuotas.Size = New System.Drawing.Size(310, 176)
+    Me.dgvCuotas.Size = New System.Drawing.Size(310, 143)
     Me.dgvCuotas.TabIndex = 15
-    '
-    'bsCuotas
-    '
-    Me.bsCuotas.DataSource = GetType(manDB.clsInfoPagos)
-    '
-    'cmbVendedor
-    '
-    Me.cmbVendedor.FormattingEnabled = True
-    Me.cmbVendedor.Location = New System.Drawing.Point(453, 305)
-    Me.cmbVendedor.Name = "cmbVendedor"
-    Me.cmbVendedor.Size = New System.Drawing.Size(178, 21)
-    Me.cmbVendedor.TabIndex = 16
-    '
-    'Label6
-    '
-    Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(454, 285)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(53, 13)
-    Me.Label6.TabIndex = 17
-    Me.Label6.Text = "Vendedor"
-    '
-    'chkEditarCuotas
-    '
-    Me.chkEditarCuotas.AutoSize = True
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(426, 162)
-    Me.chkEditarCuotas.Name = "chkEditarCuotas"
-    Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
-    Me.chkEditarCuotas.TabIndex = 18
-    Me.chkEditarCuotas.Text = "EditarCuotas"
-    Me.chkEditarCuotas.UseVisualStyleBackColor = True
-    '
-    'ListBox1
-    '
-    Me.ListBox1.FormattingEnabled = True
-    Me.ListBox1.Location = New System.Drawing.Point(710, 162)
-    Me.ListBox1.Name = "ListBox1"
-    Me.ListBox1.Size = New System.Drawing.Size(163, 199)
-    Me.ListBox1.TabIndex = 19
     '
     'IdPagoDataGridViewTextBoxColumn
     '
@@ -252,32 +233,243 @@ Partial Class frmVenta
     Me.EstadoPagoDataGridViewTextBoxColumn.HeaderText = "EstadoPago"
     Me.EstadoPagoDataGridViewTextBoxColumn.Name = "EstadoPagoDataGridViewTextBoxColumn"
     '
+    'bsCuotas
+    '
+    Me.bsCuotas.DataSource = GetType(manDB.clsInfoPagos)
+    '
+    'Label6
+    '
+    Me.Label6.AutoSize = True
+    Me.Label6.Location = New System.Drawing.Point(76, 108)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(128, 13)
+    Me.Label6.TabIndex = 17
+    Me.Label6.Text = "Informacion del Vendedor"
+    '
+    'chkEditarCuotas
+    '
+    Me.chkEditarCuotas.AutoSize = True
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(704, 376)
+    Me.chkEditarCuotas.Name = "chkEditarCuotas"
+    Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
+    Me.chkEditarCuotas.TabIndex = 18
+    Me.chkEditarCuotas.Text = "EditarCuotas"
+    Me.chkEditarCuotas.UseVisualStyleBackColor = True
+    '
+    'Label7
+    '
+    Me.Label7.AutoSize = True
+    Me.Label7.Location = New System.Drawing.Point(76, 9)
+    Me.Label7.Name = "Label7"
+    Me.Label7.Size = New System.Drawing.Size(114, 13)
+    Me.Label7.TabIndex = 20
+    Me.Label7.Text = "Informacion del Cliente"
+    '
+    'btnSelectClient
+    '
+    Me.btnSelectClient.Location = New System.Drawing.Point(79, 36)
+    Me.btnSelectClient.Name = "btnSelectClient"
+    Me.btnSelectClient.Size = New System.Drawing.Size(125, 23)
+    Me.btnSelectClient.TabIndex = 21
+    Me.btnSelectClient.Text = "Seleccionar Cliente"
+    Me.btnSelectClient.UseVisualStyleBackColor = True
+    '
+    'btnNewClient
+    '
+    Me.btnNewClient.Location = New System.Drawing.Point(79, 65)
+    Me.btnNewClient.Name = "btnNewClient"
+    Me.btnNewClient.Size = New System.Drawing.Size(125, 23)
+    Me.btnNewClient.TabIndex = 22
+    Me.btnNewClient.Text = "Cliente Nuevo"
+    Me.btnNewClient.UseVisualStyleBackColor = True
+    '
+    'btnSelectVendedor
+    '
+    Me.btnSelectVendedor.Location = New System.Drawing.Point(79, 124)
+    Me.btnSelectVendedor.Name = "btnSelectVendedor"
+    Me.btnSelectVendedor.Size = New System.Drawing.Size(125, 23)
+    Me.btnSelectVendedor.TabIndex = 23
+    Me.btnSelectVendedor.Text = "Seleccionar Vendedor"
+    Me.btnSelectVendedor.UseVisualStyleBackColor = True
+    '
+    'txtNombreCliente
+    '
+    Me.txtNombreCliente.Location = New System.Drawing.Point(266, 52)
+    Me.txtNombreCliente.Name = "txtNombreCliente"
+    Me.txtNombreCliente.ReadOnly = True
+    Me.txtNombreCliente.Size = New System.Drawing.Size(230, 20)
+    Me.txtNombreCliente.TabIndex = 24
+    '
+    'Label8
+    '
+    Me.Label8.AutoSize = True
+    Me.Label8.Location = New System.Drawing.Point(263, 36)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(39, 13)
+    Me.Label8.TabIndex = 25
+    Me.Label8.Text = "Cliente"
+    '
+    'txtDNICliente
+    '
+    Me.txtDNICliente.Location = New System.Drawing.Point(502, 52)
+    Me.txtDNICliente.Name = "txtDNICliente"
+    Me.txtDNICliente.ReadOnly = True
+    Me.txtDNICliente.Size = New System.Drawing.Size(184, 20)
+    Me.txtDNICliente.TabIndex = 26
+    '
+    'Label9
+    '
+    Me.Label9.AutoSize = True
+    Me.Label9.Location = New System.Drawing.Point(499, 36)
+    Me.Label9.Name = "Label9"
+    Me.Label9.Size = New System.Drawing.Size(26, 13)
+    Me.Label9.TabIndex = 27
+    Me.Label9.Text = "DNI"
+    '
+    'txtNombreVendedor
+    '
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(266, 140)
+    Me.txtNombreVendedor.Name = "txtNombreVendedor"
+    Me.txtNombreVendedor.ReadOnly = True
+    Me.txtNombreVendedor.Size = New System.Drawing.Size(230, 20)
+    Me.txtNombreVendedor.TabIndex = 28
+    '
+    'Label10
+    '
+    Me.Label10.AutoSize = True
+    Me.Label10.Location = New System.Drawing.Point(263, 124)
+    Me.Label10.Name = "Label10"
+    Me.Label10.Size = New System.Drawing.Size(53, 13)
+    Me.Label10.TabIndex = 29
+    Me.Label10.Text = "Vendedor"
+    '
+    'txtDNIVendedor
+    '
+    Me.txtDNIVendedor.Location = New System.Drawing.Point(502, 140)
+    Me.txtDNIVendedor.Name = "txtDNIVendedor"
+    Me.txtDNIVendedor.ReadOnly = True
+    Me.txtDNIVendedor.Size = New System.Drawing.Size(184, 20)
+    Me.txtDNIVendedor.TabIndex = 30
+    '
+    'Label11
+    '
+    Me.Label11.AutoSize = True
+    Me.Label11.Location = New System.Drawing.Point(499, 124)
+    Me.Label11.Name = "Label11"
+    Me.Label11.Size = New System.Drawing.Size(26, 13)
+    Me.Label11.TabIndex = 32
+    Me.Label11.Text = "DNI"
+    '
+    'gpVenta
+    '
+    Me.gpVenta.Controls.Add(Me.btnRemoveArticulo)
+    Me.gpVenta.Controls.Add(Me.btnAddArticulo)
+    Me.gpVenta.Controls.Add(Me.lstArticulosVendidos)
+    Me.gpVenta.Controls.Add(Me.txtBuscarArticulo)
+    Me.gpVenta.Controls.Add(Me.lstArticulos)
+    Me.gpVenta.Controls.Add(Me.Label12)
+    Me.gpVenta.Controls.Add(Me.Label2)
+    Me.gpVenta.Controls.Add(Me.txtPrecio)
+    Me.gpVenta.Controls.Add(Me.Label1)
+    Me.gpVenta.Controls.Add(Me.DateVenta)
+    Me.gpVenta.Controls.Add(Me.Label3)
+    Me.gpVenta.Controls.Add(Me.cmbCuotas)
+    Me.gpVenta.Controls.Add(Me.Label4)
+    Me.gpVenta.Controls.Add(Me.cmbTipoPago)
+    Me.gpVenta.Controls.Add(Me.Label5)
+    Me.gpVenta.Controls.Add(Me.datePrimerPago)
+    Me.gpVenta.Controls.Add(Me.dgvCuotas)
+    Me.gpVenta.Controls.Add(Me.chkEditarCuotas)
+    Me.gpVenta.Location = New System.Drawing.Point(79, 180)
+    Me.gpVenta.Name = "gpVenta"
+    Me.gpVenta.Size = New System.Drawing.Size(895, 508)
+    Me.gpVenta.TabIndex = 33
+    Me.gpVenta.TabStop = False
+    Me.gpVenta.Text = "Venta"
+    '
+    'btnRemoveArticulo
+    '
+    Me.btnRemoveArticulo.Location = New System.Drawing.Point(248, 191)
+    Me.btnRemoveArticulo.Name = "btnRemoveArticulo"
+    Me.btnRemoveArticulo.Size = New System.Drawing.Size(45, 24)
+    Me.btnRemoveArticulo.TabIndex = 25
+    Me.btnRemoveArticulo.Text = "<-"
+    Me.btnRemoveArticulo.UseVisualStyleBackColor = True
+    '
+    'btnAddArticulo
+    '
+    Me.btnAddArticulo.Location = New System.Drawing.Point(248, 162)
+    Me.btnAddArticulo.Name = "btnAddArticulo"
+    Me.btnAddArticulo.Size = New System.Drawing.Size(45, 23)
+    Me.btnAddArticulo.TabIndex = 24
+    Me.btnAddArticulo.Text = "->"
+    Me.btnAddArticulo.UseVisualStyleBackColor = True
+    '
+    'lstArticulosVendidos
+    '
+    Me.lstArticulosVendidos.FormattingEnabled = True
+    Me.lstArticulosVendidos.Location = New System.Drawing.Point(299, 118)
+    Me.lstArticulosVendidos.Name = "lstArticulosVendidos"
+    Me.lstArticulosVendidos.Size = New System.Drawing.Size(223, 173)
+    Me.lstArticulosVendidos.TabIndex = 23
+    '
+    'txtBuscarArticulo
+    '
+    Me.txtBuscarArticulo.Location = New System.Drawing.Point(19, 95)
+    Me.txtBuscarArticulo.Name = "txtBuscarArticulo"
+    Me.txtBuscarArticulo.Size = New System.Drawing.Size(223, 20)
+    Me.txtBuscarArticulo.TabIndex = 21
+    '
+    'lstArticulos
+    '
+    Me.lstArticulos.DataSource = Me.bsArticulos
+    Me.lstArticulos.FormattingEnabled = True
+    Me.lstArticulos.Location = New System.Drawing.Point(19, 119)
+    Me.lstArticulos.Name = "lstArticulos"
+    Me.lstArticulos.Size = New System.Drawing.Size(223, 173)
+    Me.lstArticulos.TabIndex = 20
+    '
+    'bsArticulos
+    '
+    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
+    '
+    'Label12
+    '
+    Me.Label12.AutoSize = True
+    Me.Label12.Location = New System.Drawing.Point(16, 76)
+    Me.Label12.Name = "Label12"
+    Me.Label12.Size = New System.Drawing.Size(47, 13)
+    Me.Label12.TabIndex = 19
+    Me.Label12.Text = "Articulos"
+    '
     'frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(896, 481)
-    Me.Controls.Add(Me.ListBox1)
-    Me.Controls.Add(Me.chkEditarCuotas)
+    Me.ClientSize = New System.Drawing.Size(1008, 729)
+    Me.Controls.Add(Me.gpVenta)
+    Me.Controls.Add(Me.Label11)
+    Me.Controls.Add(Me.txtDNIVendedor)
+    Me.Controls.Add(Me.Label10)
+    Me.Controls.Add(Me.txtNombreVendedor)
+    Me.Controls.Add(Me.Label9)
+    Me.Controls.Add(Me.txtDNICliente)
+    Me.Controls.Add(Me.Label8)
+    Me.Controls.Add(Me.txtNombreCliente)
+    Me.Controls.Add(Me.btnSelectVendedor)
+    Me.Controls.Add(Me.btnNewClient)
+    Me.Controls.Add(Me.btnSelectClient)
+    Me.Controls.Add(Me.Label7)
     Me.Controls.Add(Me.Label6)
-    Me.Controls.Add(Me.cmbVendedor)
-    Me.Controls.Add(Me.dgvCuotas)
-    Me.Controls.Add(Me.datePrimerPago)
-    Me.Controls.Add(Me.Label5)
-    Me.Controls.Add(Me.Label2)
-    Me.Controls.Add(Me.cmbTipoPago)
-    Me.Controls.Add(Me.Label4)
-    Me.Controls.Add(Me.cmbCuotas)
     Me.Controls.Add(Me.btnCancel)
     Me.Controls.Add(Me.btnSave)
-    Me.Controls.Add(Me.Label3)
-    Me.Controls.Add(Me.DateVenta)
-    Me.Controls.Add(Me.Label1)
-    Me.Controls.Add(Me.txtPrecio)
     Me.Name = "frmVenta"
     Me.Text = "frmVenta"
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.gpVenta.ResumeLayout(False)
+    Me.gpVenta.PerformLayout()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -296,10 +488,8 @@ Partial Class frmVenta
   Friend WithEvents datePrimerPago As System.Windows.Forms.DateTimePicker
   Friend WithEvents dgvCuotas As System.Windows.Forms.DataGridView
   Friend WithEvents bsCuotas As System.Windows.Forms.BindingSource
-  Friend WithEvents cmbVendedor As System.Windows.Forms.ComboBox
   Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents chkEditarCuotas As System.Windows.Forms.CheckBox
-  Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
   Friend WithEvents IdProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents IdPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -309,4 +499,24 @@ Partial Class frmVenta
   Friend WithEvents VencimientoCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents EstadoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents Label7 As System.Windows.Forms.Label
+  Friend WithEvents btnSelectClient As System.Windows.Forms.Button
+  Friend WithEvents btnNewClient As System.Windows.Forms.Button
+  Friend WithEvents btnSelectVendedor As System.Windows.Forms.Button
+  Friend WithEvents txtNombreCliente As System.Windows.Forms.TextBox
+  Friend WithEvents Label8 As System.Windows.Forms.Label
+  Friend WithEvents txtDNICliente As System.Windows.Forms.TextBox
+  Friend WithEvents Label9 As System.Windows.Forms.Label
+  Friend WithEvents txtNombreVendedor As System.Windows.Forms.TextBox
+  Friend WithEvents Label10 As System.Windows.Forms.Label
+  Friend WithEvents txtDNIVendedor As System.Windows.Forms.TextBox
+  Friend WithEvents Label11 As System.Windows.Forms.Label
+  Friend WithEvents gpVenta As System.Windows.Forms.GroupBox
+  Friend WithEvents txtBuscarArticulo As System.Windows.Forms.TextBox
+  Friend WithEvents lstArticulos As System.Windows.Forms.ListBox
+  Friend WithEvents Label12 As System.Windows.Forms.Label
+  Friend WithEvents btnRemoveArticulo As System.Windows.Forms.Button
+  Friend WithEvents btnAddArticulo As System.Windows.Forms.Button
+  Friend WithEvents lstArticulosVendidos As System.Windows.Forms.ListBox
+  Friend WithEvents bsArticulos As System.Windows.Forms.BindingSource
 End Class

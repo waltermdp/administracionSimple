@@ -22,7 +22,6 @@ Public Class frmVendedorData
 
 
 
-
   Private Sub btnGuardar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnGuardar.MouseClick
     Try
       If CargarData() <> Result.OK Then
@@ -79,11 +78,21 @@ Public Class frmVendedorData
   Private Function CargarData() As Result
     Try
       With m_Vendedor
-        If Validar(txtNombre.Text) <> Result.OK Then Return Result.NOK
-        .Nombre = txtNombre.Text
-        If Validar(txtApellido.Text) <> Result.OK Then Return Result.NOK
-        .Apellido = txtApellido.Text
-        '.DNI=txtDNI.text
+        .Apellido = txtApellido.Text.Trim
+        If .Apellido = "" Then .Apellido = "--"
+        .Nombre = txtNombre.Text.Trim
+        If .Nombre = "" Then .Nombre = "--"
+        .NumVendedor = txtNumVendedor.Text.Trim
+        .Ciudad = txtCiudad.Text.Trim
+        .Provincia = txtProvincia.Text.Trim
+        .CodigoPostal = txtCodigoPostal.Text.Trim
+        .ID = txtId.Text.Trim
+        .Grupo = txtGrupo.Text.Trim
+        .Tel1 = txtTel1.Text.Trim
+        .Tel2 = txtTel2.Text.Trim
+        .Email = txtEmail.Text.Trim
+        .Categoria = txtCategoria.Text.Trim
+        .Comentario = txtComentarios.Text.Trim
       End With
       Return Result.OK
     Catch ex As Exception
@@ -99,10 +108,22 @@ Public Class frmVendedorData
       With m_Vendedor
         txtNombre.Text = .Nombre
         txtApellido.Text = .Apellido
-        ''txtApellido.Text =.DNI
+        txtNumVendedor.Text = .NumVendedor
+        txtCiudad.Text = .Ciudad
+        txtProvincia.Text = .Provincia
+        txtCodigoPostal.Text = .Provincia
+        txtId.Text = .ID
+        txtGrupo.Text = .Grupo
+        txtTel1.Text = .Tel1
+        txtTel2.Text = .Tel2
+        txtEmail.Text = .Email
+        txtCategoria.Text = .Categoria
+        txtComentarios.Text = .Comentario
       End With
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
+
 End Class

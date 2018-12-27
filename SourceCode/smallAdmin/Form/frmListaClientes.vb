@@ -6,11 +6,10 @@ Public Class frmListaClientes
   Private m_CurrentSortDirection As String
   Private m_CurrentSortColumn As DataGridViewColumn
   Private WithEvents m_objDatabaseList As clsListDatabase = Nothing
-
   Private Const CONST_COUNT_PACS_FOR_PAGE As Integer = 10
+  Private m_objPersona_Current As ClsInfoPersona = Nothing
 
-  Private m_objPersona_Current As clsInfoPersona = Nothing
-
+  Private m_SelectedClient As clsInfoCliente
 
 
   Private Sub main_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -25,7 +24,17 @@ Public Class frmListaClientes
     End Try
   End Sub
 
-
+  Public Sub GetClienteSelected(ByRef objCliente As clsInfoCliente)
+    Try
+      If m_SelectedClient Is Nothing Then
+        objCliente = Nothing
+        Exit Sub
+      End If
+      objCliente = m_SelectedClient.Clone
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 
   Private Sub main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
@@ -41,7 +50,7 @@ Public Class frmListaClientes
 
       If m_objDatabaseList IsNot Nothing Then m_objDatabaseList.Dispose()
 
-      Dim objResult As Result
+
 
       m_objDatabaseList = New clsListDatabase(Entorno.DB_SLocal_ConnectionString, CONST_COUNT_PACS_FOR_PAGE)
 
@@ -241,15 +250,24 @@ Public Class frmListaClientes
     End Try
   End Sub
 
-
-
-
-
   Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
     Try
+
+      Dim vResult As Result
+      If m_objPersona_Current Is Nothing Then
+        m_SelectedClient = Nothing
+      Else
+        vResult = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
+        If vResult <> Result.OK Then
+          m_SelectedClient = Nothing
+        End If
+
+      End If
       Me.Close()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+ 
 End Class

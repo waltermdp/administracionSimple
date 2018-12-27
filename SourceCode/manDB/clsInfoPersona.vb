@@ -117,7 +117,7 @@
       Return m_Tel1
     End Get
     Set(value As String)
-      m_Tel2 = value
+      m_Tel1 = value
     End Set
   End Property
 
@@ -226,6 +226,12 @@
     Profesion = "--"
     
   End Sub
+
+  Public Overrides Function ToString() As String
+
+    Return Apellido & ", " & Nombre
+
+  End Function
 
   Public Overrides Function Equals(ByVal obj As Object) As Boolean
 

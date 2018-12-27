@@ -7,6 +7,7 @@
   Private m_IdRel As Integer
   Private m_GuidArticulo As Guid
   Private m_GuidProducto As Guid
+  Private m_CantidadArticulos As Integer
 
   Public Property IdRel As Integer
     Get
@@ -35,11 +36,21 @@
     End Set
   End Property
 
+  Public Property CantidadArticulos As Integer
+    Get
+      Return m_CantidadArticulos
+    End Get
+    Set(value As Integer)
+      m_CantidadArticulos = value
+    End Set
+  End Property
+
   Public Sub New()
     MyBase.New()
     IdRel = -1
     GuidArticulo = Nothing
     GuidProducto = Nothing
+    m_CantidadArticulos = -1
   End Sub
 
 

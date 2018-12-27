@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsInfoArticulos.vb" />
+    <Compile Include="clsInfoArticuloVendido.vb" />
     <Compile Include="clsInfoCuenta.vb" />
     <Compile Include="clsInfoPagos.vb" />
     <Compile Include="clsInfoCliente.vb" />
