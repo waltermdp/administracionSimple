@@ -11,6 +11,8 @@ Public Class frmVenta
   Private m_lstArticulos As clsListArticulos
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
   Private m_CurrentCuenta As clsInfoCuenta
+
+
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
     ' This call is required by the designer.
@@ -140,9 +142,8 @@ Public Class frmVenta
 
   Private Sub FillMedioDePagoDescripcion()
     Try
-
       txtMedioPagoDescripcion.Text = GetStringResumen(m_CurrentCuenta)
-
+    
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -222,6 +223,7 @@ Public Class frmVenta
     Try
       'If txtPrecio.Text = String.Empty Then Exit Sub
       'If Not IsNumeric(txtPrecio.Text) Then Exit Sub
+
       If cmbCuotas.SelectedIndex < 0 Then Exit Sub
 
       m_Producto.ListaPagos.Clear()
@@ -234,6 +236,8 @@ Public Class frmVenta
       Else
         auxPrecioCuota = CuotasIguales(auxPrecio, auxCuotas)
       End If
+      txtValorCuota.Text = auxPrecioCuota.ToString
+
 
       Dim auxPago As New clsInfoPagos
       Dim auxinicio As Integer = 0
@@ -249,6 +253,7 @@ Public Class frmVenta
         auxPago.ValorCuota = auxPrecioCuota
         m_Producto.ListaPagos.Add(auxPago)
       Next
+
       m_Producto.FechaPrimerPago = Vencimiento(auxCuotas, datePrimerPago.Value)
       
 
@@ -280,7 +285,8 @@ Public Class frmVenta
 
   Private Function Vencimiento(ByVal Cuota As Integer, ByVal PrimerPago As Date) As Date
     Try
-      Return PrimerPago
+
+      Return PrimerPago.AddMonths(Cuota)
     Catch ex As Exception
       Print_msg(ex.Message)
       Return PrimerPago
@@ -298,6 +304,8 @@ Public Class frmVenta
 
   Private Sub btnSave_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSave.MouseClick
     Try
+
+
       With m_Producto
         .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
         .Precio = CDec(txtPrecio.Text)
@@ -308,6 +316,26 @@ Public Class frmVenta
         .ListaArticulos = m_lstArticulosVendidos.ToList
         .GuidVendedor = m_CurrentVendedor.GuidVendedor
       End With
+      'Verificamos campos
+      If m_CurrentClient Is Nothing Then
+        MsgBox("No hay ningun Cliente seleccionado")
+        Exit Sub
+      ElseIf m_CurrentVendedor Is Nothing Then
+        MsgBox("No hay ningun Vendedor seleccionado")
+        Exit Sub
+      ElseIf m_lstArticulosVendidos.Count <= 0 Then
+        MsgBox("No hay ningun Articulo Vendido")
+        Exit Sub
+      ElseIf m_CurrentCuenta Is Nothing Then
+        MsgBox("No hay ninguna Cuenta seleccionada")
+        Exit Sub
+      ElseIf m_Producto.Precio <= 0 Then
+        MsgBox("No hay ningun Precio")
+        Exit Sub
+      ElseIf m_Producto.TotalCuotas < 0 Then
+        MsgBox("No hay ninguna Cuota seleccionada")
+        Exit Sub
+      End If
       m_hayCambios = True
 
       Dim vResult As Result

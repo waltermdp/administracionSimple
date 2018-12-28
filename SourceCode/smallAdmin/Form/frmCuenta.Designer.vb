@@ -37,9 +37,9 @@ Partial Class frmCuenta
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.lblCliente = New System.Windows.Forms.Label()
     Me.lstCuentas = New System.Windows.Forms.ListBox()
+    Me.bsCuenta = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnCancelar = New System.Windows.Forms.Button()
-    Me.bsCuenta = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -160,6 +160,10 @@ Partial Class frmCuenta
     Me.lstCuentas.Size = New System.Drawing.Size(247, 147)
     Me.lstCuentas.TabIndex = 13
     '
+    'bsCuenta
+    '
+    Me.bsCuenta.DataSource = GetType(manDB.clsInfoCuenta)
+    '
     'btnNuevo
     '
     Me.btnNuevo.Location = New System.Drawing.Point(23, 28)
@@ -177,10 +181,6 @@ Partial Class frmCuenta
     Me.btnCancelar.TabIndex = 15
     Me.btnCancelar.Text = "Cancelar"
     Me.btnCancelar.UseVisualStyleBackColor = True
-    '
-    'bsCuenta
-    '
-    Me.bsCuenta.DataSource = GetType(manDB.clsInfoCuenta)
     '
     'frmCuenta
     '
@@ -203,7 +203,9 @@ Partial Class frmCuenta
     Me.Controls.Add(Me.lblCodigo1)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.cmbTipoDeCuenta)
+    Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmCuenta"
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmCuenta"
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)

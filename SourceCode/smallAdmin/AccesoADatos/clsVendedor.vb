@@ -170,7 +170,7 @@ Public Class clsVendedor
             strSQL.Append("[GuidVendedor],")
             strSQL.Append("[Nombre],")
             strSQL.Append("[Apellido],")
-            strSQL.Append("[NunmVendedor],")
+            strSQL.Append("[NumVendedor],")
             strSQL.Append("[Ciudad],")
             strSQL.Append("[Provincia],")
             strSQL.Append("[CodigoPostal],")

@@ -283,7 +283,7 @@ Partial Class frmVendedorData
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(743, 385)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.txtComentarios)
     Me.Controls.Add(Me.Label13)
     Me.Controls.Add(Me.txtCategoria)
@@ -312,7 +312,9 @@ Partial Class frmVendedorData
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.btnCancel)
     Me.Controls.Add(Me.btnGuardar)
+    Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmVendedorData"
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "vendedorData"
     Me.ResumeLayout(False)
     Me.PerformLayout()

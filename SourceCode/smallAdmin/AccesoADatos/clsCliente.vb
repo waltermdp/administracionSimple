@@ -20,8 +20,8 @@ Public Class clsCliente
         objResult = clsPersona.Save(objDB, rCliente.Personal)
         If objResult <> Result.OK Then Exit Try
 
-        objResult = Save_InfoProducto(objDB, rCliente.Personal.GuidCliente, rCliente.ListaProductos)
-        If objResult <> Result.OK Then Exit Try
+        'objResult = Save_InfoProducto(objDB, rCliente.Personal.GuidCliente, rCliente.ListaProductos)
+        'If objResult <> Result.OK Then Exit Try
 
 
       Catch ex As Exception

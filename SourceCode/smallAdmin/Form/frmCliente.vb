@@ -41,11 +41,40 @@ Public Class frmCliente
 
 
       With m_Cliente.Personal
-        .Apellido = txtApellido.Text.Trim
-        If .Apellido = "" Then .Apellido = "--"
-
         .Nombre = txtNombre.Text.Trim
         If .Nombre = "" Then .Nombre = "--"
+        .Apellido = txtApellido.Text.Trim
+        If .Apellido = "" Then .Apellido = "--"
+        .DNI = txtID.Text.Trim
+        If .DNI = "" Then .DNI = "--"
+        .FechaNac = dtFechaNac.Value
+        .Calle = txtCalle1.Text.Trim
+        If .Calle = "" Then .Calle = "--"
+        .NumCalle = txtNumero1.Text.Trim
+        If .NumCalle = "" Then .NumCalle = "--"
+        .FechaIngreso = dtFechaIngreso.Value
+        .Email = txtEmail.Text.Trim
+        If .Email = "" Then .Email = "--"
+        .Tel1 = txtTelefono1.Text.Trim
+        If .Tel1 = "" Then .Tel1 = "--"
+        .Tel2 = txtTelefono2.Text.Trim
+        If .Tel2 = "" Then .Tel2 = "--"
+        .Ciudad = txtCiudad.Text.Trim
+        If .Ciudad = "" Then .Ciudad = "--"
+        .Provincia = txtProvincia.Text.Trim
+        If .Provincia = "" Then .Provincia = "--"
+        .Calle2 = txtCalle2.Text.Trim
+        If .Calle2 = "" Then .Calle2 = "--"
+        .NumCalle2 = txtNumero2.Text.Trim
+        If .NumCalle2 = "" Then .NumCalle2 = "--"
+        .NumCliente = txtNumCliente.Text.Trim
+        If .NumCliente = "" Then .NumCliente = "--"
+        .CodigoPostal = txtCP.Text.Trim
+        If .CodigoPostal = "" Then .CodigoPostal = "--"
+        .Comentarios = txtComentario.Text.Trim
+        If .Comentarios = "" Then .Comentarios = "--"
+        .Profesion = txtProfesion.Text.Trim
+        If .Profesion = "" Then .Profesion = "--"
 
       End With
 

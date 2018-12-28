@@ -59,6 +59,8 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.lblValorCuota = New System.Windows.Forms.Label()
+    Me.txtValorCuota = New System.Windows.Forms.TextBox()
     Me.Label13 = New System.Windows.Forms.Label()
     Me.txtMedioPagoDescripcion = New System.Windows.Forms.TextBox()
     Me.btnSeleccionarCuenta = New System.Windows.Forms.Button()
@@ -175,7 +177,7 @@ Partial Class frmVenta
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
-    Me.dgvCuotas.Location = New System.Drawing.Point(19, 326)
+    Me.dgvCuotas.Location = New System.Drawing.Point(19, 371)
     Me.dgvCuotas.Name = "dgvCuotas"
     Me.dgvCuotas.Size = New System.Drawing.Size(832, 131)
     Me.dgvCuotas.TabIndex = 15
@@ -244,7 +246,7 @@ Partial Class frmVenta
     'chkEditarCuotas
     '
     Me.chkEditarCuotas.AutoSize = True
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(560, 303)
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(765, 340)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
     Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
     Me.chkEditarCuotas.TabIndex = 18
@@ -357,6 +359,8 @@ Partial Class frmVenta
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.lblValorCuota)
+    Me.gpVenta.Controls.Add(Me.txtValorCuota)
     Me.gpVenta.Controls.Add(Me.Label13)
     Me.gpVenta.Controls.Add(Me.txtMedioPagoDescripcion)
     Me.gpVenta.Controls.Add(Me.btnSeleccionarCuenta)
@@ -384,6 +388,22 @@ Partial Class frmVenta
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
+    '
+    'lblValorCuota
+    '
+    Me.lblValorCuota.AutoSize = True
+    Me.lblValorCuota.Location = New System.Drawing.Point(798, 208)
+    Me.lblValorCuota.Name = "lblValorCuota"
+    Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
+    Me.lblValorCuota.TabIndex = 31
+    Me.lblValorCuota.Text = "Valor de la Cuota"
+    '
+    'txtValorCuota
+    '
+    Me.txtValorCuota.Location = New System.Drawing.Point(793, 222)
+    Me.txtValorCuota.Name = "txtValorCuota"
+    Me.txtValorCuota.Size = New System.Drawing.Size(96, 20)
+    Me.txtValorCuota.TabIndex = 30
     '
     'Label13
     '
@@ -479,7 +499,7 @@ Partial Class frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(1008, 729)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.gpVenta)
     Me.Controls.Add(Me.Label11)
     Me.Controls.Add(Me.txtDNIVendedor)
@@ -496,7 +516,9 @@ Partial Class frmVenta
     Me.Controls.Add(Me.Label6)
     Me.Controls.Add(Me.btnCancel)
     Me.Controls.Add(Me.btnSave)
+    Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmVenta"
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmVenta"
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).EndInit()
@@ -555,4 +577,6 @@ Partial Class frmVenta
   Friend WithEvents btnSeleccionarCuenta As System.Windows.Forms.Button
   Friend WithEvents Label13 As System.Windows.Forms.Label
   Friend WithEvents txtMedioPagoDescripcion As System.Windows.Forms.TextBox
+  Friend WithEvents lblValorCuota As System.Windows.Forms.Label
+  Friend WithEvents txtValorCuota As System.Windows.Forms.TextBox
 End Class

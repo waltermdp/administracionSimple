@@ -303,14 +303,16 @@ Partial Class frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(1102, 551)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.btnRefresh)
     Me.Controls.Add(Me.btnEliminar)
     Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.dgvData1)
     Me.Controls.Add(Me.btnEdit)
+    Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmListaClientes"
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "Form1"
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).EndInit()

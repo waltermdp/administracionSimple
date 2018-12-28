@@ -83,16 +83,27 @@ Public Class frmVendedorData
         .Nombre = txtNombre.Text.Trim
         If .Nombre = "" Then .Nombre = "--"
         .NumVendedor = txtNumVendedor.Text.Trim
+        If .NumVendedor = "" Then .NumVendedor = "--"
         .Ciudad = txtCiudad.Text.Trim
+        If .Ciudad = "" Then .Ciudad = "--"
         .Provincia = txtProvincia.Text.Trim
+        If .Provincia = "" Then .Provincia = "--"
         .CodigoPostal = txtCodigoPostal.Text.Trim
+        If .CodigoPostal = "" Then .CodigoPostal = "--"
         .ID = txtId.Text.Trim
+        If .ID = "" Then .ID = "--"
         .Grupo = txtGrupo.Text.Trim
+        If .Grupo = "" Then .Grupo = "--"
         .Tel1 = txtTel1.Text.Trim
+        If .Tel1 = "" Then .Tel1 = "--"
         .Tel2 = txtTel2.Text.Trim
+        If .Tel2 = "" Then .Tel2 = "--"
         .Email = txtEmail.Text.Trim
+        If .Email = "" Then .Email = "--"
         .Categoria = txtCategoria.Text.Trim
+        If .Categoria = "" Then .Categoria = "--"
         .Comentario = txtComentarios.Text.Trim
+        If .Comentario = "" Then .Comentario = "--"
       End With
       Return Result.OK
     Catch ex As Exception
