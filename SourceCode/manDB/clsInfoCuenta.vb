@@ -94,6 +94,12 @@
 
   End Sub
 
+  Public Overrides Function ToString() As String
+
+    Return Codigo1
+
+  End Function
+
   Public Overrides Function Equals(ByVal obj As Object) As Boolean
 
     If obj.GetType Is GetType(clsInfoCuenta) Then

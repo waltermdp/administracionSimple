@@ -2,6 +2,44 @@
 Imports manDB
 Public Class clsProducto
 
+  Public Shared Function Save(ByRef rInfoProducto As manDB.clsInfoProducto) As Result
+    Try
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+      Try
+
+      
+
+        objDB = New libDB.clsAcceso
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Save(objDB, rInfoProducto.GuidCliente, rInfoProducto)
+        If objResult <> Result.OK Then Exit Try
+
+
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+
+      Return objResult
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+
   Public Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rlistProductos As List(Of clsInfoProducto), ByVal vGuidCliente As Guid, Optional ByRef rCodeError As Integer = -1) As Result
     Try
 
@@ -111,6 +149,13 @@ Public Class clsProducto
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfoProducto.GuidCuenta = CType(IIf(IsDBNull(.Item("GuidCuenta")), Nothing, .Item("GuidCuenta")), Guid)
+        Catch ex As Exception
+          vInfoProducto.GuidCuenta = Nothing
+          Call Print_msg(ex.Message)
+        End Try
+
       End With
 
       Return Result.OK
@@ -128,6 +173,12 @@ Public Class clsProducto
       If objResult <> Result.OK Then Return objResult
 
       objResult = Save_InfoPagos(vObjDB, rInfoProducto.ListaPagos)
+      If objResult <> Result.OK Then Return objResult
+
+      objResult = Save_Cuenta(vObjDB, rInfoProducto.Cuenta)
+      If objResult <> Result.OK Then Return objResult
+
+      objResult = Save_ArticulosVendidos(vObjDB, rInfoProducto.ListaArticulos, rInfoProducto.GuidProducto)
       If objResult <> Result.OK Then Return objResult
 
       Return Result.OK
@@ -180,7 +231,8 @@ Public Class clsProducto
             strSQL.Append("[TotalCuotas],")
             strSQL.Append("[CuotasDebe],")
             strSQL.Append("[FechaVenta],")
-            strSQL.Append("[FechaPrimerPago]")
+            strSQL.Append("[FechaPrimerPago],")
+            strSQL.Append("[GuidCuenta]")
 
             strSQL.Append(") VALUES (")
 
@@ -192,7 +244,8 @@ Public Class clsProducto
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.TotalCuotas) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.CuotasDebe) & """,")
             strSQL.Append("""" & .FechaVenta & """,")
-            strSQL.Append("""" & .FechaPrimerPago & """")
+            strSQL.Append("""" & .FechaPrimerPago & """,")
+            strSQL.Append("""{" & .GuidCuenta.ToString & "}""")
 
             strSQL.Append(")")
 
@@ -219,7 +272,8 @@ Public Class clsProducto
             strSQL.Append("[TotalCuotas]=""" & libDB.clsAcceso.Field_Correcting(.TotalCuotas) & """,")
             strSQL.Append("[CuotasDebe]=""" & libDB.clsAcceso.Field_Correcting(.CuotasDebe) & """,")
             strSQL.Append("[FechaVenta]=""" & .FechaVenta & """,")
-            strSQL.Append("[FechaPrimerPago]=""" & .FechaPrimerPago & """")
+            strSQL.Append("[FechaPrimerPago]=""" & .FechaPrimerPago & """,")
+            strSQL.Append("[GuidCuenta]=""{" & .GuidCuenta.ToString & "}""")
 
             strSQL.Append(" WHERE [IdProducto]=" & .IdProducto)
 
@@ -245,5 +299,23 @@ Public Class clsProducto
     End Try
   End Function
 
+  Private Shared Function Save_Cuenta(ByVal vObjDB As libDB.clsAcceso, ByRef rInfoCuenta As manDB.clsInfoCuenta) As Result
+    Try
+      Return clsCuenta.Save(rInfoCuenta)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
+
+  Private Shared Function Save_ArticulosVendidos(ByVal vObjDB As libDB.clsAcceso, ByRef rArticulosVendidos As List(Of clsInfoArticuloVendido), ByVal vGuidProducto As Guid) As Result
+    Try
+
+      Return clsRelArtProd.Save(rArticulosVendidos, vGuidProducto)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 End Class

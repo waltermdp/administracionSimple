@@ -11,6 +11,7 @@
   Private m_CuotasDebe As Integer
   Private m_FechaPrimerPago As Date
   Private m_FechaVenta As Date
+  Private m_GuidCuenta As Guid
   Private m_listPagos As New List(Of clsInfoPagos)
   Private m_Cuenta As clsInfoCuenta
   Private m_listArticulos As New List(Of clsInfoArticuloVendido)
@@ -114,6 +115,15 @@
     End Set
   End Property
 
+  Public Property GuidCuenta As Guid
+    Get
+      Return m_GuidCuenta
+    End Get
+    Set(value As Guid)
+      m_GuidCuenta = value
+    End Set
+  End Property
+
   Public Property Cuenta As clsInfoCuenta
     Get
       Return m_Cuenta
@@ -131,17 +141,19 @@
       m_listArticulos = value.ToList
     End Set
   End Property
+
   Public Sub New()
     MyBase.New()
     IdProducto = -1
     GuidProducto = Nothing
     GuidCliente = Nothing
     GuidVendedor = Nothing
-    GuidTipoPago = Guid.Empty
+    GuidTipoPago = Nothing
     TotalCuotas = 0
     Precio = 0
-    FechaPrimerPago = Nothing
-    FechaVenta = Nothing
+    FechaPrimerPago = Date.Now
+    FechaVenta = Date.Now
+    GuidCuenta = Nothing
     m_listPagos.Clear()
     Cuenta = New clsInfoCuenta
     m_listArticulos.Clear()

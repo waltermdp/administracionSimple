@@ -76,3 +76,20 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\De
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.pdb
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.xml
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulos.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulos.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe.config
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.exe
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulos.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmCliente.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmCuenta.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmDeben.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmPreviewAplicarPago.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedorData.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedores.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmVenta.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmListaClientes.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.Resources.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.GenerateResource.Cache

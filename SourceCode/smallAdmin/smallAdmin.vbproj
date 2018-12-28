@@ -227,6 +227,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
+    <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoDatabase.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoPagos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoProducto.datasource" />

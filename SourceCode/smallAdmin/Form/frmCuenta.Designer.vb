@@ -22,6 +22,7 @@ Partial Class frmCuenta
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+    Me.components = New System.ComponentModel.Container()
     Me.cmbTipoDeCuenta = New System.Windows.Forms.ComboBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.lblCodigo1 = New System.Windows.Forms.Label()
@@ -32,15 +33,20 @@ Partial Class frmCuenta
     Me.lblCodigo3 = New System.Windows.Forms.Label()
     Me.txtCodigo4 = New System.Windows.Forms.TextBox()
     Me.lblCodigo4 = New System.Windows.Forms.Label()
-    Me.btnCancelar = New System.Windows.Forms.Button()
+    Me.btnVolver = New System.Windows.Forms.Button()
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.lblCliente = New System.Windows.Forms.Label()
+    Me.lstCuentas = New System.Windows.Forms.ListBox()
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnCancelar = New System.Windows.Forms.Button()
+    Me.bsCuenta = New System.Windows.Forms.BindingSource(Me.components)
+    CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'cmbTipoDeCuenta
     '
     Me.cmbTipoDeCuenta.FormattingEnabled = True
-    Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(83, 25)
+    Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(413, 38)
     Me.cmbTipoDeCuenta.Name = "cmbTipoDeCuenta"
     Me.cmbTipoDeCuenta.Size = New System.Drawing.Size(174, 21)
     Me.cmbTipoDeCuenta.TabIndex = 0
@@ -48,7 +54,7 @@ Partial Class frmCuenta
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(80, 9)
+    Me.Label1.Location = New System.Drawing.Point(410, 22)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(76, 13)
     Me.Label1.TabIndex = 1
@@ -57,7 +63,7 @@ Partial Class frmCuenta
     'lblCodigo1
     '
     Me.lblCodigo1.AutoSize = True
-    Me.lblCodigo1.Location = New System.Drawing.Point(80, 49)
+    Me.lblCodigo1.Location = New System.Drawing.Point(410, 62)
     Me.lblCodigo1.Name = "lblCodigo1"
     Me.lblCodigo1.Size = New System.Drawing.Size(39, 13)
     Me.lblCodigo1.TabIndex = 2
@@ -65,14 +71,14 @@ Partial Class frmCuenta
     '
     'txtCodigo1
     '
-    Me.txtCodigo1.Location = New System.Drawing.Point(83, 66)
+    Me.txtCodigo1.Location = New System.Drawing.Point(413, 79)
     Me.txtCodigo1.Name = "txtCodigo1"
     Me.txtCodigo1.Size = New System.Drawing.Size(366, 20)
     Me.txtCodigo1.TabIndex = 3
     '
     'txtCodigo2
     '
-    Me.txtCodigo2.Location = New System.Drawing.Point(83, 106)
+    Me.txtCodigo2.Location = New System.Drawing.Point(413, 119)
     Me.txtCodigo2.Name = "txtCodigo2"
     Me.txtCodigo2.Size = New System.Drawing.Size(366, 20)
     Me.txtCodigo2.TabIndex = 5
@@ -80,7 +86,7 @@ Partial Class frmCuenta
     'lblCodigo2
     '
     Me.lblCodigo2.AutoSize = True
-    Me.lblCodigo2.Location = New System.Drawing.Point(80, 89)
+    Me.lblCodigo2.Location = New System.Drawing.Point(410, 102)
     Me.lblCodigo2.Name = "lblCodigo2"
     Me.lblCodigo2.Size = New System.Drawing.Size(39, 13)
     Me.lblCodigo2.TabIndex = 4
@@ -88,7 +94,7 @@ Partial Class frmCuenta
     '
     'txtCodigo3
     '
-    Me.txtCodigo3.Location = New System.Drawing.Point(83, 146)
+    Me.txtCodigo3.Location = New System.Drawing.Point(413, 159)
     Me.txtCodigo3.Name = "txtCodigo3"
     Me.txtCodigo3.Size = New System.Drawing.Size(366, 20)
     Me.txtCodigo3.TabIndex = 7
@@ -96,7 +102,7 @@ Partial Class frmCuenta
     'lblCodigo3
     '
     Me.lblCodigo3.AutoSize = True
-    Me.lblCodigo3.Location = New System.Drawing.Point(80, 129)
+    Me.lblCodigo3.Location = New System.Drawing.Point(410, 142)
     Me.lblCodigo3.Name = "lblCodigo3"
     Me.lblCodigo3.Size = New System.Drawing.Size(39, 13)
     Me.lblCodigo3.TabIndex = 6
@@ -104,7 +110,7 @@ Partial Class frmCuenta
     '
     'txtCodigo4
     '
-    Me.txtCodigo4.Location = New System.Drawing.Point(83, 186)
+    Me.txtCodigo4.Location = New System.Drawing.Point(413, 199)
     Me.txtCodigo4.Name = "txtCodigo4"
     Me.txtCodigo4.Size = New System.Drawing.Size(366, 20)
     Me.txtCodigo4.TabIndex = 9
@@ -112,26 +118,26 @@ Partial Class frmCuenta
     'lblCodigo4
     '
     Me.lblCodigo4.AutoSize = True
-    Me.lblCodigo4.Location = New System.Drawing.Point(80, 169)
+    Me.lblCodigo4.Location = New System.Drawing.Point(410, 182)
     Me.lblCodigo4.Name = "lblCodigo4"
     Me.lblCodigo4.Size = New System.Drawing.Size(39, 13)
     Me.lblCodigo4.TabIndex = 8
     Me.lblCodigo4.Text = "Label5"
     '
-    'btnCancelar
+    'btnVolver
     '
-    Me.btnCancelar.Location = New System.Drawing.Point(44, 234)
-    Me.btnCancelar.Name = "btnCancelar"
-    Me.btnCancelar.Size = New System.Drawing.Size(75, 23)
-    Me.btnCancelar.TabIndex = 10
-    Me.btnCancelar.Text = "Cancelar"
-    Me.btnCancelar.UseVisualStyleBackColor = True
+    Me.btnVolver.Location = New System.Drawing.Point(23, 257)
+    Me.btnVolver.Name = "btnVolver"
+    Me.btnVolver.Size = New System.Drawing.Size(98, 23)
+    Me.btnVolver.TabIndex = 10
+    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.UseVisualStyleBackColor = True
     '
     'btnGuardar
     '
-    Me.btnGuardar.Location = New System.Drawing.Point(368, 234)
+    Me.btnGuardar.Location = New System.Drawing.Point(23, 62)
     Me.btnGuardar.Name = "btnGuardar"
-    Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
+    Me.btnGuardar.Size = New System.Drawing.Size(98, 23)
     Me.btnGuardar.TabIndex = 11
     Me.btnGuardar.Text = "Guardar"
     Me.btnGuardar.UseVisualStyleBackColor = True
@@ -139,20 +145,54 @@ Partial Class frmCuenta
     'lblCliente
     '
     Me.lblCliente.AutoSize = True
-    Me.lblCliente.Location = New System.Drawing.Point(281, 25)
+    Me.lblCliente.Location = New System.Drawing.Point(611, 38)
     Me.lblCliente.Name = "lblCliente"
     Me.lblCliente.Size = New System.Drawing.Size(39, 13)
     Me.lblCliente.TabIndex = 12
     Me.lblCliente.Text = "Label6"
     '
+    'lstCuentas
+    '
+    Me.lstCuentas.DataSource = Me.bsCuenta
+    Me.lstCuentas.FormattingEnabled = True
+    Me.lstCuentas.Location = New System.Drawing.Point(144, 72)
+    Me.lstCuentas.Name = "lstCuentas"
+    Me.lstCuentas.Size = New System.Drawing.Size(247, 147)
+    Me.lstCuentas.TabIndex = 13
+    '
+    'btnNuevo
+    '
+    Me.btnNuevo.Location = New System.Drawing.Point(23, 28)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(98, 23)
+    Me.btnNuevo.TabIndex = 14
+    Me.btnNuevo.Text = "Nuevo"
+    Me.btnNuevo.UseVisualStyleBackColor = True
+    '
+    'btnCancelar
+    '
+    Me.btnCancelar.Location = New System.Drawing.Point(23, 91)
+    Me.btnCancelar.Name = "btnCancelar"
+    Me.btnCancelar.Size = New System.Drawing.Size(98, 24)
+    Me.btnCancelar.TabIndex = 15
+    Me.btnCancelar.Text = "Cancelar"
+    Me.btnCancelar.UseVisualStyleBackColor = True
+    '
+    'bsCuenta
+    '
+    Me.bsCuenta.DataSource = GetType(manDB.clsInfoCuenta)
+    '
     'frmCuenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(680, 281)
+    Me.ClientSize = New System.Drawing.Size(810, 310)
+    Me.Controls.Add(Me.btnCancelar)
+    Me.Controls.Add(Me.btnNuevo)
+    Me.Controls.Add(Me.lstCuentas)
     Me.Controls.Add(Me.lblCliente)
     Me.Controls.Add(Me.btnGuardar)
-    Me.Controls.Add(Me.btnCancelar)
+    Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.txtCodigo4)
     Me.Controls.Add(Me.lblCodigo4)
     Me.Controls.Add(Me.txtCodigo3)
@@ -165,6 +205,7 @@ Partial Class frmCuenta
     Me.Controls.Add(Me.cmbTipoDeCuenta)
     Me.Name = "frmCuenta"
     Me.Text = "frmCuenta"
+    CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -179,7 +220,11 @@ Partial Class frmCuenta
   Friend WithEvents lblCodigo3 As System.Windows.Forms.Label
   Friend WithEvents txtCodigo4 As System.Windows.Forms.TextBox
   Friend WithEvents lblCodigo4 As System.Windows.Forms.Label
-  Friend WithEvents btnCancelar As System.Windows.Forms.Button
+  Friend WithEvents btnVolver As System.Windows.Forms.Button
   Friend WithEvents btnGuardar As System.Windows.Forms.Button
   Friend WithEvents lblCliente As System.Windows.Forms.Label
+  Friend WithEvents lstCuentas As System.Windows.Forms.ListBox
+  Friend WithEvents btnNuevo As System.Windows.Forms.Button
+  Friend WithEvents btnCancelar As System.Windows.Forms.Button
+  Friend WithEvents bsCuenta As System.Windows.Forms.BindingSource
 End Class

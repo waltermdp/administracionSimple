@@ -10,7 +10,7 @@ Public Class frmVenta
   Private m_CurrentVendedor As clsInfoVendedor
   Private m_lstArticulos As clsListArticulos
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
-
+  Private m_CurrentCuenta As clsInfoCuenta
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
     ' This call is required by the designer.
@@ -25,6 +25,7 @@ Public Class frmVenta
         m_Producto = vProducto.Clone
         m_CurrentClient = New clsInfoCliente
         m_CurrentVendedor = New clsInfoVendedor
+        m_CurrentCuenta = New clsInfoCuenta
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -39,7 +40,7 @@ Public Class frmVenta
       Dim vResult As Result = Result.NOK
       DateVenta.Value = Today
       cmbCuotas.DataSource = g_Cuotas
-      cmbTipoPago.DataSource = g_TipoPago
+
       datePrimerPago.Value = Today
       txtPrecio.Text = 0
       m_hayCambios = False
@@ -54,23 +55,43 @@ Public Class frmVenta
         If vResult <> Result.OK Then
           Call Print_msg("Falloo carga de vendedor")
         End If
+        vResult = clsPago.Load(m_Producto.ListaPagos, m_Producto.GuidProducto)
+        If vResult <> Result.OK Then
+          Call Print_msg("Falloo carga de Pagos")
+        End If
+
+        vResult = clsRelArtProd.Load(m_Producto.ListaArticulos, m_Producto.GuidProducto)
+        If vResult <> Result.OK Then
+          Call Print_msg("Falloo carga de Articulos Vendidos")
+        End If
+
+        vResult = clsCuenta.Load(m_Producto.GuidCuenta, m_CurrentCuenta)
+        If vResult <> Result.OK Then
+          Call Print_msg("Falloo carga de cuenta")
+        End If
+
         Exit Sub
       End If
       Call Print_msg("Incongruencia de cliente and vendedor, deben o no existir ambos ")
-      gpVenta.Enabled = False
+    
     Catch ex As Exception
       Print_msg(ex.Message)
     Finally
+      gpVenta.Enabled = False
+      btnSave.Enabled = False
       m_skip = False
     End Try
   End Sub
 
   Private Sub frmVenta_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
+      m_skip = True
       Call Refresh_infoClientVendedor()
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
+    Finally
+      m_skip = False
     End Try
   End Sub
 
@@ -96,10 +117,42 @@ Public Class frmVenta
     End Try
   End Sub
 
+  Private Sub FillVentaData()
+    Try
+      With m_Producto
+        txtPrecio.Text = .Precio
+        DateVenta.Value = .FechaVenta
+        datePrimerPago.Value = .FechaPrimerPago
+
+        For Each cuota In g_Cuotas
+          If cuota.Cantidad = .TotalCuotas Then
+            cmbCuotas.SelectedItem = cuota
+            Exit For
+          End If
+        Next
+
+      End With
+      Call FillMedioDePagoDescripcion()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub FillMedioDePagoDescripcion()
+    Try
+
+      txtMedioPagoDescripcion.Text = GetStringResumen(m_CurrentCuenta)
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub Refresh_infoClientVendedor()
     Try
       If m_CurrentClient IsNot Nothing Then Call FillClientData()
       If m_CurrentVendedor IsNot Nothing Then Call FillVendedorData()
+      Call FillVentaData()
       Call PermitirVenta()
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -126,16 +179,8 @@ Public Class frmVenta
 
   Private Sub txtPrecio_TextChanged(sender As Object, e As EventArgs) Handles txtPrecio.TextChanged
     Try
-
+      If m_skip Then Exit Sub
       Dim auxValue As String = CType(sender, TextBox).Text
-      'Dim dec As Decimal
-      'Dim esCorrecto As Boolean = Decimal.TryParse(auxValue, dec)
-      'If (esCorrecto) Then
-      '  txtPrecio.Text = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", dec)
-
-
-      'End If
-      'Exit Sub
       Dim dec As Decimal
       If text2decimal(auxValue, dec) Then
         Call GenerarPlanCuotas()
@@ -146,35 +191,10 @@ Public Class frmVenta
     End Try
   End Sub
 
-  Private Function IsMoneyFormat(ByVal value As String) As Boolean
-    Try
-      If value = String.Empty Then Return False
-      If value.Trim = String.Empty Then Return False
-      Dim dec As Decimal
-      Dim esCorrecto As Boolean = Decimal.TryParse(value, dec)
-      If (esCorrecto) Then
-        value = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", dec)
-      End If
-
-
-      If Not IsNumeric(value) Then
-        Return False
-      Else
-        If value.Contains(",") Then
-          If (value.Substring(value.IndexOf(",")).Count) > 2 Then
-            Return False
-          End If
-        End If
-      End If
-      Return True
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return False
-    End Try
-  End Function
-
+ 
   Private Sub cmbCuotas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCuotas.SelectedIndexChanged
     Try
+      If m_skip Then Exit Sub
       Call GenerarPlanCuotas()
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -182,20 +202,7 @@ Public Class frmVenta
   End Sub
 
 
-  Private Sub cmbTipoPago_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTipoPago.SelectedIndexChanged
-    Try
-      Dim tipoPago As clsTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago)
-      If Not tipoPago.PermiteCuotas Then
-        cmbCuotas.SelectedItem = g_Cuotas(0)
-        cmbCuotas.Enabled = False
-      Else
-        cmbCuotas.Enabled = True
-      End If
-      Call GenerarPlanCuotas()
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
+  
 
   Private Function text2decimal(ByVal vText As String, ByRef rValor As Decimal) As Boolean
     Try
@@ -216,7 +223,7 @@ Public Class frmVenta
       'If txtPrecio.Text = String.Empty Then Exit Sub
       'If Not IsNumeric(txtPrecio.Text) Then Exit Sub
       If cmbCuotas.SelectedIndex < 0 Then Exit Sub
-      If cmbTipoPago.SelectedIndex < 0 Then Exit Sub
+
       m_Producto.ListaPagos.Clear()
       Dim auxCuotas As Integer = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
       Dim auxPrecio As Decimal
@@ -243,9 +250,18 @@ Public Class frmVenta
         m_Producto.ListaPagos.Add(auxPago)
       Next
       m_Producto.FechaPrimerPago = Vencimiento(auxCuotas, datePrimerPago.Value)
+      
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub ReloadListPagos()
+    Try
+      If m_Producto Is Nothing Then Exit Sub
       bsCuotas.DataSource = m_Producto.ListaPagos
       bsCuotas.ResetBindings(False)
-
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -280,17 +296,27 @@ Public Class frmVenta
     End Try
   End Sub
 
-
-  Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+  Private Sub btnSave_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSave.MouseClick
     Try
       With m_Producto
         .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
-        .GuidTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago).GuidTipo
-        .FechaVenta = DateVenta.Value
         .Precio = CDec(txtPrecio.Text)
-        .GuidVendedor = New Guid("09c216f0-a4a0-41d7-ab18-08c403968cf5")
+        .GuidTipoPago = m_CurrentCuenta.TipoDeCuenta
+        .GuidCuenta = m_CurrentCuenta.GuidCuenta
+        .Cuenta = m_CurrentCuenta.Clone
+        .FechaVenta = DateVenta.Value
+        .ListaArticulos = m_lstArticulosVendidos.ToList
+        .GuidVendedor = m_CurrentVendedor.GuidVendedor
       End With
       m_hayCambios = True
+
+      Dim vResult As Result
+      vResult = clsProducto.Save(m_Producto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo save producto")
+        Exit Sub
+      End If
+
       Me.Close()
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -337,17 +363,19 @@ Public Class frmVenta
     Try
       If Not (m_CurrentClient IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing) Then
         gpVenta.Enabled = False
+        btnSave.Enabled = False
         Exit Sub
       End If
       gpVenta.Enabled = True
+      btnSave.Enabled = True
       Call FillListArticulos()
       Call LoadArticulosVendidos()
+      Call FillMedioDePagoDescripcion()
+      Call ReloadListPagos()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
-
-
 
   Private Sub FillListArticulos()
     Try
@@ -379,9 +407,9 @@ Public Class frmVenta
   Private Sub btnAddArticulo_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAddArticulo.MouseClick
     Try
       If lstArticulos.SelectedIndex < 0 Then Exit Sub
+      Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = (CType(lstArticulos.SelectedItem, clsInfoArticulos).GuidArticulo))
+      If index >= 0 Then
 
-      If m_lstArticulosVendidos.Exists(Function(c) c.Equals(CType(lstArticulos.SelectedItem, clsInfoArticulos))) Then
-        Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.Equals(CType(lstArticulos.SelectedItem, clsInfoArticulos)))
         m_lstArticulosVendidos(index).CantidadArticulos += 1
       Else
         Dim auxArticulo As New clsInfoArticuloVendido
@@ -413,5 +441,55 @@ Public Class frmVenta
     End Try
   End Sub
 
+  Private Sub btnSeleccionarCuenta_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSeleccionarCuenta.MouseClick
+    Try
+      Using objForm As New frmCuenta(m_CurrentClient.Personal.GuidCliente)
+        objForm.ShowDialog(Me)
+        objForm.GetCuentaSeleccionada(m_CurrentCuenta)
+        Call FillMedioDePagoDescripcion()
+      End Using
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnAddCuenta_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAddCuenta.MouseClick
+    Try
+      Using objForm As New frmCuenta(m_CurrentClient.Personal.GuidCliente)
+        objForm.ShowDialog(Me)
+        objForm.GetCuentaSeleccionada(m_CurrentCuenta)
+        Call FillMedioDePagoDescripcion()
+      End Using
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  'Private Function IsMoneyFormat(ByVal value As String) As Boolean
+  '  Try
+  '    If value = String.Empty Then Return False
+  '    If value.Trim = String.Empty Then Return False
+  '    Dim dec As Decimal
+  '    Dim esCorrecto As Boolean = Decimal.TryParse(value, dec)
+  '    If (esCorrecto) Then
+  '      value = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", dec)
+  '    End If
+
+
+  '    If Not IsNumeric(value) Then
+  '      Return False
+  '    Else
+  '      If value.Contains(",") Then
+  '        If (value.Substring(value.IndexOf(",")).Count) > 2 Then
+  '          Return False
+  '        End If
+  '      End If
+  '    End If
+  '    Return True
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    Return False
+  '  End Try
+  'End Function
 
 End Class

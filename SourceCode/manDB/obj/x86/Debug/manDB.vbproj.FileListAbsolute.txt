@@ -43,3 +43,18 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Debug\m
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.dll
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.xml
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\manDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\manDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\manDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\libCommon.dll
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\libDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\libCommon.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\libCommon.xml
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\libDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\bin\x86\Debug\libDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\obj\x86\Debug\manDB.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\obj\x86\Debug\manDB.Resources.resources
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\obj\x86\Debug\manDB.vbproj.GenerateResource.Cache
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\obj\x86\Debug\manDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\obj\x86\Debug\manDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\manDB\obj\x86\Debug\manDB.pdb

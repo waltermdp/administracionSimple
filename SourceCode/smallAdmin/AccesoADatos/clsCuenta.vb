@@ -20,6 +20,45 @@ Public Class clsCuenta
     End Try
   End Function
 
+  Public Shared Function Load(ByVal vGuidCliente As Guid, ByRef rListaCuenta As List(Of clsInfoCuenta)) As Result
+    Try
+
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+      Try
+
+
+        objDB = New libDB.clsAcceso
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Init(objDB, rListaCuenta, vGuidCliente)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
   Public Shared Function Save(ByRef rCuenta As manDB.clsInfoCuenta) As libCommon.Comunes.Result
     Try
       Dim objDB As libDB.clsAcceso = Nothing
@@ -101,6 +140,41 @@ Public Class clsCuenta
       Return Result.ErrorEx
     End Try
 
+  End Function
+
+  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rlistCuentas As List(Of clsInfoCuenta), ByVal vGuidCliente As Guid, Optional ByRef rCodeError As Integer = -1) As Result
+    Try
+
+      Dim objResult As Result = Result.OK
+      Dim dt As DataTable = Nothing
+      Dim strSQL As String
+
+      'strSQL = "SELECT Pat.* FROM Pat INNER JOIN PatPac ON Pat.IdPat = PatPac.IdPat WHERE [Pagos.GuidProducto]={" & vGuidProducto.ToString & "}" ' WHERE [Pagos.GuidProducto]= " & vGuidProducto.ToString
+      strSQL = "SELECT * FROM [Cuentas] WHERE [Cuentas.GuidCliente]={" & vGuidCliente.ToString & "}"
+
+      objResult = vObjDB.GetDato(strSQL, dt)
+
+      '--- Devuelvo OK cuando no hay resultados -->
+      If objResult = Result.NOK Then Return Result.OK
+      If objResult <> Result.OK Then Return objResult
+      '<-- Devuelvo OK cuando no hay resultados ---
+
+      '<-- Comando en DB ---
+
+
+      Dim auxInfoCuenta As clsInfoCuenta = Nothing
+      For Each dr As DataRow In dt.Rows
+        auxInfoCuenta = New clsInfoCuenta
+        objResult = clsCuenta.CuentaIgualDataRow(auxInfoCuenta, dr)
+        If objResult <> Result.OK Then Exit For
+        rlistCuentas.Add(auxInfoCuenta)
+      Next
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
   End Function
 
   Private Shared Function Init(ByRef rInfoCuenta As manDB.clsInfoCuenta, ByVal GuidCuenta As Guid) As Result
@@ -247,7 +321,7 @@ Public Class clsCuenta
             strSQL.Append("[Codigo2]=""" & libDB.clsAcceso.Field_Correcting(.Codigo2) & """,")
             strSQL.Append("[Codigo3]=""" & libDB.clsAcceso.Field_Correcting(.Codigo3) & """,")
             strSQL.Append("[Codigo4]=""" & libDB.clsAcceso.Field_Correcting(.Codigo4) & """,")
-            strSQL.Append("[GuidCuenta]=""{" & .TipoDeCuenta.ToString & "}""")
+            strSQL.Append("[TipoDeCuenta]=""{" & .TipoDeCuenta.ToString & "}""")
 
             strSQL.Append(" WHERE [IdCuenta]=" & .IdCuenta)
 

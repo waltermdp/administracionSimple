@@ -127,7 +127,6 @@ Public Class frmDeben
 
   Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
     Try
-
       Dim lProducto As New clsInfoProducto
 
       Using objVenta As New frmVenta()
@@ -136,8 +135,6 @@ Public Class frmDeben
           objVenta.getCambios(lProducto)
           'TODO: resolver dentro del formulario venta
 
-          'lProducto.GuidCliente = LCliente.Personal.GuidCliente
-          'LCliente.ListaProductos.Add(lProducto)
         End If
       End Using
 

@@ -3,7 +3,46 @@ Imports manDB
 
 Public Class clsPago
 
-  Public Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rlistPagos As List(Of clsInfoPagos), ByVal vGuidProducto As Guid, Optional ByRef rCodeError As Integer = -1) As Result
+  Public Shared Function Load(ByRef rlistPagos As List(Of clsInfoPagos), ByVal vGuidProducto As Guid) As Result
+    Try
+
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+      Try
+       
+
+        objDB = New libDB.clsAcceso
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Init(objDB, rlistPagos, vGuidProducto)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rlistPagos As List(Of clsInfoPagos), ByVal vGuidProducto As Guid, Optional ByRef rCodeError As Integer = -1) As Result
     Try
 
       Dim objResult As Result = Result.OK
@@ -229,7 +268,7 @@ Public Class clsPago
             strSQL.Append("[FechaPago]=""" & .FechaPago & """,")
             strSQL.Append("[EstadoPago]=""" & libDB.clsAcceso.Field_Correcting(.EstadoPago) & """")
 
-            strSQL.Append(" WHERE [IdCliente]=" & .IdPago)
+            strSQL.Append(" WHERE [IdPago]=" & .IdPago)
 
             objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)
             If objResult <> Result.OK Then Return objResult

@@ -49,9 +49,9 @@ Public Class clsRelArtProd
       Dim dt As DataTable = Nothing
       Dim strSQL As String
 
-      'select Jugadores.nombre, Jugadores.edad from Jugadores inner join Equipos on Jugadores.NomEquipo = Equipos.Nombre where Equipos.titulos=2;
+      'strSQL = "SELECT * FROM [Articulos] INNER JOIN [RelArtProd] ON Articulos.GuidArticulo = RelArtProd.GuidArticulo WHERE [RelArtProd.GuidProducto]={" & vGuidProducto.ToString & "}"
 
-      strSQL = "SELECT * FROM [Articulos] INNER JOIN [RelArtProd] ON Articulos.GuidArticulo = RelArtProd.GuidArticulo WHERE [RelArtProd.GuidProducto]={" & vGuidProducto.ToString & "}"
+      strSQL = "SELECT * FROM [RelArtProd] WHERE [GuidProducto]={" & vGuidProducto.ToString & "}"
 
       objResult = vObjDB.GetDato(strSQL, dt)
 
@@ -63,12 +63,18 @@ Public Class clsRelArtProd
       '<-- Comando en DB ---
 
 
-      Dim auxInfoArticulos As clsInfoArticulos = Nothing
+      Dim auxInfoRel As clsInfoRelArtProd = Nothing
+      Dim auxInfoArticulo As clsInfoArticulos
       For Each dr As DataRow In dt.Rows
-        auxInfoArticulos = New clsInfoArticulos
-        objResult = clsArticulo.ArticuloIgualDataRow(auxInfoArticulos, dr)
+        auxInfoRel = New clsInfoRelArtProd
+        auxInfoArticulo = New clsInfoArticulos
+        objResult = RelArtProdIgualDataRow(auxInfoRel, dr)
         If objResult <> Result.OK Then Exit For
-        rlistArticulos.Add(auxInfoArticulos)
+        objResult = clsArticulo.Load(auxInfoRel.GuidArticulo, auxInfoArticulo)
+        If objResult <> Result.OK Then Exit For
+        rlistArticulos.Add(New clsInfoArticuloVendido)
+        rlistArticulos.Last.copy(auxInfoArticulo)
+        rlistArticulos.Last.CantidadArticulos = auxInfoRel.CantidadArticulos
       Next
 
       Return Result.OK
@@ -78,7 +84,7 @@ Public Class clsRelArtProd
     End Try
   End Function
 
-  Public Shared Function Save(ByRef rListArticulos As List(Of clsInfoArticulos), ByVal vGuidProducto As Guid, ByVal vCantidadArticulos As Integer) As Result
+  Public Shared Function Save(ByRef rListArticulos As List(Of clsInfoArticuloVendido), ByVal vGuidProducto As Guid) As Result
 
     Try
 
@@ -92,7 +98,7 @@ Public Class clsRelArtProd
         If objResult <> Result.OK Then Exit Try
 
         For Each articulo In rListArticulos
-          objResult = SaveRel(objDB, articulo.GuidArticulo, vGuidProducto, vCantidadArticulos)
+          objResult = SaveRel(objDB, articulo.GuidArticulo, vGuidProducto, articulo.CantidadArticulos)
           If objResult <> Result.OK Then Exit For
         Next
 
@@ -130,7 +136,7 @@ Public Class clsRelArtProd
       If Not (vGuidProducto = Nothing) AndAlso Not (vGuidArticulo = Nothing) Then
         '--- Comando en DB -->
         Dim IdRel As String = -1
-        objResult = vObjDB.EjecutarConsulta("SELECT [IdRel] FROM [RelArtProd] WHERE ([GuidArticulo]={" & vGuidArticulo.ToString & "} AND [GuidProducto]={" & vGuidProducto.ToString & "}", IdRel)
+        objResult = vObjDB.EjecutarConsulta("SELECT [IdRel] FROM [RelArtProd] WHERE ([GuidArticulo]={" & vGuidArticulo.ToString & "} AND [GuidProducto]={" & vGuidProducto.ToString & "})", IdRel)
         If objResult <> Result.OK Then Return objResult
 
         Dim strSQL As New System.Text.StringBuilder("")
@@ -170,8 +176,8 @@ Public Class clsRelArtProd
           strSQL.Append("UPDATE [RelArtProd] SET ")
           strSQL.Append("[GuidArticulo]=""{" & vGuidArticulo.ToString & "}"",")
           strSQL.Append("[GuidProducto]=""{" & vGuidProducto.ToString & "}"",")
-          strSQL.Append("[Precio]=""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos) & """")
-          strSQL.Append(" WHERE [IdCliente]=" & IdRel)
+          strSQL.Append("[CantidadArticulos]=""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos) & """")
+          strSQL.Append(" WHERE [IdRel]=" & IdRel)
 
           objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)
           If objResult <> Result.OK Then Return objResult
@@ -189,6 +195,44 @@ Public Class clsRelArtProd
     End Try
   End Function
 
+  Private Shared Function RelArtProdIgualDataRow(ByRef vInfoArticulo As clsInfoRelArtProd, ByVal vData As DataRow) As Result
+    Try
+      With vData
+        Try
+          vInfoArticulo.IdRel = CInt(IIf(IsDBNull(.Item("IdRel")), -1, .Item("IdRel")))
+        Catch ex As Exception
+          vInfoArticulo.IdRel = -1
+          Call Print_msg(ex.Message)
+        End Try
 
+        Try
+          vInfoArticulo.GuidArticulo = CType(IIf(IsDBNull(.Item("GuidArticulo")), Nothing, .Item("GuidArticulo")), Guid)
+        Catch ex As Exception
+          vInfoArticulo.GuidArticulo = Nothing
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoArticulo.GuidProducto = CType(IIf(IsDBNull(.Item("GuidProducto")), Nothing, .Item("GuidProducto")), Guid)
+        Catch ex As Exception
+          vInfoArticulo.GuidProducto = Nothing
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoArticulo.CantidadArticulos = CStr(IIf(IsDBNull(.Item("CantidadArticulos")), "", .Item("CantidadArticulos")))
+        Catch ex As Exception
+          vInfoArticulo.CantidadArticulos = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+      End With
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
 End Class

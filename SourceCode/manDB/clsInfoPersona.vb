@@ -224,7 +224,6 @@
     CodigoPostal = "--"
     Comentarios = "--"
     Profesion = "--"
-    
   End Sub
 
   Public Overrides Function ToString() As String
