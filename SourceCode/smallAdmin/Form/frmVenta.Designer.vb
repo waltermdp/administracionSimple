@@ -246,7 +246,7 @@ Partial Class frmVenta
     'chkEditarCuotas
     '
     Me.chkEditarCuotas.AutoSize = True
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(765, 340)
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(793, 248)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
     Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
     Me.chkEditarCuotas.TabIndex = 18

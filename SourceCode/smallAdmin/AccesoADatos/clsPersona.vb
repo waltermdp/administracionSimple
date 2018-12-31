@@ -2,6 +2,98 @@
 Imports manDB
 Public Class clsPersona
 
+  Public Shared Function Save(ByRef rPersona As ClsInfoPersona) As Result
+    Try
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+      Try
+
+        objDB = New libDB.clsAcceso
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Save(objDB, rPersona)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+
+      Return objResult
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Public Shared Function Load(ByVal vGuidPersona As Guid, ByRef rPersona As ClsInfoPersona) As Result
+    Try
+      Dim vResult As Result
+      Dim vIdVendedor As Integer
+      If FindGuid(vGuidPersona, vIdVendedor) = True Then
+        vResult = Init(rPersona, vGuidPersona)
+        Return vResult
+      Else
+
+      End If
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function Init(ByRef rInfoPersona As manDB.ClsInfoPersona, ByVal vGuidPersona As Guid) As Result
+    Try
+
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+      Try
+        rInfoPersona = New ClsInfoPersona
+        rInfoPersona.GuidCliente = vGuidPersona
+
+        objDB = New libDB.clsAcceso
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Init(objDB, rInfoPersona, vGuidPersona)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+
+  End Function
+
   Public Shared Function Save(ByVal vObjDB As libDB.clsAcceso, ByRef rInfoPersona As manDB.ClsInfoPersona) As Result
     Try
       Dim objResult As Result

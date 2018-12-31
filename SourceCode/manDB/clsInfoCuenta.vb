@@ -10,6 +10,9 @@
   Private m_Codigo4 As String
   Private m_TipoDeCuenta As Guid
 
+  Public Delegate Function delToString(ByVal vGuidTipoCuenta As Guid) As String
+  Private m_del As delToString = Nothing
+
   Public Property IdCuenta As Integer
     Get
       Return m_IdCuenta
@@ -90,13 +93,30 @@
     Codigo3 = "--"
     Codigo4 = "--"
     TipoDeCuenta = Nothing
-    
+  End Sub
 
+ 
+
+  Public Sub SetDelegadoCustomString(ByRef vSub As delToString)
+    Try
+      m_del = vSub
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+    End Try
   End Sub
 
   Public Overrides Function ToString() As String
+    Try
+      If m_del Is Nothing Then
+        Return Codigo1.ToString
+      Else
+        Return m_del.Invoke(m_TipoDeCuenta) & " -- " & Codigo1.ToString
+      End If
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+      Return "--"
+    End Try
 
-    Return Codigo1
 
   End Function
 

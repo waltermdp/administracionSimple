@@ -1,6 +1,7 @@
 ﻿Public Class clsInfoPagos
   Implements ICloneable
 
+
   Private m_IdPago As Integer
   Private m_GuidProducto As Guid
   Private m_GuidPago As Guid

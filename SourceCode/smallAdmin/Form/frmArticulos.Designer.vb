@@ -276,6 +276,7 @@ Partial Class frmArticulos
     Me.Controls.Add(Me.btnGuardar)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmArticulos"
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmArticulos"
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.dgvListArticulos, System.ComponentModel.ISupportInitialize).EndInit()

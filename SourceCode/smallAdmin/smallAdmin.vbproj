@@ -98,11 +98,12 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
+    <Compile Include="AccesoADatos\clsPrincipal.vb" />
     <Compile Include="AccesoADatos\clsProducto.vb" />
     <Compile Include="AccesoADatos\clsRelArtProd.vb" />
-    <Compile Include="AccesoADatos\clsTipoPago.vb" />
     <Compile Include="AccesoADatos\clsVendedor.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaCuentas.vb" />
+    <Compile Include="AccesoADatos\Listas\clsListaPrincipal.vb" />
     <Compile Include="AccesoADatos\Listas\clsListArticulos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListPagos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListRelArtProd.vb" />
@@ -230,6 +231,7 @@
     <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoDatabase.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoPagos.datasource" />
+    <None Include="My Project\DataSources\manDB.clsInfoPrincipal.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoProducto.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoRelArtProd.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoVendedor.datasource" />

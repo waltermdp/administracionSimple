@@ -1,7 +1,7 @@
 ﻿Imports manDB
 Imports libCommon.Comunes
-Public Class clsListProductos
-  Inherits clsList(Of clsInfoProducto)
+Public Class clsListaPrincipal
+  Inherits clsList(Of clsInfoPrincipal)
 
   Public Sub New()
     Try
@@ -11,8 +11,7 @@ Public Class clsListProductos
     End Try
   End Sub
 
-
-  Protected Overrides Function RefreshData_Private() As libCommon.Comunes.Result
+  Protected Overrides Function RefreshData_Private() As Result
     Try
       Dim objDB As libDB.clsAcceso = Nothing
       Dim objResult As libCommon.Comunes.Result = Result.OK
@@ -23,6 +22,8 @@ Public Class clsListProductos
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
         If objResult <> Result.OK Then Return objResult
 
+        Dim objInfoPrincipal As New clsInfoPrincipal
+
         Dim objListProdInfo As clsInfoProducto
         Dim strCommand As String = "Productos" ', (select max(bcospac.fecha) as LastVisitDate from BcosPac where BcosPac.idPac = Pac.idPac) as  LastVisitDate from Pac)"
         Dim objDatos As libDB.clsTabla
@@ -30,13 +31,28 @@ Public Class clsListProductos
         Dim auxResult As Result = objDatos.GetData(objDB)
         If auxResult > 0 Then
           For Each fila As DataRow In objDatos.Table.Rows
-
-            objListProdInfo = New clsInfoProducto()
+            objInfoPrincipal = New clsInfoPrincipal
+            objListProdInfo = New clsInfoProducto
             objResult = clsProducto.ProductoIgualDataRow(objListProdInfo, fila)
             If objResult <> Result.OK Then Return objResult
-            m_Items.Add(objListProdInfo)
+            objInfoPrincipal.FechaVenta = objListProdInfo.FechaVenta
+            objInfoPrincipal.GuidProducto = objListProdInfo.GuidProducto
+            objInfoPrincipal.CuotasTotales = objListProdInfo.TotalCuotas
 
+
+            Dim objPersona As New ClsInfoPersona
+            objResult = clsPersona.Load(objListProdInfo.GuidCliente, objPersona)
+            If objResult <> Result.OK Then Return objResult
+            objInfoPrincipal.NombreCliente = objPersona.ToString
+
+            Dim objPagos As New List(Of clsInfoPagos)
+            objResult = clsPago.Load(objPagos, objListProdInfo.GuidProducto)
+            If objResult <> Result.OK Then Return objResult
+            objInfoPrincipal.CuotasPagas = CuotasPagas(objPagos)
+            objInfoPrincipal.ValorCuota = objPagos.First.ValorCuota
+            m_Items.Add(objInfoPrincipal)
           Next
+
         Else
           If auxResult < 0 Then
             MsgBox("Fallo refresh data")
@@ -72,5 +88,19 @@ Public Class clsListProductos
     End Try
   End Function
 
-  
+  Private Function CuotasPagas(ByVal lstPagos As List(Of clsInfoPagos)) As Integer
+    Try
+      Dim pagadas As Integer = 0
+      For Each pago In lstPagos
+        If pago.EstadoPago = 1 Then
+          pagadas += 1
+        End If
+      Next
+      Return pagadas
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return -1
+    End Try
+  End Function
+
 End Class

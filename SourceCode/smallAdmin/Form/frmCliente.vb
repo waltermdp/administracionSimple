@@ -3,20 +3,17 @@ Imports manDB
 Public Class frmCliente
 
   Private WithEvents m_objProductList As clsListProductos = Nothing
+  Private m_Persona As ClsInfoPersona
 
-  Public Enum E_Modo As Integer
-    Nuevo = 1
-    Edicion = 2
-  End Enum
-
-  Private m_Modo As E_Modo
-  Private m_Cliente As clsInfoCliente
-
-  Public Sub New(ByVal vModo As E_Modo)
+  Public Sub New(ByVal vPersona As ClsInfoPersona)
+    InitializeComponent()
     Try
-      InitializeComponent()
-      m_Modo = vModo
-
+      If vPersona Is Nothing Then
+        m_Persona = New ClsInfoPersona
+        m_Persona.GuidCliente = Guid.NewGuid
+      Else
+        m_Persona = vPersona.Clone
+      End If
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -24,11 +21,26 @@ Public Class frmCliente
 
   Private Sub Refresh_InfoCurrentCliente()
     Try
-      With m_Cliente.Personal
-        txtApellido.Text = CStr(IIf(.Apellido = "--" And m_Modo = E_Modo.Nuevo, "", .Apellido))
-        txtNombre.Text = CStr(IIf(.Nombre = "--" And m_Modo = E_Modo.Nuevo, "", .Nombre))
+      With m_Persona
+        txtNombre.Text = .Nombre
+        txtApellido.Text = .Apellido
+        txtID.Text = .DNI
+        dtFechaNac.Value = .FechaNac
+        txtCalle1.Text = .Calle
+        txtNumero1.Text = .NumCalle
+        dtFechaIngreso.Value = .FechaIngreso
+        txtEmail.Text = .Email
+        txtTelefono1.Text = .Tel1
+        txtTelefono2.Text = .Tel2
+        txtCiudad.Text = .Ciudad
+        txtProvincia.Text = .Provincia
+        txtCalle2.Text = .Calle2
+        txtNumero2.Text = .NumCalle2
+        txtCP.Text = .CodigoPostal
+        txtComentario.Text = .Comentarios
+        txtProfesion.Text = .Profesion
       End With
-      Call MostrarProductos()
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -40,7 +52,7 @@ Public Class frmCliente
     Try
 
 
-      With m_Cliente.Personal
+      With m_Persona
         .Nombre = txtNombre.Text.Trim
         If .Nombre = "" Then .Nombre = "--"
         .Apellido = txtApellido.Text.Trim
@@ -89,13 +101,24 @@ Public Class frmCliente
     Try
       Dim vResult As libCommon.Comunes.Result
       Call Save_InfoCurrentCliente()
+      Dim auxpersona As Integer
+      Dim CrearCuentaDefecto As Boolean = Not clsPersona.FindGuid(m_Persona.GuidCliente, auxpersona)
 
-      vResult = clsCliente.SavePersonal(m_Cliente)
+      vResult = clsPersona.Save(m_Persona)
       If vResult <> Result.OK Then
         MsgBox("No se guardo")
         Exit Sub
       End If
-
+      'si es nuevo entonces crear 1 cuenta asociada = efectivo
+      If CrearCuentaDefecto Then
+        Dim Cuenta As New clsInfoCuenta
+        Cuenta.GuidCliente = m_Persona.GuidCliente
+        Cuenta.GuidCuenta = Guid.NewGuid
+        Cuenta.TipoDeCuenta = g_TipoPago(0).GuidTipo
+        If clsCuenta.Save(Cuenta) <> Result.OK Then
+          MsgBox("No se pudo asociar cuenta por defecto")
+        End If
+      End If
       Me.Close()
       Exit Sub
     Catch ex As Exception
@@ -105,19 +128,17 @@ Public Class frmCliente
 
   Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
     Try
-      m_Cliente = Nothing
+      m_Persona = Nothing
       Me.Close()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
-  Public Sub GetClient(ByRef rCliente As clsInfoCliente)
+  Public Sub GetClient(ByRef rPersona As ClsInfoPersona)
     Try
-      If m_Cliente IsNot Nothing Then
-        rCliente = m_Cliente.Clone
-      Else
-        rCliente = Nothing
+      If m_Persona IsNot Nothing Then
+        rPersona = m_Persona.Clone
       End If
 
     Catch ex As Exception
@@ -127,7 +148,7 @@ Public Class frmCliente
 
   Private Sub frmCliente_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
-      m_Cliente = New clsInfoCliente()
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -137,61 +158,12 @@ Public Class frmCliente
   Private Sub frmCliente_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
 
-      If m_Modo = E_Modo.Edicion Then
-        m_Cliente = gCliente.clone
-
-      Else 'nuevo
-        m_Cliente = New clsInfoCliente
-        m_Cliente.Personal.GuidCliente = Guid.NewGuid
-      End If
-
       Call Refresh_InfoCurrentCliente()
 
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
-
-
-  Private Sub btnAgregarProducto_MouseClick(sender As Object, e As MouseEventArgs)
-    Try
-      Dim lProducto As New clsInfoProducto
-
-      Using objVenta As New frmVenta()
-        objVenta.ShowDialog()
-        If objVenta.HayCambios Then
-          objVenta.getCambios(lProducto)
-          lProducto.GuidCliente = m_Cliente.Personal.GuidCliente
-          m_Cliente.ListaProductos.Add(lProducto)
-        End If
-      End Using
-
-      Call Refresh_InfoCurrentCliente()
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub MostrarProductos()
-    Try
-      'If m_objProductList IsNot Nothing Then m_objProductList.Dispose()
-      'm_objProductList = New clsListProductos()
-
-      bsinfoProductos.DataSource = m_Cliente.ListaProductos  'm_objProductList.Binding
-      'm_objPersona_Current = Nothing
-      'Call Refresh_InfoCliente()
-
-
-      'Call ClientList_RefreshData()
-      bsinfoProductos.ResetBindings(False)
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-
-
- 
 
 
 End Class

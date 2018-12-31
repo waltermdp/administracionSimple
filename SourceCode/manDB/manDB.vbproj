@@ -91,10 +91,12 @@
     <Compile Include="clsInfoCliente.vb" />
     <Compile Include="clsInfoDatabase.vb" />
     <Compile Include="clsInfoPersona.vb" />
+    <Compile Include="clsInfoPrincipal.vb" />
     <Compile Include="clsInfoProducto.vb" />
     <Compile Include="clsInfoRelArtProd.vb" />
     <Compile Include="clsInfoVendedor.vb" />
     <Compile Include="clsList.vb" />
+    <Compile Include="clsTipoPago.vb" />
     <Compile Include="modGlobales.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

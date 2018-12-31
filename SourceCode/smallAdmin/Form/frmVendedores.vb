@@ -6,6 +6,7 @@ Public Class frmVendedores
   Private Sub frmVendedores_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
       Call MostrarListaVendedores()
+      Call Refresh_Selection(-1)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -48,6 +49,7 @@ Public Class frmVendedores
     Try
       If indice < 0 Then
         dgvListVendedores.ClearSelection()
+        m_objVendedorCurrent = Nothing
         Exit Sub
       End If
       If (indice >= 0) Then
@@ -114,7 +116,6 @@ Public Class frmVendedores
   Public Sub GetVendedorSelected(ByRef rVendedor As manDB.clsInfoVendedor)
     Try
       If m_objVendedorCurrent Is Nothing Then
-        rVendedor = Nothing
         Exit Sub
       End If
       rVendedor = m_objVendedorCurrent.Clone

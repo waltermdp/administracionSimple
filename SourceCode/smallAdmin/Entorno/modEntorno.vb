@@ -8,7 +8,7 @@ Module Entorno
   Public DB_SLocal_ConnectionString As String = String.Empty
   Private dbpw As String = String.Empty
 
-  Public g_TipoPago As New List(Of clsTipoPago)
+  Public g_TipoPago As New List(Of manDB.clsTipoPago)
   Public g_Cuotas As New List(Of clsCuota)
 
   Public Function init() As Result
@@ -54,7 +54,7 @@ Module Entorno
   End Function
 
 
-  Public Function GuardarTipoPago(ByRef rListTipoListaPago As List(Of clsTipoPago)) As Result
+  Public Function GuardarTipoPago(ByRef rListTipoListaPago As List(Of manDB.clsTipoPago)) As Result
 
     Try
 
@@ -64,7 +64,7 @@ Module Entorno
       Fila = FreeFile()
 
       If rListTipoListaPago Is Nothing Then
-        rListTipoListaPago = New List(Of clsTipoPago)
+        rListTipoListaPago = New List(Of manDB.clsTipoPago)
       End If
 
       Try
@@ -80,7 +80,7 @@ Module Entorno
           WriteLine(Fila, auxstr)
           auxstr = CStr(rListTipoListaPago(i).GuidTipo.ToString)
           WriteLine(Fila, auxstr)
-          
+
         Next
         objResult = Result.OK
 
@@ -101,7 +101,7 @@ Module Entorno
 
   End Function
 
-  Public Function CargarTipoPago(ByRef rListTipoPago As List(Of clsTipoPago), Optional ByVal ShowMessage As Boolean = False) As Result
+  Public Function CargarTipoPago(ByRef rListTipoPago As List(Of manDB.clsTipoPago), Optional ByVal ShowMessage As Boolean = False) As Result
 
     Try
       Dim objResult As Result
@@ -109,7 +109,7 @@ Module Entorno
       Fila = FreeFile()
 
       If rListTipoPago Is Nothing Then
-        rListTipoPago = New List(Of clsTipoPago)
+        rListTipoPago = New List(Of manDB.clsTipoPago)
       Else
         rListTipoPago.Clear()
       End If
@@ -118,14 +118,14 @@ Module Entorno
 
         FileOpen(Fila, IO.Path.Combine(App_path, "TipoPagos.inf"), OpenMode.Input)
         Dim auxstr As String = ""
-        Dim auxTipoPago As clsTipoPago
+        Dim auxTipoPago As manDB.clsTipoPago
 
         Input(Fila, auxstr)
 
         objResult = Result.OK
         For i = 0 To Val(auxstr) - 1
           Try
-            auxTipoPago = New clsTipoPago
+            auxTipoPago = New manDB.clsTipoPago
             Input(Fila, auxstr)
             auxTipoPago.Nombre = auxstr
             Input(Fila, auxstr)

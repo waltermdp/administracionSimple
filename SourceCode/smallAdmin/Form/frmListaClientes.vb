@@ -24,13 +24,13 @@ Public Class frmListaClientes
     End Try
   End Sub
 
-  Public Sub GetClienteSelected(ByRef objCliente As clsInfoCliente)
+  Public Sub GetClienteSelected(ByRef objCliente As ClsInfoPersona)
     Try
       If m_SelectedClient Is Nothing Then
         objCliente = Nothing
         Exit Sub
       End If
-      objCliente = m_SelectedClient.Clone
+      objCliente = m_SelectedClient.Personal.Clone
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -118,14 +118,6 @@ Public Class frmListaClientes
     End Try
   End Sub
 
-  Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-    Try
-      Call MostrarClientes()
-
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
 
   Private Sub Refresh_Selection(ByVal indice As Integer)
 
@@ -225,8 +217,8 @@ Public Class frmListaClientes
         MsgBox("no existe cliente")
         Exit Sub
       End If
-      gCliente = LDataCliente.Clone
-      Dim objDialog As New frmCliente(frmCliente.E_Modo.Edicion)
+
+      Dim objDialog As New frmCliente(LDataCliente.Personal)
       objDialog.ShowDialog()
       objDialog.Dispose()
 
@@ -239,7 +231,7 @@ Public Class frmListaClientes
   Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
     Try
 
-      Dim objDialog As New frmCliente(frmCliente.E_Modo.Nuevo)
+      Dim objDialog As New frmCliente(Nothing)
       objDialog.ShowDialog()
       objDialog.Dispose()
 

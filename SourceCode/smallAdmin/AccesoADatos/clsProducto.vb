@@ -39,6 +39,23 @@ Public Class clsProducto
     End Try
   End Function
 
+  Public Shared Function Load(ByVal vGuid As Guid, ByRef rInfoProducto As clsInfoProducto) As Result
+    Try
+      Dim vResult As Result
+      Dim vIdProducto As Integer
+      If FindGuid(vGuid, vIdProducto) = True Then
+        vResult = Init(rInfoProducto, vGuid)
+        Return vResult
+      Else
+
+      End If
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
   Public Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rlistProductos As List(Of clsInfoProducto), ByVal vGuidCliente As Guid, Optional ByRef rCodeError As Integer = -1) As Result
     Try
@@ -72,6 +89,79 @@ Public Class clsProducto
     Catch ex As Exception
       Call Print_msg(ex.Message)
       Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function Init(ByRef rInfoProducto As clsInfoProducto, ByVal vGuid As Guid) As Result
+    Try
+
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+      Try
+        rInfoProducto = New clsInfoProducto
+        rInfoProducto.GuidCliente = vGuid
+
+        objDB = New libDB.clsAcceso
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Init(objDB, rInfoProducto, vGuid)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rInfoProductos As clsInfoProducto, ByVal vGuid As Guid) As Result
+    Try
+
+      Dim objResult As Result
+
+      '--- Comando en DB -->
+      Dim dt As DataTable = Nothing
+      Dim strCommand As String
+
+      strCommand = "SELECT * FROM [Productos] WHERE [GuidProducto]={" & vGuid.ToString & "}"
+
+
+      objResult = vObjDB.GetDato(strCommand, dt)
+
+      '--- Devuelvo OK cuando no hay resultados -->
+      If objResult = Result.NOK Then Return Result.OK
+      If objResult <> Result.OK Then Return objResult
+      '<-- Devuelvo OK cuando no hay resultados ---
+
+      '<-- Comando en DB ---
+
+      objResult = ProductoIgualDataRow(rInfoProductos, dt.Rows(0))
+      If objResult <> Result.OK Then Return objResult
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+
     End Try
   End Function
 
@@ -186,6 +276,89 @@ Public Class clsProducto
       Call Print_msg(ex.Message)
       Return Result.ErrorEx
     End Try
+  End Function
+
+  Public Shared Function FindGuid(ByVal vGuid As Guid, ByRef vIdProducto As Integer) As Boolean
+    Try
+
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+
+      Try
+        objDB = New libDB.clsAcceso
+
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = FindGuid(objDB, vGuid, vIdProducto)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+
+        If objDB IsNot Nothing Then
+
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+
+        End If
+
+      End Try
+
+      If objResult = Result.OK Then
+        Return True
+      Else
+        Return False
+      End If
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      vIdProducto = -1
+      Return False
+
+    End Try
+
+  End Function
+
+  Public Shared Function FindGuid(ByVal vObjDB As libDB.clsAcceso, ByVal vGuid As Guid, ByRef rIdProducto As Integer) As Result
+    Try
+      Dim objResult As Result
+
+      '--- Comando en DB -->
+      Dim strCommand As String
+
+      strCommand = "SELECT [IdProducto] FROM [Productos] WHERE [GuidProducto]={" & vGuid.ToString & "}"
+
+
+      objResult = vObjDB.EjecutarConsulta(strCommand, rIdProducto)
+      If objResult <> Result.OK Then Return objResult
+      '<-- Comando en DB ---
+
+      If rIdProducto > 0 Then
+        objResult = Result.OK
+      Else
+        rIdProducto = -1
+        objResult = Result.NOK
+      End If
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+
+      rIdProducto = -1
+      Return Result.ErrorEx
+
+    End Try
+
   End Function
 
   Private Shared Function Save_InfoPagos(ByVal vObjDB As libDB.clsAcceso, ByVal vPagos As List(Of clsInfoPagos)) As Result
@@ -307,7 +480,6 @@ Public Class clsProducto
       Return Result.ErrorEx
     End Try
   End Function
-
 
   Private Shared Function Save_ArticulosVendidos(ByVal vObjDB As libDB.clsAcceso, ByRef rArticulosVendidos As List(Of clsInfoArticuloVendido), ByVal vGuidProducto As Guid) As Result
     Try

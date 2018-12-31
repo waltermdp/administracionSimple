@@ -23,22 +23,12 @@ Partial Class frmDeben
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
-    Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnPagos = New System.Windows.Forms.Button()
     Me.dateInicio = New System.Windows.Forms.DateTimePicker()
     Me.btnBack = New System.Windows.Forms.Button()
-    Me.dgvData = New System.Windows.Forms.DataGridView()
-    Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.IdProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.TotalCuotasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.PrecioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotasDebeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.bsDeben = New System.Windows.Forms.BindingSource(Me.components)
     Me.ComboBox1 = New System.Windows.Forms.ComboBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.dateFin = New System.Windows.Forms.DateTimePicker()
@@ -57,10 +47,19 @@ Partial Class frmDeben
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnEditarVenta = New System.Windows.Forms.Button()
     Me.btnArticulos = New System.Windows.Forms.Button()
-    CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.btnUpPago = New System.Windows.Forms.Button()
+    Me.btnDownPago = New System.Windows.Forms.Button()
+    Me.dgvData = New System.Windows.Forms.DataGridView()
+    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
+    Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotasPagasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotasTotalesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GroupBox1.SuspendLayout()
     Me.Panel1.SuspendLayout()
+    CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'btnPagos
@@ -87,119 +86,6 @@ Partial Class frmDeben
     Me.btnBack.TabIndex = 3
     Me.btnBack.Text = "Cerrar"
     Me.btnBack.UseVisualStyleBackColor = True
-    '
-    'dgvData
-    '
-    Me.dgvData.AllowUserToAddRows = False
-    Me.dgvData.AllowUserToDeleteRows = False
-    Me.dgvData.AllowUserToResizeRows = False
-    Me.dgvData.AutoGenerateColumns = False
-    Me.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None
-    Me.dgvData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-    DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
-    Me.dgvData.ColumnHeadersHeight = 24
-    Me.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.GuidVendedorDataGridViewTextBoxColumn, Me.IdProductoDataGridViewTextBoxColumn, Me.TotalCuotasDataGridViewTextBoxColumn, Me.PrecioDataGridViewTextBoxColumn, Me.CuotasDebeDataGridViewTextBoxColumn, Me.FechaVentaDataGridViewTextBoxColumn})
-    Me.dgvData.DataSource = Me.bsDeben
-    DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle5
-    Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvData.EnableHeadersVisualStyles = False
-    Me.dgvData.GridColor = System.Drawing.Color.White
-    Me.dgvData.Location = New System.Drawing.Point(124, 175)
-    Me.dgvData.Margin = New System.Windows.Forms.Padding(0)
-    Me.dgvData.MultiSelect = False
-    Me.dgvData.Name = "dgvData"
-    Me.dgvData.ReadOnly = True
-    DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-    DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-    DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-    DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-    DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
-    Me.dgvData.RowHeadersVisible = False
-    Me.dgvData.RowTemplate.Height = 24
-    Me.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None
-    Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData.Size = New System.Drawing.Size(865, 243)
-    Me.dgvData.TabIndex = 25
-    Me.dgvData.TabStop = False
-    '
-    'GuidProductoDataGridViewTextBoxColumn
-    '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'GuidClienteDataGridViewTextBoxColumn
-    '
-    Me.GuidClienteDataGridViewTextBoxColumn.DataPropertyName = "GuidCliente"
-    Me.GuidClienteDataGridViewTextBoxColumn.HeaderText = "GuidCliente"
-    Me.GuidClienteDataGridViewTextBoxColumn.Name = "GuidClienteDataGridViewTextBoxColumn"
-    Me.GuidClienteDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'GuidVendedorDataGridViewTextBoxColumn
-    '
-    Me.GuidVendedorDataGridViewTextBoxColumn.DataPropertyName = "GuidVendedor"
-    Me.GuidVendedorDataGridViewTextBoxColumn.HeaderText = "GuidVendedor"
-    Me.GuidVendedorDataGridViewTextBoxColumn.Name = "GuidVendedorDataGridViewTextBoxColumn"
-    Me.GuidVendedorDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'IdProductoDataGridViewTextBoxColumn
-    '
-    Me.IdProductoDataGridViewTextBoxColumn.DataPropertyName = "IdProducto"
-    Me.IdProductoDataGridViewTextBoxColumn.HeaderText = "IdProducto"
-    Me.IdProductoDataGridViewTextBoxColumn.Name = "IdProductoDataGridViewTextBoxColumn"
-    Me.IdProductoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'TotalCuotasDataGridViewTextBoxColumn
-    '
-    Me.TotalCuotasDataGridViewTextBoxColumn.DataPropertyName = "TotalCuotas"
-    Me.TotalCuotasDataGridViewTextBoxColumn.HeaderText = "TotalCuotas"
-    Me.TotalCuotasDataGridViewTextBoxColumn.Name = "TotalCuotasDataGridViewTextBoxColumn"
-    Me.TotalCuotasDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'PrecioDataGridViewTextBoxColumn
-    '
-    Me.PrecioDataGridViewTextBoxColumn.DataPropertyName = "Precio"
-    Me.PrecioDataGridViewTextBoxColumn.HeaderText = "Precio"
-    Me.PrecioDataGridViewTextBoxColumn.Name = "PrecioDataGridViewTextBoxColumn"
-    Me.PrecioDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CuotasDebeDataGridViewTextBoxColumn
-    '
-    Me.CuotasDebeDataGridViewTextBoxColumn.DataPropertyName = "CuotasDebe"
-    Me.CuotasDebeDataGridViewTextBoxColumn.HeaderText = "CuotasDebe"
-    Me.CuotasDebeDataGridViewTextBoxColumn.Name = "CuotasDebeDataGridViewTextBoxColumn"
-    Me.CuotasDebeDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaVentaDataGridViewTextBoxColumn
-    '
-    Me.FechaVentaDataGridViewTextBoxColumn.DataPropertyName = "FechaVenta"
-    Me.FechaVentaDataGridViewTextBoxColumn.HeaderText = "FechaVenta"
-    Me.FechaVentaDataGridViewTextBoxColumn.Name = "FechaVentaDataGridViewTextBoxColumn"
-    Me.FechaVentaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'bsDeben
-    '
-    Me.bsDeben.DataSource = GetType(manDB.clsInfoProducto)
     '
     'ComboBox1
     '
@@ -369,11 +255,124 @@ Partial Class frmDeben
     Me.btnArticulos.Text = "Articulos"
     Me.btnArticulos.UseVisualStyleBackColor = True
     '
+    'btnUpPago
+    '
+    Me.btnUpPago.Location = New System.Drawing.Point(795, 441)
+    Me.btnUpPago.Name = "btnUpPago"
+    Me.btnUpPago.Size = New System.Drawing.Size(90, 23)
+    Me.btnUpPago.TabIndex = 33
+    Me.btnUpPago.Text = "AgregarPago"
+    Me.btnUpPago.UseVisualStyleBackColor = True
+    '
+    'btnDownPago
+    '
+    Me.btnDownPago.Location = New System.Drawing.Point(795, 479)
+    Me.btnDownPago.Name = "btnDownPago"
+    Me.btnDownPago.Size = New System.Drawing.Size(90, 24)
+    Me.btnDownPago.TabIndex = 43
+    Me.btnDownPago.Text = "revertirPago"
+    Me.btnDownPago.UseVisualStyleBackColor = True
+    '
+    'dgvData
+    '
+    Me.dgvData.AllowUserToAddRows = False
+    Me.dgvData.AllowUserToDeleteRows = False
+    Me.dgvData.AllowUserToResizeRows = False
+    Me.dgvData.AutoGenerateColumns = False
+    Me.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None
+    Me.dgvData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+    Me.dgvData.ColumnHeadersHeight = 24
+    Me.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+    Me.dgvData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaVentaDataGridViewTextBoxColumn, Me.NombreClienteDataGridViewTextBoxColumn, Me.CuotasPagasDataGridViewTextBoxColumn, Me.CuotasTotalesDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn})
+    Me.dgvData.DataSource = Me.bsInfoPrincipal
+    DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+    DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle2
+    Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+    Me.dgvData.EnableHeadersVisualStyles = False
+    Me.dgvData.GridColor = System.Drawing.Color.White
+    Me.dgvData.Location = New System.Drawing.Point(164, 175)
+    Me.dgvData.Margin = New System.Windows.Forms.Padding(0)
+    Me.dgvData.MultiSelect = False
+    Me.dgvData.Name = "dgvData"
+    Me.dgvData.ReadOnly = True
+    DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+    DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+    DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+    DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+    DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+    Me.dgvData.RowHeadersVisible = False
+    Me.dgvData.RowTemplate.Height = 24
+    Me.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None
+    Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+    Me.dgvData.Size = New System.Drawing.Size(865, 243)
+    Me.dgvData.TabIndex = 44
+    Me.dgvData.TabStop = False
+    '
+    'bsInfoPrincipal
+    '
+    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
+    '
+    'FechaVentaDataGridViewTextBoxColumn
+    '
+    Me.FechaVentaDataGridViewTextBoxColumn.DataPropertyName = "FechaVenta"
+    Me.FechaVentaDataGridViewTextBoxColumn.HeaderText = "FechaVenta"
+    Me.FechaVentaDataGridViewTextBoxColumn.Name = "FechaVentaDataGridViewTextBoxColumn"
+    Me.FechaVentaDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NombreClienteDataGridViewTextBoxColumn
+    '
+    Me.NombreClienteDataGridViewTextBoxColumn.DataPropertyName = "NombreCliente"
+    Me.NombreClienteDataGridViewTextBoxColumn.HeaderText = "NombreCliente"
+    Me.NombreClienteDataGridViewTextBoxColumn.Name = "NombreClienteDataGridViewTextBoxColumn"
+    Me.NombreClienteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotasPagasDataGridViewTextBoxColumn
+    '
+    Me.CuotasPagasDataGridViewTextBoxColumn.DataPropertyName = "CuotasPagas"
+    Me.CuotasPagasDataGridViewTextBoxColumn.HeaderText = "CuotasPagas"
+    Me.CuotasPagasDataGridViewTextBoxColumn.Name = "CuotasPagasDataGridViewTextBoxColumn"
+    Me.CuotasPagasDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotasTotalesDataGridViewTextBoxColumn
+    '
+    Me.CuotasTotalesDataGridViewTextBoxColumn.DataPropertyName = "CuotasTotales"
+    Me.CuotasTotalesDataGridViewTextBoxColumn.HeaderText = "CuotasTotales"
+    Me.CuotasTotalesDataGridViewTextBoxColumn.Name = "CuotasTotalesDataGridViewTextBoxColumn"
+    Me.CuotasTotalesDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(1264, 682)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.dgvData)
+    Me.Controls.Add(Me.btnDownPago)
+    Me.Controls.Add(Me.btnUpPago)
     Me.Controls.Add(Me.btnArticulos)
     Me.Controls.Add(Me.btnEditarVenta)
     Me.Controls.Add(Me.btnNuevo)
@@ -385,19 +384,18 @@ Partial Class frmDeben
     Me.Controls.Add(Me.Label3)
     Me.Controls.Add(Me.btnBuscar)
     Me.Controls.Add(Me.dateFin)
-    Me.Controls.Add(Me.dgvData)
     Me.Controls.Add(Me.btnBack)
     Me.Controls.Add(Me.dateInicio)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmDeben"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmDeben"
-    CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.bsDeben, System.ComponentModel.ISupportInitialize).EndInit()
     Me.GroupBox1.ResumeLayout(False)
     Me.GroupBox1.PerformLayout()
     Me.Panel1.ResumeLayout(False)
     Me.Panel1.PerformLayout()
+    CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -405,18 +403,8 @@ Partial Class frmDeben
   Friend WithEvents btnPagos As System.Windows.Forms.Button
   Friend WithEvents dateInicio As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnBack As System.Windows.Forms.Button
-  Friend WithEvents bsDeben As System.Windows.Forms.BindingSource
-  Public WithEvents dgvData As System.Windows.Forms.DataGridView
-  Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents IdProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents TipoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents TotalCuotasDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents PrecioDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CuotasDebeDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaVentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents dateFin As System.Windows.Forms.DateTimePicker
@@ -435,4 +423,13 @@ Partial Class frmDeben
   Friend WithEvents btnNuevo As System.Windows.Forms.Button
   Friend WithEvents btnEditarVenta As System.Windows.Forms.Button
   Friend WithEvents btnArticulos As System.Windows.Forms.Button
+  Friend WithEvents btnUpPago As System.Windows.Forms.Button
+  Friend WithEvents btnDownPago As System.Windows.Forms.Button
+  Public WithEvents dgvData As System.Windows.Forms.DataGridView
+  Friend WithEvents bsInfoPrincipal As System.Windows.Forms.BindingSource
+  Friend WithEvents FechaVentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NombreClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CuotasPagasDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CuotasTotalesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

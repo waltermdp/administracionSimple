@@ -15,6 +15,11 @@ Public Class frmCuenta
     End Try
   End Sub
 
+  'new del...(address of MiFuncion)
+  Private Function GetName(ByVal vGuidTipoCuenta As Guid) As String
+    Return GetNameOfTipoPago(vGuidTipoCuenta)
+  End Function
+
   Private Sub frmCuenta_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
       Dim vResult As Result
@@ -50,7 +55,8 @@ Public Class frmCuenta
   Private Sub frmCuenta_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
       Call MostrarListaCuentas()
-
+      m_objCuentaCurrent = Nothing
+      Call Refresh_Selection(-1)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -62,6 +68,7 @@ Public Class frmCuenta
 
       m_objCuentaList = New clsListaCuentas()
       m_objCuentaList.Cfg_Filtro = "WHERE GuidCliente={" & m_GuidCliente.ToString & "}"
+     
       bsCuenta.DataSource = m_objCuentaList.Binding
 
       Call CuentaList_RefreshData()
@@ -74,6 +81,9 @@ Public Class frmCuenta
   Private Sub CuentaList_RefreshData()
     Try
       m_objCuentaList.RefreshData()
+      For Each cuenta In m_objCuentaList.Items
+        cuenta.SetDelegadoCustomString(New clsInfoCuenta.delToString(AddressOf GetName))
+      Next
       bsCuenta.ResetBindings(False)
     Catch ex As Exception
       Call Print_msg(ex.Message)

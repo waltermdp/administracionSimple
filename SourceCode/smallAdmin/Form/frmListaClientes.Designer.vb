@@ -28,11 +28,6 @@ Partial Class frmListaClientes
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnEdit = New System.Windows.Forms.Button()
     Me.dgvData1 = New System.Windows.Forms.DataGridView()
-    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnNuevo = New System.Windows.Forms.Button()
-    Me.btnEliminar = New System.Windows.Forms.Button()
-    Me.btnRefresh = New System.Windows.Forms.Button()
-    Me.btnVolver = New System.Windows.Forms.Button()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,6 +48,10 @@ Partial Class frmListaClientes
     Me.CodigoPostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComentariosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ProfesionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnEliminar = New System.Windows.Forms.Button()
+    Me.btnVolver = New System.Windows.Forms.Button()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -118,46 +117,6 @@ Partial Class frmListaClientes
     Me.dgvData1.Size = New System.Drawing.Size(865, 243)
     Me.dgvData1.TabIndex = 24
     Me.dgvData1.TabStop = False
-    '
-    'bsInfoCliente
-    '
-    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
-    '
-    'btnNuevo
-    '
-    Me.btnNuevo.Location = New System.Drawing.Point(12, 35)
-    Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(98, 41)
-    Me.btnNuevo.TabIndex = 25
-    Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = True
-    '
-    'btnEliminar
-    '
-    Me.btnEliminar.Location = New System.Drawing.Point(12, 134)
-    Me.btnEliminar.Name = "btnEliminar"
-    Me.btnEliminar.Size = New System.Drawing.Size(98, 40)
-    Me.btnEliminar.TabIndex = 26
-    Me.btnEliminar.Text = "Eliminar"
-    Me.btnEliminar.UseVisualStyleBackColor = True
-    '
-    'btnRefresh
-    '
-    Me.btnRefresh.Location = New System.Drawing.Point(903, 281)
-    Me.btnRefresh.Name = "btnRefresh"
-    Me.btnRefresh.Size = New System.Drawing.Size(75, 23)
-    Me.btnRefresh.TabIndex = 27
-    Me.btnRefresh.Text = "refresh"
-    Me.btnRefresh.UseVisualStyleBackColor = True
-    '
-    'btnVolver
-    '
-    Me.btnVolver.Location = New System.Drawing.Point(12, 516)
-    Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(75, 23)
-    Me.btnVolver.TabIndex = 28
-    Me.btnVolver.Text = "Volver"
-    Me.btnVolver.UseVisualStyleBackColor = True
     '
     'IDClienteDataGridViewTextBoxColumn
     '
@@ -299,13 +258,43 @@ Partial Class frmListaClientes
     Me.ProfesionDataGridViewTextBoxColumn.Name = "ProfesionDataGridViewTextBoxColumn"
     Me.ProfesionDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'bsInfoCliente
+    '
+    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
+    '
+    'btnNuevo
+    '
+    Me.btnNuevo.Location = New System.Drawing.Point(12, 35)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(98, 41)
+    Me.btnNuevo.TabIndex = 25
+    Me.btnNuevo.Text = "Nuevo"
+    Me.btnNuevo.UseVisualStyleBackColor = True
+    '
+    'btnEliminar
+    '
+    Me.btnEliminar.Location = New System.Drawing.Point(12, 134)
+    Me.btnEliminar.Name = "btnEliminar"
+    Me.btnEliminar.Size = New System.Drawing.Size(98, 40)
+    Me.btnEliminar.TabIndex = 26
+    Me.btnEliminar.Text = "Eliminar"
+    Me.btnEliminar.UseVisualStyleBackColor = True
+    '
+    'btnVolver
+    '
+    Me.btnVolver.Location = New System.Drawing.Point(12, 516)
+    Me.btnVolver.Name = "btnVolver"
+    Me.btnVolver.Size = New System.Drawing.Size(75, 23)
+    Me.btnVolver.TabIndex = 28
+    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.UseVisualStyleBackColor = True
+    '
     'frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.btnVolver)
-    Me.Controls.Add(Me.btnRefresh)
     Me.Controls.Add(Me.btnEliminar)
     Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.dgvData1)
@@ -324,7 +313,6 @@ Partial Class frmListaClientes
   Friend WithEvents bsInfoCliente As System.Windows.Forms.BindingSource
   Friend WithEvents btnNuevo As System.Windows.Forms.Button
   Friend WithEvents btnEliminar As System.Windows.Forms.Button
-  Friend WithEvents btnRefresh As System.Windows.Forms.Button
   Friend WithEvents btnVolver As System.Windows.Forms.Button
   Friend WithEvents IDClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn

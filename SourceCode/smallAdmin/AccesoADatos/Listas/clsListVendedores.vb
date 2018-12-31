@@ -37,7 +37,11 @@ Public Class clsListVendedores
 
           Next
         Else
-          MsgBox("Fallo refresh data")
+          If auxResult < 0 Then
+
+
+            MsgBox("Fallo refresh data")
+          End If
         End If
 
       Catch ex As Exception
