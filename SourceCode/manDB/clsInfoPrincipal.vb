@@ -89,8 +89,50 @@
     End Set
   End Property
 
+  Public Property MetodoPago As String
+    Get
+      Return m_MetodoPago
+    End Get
+    Set(value As String)
+      m_MetodoPago = value
+    End Set
+  End Property
 
+  Public Property ArticulosVendidod As Integer
+    Get
+      Return m_CantidadArticulosVendidos
+    End Get
+    Set(value As Integer)
+      m_CantidadArticulosVendidos = value
+    End Set
+  End Property
 
+  Public Property DNI As String
+    Get
+      Return m_DNICliente
+    End Get
+    Set(value As String)
+      m_DNICliente = value
+    End Set
+  End Property
+
+  Public Property NumPago As String
+    Get
+      Return m_NumPago
+    End Get
+    Set(value As String)
+      m_NumPago = value
+    End Set
+  End Property
+
+  Public Property FechaUltimoPago As Date
+    Get
+      Return m_FechaUltimoPago
+    End Get
+    Set(value As Date)
+      m_FechaUltimoPago = value
+    End Set
+  End Property
 
   Public Sub New()
     MyBase.New()
@@ -99,6 +141,11 @@
     m_NombreCliente = "--"
     m_GuidProducto = Nothing
     m_ValorCouta = 0
+    m_MetodoPago = "--"
+    m_CantidadArticulosVendidos = 0
+    m_DNICliente = "--"
+    m_NumPago = "--"
+    m_FechaUltimoPago = Date.MaxValue
   End Sub
 
 

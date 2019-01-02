@@ -33,7 +33,6 @@ Partial Class frmVenta
     Me.Label4 = New System.Windows.Forms.Label()
     Me.Label2 = New System.Windows.Forms.Label()
     Me.Label5 = New System.Windows.Forms.Label()
-    Me.datePrimerPago = New System.Windows.Forms.DateTimePicker()
     Me.dgvCuotas = New System.Windows.Forms.DataGridView()
     Me.IdPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,10 +71,12 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
+    Me.dtDiaVencimiento = New System.Windows.Forms.NumericUpDown()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.dtDiaVencimiento, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtPrecio
@@ -112,20 +113,20 @@ Partial Class frmVenta
     '
     'btnSave
     '
-    Me.btnSave.Location = New System.Drawing.Point(79, 694)
+    Me.btnSave.Location = New System.Drawing.Point(12, 69)
     Me.btnSave.Name = "btnSave"
-    Me.btnSave.Size = New System.Drawing.Size(75, 23)
+    Me.btnSave.Size = New System.Drawing.Size(92, 52)
     Me.btnSave.TabIndex = 7
-    Me.btnSave.Text = "guardar"
+    Me.btnSave.Text = "Guardar"
     Me.btnSave.UseVisualStyleBackColor = True
     '
     'btnCancel
     '
-    Me.btnCancel.Location = New System.Drawing.Point(160, 694)
+    Me.btnCancel.Location = New System.Drawing.Point(12, 648)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+    Me.btnCancel.Size = New System.Drawing.Size(92, 52)
     Me.btnCancel.TabIndex = 8
-    Me.btnCancel.Text = "cancelar"
+    Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = True
     '
     'cmbCuotas
@@ -158,18 +159,11 @@ Partial Class frmVenta
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(561, 245)
+    Me.Label5.Location = New System.Drawing.Point(892, 202)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(91, 13)
+    Me.Label5.Size = New System.Drawing.Size(124, 13)
     Me.Label5.TabIndex = 13
-    Me.Label5.Text = "FechaPrimerPago"
-    '
-    'datePrimerPago
-    '
-    Me.datePrimerPago.Location = New System.Drawing.Point(560, 261)
-    Me.datePrimerPago.Name = "datePrimerPago"
-    Me.datePrimerPago.Size = New System.Drawing.Size(200, 20)
-    Me.datePrimerPago.TabIndex = 14
+    Me.Label5.Text = "FechaPrimerVencimiento"
     '
     'dgvCuotas
     '
@@ -177,7 +171,7 @@ Partial Class frmVenta
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
-    Me.dgvCuotas.Location = New System.Drawing.Point(19, 371)
+    Me.dgvCuotas.Location = New System.Drawing.Point(31, 318)
     Me.dgvCuotas.Name = "dgvCuotas"
     Me.dgvCuotas.Size = New System.Drawing.Size(832, 131)
     Me.dgvCuotas.TabIndex = 15
@@ -237,7 +231,7 @@ Partial Class frmVenta
     'Label6
     '
     Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(76, 108)
+    Me.Label6.Location = New System.Drawing.Point(138, 108)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(128, 13)
     Me.Label6.TabIndex = 17
@@ -256,7 +250,7 @@ Partial Class frmVenta
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(76, 9)
+    Me.Label7.Location = New System.Drawing.Point(138, 9)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(114, 13)
     Me.Label7.TabIndex = 20
@@ -264,7 +258,7 @@ Partial Class frmVenta
     '
     'btnSelectClient
     '
-    Me.btnSelectClient.Location = New System.Drawing.Point(79, 36)
+    Me.btnSelectClient.Location = New System.Drawing.Point(141, 36)
     Me.btnSelectClient.Name = "btnSelectClient"
     Me.btnSelectClient.Size = New System.Drawing.Size(125, 23)
     Me.btnSelectClient.TabIndex = 21
@@ -273,7 +267,7 @@ Partial Class frmVenta
     '
     'btnNewClient
     '
-    Me.btnNewClient.Location = New System.Drawing.Point(79, 65)
+    Me.btnNewClient.Location = New System.Drawing.Point(141, 65)
     Me.btnNewClient.Name = "btnNewClient"
     Me.btnNewClient.Size = New System.Drawing.Size(125, 23)
     Me.btnNewClient.TabIndex = 22
@@ -282,7 +276,7 @@ Partial Class frmVenta
     '
     'btnSelectVendedor
     '
-    Me.btnSelectVendedor.Location = New System.Drawing.Point(79, 124)
+    Me.btnSelectVendedor.Location = New System.Drawing.Point(141, 124)
     Me.btnSelectVendedor.Name = "btnSelectVendedor"
     Me.btnSelectVendedor.Size = New System.Drawing.Size(125, 23)
     Me.btnSelectVendedor.TabIndex = 23
@@ -291,7 +285,7 @@ Partial Class frmVenta
     '
     'txtNombreCliente
     '
-    Me.txtNombreCliente.Location = New System.Drawing.Point(266, 52)
+    Me.txtNombreCliente.Location = New System.Drawing.Point(328, 52)
     Me.txtNombreCliente.Name = "txtNombreCliente"
     Me.txtNombreCliente.ReadOnly = True
     Me.txtNombreCliente.Size = New System.Drawing.Size(230, 20)
@@ -300,7 +294,7 @@ Partial Class frmVenta
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.Location = New System.Drawing.Point(263, 36)
+    Me.Label8.Location = New System.Drawing.Point(325, 36)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(39, 13)
     Me.Label8.TabIndex = 25
@@ -308,7 +302,7 @@ Partial Class frmVenta
     '
     'txtDNICliente
     '
-    Me.txtDNICliente.Location = New System.Drawing.Point(502, 52)
+    Me.txtDNICliente.Location = New System.Drawing.Point(564, 52)
     Me.txtDNICliente.Name = "txtDNICliente"
     Me.txtDNICliente.ReadOnly = True
     Me.txtDNICliente.Size = New System.Drawing.Size(184, 20)
@@ -317,7 +311,7 @@ Partial Class frmVenta
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(499, 36)
+    Me.Label9.Location = New System.Drawing.Point(561, 36)
     Me.Label9.Name = "Label9"
     Me.Label9.Size = New System.Drawing.Size(26, 13)
     Me.Label9.TabIndex = 27
@@ -325,7 +319,7 @@ Partial Class frmVenta
     '
     'txtNombreVendedor
     '
-    Me.txtNombreVendedor.Location = New System.Drawing.Point(266, 140)
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(328, 140)
     Me.txtNombreVendedor.Name = "txtNombreVendedor"
     Me.txtNombreVendedor.ReadOnly = True
     Me.txtNombreVendedor.Size = New System.Drawing.Size(230, 20)
@@ -334,7 +328,7 @@ Partial Class frmVenta
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.Location = New System.Drawing.Point(263, 124)
+    Me.Label10.Location = New System.Drawing.Point(325, 124)
     Me.Label10.Name = "Label10"
     Me.Label10.Size = New System.Drawing.Size(53, 13)
     Me.Label10.TabIndex = 29
@@ -342,7 +336,7 @@ Partial Class frmVenta
     '
     'txtDNIVendedor
     '
-    Me.txtDNIVendedor.Location = New System.Drawing.Point(502, 140)
+    Me.txtDNIVendedor.Location = New System.Drawing.Point(564, 140)
     Me.txtDNIVendedor.Name = "txtDNIVendedor"
     Me.txtDNIVendedor.ReadOnly = True
     Me.txtDNIVendedor.Size = New System.Drawing.Size(184, 20)
@@ -351,7 +345,7 @@ Partial Class frmVenta
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(499, 124)
+    Me.Label11.Location = New System.Drawing.Point(561, 124)
     Me.Label11.Name = "Label11"
     Me.Label11.Size = New System.Drawing.Size(26, 13)
     Me.Label11.TabIndex = 32
@@ -359,6 +353,7 @@ Partial Class frmVenta
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.dtDiaVencimiento)
     Me.gpVenta.Controls.Add(Me.lblValorCuota)
     Me.gpVenta.Controls.Add(Me.txtValorCuota)
     Me.gpVenta.Controls.Add(Me.Label13)
@@ -379,12 +374,11 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.cmbCuotas)
     Me.gpVenta.Controls.Add(Me.Label4)
     Me.gpVenta.Controls.Add(Me.Label5)
-    Me.gpVenta.Controls.Add(Me.datePrimerPago)
     Me.gpVenta.Controls.Add(Me.dgvCuotas)
     Me.gpVenta.Controls.Add(Me.chkEditarCuotas)
-    Me.gpVenta.Location = New System.Drawing.Point(79, 180)
+    Me.gpVenta.Location = New System.Drawing.Point(141, 180)
     Me.gpVenta.Name = "gpVenta"
-    Me.gpVenta.Size = New System.Drawing.Size(895, 508)
+    Me.gpVenta.Size = New System.Drawing.Size(1044, 462)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
@@ -495,6 +489,16 @@ Partial Class frmVenta
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
     '
+    'dtDiaVencimiento
+    '
+    Me.dtDiaVencimiento.Location = New System.Drawing.Point(918, 221)
+    Me.dtDiaVencimiento.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
+    Me.dtDiaVencimiento.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dtDiaVencimiento.Name = "dtDiaVencimiento"
+    Me.dtDiaVencimiento.Size = New System.Drawing.Size(60, 20)
+    Me.dtDiaVencimiento.TabIndex = 32
+    Me.dtDiaVencimiento.Value = New Decimal(New Integer() {1, 0, 0, 0})
+    '
     'frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -525,6 +529,7 @@ Partial Class frmVenta
     Me.gpVenta.ResumeLayout(False)
     Me.gpVenta.PerformLayout()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.dtDiaVencimiento, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -539,7 +544,6 @@ Partial Class frmVenta
   Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents Label5 As System.Windows.Forms.Label
-  Friend WithEvents datePrimerPago As System.Windows.Forms.DateTimePicker
   Friend WithEvents dgvCuotas As System.Windows.Forms.DataGridView
   Friend WithEvents bsCuotas As System.Windows.Forms.BindingSource
   Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -579,4 +583,5 @@ Partial Class frmVenta
   Friend WithEvents txtMedioPagoDescripcion As System.Windows.Forms.TextBox
   Friend WithEvents lblValorCuota As System.Windows.Forms.Label
   Friend WithEvents txtValorCuota As System.Windows.Forms.TextBox
+  Friend WithEvents dtDiaVencimiento As System.Windows.Forms.NumericUpDown
 End Class

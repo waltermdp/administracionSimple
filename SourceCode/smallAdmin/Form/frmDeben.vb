@@ -5,7 +5,7 @@ Public Class frmDeben
 
   Private WithEvents m_objPrincipal As clsListaPrincipal = Nothing
   Private m_CurrentProducto As clsInfoPrincipal = Nothing
-
+  Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
 
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     Try
@@ -23,6 +23,10 @@ Public Class frmDeben
       If vResult <> Result.OK Then
         MsgBox("No continua application, error init")
       End If
+
+      dateInicio.Value = New Date(Date.Today.Year, Today.Month, 1)
+      dateFin.Value = New Date(Date.Today.Year, Today.Month, Date.DaysInMonth(Today.Year, Today.Month))
+      rbtnVendidos.Checked = True
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -41,14 +45,43 @@ Public Class frmDeben
       If m_objPrincipal IsNot Nothing Then m_objPrincipal.Dispose()
 
       m_objPrincipal = New clsListaPrincipal()
+      Call Filtro("")
+
       bsInfoPrincipal.DataSource = m_objPrincipal.Binding
       Call ProductList_RefreshData()
+
+
+
       bsInfoPrincipal.ResetBindings(False)
+     
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
+  Private Function Filtro(ByVal modo As String) As Result
+    Try
+      'strFiltro = "Pac.Fecha between #" & Format(m_dFiltroFechaDesde, strFormatoAnsiStdFecha) & "# and #" & Format(m_dFiltroFechaHasta, strFormatoAnsiStdFecha) & "#"
+      If rbtnVendidos.Checked = True Then
+        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value, strFormatoAnsiStdFecha) & "#"
+        m_objPrincipal.Deben = "0"
+      ElseIf rbtnDeben.Checked Then
+        m_objPrincipal.Cfg_Filtro = ""
+        m_objPrincipal.Deben = "1"
+      ElseIf rbtnPagados.Checked Then
+        m_objPrincipal.Cfg_Filtro = ""
+        m_objPrincipal.Deben = "2"
+      ElseIf rbtnCuotaPagaron.Checked Then
+        m_objPrincipal.Cfg_Filtro = ""
+        m_objPrincipal.Deben = "3"
+      End If
+
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
   Private Sub ProductList_RefreshData()
     Try
       m_objPrincipal.RefreshData()
@@ -202,8 +235,9 @@ Public Class frmDeben
               MsgBox("Fallo guardar pagos")
               Exit Sub
             End If
+
             If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.ValorCuota, pago.NumCuota + 1, pago.VencimientoCuota)
+              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, pago.ValorCuota, pago.NumCuota + 1, pago.VencimientoCuota)
             End If
             If auxPago IsNot Nothing Then
               vResult = clsPago.Save(auxPago)
@@ -237,4 +271,11 @@ Public Class frmDeben
     End Try
   End Sub
 
+  Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
+    Try
+      Call MostrarDeben()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

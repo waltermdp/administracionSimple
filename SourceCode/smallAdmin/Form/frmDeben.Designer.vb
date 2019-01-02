@@ -23,9 +23,9 @@ Partial Class frmDeben
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
-    Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnPagos = New System.Windows.Forms.Button()
     Me.dateInicio = New System.Windows.Forms.DateTimePicker()
     Me.btnBack = New System.Windows.Forms.Button()
@@ -37,9 +37,10 @@ Partial Class frmDeben
     Me.Label2 = New System.Windows.Forms.Label()
     Me.Label3 = New System.Windows.Forms.Label()
     Me.Label4 = New System.Windows.Forms.Label()
-    Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-    Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+    Me.rbtnVendidos = New System.Windows.Forms.RadioButton()
+    Me.rbtnDeben = New System.Windows.Forms.RadioButton()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.rbtnPagados = New System.Windows.Forms.RadioButton()
     Me.Panel1 = New System.Windows.Forms.Panel()
     Me.Button1 = New System.Windows.Forms.Button()
     Me.btnLstVendedores = New System.Windows.Forms.Button()
@@ -50,12 +51,22 @@ Partial Class frmDeben
     Me.btnUpPago = New System.Windows.Forms.Button()
     Me.btnDownPago = New System.Windows.Forms.Button()
     Me.dgvData = New System.Windows.Forms.DataGridView()
-    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
     Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotasPagasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotasTotalesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.PrecioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotasTotalesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotasPagasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.MetodoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ArticulosVendidodDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnLiquidVendedores = New System.Windows.Forms.Button()
+    Me.rbtnCuotaPagaron = New System.Windows.Forms.RadioButton()
     Me.GroupBox1.SuspendLayout()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,7 +75,7 @@ Partial Class frmDeben
     '
     'btnPagos
     '
-    Me.btnPagos.Location = New System.Drawing.Point(552, 5)
+    Me.btnPagos.Location = New System.Drawing.Point(111, 44)
     Me.btnPagos.Name = "btnPagos"
     Me.btnPagos.Size = New System.Drawing.Size(95, 22)
     Me.btnPagos.TabIndex = 1
@@ -73,16 +84,16 @@ Partial Class frmDeben
     '
     'dateInicio
     '
-    Me.dateInicio.Location = New System.Drawing.Point(124, 33)
+    Me.dateInicio.Location = New System.Drawing.Point(775, 25)
     Me.dateInicio.Name = "dateInicio"
     Me.dateInicio.Size = New System.Drawing.Size(200, 20)
     Me.dateInicio.TabIndex = 2
     '
     'btnBack
     '
-    Me.btnBack.Location = New System.Drawing.Point(12, 441)
+    Me.btnBack.Location = New System.Drawing.Point(30, 639)
     Me.btnBack.Name = "btnBack"
-    Me.btnBack.Size = New System.Drawing.Size(75, 23)
+    Me.btnBack.Size = New System.Drawing.Size(92, 52)
     Me.btnBack.TabIndex = 3
     Me.btnBack.Text = "Cerrar"
     Me.btnBack.UseVisualStyleBackColor = True
@@ -106,18 +117,18 @@ Partial Class frmDeben
     '
     'dateFin
     '
-    Me.dateFin.Location = New System.Drawing.Point(371, 33)
+    Me.dateFin.Location = New System.Drawing.Point(775, 64)
     Me.dateFin.Name = "dateFin"
     Me.dateFin.Size = New System.Drawing.Size(200, 20)
     Me.dateFin.TabIndex = 28
     '
     'btnBuscar
     '
-    Me.btnBuscar.Location = New System.Drawing.Point(619, 17)
+    Me.btnBuscar.Location = New System.Drawing.Point(695, 109)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(85, 43)
     Me.btnBuscar.TabIndex = 29
-    Me.btnBuscar.Text = "Button1"
+    Me.btnBuscar.Text = "Buscar"
     Me.btnBuscar.UseVisualStyleBackColor = True
     '
     'cmbTipoPago
@@ -140,7 +151,7 @@ Partial Class frmDeben
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(121, 17)
+    Me.Label3.Location = New System.Drawing.Point(772, 9)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(32, 13)
     Me.Label3.TabIndex = 32
@@ -149,44 +160,57 @@ Partial Class frmDeben
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(368, 17)
+    Me.Label4.Location = New System.Drawing.Point(772, 48)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(21, 13)
     Me.Label4.TabIndex = 33
     Me.Label4.Text = "Fin"
     '
-    'RadioButton1
+    'rbtnVendidos
     '
-    Me.RadioButton1.AutoSize = True
-    Me.RadioButton1.Location = New System.Drawing.Point(6, 19)
-    Me.RadioButton1.Name = "RadioButton1"
-    Me.RadioButton1.Size = New System.Drawing.Size(64, 17)
-    Me.RadioButton1.TabIndex = 34
-    Me.RadioButton1.TabStop = True
-    Me.RadioButton1.Text = "Vendido"
-    Me.RadioButton1.UseVisualStyleBackColor = True
+    Me.rbtnVendidos.AutoSize = True
+    Me.rbtnVendidos.Location = New System.Drawing.Point(6, 19)
+    Me.rbtnVendidos.Name = "rbtnVendidos"
+    Me.rbtnVendidos.Size = New System.Drawing.Size(69, 17)
+    Me.rbtnVendidos.TabIndex = 34
+    Me.rbtnVendidos.TabStop = True
+    Me.rbtnVendidos.Text = "Vendidos"
+    Me.rbtnVendidos.UseVisualStyleBackColor = True
     '
-    'RadioButton2
+    'rbtnDeben
     '
-    Me.RadioButton2.AutoSize = True
-    Me.RadioButton2.Location = New System.Drawing.Point(122, 18)
-    Me.RadioButton2.Name = "RadioButton2"
-    Me.RadioButton2.Size = New System.Drawing.Size(58, 17)
-    Me.RadioButton2.TabIndex = 35
-    Me.RadioButton2.TabStop = True
-    Me.RadioButton2.Text = "Cobros"
-    Me.RadioButton2.UseVisualStyleBackColor = True
+    Me.rbtnDeben.AutoSize = True
+    Me.rbtnDeben.Location = New System.Drawing.Point(6, 42)
+    Me.rbtnDeben.Name = "rbtnDeben"
+    Me.rbtnDeben.Size = New System.Drawing.Size(88, 17)
+    Me.rbtnDeben.TabIndex = 35
+    Me.rbtnDeben.TabStop = True
+    Me.rbtnDeben.Text = "Cuota Deben"
+    Me.rbtnDeben.UseVisualStyleBackColor = True
     '
     'GroupBox1
     '
-    Me.GroupBox1.Controls.Add(Me.RadioButton1)
-    Me.GroupBox1.Controls.Add(Me.RadioButton2)
-    Me.GroupBox1.Location = New System.Drawing.Point(124, 70)
+    Me.GroupBox1.Controls.Add(Me.rbtnCuotaPagaron)
+    Me.GroupBox1.Controls.Add(Me.rbtnPagados)
+    Me.GroupBox1.Controls.Add(Me.rbtnVendidos)
+    Me.GroupBox1.Controls.Add(Me.rbtnDeben)
+    Me.GroupBox1.Location = New System.Drawing.Point(173, 70)
     Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(200, 44)
+    Me.GroupBox1.Size = New System.Drawing.Size(459, 91)
     Me.GroupBox1.TabIndex = 36
     Me.GroupBox1.TabStop = False
     Me.GroupBox1.Text = "Estado"
+    '
+    'rbtnPagados
+    '
+    Me.rbtnPagados.AutoSize = True
+    Me.rbtnPagados.Location = New System.Drawing.Point(6, 65)
+    Me.rbtnPagados.Name = "rbtnPagados"
+    Me.rbtnPagados.Size = New System.Drawing.Size(67, 17)
+    Me.rbtnPagados.TabIndex = 36
+    Me.rbtnPagados.TabStop = True
+    Me.rbtnPagados.Text = "Pagados"
+    Me.rbtnPagados.UseVisualStyleBackColor = True
     '
     'Panel1
     '
@@ -196,14 +220,14 @@ Partial Class frmDeben
     Me.Panel1.Controls.Add(Me.Label1)
     Me.Panel1.Controls.Add(Me.ComboBox1)
     Me.Panel1.Controls.Add(Me.btnPagos)
-    Me.Panel1.Location = New System.Drawing.Point(339, 79)
+    Me.Panel1.Location = New System.Drawing.Point(786, 79)
     Me.Panel1.Name = "Panel1"
-    Me.Panel1.Size = New System.Drawing.Size(650, 93)
+    Me.Panel1.Size = New System.Drawing.Size(453, 93)
     Me.Panel1.TabIndex = 37
     '
     'Button1
     '
-    Me.Button1.Location = New System.Drawing.Point(552, 33)
+    Me.Button1.Location = New System.Drawing.Point(245, 53)
     Me.Button1.Name = "Button1"
     Me.Button1.Size = New System.Drawing.Size(95, 23)
     Me.Button1.TabIndex = 32
@@ -212,52 +236,52 @@ Partial Class frmDeben
     '
     'btnLstVendedores
     '
-    Me.btnLstVendedores.Location = New System.Drawing.Point(12, 395)
+    Me.btnLstVendedores.Location = New System.Drawing.Point(30, 482)
     Me.btnLstVendedores.Name = "btnLstVendedores"
-    Me.btnLstVendedores.Size = New System.Drawing.Size(109, 23)
+    Me.btnLstVendedores.Size = New System.Drawing.Size(92, 52)
     Me.btnLstVendedores.TabIndex = 38
-    Me.btnLstVendedores.Text = "ListaVendedores"
+    Me.btnLstVendedores.Text = "Lista de Vendedores"
     Me.btnLstVendedores.UseVisualStyleBackColor = True
     '
     'btnListaClientes
     '
-    Me.btnListaClientes.Location = New System.Drawing.Point(12, 366)
+    Me.btnListaClientes.Location = New System.Drawing.Point(30, 424)
     Me.btnListaClientes.Name = "btnListaClientes"
-    Me.btnListaClientes.Size = New System.Drawing.Size(109, 23)
+    Me.btnListaClientes.Size = New System.Drawing.Size(92, 52)
     Me.btnListaClientes.TabIndex = 39
-    Me.btnListaClientes.Text = "ListaClientes"
+    Me.btnListaClientes.Text = "Lista de Clientes"
     Me.btnListaClientes.UseVisualStyleBackColor = True
     '
     'btnNuevo
     '
-    Me.btnNuevo.Location = New System.Drawing.Point(12, 175)
+    Me.btnNuevo.Location = New System.Drawing.Point(30, 175)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(109, 34)
+    Me.btnNuevo.Size = New System.Drawing.Size(92, 52)
     Me.btnNuevo.TabIndex = 40
     Me.btnNuevo.Text = "Venta Nueva"
     Me.btnNuevo.UseVisualStyleBackColor = True
     '
     'btnEditarVenta
     '
-    Me.btnEditarVenta.Location = New System.Drawing.Point(12, 215)
+    Me.btnEditarVenta.Location = New System.Drawing.Point(30, 233)
     Me.btnEditarVenta.Name = "btnEditarVenta"
-    Me.btnEditarVenta.Size = New System.Drawing.Size(109, 30)
+    Me.btnEditarVenta.Size = New System.Drawing.Size(92, 52)
     Me.btnEditarVenta.TabIndex = 41
     Me.btnEditarVenta.Text = "Modificar Venta"
     Me.btnEditarVenta.UseVisualStyleBackColor = True
     '
     'btnArticulos
     '
-    Me.btnArticulos.Location = New System.Drawing.Point(12, 337)
+    Me.btnArticulos.Location = New System.Drawing.Point(30, 366)
     Me.btnArticulos.Name = "btnArticulos"
-    Me.btnArticulos.Size = New System.Drawing.Size(109, 23)
+    Me.btnArticulos.Size = New System.Drawing.Size(92, 52)
     Me.btnArticulos.TabIndex = 42
-    Me.btnArticulos.Text = "Articulos"
+    Me.btnArticulos.Text = "Lista de Articulos"
     Me.btnArticulos.UseVisualStyleBackColor = True
     '
     'btnUpPago
     '
-    Me.btnUpPago.Location = New System.Drawing.Point(795, 441)
+    Me.btnUpPago.Location = New System.Drawing.Point(1149, 560)
     Me.btnUpPago.Name = "btnUpPago"
     Me.btnUpPago.Size = New System.Drawing.Size(90, 23)
     Me.btnUpPago.TabIndex = 33
@@ -266,7 +290,7 @@ Partial Class frmDeben
     '
     'btnDownPago
     '
-    Me.btnDownPago.Location = New System.Drawing.Point(795, 479)
+    Me.btnDownPago.Location = New System.Drawing.Point(1149, 598)
     Me.btnDownPago.Name = "btnDownPago"
     Me.btnDownPago.Size = New System.Drawing.Size(90, 24)
     Me.btnDownPago.TabIndex = 43
@@ -282,26 +306,26 @@ Partial Class frmDeben
     Me.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None
     Me.dgvData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+    DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
     Me.dgvData.ColumnHeadersHeight = 24
     Me.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaVentaDataGridViewTextBoxColumn, Me.NombreClienteDataGridViewTextBoxColumn, Me.CuotasPagasDataGridViewTextBoxColumn, Me.CuotasTotalesDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn})
+    Me.dgvData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaVentaDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.NombreClienteDataGridViewTextBoxColumn, Me.NombreVendedorDataGridViewTextBoxColumn, Me.PrecioDataGridViewTextBoxColumn, Me.CuotasTotalesDataGridViewTextBoxColumn, Me.CuotasPagasDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.MetodoPagoDataGridViewTextBoxColumn, Me.ArticulosVendidodDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.NumPagoDataGridViewTextBoxColumn, Me.FechaUltimoPagoDataGridViewTextBoxColumn})
     Me.dgvData.DataSource = Me.bsInfoPrincipal
-    DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle2
+    DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+    DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle5
     Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData.EnableHeadersVisualStyles = False
     Me.dgvData.GridColor = System.Drawing.Color.White
@@ -310,25 +334,21 @@ Partial Class frmDeben
     Me.dgvData.MultiSelect = False
     Me.dgvData.Name = "dgvData"
     Me.dgvData.ReadOnly = True
-    DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-    DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-    DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-    DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-    DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+    DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+    DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+    DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+    DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+    DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
     Me.dgvData.RowHeadersVisible = False
     Me.dgvData.RowTemplate.Height = 24
     Me.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None
     Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData.Size = New System.Drawing.Size(865, 243)
+    Me.dgvData.Size = New System.Drawing.Size(1075, 359)
     Me.dgvData.TabIndex = 44
     Me.dgvData.TabStop = False
-    '
-    'bsInfoPrincipal
-    '
-    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
     '
     'FechaVentaDataGridViewTextBoxColumn
     '
@@ -337,6 +357,13 @@ Partial Class frmDeben
     Me.FechaVentaDataGridViewTextBoxColumn.Name = "FechaVentaDataGridViewTextBoxColumn"
     Me.FechaVentaDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    '
     'NombreClienteDataGridViewTextBoxColumn
     '
     Me.NombreClienteDataGridViewTextBoxColumn.DataPropertyName = "NombreCliente"
@@ -344,12 +371,19 @@ Partial Class frmDeben
     Me.NombreClienteDataGridViewTextBoxColumn.Name = "NombreClienteDataGridViewTextBoxColumn"
     Me.NombreClienteDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'CuotasPagasDataGridViewTextBoxColumn
+    'NombreVendedorDataGridViewTextBoxColumn
     '
-    Me.CuotasPagasDataGridViewTextBoxColumn.DataPropertyName = "CuotasPagas"
-    Me.CuotasPagasDataGridViewTextBoxColumn.HeaderText = "CuotasPagas"
-    Me.CuotasPagasDataGridViewTextBoxColumn.Name = "CuotasPagasDataGridViewTextBoxColumn"
-    Me.CuotasPagasDataGridViewTextBoxColumn.ReadOnly = True
+    Me.NombreVendedorDataGridViewTextBoxColumn.DataPropertyName = "NombreVendedor"
+    Me.NombreVendedorDataGridViewTextBoxColumn.HeaderText = "NombreVendedor"
+    Me.NombreVendedorDataGridViewTextBoxColumn.Name = "NombreVendedorDataGridViewTextBoxColumn"
+    Me.NombreVendedorDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'PrecioDataGridViewTextBoxColumn
+    '
+    Me.PrecioDataGridViewTextBoxColumn.DataPropertyName = "Precio"
+    Me.PrecioDataGridViewTextBoxColumn.HeaderText = "Precio"
+    Me.PrecioDataGridViewTextBoxColumn.Name = "PrecioDataGridViewTextBoxColumn"
+    Me.PrecioDataGridViewTextBoxColumn.ReadOnly = True
     '
     'CuotasTotalesDataGridViewTextBoxColumn
     '
@@ -358,18 +392,86 @@ Partial Class frmDeben
     Me.CuotasTotalesDataGridViewTextBoxColumn.Name = "CuotasTotalesDataGridViewTextBoxColumn"
     Me.CuotasTotalesDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'GuidProductoDataGridViewTextBoxColumn
+    'CuotasPagasDataGridViewTextBoxColumn
     '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CuotasPagasDataGridViewTextBoxColumn.DataPropertyName = "CuotasPagas"
+    Me.CuotasPagasDataGridViewTextBoxColumn.HeaderText = "CuotasPagas"
+    Me.CuotasPagasDataGridViewTextBoxColumn.Name = "CuotasPagasDataGridViewTextBoxColumn"
+    Me.CuotasPagasDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ValorCuotaDataGridViewTextBoxColumn
+    '
+    Me.ValorCuotaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuota"
+    Me.ValorCuotaDataGridViewTextBoxColumn.HeaderText = "ValorCuota"
+    Me.ValorCuotaDataGridViewTextBoxColumn.Name = "ValorCuotaDataGridViewTextBoxColumn"
+    Me.ValorCuotaDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'MetodoPagoDataGridViewTextBoxColumn
+    '
+    Me.MetodoPagoDataGridViewTextBoxColumn.DataPropertyName = "MetodoPago"
+    Me.MetodoPagoDataGridViewTextBoxColumn.HeaderText = "MetodoPago"
+    Me.MetodoPagoDataGridViewTextBoxColumn.Name = "MetodoPagoDataGridViewTextBoxColumn"
+    Me.MetodoPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ArticulosVendidodDataGridViewTextBoxColumn
+    '
+    Me.ArticulosVendidodDataGridViewTextBoxColumn.DataPropertyName = "ArticulosVendidod"
+    Me.ArticulosVendidodDataGridViewTextBoxColumn.HeaderText = "ArticulosVendidod"
+    Me.ArticulosVendidodDataGridViewTextBoxColumn.Name = "ArticulosVendidodDataGridViewTextBoxColumn"
+    Me.ArticulosVendidodDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'DNIDataGridViewTextBoxColumn
+    '
+    Me.DNIDataGridViewTextBoxColumn.DataPropertyName = "DNI"
+    Me.DNIDataGridViewTextBoxColumn.HeaderText = "DNI"
+    Me.DNIDataGridViewTextBoxColumn.Name = "DNIDataGridViewTextBoxColumn"
+    Me.DNIDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NumPagoDataGridViewTextBoxColumn
+    '
+    Me.NumPagoDataGridViewTextBoxColumn.DataPropertyName = "NumPago"
+    Me.NumPagoDataGridViewTextBoxColumn.HeaderText = "NumPago"
+    Me.NumPagoDataGridViewTextBoxColumn.Name = "NumPagoDataGridViewTextBoxColumn"
+    Me.NumPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaUltimoPagoDataGridViewTextBoxColumn
+    '
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimoPago"
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.HeaderText = "FechaUltimoPago"
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.Name = "FechaUltimoPagoDataGridViewTextBoxColumn"
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'bsInfoPrincipal
+    '
+    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
+    '
+    'btnLiquidVendedores
+    '
+    Me.btnLiquidVendedores.Location = New System.Drawing.Point(30, 540)
+    Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
+    Me.btnLiquidVendedores.Size = New System.Drawing.Size(92, 52)
+    Me.btnLiquidVendedores.TabIndex = 45
+    Me.btnLiquidVendedores.Text = "Liquidacion Vendedores"
+    Me.btnLiquidVendedores.UseVisualStyleBackColor = True
+    '
+    'rbtnCuotaPagaron
+    '
+    Me.rbtnCuotaPagaron.AutoSize = True
+    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(215, 37)
+    Me.rbtnCuotaPagaron.Name = "rbtnCuotaPagaron"
+    Me.rbtnCuotaPagaron.Size = New System.Drawing.Size(96, 17)
+    Me.rbtnCuotaPagaron.TabIndex = 37
+    Me.rbtnCuotaPagaron.TabStop = True
+    Me.rbtnCuotaPagaron.Text = "Cuota Pagaron"
+    Me.rbtnCuotaPagaron.UseVisualStyleBackColor = True
     '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackColor = System.Drawing.SystemColors.Control
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnLiquidVendedores)
     Me.Controls.Add(Me.dgvData)
     Me.Controls.Add(Me.btnDownPago)
     Me.Controls.Add(Me.btnUpPago)
@@ -413,8 +515,8 @@ Partial Class frmDeben
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents Label3 As System.Windows.Forms.Label
   Friend WithEvents Label4 As System.Windows.Forms.Label
-  Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
-  Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnVendidos As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnDeben As System.Windows.Forms.RadioButton
   Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
   Friend WithEvents Panel1 As System.Windows.Forms.Panel
   Friend WithEvents Button1 As System.Windows.Forms.Button
@@ -428,8 +530,19 @@ Partial Class frmDeben
   Public WithEvents dgvData As System.Windows.Forms.DataGridView
   Friend WithEvents bsInfoPrincipal As System.Windows.Forms.BindingSource
   Friend WithEvents FechaVentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents NombreClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CuotasPagasDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CuotasTotalesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NombreClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NombreVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents PrecioDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CuotasTotalesDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CuotasPagasDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ValorCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents MetodoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ArticulosVendidodDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DNIDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NumPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaUltimoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents btnLiquidVendedores As System.Windows.Forms.Button
+  Friend WithEvents rbtnPagados As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnCuotaPagaron As System.Windows.Forms.RadioButton
 End Class

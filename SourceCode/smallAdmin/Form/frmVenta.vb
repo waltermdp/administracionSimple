@@ -11,7 +11,7 @@ Public Class frmVenta
   Private m_lstArticulos As clsListArticulos
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
   Private m_CurrentCuenta As clsInfoCuenta
-
+  Private m_lstPagos As New List(Of clsInfoPagos)
 
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
@@ -45,7 +45,7 @@ Public Class frmVenta
 
       chkEditarCuotas.Checked = False
       txtValorCuota.Enabled = False
-      datePrimerPago.Value = Today
+
       txtPrecio.Text = 0
       m_hayCambios = False
 
@@ -63,6 +63,8 @@ Public Class frmVenta
         If vResult <> Result.OK Then
           Call Print_msg("Falloo carga de Pagos")
         End If
+        m_lstPagos = m_Producto.ListaPagos.ToList
+        If TerminoDePagar(m_Producto) Then btnSave.Enabled = False
 
         vResult = clsRelArtProd.Load(m_Producto.ListaArticulos, m_Producto.GuidProducto)
         If vResult <> Result.OK Then
@@ -74,6 +76,8 @@ Public Class frmVenta
           Call Print_msg("Falloo carga de cuenta")
         End If
 
+        DateVenta.Value = m_Producto.FechaVenta
+        dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
         Exit Sub
       End If
       Call Print_msg("Incongruencia de cliente and vendedor, deben o no existir ambos ")
@@ -98,6 +102,21 @@ Public Class frmVenta
       m_skip = False
     End Try
   End Sub
+
+  Private Function TerminoDePagar(ByVal vProducto As clsInfoProducto) As Boolean
+    Try
+      Dim cantCuotas As Integer = vProducto.TotalCuotas
+      If vProducto.ListaPagos.Count <= 0 Then Return False
+      For Each cuota As clsInfoPagos In vProducto.ListaPagos
+        If cuota.EstadoPago = E_EstadoPago.Pago Then cantCuotas -= 1
+      Next
+      If cantCuotas = 0 Then Return True
+      Return False
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
 
   Private Sub FillClientData()
     Try
@@ -126,7 +145,7 @@ Public Class frmVenta
       With m_Producto
         txtPrecio.Text = .Precio
         DateVenta.Value = .FechaVenta
-        datePrimerPago.Value = .FechaPrimerPago
+        dtDiaVencimiento.Value = .FechaPrimerPago.Day
         'For Each item As clsCuota In cmbCuotas.Items
         '  If .ListaPagos.Count = item.Cantidad Then
         '    cmbCuotas.SelectedItem = item
@@ -273,8 +292,12 @@ Public Class frmVenta
 
   Private Sub GenerarPlanCuotas()
     Try
+      If m_Producto Is Nothing Then Exit Sub
+      m_lstPagos.Clear()
+      For Each pago In m_Producto.ListaPagos
+        m_lstPagos.Add(pago.Clone)
+      Next
 
-      m_Producto.ListaPagos.Clear()
 
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
       Dim Precio As Decimal
@@ -283,24 +306,22 @@ Public Class frmVenta
       text2decimal(txtValorCuota.Text, ValorCuota)
       Dim auxPago As New clsInfoPagos
 
-      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, , Vencimiento(i, datePrimerPago.Value))
+      Dim numProxCouta As Integer = 1
+      If m_lstPagos.Count > 0 Then
+        If m_lstPagos.Last.EstadoPago = E_EstadoPago.Debe Then
+          numProxCouta = m_lstPagos.Last.NumCuota
+          m_lstPagos.Last.EstadoPago = 2 'editado
 
-      'Dim auxinicio As Integer = 0
-      'If Cuota.Cantidad > 0 Then auxinicio = 1
-      'For i As Integer = 1 To 1
-      '  'For i As Integer = auxinicio To Cuota.Cantidad
-      '  auxPago = New clsInfoPagos
-      '  auxPago.EstadoPago = 0
-      '  auxPago.GuidProducto = m_Producto.GuidProducto
-      '  auxPago.GuidPago = Guid.NewGuid
-      '  auxPago.FechaPago = Date.MaxValue ' Vencimiento(auxCuotas, datePrimerPago.Value)
-      '  auxPago.VencimientoCuota = Vencimiento(i, datePrimerPago.Value)
-      '  auxPago.NumCuota = i
-      '  auxPago.ValorCuota = ValorCuota
-      '  m_Producto.ListaPagos.Add(auxPago)
-      'Next
+        ElseIf m_lstPagos.Last.EstadoPago = E_EstadoPago.Pago Then
+          Exit Sub
+        End If
+      End If
+      m_Producto.FechaPrimerPago = New Date(DateVenta.Value.Year, DateVenta.Value.Month, dtDiaVencimiento.Value)
 
-      m_Producto.FechaPrimerPago = Vencimiento(Cuota.Cantidad, datePrimerPago.Value)
+
+      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, numProxCouta, Vencimiento(numProxCouta, m_Producto.FechaPrimerPago))
+      m_lstPagos.Add(auxPago)
+
       Call ReloadListPagos()
 
     Catch ex As Exception
@@ -311,7 +332,7 @@ Public Class frmVenta
   Private Sub ReloadListPagos()
     Try
       If m_Producto Is Nothing Then Exit Sub
-      bsCuotas.DataSource = m_Producto.ListaPagos
+      bsCuotas.DataSource = m_lstPagos ' m_Producto.ListaPagos
       bsCuotas.ResetBindings(False)
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -332,8 +353,9 @@ Public Class frmVenta
 
   Private Function Vencimiento(ByVal Cuota As Integer, ByVal PrimerPago As Date) As Date
     Try
-
-      Return PrimerPago.AddMonths(Cuota)
+      Dim fVencimiento As Date = m_Producto.FechaVenta
+      fVencimiento.AddMonths(Cuota)
+      Return New Date(fVencimiento.Year, fVencimiento.Month, PrimerPago.Day)
     Catch ex As Exception
       Print_msg(ex.Message)
       Return PrimerPago
@@ -366,10 +388,12 @@ Public Class frmVenta
         .ListaArticulos = m_lstArticulosVendidos.ToList
         .GuidVendedor = m_CurrentVendedor.GuidVendedor
         .GuidCliente = m_CurrentPersona.GuidCliente
+
         If isNewProducto Then
           .CuotasDebe = .TotalCuotas
         End If
-
+        .ListaPagos.Clear()
+        .ListaPagos = m_lstPagos.ToList
       End With
       
 
@@ -452,7 +476,9 @@ Public Class frmVenta
         Exit Sub
       End If
       gpVenta.Enabled = True
-      btnSave.Enabled = True
+      btnSave.Enabled = Not TerminoDePagar(m_Producto)
+
+
       Call FillListArticulos()
       Call LoadArticulosVendidos()
       Call FillMedioDePagoDescripcion()
@@ -600,6 +626,16 @@ Public Class frmVenta
           Call GenerarPlanCuotas()
         End If
       End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub dtDiaVencimiento_ValueChanged(sender As Object, e As EventArgs) Handles dtDiaVencimiento.ValueChanged
+    Try
+      If m_skip Then Exit Sub
+      If dtDiaVencimiento.Value = 0 Then Exit Sub
+      Call GenerarPlanCuotas()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

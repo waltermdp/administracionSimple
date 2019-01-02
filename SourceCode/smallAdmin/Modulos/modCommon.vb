@@ -4,6 +4,8 @@
   Public Enum E_EstadoPago As Integer
     Debe = 0
     Pago = 1
+    Anulo_Editado = 2  'Se anula el pago para generar uno nuevo
+    Vencido = 3  'se anula el pago porque no pago dentro del plazo
   End Enum
 
   Public Function GetNameOfTipoPago(ByVal vGuid As Guid) As String
