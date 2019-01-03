@@ -58,6 +58,7 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.dtDiaVencimiento = New System.Windows.Forms.NumericUpDown()
     Me.lblValorCuota = New System.Windows.Forms.Label()
     Me.txtValorCuota = New System.Windows.Forms.TextBox()
     Me.Label13 = New System.Windows.Forms.Label()
@@ -71,17 +72,16 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
-    Me.dtDiaVencimiento = New System.Windows.Forms.NumericUpDown()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
-    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.dtDiaVencimiento, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtPrecio
     '
-    Me.txtPrecio.Location = New System.Drawing.Point(560, 222)
+    Me.txtPrecio.Location = New System.Drawing.Point(560, 180)
     Me.txtPrecio.Name = "txtPrecio"
     Me.txtPrecio.Size = New System.Drawing.Size(100, 20)
     Me.txtPrecio.TabIndex = 0
@@ -89,7 +89,7 @@ Partial Class frmVenta
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(561, 205)
+    Me.Label1.Location = New System.Drawing.Point(561, 161)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(37, 13)
     Me.Label1.TabIndex = 2
@@ -97,7 +97,7 @@ Partial Class frmVenta
     '
     'DateVenta
     '
-    Me.DateVenta.Location = New System.Drawing.Point(19, 42)
+    Me.DateVenta.Location = New System.Drawing.Point(560, 42)
     Me.DateVenta.Name = "DateVenta"
     Me.DateVenta.Size = New System.Drawing.Size(200, 20)
     Me.DateVenta.TabIndex = 4
@@ -105,7 +105,7 @@ Partial Class frmVenta
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(561, 67)
+    Me.Label3.Location = New System.Drawing.Point(557, 69)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(70, 13)
     Me.Label3.TabIndex = 6
@@ -133,7 +133,7 @@ Partial Class frmVenta
     '
     Me.cmbCuotas.FormattingEnabled = True
     Me.cmbCuotas.Items.AddRange(New Object() {"Contado", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-    Me.cmbCuotas.Location = New System.Drawing.Point(666, 221)
+    Me.cmbCuotas.Location = New System.Drawing.Point(666, 179)
     Me.cmbCuotas.Name = "cmbCuotas"
     Me.cmbCuotas.Size = New System.Drawing.Size(121, 21)
     Me.cmbCuotas.TabIndex = 9
@@ -141,7 +141,7 @@ Partial Class frmVenta
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(663, 205)
+    Me.Label4.Location = New System.Drawing.Point(663, 161)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(40, 13)
     Me.Label4.TabIndex = 10
@@ -150,7 +150,7 @@ Partial Class frmVenta
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(16, 26)
+    Me.Label2.Location = New System.Drawing.Point(557, 26)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(65, 13)
     Me.Label2.TabIndex = 12
@@ -159,7 +159,7 @@ Partial Class frmVenta
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(892, 202)
+    Me.Label5.Location = New System.Drawing.Point(908, 164)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(124, 13)
     Me.Label5.TabIndex = 13
@@ -240,7 +240,7 @@ Partial Class frmVenta
     'chkEditarCuotas
     '
     Me.chkEditarCuotas.AutoSize = True
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(793, 248)
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(793, 204)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
     Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
     Me.chkEditarCuotas.TabIndex = 18
@@ -296,9 +296,9 @@ Partial Class frmVenta
     Me.Label8.AutoSize = True
     Me.Label8.Location = New System.Drawing.Point(325, 36)
     Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(39, 13)
+    Me.Label8.Size = New System.Drawing.Size(44, 13)
     Me.Label8.TabIndex = 25
-    Me.Label8.Text = "Cliente"
+    Me.Label8.Text = "Nombre"
     '
     'txtDNICliente
     '
@@ -378,15 +378,25 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.chkEditarCuotas)
     Me.gpVenta.Location = New System.Drawing.Point(141, 180)
     Me.gpVenta.Name = "gpVenta"
-    Me.gpVenta.Size = New System.Drawing.Size(1044, 462)
+    Me.gpVenta.Size = New System.Drawing.Size(1098, 520)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
     '
+    'dtDiaVencimiento
+    '
+    Me.dtDiaVencimiento.Location = New System.Drawing.Point(911, 180)
+    Me.dtDiaVencimiento.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
+    Me.dtDiaVencimiento.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dtDiaVencimiento.Name = "dtDiaVencimiento"
+    Me.dtDiaVencimiento.Size = New System.Drawing.Size(60, 20)
+    Me.dtDiaVencimiento.TabIndex = 32
+    Me.dtDiaVencimiento.Value = New Decimal(New Integer() {1, 0, 0, 0})
+    '
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
-    Me.lblValorCuota.Location = New System.Drawing.Point(798, 208)
+    Me.lblValorCuota.Location = New System.Drawing.Point(798, 164)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
     Me.lblValorCuota.TabIndex = 31
@@ -394,7 +404,7 @@ Partial Class frmVenta
     '
     'txtValorCuota
     '
-    Me.txtValorCuota.Location = New System.Drawing.Point(793, 222)
+    Me.txtValorCuota.Location = New System.Drawing.Point(793, 179)
     Me.txtValorCuota.Name = "txtValorCuota"
     Me.txtValorCuota.Size = New System.Drawing.Size(96, 20)
     Me.txtValorCuota.TabIndex = 30
@@ -402,7 +412,7 @@ Partial Class frmVenta
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(561, 146)
+    Me.Label13.Location = New System.Drawing.Point(769, 85)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(81, 13)
     Me.Label13.TabIndex = 29
@@ -410,7 +420,7 @@ Partial Class frmVenta
     '
     'txtMedioPagoDescripcion
     '
-    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(560, 162)
+    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(772, 101)
     Me.txtMedioPagoDescripcion.Name = "txtMedioPagoDescripcion"
     Me.txtMedioPagoDescripcion.ReadOnly = True
     Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(303, 20)
@@ -418,7 +428,7 @@ Partial Class frmVenta
     '
     'btnSeleccionarCuenta
     '
-    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(564, 83)
+    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(560, 114)
     Me.btnSeleccionarCuenta.Name = "btnSeleccionarCuenta"
     Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(117, 23)
     Me.btnSeleccionarCuenta.TabIndex = 27
@@ -427,7 +437,7 @@ Partial Class frmVenta
     '
     'btnAddCuenta
     '
-    Me.btnAddCuenta.Location = New System.Drawing.Point(564, 112)
+    Me.btnAddCuenta.Location = New System.Drawing.Point(560, 85)
     Me.btnAddCuenta.Name = "btnAddCuenta"
     Me.btnAddCuenta.Size = New System.Drawing.Size(117, 23)
     Me.btnAddCuenta.TabIndex = 26
@@ -436,7 +446,7 @@ Partial Class frmVenta
     '
     'btnRemoveArticulo
     '
-    Me.btnRemoveArticulo.Location = New System.Drawing.Point(248, 191)
+    Me.btnRemoveArticulo.Location = New System.Drawing.Point(251, 141)
     Me.btnRemoveArticulo.Name = "btnRemoveArticulo"
     Me.btnRemoveArticulo.Size = New System.Drawing.Size(45, 24)
     Me.btnRemoveArticulo.TabIndex = 25
@@ -445,7 +455,7 @@ Partial Class frmVenta
     '
     'btnAddArticulo
     '
-    Me.btnAddArticulo.Location = New System.Drawing.Point(248, 162)
+    Me.btnAddArticulo.Location = New System.Drawing.Point(251, 112)
     Me.btnAddArticulo.Name = "btnAddArticulo"
     Me.btnAddArticulo.Size = New System.Drawing.Size(45, 23)
     Me.btnAddArticulo.TabIndex = 24
@@ -455,14 +465,14 @@ Partial Class frmVenta
     'lstArticulosVendidos
     '
     Me.lstArticulosVendidos.FormattingEnabled = True
-    Me.lstArticulosVendidos.Location = New System.Drawing.Point(299, 118)
+    Me.lstArticulosVendidos.Location = New System.Drawing.Point(302, 68)
     Me.lstArticulosVendidos.Name = "lstArticulosVendidos"
     Me.lstArticulosVendidos.Size = New System.Drawing.Size(223, 173)
     Me.lstArticulosVendidos.TabIndex = 23
     '
     'txtBuscarArticulo
     '
-    Me.txtBuscarArticulo.Location = New System.Drawing.Point(19, 95)
+    Me.txtBuscarArticulo.Location = New System.Drawing.Point(22, 45)
     Me.txtBuscarArticulo.Name = "txtBuscarArticulo"
     Me.txtBuscarArticulo.Size = New System.Drawing.Size(223, 20)
     Me.txtBuscarArticulo.TabIndex = 21
@@ -471,7 +481,7 @@ Partial Class frmVenta
     '
     Me.lstArticulos.DataSource = Me.bsArticulos
     Me.lstArticulos.FormattingEnabled = True
-    Me.lstArticulos.Location = New System.Drawing.Point(19, 119)
+    Me.lstArticulos.Location = New System.Drawing.Point(22, 69)
     Me.lstArticulos.Name = "lstArticulos"
     Me.lstArticulos.Size = New System.Drawing.Size(223, 173)
     Me.lstArticulos.TabIndex = 20
@@ -483,21 +493,11 @@ Partial Class frmVenta
     'Label12
     '
     Me.Label12.AutoSize = True
-    Me.Label12.Location = New System.Drawing.Point(16, 76)
+    Me.Label12.Location = New System.Drawing.Point(19, 26)
     Me.Label12.Name = "Label12"
     Me.Label12.Size = New System.Drawing.Size(47, 13)
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
-    '
-    'dtDiaVencimiento
-    '
-    Me.dtDiaVencimiento.Location = New System.Drawing.Point(918, 221)
-    Me.dtDiaVencimiento.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
-    Me.dtDiaVencimiento.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-    Me.dtDiaVencimiento.Name = "dtDiaVencimiento"
-    Me.dtDiaVencimiento.Size = New System.Drawing.Size(60, 20)
-    Me.dtDiaVencimiento.TabIndex = 32
-    Me.dtDiaVencimiento.Value = New Decimal(New Integer() {1, 0, 0, 0})
     '
     'frmVenta
     '
@@ -528,8 +528,8 @@ Partial Class frmVenta
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gpVenta.ResumeLayout(False)
     Me.gpVenta.PerformLayout()
-    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.dtDiaVencimiento, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 

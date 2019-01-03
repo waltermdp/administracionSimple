@@ -9,7 +9,10 @@ Public Class frmDeben
 
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     Try
-      Me.Close()
+      If MsgBox("Desea salir del programa?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        Me.Close()
+      End If
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -76,7 +79,7 @@ Public Class frmDeben
         m_objPrincipal.Deben = "3"
       End If
 
-
+      Return Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
       Return Result.ErrorEx
@@ -211,13 +214,29 @@ Public Class frmDeben
 
   Private Sub btnUpPago_MouseClick(sender As Object, e As MouseEventArgs) Handles btnUpPago.MouseClick
     Try
+      Dim vResult As Result
       If m_CurrentProducto Is Nothing Then Exit Sub
-      If m_CurrentProducto.CuotasPagas >= m_CurrentProducto.CuotasTotales Then Exit Sub
+      If m_CurrentProducto.CuotasTotales > 0 AndAlso m_CurrentProducto.CuotasPagas >= m_CurrentProducto.CuotasTotales Then Exit Sub
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar pagos")
+        Exit Sub
+      End If
+      If Not DebePeriodoActual(lstPagos) Then Exit Sub
       'collectar la informacion a mostrar antes de aplicar el pago elgido
-      Dim rsta As MsgBoxResult = MsgBox("Desea aplicar los cambios", MsgBoxStyle.YesNo)
+      Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
+                                        "Nombre: {0}" & vbNewLine & _
+                                        "DNI: {1}" & vbNewLine & _
+                                        "Metodo Pago: {2}" & vbNewLine & _
+                                        "Numero: {3}" & vbNewLine & _
+                                        "Valor Cuota: {4}" & vbNewLine & _
+                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.NombreCliente, m_CurrentProducto.DNI, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuota, Today)
+      Dim rsta As MsgBoxResult = MsgBox(msg, MsgBoxStyle.YesNo)
+
       If rsta = MsgBoxResult.Yes Then
-        Dim vResult As Result
-        Dim lstPagos As New List(Of manDB.clsInfoPagos)
+
+        'Dim lstPagos As New List(Of manDB.clsInfoPagos)
         vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
         If vResult <> Result.OK Then
           MsgBox("Fallo cargar pagos")
@@ -237,7 +256,7 @@ Public Class frmDeben
             End If
 
             If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, pago.ValorCuota, pago.NumCuota + 1, pago.VencimientoCuota)
+              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, pago.ValorCuota, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
             End If
             If auxPago IsNot Nothing Then
               vResult = clsPago.Save(auxPago)
@@ -250,7 +269,7 @@ Public Class frmDeben
           End If
         Next
 
-        
+
 
         Call MostrarDeben()
 
@@ -274,6 +293,16 @@ Public Class frmDeben
   Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
     Try
       Call MostrarDeben()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnConfiguracion_MouseClick(sender As Object, e As MouseEventArgs) Handles btnConfiguracion.MouseClick
+    Try
+      Using objform As New frmConfig
+        objform.ShowDialog(Me)
+      End Using
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

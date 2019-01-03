@@ -83,7 +83,7 @@ Partial Class frmVendedores
     Me.dgvListVendedores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvListVendedores.EnableHeadersVisualStyles = False
     Me.dgvListVendedores.GridColor = System.Drawing.Color.White
-    Me.dgvListVendedores.Location = New System.Drawing.Point(141, 52)
+    Me.dgvListVendedores.Location = New System.Drawing.Point(154, 87)
     Me.dgvListVendedores.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvListVendedores.MultiSelect = False
     Me.dgvListVendedores.Name = "dgvListVendedores"
@@ -98,9 +98,9 @@ Partial Class frmVendedores
     Me.dgvListVendedores.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
     Me.dgvListVendedores.RowHeadersVisible = False
     Me.dgvListVendedores.RowTemplate.Height = 24
-    Me.dgvListVendedores.ScrollBars = System.Windows.Forms.ScrollBars.None
+    Me.dgvListVendedores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
     Me.dgvListVendedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvListVendedores.Size = New System.Drawing.Size(808, 322)
+    Me.dgvListVendedores.Size = New System.Drawing.Size(1071, 373)
     Me.dgvListVendedores.TabIndex = 25
     Me.dgvListVendedores.TabStop = False
     '
@@ -110,36 +110,36 @@ Partial Class frmVendedores
     '
     'btnNuevo
     '
-    Me.btnNuevo.Location = New System.Drawing.Point(23, 52)
+    Me.btnNuevo.Location = New System.Drawing.Point(30, 87)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
+    Me.btnNuevo.Size = New System.Drawing.Size(92, 52)
     Me.btnNuevo.TabIndex = 26
     Me.btnNuevo.Text = "Nuevo"
     Me.btnNuevo.UseVisualStyleBackColor = True
     '
     'btnEditar
     '
-    Me.btnEditar.Location = New System.Drawing.Point(23, 81)
+    Me.btnEditar.Location = New System.Drawing.Point(30, 145)
     Me.btnEditar.Name = "btnEditar"
-    Me.btnEditar.Size = New System.Drawing.Size(75, 23)
+    Me.btnEditar.Size = New System.Drawing.Size(92, 52)
     Me.btnEditar.TabIndex = 27
-    Me.btnEditar.Text = "btnEditar"
+    Me.btnEditar.Text = "Editar"
     Me.btnEditar.UseVisualStyleBackColor = True
     '
     'btnBorrar
     '
-    Me.btnBorrar.Location = New System.Drawing.Point(23, 110)
+    Me.btnBorrar.Location = New System.Drawing.Point(30, 203)
     Me.btnBorrar.Name = "btnBorrar"
-    Me.btnBorrar.Size = New System.Drawing.Size(75, 23)
+    Me.btnBorrar.Size = New System.Drawing.Size(92, 52)
     Me.btnBorrar.TabIndex = 28
-    Me.btnBorrar.Text = "btnEliminar"
+    Me.btnBorrar.Text = "Eliminar"
     Me.btnBorrar.UseVisualStyleBackColor = True
     '
     'btnVolver
     '
-    Me.btnVolver.Location = New System.Drawing.Point(23, 430)
+    Me.btnVolver.Location = New System.Drawing.Point(30, 639)
     Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(75, 23)
+    Me.btnVolver.Size = New System.Drawing.Size(92, 52)
     Me.btnVolver.TabIndex = 29
     Me.btnVolver.Text = "Volver"
     Me.btnVolver.UseVisualStyleBackColor = True
@@ -150,6 +150,7 @@ Partial Class frmVendedores
     Me.IdVendedorDataGridViewTextBoxColumn.HeaderText = "IdVendedor"
     Me.IdVendedorDataGridViewTextBoxColumn.Name = "IdVendedorDataGridViewTextBoxColumn"
     Me.IdVendedorDataGridViewTextBoxColumn.ReadOnly = True
+    Me.IdVendedorDataGridViewTextBoxColumn.Visible = False
     '
     'GuidVendedorDataGridViewTextBoxColumn
     '
@@ -157,6 +158,7 @@ Partial Class frmVendedores
     Me.GuidVendedorDataGridViewTextBoxColumn.HeaderText = "GuidVendedor"
     Me.GuidVendedorDataGridViewTextBoxColumn.Name = "GuidVendedorDataGridViewTextBoxColumn"
     Me.GuidVendedorDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidVendedorDataGridViewTextBoxColumn.Visible = False
     '
     'NombreDataGridViewTextBoxColumn
     '
@@ -199,6 +201,7 @@ Partial Class frmVendedores
     Me.CodigoPostalDataGridViewTextBoxColumn.HeaderText = "CodigoPostal"
     Me.CodigoPostalDataGridViewTextBoxColumn.Name = "CodigoPostalDataGridViewTextBoxColumn"
     Me.CodigoPostalDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CodigoPostalDataGridViewTextBoxColumn.Visible = False
     '
     'IDDataGridViewTextBoxColumn
     '
@@ -227,6 +230,7 @@ Partial Class frmVendedores
     Me.Tel2DataGridViewTextBoxColumn.HeaderText = "Tel2"
     Me.Tel2DataGridViewTextBoxColumn.Name = "Tel2DataGridViewTextBoxColumn"
     Me.Tel2DataGridViewTextBoxColumn.ReadOnly = True
+    Me.Tel2DataGridViewTextBoxColumn.Visible = False
     '
     'EmailDataGridViewTextBoxColumn
     '
@@ -241,6 +245,7 @@ Partial Class frmVendedores
     Me.CategoriaDataGridViewTextBoxColumn.HeaderText = "Categoria"
     Me.CategoriaDataGridViewTextBoxColumn.Name = "CategoriaDataGridViewTextBoxColumn"
     Me.CategoriaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CategoriaDataGridViewTextBoxColumn.Visible = False
     '
     'ComentarioDataGridViewTextBoxColumn
     '
@@ -248,6 +253,7 @@ Partial Class frmVendedores
     Me.ComentarioDataGridViewTextBoxColumn.HeaderText = "Comentario"
     Me.ComentarioDataGridViewTextBoxColumn.Name = "ComentarioDataGridViewTextBoxColumn"
     Me.ComentarioDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ComentarioDataGridViewTextBoxColumn.Visible = False
     '
     'frmVendedores
     '

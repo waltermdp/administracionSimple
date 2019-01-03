@@ -27,6 +27,7 @@ Public Class clsListPagos
         Dim strCommand As String = "Pagos" ', (select max(bcospac.fecha) as LastVisitDate from BcosPac where BcosPac.idPac = Pac.idPac) as  LastVisitDate from Pac)"
         Dim objDatos As libDB.clsTabla
         objDatos = New libDB.clsTabla(strCommand)
+        objDatos.Filter = Cfg_Filtro
         Dim auxResult As Result = objDatos.GetData(objDB)
         If auxResult > 0 Then
           For Each fila As DataRow In objDatos.Table.Rows
@@ -38,7 +39,11 @@ Public Class clsListPagos
 
           Next
         Else
-          MsgBox("Fallo refresh data")
+          If auxResult <> 0 Then
+            MsgBox("Fallo refresh data")
+          End If
+
+
         End If
 
       Catch ex As Exception

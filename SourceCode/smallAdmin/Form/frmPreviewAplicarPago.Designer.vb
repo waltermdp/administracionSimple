@@ -30,16 +30,16 @@ Partial Class frmPreviewAplicarPago
     '
     'lstPagoAplicar
     '
-    Me.lstPagoAplicar.Location = New System.Drawing.Point(28, 41)
+    Me.lstPagoAplicar.Location = New System.Drawing.Point(155, 41)
     Me.lstPagoAplicar.Name = "lstPagoAplicar"
-    Me.lstPagoAplicar.Size = New System.Drawing.Size(228, 268)
+    Me.lstPagoAplicar.Size = New System.Drawing.Size(267, 268)
     Me.lstPagoAplicar.TabIndex = 0
     Me.lstPagoAplicar.UseCompatibleStateImageBehavior = False
     '
     'lblTipo
     '
     Me.lblTipo.AutoSize = True
-    Me.lblTipo.Location = New System.Drawing.Point(25, 25)
+    Me.lblTipo.Location = New System.Drawing.Point(152, 25)
     Me.lblTipo.Name = "lblTipo"
     Me.lblTipo.Size = New System.Drawing.Size(39, 13)
     Me.lblTipo.TabIndex = 1
@@ -47,18 +47,18 @@ Partial Class frmPreviewAplicarPago
     '
     'btnAplicar
     '
-    Me.btnAplicar.Location = New System.Drawing.Point(38, 332)
+    Me.btnAplicar.Location = New System.Drawing.Point(25, 27)
     Me.btnAplicar.Name = "btnAplicar"
-    Me.btnAplicar.Size = New System.Drawing.Size(75, 35)
+    Me.btnAplicar.Size = New System.Drawing.Size(92, 52)
     Me.btnAplicar.TabIndex = 2
     Me.btnAplicar.Text = "Aplicar y salir"
     Me.btnAplicar.UseVisualStyleBackColor = True
     '
     'btnCancelar
     '
-    Me.btnCancelar.Location = New System.Drawing.Point(480, 344)
+    Me.btnCancelar.Location = New System.Drawing.Point(25, 356)
     Me.btnCancelar.Name = "btnCancelar"
-    Me.btnCancelar.Size = New System.Drawing.Size(75, 23)
+    Me.btnCancelar.Size = New System.Drawing.Size(92, 52)
     Me.btnCancelar.TabIndex = 3
     Me.btnCancelar.Text = "Cancelar"
     Me.btnCancelar.UseVisualStyleBackColor = True
@@ -67,11 +67,12 @@ Partial Class frmPreviewAplicarPago
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(587, 415)
+    Me.ClientSize = New System.Drawing.Size(816, 415)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnAplicar)
     Me.Controls.Add(Me.lblTipo)
     Me.Controls.Add(Me.lstPagoAplicar)
+    Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmPreviewAplicarPago"
     Me.Text = "frmPreviewAplicarPago"
     Me.ResumeLayout(False)

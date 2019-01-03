@@ -28,11 +28,16 @@ Partial Class frmListaClientes
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnEdit = New System.Windows.Forms.Button()
     Me.dgvData1 = New System.Windows.Forms.DataGridView()
+    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnEliminar = New System.Windows.Forms.Button()
+    Me.btnVolver = New System.Windows.Forms.Button()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ApellidoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ProfesionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaNacDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NumCalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,20 +52,15 @@ Partial Class frmListaClientes
     Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoPostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComentariosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ProfesionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnNuevo = New System.Windows.Forms.Button()
-    Me.btnEliminar = New System.Windows.Forms.Button()
-    Me.btnVolver = New System.Windows.Forms.Button()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'btnEdit
     '
-    Me.btnEdit.Location = New System.Drawing.Point(12, 82)
+    Me.btnEdit.Location = New System.Drawing.Point(30, 180)
     Me.btnEdit.Name = "btnEdit"
-    Me.btnEdit.Size = New System.Drawing.Size(98, 46)
+    Me.btnEdit.Size = New System.Drawing.Size(92, 52)
     Me.btnEdit.TabIndex = 0
     Me.btnEdit.Text = "Editar"
     Me.btnEdit.UseVisualStyleBackColor = True
@@ -84,7 +84,7 @@ Partial Class frmListaClientes
     Me.dgvData1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.dgvData1.ColumnHeadersHeight = 24
     Me.dgvData1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn})
+    Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn})
     Me.dgvData1.DataSource = Me.bsInfoCliente
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
@@ -97,7 +97,7 @@ Partial Class frmListaClientes
     Me.dgvData1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData1.EnableHeadersVisualStyles = False
     Me.dgvData1.GridColor = System.Drawing.Color.White
-    Me.dgvData1.Location = New System.Drawing.Point(113, 35)
+    Me.dgvData1.Location = New System.Drawing.Point(165, 122)
     Me.dgvData1.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvData1.MultiSelect = False
     Me.dgvData1.Name = "dgvData1"
@@ -112,11 +112,42 @@ Partial Class frmListaClientes
     Me.dgvData1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
     Me.dgvData1.RowHeadersVisible = False
     Me.dgvData1.RowTemplate.Height = 24
-    Me.dgvData1.ScrollBars = System.Windows.Forms.ScrollBars.None
+    Me.dgvData1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
     Me.dgvData1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData1.Size = New System.Drawing.Size(865, 243)
+    Me.dgvData1.Size = New System.Drawing.Size(1036, 447)
     Me.dgvData1.TabIndex = 24
     Me.dgvData1.TabStop = False
+    '
+    'bsInfoCliente
+    '
+    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
+    '
+    'btnNuevo
+    '
+    Me.btnNuevo.Location = New System.Drawing.Point(30, 122)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(92, 52)
+    Me.btnNuevo.TabIndex = 25
+    Me.btnNuevo.Text = "Nuevo"
+    Me.btnNuevo.UseVisualStyleBackColor = True
+    '
+    'btnEliminar
+    '
+    Me.btnEliminar.Location = New System.Drawing.Point(30, 238)
+    Me.btnEliminar.Name = "btnEliminar"
+    Me.btnEliminar.Size = New System.Drawing.Size(92, 52)
+    Me.btnEliminar.TabIndex = 26
+    Me.btnEliminar.Text = "Eliminar"
+    Me.btnEliminar.UseVisualStyleBackColor = True
+    '
+    'btnVolver
+    '
+    Me.btnVolver.Location = New System.Drawing.Point(30, 639)
+    Me.btnVolver.Name = "btnVolver"
+    Me.btnVolver.Size = New System.Drawing.Size(92, 52)
+    Me.btnVolver.TabIndex = 28
+    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.UseVisualStyleBackColor = True
     '
     'IDClienteDataGridViewTextBoxColumn
     '
@@ -124,6 +155,7 @@ Partial Class frmListaClientes
     Me.IDClienteDataGridViewTextBoxColumn.HeaderText = "IDCliente"
     Me.IDClienteDataGridViewTextBoxColumn.Name = "IDClienteDataGridViewTextBoxColumn"
     Me.IDClienteDataGridViewTextBoxColumn.ReadOnly = True
+    Me.IDClienteDataGridViewTextBoxColumn.Visible = False
     '
     'GuidClienteDataGridViewTextBoxColumn
     '
@@ -131,6 +163,7 @@ Partial Class frmListaClientes
     Me.GuidClienteDataGridViewTextBoxColumn.HeaderText = "GuidCliente"
     Me.GuidClienteDataGridViewTextBoxColumn.Name = "GuidClienteDataGridViewTextBoxColumn"
     Me.GuidClienteDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidClienteDataGridViewTextBoxColumn.Visible = False
     '
     'NombreDataGridViewTextBoxColumn
     '
@@ -153,12 +186,20 @@ Partial Class frmListaClientes
     Me.DNIDataGridViewTextBoxColumn.Name = "DNIDataGridViewTextBoxColumn"
     Me.DNIDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'ProfesionDataGridViewTextBoxColumn
+    '
+    Me.ProfesionDataGridViewTextBoxColumn.DataPropertyName = "Profesion"
+    Me.ProfesionDataGridViewTextBoxColumn.HeaderText = "Profesion"
+    Me.ProfesionDataGridViewTextBoxColumn.Name = "ProfesionDataGridViewTextBoxColumn"
+    Me.ProfesionDataGridViewTextBoxColumn.ReadOnly = True
+    '
     'FechaNacDataGridViewTextBoxColumn
     '
     Me.FechaNacDataGridViewTextBoxColumn.DataPropertyName = "FechaNac"
     Me.FechaNacDataGridViewTextBoxColumn.HeaderText = "FechaNac"
     Me.FechaNacDataGridViewTextBoxColumn.Name = "FechaNacDataGridViewTextBoxColumn"
     Me.FechaNacDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaNacDataGridViewTextBoxColumn.Visible = False
     '
     'CalleDataGridViewTextBoxColumn
     '
@@ -180,6 +221,7 @@ Partial Class frmListaClientes
     Me.FechaIngresoDataGridViewTextBoxColumn.HeaderText = "FechaIngreso"
     Me.FechaIngresoDataGridViewTextBoxColumn.Name = "FechaIngresoDataGridViewTextBoxColumn"
     Me.FechaIngresoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaIngresoDataGridViewTextBoxColumn.Visible = False
     '
     'EmailDataGridViewTextBoxColumn
     '
@@ -201,6 +243,7 @@ Partial Class frmListaClientes
     Me.Tel2DataGridViewTextBoxColumn.HeaderText = "Tel2"
     Me.Tel2DataGridViewTextBoxColumn.Name = "Tel2DataGridViewTextBoxColumn"
     Me.Tel2DataGridViewTextBoxColumn.ReadOnly = True
+    Me.Tel2DataGridViewTextBoxColumn.Visible = False
     '
     'CiudadDataGridViewTextBoxColumn
     '
@@ -222,6 +265,7 @@ Partial Class frmListaClientes
     Me.Calle2DataGridViewTextBoxColumn.HeaderText = "Calle2"
     Me.Calle2DataGridViewTextBoxColumn.Name = "Calle2DataGridViewTextBoxColumn"
     Me.Calle2DataGridViewTextBoxColumn.ReadOnly = True
+    Me.Calle2DataGridViewTextBoxColumn.Visible = False
     '
     'NumCalle2DataGridViewTextBoxColumn
     '
@@ -229,6 +273,7 @@ Partial Class frmListaClientes
     Me.NumCalle2DataGridViewTextBoxColumn.HeaderText = "NumCalle2"
     Me.NumCalle2DataGridViewTextBoxColumn.Name = "NumCalle2DataGridViewTextBoxColumn"
     Me.NumCalle2DataGridViewTextBoxColumn.ReadOnly = True
+    Me.NumCalle2DataGridViewTextBoxColumn.Visible = False
     '
     'NumClienteDataGridViewTextBoxColumn
     '
@@ -236,6 +281,7 @@ Partial Class frmListaClientes
     Me.NumClienteDataGridViewTextBoxColumn.HeaderText = "NumCliente"
     Me.NumClienteDataGridViewTextBoxColumn.Name = "NumClienteDataGridViewTextBoxColumn"
     Me.NumClienteDataGridViewTextBoxColumn.ReadOnly = True
+    Me.NumClienteDataGridViewTextBoxColumn.Visible = False
     '
     'CodigoPostalDataGridViewTextBoxColumn
     '
@@ -243,6 +289,7 @@ Partial Class frmListaClientes
     Me.CodigoPostalDataGridViewTextBoxColumn.HeaderText = "CodigoPostal"
     Me.CodigoPostalDataGridViewTextBoxColumn.Name = "CodigoPostalDataGridViewTextBoxColumn"
     Me.CodigoPostalDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CodigoPostalDataGridViewTextBoxColumn.Visible = False
     '
     'ComentariosDataGridViewTextBoxColumn
     '
@@ -250,44 +297,7 @@ Partial Class frmListaClientes
     Me.ComentariosDataGridViewTextBoxColumn.HeaderText = "Comentarios"
     Me.ComentariosDataGridViewTextBoxColumn.Name = "ComentariosDataGridViewTextBoxColumn"
     Me.ComentariosDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ProfesionDataGridViewTextBoxColumn
-    '
-    Me.ProfesionDataGridViewTextBoxColumn.DataPropertyName = "Profesion"
-    Me.ProfesionDataGridViewTextBoxColumn.HeaderText = "Profesion"
-    Me.ProfesionDataGridViewTextBoxColumn.Name = "ProfesionDataGridViewTextBoxColumn"
-    Me.ProfesionDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'bsInfoCliente
-    '
-    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
-    '
-    'btnNuevo
-    '
-    Me.btnNuevo.Location = New System.Drawing.Point(12, 35)
-    Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(98, 41)
-    Me.btnNuevo.TabIndex = 25
-    Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = True
-    '
-    'btnEliminar
-    '
-    Me.btnEliminar.Location = New System.Drawing.Point(12, 134)
-    Me.btnEliminar.Name = "btnEliminar"
-    Me.btnEliminar.Size = New System.Drawing.Size(98, 40)
-    Me.btnEliminar.TabIndex = 26
-    Me.btnEliminar.Text = "Eliminar"
-    Me.btnEliminar.UseVisualStyleBackColor = True
-    '
-    'btnVolver
-    '
-    Me.btnVolver.Location = New System.Drawing.Point(12, 516)
-    Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(75, 23)
-    Me.btnVolver.TabIndex = 28
-    Me.btnVolver.Text = "Volver"
-    Me.btnVolver.UseVisualStyleBackColor = True
+    Me.ComentariosDataGridViewTextBoxColumn.Visible = False
     '
     'frmListaClientes
     '
@@ -319,6 +329,7 @@ Partial Class frmListaClientes
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ApellidoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DNIDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ProfesionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaNacDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CalleDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NumCalleDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -333,6 +344,5 @@ Partial Class frmListaClientes
   Friend WithEvents NumClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CodigoPostalDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentariosDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ProfesionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

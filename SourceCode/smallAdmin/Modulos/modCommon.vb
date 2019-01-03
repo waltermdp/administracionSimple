@@ -23,14 +23,14 @@
     End Try
   End Function
 
-  Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vPrimerVencimiento As Date) As manDB.clsInfoPagos
+  Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vFechaVenta As Date, ByVal vPrimerVencimiento As Date) As manDB.clsInfoPagos
     Try
       Dim pago As New manDB.clsInfoPagos
       pago.EstadoPago = E_EstadoPago.Debe
       pago.GuidProducto = vGuidProducto
       pago.GuidPago = Guid.NewGuid
       pago.FechaPago = Date.MaxValue ' Vencimiento(auxCuotas, datePrimerPago.Value)
-      pago.VencimientoCuota = Vencimiento(vNumCuota, vPrimerVencimiento)
+      pago.VencimientoCuota = Vencimiento(vNumCuota, vFechaVenta, vPrimerVencimiento)
       pago.NumCuota = vNumCuota
       pago.ValorCuota = vValorCuota
       Return pago
@@ -40,13 +40,37 @@
     End Try
   End Function
 
-  Private Function Vencimiento(ByVal Cuota As Integer, ByVal vPrimerVencimiento As Date) As Date
+
+  Public Function Vencimiento(ByVal Cuota As Integer, ByVal vFechaVenta As Date, ByVal PrimerPago As Date) As Date
     Try
 
-      Return vPrimerVencimiento.AddMonths(Cuota)
+      vFechaVenta = vFechaVenta.AddMonths(Cuota)
+      Dim auxFecha As New Date(vFechaVenta.Year, vFechaVenta.Month, PrimerPago.Day)
+      If auxFecha < Today Then
+        aux()
+        auxFecha = New Date(vFechaVenta.Year, vFechaVenta.Month, PrimerPago.Day)
+      End If
+      Return New Date(vFechaVenta.Year, vFechaVenta.Month, PrimerPago.Day)
     Catch ex As Exception
       Call libCommon.Comunes.Print_msg(ex.Message)
-      Return vPrimerVencimiento
+      Return PrimerPago
     End Try
   End Function
+
+  Public Function DebePeriodoActual(ByVal lstPagos As List(Of manDB.clsInfoPagos)) As Boolean
+    Try
+      Dim pagadas As Integer = 0
+      If lstPagos.Where(Function(c) c.EstadoPago = 1).ToList.Count <= 0 Then Return True
+      Dim auxpago As manDB.clsInfoPagos = lstPagos.Where(Function(c) c.EstadoPago = 1).OrderBy(Function(c) c.NumCuota).ToList.Last
+      If Today < auxpago.VencimientoCuota Then
+        Return False
+      End If
+      Return True
+    Catch ex As Exception
+      Call libCommon.Comunes.Print_msg(ex.Message)
+      Return True
+    End Try
+  End Function
+
+
 End Module

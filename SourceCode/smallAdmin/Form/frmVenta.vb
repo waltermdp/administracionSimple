@@ -319,7 +319,7 @@ Public Class frmVenta
       m_Producto.FechaPrimerPago = New Date(DateVenta.Value.Year, DateVenta.Value.Month, dtDiaVencimiento.Value)
 
 
-      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, numProxCouta, Vencimiento(numProxCouta, m_Producto.FechaPrimerPago))
+      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(numProxCouta, m_Producto.FechaVenta, m_Producto.FechaPrimerPago))
       m_lstPagos.Add(auxPago)
 
       Call ReloadListPagos()
@@ -351,16 +351,7 @@ Public Class frmVenta
     End Try
   End Function
 
-  Private Function Vencimiento(ByVal Cuota As Integer, ByVal PrimerPago As Date) As Date
-    Try
-      Dim fVencimiento As Date = m_Producto.FechaVenta
-      fVencimiento.AddMonths(Cuota)
-      Return New Date(fVencimiento.Year, fVencimiento.Month, PrimerPago.Day)
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return PrimerPago
-    End Try
-  End Function
+ 
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
@@ -635,6 +626,16 @@ Public Class frmVenta
     Try
       If m_skip Then Exit Sub
       If dtDiaVencimiento.Value = 0 Then Exit Sub
+      Call GenerarPlanCuotas()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub DateVenta_ValueChanged(sender As Object, e As EventArgs) Handles DateVenta.ValueChanged
+    Try
+      If m_skip Then Exit Sub
+      m_Producto.FechaVenta = DateVenta.Value
       Call GenerarPlanCuotas()
     Catch ex As Exception
       Call Print_msg(ex.Message)

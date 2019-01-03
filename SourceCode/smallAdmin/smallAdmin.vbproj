@@ -125,6 +125,12 @@
     <Compile Include="Form\frmCliente.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmConfig.Designer.vb">
+      <DependentUpon>frmConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmConfig.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmCuenta.Designer.vb">
       <DependentUpon>frmCuenta.vb</DependentUpon>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmCliente.resx">
       <DependentUpon>frmCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmConfig.resx">
+      <DependentUpon>frmConfig.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmCuenta.resx">
       <DependentUpon>frmCuenta.vb</DependentUpon>

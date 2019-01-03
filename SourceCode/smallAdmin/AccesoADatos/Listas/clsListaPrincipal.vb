@@ -157,20 +157,7 @@ Public Class clsListaPrincipal
     End Try
   End Function
 
-  Private Function DebePeriodoActual(ByVal lstPagos As List(Of clsInfoPagos)) As Boolean
-    Try
-      Dim pagadas As Integer = 0
-      If lstPagos.Where(Function(c) c.EstadoPago = 1).ToList.Count <= 0 Then Return True
-      Dim auxpago As clsInfoPagos = lstPagos.Where(Function(c) c.EstadoPago = 1).OrderBy(Function(c) c.NumCuota).ToList.Last
-      If Today < auxpago.VencimientoCuota Then
-        Return False
-      End If
-      Return True
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-      Return True
-    End Try
-  End Function
+  
 
   Private Function GetName(ByVal vGuidTipoCuenta As Guid) As String
     Return GetNameOfTipoPago(vGuidTipoCuenta)
