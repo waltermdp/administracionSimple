@@ -58,6 +58,10 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.ListView1 = New System.Windows.Forms.ListView()
+    Me.cArticulos = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cCantidad = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cGuid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.dtDiaVencimiento = New System.Windows.Forms.NumericUpDown()
     Me.lblValorCuota = New System.Windows.Forms.Label()
     Me.txtValorCuota = New System.Windows.Forms.TextBox()
@@ -67,7 +71,6 @@ Partial Class frmVenta
     Me.btnAddCuenta = New System.Windows.Forms.Button()
     Me.btnRemoveArticulo = New System.Windows.Forms.Button()
     Me.btnAddArticulo = New System.Windows.Forms.Button()
-    Me.lstArticulosVendidos = New System.Windows.Forms.ListBox()
     Me.txtBuscarArticulo = New System.Windows.Forms.TextBox()
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
@@ -353,6 +356,7 @@ Partial Class frmVenta
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.ListView1)
     Me.gpVenta.Controls.Add(Me.dtDiaVencimiento)
     Me.gpVenta.Controls.Add(Me.lblValorCuota)
     Me.gpVenta.Controls.Add(Me.txtValorCuota)
@@ -362,7 +366,6 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.btnAddCuenta)
     Me.gpVenta.Controls.Add(Me.btnRemoveArticulo)
     Me.gpVenta.Controls.Add(Me.btnAddArticulo)
-    Me.gpVenta.Controls.Add(Me.lstArticulosVendidos)
     Me.gpVenta.Controls.Add(Me.txtBuscarArticulo)
     Me.gpVenta.Controls.Add(Me.lstArticulos)
     Me.gpVenta.Controls.Add(Me.Label12)
@@ -382,6 +385,31 @@ Partial Class frmVenta
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
+    '
+    'ListView1
+    '
+    Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cArticulos, Me.cCantidad, Me.cGuid})
+    Me.ListView1.FullRowSelect = True
+    Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+    Me.ListView1.Location = New System.Drawing.Point(302, 69)
+    Me.ListView1.MultiSelect = False
+    Me.ListView1.Name = "ListView1"
+    Me.ListView1.Size = New System.Drawing.Size(223, 173)
+    Me.ListView1.TabIndex = 33
+    Me.ListView1.UseCompatibleStateImageBehavior = False
+    '
+    'cArticulos
+    '
+    Me.cArticulos.Text = "Articulos"
+    '
+    'cCantidad
+    '
+    Me.cCantidad.Text = "Cantidad"
+    Me.cCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'cGuid
+    '
+    Me.cGuid.Width = 0
     '
     'dtDiaVencimiento
     '
@@ -461,14 +489,6 @@ Partial Class frmVenta
     Me.btnAddArticulo.TabIndex = 24
     Me.btnAddArticulo.Text = "->"
     Me.btnAddArticulo.UseVisualStyleBackColor = True
-    '
-    'lstArticulosVendidos
-    '
-    Me.lstArticulosVendidos.FormattingEnabled = True
-    Me.lstArticulosVendidos.Location = New System.Drawing.Point(302, 68)
-    Me.lstArticulosVendidos.Name = "lstArticulosVendidos"
-    Me.lstArticulosVendidos.Size = New System.Drawing.Size(223, 173)
-    Me.lstArticulosVendidos.TabIndex = 23
     '
     'txtBuscarArticulo
     '
@@ -575,7 +595,6 @@ Partial Class frmVenta
   Friend WithEvents Label12 As System.Windows.Forms.Label
   Friend WithEvents btnRemoveArticulo As System.Windows.Forms.Button
   Friend WithEvents btnAddArticulo As System.Windows.Forms.Button
-  Friend WithEvents lstArticulosVendidos As System.Windows.Forms.ListBox
   Friend WithEvents bsArticulos As System.Windows.Forms.BindingSource
   Friend WithEvents btnAddCuenta As System.Windows.Forms.Button
   Friend WithEvents btnSeleccionarCuenta As System.Windows.Forms.Button
@@ -584,4 +603,8 @@ Partial Class frmVenta
   Friend WithEvents lblValorCuota As System.Windows.Forms.Label
   Friend WithEvents txtValorCuota As System.Windows.Forms.TextBox
   Friend WithEvents dtDiaVencimiento As System.Windows.Forms.NumericUpDown
+  Friend WithEvents ListView1 As System.Windows.Forms.ListView
+  Friend WithEvents cArticulos As System.Windows.Forms.ColumnHeader
+  Friend WithEvents cCantidad As System.Windows.Forms.ColumnHeader
+  Friend WithEvents cGuid As System.Windows.Forms.ColumnHeader
 End Class

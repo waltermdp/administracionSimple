@@ -30,7 +30,7 @@
       pago.GuidProducto = vGuidProducto
       pago.GuidPago = Guid.NewGuid
       pago.FechaPago = Date.MaxValue ' Vencimiento(auxCuotas, datePrimerPago.Value)
-      pago.VencimientoCuota = Vencimiento(vNumCuota, vFechaVenta, vPrimerVencimiento)
+      pago.VencimientoCuota = Vencimiento(vPrimerVencimiento)
       pago.NumCuota = vNumCuota
       pago.ValorCuota = vValorCuota
       Return pago
@@ -41,16 +41,16 @@
   End Function
 
 
-  Public Function Vencimiento(ByVal Cuota As Integer, ByVal vFechaVenta As Date, ByVal PrimerPago As Date) As Date
+  Public Function Vencimiento(ByVal PrimerPago As Date, Optional ByVal fechaInicial As Date = Nothing) As Date
     Try
-
-      vFechaVenta = vFechaVenta.AddMonths(Cuota)
-      Dim auxFecha As New Date(vFechaVenta.Year, vFechaVenta.Month, PrimerPago.Day)
-      If auxFecha < Today Then
-        aux()
-        auxFecha = New Date(vFechaVenta.Year, vFechaVenta.Month, PrimerPago.Day)
+      If fechaInicial = Nothing Then
+        fechaInicial = Today
       End If
-      Return New Date(vFechaVenta.Year, vFechaVenta.Month, PrimerPago.Day)
+
+      fechaInicial = fechaInicial.AddMonths(1)
+      Dim auxFecha As New Date(fechaInicial.Year, fechaInicial.Month, PrimerPago.Day)
+      
+      Return auxFecha
     Catch ex As Exception
       Call libCommon.Comunes.Print_msg(ex.Message)
       Return PrimerPago

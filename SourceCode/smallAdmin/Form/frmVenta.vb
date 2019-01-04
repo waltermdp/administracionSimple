@@ -49,6 +49,11 @@ Public Class frmVenta
       txtPrecio.Text = 0
       m_hayCambios = False
 
+      ListView1.View = View.Details
+      ListView1.Columns(0).Width = CInt(0.7 * ListView1.Width)
+      ListView1.Columns(1).Width = ListView1.Width - ListView1.Columns(0).Width - 5
+
+
       If m_CurrentPersona Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub
       If m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing Then
         vResult = clsPersona.Load(m_Producto.GuidCliente, m_CurrentPersona)
@@ -319,7 +324,7 @@ Public Class frmVenta
       m_Producto.FechaPrimerPago = New Date(DateVenta.Value.Year, DateVenta.Value.Month, dtDiaVencimiento.Value)
 
 
-      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(numProxCouta, m_Producto.FechaVenta, m_Producto.FechaPrimerPago))
+      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
       m_lstPagos.Add(auxPago)
 
       Call ReloadListPagos()
@@ -498,8 +503,7 @@ Public Class frmVenta
         MsgBox("Fallo carga de articulos vendidos")
         Exit Sub
       End If
-      lstArticulosVendidos.Items.Clear()
-      lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+      Call FillListArticulosVendidos(m_lstArticulosVendidos)
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -511,7 +515,6 @@ Public Class frmVenta
       If lstArticulos.SelectedIndex < 0 Then Exit Sub
       Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = (CType(lstArticulos.SelectedItem, clsInfoArticulos).GuidArticulo))
       If index >= 0 Then
-
         m_lstArticulosVendidos(index).CantidadArticulos += 1
       Else
         Dim auxArticulo As New clsInfoArticuloVendido
@@ -519,8 +522,8 @@ Public Class frmVenta
         auxArticulo.CantidadArticulos = 1
         m_lstArticulosVendidos.Add(auxArticulo)
       End If
-      lstArticulosVendidos.Items.Clear()
-      lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+      Call FillListArticulosVendidos(m_lstArticulosVendidos)
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -528,16 +531,38 @@ Public Class frmVenta
 
   Private Sub btnRemoveArticulo_MouseClick(sender As Object, e As MouseEventArgs) Handles btnRemoveArticulo.MouseClick
     Try
-      If lstArticulosVendidos.SelectedIndex < 0 Then Exit Sub
-      Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.Equals(CType(lstArticulosVendidos.SelectedItem, clsInfoArticuloVendido)))
+
+      If ListView1.SelectedIndices.Count <= 0 Then Exit Sub
+      Dim sGuid As Guid = New Guid(ListView1.SelectedItems.Item(0).SubItems(2).Text)
+      Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = sGuid)
+
+      'If lstArticulosVendidos.SelectedIndex < 0 Then Exit Sub
+      'Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.Equals(CType(lstArticulosVendidos.SelectedItem, clsInfoArticuloVendido)))
       If m_lstArticulosVendidos(index).CantidadArticulos > 1 Then
         m_lstArticulosVendidos(index).CantidadArticulos -= 1
       Else
         m_lstArticulosVendidos.RemoveAt(index)
       End If
+      Call FillListArticulosVendidos(m_lstArticulosVendidos)
 
-      lstArticulosVendidos.Items.Clear()
-      lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+      'lstArticulosVendidos.Items.Clear()
+      'lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub FillListArticulosVendidos(ByVal lstArticulosVendidos As List(Of clsInfoArticuloVendido))
+    Try
+      ListView1.Items.Clear()
+      For Each articulo In lstArticulosVendidos
+        Dim item As New ListViewItem
+
+        item.Text = articulo.ToString
+        item.SubItems.Add(articulo.CantidadArticulos.ToString)
+        item.SubItems.Add(articulo.GuidArticulo.ToString)
+        ListView1.Items.Add(item)
+      Next
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -637,6 +662,33 @@ Public Class frmVenta
       If m_skip Then Exit Sub
       m_Producto.FechaVenta = DateVenta.Value
       Call GenerarPlanCuotas()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtBuscarArticulo_TextChanged(sender As Object, e As EventArgs) Handles txtBuscarArticulo.TextChanged
+    Try
+      If txtBuscarArticulo.Text.Trim = "" Then
+        m_lstArticulos.Cfg_Filtro = ""
+      Else
+        Dim str As String = txtBuscarArticulo.Text.Trim
+
+        'str = str.Replace("'", "''")
+        m_lstArticulos.Cfg_Filtro = "WHERE Nombre Like '%" & str & "%' OR Codigo Like '%" & str & "%'"
+      End If
+      m_lstArticulos.Items.Clear()
+      Call m_lstArticulos.RefreshData()
+      bsArticulos.ResetBindings(False)
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub ListView1_LostFocus(sender As Object, e As EventArgs) Handles ListView1.LostFocus
+    Try
+      ListView1.Refresh()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

@@ -39,7 +39,6 @@ Public Class frmConfig
           MsgBox("Fallo guardar newpago")
         End If
       Next
-      Dim s As Integer = 0
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

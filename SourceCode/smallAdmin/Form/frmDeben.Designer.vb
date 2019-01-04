@@ -52,9 +52,6 @@ Partial Class frmDeben
     Me.btnUpPago = New System.Windows.Forms.Button()
     Me.btnDownPago = New System.Windows.Forms.Button()
     Me.dgvData = New System.Windows.Forms.DataGridView()
-    Me.btnLiquidVendedores = New System.Windows.Forms.Button()
-    Me.btnConfiguracion = New System.Windows.Forms.Button()
-    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
     Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,10 +65,13 @@ Partial Class frmDeben
     Me.NumPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaUltimoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ArticulosVendidodDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnLiquidVendedores = New System.Windows.Forms.Button()
+    Me.btnConfiguracion = New System.Windows.Forms.Button()
     Me.txtBusqueda = New System.Windows.Forms.TextBox()
     Me.gpxBuscar = New System.Windows.Forms.GroupBox()
-    Me.rbtnClientName = New System.Windows.Forms.RadioButton()
     Me.rbtnNombreVendedor = New System.Windows.Forms.RadioButton()
+    Me.rbtnClientName = New System.Windows.Forms.RadioButton()
     Me.GroupBox1.SuspendLayout()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -366,28 +366,6 @@ Partial Class frmDeben
     Me.dgvData.TabIndex = 44
     Me.dgvData.TabStop = False
     '
-    'btnLiquidVendedores
-    '
-    Me.btnLiquidVendedores.Location = New System.Drawing.Point(30, 291)
-    Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
-    Me.btnLiquidVendedores.Size = New System.Drawing.Size(92, 52)
-    Me.btnLiquidVendedores.TabIndex = 45
-    Me.btnLiquidVendedores.Text = "Liquidacion Vendedores"
-    Me.btnLiquidVendedores.UseVisualStyleBackColor = True
-    '
-    'btnConfiguracion
-    '
-    Me.btnConfiguracion.Location = New System.Drawing.Point(164, 549)
-    Me.btnConfiguracion.Name = "btnConfiguracion"
-    Me.btnConfiguracion.Size = New System.Drawing.Size(92, 52)
-    Me.btnConfiguracion.TabIndex = 46
-    Me.btnConfiguracion.Text = "Configuracion"
-    Me.btnConfiguracion.UseVisualStyleBackColor = True
-    '
-    'bsInfoPrincipal
-    '
-    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
-    '
     'FechaVentaDataGridViewTextBoxColumn
     '
     Me.FechaVentaDataGridViewTextBoxColumn.DataPropertyName = "FechaVenta"
@@ -480,6 +458,28 @@ Partial Class frmDeben
     Me.ArticulosVendidodDataGridViewTextBoxColumn.Name = "ArticulosVendidodDataGridViewTextBoxColumn"
     Me.ArticulosVendidodDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'bsInfoPrincipal
+    '
+    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
+    '
+    'btnLiquidVendedores
+    '
+    Me.btnLiquidVendedores.Location = New System.Drawing.Point(30, 291)
+    Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
+    Me.btnLiquidVendedores.Size = New System.Drawing.Size(92, 52)
+    Me.btnLiquidVendedores.TabIndex = 45
+    Me.btnLiquidVendedores.Text = "Liquidacion Vendedores"
+    Me.btnLiquidVendedores.UseVisualStyleBackColor = True
+    '
+    'btnConfiguracion
+    '
+    Me.btnConfiguracion.Location = New System.Drawing.Point(164, 549)
+    Me.btnConfiguracion.Name = "btnConfiguracion"
+    Me.btnConfiguracion.Size = New System.Drawing.Size(92, 52)
+    Me.btnConfiguracion.TabIndex = 46
+    Me.btnConfiguracion.Text = "Configuracion"
+    Me.btnConfiguracion.UseVisualStyleBackColor = True
+    '
     'txtBusqueda
     '
     Me.txtBusqueda.Location = New System.Drawing.Point(6, 69)
@@ -499,17 +499,6 @@ Partial Class frmDeben
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Busqueda"
     '
-    'rbtnClientName
-    '
-    Me.rbtnClientName.AutoSize = True
-    Me.rbtnClientName.Location = New System.Drawing.Point(6, 20)
-    Me.rbtnClientName.Name = "rbtnClientName"
-    Me.rbtnClientName.Size = New System.Drawing.Size(97, 17)
-    Me.rbtnClientName.TabIndex = 48
-    Me.rbtnClientName.TabStop = True
-    Me.rbtnClientName.Text = "Nombre Cliente"
-    Me.rbtnClientName.UseVisualStyleBackColor = True
-    '
     'rbtnNombreVendedor
     '
     Me.rbtnNombreVendedor.AutoSize = True
@@ -521,11 +510,22 @@ Partial Class frmDeben
     Me.rbtnNombreVendedor.Text = "Nombre Vendedor"
     Me.rbtnNombreVendedor.UseVisualStyleBackColor = True
     '
+    'rbtnClientName
+    '
+    Me.rbtnClientName.AutoSize = True
+    Me.rbtnClientName.Location = New System.Drawing.Point(6, 20)
+    Me.rbtnClientName.Name = "rbtnClientName"
+    Me.rbtnClientName.Size = New System.Drawing.Size(97, 17)
+    Me.rbtnClientName.TabIndex = 48
+    Me.rbtnClientName.TabStop = True
+    Me.rbtnClientName.Text = "Nombre Cliente"
+    Me.rbtnClientName.UseVisualStyleBackColor = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.BackColor = System.Drawing.SystemColors.Control
+    Me.BackColor = System.Drawing.Color.White
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.gpxBuscar)
     Me.Controls.Add(Me.btnConfiguracion)
