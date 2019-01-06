@@ -23,6 +23,7 @@ Partial Class frmVenta
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmVenta))
     Me.txtPrecio = New System.Windows.Forms.TextBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.DateVenta = New System.Windows.Forms.DateTimePicker()
@@ -116,21 +117,31 @@ Partial Class frmVenta
     '
     'btnSave
     '
-    Me.btnSave.Location = New System.Drawing.Point(12, 69)
+    Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSave.FlatAppearance.BorderSize = 0
+    Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSave.ForeColor = System.Drawing.Color.White
+    Me.btnSave.Location = New System.Drawing.Point(24, 51)
     Me.btnSave.Name = "btnSave"
-    Me.btnSave.Size = New System.Drawing.Size(92, 52)
+    Me.btnSave.Size = New System.Drawing.Size(110, 61)
     Me.btnSave.TabIndex = 7
     Me.btnSave.Text = "Guardar"
-    Me.btnSave.UseVisualStyleBackColor = True
+    Me.btnSave.UseVisualStyleBackColor = False
     '
     'btnCancel
     '
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
     Me.btnCancel.Location = New System.Drawing.Point(12, 648)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(92, 52)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 8
     Me.btnCancel.Text = "Cancelar"
-    Me.btnCancel.UseVisualStyleBackColor = True
+    Me.btnCancel.UseVisualStyleBackColor = False
     '
     'cmbCuotas
     '
@@ -234,7 +245,7 @@ Partial Class frmVenta
     'Label6
     '
     Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(138, 108)
+    Me.Label6.Location = New System.Drawing.Point(234, 137)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(128, 13)
     Me.Label6.TabIndex = 17
@@ -253,7 +264,7 @@ Partial Class frmVenta
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(138, 9)
+    Me.Label7.Location = New System.Drawing.Point(234, 38)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(114, 13)
     Me.Label7.TabIndex = 20
@@ -261,7 +272,7 @@ Partial Class frmVenta
     '
     'btnSelectClient
     '
-    Me.btnSelectClient.Location = New System.Drawing.Point(141, 36)
+    Me.btnSelectClient.Location = New System.Drawing.Point(237, 65)
     Me.btnSelectClient.Name = "btnSelectClient"
     Me.btnSelectClient.Size = New System.Drawing.Size(125, 23)
     Me.btnSelectClient.TabIndex = 21
@@ -270,7 +281,7 @@ Partial Class frmVenta
     '
     'btnNewClient
     '
-    Me.btnNewClient.Location = New System.Drawing.Point(141, 65)
+    Me.btnNewClient.Location = New System.Drawing.Point(237, 94)
     Me.btnNewClient.Name = "btnNewClient"
     Me.btnNewClient.Size = New System.Drawing.Size(125, 23)
     Me.btnNewClient.TabIndex = 22
@@ -279,7 +290,7 @@ Partial Class frmVenta
     '
     'btnSelectVendedor
     '
-    Me.btnSelectVendedor.Location = New System.Drawing.Point(141, 124)
+    Me.btnSelectVendedor.Location = New System.Drawing.Point(237, 153)
     Me.btnSelectVendedor.Name = "btnSelectVendedor"
     Me.btnSelectVendedor.Size = New System.Drawing.Size(125, 23)
     Me.btnSelectVendedor.TabIndex = 23
@@ -288,7 +299,7 @@ Partial Class frmVenta
     '
     'txtNombreCliente
     '
-    Me.txtNombreCliente.Location = New System.Drawing.Point(328, 52)
+    Me.txtNombreCliente.Location = New System.Drawing.Point(424, 81)
     Me.txtNombreCliente.Name = "txtNombreCliente"
     Me.txtNombreCliente.ReadOnly = True
     Me.txtNombreCliente.Size = New System.Drawing.Size(230, 20)
@@ -297,7 +308,7 @@ Partial Class frmVenta
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.Location = New System.Drawing.Point(325, 36)
+    Me.Label8.Location = New System.Drawing.Point(421, 65)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(44, 13)
     Me.Label8.TabIndex = 25
@@ -305,7 +316,7 @@ Partial Class frmVenta
     '
     'txtDNICliente
     '
-    Me.txtDNICliente.Location = New System.Drawing.Point(564, 52)
+    Me.txtDNICliente.Location = New System.Drawing.Point(660, 81)
     Me.txtDNICliente.Name = "txtDNICliente"
     Me.txtDNICliente.ReadOnly = True
     Me.txtDNICliente.Size = New System.Drawing.Size(184, 20)
@@ -314,7 +325,7 @@ Partial Class frmVenta
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(561, 36)
+    Me.Label9.Location = New System.Drawing.Point(657, 65)
     Me.Label9.Name = "Label9"
     Me.Label9.Size = New System.Drawing.Size(26, 13)
     Me.Label9.TabIndex = 27
@@ -322,7 +333,7 @@ Partial Class frmVenta
     '
     'txtNombreVendedor
     '
-    Me.txtNombreVendedor.Location = New System.Drawing.Point(328, 140)
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(424, 169)
     Me.txtNombreVendedor.Name = "txtNombreVendedor"
     Me.txtNombreVendedor.ReadOnly = True
     Me.txtNombreVendedor.Size = New System.Drawing.Size(230, 20)
@@ -331,7 +342,7 @@ Partial Class frmVenta
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.Location = New System.Drawing.Point(325, 124)
+    Me.Label10.Location = New System.Drawing.Point(421, 153)
     Me.Label10.Name = "Label10"
     Me.Label10.Size = New System.Drawing.Size(53, 13)
     Me.Label10.TabIndex = 29
@@ -339,7 +350,7 @@ Partial Class frmVenta
     '
     'txtDNIVendedor
     '
-    Me.txtDNIVendedor.Location = New System.Drawing.Point(564, 140)
+    Me.txtDNIVendedor.Location = New System.Drawing.Point(660, 169)
     Me.txtDNIVendedor.Name = "txtDNIVendedor"
     Me.txtDNIVendedor.ReadOnly = True
     Me.txtDNIVendedor.Size = New System.Drawing.Size(184, 20)
@@ -348,7 +359,7 @@ Partial Class frmVenta
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(561, 124)
+    Me.Label11.Location = New System.Drawing.Point(657, 153)
     Me.Label11.Name = "Label11"
     Me.Label11.Size = New System.Drawing.Size(26, 13)
     Me.Label11.TabIndex = 32
@@ -379,15 +390,16 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.Label5)
     Me.gpVenta.Controls.Add(Me.dgvCuotas)
     Me.gpVenta.Controls.Add(Me.chkEditarCuotas)
-    Me.gpVenta.Location = New System.Drawing.Point(141, 180)
+    Me.gpVenta.Location = New System.Drawing.Point(170, 221)
     Me.gpVenta.Name = "gpVenta"
-    Me.gpVenta.Size = New System.Drawing.Size(1098, 520)
+    Me.gpVenta.Size = New System.Drawing.Size(1098, 479)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
     '
     'ListView1
     '
+    Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cArticulos, Me.cCantidad, Me.cGuid})
     Me.ListView1.FullRowSelect = True
     Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -499,11 +511,12 @@ Partial Class frmVenta
     '
     'lstArticulos
     '
+    Me.lstArticulos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lstArticulos.DataSource = Me.bsArticulos
     Me.lstArticulos.FormattingEnabled = True
     Me.lstArticulos.Location = New System.Drawing.Point(22, 69)
     Me.lstArticulos.Name = "lstArticulos"
-    Me.lstArticulos.Size = New System.Drawing.Size(223, 173)
+    Me.lstArticulos.Size = New System.Drawing.Size(223, 171)
     Me.lstArticulos.TabIndex = 20
     '
     'bsArticulos
@@ -523,6 +536,7 @@ Partial Class frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.gpVenta)
     Me.Controls.Add(Me.Label11)

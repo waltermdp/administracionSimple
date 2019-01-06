@@ -22,6 +22,7 @@ Partial Class frmVendedorData
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmVendedorData))
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.btnCancel = New System.Windows.Forms.Button()
     Me.Label1 = New System.Windows.Forms.Label()
@@ -50,30 +51,41 @@ Partial Class frmVendedorData
     Me.Label12 = New System.Windows.Forms.Label()
     Me.txtComentarios = New System.Windows.Forms.TextBox()
     Me.Label13 = New System.Windows.Forms.Label()
+    Me.Label14 = New System.Windows.Forms.Label()
     Me.SuspendLayout()
     '
     'btnGuardar
     '
-    Me.btnGuardar.Location = New System.Drawing.Point(12, 55)
+    Me.btnGuardar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnGuardar.FlatAppearance.BorderSize = 0
+    Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnGuardar.ForeColor = System.Drawing.Color.White
+    Me.btnGuardar.Location = New System.Drawing.Point(24, 51)
     Me.btnGuardar.Name = "btnGuardar"
-    Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
+    Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
     Me.btnGuardar.TabIndex = 0
     Me.btnGuardar.Text = "Guardar"
-    Me.btnGuardar.UseVisualStyleBackColor = True
+    Me.btnGuardar.UseVisualStyleBackColor = False
     '
     'btnCancel
     '
-    Me.btnCancel.Location = New System.Drawing.Point(12, 92)
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
+    Me.btnCancel.Location = New System.Drawing.Point(24, 127)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(75, 26)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 1
     Me.btnCancel.Text = "Cancelar"
-    Me.btnCancel.UseVisualStyleBackColor = True
+    Me.btnCancel.UseVisualStyleBackColor = False
     '
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(105, 39)
+    Me.Label1.Location = New System.Drawing.Point(434, 88)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(44, 13)
     Me.Label1.TabIndex = 2
@@ -81,14 +93,14 @@ Partial Class frmVendedorData
     '
     'txtNombre
     '
-    Me.txtNombre.Location = New System.Drawing.Point(108, 55)
+    Me.txtNombre.Location = New System.Drawing.Point(437, 104)
     Me.txtNombre.Name = "txtNombre"
     Me.txtNombre.Size = New System.Drawing.Size(230, 20)
     Me.txtNombre.TabIndex = 3
     '
     'txtApellido
     '
-    Me.txtApellido.Location = New System.Drawing.Point(364, 55)
+    Me.txtApellido.Location = New System.Drawing.Point(693, 104)
     Me.txtApellido.Name = "txtApellido"
     Me.txtApellido.Size = New System.Drawing.Size(230, 20)
     Me.txtApellido.TabIndex = 5
@@ -96,7 +108,7 @@ Partial Class frmVendedorData
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(361, 39)
+    Me.Label2.Location = New System.Drawing.Point(690, 88)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(44, 13)
     Me.Label2.TabIndex = 4
@@ -104,7 +116,7 @@ Partial Class frmVendedorData
     '
     'txtId
     '
-    Me.txtId.Location = New System.Drawing.Point(108, 108)
+    Me.txtId.Location = New System.Drawing.Point(437, 157)
     Me.txtId.Name = "txtId"
     Me.txtId.Size = New System.Drawing.Size(230, 20)
     Me.txtId.TabIndex = 7
@@ -112,7 +124,7 @@ Partial Class frmVendedorData
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(105, 92)
+    Me.Label3.Location = New System.Drawing.Point(434, 141)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(26, 13)
     Me.Label3.TabIndex = 6
@@ -120,7 +132,7 @@ Partial Class frmVendedorData
     '
     'txtCiudad
     '
-    Me.txtCiudad.Location = New System.Drawing.Point(364, 108)
+    Me.txtCiudad.Location = New System.Drawing.Point(693, 157)
     Me.txtCiudad.Name = "txtCiudad"
     Me.txtCiudad.Size = New System.Drawing.Size(230, 20)
     Me.txtCiudad.TabIndex = 9
@@ -128,7 +140,7 @@ Partial Class frmVendedorData
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(361, 92)
+    Me.Label4.Location = New System.Drawing.Point(690, 141)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(40, 13)
     Me.Label4.TabIndex = 8
@@ -136,7 +148,7 @@ Partial Class frmVendedorData
     '
     'txtProvincia
     '
-    Me.txtProvincia.Location = New System.Drawing.Point(108, 147)
+    Me.txtProvincia.Location = New System.Drawing.Point(437, 196)
     Me.txtProvincia.Name = "txtProvincia"
     Me.txtProvincia.Size = New System.Drawing.Size(230, 20)
     Me.txtProvincia.TabIndex = 11
@@ -144,7 +156,7 @@ Partial Class frmVendedorData
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(105, 131)
+    Me.Label5.Location = New System.Drawing.Point(434, 180)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(51, 13)
     Me.Label5.TabIndex = 10
@@ -152,7 +164,7 @@ Partial Class frmVendedorData
     '
     'txtCodigoPostal
     '
-    Me.txtCodigoPostal.Location = New System.Drawing.Point(364, 147)
+    Me.txtCodigoPostal.Location = New System.Drawing.Point(693, 196)
     Me.txtCodigoPostal.Name = "txtCodigoPostal"
     Me.txtCodigoPostal.Size = New System.Drawing.Size(230, 20)
     Me.txtCodigoPostal.TabIndex = 13
@@ -160,7 +172,7 @@ Partial Class frmVendedorData
     'Label6
     '
     Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(361, 131)
+    Me.Label6.Location = New System.Drawing.Point(690, 180)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(21, 13)
     Me.Label6.TabIndex = 12
@@ -168,7 +180,7 @@ Partial Class frmVendedorData
     '
     'txtNumVendedor
     '
-    Me.txtNumVendedor.Location = New System.Drawing.Point(108, 186)
+    Me.txtNumVendedor.Location = New System.Drawing.Point(437, 235)
     Me.txtNumVendedor.Name = "txtNumVendedor"
     Me.txtNumVendedor.Size = New System.Drawing.Size(230, 20)
     Me.txtNumVendedor.TabIndex = 15
@@ -176,7 +188,7 @@ Partial Class frmVendedorData
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(105, 170)
+    Me.Label7.Location = New System.Drawing.Point(434, 219)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(93, 13)
     Me.Label7.TabIndex = 14
@@ -184,7 +196,7 @@ Partial Class frmVendedorData
     '
     'txtGrupo
     '
-    Me.txtGrupo.Location = New System.Drawing.Point(364, 186)
+    Me.txtGrupo.Location = New System.Drawing.Point(693, 235)
     Me.txtGrupo.Name = "txtGrupo"
     Me.txtGrupo.Size = New System.Drawing.Size(230, 20)
     Me.txtGrupo.TabIndex = 17
@@ -192,7 +204,7 @@ Partial Class frmVendedorData
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.Location = New System.Drawing.Point(361, 170)
+    Me.Label8.Location = New System.Drawing.Point(690, 219)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(36, 13)
     Me.Label8.TabIndex = 16
@@ -200,7 +212,7 @@ Partial Class frmVendedorData
     '
     'txtTel1
     '
-    Me.txtTel1.Location = New System.Drawing.Point(108, 225)
+    Me.txtTel1.Location = New System.Drawing.Point(437, 274)
     Me.txtTel1.Name = "txtTel1"
     Me.txtTel1.Size = New System.Drawing.Size(230, 20)
     Me.txtTel1.TabIndex = 19
@@ -208,7 +220,7 @@ Partial Class frmVendedorData
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(105, 209)
+    Me.Label9.Location = New System.Drawing.Point(434, 258)
     Me.Label9.Name = "Label9"
     Me.Label9.Size = New System.Drawing.Size(28, 13)
     Me.Label9.TabIndex = 18
@@ -216,7 +228,7 @@ Partial Class frmVendedorData
     '
     'txtTel2
     '
-    Me.txtTel2.Location = New System.Drawing.Point(364, 225)
+    Me.txtTel2.Location = New System.Drawing.Point(693, 274)
     Me.txtTel2.Name = "txtTel2"
     Me.txtTel2.Size = New System.Drawing.Size(230, 20)
     Me.txtTel2.TabIndex = 21
@@ -224,7 +236,7 @@ Partial Class frmVendedorData
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.Location = New System.Drawing.Point(361, 209)
+    Me.Label10.Location = New System.Drawing.Point(690, 258)
     Me.Label10.Name = "Label10"
     Me.Label10.Size = New System.Drawing.Size(28, 13)
     Me.Label10.TabIndex = 20
@@ -232,7 +244,7 @@ Partial Class frmVendedorData
     '
     'txtEmail
     '
-    Me.txtEmail.Location = New System.Drawing.Point(108, 264)
+    Me.txtEmail.Location = New System.Drawing.Point(437, 313)
     Me.txtEmail.Name = "txtEmail"
     Me.txtEmail.Size = New System.Drawing.Size(230, 20)
     Me.txtEmail.TabIndex = 23
@@ -240,7 +252,7 @@ Partial Class frmVendedorData
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(105, 248)
+    Me.Label11.Location = New System.Drawing.Point(434, 297)
     Me.Label11.Name = "Label11"
     Me.Label11.Size = New System.Drawing.Size(32, 13)
     Me.Label11.TabIndex = 22
@@ -248,7 +260,7 @@ Partial Class frmVendedorData
     '
     'txtCategoria
     '
-    Me.txtCategoria.Location = New System.Drawing.Point(364, 264)
+    Me.txtCategoria.Location = New System.Drawing.Point(693, 313)
     Me.txtCategoria.Name = "txtCategoria"
     Me.txtCategoria.Size = New System.Drawing.Size(230, 20)
     Me.txtCategoria.TabIndex = 25
@@ -256,7 +268,7 @@ Partial Class frmVendedorData
     'Label12
     '
     Me.Label12.AutoSize = True
-    Me.Label12.Location = New System.Drawing.Point(361, 248)
+    Me.Label12.Location = New System.Drawing.Point(690, 297)
     Me.Label12.Name = "Label12"
     Me.Label12.Size = New System.Drawing.Size(52, 13)
     Me.Label12.TabIndex = 24
@@ -264,7 +276,7 @@ Partial Class frmVendedorData
     '
     'txtComentarios
     '
-    Me.txtComentarios.Location = New System.Drawing.Point(108, 303)
+    Me.txtComentarios.Location = New System.Drawing.Point(437, 352)
     Me.txtComentarios.Multiline = True
     Me.txtComentarios.Name = "txtComentarios"
     Me.txtComentarios.Size = New System.Drawing.Size(486, 41)
@@ -273,17 +285,30 @@ Partial Class frmVendedorData
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(105, 287)
+    Me.Label13.Location = New System.Drawing.Point(434, 336)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(65, 13)
     Me.Label13.TabIndex = 26
     Me.Label13.Text = "Comentarios"
     '
+    'Label14
+    '
+    Me.Label14.AutoSize = True
+    Me.Label14.BackColor = System.Drawing.Color.Transparent
+    Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label14.Location = New System.Drawing.Point(591, 9)
+    Me.Label14.Name = "Label14"
+    Me.Label14.Size = New System.Drawing.Size(169, 20)
+    Me.Label14.TabIndex = 28
+    Me.Label14.Text = "Datos del Vendedor"
+    '
     'frmVendedorData
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.Label14)
     Me.Controls.Add(Me.txtComentarios)
     Me.Controls.Add(Me.Label13)
     Me.Controls.Add(Me.txtCategoria)
@@ -347,5 +372,6 @@ Partial Class frmVendedorData
     Friend WithEvents txtCategoria As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtComentarios As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
+  Friend WithEvents Label13 As System.Windows.Forms.Label
+  Friend WithEvents Label14 As System.Windows.Forms.Label
 End Class

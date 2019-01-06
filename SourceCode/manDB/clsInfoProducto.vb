@@ -1,6 +1,8 @@
 ﻿Public Class clsInfoProducto
   Implements ICloneable
 
+
+
   Private m_IdProducto As Integer
   Private m_GuidCliente As Guid
   Private m_GuidVendedor As Guid
@@ -178,4 +180,6 @@
   End Function
 
 #End Region
+
+
 End Class

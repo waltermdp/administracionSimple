@@ -3,6 +3,12 @@ Imports libCommon.Comunes
 Public Class clsListaPrincipal
   Inherits clsList(Of clsInfoPrincipal)
 
+
+
+  Private m_str As String
+  Private m_NameSort As String
+  Private m_Order As String
+
   Public Sub New()
     Try
       Call Init(10)
@@ -11,7 +17,7 @@ Public Class clsListaPrincipal
     End Try
   End Sub
 
-  Private m_str As String
+
 
   Public Property Deben() As String
     Get
@@ -21,6 +27,11 @@ Public Class clsListaPrincipal
       m_str = value
     End Set
   End Property
+
+  Public Sub SetOrder(ByVal Name As String, Order As String)
+    m_NameSort = Name
+    m_Order = Order
+  End Sub
 
   Protected Overrides Function RefreshData_Private() As Result
     Try
@@ -40,7 +51,9 @@ Public Class clsListaPrincipal
         Dim objDatos As libDB.clsTabla
         objDatos = New libDB.clsTabla(strCommand)
         objDatos.Filter = m_Cfg_Filtro
+        objDatos.Order = m_Cfg_Orden
         Dim auxResult As Result = objDatos.GetData(objDB)
+        Dim auxList As New List(Of clsInfoPrincipal)
         If auxResult > 0 Then
           For Each fila As DataRow In objDatos.Table.Rows
             objInfoPrincipal = New clsInfoPrincipal
@@ -76,20 +89,30 @@ Public Class clsListaPrincipal
 
             objInfoPrincipal.ValorCuota = objPagos.Last.ValorCuota
             objInfoPrincipal.FechaUltimoPago = UltimoPago(objPagos)
-            If Deben = "1" Then
-              'si tiene todo pago
-              If objInfoPrincipal.CuotasPagas = objInfoPrincipal.CuotasTotales Then Continue For
-              'si pago el periodo actual
-              If DebePeriodoActual(objPagos) = False Then Continue For
+
+            If Deben = "0" Then
+              '
+            ElseIf Deben = "1" Then
+              'Mostrar los productos que deben cuotas
+              If objInfoPrincipal.CuotasPagas = objInfoPrincipal.CuotasTotales Then Continue For 'si tiene todo pago
+              If DebePeriodoActual(objPagos) = False Then Continue For 'si pago el periodo actual
             ElseIf Deben = "2" Then
+              'Mostrar solo los productos ya pagados
               If objInfoPrincipal.CuotasPagas <> objInfoPrincipal.CuotasTotales Then Continue For
             ElseIf Deben = "3" Then
-              'todos los que ya pagaron este mes
-              If DebePeriodoActual(objPagos) = True Then Continue For
+              'Mostrar los productos con la cuota pagada
+              If DebePeriodoActual(objPagos) = True Then Continue For 'todos los que ya pagaron este mes
             End If
 
-            m_Items.Add(objInfoPrincipal)
+            auxList.Add(objInfoPrincipal)
           Next
+
+          If m_NameSort <> Nothing AndAlso m_Order <> Nothing Then
+
+            auxList = auxList.OrderBy(Function(c) c.GetType.GetProperty(m_NameSort).GetValue(c)).ToList() 'c.FechaVenta 'c.GetType.GetProperty(m_NameSort)
+            If m_Order = "ASC" Then auxList.Reverse()
+          End If
+          If auxList.Count > 0 Then m_Items.AddRange(auxList.ToList)
 
         Else
           If auxResult < 0 Then
@@ -157,9 +180,12 @@ Public Class clsListaPrincipal
     End Try
   End Function
 
-  
+
 
   Private Function GetName(ByVal vGuidTipoCuenta As Guid) As String
     Return GetNameOfTipoPago(vGuidTipoCuenta)
   End Function
+
+
+
 End Class

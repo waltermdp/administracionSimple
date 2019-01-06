@@ -26,6 +26,7 @@ Partial Class frmDeben
     Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDeben))
     Me.btnPagos = New System.Windows.Forms.Button()
     Me.dateInicio = New System.Windows.Forms.DateTimePicker()
     Me.btnBack = New System.Windows.Forms.Button()
@@ -72,6 +73,8 @@ Partial Class frmDeben
     Me.gpxBuscar = New System.Windows.Forms.GroupBox()
     Me.rbtnNombreVendedor = New System.Windows.Forms.RadioButton()
     Me.rbtnClientName = New System.Windows.Forms.RadioButton()
+    Me.btnMinimize = New System.Windows.Forms.Button()
+    Me.Label5 = New System.Windows.Forms.Label()
     Me.GroupBox1.SuspendLayout()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -90,19 +93,25 @@ Partial Class frmDeben
     '
     'dateInicio
     '
-    Me.dateInicio.Location = New System.Drawing.Point(428, 86)
+    Me.dateInicio.Location = New System.Drawing.Point(851, 596)
     Me.dateInicio.Name = "dateInicio"
     Me.dateInicio.Size = New System.Drawing.Size(200, 20)
     Me.dateInicio.TabIndex = 2
     '
     'btnBack
     '
-    Me.btnBack.Location = New System.Drawing.Point(30, 639)
+    Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnBack.FlatAppearance.BorderSize = 0
+    Me.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red
+    Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnBack.ForeColor = System.Drawing.Color.White
+    Me.btnBack.Location = New System.Drawing.Point(24, 636)
     Me.btnBack.Name = "btnBack"
-    Me.btnBack.Size = New System.Drawing.Size(92, 52)
+    Me.btnBack.Size = New System.Drawing.Size(110, 61)
     Me.btnBack.TabIndex = 3
     Me.btnBack.Text = "Cerrar"
-    Me.btnBack.UseVisualStyleBackColor = True
+    Me.btnBack.UseVisualStyleBackColor = False
     '
     'ComboBox1
     '
@@ -123,14 +132,14 @@ Partial Class frmDeben
     '
     'dateFin
     '
-    Me.dateFin.Location = New System.Drawing.Point(428, 125)
+    Me.dateFin.Location = New System.Drawing.Point(851, 635)
     Me.dateFin.Name = "dateFin"
     Me.dateFin.Size = New System.Drawing.Size(200, 20)
     Me.dateFin.TabIndex = 28
     '
     'btnBuscar
     '
-    Me.btnBuscar.Location = New System.Drawing.Point(1149, 86)
+    Me.btnBuscar.Location = New System.Drawing.Point(1138, 452)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(85, 43)
     Me.btnBuscar.TabIndex = 29
@@ -157,7 +166,7 @@ Partial Class frmDeben
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(425, 70)
+    Me.Label3.Location = New System.Drawing.Point(848, 580)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(32, 13)
     Me.Label3.TabIndex = 32
@@ -166,7 +175,7 @@ Partial Class frmDeben
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(425, 109)
+    Me.Label4.Location = New System.Drawing.Point(848, 619)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(21, 13)
     Me.Label4.TabIndex = 33
@@ -200,7 +209,7 @@ Partial Class frmDeben
     Me.GroupBox1.Controls.Add(Me.rbtnPagados)
     Me.GroupBox1.Controls.Add(Me.rbtnVendidos)
     Me.GroupBox1.Controls.Add(Me.rbtnDeben)
-    Me.GroupBox1.Location = New System.Drawing.Point(173, 70)
+    Me.GroupBox1.Location = New System.Drawing.Point(186, 442)
     Me.GroupBox1.Name = "GroupBox1"
     Me.GroupBox1.Size = New System.Drawing.Size(219, 91)
     Me.GroupBox1.TabIndex = 36
@@ -237,7 +246,7 @@ Partial Class frmDeben
     Me.Panel1.Controls.Add(Me.Label1)
     Me.Panel1.Controls.Add(Me.ComboBox1)
     Me.Panel1.Controls.Add(Me.btnPagos)
-    Me.Panel1.Location = New System.Drawing.Point(411, 560)
+    Me.Panel1.Location = New System.Drawing.Point(297, 624)
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Size = New System.Drawing.Size(453, 93)
     Me.Panel1.TabIndex = 37
@@ -253,52 +262,79 @@ Partial Class frmDeben
     '
     'btnLstVendedores
     '
-    Me.btnLstVendedores.Location = New System.Drawing.Point(30, 482)
+    Me.btnLstVendedores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnLstVendedores.FlatAppearance.BorderSize = 0
+    Me.btnLstVendedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnLstVendedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnLstVendedores.ForeColor = System.Drawing.Color.White
+    Me.btnLstVendedores.Location = New System.Drawing.Point(24, 489)
     Me.btnLstVendedores.Name = "btnLstVendedores"
-    Me.btnLstVendedores.Size = New System.Drawing.Size(92, 52)
+    Me.btnLstVendedores.Size = New System.Drawing.Size(110, 61)
     Me.btnLstVendedores.TabIndex = 38
     Me.btnLstVendedores.Text = "Lista de Vendedores"
-    Me.btnLstVendedores.UseVisualStyleBackColor = True
+    Me.btnLstVendedores.UseVisualStyleBackColor = False
     '
     'btnListaClientes
     '
-    Me.btnListaClientes.Location = New System.Drawing.Point(30, 424)
+    Me.btnListaClientes.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnListaClientes.FlatAppearance.BorderSize = 0
+    Me.btnListaClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnListaClientes.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnListaClientes.ForeColor = System.Drawing.Color.White
+    Me.btnListaClientes.Location = New System.Drawing.Point(24, 416)
+    Me.btnListaClientes.Margin = New System.Windows.Forms.Padding(0)
     Me.btnListaClientes.Name = "btnListaClientes"
-    Me.btnListaClientes.Size = New System.Drawing.Size(92, 52)
+    Me.btnListaClientes.Size = New System.Drawing.Size(110, 61)
     Me.btnListaClientes.TabIndex = 39
     Me.btnListaClientes.Text = "Lista de Clientes"
-    Me.btnListaClientes.UseVisualStyleBackColor = True
+    Me.btnListaClientes.UseVisualStyleBackColor = False
     '
     'btnNuevo
     '
-    Me.btnNuevo.Location = New System.Drawing.Point(30, 175)
+    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnNuevo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(131, Byte), Integer), CType(CType(215, Byte), Integer))
+    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNuevo.ForeColor = System.Drawing.Color.White
+    Me.btnNuevo.Location = New System.Drawing.Point(24, 51)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(92, 52)
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
     Me.btnNuevo.TabIndex = 40
     Me.btnNuevo.Text = "Venta Nueva"
-    Me.btnNuevo.UseVisualStyleBackColor = True
+    Me.btnNuevo.UseVisualStyleBackColor = False
     '
     'btnEditarVenta
     '
-    Me.btnEditarVenta.Location = New System.Drawing.Point(30, 233)
+    Me.btnEditarVenta.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnEditarVenta.FlatAppearance.BorderSize = 0
+    Me.btnEditarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnEditarVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEditarVenta.ForeColor = System.Drawing.Color.White
+    Me.btnEditarVenta.Location = New System.Drawing.Point(24, 125)
     Me.btnEditarVenta.Name = "btnEditarVenta"
-    Me.btnEditarVenta.Size = New System.Drawing.Size(92, 52)
+    Me.btnEditarVenta.Size = New System.Drawing.Size(110, 61)
     Me.btnEditarVenta.TabIndex = 41
     Me.btnEditarVenta.Text = "Modificar Venta"
-    Me.btnEditarVenta.UseVisualStyleBackColor = True
+    Me.btnEditarVenta.UseVisualStyleBackColor = False
     '
     'btnArticulos
     '
-    Me.btnArticulos.Location = New System.Drawing.Point(30, 366)
+    Me.btnArticulos.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnArticulos.FlatAppearance.BorderSize = 0
+    Me.btnArticulos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnArticulos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnArticulos.ForeColor = System.Drawing.Color.White
+    Me.btnArticulos.Location = New System.Drawing.Point(24, 343)
+    Me.btnArticulos.Margin = New System.Windows.Forms.Padding(0)
     Me.btnArticulos.Name = "btnArticulos"
-    Me.btnArticulos.Size = New System.Drawing.Size(92, 52)
+    Me.btnArticulos.Size = New System.Drawing.Size(110, 61)
     Me.btnArticulos.TabIndex = 42
     Me.btnArticulos.Text = "Lista de Articulos"
-    Me.btnArticulos.UseVisualStyleBackColor = True
+    Me.btnArticulos.UseVisualStyleBackColor = False
     '
     'btnUpPago
     '
-    Me.btnUpPago.Location = New System.Drawing.Point(1149, 560)
+    Me.btnUpPago.Location = New System.Drawing.Point(1165, 636)
     Me.btnUpPago.Name = "btnUpPago"
     Me.btnUpPago.Size = New System.Drawing.Size(90, 23)
     Me.btnUpPago.TabIndex = 33
@@ -346,7 +382,7 @@ Partial Class frmDeben
     Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData.EnableHeadersVisualStyles = False
     Me.dgvData.GridColor = System.Drawing.Color.White
-    Me.dgvData.Location = New System.Drawing.Point(164, 175)
+    Me.dgvData.Location = New System.Drawing.Point(186, 65)
     Me.dgvData.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvData.MultiSelect = False
     Me.dgvData.Name = "dgvData"
@@ -362,7 +398,7 @@ Partial Class frmDeben
     Me.dgvData.RowHeadersVisible = False
     Me.dgvData.RowTemplate.Height = 24
     Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData.Size = New System.Drawing.Size(1095, 359)
+    Me.dgvData.Size = New System.Drawing.Size(1069, 359)
     Me.dgvData.TabIndex = 44
     Me.dgvData.TabStop = False
     '
@@ -464,21 +500,29 @@ Partial Class frmDeben
     '
     'btnLiquidVendedores
     '
-    Me.btnLiquidVendedores.Location = New System.Drawing.Point(30, 291)
+    Me.btnLiquidVendedores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnLiquidVendedores.FlatAppearance.BorderSize = 0
+    Me.btnLiquidVendedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnLiquidVendedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnLiquidVendedores.ForeColor = System.Drawing.Color.White
+    Me.btnLiquidVendedores.Location = New System.Drawing.Point(24, 201)
     Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
-    Me.btnLiquidVendedores.Size = New System.Drawing.Size(92, 52)
+    Me.btnLiquidVendedores.Size = New System.Drawing.Size(110, 61)
     Me.btnLiquidVendedores.TabIndex = 45
     Me.btnLiquidVendedores.Text = "Liquidacion Vendedores"
-    Me.btnLiquidVendedores.UseVisualStyleBackColor = True
+    Me.btnLiquidVendedores.UseVisualStyleBackColor = False
     '
     'btnConfiguracion
     '
-    Me.btnConfiguracion.Location = New System.Drawing.Point(164, 549)
+    Me.btnConfiguracion.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.btnConfiguracion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnConfiguracion.Location = New System.Drawing.Point(157, 24)
     Me.btnConfiguracion.Name = "btnConfiguracion"
-    Me.btnConfiguracion.Size = New System.Drawing.Size(92, 52)
+    Me.btnConfiguracion.Size = New System.Drawing.Size(92, 25)
     Me.btnConfiguracion.TabIndex = 46
     Me.btnConfiguracion.Text = "Configuracion"
-    Me.btnConfiguracion.UseVisualStyleBackColor = True
+    Me.btnConfiguracion.UseVisualStyleBackColor = False
     '
     'txtBusqueda
     '
@@ -492,9 +536,9 @@ Partial Class frmDeben
     Me.gpxBuscar.Controls.Add(Me.rbtnNombreVendedor)
     Me.gpxBuscar.Controls.Add(Me.rbtnClientName)
     Me.gpxBuscar.Controls.Add(Me.txtBusqueda)
-    Me.gpxBuscar.Location = New System.Drawing.Point(788, 66)
+    Me.gpxBuscar.Location = New System.Drawing.Point(667, 459)
     Me.gpxBuscar.Name = "gpxBuscar"
-    Me.gpxBuscar.Size = New System.Drawing.Size(290, 100)
+    Me.gpxBuscar.Size = New System.Drawing.Size(388, 103)
     Me.gpxBuscar.TabIndex = 48
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Busqueda"
@@ -521,32 +565,62 @@ Partial Class frmDeben
     Me.rbtnClientName.Text = "Nombre Cliente"
     Me.rbtnClientName.UseVisualStyleBackColor = True
     '
+    'btnMinimize
+    '
+    Me.btnMinimize.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.btnMinimize.FlatAppearance.BorderSize = 0
+    Me.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMinimize.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMinimize.Location = New System.Drawing.Point(1246, 3)
+    Me.btnMinimize.Name = "btnMinimize"
+    Me.btnMinimize.Size = New System.Drawing.Size(31, 26)
+    Me.btnMinimize.TabIndex = 49
+    Me.btnMinimize.Text = "_"
+    Me.btnMinimize.UseVisualStyleBackColor = False
+    '
+    'Label5
+    '
+    Me.Label5.AutoSize = True
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.Location = New System.Drawing.Point(616, 3)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(217, 20)
+    Me.Label5.TabIndex = 50
+    Me.Label5.Text = "PRODUCTOS VENDIDOS"
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.White
+    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.ControlBox = False
+    Me.Controls.Add(Me.Label5)
+    Me.Controls.Add(Me.btnLstVendedores)
+    Me.Controls.Add(Me.btnListaClientes)
+    Me.Controls.Add(Me.Label3)
+    Me.Controls.Add(Me.dateInicio)
+    Me.Controls.Add(Me.btnMinimize)
+    Me.Controls.Add(Me.dateFin)
+    Me.Controls.Add(Me.btnArticulos)
+    Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.gpxBuscar)
+    Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.btnConfiguracion)
     Me.Controls.Add(Me.btnLiquidVendedores)
     Me.Controls.Add(Me.dgvData)
     Me.Controls.Add(Me.btnDownPago)
     Me.Controls.Add(Me.btnUpPago)
-    Me.Controls.Add(Me.btnArticulos)
     Me.Controls.Add(Me.btnEditarVenta)
-    Me.Controls.Add(Me.btnNuevo)
-    Me.Controls.Add(Me.btnListaClientes)
-    Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.GroupBox1)
-    Me.Controls.Add(Me.Label4)
-    Me.Controls.Add(Me.Label3)
     Me.Controls.Add(Me.btnBuscar)
-    Me.Controls.Add(Me.dateFin)
     Me.Controls.Add(Me.btnBack)
-    Me.Controls.Add(Me.dateInicio)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+    Me.MaximizeBox = False
+    Me.MinimizeBox = False
     Me.Name = "frmDeben"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmDeben"
@@ -610,4 +684,6 @@ Partial Class frmDeben
   Friend WithEvents gpxBuscar As System.Windows.Forms.GroupBox
   Friend WithEvents rbtnNombreVendedor As System.Windows.Forms.RadioButton
   Friend WithEvents rbtnClientName As System.Windows.Forms.RadioButton
+  Friend WithEvents btnMinimize As System.Windows.Forms.Button
+  Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

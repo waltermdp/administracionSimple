@@ -686,11 +686,29 @@ Public Class frmVenta
     End Try
   End Sub
 
-  Private Sub ListView1_LostFocus(sender As Object, e As EventArgs) Handles ListView1.LostFocus
+  Private Sub ListView1_GotFocus(sender As Object, e As EventArgs) Handles ListView1.GotFocus
     Try
-      ListView1.Refresh()
+      If ListView1.SelectedItems.Count > 0 Then
+        ListView1.SelectedItems.Item(0).BackColor = Color.White
+        ListView1.SelectedItems.Item(0).ForeColor = Color.Black
+      End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub ListView1_LostFocus(sender As Object, e As EventArgs) Handles ListView1.LostFocus
+    Try
+
+      If ListView1.SelectedItems.Count > 0 Then
+        ListView1.SelectedItems.Item(0).BackColor = SystemColors.Highlight
+        ListView1.SelectedItems.Item(0).ForeColor = Color.White
+      End If
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+ 
 End Class

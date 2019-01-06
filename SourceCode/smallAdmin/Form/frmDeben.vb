@@ -7,6 +7,7 @@ Public Class frmDeben
   Private m_CurrentProducto As clsInfoPrincipal = Nothing
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
 
+
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     Try
       If MsgBox("Desea salir del programa?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
@@ -17,6 +18,7 @@ Public Class frmDeben
       Print_msg(ex.Message)
     End Try
   End Sub
+
 
   Private Sub frmDeben_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
@@ -30,6 +32,7 @@ Public Class frmDeben
       dateInicio.Value = New Date(Date.Today.Year, Today.Month, 1)
       dateFin.Value = New Date(Date.Today.Year, Today.Month, Date.DaysInMonth(Today.Year, Today.Month))
       rbtnVendidos.Checked = True
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -49,14 +52,14 @@ Public Class frmDeben
 
       m_objPrincipal = New clsListaPrincipal()
       Call Filtro("")
-
+      m_objPrincipal.SetOrder(m_ColumnName, m_Order)
       bsInfoPrincipal.DataSource = m_objPrincipal.Binding
       Call ProductList_RefreshData()
 
 
 
       bsInfoPrincipal.ResetBindings(False)
-     
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -91,6 +94,50 @@ Public Class frmDeben
 
     Catch ex As Exception
       Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private m_ColumnName As String = String.Empty
+  Private m_Order As String = String.Empty
+
+  Private Sub dgvData_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData.ColumnHeaderMouseClick
+    Try
+      Dim m_CurrentSortColumn As DataGridViewColumn = dgvData.Columns(e.ColumnIndex)
+      m_ColumnName = m_CurrentSortColumn.DataPropertyName
+
+
+      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+        m_Order = "ASC"
+      ElseIf m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Ascending Then
+        m_Order = "DESC"
+      Else
+        m_Order = "ASC"
+      End If
+      m_objPrincipal.SetOrder(m_ColumnName, m_Order)
+      'dgvData.Sort(m_CurrentSortColumn, System.ComponentModel.ListSortDirection.Ascending)
+      'Set the sortColumn and sortDirection variables.
+      'If (m_CurrentSortColumnName = columnName) Then
+      '  m_CurrentSortDirection = CStr(IIf(m_CurrentSortDirection = "ASC", "DESC", "ASC"))
+      'Else
+      '  m_CurrentSortDirection = "ASC"
+      '  m_CurrentSortColumnName = columnName
+      'End If
+
+      'Perform the sort
+      'm_objPrincipal.Cfg_Orden = "ORDER BY " & columnName & " " & direccion
+
+      Call MostrarDeben()
+      m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(IIf(m_Order = "ASC", SortOrder.Ascending, SortOrder.Descending), Windows.Forms.SortOrder)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub dgvData_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgvData.DataError
+    Try
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
     End Try
   End Sub
 
@@ -303,6 +350,14 @@ Public Class frmDeben
       Using objform As New frmConfig
         objform.ShowDialog(Me)
       End Using
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnMinimize_MouseClick(sender As Object, e As MouseEventArgs) Handles btnMinimize.MouseClick
+    Try
+      Me.WindowState = FormWindowState.Minimized
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
