@@ -17,6 +17,9 @@
   Private m_listPagos As New List(Of clsInfoPagos)
   Private m_Cuenta As clsInfoCuenta
   Private m_listArticulos As New List(Of clsInfoArticuloVendido)
+  Private m_Adelanto As Decimal
+  Private m_ValorCuotaFija As Decimal
+
 
   Public Property ListaPagos As List(Of clsInfoPagos)
     Get
@@ -135,6 +138,24 @@
     End Set
   End Property
 
+  Public Property Adelanto As Decimal
+    Get
+      Return m_Adelanto
+    End Get
+    Set(value As Decimal)
+      m_Adelanto = value
+    End Set
+  End Property
+
+  Public Property ValorCuotaFija As Decimal
+    Get
+      Return m_ValorCuotaFija
+    End Get
+    Set(value As Decimal)
+      m_ValorCuotaFija = value
+    End Set
+  End Property
+
   Public Property ListaArticulos As List(Of clsInfoArticuloVendido)
     Get
       Return m_listArticulos
@@ -156,6 +177,8 @@
     FechaPrimerPago = Date.Now
     FechaVenta = Date.Now
     GuidCuenta = Nothing
+    Adelanto = 0
+    ValorCuotaFija = 0
     m_listPagos.Clear()
     Cuenta = New clsInfoCuenta
     m_listArticulos.Clear()

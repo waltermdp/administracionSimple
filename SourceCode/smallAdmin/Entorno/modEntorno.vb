@@ -10,6 +10,7 @@ Module Entorno
 
   Public g_TipoPago As New List(Of manDB.clsTipoPago)
   Public g_Cuotas As New List(Of clsCuota)
+  Public g_Today As Date 'TODO: crear fecha para saber si se cambia la fecha de la pc con respecto al ultimo uso
 
   Public Function init() As Result
     Try

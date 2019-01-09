@@ -176,7 +176,7 @@ Public Class clsProducto
         End Try
 
         Try
-          vInfoProducto.GuidCliente = CType(IIf(IsDBNull(.Item("Guidcliente")), Nothing, .Item("Guidcliente")), Guid)
+          vInfoProducto.GuidCliente = CType(IIf(IsDBNull(.Item("GuidCliente")), Nothing, .Item("GuidCliente")), Guid)
         Catch ex As Exception
           vInfoProducto.GuidCliente = Nothing
           Call Print_msg(ex.Message)
@@ -243,6 +243,20 @@ Public Class clsProducto
           vInfoProducto.GuidCuenta = CType(IIf(IsDBNull(.Item("GuidCuenta")), Nothing, .Item("GuidCuenta")), Guid)
         Catch ex As Exception
           vInfoProducto.GuidCuenta = Nothing
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoProducto.Adelanto = CInt(IIf(IsDBNull(.Item("Adelanto")), -1, .Item("Adelanto")))
+        Catch ex As Exception
+          vInfoProducto.Adelanto = -1
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoProducto.ValorCuotaFija = CInt(IIf(IsDBNull(.Item("ValorCuotaFija")), -1, .Item("ValorCuotaFija")))
+        Catch ex As Exception
+          vInfoProducto.ValorCuotaFija = -1
           Call Print_msg(ex.Message)
         End Try
 
@@ -405,7 +419,9 @@ Public Class clsProducto
             strSQL.Append("[CuotasDebe],")
             strSQL.Append("[FechaVenta],")
             strSQL.Append("[FechaPrimerPago],")
-            strSQL.Append("[GuidCuenta]")
+            strSQL.Append("[GuidCuenta],")
+            strSQL.Append("[Adelanto],")
+            strSQL.Append("[ValorCuotaFija]")
 
             strSQL.Append(") VALUES (")
 
@@ -418,8 +434,9 @@ Public Class clsProducto
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.CuotasDebe) & """,")
             strSQL.Append("""" & .FechaVenta & """,")
             strSQL.Append("""" & .FechaPrimerPago & """,")
-            strSQL.Append("""{" & .GuidCuenta.ToString & "}""")
-
+            strSQL.Append("""{" & .GuidCuenta.ToString & "}"",")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Adelanto) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.ValorCuotaFija) & """")
             strSQL.Append(")")
 
             objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)
@@ -446,7 +463,9 @@ Public Class clsProducto
             strSQL.Append("[CuotasDebe]=""" & libDB.clsAcceso.Field_Correcting(.CuotasDebe) & """,")
             strSQL.Append("[FechaVenta]=""" & .FechaVenta & """,")
             strSQL.Append("[FechaPrimerPago]=""" & .FechaPrimerPago & """,")
-            strSQL.Append("[GuidCuenta]=""{" & .GuidCuenta.ToString & "}""")
+            strSQL.Append("[GuidCuenta]=""{" & .GuidCuenta.ToString & "}"",")
+            strSQL.Append("[Adelanto]=""" & libDB.clsAcceso.Field_Correcting(.Adelanto) & """,")
+            strSQL.Append("[ValorCuotaFija]=""" & libDB.clsAcceso.Field_Correcting(.ValorCuotaFija) & """")
 
             strSQL.Append(" WHERE [IdProducto]=" & .IdProducto)
 

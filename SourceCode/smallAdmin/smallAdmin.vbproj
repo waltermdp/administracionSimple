@@ -101,12 +101,14 @@
     <Compile Include="AccesoADatos\clsPrincipal.vb" />
     <Compile Include="AccesoADatos\clsProducto.vb" />
     <Compile Include="AccesoADatos\clsRelArtProd.vb" />
+    <Compile Include="AccesoADatos\clsStock.vb" />
     <Compile Include="AccesoADatos\clsVendedor.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaCuentas.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaPrincipal.vb" />
     <Compile Include="AccesoADatos\Listas\clsListArticulos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListPagos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListRelArtProd.vb" />
+    <Compile Include="AccesoADatos\Listas\clsListStock.vb" />
     <Compile Include="AccesoADatos\Listas\clsListVendedores.vb" />
     <Compile Include="AccesoADatos\Listas\clsListDatabase.vb" />
     <Compile Include="AccesoADatos\clsPersona.vb" />

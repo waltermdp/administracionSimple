@@ -5,13 +5,10 @@ Public Class clsPago
 
   Public Shared Function Load(ByRef rlistPagos As List(Of clsInfoPagos), ByVal vGuidProducto As Guid) As Result
     Try
-
       Dim objDB As libDB.clsAcceso = Nothing
       Dim objResult As Result = Result.OK
 
       Try
-       
-
         objDB = New libDB.clsAcceso
 
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)

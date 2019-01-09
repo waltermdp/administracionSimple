@@ -41,13 +41,17 @@ Partial Class frmArticulos
     Me.btnCancelar = New System.Windows.Forms.Button()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.dgvListArticulos = New System.Windows.Forms.DataGridView()
-    Me.gbProducto = New System.Windows.Forms.GroupBox()
-    Me.Label4 = New System.Windows.Forms.Label()
     Me.IdArticuloDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidArticuloDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DescripcionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.gbProducto = New System.Windows.Forms.GroupBox()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+    Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+    Me.TextBox1 = New System.Windows.Forms.TextBox()
+    Me.Label5 = New System.Windows.Forms.Label()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.dgvListArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gbProducto.SuspendLayout()
@@ -245,37 +249,9 @@ Partial Class frmArticulos
     Me.dgvListArticulos.RowTemplate.Height = 24
     Me.dgvListArticulos.ScrollBars = System.Windows.Forms.ScrollBars.None
     Me.dgvListArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvListArticulos.Size = New System.Drawing.Size(1038, 432)
+    Me.dgvListArticulos.Size = New System.Drawing.Size(497, 369)
     Me.dgvListArticulos.TabIndex = 26
     Me.dgvListArticulos.TabStop = False
-    '
-    'gbProducto
-    '
-    Me.gbProducto.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.gbProducto.Controls.Add(Me.Label1)
-    Me.gbProducto.Controls.Add(Me.txtNombre)
-    Me.gbProducto.Controls.Add(Me.Label2)
-    Me.gbProducto.Controls.Add(Me.Label3)
-    Me.gbProducto.Controls.Add(Me.txtCodigo)
-    Me.gbProducto.Controls.Add(Me.txtDescripcion)
-    Me.gbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.gbProducto.Location = New System.Drawing.Point(200, 62)
-    Me.gbProducto.Name = "gbProducto"
-    Me.gbProducto.Size = New System.Drawing.Size(1038, 125)
-    Me.gbProducto.TabIndex = 27
-    Me.gbProducto.TabStop = False
-    Me.gbProducto.Text = "Informacion del Articulo"
-    '
-    'Label4
-    '
-    Me.Label4.AutoSize = True
-    Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label4.Location = New System.Drawing.Point(550, 9)
-    Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(195, 20)
-    Me.Label4.TabIndex = 28
-    Me.Label4.Text = "LISTA DE ARTICULOS"
     '
     'IdArticuloDataGridViewTextBoxColumn
     '
@@ -320,12 +296,82 @@ Partial Class frmArticulos
     Me.DescripcionDataGridViewTextBoxColumn.ReadOnly = True
     Me.DescripcionDataGridViewTextBoxColumn.Width = 400
     '
+    'gbProducto
+    '
+    Me.gbProducto.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.gbProducto.Controls.Add(Me.Label1)
+    Me.gbProducto.Controls.Add(Me.txtNombre)
+    Me.gbProducto.Controls.Add(Me.Label2)
+    Me.gbProducto.Controls.Add(Me.Label3)
+    Me.gbProducto.Controls.Add(Me.txtCodigo)
+    Me.gbProducto.Controls.Add(Me.txtDescripcion)
+    Me.gbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.gbProducto.Location = New System.Drawing.Point(200, 62)
+    Me.gbProducto.Name = "gbProducto"
+    Me.gbProducto.Size = New System.Drawing.Size(1038, 125)
+    Me.gbProducto.TabIndex = 27
+    Me.gbProducto.TabStop = False
+    Me.gbProducto.Text = "Informacion del Articulo"
+    '
+    'Label4
+    '
+    Me.Label4.AutoSize = True
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
+    Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label4.Location = New System.Drawing.Point(550, 9)
+    Me.Label4.Name = "Label4"
+    Me.Label4.Size = New System.Drawing.Size(195, 20)
+    Me.Label4.TabIndex = 28
+    Me.Label4.Text = "LISTA DE ARTICULOS"
+    '
+    'RadioButton1
+    '
+    Me.RadioButton1.AutoSize = True
+    Me.RadioButton1.Location = New System.Drawing.Point(733, 213)
+    Me.RadioButton1.Name = "RadioButton1"
+    Me.RadioButton1.Size = New System.Drawing.Size(90, 17)
+    Me.RadioButton1.TabIndex = 29
+    Me.RadioButton1.TabStop = True
+    Me.RadioButton1.Text = "RadioButton1"
+    Me.RadioButton1.UseVisualStyleBackColor = True
+    '
+    'RadioButton2
+    '
+    Me.RadioButton2.AutoSize = True
+    Me.RadioButton2.Location = New System.Drawing.Point(733, 246)
+    Me.RadioButton2.Name = "RadioButton2"
+    Me.RadioButton2.Size = New System.Drawing.Size(90, 17)
+    Me.RadioButton2.TabIndex = 30
+    Me.RadioButton2.TabStop = True
+    Me.RadioButton2.Text = "RadioButton2"
+    Me.RadioButton2.UseVisualStyleBackColor = True
+    '
+    'TextBox1
+    '
+    Me.TextBox1.Location = New System.Drawing.Point(885, 245)
+    Me.TextBox1.Name = "TextBox1"
+    Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+    Me.TextBox1.TabIndex = 31
+    '
+    'Label5
+    '
+    Me.Label5.AutoSize = True
+    Me.Label5.Location = New System.Drawing.Point(890, 214)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(39, 13)
+    Me.Label5.TabIndex = 32
+    Me.Label5.Text = "Label5"
+    '
     'frmArticulos
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.Label5)
+    Me.Controls.Add(Me.TextBox1)
+    Me.Controls.Add(Me.RadioButton2)
+    Me.Controls.Add(Me.RadioButton1)
     Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.gbProducto)
     Me.Controls.Add(Me.dgvListArticulos)
@@ -368,4 +414,8 @@ Partial Class frmArticulos
   Friend WithEvents CodigoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DescripcionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+  Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+  Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+  Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

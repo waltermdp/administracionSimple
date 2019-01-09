@@ -74,12 +74,21 @@ Public Class frmDeben
       ElseIf rbtnDeben.Checked Then
         m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "1"
-      ElseIf rbtnPagados.Checked Then
+      ElseIf rbtnCancelados.Checked Then
         m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "2"
       ElseIf rbtnCuotaPagaron.Checked Then
         m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "3"
+      ElseIf rbtnClientName.Checked Then
+        'Mostrar los productos vendidos a este cliente
+        'strSQL = "SELECT * FROM [Articulos] INNER JOIN [RelArtProd] ON Articulos.GuidArticulo = RelArtProd.GuidArticulo WHERE [RelArtProd.GuidProducto]={" & vGuidProducto.ToString & "}"
+        m_objPrincipal.Cfg_Filtro = "where GuidCliente in (select GuidCliente from Clientes where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR ID Like '%" & txtBusqueda.Text.Trim & "%')"
+        m_objPrincipal.Deben = "0"
+      ElseIf rbtnNombreVendedor.Checked Then
+        'Mostrar los productos vendidos por este vendedor
+        m_objPrincipal.Cfg_Filtro = "where GuidVendedor in (select GuidVendedor from Vendedores where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR NumVendedor Like '%" & txtBusqueda.Text.Trim & "%' OR Grupo Like '%" & txtBusqueda.Text.Trim & "%')"
+
       End If
 
       Return Result.OK
@@ -173,21 +182,21 @@ Public Class frmDeben
   End Sub
 
 
-  Private Sub btnPagos_Click(sender As Object, e As EventArgs) Handles btnPagos.Click
-    Try
-      If cmbTipoPago.SelectedIndex < 0 Then
-        MsgBox("Debe Seleccionar un tipo de pago")
-        Exit Sub
-      End If
-      Dim tipoPago As clsTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago)
-      Using objForm As New frmPreviewAplicarPago(tipoPago)
-        objForm.ShowDialog()
-        Call ProductList_RefreshData()
-      End Using
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
+  'Private Sub btnPagos_Click(sender As Object, e As EventArgs)
+  '  Try
+  '    If cmbTipoPago.SelectedIndex < 0 Then
+  '      MsgBox("Debe Seleccionar un tipo de pago")
+  '      Exit Sub
+  '    End If
+  '    Dim tipoPago As clsTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago)
+  '    Using objForm As New frmPreviewAplicarPago(tipoPago)
+  '      objForm.ShowDialog()
+  '      Call ProductList_RefreshData()
+  '    End Using
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub btnLstVendedores_Click(sender As Object, e As EventArgs) Handles btnLstVendedores.Click
     Try
@@ -362,4 +371,6 @@ Public Class frmDeben
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+
 End Class

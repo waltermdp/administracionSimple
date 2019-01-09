@@ -27,24 +27,16 @@ Partial Class frmDeben
     Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDeben))
-    Me.btnPagos = New System.Windows.Forms.Button()
     Me.dateInicio = New System.Windows.Forms.DateTimePicker()
     Me.btnBack = New System.Windows.Forms.Button()
-    Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-    Me.Label1 = New System.Windows.Forms.Label()
     Me.dateFin = New System.Windows.Forms.DateTimePicker()
     Me.btnBuscar = New System.Windows.Forms.Button()
-    Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
-    Me.Label2 = New System.Windows.Forms.Label()
     Me.Label3 = New System.Windows.Forms.Label()
     Me.Label4 = New System.Windows.Forms.Label()
     Me.rbtnVendidos = New System.Windows.Forms.RadioButton()
     Me.rbtnDeben = New System.Windows.Forms.RadioButton()
-    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.rbtnCuotaPagaron = New System.Windows.Forms.RadioButton()
-    Me.rbtnPagados = New System.Windows.Forms.RadioButton()
-    Me.Panel1 = New System.Windows.Forms.Panel()
-    Me.Button1 = New System.Windows.Forms.Button()
+    Me.rbtnCancelados = New System.Windows.Forms.RadioButton()
     Me.btnLstVendedores = New System.Windows.Forms.Button()
     Me.btnListaClientes = New System.Windows.Forms.Button()
     Me.btnNuevo = New System.Windows.Forms.Button()
@@ -75,25 +67,14 @@ Partial Class frmDeben
     Me.rbtnClientName = New System.Windows.Forms.RadioButton()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.Label5 = New System.Windows.Forms.Label()
-    Me.GroupBox1.SuspendLayout()
-    Me.Panel1.SuspendLayout()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.SuspendLayout()
     '
-    'btnPagos
-    '
-    Me.btnPagos.Location = New System.Drawing.Point(111, 44)
-    Me.btnPagos.Name = "btnPagos"
-    Me.btnPagos.Size = New System.Drawing.Size(95, 22)
-    Me.btnPagos.TabIndex = 1
-    Me.btnPagos.Text = "InsertarPagos"
-    Me.btnPagos.UseVisualStyleBackColor = True
-    '
     'dateInicio
     '
-    Me.dateInicio.Location = New System.Drawing.Point(851, 596)
+    Me.dateInicio.Location = New System.Drawing.Point(152, 182)
     Me.dateInicio.Name = "dateInicio"
     Me.dateInicio.Size = New System.Drawing.Size(200, 20)
     Me.dateInicio.TabIndex = 2
@@ -113,60 +94,26 @@ Partial Class frmDeben
     Me.btnBack.Text = "Cerrar"
     Me.btnBack.UseVisualStyleBackColor = False
     '
-    'ComboBox1
-    '
-    Me.ComboBox1.FormattingEnabled = True
-    Me.ComboBox1.Location = New System.Drawing.Point(97, 5)
-    Me.ComboBox1.Name = "ComboBox1"
-    Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-    Me.ComboBox1.TabIndex = 26
-    '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(14, 9)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(40, 13)
-    Me.Label1.TabIndex = 27
-    Me.Label1.Text = "Estado"
-    '
     'dateFin
     '
-    Me.dateFin.Location = New System.Drawing.Point(851, 635)
+    Me.dateFin.Location = New System.Drawing.Point(152, 221)
     Me.dateFin.Name = "dateFin"
     Me.dateFin.Size = New System.Drawing.Size(200, 20)
     Me.dateFin.TabIndex = 28
     '
     'btnBuscar
     '
-    Me.btnBuscar.Location = New System.Drawing.Point(1138, 452)
+    Me.btnBuscar.Location = New System.Drawing.Point(391, 107)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(85, 43)
     Me.btnBuscar.TabIndex = 29
     Me.btnBuscar.Text = "Buscar"
     Me.btnBuscar.UseVisualStyleBackColor = True
     '
-    'cmbTipoPago
-    '
-    Me.cmbTipoPago.FormattingEnabled = True
-    Me.cmbTipoPago.Location = New System.Drawing.Point(301, 5)
-    Me.cmbTipoPago.Name = "cmbTipoPago"
-    Me.cmbTipoPago.Size = New System.Drawing.Size(121, 21)
-    Me.cmbTipoPago.TabIndex = 30
-    '
-    'Label2
-    '
-    Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(242, 9)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(53, 13)
-    Me.Label2.TabIndex = 31
-    Me.Label2.Text = "TipoPago"
-    '
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(848, 580)
+    Me.Label3.Location = New System.Drawing.Point(149, 166)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(32, 13)
     Me.Label3.TabIndex = 32
@@ -175,7 +122,7 @@ Partial Class frmDeben
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(848, 619)
+    Me.Label4.Location = New System.Drawing.Point(149, 205)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(21, 13)
     Me.Label4.TabIndex = 33
@@ -184,7 +131,7 @@ Partial Class frmDeben
     'rbtnVendidos
     '
     Me.rbtnVendidos.AutoSize = True
-    Me.rbtnVendidos.Location = New System.Drawing.Point(6, 19)
+    Me.rbtnVendidos.Location = New System.Drawing.Point(32, 163)
     Me.rbtnVendidos.Name = "rbtnVendidos"
     Me.rbtnVendidos.Size = New System.Drawing.Size(69, 17)
     Me.rbtnVendidos.TabIndex = 34
@@ -195,7 +142,7 @@ Partial Class frmDeben
     'rbtnDeben
     '
     Me.rbtnDeben.AutoSize = True
-    Me.rbtnDeben.Location = New System.Drawing.Point(6, 42)
+    Me.rbtnDeben.Location = New System.Drawing.Point(6, 75)
     Me.rbtnDeben.Name = "rbtnDeben"
     Me.rbtnDeben.Size = New System.Drawing.Size(88, 17)
     Me.rbtnDeben.TabIndex = 35
@@ -203,23 +150,10 @@ Partial Class frmDeben
     Me.rbtnDeben.Text = "Cuota Deben"
     Me.rbtnDeben.UseVisualStyleBackColor = True
     '
-    'GroupBox1
-    '
-    Me.GroupBox1.Controls.Add(Me.rbtnCuotaPagaron)
-    Me.GroupBox1.Controls.Add(Me.rbtnPagados)
-    Me.GroupBox1.Controls.Add(Me.rbtnVendidos)
-    Me.GroupBox1.Controls.Add(Me.rbtnDeben)
-    Me.GroupBox1.Location = New System.Drawing.Point(186, 442)
-    Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(219, 91)
-    Me.GroupBox1.TabIndex = 36
-    Me.GroupBox1.TabStop = False
-    Me.GroupBox1.Text = "Estado"
-    '
     'rbtnCuotaPagaron
     '
     Me.rbtnCuotaPagaron.AutoSize = True
-    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(100, 42)
+    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(6, 98)
     Me.rbtnCuotaPagaron.Name = "rbtnCuotaPagaron"
     Me.rbtnCuotaPagaron.Size = New System.Drawing.Size(96, 17)
     Me.rbtnCuotaPagaron.TabIndex = 37
@@ -227,38 +161,16 @@ Partial Class frmDeben
     Me.rbtnCuotaPagaron.Text = "Cuota Pagaron"
     Me.rbtnCuotaPagaron.UseVisualStyleBackColor = True
     '
-    'rbtnPagados
+    'rbtnCancelados
     '
-    Me.rbtnPagados.AutoSize = True
-    Me.rbtnPagados.Location = New System.Drawing.Point(6, 65)
-    Me.rbtnPagados.Name = "rbtnPagados"
-    Me.rbtnPagados.Size = New System.Drawing.Size(67, 17)
-    Me.rbtnPagados.TabIndex = 36
-    Me.rbtnPagados.TabStop = True
-    Me.rbtnPagados.Text = "Pagados"
-    Me.rbtnPagados.UseVisualStyleBackColor = True
-    '
-    'Panel1
-    '
-    Me.Panel1.Controls.Add(Me.Button1)
-    Me.Panel1.Controls.Add(Me.Label2)
-    Me.Panel1.Controls.Add(Me.cmbTipoPago)
-    Me.Panel1.Controls.Add(Me.Label1)
-    Me.Panel1.Controls.Add(Me.ComboBox1)
-    Me.Panel1.Controls.Add(Me.btnPagos)
-    Me.Panel1.Location = New System.Drawing.Point(297, 624)
-    Me.Panel1.Name = "Panel1"
-    Me.Panel1.Size = New System.Drawing.Size(453, 93)
-    Me.Panel1.TabIndex = 37
-    '
-    'Button1
-    '
-    Me.Button1.Location = New System.Drawing.Point(245, 53)
-    Me.Button1.Name = "Button1"
-    Me.Button1.Size = New System.Drawing.Size(95, 23)
-    Me.Button1.TabIndex = 32
-    Me.Button1.Text = "ExportarPagos"
-    Me.Button1.UseVisualStyleBackColor = True
+    Me.rbtnCancelados.AutoSize = True
+    Me.rbtnCancelados.Location = New System.Drawing.Point(32, 186)
+    Me.rbtnCancelados.Name = "rbtnCancelados"
+    Me.rbtnCancelados.Size = New System.Drawing.Size(81, 17)
+    Me.rbtnCancelados.TabIndex = 36
+    Me.rbtnCancelados.TabStop = True
+    Me.rbtnCancelados.Text = "Cancelados"
+    Me.rbtnCancelados.UseVisualStyleBackColor = True
     '
     'btnLstVendedores
     '
@@ -334,7 +246,7 @@ Partial Class frmDeben
     '
     'btnUpPago
     '
-    Me.btnUpPago.Location = New System.Drawing.Point(1165, 636)
+    Me.btnUpPago.Location = New System.Drawing.Point(1165, 450)
     Me.btnUpPago.Name = "btnUpPago"
     Me.btnUpPago.Size = New System.Drawing.Size(90, 23)
     Me.btnUpPago.TabIndex = 33
@@ -343,7 +255,7 @@ Partial Class frmDeben
     '
     'btnDownPago
     '
-    Me.btnDownPago.Location = New System.Drawing.Point(1149, 598)
+    Me.btnDownPago.Location = New System.Drawing.Point(1165, 479)
     Me.btnDownPago.Name = "btnDownPago"
     Me.btnDownPago.Size = New System.Drawing.Size(90, 24)
     Me.btnDownPago.TabIndex = 43
@@ -526,19 +438,28 @@ Partial Class frmDeben
     '
     'txtBusqueda
     '
-    Me.txtBusqueda.Location = New System.Drawing.Point(6, 69)
+    Me.txtBusqueda.Location = New System.Drawing.Point(6, 47)
     Me.txtBusqueda.Name = "txtBusqueda"
     Me.txtBusqueda.Size = New System.Drawing.Size(278, 20)
     Me.txtBusqueda.TabIndex = 47
     '
     'gpxBuscar
     '
+    Me.gpxBuscar.Controls.Add(Me.rbtnCuotaPagaron)
     Me.gpxBuscar.Controls.Add(Me.rbtnNombreVendedor)
+    Me.gpxBuscar.Controls.Add(Me.rbtnCancelados)
+    Me.gpxBuscar.Controls.Add(Me.Label3)
+    Me.gpxBuscar.Controls.Add(Me.dateInicio)
     Me.gpxBuscar.Controls.Add(Me.rbtnClientName)
+    Me.gpxBuscar.Controls.Add(Me.rbtnVendidos)
+    Me.gpxBuscar.Controls.Add(Me.dateFin)
+    Me.gpxBuscar.Controls.Add(Me.rbtnDeben)
     Me.gpxBuscar.Controls.Add(Me.txtBusqueda)
-    Me.gpxBuscar.Location = New System.Drawing.Point(667, 459)
+    Me.gpxBuscar.Controls.Add(Me.Label4)
+    Me.gpxBuscar.Controls.Add(Me.btnBuscar)
+    Me.gpxBuscar.Location = New System.Drawing.Point(186, 437)
     Me.gpxBuscar.Name = "gpxBuscar"
-    Me.gpxBuscar.Size = New System.Drawing.Size(388, 103)
+    Me.gpxBuscar.Size = New System.Drawing.Size(502, 261)
     Me.gpxBuscar.TabIndex = 48
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Busqueda"
@@ -546,12 +467,12 @@ Partial Class frmDeben
     'rbtnNombreVendedor
     '
     Me.rbtnNombreVendedor.AutoSize = True
-    Me.rbtnNombreVendedor.Location = New System.Drawing.Point(6, 43)
+    Me.rbtnNombreVendedor.Location = New System.Drawing.Point(201, 20)
     Me.rbtnNombreVendedor.Name = "rbtnNombreVendedor"
-    Me.rbtnNombreVendedor.Size = New System.Drawing.Size(111, 17)
+    Me.rbtnNombreVendedor.Size = New System.Drawing.Size(71, 17)
     Me.rbtnNombreVendedor.TabIndex = 49
     Me.rbtnNombreVendedor.TabStop = True
-    Me.rbtnNombreVendedor.Text = "Nombre Vendedor"
+    Me.rbtnNombreVendedor.Text = "Vendedor"
     Me.rbtnNombreVendedor.UseVisualStyleBackColor = True
     '
     'rbtnClientName
@@ -559,10 +480,10 @@ Partial Class frmDeben
     Me.rbtnClientName.AutoSize = True
     Me.rbtnClientName.Location = New System.Drawing.Point(6, 20)
     Me.rbtnClientName.Name = "rbtnClientName"
-    Me.rbtnClientName.Size = New System.Drawing.Size(97, 17)
+    Me.rbtnClientName.Size = New System.Drawing.Size(57, 17)
     Me.rbtnClientName.TabIndex = 48
     Me.rbtnClientName.TabStop = True
-    Me.rbtnClientName.Text = "Nombre Cliente"
+    Me.rbtnClientName.Text = "Cliente"
     Me.rbtnClientName.UseVisualStyleBackColor = True
     '
     'btnMinimize
@@ -600,12 +521,8 @@ Partial Class frmDeben
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.btnListaClientes)
-    Me.Controls.Add(Me.Label3)
-    Me.Controls.Add(Me.dateInicio)
     Me.Controls.Add(Me.btnMinimize)
-    Me.Controls.Add(Me.dateFin)
     Me.Controls.Add(Me.btnArticulos)
-    Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.gpxBuscar)
     Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.btnConfiguracion)
@@ -614,9 +531,6 @@ Partial Class frmDeben
     Me.Controls.Add(Me.btnDownPago)
     Me.Controls.Add(Me.btnUpPago)
     Me.Controls.Add(Me.btnEditarVenta)
-    Me.Controls.Add(Me.Panel1)
-    Me.Controls.Add(Me.GroupBox1)
-    Me.Controls.Add(Me.btnBuscar)
     Me.Controls.Add(Me.btnBack)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.MaximizeBox = False
@@ -624,10 +538,6 @@ Partial Class frmDeben
     Me.Name = "frmDeben"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmDeben"
-    Me.GroupBox1.ResumeLayout(False)
-    Me.GroupBox1.PerformLayout()
-    Me.Panel1.ResumeLayout(False)
-    Me.Panel1.PerformLayout()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gpxBuscar.ResumeLayout(False)
@@ -636,24 +546,16 @@ Partial Class frmDeben
     Me.PerformLayout()
 
   End Sub
-  Friend WithEvents btnPagos As System.Windows.Forms.Button
   Friend WithEvents dateInicio As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnBack As System.Windows.Forms.Button
   Friend WithEvents TipoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-  Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents dateFin As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnBuscar As System.Windows.Forms.Button
-  Friend WithEvents cmbTipoPago As System.Windows.Forms.ComboBox
-  Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents Label3 As System.Windows.Forms.Label
   Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents rbtnVendidos As System.Windows.Forms.RadioButton
   Friend WithEvents rbtnDeben As System.Windows.Forms.RadioButton
-  Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-  Friend WithEvents Panel1 As System.Windows.Forms.Panel
-  Friend WithEvents Button1 As System.Windows.Forms.Button
   Friend WithEvents btnLstVendedores As System.Windows.Forms.Button
   Friend WithEvents btnListaClientes As System.Windows.Forms.Button
   Friend WithEvents btnNuevo As System.Windows.Forms.Button
@@ -664,7 +566,7 @@ Partial Class frmDeben
   Public WithEvents dgvData As System.Windows.Forms.DataGridView
   Friend WithEvents bsInfoPrincipal As System.Windows.Forms.BindingSource
   Friend WithEvents btnLiquidVendedores As System.Windows.Forms.Button
-  Friend WithEvents rbtnPagados As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnCancelados As System.Windows.Forms.RadioButton
   Friend WithEvents rbtnCuotaPagaron As System.Windows.Forms.RadioButton
   Friend WithEvents btnConfiguracion As System.Windows.Forms.Button
   Friend WithEvents FechaVentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn

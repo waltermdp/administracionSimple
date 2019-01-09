@@ -94,6 +94,7 @@
     <Compile Include="clsInfoPrincipal.vb" />
     <Compile Include="clsInfoProducto.vb" />
     <Compile Include="clsInfoRelArtProd.vb" />
+    <Compile Include="clsInfoStock.vb" />
     <Compile Include="clsInfoVendedor.vb" />
     <Compile Include="clsList.vb" />
     <Compile Include="clsTipoPago.vb" />

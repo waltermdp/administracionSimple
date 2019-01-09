@@ -76,6 +76,8 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
+    Me.Label14 = New System.Windows.Forms.Label()
+    Me.txtAdelanto = New System.Windows.Forms.TextBox()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
@@ -299,6 +301,7 @@ Partial Class frmVenta
     '
     'txtNombreCliente
     '
+    Me.txtNombreCliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
     Me.txtNombreCliente.Location = New System.Drawing.Point(424, 81)
     Me.txtNombreCliente.Name = "txtNombreCliente"
     Me.txtNombreCliente.ReadOnly = True
@@ -316,6 +319,7 @@ Partial Class frmVenta
     '
     'txtDNICliente
     '
+    Me.txtDNICliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
     Me.txtDNICliente.Location = New System.Drawing.Point(660, 81)
     Me.txtDNICliente.Name = "txtDNICliente"
     Me.txtDNICliente.ReadOnly = True
@@ -333,6 +337,7 @@ Partial Class frmVenta
     '
     'txtNombreVendedor
     '
+    Me.txtNombreVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
     Me.txtNombreVendedor.Location = New System.Drawing.Point(424, 169)
     Me.txtNombreVendedor.Name = "txtNombreVendedor"
     Me.txtNombreVendedor.ReadOnly = True
@@ -350,6 +355,7 @@ Partial Class frmVenta
     '
     'txtDNIVendedor
     '
+    Me.txtDNIVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
     Me.txtDNIVendedor.Location = New System.Drawing.Point(660, 169)
     Me.txtDNIVendedor.Name = "txtDNIVendedor"
     Me.txtDNIVendedor.ReadOnly = True
@@ -367,6 +373,8 @@ Partial Class frmVenta
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.txtAdelanto)
+    Me.gpVenta.Controls.Add(Me.Label14)
     Me.gpVenta.Controls.Add(Me.ListView1)
     Me.gpVenta.Controls.Add(Me.dtDiaVencimiento)
     Me.gpVenta.Controls.Add(Me.lblValorCuota)
@@ -532,6 +540,22 @@ Partial Class frmVenta
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
     '
+    'Label14
+    '
+    Me.Label14.AutoSize = True
+    Me.Label14.Location = New System.Drawing.Point(561, 208)
+    Me.Label14.Name = "Label14"
+    Me.Label14.Size = New System.Drawing.Size(49, 13)
+    Me.Label14.TabIndex = 34
+    Me.Label14.Text = "Adelanto"
+    '
+    'txtAdelanto
+    '
+    Me.txtAdelanto.Location = New System.Drawing.Point(560, 224)
+    Me.txtAdelanto.Name = "txtAdelanto"
+    Me.txtAdelanto.Size = New System.Drawing.Size(100, 20)
+    Me.txtAdelanto.TabIndex = 35
+    '
     'frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -621,4 +645,6 @@ Partial Class frmVenta
   Friend WithEvents cArticulos As System.Windows.Forms.ColumnHeader
   Friend WithEvents cCantidad As System.Windows.Forms.ColumnHeader
   Friend WithEvents cGuid As System.Windows.Forms.ColumnHeader
+  Friend WithEvents txtAdelanto As System.Windows.Forms.TextBox
+  Friend WithEvents Label14 As System.Windows.Forms.Label
 End Class

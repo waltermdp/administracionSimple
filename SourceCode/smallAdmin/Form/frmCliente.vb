@@ -4,6 +4,8 @@ Public Class frmCliente
 
   Private WithEvents m_objProductList As clsListProductos = Nothing
   Private m_Persona As ClsInfoPersona
+  Private m_PrimerEntrada As Boolean
+
 
   Public Sub New(ByVal vPersona As ClsInfoPersona)
     InitializeComponent()
@@ -11,8 +13,10 @@ Public Class frmCliente
       If vPersona Is Nothing Then
         m_Persona = New ClsInfoPersona
         m_Persona.GuidCliente = Guid.NewGuid
+        m_PrimerEntrada = True
       Else
         m_Persona = vPersona.Clone
+        m_PrimerEntrada = False
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -25,7 +29,6 @@ Public Class frmCliente
         txtNombre.Text = .Nombre
         txtApellido.Text = .Apellido
         txtID.Text = .DNI
-        dtFechaNac.Value = .FechaNac
         txtCalle1.Text = .Calle
         txtNumero1.Text = .NumCalle
         dtFechaIngreso.Value = .FechaIngreso
@@ -59,7 +62,6 @@ Public Class frmCliente
         If .Apellido = "" Then .Apellido = "--"
         .DNI = txtID.Text.Trim
         If .DNI = "" Then .DNI = "--"
-        .FechaNac = dtFechaNac.Value
         .Calle = txtCalle1.Text.Trim
         If .Calle = "" Then .Calle = "--"
         .NumCalle = txtNumero1.Text.Trim
@@ -166,4 +168,12 @@ Public Class frmCliente
   End Sub
 
 
+  Private Sub txtID_TextChanged(sender As Object, e As EventArgs) Handles txtID.TextChanged
+    Try
+      If m_PrimerEntrada = False Then Exit Sub
+      txtNumCliente.Text = txtID.Text
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class
