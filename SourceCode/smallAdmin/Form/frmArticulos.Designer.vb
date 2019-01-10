@@ -40,21 +40,27 @@ Partial Class frmArticulos
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnCancelar = New System.Windows.Forms.Button()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
-    Me.dgvListArticulos = New System.Windows.Forms.DataGridView()
-    Me.IdArticuloDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidArticuloDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.DescripcionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.gbProducto = New System.Windows.Forms.GroupBox()
     Me.Label4 = New System.Windows.Forms.Label()
-    Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-    Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+    Me.rbtnResponsables = New System.Windows.Forms.RadioButton()
+    Me.rbtnByStock = New System.Windows.Forms.RadioButton()
     Me.TextBox1 = New System.Windows.Forms.TextBox()
     Me.Label5 = New System.Windows.Forms.Label()
+    Me.dgvStock = New System.Windows.Forms.DataGridView()
+    Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DescripcionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnAddDeposito = New System.Windows.Forms.Button()
+    Me.btnRemDeposito = New System.Windows.Forms.Button()
+    Me.Button1 = New System.Windows.Forms.Button()
+    Me.cmbResponsables = New System.Windows.Forms.ComboBox()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.dgvListArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gbProducto.SuspendLayout()
+    CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtNombre
@@ -200,102 +206,6 @@ Partial Class frmArticulos
     '
     Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
     '
-    'dgvListArticulos
-    '
-    Me.dgvListArticulos.AllowUserToAddRows = False
-    Me.dgvListArticulos.AllowUserToDeleteRows = False
-    Me.dgvListArticulos.AllowUserToResizeRows = False
-    Me.dgvListArticulos.AutoGenerateColumns = False
-    Me.dgvListArticulos.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.dgvListArticulos.BorderStyle = System.Windows.Forms.BorderStyle.None
-    Me.dgvListArticulos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvListArticulos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-    Me.dgvListArticulos.ColumnHeadersHeight = 24
-    Me.dgvListArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvListArticulos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdArticuloDataGridViewTextBoxColumn, Me.GuidArticuloDataGridViewTextBoxColumn, Me.CodigoDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.DescripcionDataGridViewTextBoxColumn})
-    Me.dgvListArticulos.DataSource = Me.bsArticulos
-    DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-    Me.dgvListArticulos.DefaultCellStyle = DataGridViewCellStyle2
-    Me.dgvListArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvListArticulos.EnableHeadersVisualStyles = False
-    Me.dgvListArticulos.GridColor = System.Drawing.Color.White
-    Me.dgvListArticulos.Location = New System.Drawing.Point(200, 202)
-    Me.dgvListArticulos.Margin = New System.Windows.Forms.Padding(0)
-    Me.dgvListArticulos.MultiSelect = False
-    Me.dgvListArticulos.Name = "dgvListArticulos"
-    Me.dgvListArticulos.ReadOnly = True
-    DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-    DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-    DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-    DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-    DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvListArticulos.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
-    Me.dgvListArticulos.RowHeadersVisible = False
-    Me.dgvListArticulos.RowTemplate.Height = 24
-    Me.dgvListArticulos.ScrollBars = System.Windows.Forms.ScrollBars.None
-    Me.dgvListArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvListArticulos.Size = New System.Drawing.Size(497, 369)
-    Me.dgvListArticulos.TabIndex = 26
-    Me.dgvListArticulos.TabStop = False
-    '
-    'IdArticuloDataGridViewTextBoxColumn
-    '
-    Me.IdArticuloDataGridViewTextBoxColumn.DataPropertyName = "IdArticulo"
-    Me.IdArticuloDataGridViewTextBoxColumn.HeaderText = "IdArticulo"
-    Me.IdArticuloDataGridViewTextBoxColumn.Name = "IdArticuloDataGridViewTextBoxColumn"
-    Me.IdArticuloDataGridViewTextBoxColumn.ReadOnly = True
-    Me.IdArticuloDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidArticuloDataGridViewTextBoxColumn
-    '
-    Me.GuidArticuloDataGridViewTextBoxColumn.DataPropertyName = "GuidArticulo"
-    Me.GuidArticuloDataGridViewTextBoxColumn.HeaderText = "GuidArticulo"
-    Me.GuidArticuloDataGridViewTextBoxColumn.Name = "GuidArticuloDataGridViewTextBoxColumn"
-    Me.GuidArticuloDataGridViewTextBoxColumn.ReadOnly = True
-    Me.GuidArticuloDataGridViewTextBoxColumn.Visible = False
-    '
-    'CodigoDataGridViewTextBoxColumn
-    '
-    Me.CodigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo"
-    Me.CodigoDataGridViewTextBoxColumn.HeaderText = "Codigo"
-    Me.CodigoDataGridViewTextBoxColumn.Name = "CodigoDataGridViewTextBoxColumn"
-    Me.CodigoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'NombreDataGridViewTextBoxColumn
-    '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.FillWeight = 200.0!
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.MinimumWidth = 100
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
-    Me.NombreDataGridViewTextBoxColumn.Width = 200
-    '
-    'DescripcionDataGridViewTextBoxColumn
-    '
-    Me.DescripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion"
-    Me.DescripcionDataGridViewTextBoxColumn.FillWeight = 400.0!
-    Me.DescripcionDataGridViewTextBoxColumn.HeaderText = "Descripcion"
-    Me.DescripcionDataGridViewTextBoxColumn.MinimumWidth = 200
-    Me.DescripcionDataGridViewTextBoxColumn.Name = "DescripcionDataGridViewTextBoxColumn"
-    Me.DescripcionDataGridViewTextBoxColumn.ReadOnly = True
-    Me.DescripcionDataGridViewTextBoxColumn.Width = 400
-    '
     'gbProducto
     '
     Me.gbProducto.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
@@ -324,33 +234,33 @@ Partial Class frmArticulos
     Me.Label4.TabIndex = 28
     Me.Label4.Text = "LISTA DE ARTICULOS"
     '
-    'RadioButton1
+    'rbtnResponsables
     '
-    Me.RadioButton1.AutoSize = True
-    Me.RadioButton1.Location = New System.Drawing.Point(733, 213)
-    Me.RadioButton1.Name = "RadioButton1"
-    Me.RadioButton1.Size = New System.Drawing.Size(90, 17)
-    Me.RadioButton1.TabIndex = 29
-    Me.RadioButton1.TabStop = True
-    Me.RadioButton1.Text = "RadioButton1"
-    Me.RadioButton1.UseVisualStyleBackColor = True
+    Me.rbtnResponsables.AutoSize = True
+    Me.rbtnResponsables.Location = New System.Drawing.Point(269, 210)
+    Me.rbtnResponsables.Name = "rbtnResponsables"
+    Me.rbtnResponsables.Size = New System.Drawing.Size(92, 17)
+    Me.rbtnResponsables.TabIndex = 29
+    Me.rbtnResponsables.Text = "Responsables"
+    Me.rbtnResponsables.UseVisualStyleBackColor = True
     '
-    'RadioButton2
+    'rbtnByStock
     '
-    Me.RadioButton2.AutoSize = True
-    Me.RadioButton2.Location = New System.Drawing.Point(733, 246)
-    Me.RadioButton2.Name = "RadioButton2"
-    Me.RadioButton2.Size = New System.Drawing.Size(90, 17)
-    Me.RadioButton2.TabIndex = 30
-    Me.RadioButton2.TabStop = True
-    Me.RadioButton2.Text = "RadioButton2"
-    Me.RadioButton2.UseVisualStyleBackColor = True
+    Me.rbtnByStock.AutoSize = True
+    Me.rbtnByStock.Checked = True
+    Me.rbtnByStock.Location = New System.Drawing.Point(200, 210)
+    Me.rbtnByStock.Name = "rbtnByStock"
+    Me.rbtnByStock.Size = New System.Drawing.Size(51, 17)
+    Me.rbtnByStock.TabIndex = 30
+    Me.rbtnByStock.TabStop = True
+    Me.rbtnByStock.Text = "stock"
+    Me.rbtnByStock.UseVisualStyleBackColor = True
     '
     'TextBox1
     '
-    Me.TextBox1.Location = New System.Drawing.Point(885, 245)
+    Me.TextBox1.Location = New System.Drawing.Point(1051, 212)
     Me.TextBox1.Name = "TextBox1"
-    Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+    Me.TextBox1.Size = New System.Drawing.Size(187, 20)
     Me.TextBox1.TabIndex = 31
     '
     'Label5
@@ -362,19 +272,150 @@ Partial Class frmArticulos
     Me.Label5.TabIndex = 32
     Me.Label5.Text = "Label5"
     '
+    'dgvStock
+    '
+    Me.dgvStock.AllowUserToAddRows = False
+    Me.dgvStock.AllowUserToDeleteRows = False
+    Me.dgvStock.AllowUserToResizeRows = False
+    Me.dgvStock.AutoGenerateColumns = False
+    Me.dgvStock.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.dgvStock.BorderStyle = System.Windows.Forms.BorderStyle.None
+    Me.dgvStock.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvStock.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+    Me.dgvStock.ColumnHeadersHeight = 24
+    Me.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+    Me.dgvStock.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn1, Me.CodigoDataGridViewTextBoxColumn1, Me.DescripcionDataGridViewTextBoxColumn1, Me.ResponsableDataGridViewTextBoxColumn, Me.CantidadDataGridViewTextBoxColumn})
+    Me.dgvStock.DataSource = Me.BindingSource1
+    DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+    DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+    Me.dgvStock.DefaultCellStyle = DataGridViewCellStyle2
+    Me.dgvStock.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+    Me.dgvStock.EnableHeadersVisualStyles = False
+    Me.dgvStock.GridColor = System.Drawing.Color.White
+    Me.dgvStock.Location = New System.Drawing.Point(200, 246)
+    Me.dgvStock.Margin = New System.Windows.Forms.Padding(0)
+    Me.dgvStock.MultiSelect = False
+    Me.dgvStock.Name = "dgvStock"
+    Me.dgvStock.ReadOnly = True
+    DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+    DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+    DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+    DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+    DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvStock.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+    Me.dgvStock.RowHeadersVisible = False
+    Me.dgvStock.RowTemplate.Height = 24
+    Me.dgvStock.ScrollBars = System.Windows.Forms.ScrollBars.None
+    Me.dgvStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+    Me.dgvStock.Size = New System.Drawing.Size(497, 343)
+    Me.dgvStock.TabIndex = 33
+    Me.dgvStock.TabStop = False
+    '
+    'NombreDataGridViewTextBoxColumn1
+    '
+    Me.NombreDataGridViewTextBoxColumn1.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn1.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn1.Name = "NombreDataGridViewTextBoxColumn1"
+    Me.NombreDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'CodigoDataGridViewTextBoxColumn1
+    '
+    Me.CodigoDataGridViewTextBoxColumn1.DataPropertyName = "Codigo"
+    Me.CodigoDataGridViewTextBoxColumn1.HeaderText = "Codigo"
+    Me.CodigoDataGridViewTextBoxColumn1.Name = "CodigoDataGridViewTextBoxColumn1"
+    Me.CodigoDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'DescripcionDataGridViewTextBoxColumn1
+    '
+    Me.DescripcionDataGridViewTextBoxColumn1.DataPropertyName = "Descripcion"
+    Me.DescripcionDataGridViewTextBoxColumn1.HeaderText = "Descripcion"
+    Me.DescripcionDataGridViewTextBoxColumn1.Name = "DescripcionDataGridViewTextBoxColumn1"
+    Me.DescripcionDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'ResponsableDataGridViewTextBoxColumn
+    '
+    Me.ResponsableDataGridViewTextBoxColumn.DataPropertyName = "Responsable"
+    Me.ResponsableDataGridViewTextBoxColumn.HeaderText = "Responsable"
+    Me.ResponsableDataGridViewTextBoxColumn.Name = "ResponsableDataGridViewTextBoxColumn"
+    Me.ResponsableDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CantidadDataGridViewTextBoxColumn
+    '
+    Me.CantidadDataGridViewTextBoxColumn.DataPropertyName = "Cantidad"
+    Me.CantidadDataGridViewTextBoxColumn.HeaderText = "Cantidad"
+    Me.CantidadDataGridViewTextBoxColumn.Name = "CantidadDataGridViewTextBoxColumn"
+    Me.CantidadDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'BindingSource1
+    '
+    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
+    '
+    'btnAddDeposito
+    '
+    Me.btnAddDeposito.Location = New System.Drawing.Point(727, 293)
+    Me.btnAddDeposito.Name = "btnAddDeposito"
+    Me.btnAddDeposito.Size = New System.Drawing.Size(26, 23)
+    Me.btnAddDeposito.TabIndex = 34
+    Me.btnAddDeposito.Text = "+"
+    Me.btnAddDeposito.UseVisualStyleBackColor = True
+    '
+    'btnRemDeposito
+    '
+    Me.btnRemDeposito.Location = New System.Drawing.Point(727, 322)
+    Me.btnRemDeposito.Name = "btnRemDeposito"
+    Me.btnRemDeposito.Size = New System.Drawing.Size(26, 23)
+    Me.btnRemDeposito.TabIndex = 35
+    Me.btnRemDeposito.Text = "-"
+    Me.btnRemDeposito.UseVisualStyleBackColor = True
+    '
+    'Button1
+    '
+    Me.Button1.Location = New System.Drawing.Point(727, 374)
+    Me.Button1.Name = "Button1"
+    Me.Button1.Size = New System.Drawing.Size(69, 23)
+    Me.Button1.TabIndex = 37
+    Me.Button1.Text = "Button1"
+    Me.Button1.UseVisualStyleBackColor = True
+    '
+    'cmbResponsables
+    '
+    Me.cmbResponsables.FormattingEnabled = True
+    Me.cmbResponsables.Location = New System.Drawing.Point(893, 295)
+    Me.cmbResponsables.Name = "cmbResponsables"
+    Me.cmbResponsables.Size = New System.Drawing.Size(121, 21)
+    Me.cmbResponsables.TabIndex = 38
+    '
     'frmArticulos
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.cmbResponsables)
+    Me.Controls.Add(Me.Button1)
+    Me.Controls.Add(Me.btnRemDeposito)
+    Me.Controls.Add(Me.btnAddDeposito)
+    Me.Controls.Add(Me.dgvStock)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.TextBox1)
-    Me.Controls.Add(Me.RadioButton2)
-    Me.Controls.Add(Me.RadioButton1)
+    Me.Controls.Add(Me.rbtnByStock)
+    Me.Controls.Add(Me.rbtnResponsables)
     Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.gbProducto)
-    Me.Controls.Add(Me.dgvListArticulos)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.btnVolver)
@@ -386,9 +427,10 @@ Partial Class frmArticulos
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmArticulos"
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.dgvListArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gbProducto.ResumeLayout(False)
     Me.gbProducto.PerformLayout()
+    CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -406,16 +448,21 @@ Partial Class frmArticulos
   Friend WithEvents btnNuevo As System.Windows.Forms.Button
   Friend WithEvents btnCancelar As System.Windows.Forms.Button
   Friend WithEvents bsArticulos As System.Windows.Forms.BindingSource
-  Public WithEvents dgvListArticulos As System.Windows.Forms.DataGridView
   Friend WithEvents gbProducto As System.Windows.Forms.GroupBox
   Friend WithEvents Label4 As System.Windows.Forms.Label
-  Friend WithEvents IdArticuloDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidArticuloDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CodigoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents DescripcionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
-  Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnResponsables As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnByStock As System.Windows.Forms.RadioButton
   Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
   Friend WithEvents Label5 As System.Windows.Forms.Label
+  Public WithEvents dgvStock As System.Windows.Forms.DataGridView
+  Friend WithEvents BindingSource1 As System.Windows.Forms.BindingSource
+  Friend WithEvents NombreDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CodigoDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DescripcionDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ResponsableDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CantidadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents btnAddDeposito As System.Windows.Forms.Button
+  Friend WithEvents btnRemDeposito As System.Windows.Forms.Button
+  Friend WithEvents Button1 As System.Windows.Forms.Button
+  Friend WithEvents cmbResponsables As System.Windows.Forms.ComboBox
 End Class

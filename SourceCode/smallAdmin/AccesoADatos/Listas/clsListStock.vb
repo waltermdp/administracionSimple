@@ -11,6 +11,7 @@ Public Class clsListStock
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
   Protected Overrides Function RefreshData_Private() As libCommon.Comunes.Result
     Try
       Dim objDB As libDB.clsAcceso = Nothing

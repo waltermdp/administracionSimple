@@ -97,6 +97,7 @@
     <Compile Include="AccesoADatos\clsCliente.vb" />
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
+    <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
     <Compile Include="AccesoADatos\clsPrincipal.vb" />
     <Compile Include="AccesoADatos\clsProducto.vb" />
@@ -106,6 +107,7 @@
     <Compile Include="AccesoADatos\Listas\clsListaCuentas.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaPrincipal.vb" />
     <Compile Include="AccesoADatos\Listas\clsListArticulos.vb" />
+    <Compile Include="AccesoADatos\Listas\clsListaStorage.vb" />
     <Compile Include="AccesoADatos\Listas\clsListPagos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListRelArtProd.vb" />
     <Compile Include="AccesoADatos\Listas\clsListStock.vb" />
@@ -238,6 +240,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\clsListaStorage.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoDatabase.datasource" />
