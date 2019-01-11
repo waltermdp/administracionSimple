@@ -1,12 +1,15 @@
 ﻿Public Class clsListaStorage
+  Implements ICloneable
 
   Private m_Nombre As String
   Private m_Codigo As String
   Private m_Descripcion As String
   Private m_Responsable As String
+  Private m_GuidResponsable As Guid
+  Private m_GuidArticulo As Guid
   Private m_Cantidad As Integer
 
-  Private m_GuidArticulo As Guid
+
 
   Public Property GuidArticulo As Guid
     Get
@@ -63,6 +66,15 @@
     End Set
   End Property
 
+  Public Property GuidResponsable As Guid
+    Get
+      Return m_GuidResponsable
+    End Get
+    Set(value As Guid)
+      m_GuidResponsable = value
+    End Set
+  End Property
+
   Public Sub New()
     GuidArticulo = Nothing
     Nombre = "--"
@@ -70,5 +82,19 @@
     Descripcion = "--"
     Responsable = "--"
     Cantidad = 0
+    GuidResponsable = Nothing
   End Sub
+
+#Region "Interface: ICloneable"
+
+  Private Function ClonePrivate() As Object Implements ICloneable.Clone
+    'Clonación Superficial
+    Return Me.MemberwiseClone()
+  End Function
+
+  Public Function Clone() As clsListaStorage
+    Return CType(ClonePrivate(), clsListaStorage)
+  End Function
+
+#End Region
 End Class

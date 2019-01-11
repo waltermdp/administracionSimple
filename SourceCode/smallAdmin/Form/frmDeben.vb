@@ -41,6 +41,7 @@ Public Class frmDeben
   Private Sub frmDeben_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
       Call MostrarDeben()
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

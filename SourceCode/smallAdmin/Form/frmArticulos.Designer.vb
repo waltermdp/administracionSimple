@@ -39,7 +39,6 @@ Partial Class frmArticulos
     Me.btnVolver = New System.Windows.Forms.Button()
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnCancelar = New System.Windows.Forms.Button()
-    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.gbProducto = New System.Windows.Forms.GroupBox()
     Me.Label4 = New System.Windows.Forms.Label()
     Me.rbtnResponsables = New System.Windows.Forms.RadioButton()
@@ -47,20 +46,21 @@ Partial Class frmArticulos
     Me.TextBox1 = New System.Windows.Forms.TextBox()
     Me.Label5 = New System.Windows.Forms.Label()
     Me.dgvStock = New System.Windows.Forms.DataGridView()
-    Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.DescripcionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnAddDeposito = New System.Windows.Forms.Button()
     Me.btnRemDeposito = New System.Windows.Forms.Button()
     Me.Button1 = New System.Windows.Forms.Button()
     Me.cmbResponsables = New System.Windows.Forms.ComboBox()
-    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
+    Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DescripcionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.gbProducto.SuspendLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtNombre
@@ -202,10 +202,6 @@ Partial Class frmArticulos
     Me.btnCancelar.Text = "Cancelar"
     Me.btnCancelar.UseVisualStyleBackColor = False
     '
-    'bsArticulos
-    '
-    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
-    '
     'gbProducto
     '
     Me.gbProducto.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
@@ -291,7 +287,7 @@ Partial Class frmArticulos
     Me.dgvStock.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.dgvStock.ColumnHeadersHeight = 24
     Me.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvStock.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn1, Me.CodigoDataGridViewTextBoxColumn1, Me.DescripcionDataGridViewTextBoxColumn1, Me.ResponsableDataGridViewTextBoxColumn, Me.CantidadDataGridViewTextBoxColumn})
+    Me.dgvStock.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ResponsableDataGridViewTextBoxColumn, Me.CodigoDataGridViewTextBoxColumn1, Me.NombreDataGridViewTextBoxColumn1, Me.CantidadDataGridViewTextBoxColumn, Me.DescripcionDataGridViewTextBoxColumn1})
     Me.dgvStock.DataSource = Me.BindingSource1
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
@@ -324,45 +320,6 @@ Partial Class frmArticulos
     Me.dgvStock.Size = New System.Drawing.Size(497, 343)
     Me.dgvStock.TabIndex = 33
     Me.dgvStock.TabStop = False
-    '
-    'NombreDataGridViewTextBoxColumn1
-    '
-    Me.NombreDataGridViewTextBoxColumn1.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn1.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn1.Name = "NombreDataGridViewTextBoxColumn1"
-    Me.NombreDataGridViewTextBoxColumn1.ReadOnly = True
-    '
-    'CodigoDataGridViewTextBoxColumn1
-    '
-    Me.CodigoDataGridViewTextBoxColumn1.DataPropertyName = "Codigo"
-    Me.CodigoDataGridViewTextBoxColumn1.HeaderText = "Codigo"
-    Me.CodigoDataGridViewTextBoxColumn1.Name = "CodigoDataGridViewTextBoxColumn1"
-    Me.CodigoDataGridViewTextBoxColumn1.ReadOnly = True
-    '
-    'DescripcionDataGridViewTextBoxColumn1
-    '
-    Me.DescripcionDataGridViewTextBoxColumn1.DataPropertyName = "Descripcion"
-    Me.DescripcionDataGridViewTextBoxColumn1.HeaderText = "Descripcion"
-    Me.DescripcionDataGridViewTextBoxColumn1.Name = "DescripcionDataGridViewTextBoxColumn1"
-    Me.DescripcionDataGridViewTextBoxColumn1.ReadOnly = True
-    '
-    'ResponsableDataGridViewTextBoxColumn
-    '
-    Me.ResponsableDataGridViewTextBoxColumn.DataPropertyName = "Responsable"
-    Me.ResponsableDataGridViewTextBoxColumn.HeaderText = "Responsable"
-    Me.ResponsableDataGridViewTextBoxColumn.Name = "ResponsableDataGridViewTextBoxColumn"
-    Me.ResponsableDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CantidadDataGridViewTextBoxColumn
-    '
-    Me.CantidadDataGridViewTextBoxColumn.DataPropertyName = "Cantidad"
-    Me.CantidadDataGridViewTextBoxColumn.HeaderText = "Cantidad"
-    Me.CantidadDataGridViewTextBoxColumn.Name = "CantidadDataGridViewTextBoxColumn"
-    Me.CantidadDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'BindingSource1
-    '
-    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
     '
     'btnAddDeposito
     '
@@ -399,6 +356,50 @@ Partial Class frmArticulos
     Me.cmbResponsables.Size = New System.Drawing.Size(121, 21)
     Me.cmbResponsables.TabIndex = 38
     '
+    'BindingSource1
+    '
+    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
+    '
+    'bsArticulos
+    '
+    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
+    '
+    'ResponsableDataGridViewTextBoxColumn
+    '
+    Me.ResponsableDataGridViewTextBoxColumn.DataPropertyName = "Responsable"
+    Me.ResponsableDataGridViewTextBoxColumn.HeaderText = "Responsable"
+    Me.ResponsableDataGridViewTextBoxColumn.Name = "ResponsableDataGridViewTextBoxColumn"
+    Me.ResponsableDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CodigoDataGridViewTextBoxColumn1
+    '
+    Me.CodigoDataGridViewTextBoxColumn1.DataPropertyName = "Codigo"
+    Me.CodigoDataGridViewTextBoxColumn1.HeaderText = "Codigo"
+    Me.CodigoDataGridViewTextBoxColumn1.Name = "CodigoDataGridViewTextBoxColumn1"
+    Me.CodigoDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'NombreDataGridViewTextBoxColumn1
+    '
+    Me.NombreDataGridViewTextBoxColumn1.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn1.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn1.Name = "NombreDataGridViewTextBoxColumn1"
+    Me.NombreDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'CantidadDataGridViewTextBoxColumn
+    '
+    Me.CantidadDataGridViewTextBoxColumn.DataPropertyName = "Cantidad"
+    Me.CantidadDataGridViewTextBoxColumn.HeaderText = "Cantidad"
+    Me.CantidadDataGridViewTextBoxColumn.Name = "CantidadDataGridViewTextBoxColumn"
+    Me.CantidadDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'DescripcionDataGridViewTextBoxColumn1
+    '
+    Me.DescripcionDataGridViewTextBoxColumn1.DataPropertyName = "Descripcion"
+    Me.DescripcionDataGridViewTextBoxColumn1.HeaderText = "Descripcion"
+    Me.DescripcionDataGridViewTextBoxColumn1.Name = "DescripcionDataGridViewTextBoxColumn1"
+    Me.DescripcionDataGridViewTextBoxColumn1.ReadOnly = True
+    Me.DescripcionDataGridViewTextBoxColumn1.Visible = False
+    '
     'frmArticulos
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -426,11 +427,11 @@ Partial Class frmArticulos
     Me.Name = "frmArticulos"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmArticulos"
-    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gbProducto.ResumeLayout(False)
     Me.gbProducto.PerformLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -456,13 +457,13 @@ Partial Class frmArticulos
   Friend WithEvents Label5 As System.Windows.Forms.Label
   Public WithEvents dgvStock As System.Windows.Forms.DataGridView
   Friend WithEvents BindingSource1 As System.Windows.Forms.BindingSource
-  Friend WithEvents NombreDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CodigoDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents DescripcionDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ResponsableDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CantidadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents btnAddDeposito As System.Windows.Forms.Button
   Friend WithEvents btnRemDeposito As System.Windows.Forms.Button
   Friend WithEvents Button1 As System.Windows.Forms.Button
   Friend WithEvents cmbResponsables As System.Windows.Forms.ComboBox
+  Friend WithEvents ResponsableDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CodigoDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NombreDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CantidadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DescripcionDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

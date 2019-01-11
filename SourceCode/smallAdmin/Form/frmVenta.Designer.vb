@@ -59,6 +59,8 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.txtAdelanto = New System.Windows.Forms.TextBox()
+    Me.Label14 = New System.Windows.Forms.Label()
     Me.ListView1 = New System.Windows.Forms.ListView()
     Me.cArticulos = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.cCantidad = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -76,8 +78,7 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
-    Me.Label14 = New System.Windows.Forms.Label()
-    Me.txtAdelanto = New System.Windows.Forms.TextBox()
+    Me.cmbResponsables = New System.Windows.Forms.ComboBox()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
@@ -87,7 +88,7 @@ Partial Class frmVenta
     '
     'txtPrecio
     '
-    Me.txtPrecio.Location = New System.Drawing.Point(560, 180)
+    Me.txtPrecio.Location = New System.Drawing.Point(553, 190)
     Me.txtPrecio.Name = "txtPrecio"
     Me.txtPrecio.Size = New System.Drawing.Size(100, 20)
     Me.txtPrecio.TabIndex = 0
@@ -95,7 +96,7 @@ Partial Class frmVenta
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(561, 161)
+    Me.Label1.Location = New System.Drawing.Point(554, 171)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(37, 13)
     Me.Label1.TabIndex = 2
@@ -103,7 +104,7 @@ Partial Class frmVenta
     '
     'DateVenta
     '
-    Me.DateVenta.Location = New System.Drawing.Point(560, 42)
+    Me.DateVenta.Location = New System.Drawing.Point(553, 52)
     Me.DateVenta.Name = "DateVenta"
     Me.DateVenta.Size = New System.Drawing.Size(200, 20)
     Me.DateVenta.TabIndex = 4
@@ -111,7 +112,7 @@ Partial Class frmVenta
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(557, 69)
+    Me.Label3.Location = New System.Drawing.Point(550, 79)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(70, 13)
     Me.Label3.TabIndex = 6
@@ -149,7 +150,7 @@ Partial Class frmVenta
     '
     Me.cmbCuotas.FormattingEnabled = True
     Me.cmbCuotas.Items.AddRange(New Object() {"Contado", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-    Me.cmbCuotas.Location = New System.Drawing.Point(666, 179)
+    Me.cmbCuotas.Location = New System.Drawing.Point(659, 189)
     Me.cmbCuotas.Name = "cmbCuotas"
     Me.cmbCuotas.Size = New System.Drawing.Size(121, 21)
     Me.cmbCuotas.TabIndex = 9
@@ -157,7 +158,7 @@ Partial Class frmVenta
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(663, 161)
+    Me.Label4.Location = New System.Drawing.Point(656, 171)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(40, 13)
     Me.Label4.TabIndex = 10
@@ -166,7 +167,7 @@ Partial Class frmVenta
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(557, 26)
+    Me.Label2.Location = New System.Drawing.Point(550, 36)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(65, 13)
     Me.Label2.TabIndex = 12
@@ -175,7 +176,7 @@ Partial Class frmVenta
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(908, 164)
+    Me.Label5.Location = New System.Drawing.Point(901, 174)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(124, 13)
     Me.Label5.TabIndex = 13
@@ -187,9 +188,9 @@ Partial Class frmVenta
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
-    Me.dgvCuotas.Location = New System.Drawing.Point(31, 318)
+    Me.dgvCuotas.Location = New System.Drawing.Point(254, 406)
     Me.dgvCuotas.Name = "dgvCuotas"
-    Me.dgvCuotas.Size = New System.Drawing.Size(832, 131)
+    Me.dgvCuotas.Size = New System.Drawing.Size(831, 67)
     Me.dgvCuotas.TabIndex = 15
     '
     'IdPagoDataGridViewTextBoxColumn
@@ -256,7 +257,7 @@ Partial Class frmVenta
     'chkEditarCuotas
     '
     Me.chkEditarCuotas.AutoSize = True
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(793, 204)
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(786, 214)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
     Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
     Me.chkEditarCuotas.TabIndex = 18
@@ -373,6 +374,7 @@ Partial Class frmVenta
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.cmbResponsables)
     Me.gpVenta.Controls.Add(Me.txtAdelanto)
     Me.gpVenta.Controls.Add(Me.Label14)
     Me.gpVenta.Controls.Add(Me.ListView1)
@@ -400,10 +402,26 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.chkEditarCuotas)
     Me.gpVenta.Location = New System.Drawing.Point(170, 221)
     Me.gpVenta.Name = "gpVenta"
-    Me.gpVenta.Size = New System.Drawing.Size(1098, 479)
+    Me.gpVenta.Size = New System.Drawing.Size(1098, 487)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
+    '
+    'txtAdelanto
+    '
+    Me.txtAdelanto.Location = New System.Drawing.Point(553, 234)
+    Me.txtAdelanto.Name = "txtAdelanto"
+    Me.txtAdelanto.Size = New System.Drawing.Size(100, 20)
+    Me.txtAdelanto.TabIndex = 35
+    '
+    'Label14
+    '
+    Me.Label14.AutoSize = True
+    Me.Label14.Location = New System.Drawing.Point(554, 218)
+    Me.Label14.Name = "Label14"
+    Me.Label14.Size = New System.Drawing.Size(49, 13)
+    Me.Label14.TabIndex = 34
+    Me.Label14.Text = "Adelanto"
     '
     'ListView1
     '
@@ -411,7 +429,7 @@ Partial Class frmVenta
     Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cArticulos, Me.cCantidad, Me.cGuid})
     Me.ListView1.FullRowSelect = True
     Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-    Me.ListView1.Location = New System.Drawing.Point(302, 69)
+    Me.ListView1.Location = New System.Drawing.Point(295, 79)
     Me.ListView1.MultiSelect = False
     Me.ListView1.Name = "ListView1"
     Me.ListView1.Size = New System.Drawing.Size(223, 173)
@@ -433,7 +451,7 @@ Partial Class frmVenta
     '
     'dtDiaVencimiento
     '
-    Me.dtDiaVencimiento.Location = New System.Drawing.Point(911, 180)
+    Me.dtDiaVencimiento.Location = New System.Drawing.Point(904, 190)
     Me.dtDiaVencimiento.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
     Me.dtDiaVencimiento.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
     Me.dtDiaVencimiento.Name = "dtDiaVencimiento"
@@ -444,7 +462,7 @@ Partial Class frmVenta
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
-    Me.lblValorCuota.Location = New System.Drawing.Point(798, 164)
+    Me.lblValorCuota.Location = New System.Drawing.Point(791, 174)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
     Me.lblValorCuota.TabIndex = 31
@@ -452,7 +470,7 @@ Partial Class frmVenta
     '
     'txtValorCuota
     '
-    Me.txtValorCuota.Location = New System.Drawing.Point(793, 179)
+    Me.txtValorCuota.Location = New System.Drawing.Point(786, 189)
     Me.txtValorCuota.Name = "txtValorCuota"
     Me.txtValorCuota.Size = New System.Drawing.Size(96, 20)
     Me.txtValorCuota.TabIndex = 30
@@ -460,7 +478,7 @@ Partial Class frmVenta
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(769, 85)
+    Me.Label13.Location = New System.Drawing.Point(762, 95)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(81, 13)
     Me.Label13.TabIndex = 29
@@ -468,7 +486,7 @@ Partial Class frmVenta
     '
     'txtMedioPagoDescripcion
     '
-    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(772, 101)
+    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(765, 111)
     Me.txtMedioPagoDescripcion.Name = "txtMedioPagoDescripcion"
     Me.txtMedioPagoDescripcion.ReadOnly = True
     Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(303, 20)
@@ -476,7 +494,7 @@ Partial Class frmVenta
     '
     'btnSeleccionarCuenta
     '
-    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(560, 114)
+    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(553, 124)
     Me.btnSeleccionarCuenta.Name = "btnSeleccionarCuenta"
     Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(117, 23)
     Me.btnSeleccionarCuenta.TabIndex = 27
@@ -485,7 +503,7 @@ Partial Class frmVenta
     '
     'btnAddCuenta
     '
-    Me.btnAddCuenta.Location = New System.Drawing.Point(560, 85)
+    Me.btnAddCuenta.Location = New System.Drawing.Point(553, 95)
     Me.btnAddCuenta.Name = "btnAddCuenta"
     Me.btnAddCuenta.Size = New System.Drawing.Size(117, 23)
     Me.btnAddCuenta.TabIndex = 26
@@ -494,7 +512,7 @@ Partial Class frmVenta
     '
     'btnRemoveArticulo
     '
-    Me.btnRemoveArticulo.Location = New System.Drawing.Point(251, 141)
+    Me.btnRemoveArticulo.Location = New System.Drawing.Point(244, 151)
     Me.btnRemoveArticulo.Name = "btnRemoveArticulo"
     Me.btnRemoveArticulo.Size = New System.Drawing.Size(45, 24)
     Me.btnRemoveArticulo.TabIndex = 25
@@ -503,7 +521,7 @@ Partial Class frmVenta
     '
     'btnAddArticulo
     '
-    Me.btnAddArticulo.Location = New System.Drawing.Point(251, 112)
+    Me.btnAddArticulo.Location = New System.Drawing.Point(244, 122)
     Me.btnAddArticulo.Name = "btnAddArticulo"
     Me.btnAddArticulo.Size = New System.Drawing.Size(45, 23)
     Me.btnAddArticulo.TabIndex = 24
@@ -512,7 +530,7 @@ Partial Class frmVenta
     '
     'txtBuscarArticulo
     '
-    Me.txtBuscarArticulo.Location = New System.Drawing.Point(22, 45)
+    Me.txtBuscarArticulo.Location = New System.Drawing.Point(15, 55)
     Me.txtBuscarArticulo.Name = "txtBuscarArticulo"
     Me.txtBuscarArticulo.Size = New System.Drawing.Size(223, 20)
     Me.txtBuscarArticulo.TabIndex = 21
@@ -522,7 +540,7 @@ Partial Class frmVenta
     Me.lstArticulos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lstArticulos.DataSource = Me.bsArticulos
     Me.lstArticulos.FormattingEnabled = True
-    Me.lstArticulos.Location = New System.Drawing.Point(22, 69)
+    Me.lstArticulos.Location = New System.Drawing.Point(15, 79)
     Me.lstArticulos.Name = "lstArticulos"
     Me.lstArticulos.Size = New System.Drawing.Size(223, 171)
     Me.lstArticulos.TabIndex = 20
@@ -534,27 +552,19 @@ Partial Class frmVenta
     'Label12
     '
     Me.Label12.AutoSize = True
-    Me.Label12.Location = New System.Drawing.Point(19, 26)
+    Me.Label12.Location = New System.Drawing.Point(12, 27)
     Me.Label12.Name = "Label12"
     Me.Label12.Size = New System.Drawing.Size(47, 13)
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
     '
-    'Label14
+    'cmbResponsables
     '
-    Me.Label14.AutoSize = True
-    Me.Label14.Location = New System.Drawing.Point(561, 208)
-    Me.Label14.Name = "Label14"
-    Me.Label14.Size = New System.Drawing.Size(49, 13)
-    Me.Label14.TabIndex = 34
-    Me.Label14.Text = "Adelanto"
-    '
-    'txtAdelanto
-    '
-    Me.txtAdelanto.Location = New System.Drawing.Point(560, 224)
-    Me.txtAdelanto.Name = "txtAdelanto"
-    Me.txtAdelanto.Size = New System.Drawing.Size(100, 20)
-    Me.txtAdelanto.TabIndex = 35
+    Me.cmbResponsables.FormattingEnabled = True
+    Me.cmbResponsables.Location = New System.Drawing.Point(15, 266)
+    Me.cmbResponsables.Name = "cmbResponsables"
+    Me.cmbResponsables.Size = New System.Drawing.Size(223, 21)
+    Me.cmbResponsables.TabIndex = 36
     '
     'frmVenta
     '
@@ -647,4 +657,5 @@ Partial Class frmVenta
   Friend WithEvents cGuid As System.Windows.Forms.ColumnHeader
   Friend WithEvents txtAdelanto As System.Windows.Forms.TextBox
   Friend WithEvents Label14 As System.Windows.Forms.Label
+  Friend WithEvents cmbResponsables As System.Windows.Forms.ComboBox
 End Class

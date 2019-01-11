@@ -484,6 +484,18 @@ Public Class frmVenta
     End Try
   End Sub
 
+  Private Sub FillResponsables()
+    Try
+      Dim objListStock As New clsListStock
+      objListStock.Cfg_Filtro = "where"
+      objListStock.RefreshData()
+
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub FillListArticulos()
     Try
       If m_lstArticulos IsNot Nothing Then m_lstArticulos.Dispose()

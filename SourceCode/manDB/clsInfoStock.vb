@@ -5,6 +5,7 @@
   Private m_GuidArticulo As Guid
   Private m_Responsable As String
   Private m_Cantidad As Integer
+  Private m_GuidResponsable As Guid
 
   Public Property IdStock As Integer
     Get
@@ -42,12 +43,22 @@
     End Set
   End Property
 
+  Public Property GuidResponsable As Guid
+    Get
+      Return m_GuidResponsable
+    End Get
+    Set(value As Guid)
+      m_GuidResponsable = value
+    End Set
+  End Property
+
   Public Sub New()
     MyBase.New()
     IdStock = -1
     GuidArticulo = Nothing
     Responsable = "--"
     Cantidad = -1
+    GuidResponsable = Nothing
   End Sub
 
 #Region "Interfaz ICloneable"

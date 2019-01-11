@@ -2,12 +2,12 @@
 Imports manDB
 
 Public Class clsStock
-  Public Shared Function Load(ByVal vGuid As Guid, ByRef rStock As manDB.clsInfoStock) As Result
+  Public Shared Function Load(ByRef rStock As manDB.clsInfoStock) As Result
     Try
       Dim vResult As Result
       Dim vId As Integer
-      If FindGuid(vGuid, vId) = True Then
-        vResult = init(rStock, vGuid)
+      If FindGuid(rStock, vId) = True Then
+        vResult = Init(rStock, vId)
         Return vResult
       Else
         'crea un Cliente vacio con vGuid. 
@@ -53,7 +53,7 @@ Public Class clsStock
   End Function
 
 
-  Private Shared Function Init(ByRef rInfoStock As manDB.clsInfoStock, ByVal vGuid As Guid) As Result
+  Private Shared Function Init(ByRef rInfoStock As manDB.clsInfoStock, ByVal vID As Integer) As Result
     Try
 
       Dim objDB As libDB.clsAcceso = Nothing
@@ -61,14 +61,14 @@ Public Class clsStock
 
       Try
         rInfoStock = New clsInfoStock
-        rInfoStock.GuidArticulo = vGuid
+        rInfoStock.IdStock = vID
 
         objDB = New libDB.clsAcceso
 
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
         If objResult <> Result.OK Then Exit Try
 
-        objResult = Init(objDB, rInfoStock, vGuid)
+        objResult = Init(objDB, rInfoStock, vID)
         If objResult <> Result.OK Then Exit Try
 
       Catch ex As Exception
@@ -93,19 +93,19 @@ Public Class clsStock
     End Try
   End Function
 
-  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rInfoStock As clsInfoStock, ByVal vGuid As Guid, Optional ByRef rCodeError As Integer = -1) As Result
+  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByRef rInfoStock As clsInfoStock, ByVal vID As Integer, Optional ByRef rCodeError As Integer = -1) As Result
     Try
 
       Dim objResult As Result
 
       rInfoStock = New clsInfoStock
-      rInfoStock.GuidArticulo = vGuid
+      rInfoStock.IdStock = vID
 
       '--- Comando en DB -->
       Dim dt As DataTable = Nothing
       Dim strCommand As String
 
-      strCommand = "SELECT * FROM [Stock] WHERE [GuidArticulo]={" & vGuid.ToString & "}"
+      strCommand = "SELECT * FROM [Stock] WHERE [IdStock]={" & vID.ToString & "}"
 
 
       objResult = vObjDB.GetDato(strCommand, dt)
@@ -142,7 +142,7 @@ Public Class clsStock
 
         '--- Comando en DB -->
 
-        objResult = vObjDB.EjecutarConsulta("SELECT [IdStock] FROM [Stock] WHERE [GuidArticulo]={" & rInfoStock.GuidArticulo.ToString & "}", rInfoStock.IdStock)
+        objResult = vObjDB.EjecutarConsulta("SELECT [IdStock] FROM [Stock] WHERE [GuidArticulo]={" & rInfoStock.GuidArticulo.ToString & "} AND [GuidResponsable]={" & rInfoStock.GuidResponsable.ToString & "}", rInfoStock.IdStock)
         If objResult <> Result.OK Then Return objResult
 
         Dim strSQL As New System.Text.StringBuilder("")
@@ -158,13 +158,15 @@ Public Class clsStock
 
             strSQL.Append("[GuidArticulo],")
             strSQL.Append("[Responsable],")
-            strSQL.Append("[Cantidad]")
+            strSQL.Append("[Cantidad],")
+            strSQL.Append("[GuidResponsable]")
 
             strSQL.Append(") VALUES (")
 
             strSQL.Append("""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Responsable) & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Cantidad) & """")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Cantidad) & """,")
+            strSQL.Append("""{" & .GuidResponsable.ToString & "}""")
 
             strSQL.Append(")")
 
@@ -185,7 +187,8 @@ Public Class clsStock
             strSQL.Append("UPDATE [Stock] SET ")
             strSQL.Append("[GuidArticulo]=""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("[Responsable]=""" & libDB.clsAcceso.Field_Correcting(.Responsable) & """,")
-            strSQL.Append("[Cantidad]=""" & libDB.clsAcceso.Field_Correcting(.Cantidad) & """")
+            strSQL.Append("[Cantidad]=""" & libDB.clsAcceso.Field_Correcting(.Cantidad) & """,")
+            strSQL.Append("[GuidResponsable]=""{" & .GuidResponsable.ToString & "}""")
 
             strSQL.Append(" WHERE [Idstock]=" & .IdStock)
 
@@ -244,6 +247,13 @@ Public Class clsStock
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfoStock.GuidResponsable = CType(IIf(IsDBNull(.Item("GuidResponsable")), Nothing, .Item("GuidResponsable")), Guid)
+        Catch ex As Exception
+          vInfoStock.GuidResponsable = Nothing
+          Call Print_msg(ex.Message)
+        End Try
+
       End With
 
       Return Result.OK
@@ -253,7 +263,7 @@ Public Class clsStock
     End Try
   End Function
 
-  Private Shared Function FindGuid(ByVal vGuid As Guid, ByRef vId As Integer) As Boolean
+  Private Shared Function FindGuid(ByVal rStock As manDB.clsInfoStock, ByRef vId As Integer) As Boolean
     Try
 
       Dim objDB As libDB.clsAcceso = Nothing
@@ -267,7 +277,7 @@ Public Class clsStock
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
         If objResult <> Result.OK Then Exit Try
 
-        objResult = FindGuid(objDB, vGuid, vId)
+        objResult = FindGuid(objDB, rStock, vId)
         If objResult <> Result.OK Then Exit Try
 
       Catch ex As Exception
@@ -303,14 +313,14 @@ Public Class clsStock
 
   End Function
 
-  Private Shared Function FindGuid(ByVal vObjDB As libDB.clsAcceso, ByVal vGuid As Guid, ByRef rId As Integer) As Result
+  Private Shared Function FindGuid(ByVal vObjDB As libDB.clsAcceso, ByVal rStock As clsInfoStock, ByRef rId As Integer) As Result
     Try
       Dim objResult As Result
 
       '--- Comando en DB -->
       Dim strCommand As String
 
-      strCommand = "SELECT [IdStock] FROM [Stock] WHERE [GuidArticulo]={" & vGuid.ToString & "}"
+      strCommand = "SELECT [IdStock] FROM [Stock] WHERE [GuidArticulo]={" & rStock.GuidArticulo.ToString & "} AND [GuidResponsable]={" & rStock.GuidResponsable.ToString & "}"
 
 
       objResult = vObjDB.EjecutarConsulta(strCommand, rId)
