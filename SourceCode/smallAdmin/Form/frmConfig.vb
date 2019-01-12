@@ -32,7 +32,7 @@ Public Class frmConfig
           MsgBox("Fallo load producto")
           Exit Sub
         End If
-        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, item.ValorCuota, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
+        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, objProducto.Adelanto, objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
         If newpago IsNot Nothing Then
           vResult = clsPago.Save(newpago)
         Else

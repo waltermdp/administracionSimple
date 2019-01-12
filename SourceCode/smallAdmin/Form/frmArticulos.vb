@@ -465,4 +465,62 @@ Public Class frmArticulos
   End Sub
 
 
+  Private Sub btnVendido_MouseClick(sender As Object, e As MouseEventArgs) Handles btnVendido.MouseClick
+    Try
+      If m_ObjCurrent Is Nothing Then Exit Sub
+      Dim objSelectedIndex As Integer = dgvStock.SelectedRows(0).Index
+      Try
+
+
+        If m_ObjListaStock IsNot Nothing Then m_ObjListaStock.Dispose()
+        m_ObjListaStock = New clsListStock
+        Dim GuidResponsable As Guid
+        Dim Responsable As String
+        If rbtnByStock.Checked = True Then
+          GuidResponsable = m_Deposito.GuidResponsable
+          Responsable = m_Deposito.ToString
+        Else
+          GuidResponsable = m_ObjCurrent.GuidResponsable
+          Responsable = m_ObjCurrent.Responsable
+        End If
+        m_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & m_ObjCurrent.GuidArticulo.ToString & "} and GuidResponsable={" & GuidResponsable.ToString & "} and Cantidad > 0"
+        m_ObjListaStock.RefreshData()
+
+        If m_ObjListaStock.Items.Count > 0 Then
+          'El responsable tiene objetos
+          Dim ArticuloDelResponsable As manDB.clsInfoStock = m_ObjListaStock.Items.First.Clone
+          'Dim ArticuloDelDeposito As manDB.clsInfoStock
+
+          'Cargo el articulo del deposito
+          'm_ObjListaStock = New clsListStock
+          'm_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & ArticuloDelResponsable.GuidArticulo.ToString & "} and GuidResponsable={" & m_Deposito.GuidResponsable.ToString & "}"
+          'm_ObjListaStock.RefreshData()
+          'If m_ObjListaStock.Items.Count > 0 Then
+          '  ArticuloDelDeposito = m_ObjListaStock.Items.First.Clone
+          'Else
+          '  MsgBox("No estaba en stock")
+          '  Exit Sub
+          'End If
+
+          'If GuidResponsable <> m_Deposito.GuidResponsable Then
+          'mover a deposito
+          '  ArticuloDelDeposito.Cantidad += 1
+          'End If
+
+          ArticuloDelResponsable.Cantidad -= 1
+          'clsStock.Save(ArticuloDelDeposito)
+          clsStock.Save(ArticuloDelResponsable)
+
+        End If
+
+
+
+        Call MostrarListaArticulos()
+      Finally
+        Refresh_Selection(objSelectedIndex)
+      End Try
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

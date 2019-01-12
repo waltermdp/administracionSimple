@@ -23,7 +23,7 @@
     End Try
   End Function
 
-  Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vFechaVenta As Date, ByVal vPrimerVencimiento As Date) As manDB.clsInfoPagos
+  Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal vACuenta As Decimal, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vFechaVenta As Date, ByVal vPrimerVencimiento As Date) As manDB.clsInfoPagos
     Try
       Dim pago As New manDB.clsInfoPagos
       pago.EstadoPago = E_EstadoPago.Debe
@@ -32,7 +32,23 @@
       pago.FechaPago = Date.MaxValue ' Vencimiento(auxCuotas, datePrimerPago.Value)
       pago.VencimientoCuota = Vencimiento(vPrimerVencimiento)
       pago.NumCuota = vNumCuota
-      pago.ValorCuota = vValorCuota
+      If vACuenta > 0 Then
+        If vACuenta >= vValorCuota Then
+          pago.ValorCuota = 0
+          vACuenta -= vValorCuota
+        Else
+          pago.ValorCuota = vValorCuota - vACuenta
+          vACuenta = 0
+        End If
+        Dim prod As New manDB.clsInfoProducto
+        Dim vResult As libCommon.Comunes.Result = clsProducto.Load(vGuidProducto, prod)
+        prod.Adelanto = vACuenta
+        vResult = clsProducto.Save(prod)
+
+      Else
+        pago.ValorCuota = vValorCuota
+      End If
+
       Return pago
     Catch ex As Exception
       Call libCommon.Comunes.Print_msg(ex.Message)

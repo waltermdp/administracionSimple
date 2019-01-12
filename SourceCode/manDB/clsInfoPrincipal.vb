@@ -8,7 +8,8 @@
   Private m_Precio As Decimal
   Private m_CuotasTotales As Integer
   Private m_CuotasPagas As Integer
-  'TODO: continuar
+  Private m_Adelanto As Decimal
+  Private m_ValorCuotaFija As Decimal
   Private m_ValorCouta As Decimal
   Private m_MetodoPago As String
   Private m_CantidadArticulosVendidos As Integer
@@ -86,6 +87,24 @@
     End Get
     Set(value As Decimal)
       m_ValorCouta = value
+    End Set
+  End Property
+
+  Public Property Adelanto As Decimal
+    Get
+      Return m_Adelanto
+    End Get
+    Set(value As Decimal)
+      m_Adelanto = value
+    End Set
+  End Property
+
+  Public Property ValorCuotaFija As Decimal
+    Get
+      Return m_ValorCuotaFija
+    End Get
+    Set(value As Decimal)
+      m_ValorCuotaFija = value
     End Set
   End Property
 

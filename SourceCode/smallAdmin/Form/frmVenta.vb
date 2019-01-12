@@ -8,10 +8,14 @@ Public Class frmVenta
 
   Private m_CurrentPersona As ClsInfoPersona
   Private m_CurrentVendedor As clsInfoVendedor
-  Private m_lstArticulos As clsListArticulos
-  Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
+
   Private m_CurrentCuenta As clsInfoCuenta
   Private m_lstPagos As New List(Of clsInfoPagos)
+
+  Private m_objListStock As New clsListStock
+  Private m_lstArticulos As clsListArticulos
+  Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
+  Private m_lstArticulosEnStock As List(Of clsListaStorage)
 
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
@@ -52,6 +56,7 @@ Public Class frmVenta
       ListView1.View = View.Details
       ListView1.Columns(0).Width = CInt(0.7 * ListView1.Width)
       ListView1.Columns(1).Width = ListView1.Width - ListView1.Columns(0).Width - 5
+
 
 
       If m_CurrentPersona Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub
@@ -100,7 +105,7 @@ Public Class frmVenta
     Try
       m_skip = True
       Call Refresh_infoClientVendedor()
-
+      'FillResponsables()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     Finally
@@ -324,7 +329,7 @@ Public Class frmVenta
       m_Producto.FechaPrimerPago = New Date(DateVenta.Value.Year, DateVenta.Value.Month, dtDiaVencimiento.Value)
 
 
-      auxPago = GetProximoPago(m_Producto.GuidProducto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
+      auxPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.Adelanto, m_Producto.ValorCuotaFija, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
       m_lstPagos.Add(auxPago)
 
       Call ReloadListPagos()
@@ -484,17 +489,23 @@ Public Class frmVenta
     End Try
   End Sub
 
-  Private Sub FillResponsables()
-    Try
-      Dim objListStock As New clsListStock
-      objListStock.Cfg_Filtro = "where"
-      objListStock.RefreshData()
+  'Private Sub FillResponsables()
+  '  Try
+  '    m_objListStock = New clsListStock
+  '    m_objListStock.Cfg_Filtro = "where Cantidad > 0"
+  '    m_objListStock.RefreshData()
 
+  '    Dim lstResponsables As New List(Of clsInfoResponsable)
+  '    For Each item In m_objListStock.Items
+  '      If lstResponsables.Exists(Function(c) c.GuidResponsable = item.GuidResponsable) Then Continue For
+  '      lstResponsables.Add(New clsInfoResponsable With {.Nombre = item.Responsable, .Codigo = "", .GuidResponsable = item.GuidResponsable})
+  '    Next
+  '    cmbResponsables.DataSource = lstResponsables
 
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub FillListArticulos()
     Try
@@ -548,8 +559,6 @@ Public Class frmVenta
       Dim sGuid As Guid = New Guid(ListView1.SelectedItems.Item(0).SubItems(2).Text)
       Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = sGuid)
 
-      'If lstArticulosVendidos.SelectedIndex < 0 Then Exit Sub
-      'Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.Equals(CType(lstArticulosVendidos.SelectedItem, clsInfoArticuloVendido)))
       If m_lstArticulosVendidos(index).CantidadArticulos > 1 Then
         m_lstArticulosVendidos(index).CantidadArticulos -= 1
       Else
@@ -557,8 +566,7 @@ Public Class frmVenta
       End If
       Call FillListArticulosVendidos(m_lstArticulosVendidos)
 
-      'lstArticulosVendidos.Items.Clear()
-      'lstArticulosVendidos.Items.AddRange(m_lstArticulosVendidos.ToArray)
+   
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -603,33 +611,6 @@ Public Class frmVenta
       Print_msg(ex.Message)
     End Try
   End Sub
-
-  'Private Function IsMoneyFormat(ByVal value As String) As Boolean
-  '  Try
-  '    If value = String.Empty Then Return False
-  '    If value.Trim = String.Empty Then Return False
-  '    Dim dec As Decimal
-  '    Dim esCorrecto As Boolean = Decimal.TryParse(value, dec)
-  '    If (esCorrecto) Then
-  '      value = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", dec)
-  '    End If
-
-
-  '    If Not IsNumeric(value) Then
-  '      Return False
-  '    Else
-  '      If value.Contains(",") Then
-  '        If (value.Substring(value.IndexOf(",")).Count) > 2 Then
-  '          Return False
-  '        End If
-  '      End If
-  '    End If
-  '    Return True
-  '  Catch ex As Exception
-  '    Print_msg(ex.Message)
-  '    Return False
-  '  End Try
-  'End Function
 
   Private Sub chkEditarCuotas_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditarCuotas.CheckedChanged
     Try
@@ -723,4 +704,21 @@ Public Class frmVenta
   End Sub
 
  
+  'Private Sub cmbResponsables_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbResponsables.SelectedValueChanged
+  '  Try
+  '    If cmbResponsables.SelectedIndex < 0 Then Exit Sub
+  '    Dim ResponsableSeleccionado As clsInfoResponsable = CType(cmbResponsables.SelectedItem, clsInfoResponsable)
+  '    m_lstArticulosEnStock = New List(Of clsListaStorage)
+
+  '    For Each objStock In m_objListStock.Items.Where(Function(c) c.GuidResponsable = ResponsableSeleccionado.GuidResponsable)
+  '      Dim art As clsInfoArticulos = m_lstArticulos.Items.Where(Function(c) c.GuidArticulo = objStock.GuidArticulo).First
+  '      m_lstArticulosEnStock.Add(New clsListaStorage With {.Codigo = art.Codigo, .GuidArticulo = art.GuidArticulo, .Nombre = art.Nombre, .Cantidad = objStock.Cantidad})
+  '    Next
+  '    lstArticulos.DataSource = Nothing
+  '    lstArticulos.DataSource = m_lstArticulosEnStock
+
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 End Class

@@ -43,20 +43,20 @@ Partial Class frmArticulos
     Me.Label4 = New System.Windows.Forms.Label()
     Me.rbtnResponsables = New System.Windows.Forms.RadioButton()
     Me.rbtnByStock = New System.Windows.Forms.RadioButton()
-    Me.TextBox1 = New System.Windows.Forms.TextBox()
+    Me.txtFiltro = New System.Windows.Forms.TextBox()
     Me.Label5 = New System.Windows.Forms.Label()
     Me.dgvStock = New System.Windows.Forms.DataGridView()
-    Me.btnAddDeposito = New System.Windows.Forms.Button()
-    Me.btnRemDeposito = New System.Windows.Forms.Button()
-    Me.Button1 = New System.Windows.Forms.Button()
-    Me.cmbResponsables = New System.Windows.Forms.ComboBox()
-    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DescripcionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnAddDeposito = New System.Windows.Forms.Button()
+    Me.btnRemDeposito = New System.Windows.Forms.Button()
+    Me.btnVendido = New System.Windows.Forms.Button()
+    Me.cmbResponsables = New System.Windows.Forms.ComboBox()
+    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.gbProducto.SuspendLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -252,21 +252,21 @@ Partial Class frmArticulos
     Me.rbtnByStock.Text = "stock"
     Me.rbtnByStock.UseVisualStyleBackColor = True
     '
-    'TextBox1
+    'txtFiltro
     '
-    Me.TextBox1.Location = New System.Drawing.Point(1051, 212)
-    Me.TextBox1.Name = "TextBox1"
-    Me.TextBox1.Size = New System.Drawing.Size(187, 20)
-    Me.TextBox1.TabIndex = 31
+    Me.txtFiltro.Location = New System.Drawing.Point(492, 212)
+    Me.txtFiltro.Name = "txtFiltro"
+    Me.txtFiltro.Size = New System.Drawing.Size(187, 20)
+    Me.txtFiltro.TabIndex = 31
     '
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(890, 214)
+    Me.Label5.Location = New System.Drawing.Point(386, 212)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(39, 13)
+    Me.Label5.Size = New System.Drawing.Size(92, 13)
     Me.Label5.TabIndex = 32
-    Me.Label5.Text = "Label5"
+    Me.Label5.Text = "Filtrar responsable"
     '
     'dgvStock
     '
@@ -321,49 +321,6 @@ Partial Class frmArticulos
     Me.dgvStock.TabIndex = 33
     Me.dgvStock.TabStop = False
     '
-    'btnAddDeposito
-    '
-    Me.btnAddDeposito.Location = New System.Drawing.Point(727, 293)
-    Me.btnAddDeposito.Name = "btnAddDeposito"
-    Me.btnAddDeposito.Size = New System.Drawing.Size(26, 23)
-    Me.btnAddDeposito.TabIndex = 34
-    Me.btnAddDeposito.Text = "+"
-    Me.btnAddDeposito.UseVisualStyleBackColor = True
-    '
-    'btnRemDeposito
-    '
-    Me.btnRemDeposito.Location = New System.Drawing.Point(727, 322)
-    Me.btnRemDeposito.Name = "btnRemDeposito"
-    Me.btnRemDeposito.Size = New System.Drawing.Size(26, 23)
-    Me.btnRemDeposito.TabIndex = 35
-    Me.btnRemDeposito.Text = "-"
-    Me.btnRemDeposito.UseVisualStyleBackColor = True
-    '
-    'Button1
-    '
-    Me.Button1.Location = New System.Drawing.Point(727, 374)
-    Me.Button1.Name = "Button1"
-    Me.Button1.Size = New System.Drawing.Size(69, 23)
-    Me.Button1.TabIndex = 37
-    Me.Button1.Text = "Button1"
-    Me.Button1.UseVisualStyleBackColor = True
-    '
-    'cmbResponsables
-    '
-    Me.cmbResponsables.FormattingEnabled = True
-    Me.cmbResponsables.Location = New System.Drawing.Point(893, 295)
-    Me.cmbResponsables.Name = "cmbResponsables"
-    Me.cmbResponsables.Size = New System.Drawing.Size(121, 21)
-    Me.cmbResponsables.TabIndex = 38
-    '
-    'BindingSource1
-    '
-    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
-    '
-    'bsArticulos
-    '
-    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
-    '
     'ResponsableDataGridViewTextBoxColumn
     '
     Me.ResponsableDataGridViewTextBoxColumn.DataPropertyName = "Responsable"
@@ -400,6 +357,49 @@ Partial Class frmArticulos
     Me.DescripcionDataGridViewTextBoxColumn1.ReadOnly = True
     Me.DescripcionDataGridViewTextBoxColumn1.Visible = False
     '
+    'BindingSource1
+    '
+    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
+    '
+    'btnAddDeposito
+    '
+    Me.btnAddDeposito.Location = New System.Drawing.Point(727, 293)
+    Me.btnAddDeposito.Name = "btnAddDeposito"
+    Me.btnAddDeposito.Size = New System.Drawing.Size(26, 23)
+    Me.btnAddDeposito.TabIndex = 34
+    Me.btnAddDeposito.Text = "+"
+    Me.btnAddDeposito.UseVisualStyleBackColor = True
+    '
+    'btnRemDeposito
+    '
+    Me.btnRemDeposito.Location = New System.Drawing.Point(727, 322)
+    Me.btnRemDeposito.Name = "btnRemDeposito"
+    Me.btnRemDeposito.Size = New System.Drawing.Size(26, 23)
+    Me.btnRemDeposito.TabIndex = 35
+    Me.btnRemDeposito.Text = "-"
+    Me.btnRemDeposito.UseVisualStyleBackColor = True
+    '
+    'btnVendido
+    '
+    Me.btnVendido.Location = New System.Drawing.Point(727, 351)
+    Me.btnVendido.Name = "btnVendido"
+    Me.btnVendido.Size = New System.Drawing.Size(69, 23)
+    Me.btnVendido.TabIndex = 37
+    Me.btnVendido.Text = "Vendido"
+    Me.btnVendido.UseVisualStyleBackColor = True
+    '
+    'cmbResponsables
+    '
+    Me.cmbResponsables.FormattingEnabled = True
+    Me.cmbResponsables.Location = New System.Drawing.Point(893, 295)
+    Me.cmbResponsables.Name = "cmbResponsables"
+    Me.cmbResponsables.Size = New System.Drawing.Size(121, 21)
+    Me.cmbResponsables.TabIndex = 38
+    '
+    'bsArticulos
+    '
+    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
+    '
     'frmArticulos
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -407,12 +407,12 @@ Partial Class frmArticulos
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.cmbResponsables)
-    Me.Controls.Add(Me.Button1)
+    Me.Controls.Add(Me.btnVendido)
     Me.Controls.Add(Me.btnRemDeposito)
     Me.Controls.Add(Me.btnAddDeposito)
     Me.Controls.Add(Me.dgvStock)
     Me.Controls.Add(Me.Label5)
-    Me.Controls.Add(Me.TextBox1)
+    Me.Controls.Add(Me.txtFiltro)
     Me.Controls.Add(Me.rbtnByStock)
     Me.Controls.Add(Me.rbtnResponsables)
     Me.Controls.Add(Me.Label4)
@@ -453,13 +453,13 @@ Partial Class frmArticulos
   Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents rbtnResponsables As System.Windows.Forms.RadioButton
   Friend WithEvents rbtnByStock As System.Windows.Forms.RadioButton
-  Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+  Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
   Friend WithEvents Label5 As System.Windows.Forms.Label
   Public WithEvents dgvStock As System.Windows.Forms.DataGridView
   Friend WithEvents BindingSource1 As System.Windows.Forms.BindingSource
   Friend WithEvents btnAddDeposito As System.Windows.Forms.Button
   Friend WithEvents btnRemDeposito As System.Windows.Forms.Button
-  Friend WithEvents Button1 As System.Windows.Forms.Button
+  Friend WithEvents btnVendido As System.Windows.Forms.Button
   Friend WithEvents cmbResponsables As System.Windows.Forms.ComboBox
   Friend WithEvents ResponsableDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CodigoDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -313,7 +313,7 @@ Public Class frmDeben
             End If
 
             If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, pago.ValorCuota, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
+              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.Adelanto, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
             End If
             If auxPago IsNot Nothing Then
               vResult = clsPago.Save(auxPago)
