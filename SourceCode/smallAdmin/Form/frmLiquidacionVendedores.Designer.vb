@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmVendedores
+Partial Class frmLiquidacionVendedores
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -26,8 +26,11 @@ Partial Class frmVendedores
     Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmVendedores))
-    Me.dgvListVendedores = New System.Windows.Forms.DataGridView()
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLiquidacionVendedores))
+    Me.lblFecha = New System.Windows.Forms.Label()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.btnLiquidar = New System.Windows.Forms.Button()
+    Me.dgvData = New System.Windows.Forms.DataGridView()
     Me.IdVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,28 +47,56 @@ Partial Class frmVendedores
     Me.CategoriaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComentarioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnNuevo = New System.Windows.Forms.Button()
-    Me.btnEditar = New System.Windows.Forms.Button()
-    Me.btnBorrar = New System.Windows.Forms.Button()
+    Me.cmbPeriodo = New System.Windows.Forms.ComboBox()
+    Me.dtFinal = New System.Windows.Forms.DateTimePicker()
+    Me.dtInicio = New System.Windows.Forms.DateTimePicker()
+    Me.lblNombre = New System.Windows.Forms.Label()
     Me.btnVolver = New System.Windows.Forms.Button()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.btnLiquidar = New System.Windows.Forms.Button()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.btnBuscar = New System.Windows.Forms.Button()
-    Me.txtFiltro = New System.Windows.Forms.TextBox()
-    CType(Me.dgvListVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
-    'dgvListVendedores
+    'lblFecha
     '
-    Me.dgvListVendedores.AllowUserToAddRows = False
-    Me.dgvListVendedores.AllowUserToDeleteRows = False
-    Me.dgvListVendedores.AllowUserToResizeRows = False
-    Me.dgvListVendedores.AutoGenerateColumns = False
-    Me.dgvListVendedores.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.dgvListVendedores.BorderStyle = System.Windows.Forms.BorderStyle.None
-    Me.dgvListVendedores.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+    Me.lblFecha.AutoSize = True
+    Me.lblFecha.Location = New System.Drawing.Point(194, 66)
+    Me.lblFecha.Name = "lblFecha"
+    Me.lblFecha.Size = New System.Drawing.Size(39, 13)
+    Me.lblFecha.TabIndex = 0
+    Me.lblFecha.Text = "Label1"
+    '
+    'Label1
+    '
+    Me.Label1.AutoSize = True
+    Me.Label1.Location = New System.Drawing.Point(193, 94)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(29, 13)
+    Me.Label1.TabIndex = 1
+    Me.Label1.Text = "Filtro"
+    '
+    'btnLiquidar
+    '
+    Me.btnLiquidar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnLiquidar.FlatAppearance.BorderSize = 0
+    Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnLiquidar.ForeColor = System.Drawing.Color.White
+    Me.btnLiquidar.Location = New System.Drawing.Point(184, 203)
+    Me.btnLiquidar.Name = "btnLiquidar"
+    Me.btnLiquidar.Size = New System.Drawing.Size(110, 61)
+    Me.btnLiquidar.TabIndex = 14
+    Me.btnLiquidar.Text = "Liquidar"
+    Me.btnLiquidar.UseVisualStyleBackColor = False
+    '
+    'dgvData
+    '
+    Me.dgvData.AllowUserToAddRows = False
+    Me.dgvData.AllowUserToDeleteRows = False
+    Me.dgvData.AllowUserToResizeRows = False
+    Me.dgvData.AutoGenerateColumns = False
+    Me.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.dgvData.BorderStyle = System.Windows.Forms.BorderStyle.None
+    Me.dgvData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
     DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -73,11 +104,11 @@ Partial Class frmVendedores
     DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
     DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
     DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvListVendedores.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-    Me.dgvListVendedores.ColumnHeadersHeight = 24
-    Me.dgvListVendedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvListVendedores.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdVendedorDataGridViewTextBoxColumn, Me.GuidVendedorDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.NumVendedorDataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.GrupoDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.CategoriaDataGridViewTextBoxColumn, Me.ComentarioDataGridViewTextBoxColumn})
-    Me.dgvListVendedores.DataSource = Me.bsVendedores
+    Me.dgvData.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+    Me.dgvData.ColumnHeadersHeight = 24
+    Me.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+    Me.dgvData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdVendedorDataGridViewTextBoxColumn, Me.GuidVendedorDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.NumVendedorDataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn, Me.GrupoDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.CategoriaDataGridViewTextBoxColumn, Me.ComentarioDataGridViewTextBoxColumn})
+    Me.dgvData.DataSource = Me.bsVendedores
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
     DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -85,15 +116,15 @@ Partial Class frmVendedores
     DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
     DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
     DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-    Me.dgvListVendedores.DefaultCellStyle = DataGridViewCellStyle2
-    Me.dgvListVendedores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvListVendedores.EnableHeadersVisualStyles = False
-    Me.dgvListVendedores.GridColor = System.Drawing.Color.White
-    Me.dgvListVendedores.Location = New System.Drawing.Point(183, 158)
-    Me.dgvListVendedores.Margin = New System.Windows.Forms.Padding(0)
-    Me.dgvListVendedores.MultiSelect = False
-    Me.dgvListVendedores.Name = "dgvListVendedores"
-    Me.dgvListVendedores.ReadOnly = True
+    Me.dgvData.DefaultCellStyle = DataGridViewCellStyle2
+    Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+    Me.dgvData.EnableHeadersVisualStyles = False
+    Me.dgvData.GridColor = System.Drawing.Color.White
+    Me.dgvData.Location = New System.Drawing.Point(184, 312)
+    Me.dgvData.Margin = New System.Windows.Forms.Padding(0)
+    Me.dgvData.MultiSelect = False
+    Me.dgvData.Name = "dgvData"
+    Me.dgvData.ReadOnly = True
     DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
     DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -101,14 +132,14 @@ Partial Class frmVendedores
     DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
     DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
     DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvListVendedores.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
-    Me.dgvListVendedores.RowHeadersVisible = False
-    Me.dgvListVendedores.RowTemplate.Height = 24
-    Me.dgvListVendedores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-    Me.dgvListVendedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvListVendedores.Size = New System.Drawing.Size(1071, 373)
-    Me.dgvListVendedores.TabIndex = 25
-    Me.dgvListVendedores.TabStop = False
+    Me.dgvData.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+    Me.dgvData.RowHeadersVisible = False
+    Me.dgvData.RowTemplate.Height = 24
+    Me.dgvData.ScrollBars = System.Windows.Forms.ScrollBars.None
+    Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+    Me.dgvData.Size = New System.Drawing.Size(664, 209)
+    Me.dgvData.TabIndex = 34
+    Me.dgvData.TabStop = False
     '
     'IdVendedorDataGridViewTextBoxColumn
     '
@@ -153,6 +184,7 @@ Partial Class frmVendedores
     Me.CiudadDataGridViewTextBoxColumn.HeaderText = "Ciudad"
     Me.CiudadDataGridViewTextBoxColumn.Name = "CiudadDataGridViewTextBoxColumn"
     Me.CiudadDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CiudadDataGridViewTextBoxColumn.Visible = False
     '
     'ProvinciaDataGridViewTextBoxColumn
     '
@@ -160,6 +192,7 @@ Partial Class frmVendedores
     Me.ProvinciaDataGridViewTextBoxColumn.HeaderText = "Provincia"
     Me.ProvinciaDataGridViewTextBoxColumn.Name = "ProvinciaDataGridViewTextBoxColumn"
     Me.ProvinciaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ProvinciaDataGridViewTextBoxColumn.Visible = False
     '
     'CodigoPostalDataGridViewTextBoxColumn
     '
@@ -189,6 +222,7 @@ Partial Class frmVendedores
     Me.Tel1DataGridViewTextBoxColumn.HeaderText = "Tel1"
     Me.Tel1DataGridViewTextBoxColumn.Name = "Tel1DataGridViewTextBoxColumn"
     Me.Tel1DataGridViewTextBoxColumn.ReadOnly = True
+    Me.Tel1DataGridViewTextBoxColumn.Visible = False
     '
     'Tel2DataGridViewTextBoxColumn
     '
@@ -204,6 +238,7 @@ Partial Class frmVendedores
     Me.EmailDataGridViewTextBoxColumn.HeaderText = "Email"
     Me.EmailDataGridViewTextBoxColumn.Name = "EmailDataGridViewTextBoxColumn"
     Me.EmailDataGridViewTextBoxColumn.ReadOnly = True
+    Me.EmailDataGridViewTextBoxColumn.Visible = False
     '
     'CategoriaDataGridViewTextBoxColumn
     '
@@ -211,7 +246,6 @@ Partial Class frmVendedores
     Me.CategoriaDataGridViewTextBoxColumn.HeaderText = "Categoria"
     Me.CategoriaDataGridViewTextBoxColumn.Name = "CategoriaDataGridViewTextBoxColumn"
     Me.CategoriaDataGridViewTextBoxColumn.ReadOnly = True
-    Me.CategoriaDataGridViewTextBoxColumn.Visible = False
     '
     'ComentarioDataGridViewTextBoxColumn
     '
@@ -225,47 +259,36 @@ Partial Class frmVendedores
     '
     Me.bsVendedores.DataSource = GetType(manDB.clsInfoVendedor)
     '
-    'btnNuevo
+    'cmbPeriodo
     '
-    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnNuevo.FlatAppearance.BorderSize = 0
-    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(24, 51)
-    Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
-    Me.btnNuevo.TabIndex = 26
-    Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = False
+    Me.cmbPeriodo.FormattingEnabled = True
+    Me.cmbPeriodo.Location = New System.Drawing.Point(893, 149)
+    Me.cmbPeriodo.Name = "cmbPeriodo"
+    Me.cmbPeriodo.Size = New System.Drawing.Size(189, 21)
+    Me.cmbPeriodo.TabIndex = 35
     '
-    'btnEditar
+    'dtFinal
     '
-    Me.btnEditar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnEditar.FlatAppearance.BorderSize = 0
-    Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnEditar.ForeColor = System.Drawing.Color.White
-    Me.btnEditar.Location = New System.Drawing.Point(24, 127)
-    Me.btnEditar.Name = "btnEditar"
-    Me.btnEditar.Size = New System.Drawing.Size(110, 61)
-    Me.btnEditar.TabIndex = 27
-    Me.btnEditar.Text = "Editar"
-    Me.btnEditar.UseVisualStyleBackColor = False
+    Me.dtFinal.Location = New System.Drawing.Point(843, 78)
+    Me.dtFinal.Name = "dtFinal"
+    Me.dtFinal.Size = New System.Drawing.Size(200, 20)
+    Me.dtFinal.TabIndex = 36
     '
-    'btnBorrar
+    'dtInicio
     '
-    Me.btnBorrar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnBorrar.FlatAppearance.BorderSize = 0
-    Me.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnBorrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnBorrar.ForeColor = System.Drawing.Color.White
-    Me.btnBorrar.Location = New System.Drawing.Point(24, 203)
-    Me.btnBorrar.Name = "btnBorrar"
-    Me.btnBorrar.Size = New System.Drawing.Size(110, 61)
-    Me.btnBorrar.TabIndex = 28
-    Me.btnBorrar.Text = "Eliminar"
-    Me.btnBorrar.UseVisualStyleBackColor = False
+    Me.dtInicio.Location = New System.Drawing.Point(637, 78)
+    Me.dtInicio.Name = "dtInicio"
+    Me.dtInicio.Size = New System.Drawing.Size(200, 20)
+    Me.dtInicio.TabIndex = 37
+    '
+    'lblNombre
+    '
+    Me.lblNombre.AutoSize = True
+    Me.lblNombre.Location = New System.Drawing.Point(194, 124)
+    Me.lblNombre.Name = "lblNombre"
+    Me.lblNombre.Size = New System.Drawing.Size(39, 13)
+    Me.lblNombre.TabIndex = 38
+    Me.lblNombre.Text = "Label2"
     '
     'btnVolver
     '
@@ -274,102 +297,42 @@ Partial Class frmVendedores
     Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(24, 636)
+    Me.btnVolver.Location = New System.Drawing.Point(30, 556)
     Me.btnVolver.Name = "btnVolver"
     Me.btnVolver.Size = New System.Drawing.Size(110, 61)
-    Me.btnVolver.TabIndex = 29
+    Me.btnVolver.TabIndex = 39
     Me.btnVolver.Text = "Volver"
     Me.btnVolver.UseVisualStyleBackColor = False
     '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(593, 9)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(218, 20)
-    Me.Label1.TabIndex = 30
-    Me.Label1.Text = "LISTA DE VENDEDORES"
-    '
-    'btnLiquidar
-    '
-    Me.btnLiquidar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnLiquidar.FlatAppearance.BorderSize = 0
-    Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnLiquidar.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidar.Location = New System.Drawing.Point(24, 49)
-    Me.btnLiquidar.Name = "btnLiquidar"
-    Me.btnLiquidar.Size = New System.Drawing.Size(110, 61)
-    Me.btnLiquidar.TabIndex = 31
-    Me.btnLiquidar.Text = "Liquidar"
-    Me.btnLiquidar.UseVisualStyleBackColor = False
-    Me.btnLiquidar.Visible = False
-    '
-    'Label2
-    '
-    Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(346, 74)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(39, 13)
-    Me.Label2.TabIndex = 32
-    Me.Label2.Text = "Label2"
-    '
-    'btnBuscar
-    '
-    Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnBuscar.FlatAppearance.BorderSize = 0
-    Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnBuscar.ForeColor = System.Drawing.Color.White
-    Me.btnBuscar.Location = New System.Drawing.Point(524, 89)
-    Me.btnBuscar.Name = "btnBuscar"
-    Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
-    Me.btnBuscar.TabIndex = 34
-    Me.btnBuscar.Text = "Buscar"
-    Me.btnBuscar.UseVisualStyleBackColor = False
-    '
-    'txtFiltro
-    '
-    Me.txtFiltro.Location = New System.Drawing.Point(183, 116)
-    Me.txtFiltro.Name = "txtFiltro"
-    Me.txtFiltro.Size = New System.Drawing.Size(241, 20)
-    Me.txtFiltro.TabIndex = 33
-    '
-    'frmVendedores
+    'frmLiquidacionVendedores
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-    Me.ClientSize = New System.Drawing.Size(1280, 720)
-    Me.Controls.Add(Me.btnBuscar)
-    Me.Controls.Add(Me.txtFiltro)
-    Me.Controls.Add(Me.Label2)
-    Me.Controls.Add(Me.Label1)
+    Me.ClientSize = New System.Drawing.Size(1264, 681)
     Me.Controls.Add(Me.btnVolver)
-    Me.Controls.Add(Me.btnBorrar)
-    Me.Controls.Add(Me.btnEditar)
-    Me.Controls.Add(Me.btnNuevo)
-    Me.Controls.Add(Me.dgvListVendedores)
+    Me.Controls.Add(Me.lblNombre)
+    Me.Controls.Add(Me.dtInicio)
+    Me.Controls.Add(Me.dtFinal)
+    Me.Controls.Add(Me.cmbPeriodo)
+    Me.Controls.Add(Me.dgvData)
     Me.Controls.Add(Me.btnLiquidar)
+    Me.Controls.Add(Me.Label1)
+    Me.Controls.Add(Me.lblFecha)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-    Me.Name = "frmVendedores"
+    Me.Name = "frmLiquidacionVendedores"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-    Me.Text = "frmVendedores"
-    CType(Me.dgvListVendedores, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.Text = "frmLiquidacionVendedores"
+    CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
   End Sub
-  Public WithEvents dgvListVendedores As System.Windows.Forms.DataGridView
-  Friend WithEvents btnNuevo As System.Windows.Forms.Button
-  Friend WithEvents btnEditar As System.Windows.Forms.Button
-  Friend WithEvents btnBorrar As System.Windows.Forms.Button
-  Friend WithEvents bsVendedores As System.Windows.Forms.BindingSource
-  Friend WithEvents btnVolver As System.Windows.Forms.Button
+  Friend WithEvents lblFecha As System.Windows.Forms.Label
+  Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents btnLiquidar As System.Windows.Forms.Button
+  Public WithEvents dgvData As System.Windows.Forms.DataGridView
   Friend WithEvents IdVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -385,9 +348,10 @@ Partial Class frmVendedores
   Friend WithEvents EmailDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CategoriaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentarioDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Label1 As System.Windows.Forms.Label
-  Friend WithEvents btnLiquidar As System.Windows.Forms.Button
-  Friend WithEvents Label2 As System.Windows.Forms.Label
-  Friend WithEvents btnBuscar As System.Windows.Forms.Button
-  Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
+  Friend WithEvents bsVendedores As System.Windows.Forms.BindingSource
+  Friend WithEvents cmbPeriodo As System.Windows.Forms.ComboBox
+  Friend WithEvents dtFinal As System.Windows.Forms.DateTimePicker
+  Friend WithEvents dtInicio As System.Windows.Forms.DateTimePicker
+  Friend WithEvents lblNombre As System.Windows.Forms.Label
+  Friend WithEvents btnVolver As System.Windows.Forms.Button
 End Class

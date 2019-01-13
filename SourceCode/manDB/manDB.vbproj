@@ -84,6 +84,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsInfoAdelanto.vb" />
     <Compile Include="clsInfoArticulos.vb" />
     <Compile Include="clsInfoArticuloVendido.vb" />
     <Compile Include="clsInfoCuenta.vb" />

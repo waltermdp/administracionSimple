@@ -374,4 +374,13 @@ Public Class frmDeben
   End Sub
 
 
+  Private Sub btnLiquidVendedores_MouseClick(sender As Object, e As MouseEventArgs) Handles btnLiquidVendedores.MouseClick
+    Try
+      Using objForm As New frmVendedores(True)
+        objForm.ShowDialog(Me)
+      End Using
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

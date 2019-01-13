@@ -3,8 +3,26 @@ Public Class frmVendedores
   Private WithEvents m_objVendedoresList As clsListVendedores = Nothing
   Private m_objVendedorCurrent As manDB.clsInfoVendedor = Nothing
 
+  Private m_Modo As Boolean = False
+
+  Public Sub New(Optional ByVal vModo As Boolean = False)
+
+    ' This call is required by the designer.
+    InitializeComponent()
+
+    ' Add any initialization after the InitializeComponent() call.
+    m_Modo = vModo
+
+  End Sub
+
   Private Sub frmVendedores_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
+      If m_Modo Then
+        btnEditar.Visible = False
+        btnNuevo.Visible = False
+        btnBorrar.Visible = False
+        btnLiquidar.Visible = True
+      End If
       Call MostrarListaVendedores()
       Call Refresh_Selection(-1)
     Catch ex As Exception
@@ -17,6 +35,7 @@ Public Class frmVendedores
       If m_objVendedoresList IsNot Nothing Then m_objVendedoresList.Dispose()
 
       m_objVendedoresList = New clsListVendedores()
+      m_objVendedoresList.Cfg_Filtro = GetFiltro()
       bsVendedores.DataSource = m_objVendedoresList.Binding
       Call VendedoresList_RefreshData()
       bsVendedores.ResetBindings(False)
@@ -24,6 +43,20 @@ Public Class frmVendedores
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Function GetFiltro() As String
+    Try
+      Dim Command As String = "where Nombre Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR Apellido Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR ID Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR NumVendedor Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR Grupo like '%" & txtFiltro.Text.Trim & "%'"
+      Return Command
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return ""
+    End Try
+  End Function
 
   Private Sub VendedoresList_RefreshData()
     Try
@@ -128,6 +161,30 @@ Public Class frmVendedores
     Try
       Me.Close()
       Exit Sub
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnLiquidar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnLiquidar.MouseClick
+    Try
+      If m_objVendedorCurrent Is Nothing Then
+        MsgBox("Debe seleccionar un Vendedor de la lista")
+        Exit Sub
+      End If
+
+      Using objForm As New frmLiquidacionVendedores(m_objVendedorCurrent)
+        objForm.ShowDialog(Me)
+      End Using
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
+    Try
+
+      Call MostrarListaVendedores()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

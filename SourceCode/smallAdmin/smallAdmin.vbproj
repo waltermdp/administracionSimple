@@ -93,6 +93,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoADatos\clsAdelantos.vb" />
     <Compile Include="AccesoADatos\clsArticulo.vb" />
     <Compile Include="AccesoADatos\clsCliente.vb" />
     <Compile Include="AccesoADatos\clsCuenta.vb" />
@@ -145,6 +146,12 @@
       <DependentUpon>frmDeben.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\frmDeben.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmLiquidacionVendedores.Designer.vb">
+      <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmLiquidacionVendedores.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmPreviewAplicarPago.Designer.vb">
@@ -212,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDeben.resx">
       <DependentUpon>frmDeben.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmLiquidacionVendedores.resx">
+      <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmPreviewAplicarPago.resx">
       <DependentUpon>frmPreviewAplicarPago.vb</DependentUpon>

@@ -76,8 +76,10 @@ Partial Class frmVenta
     Me.btnAddArticulo = New System.Windows.Forms.Button()
     Me.txtBuscarArticulo = New System.Windows.Forms.TextBox()
     Me.lstArticulos = New System.Windows.Forms.ListBox()
-    Me.Label12 = New System.Windows.Forms.Label()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label12 = New System.Windows.Forms.Label()
+    Me.Label15 = New System.Windows.Forms.Label()
+    Me.txtAdelantoVendedor = New System.Windows.Forms.TextBox()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
@@ -373,6 +375,8 @@ Partial Class frmVenta
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.txtAdelantoVendedor)
+    Me.gpVenta.Controls.Add(Me.Label15)
     Me.gpVenta.Controls.Add(Me.txtAdelanto)
     Me.gpVenta.Controls.Add(Me.Label14)
     Me.gpVenta.Controls.Add(Me.ListView1)
@@ -407,19 +411,20 @@ Partial Class frmVenta
     '
     'txtAdelanto
     '
-    Me.txtAdelanto.Location = New System.Drawing.Point(553, 251)
+    Me.txtAdelanto.Location = New System.Drawing.Point(553, 275)
     Me.txtAdelanto.Name = "txtAdelanto"
     Me.txtAdelanto.Size = New System.Drawing.Size(100, 20)
     Me.txtAdelanto.TabIndex = 35
+    Me.txtAdelanto.Text = "0"
     '
     'Label14
     '
     Me.Label14.AutoSize = True
-    Me.Label14.Location = New System.Drawing.Point(554, 235)
+    Me.Label14.Location = New System.Drawing.Point(554, 254)
     Me.Label14.Name = "Label14"
-    Me.Label14.Size = New System.Drawing.Size(49, 13)
+    Me.Label14.Size = New System.Drawing.Size(94, 13)
     Me.Label14.TabIndex = 34
-    Me.Label14.Text = "Adelanto"
+    Me.Label14.Text = "Adelanto de cuota"
     '
     'ListView1
     '
@@ -543,6 +548,10 @@ Partial Class frmVenta
     Me.lstArticulos.Size = New System.Drawing.Size(223, 171)
     Me.lstArticulos.TabIndex = 20
     '
+    'bsArticulos
+    '
+    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
+    '
     'Label12
     '
     Me.Label12.AutoSize = True
@@ -552,9 +561,22 @@ Partial Class frmVenta
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
     '
-    'bsArticulos
+    'Label15
     '
-    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
+    Me.Label15.AutoSize = True
+    Me.Label15.Location = New System.Drawing.Point(682, 253)
+    Me.Label15.Name = "Label15"
+    Me.Label15.Size = New System.Drawing.Size(132, 13)
+    Me.Label15.TabIndex = 36
+    Me.Label15.Text = "Adelanto para el vendedor"
+    '
+    'txtAdelantoVendedor
+    '
+    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(685, 275)
+    Me.txtAdelantoVendedor.Name = "txtAdelantoVendedor"
+    Me.txtAdelantoVendedor.Size = New System.Drawing.Size(100, 20)
+    Me.txtAdelantoVendedor.TabIndex = 37
+    Me.txtAdelantoVendedor.Text = "0"
     '
     'frmVenta
     '
@@ -647,4 +669,6 @@ Partial Class frmVenta
   Friend WithEvents cGuid As System.Windows.Forms.ColumnHeader
   Friend WithEvents txtAdelanto As System.Windows.Forms.TextBox
   Friend WithEvents Label14 As System.Windows.Forms.Label
+  Friend WithEvents txtAdelantoVendedor As System.Windows.Forms.TextBox
+  Friend WithEvents Label15 As System.Windows.Forms.Label
 End Class
