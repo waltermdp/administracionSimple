@@ -95,3 +95,5 @@ C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smal
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.GenerateResource.Cache
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmConfig.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmLiquidacionVendedores.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmConfig.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmLiquidacionVendedores.resources

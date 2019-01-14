@@ -10,7 +10,7 @@
   Private m_VencimientoCuota As Date
   Private m_FechaPago As Date
   Private m_EstadoPago As Integer
-
+  Private m_NumComprobante As Integer
 
   Public Property IdPago As Integer
     Get
@@ -21,6 +21,14 @@
     End Set
   End Property
 
+  Public Property NumComprobante As Integer
+    Get
+      Return m_NumComprobante
+    End Get
+    Set(value As Integer)
+      m_NumComprobante = value
+    End Set
+  End Property
 
 
   Public Property GuidProducto As Guid
@@ -92,14 +100,14 @@
     MyBase.New()
     Try
       IdPago = -1
-      GuidPago = Guid.Empty
-      m_GuidProducto = Guid.Empty
+      GuidPago = Nothing
+      GuidProducto = Nothing
       NumCuota = -1
       ValorCuota = 0
       VencimientoCuota = Nothing
       FechaPago = Nothing
       EstadoPago = -1
-      
+      NumComprobante = 0
 
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)

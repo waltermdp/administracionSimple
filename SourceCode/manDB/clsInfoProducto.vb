@@ -19,7 +19,7 @@
   Private m_listArticulos As New List(Of clsInfoArticuloVendido)
   Private m_Adelanto As Decimal
   Private m_ValorCuotaFija As Decimal
-
+  Private m_NumComprobante As Integer
 
   Public Property ListaPagos As List(Of clsInfoPagos)
     Get

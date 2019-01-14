@@ -67,6 +67,7 @@ Partial Class frmDeben
     Me.rbtnClientName = New System.Windows.Forms.RadioButton()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.Label5 = New System.Windows.Forms.Label()
+    Me.Button1 = New System.Windows.Forms.Button()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -510,6 +511,15 @@ Partial Class frmDeben
     Me.Label5.TabIndex = 50
     Me.Label5.Text = "PRODUCTOS VENDIDOS"
     '
+    'Button1
+    '
+    Me.Button1.Location = New System.Drawing.Point(895, 472)
+    Me.Button1.Name = "Button1"
+    Me.Button1.Size = New System.Drawing.Size(139, 32)
+    Me.Button1.TabIndex = 51
+    Me.Button1.Text = "Button1"
+    Me.Button1.UseVisualStyleBackColor = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -518,6 +528,7 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.Button1)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.btnListaClientes)
@@ -588,4 +599,5 @@ Partial Class frmDeben
   Friend WithEvents rbtnClientName As System.Windows.Forms.RadioButton
   Friend WithEvents btnMinimize As System.Windows.Forms.Button
   Friend WithEvents Label5 As System.Windows.Forms.Label
+  Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

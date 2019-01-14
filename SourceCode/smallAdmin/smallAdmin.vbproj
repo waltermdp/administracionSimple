@@ -96,9 +96,11 @@
     <Compile Include="AccesoADatos\clsAdelantos.vb" />
     <Compile Include="AccesoADatos\clsArticulo.vb" />
     <Compile Include="AccesoADatos\clsCliente.vb" />
+    <Compile Include="AccesoADatos\clsCobros.vb" />
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
+    <Compile Include="AccesoADatos\clsInfoResumen.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
     <Compile Include="AccesoADatos\clsPrincipal.vb" />
     <Compile Include="AccesoADatos\clsProducto.vb" />
@@ -185,9 +187,11 @@
       <DependentUpon>frmListaClientes.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
     <Compile Include="Modulos\modCommon.vb" />
     <Compile Include="Modulos\modFile.vb" />
+    <Compile Include="Modulos\modVisa.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

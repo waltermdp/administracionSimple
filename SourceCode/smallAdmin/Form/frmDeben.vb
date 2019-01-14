@@ -302,9 +302,9 @@ Public Class frmDeben
 
         Dim auxPago As clsInfoPagos = Nothing
         For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota)
-          If pago.EstadoPago = modCommon.E_EstadoPago.Debe Then
+          If pago.EstadoPago = E_EstadoPago.Debe Then
 
-            pago.EstadoPago = modCommon.E_EstadoPago.Pago
+            pago.EstadoPago = E_EstadoPago.Pago
             pago.FechaPago = Date.Now
             vResult = clsPago.Save(pago)
             If vResult <> Result.OK Then
@@ -379,6 +379,24 @@ Public Class frmDeben
       Using objForm As New frmVendedores(True)
         objForm.ShowDialog(Me)
       End Using
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Try
+      Dim archivo As New List(Of String)
+      Dim AbrirArchivo As New OpenFileDialog
+      If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
+      modFile.Load(AbrirArchivo.FileName, archivo)
+      Dim mov As New List(Of clsInfoMovimiento)
+      GetCuerpo(archivo, mov)
+      Dim s As Integer = 0
+
+      modFile.Save("c:\1.txt", archivo)
+
+      s = 1
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

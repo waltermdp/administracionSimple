@@ -1,12 +1,7 @@
 ﻿Module modCommon
 
 
-  Public Enum E_EstadoPago As Integer
-    Debe = 0
-    Pago = 1
-    Anulo_Editado = 2  'Se anula el pago para generar uno nuevo
-    Vencido = 3  'se anula el pago porque no pago dentro del plazo
-  End Enum
+
 
   Public Function GetNameOfTipoPago(ByVal vGuid As Guid) As String
     Try
@@ -26,7 +21,7 @@
   Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal vACuenta As Decimal, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vFechaVenta As Date, ByVal vPrimerVencimiento As Date, Optional ByVal vFechaVencimiento As Date = Nothing) As manDB.clsInfoPagos
     Try
       Dim pago As New manDB.clsInfoPagos
-      pago.EstadoPago = E_EstadoPago.Debe
+      pago.EstadoPago = libCommon.Comunes.E_EstadoPago.Debe
       pago.GuidProducto = vGuidProducto
       pago.GuidPago = Guid.NewGuid
       pago.FechaPago = Date.MaxValue ' Vencimiento(auxCuotas, datePrimerPago.Value)
@@ -77,5 +72,18 @@
     End Try
   End Function
 
+  Public Function FillString(ByVal texto As String, ByVal lenFinal As Integer, ByVal caracter As Char) As String
+    Try
+      If caracter = String.Empty Then Return texto
+
+      For i As Integer = 0 To lenFinal - texto.Length
+        texto = texto.Insert(0, caracter)
+      Next
+      Return texto
+    Catch ex As Exception
+      Call libCommon.Comunes.Print_msg(ex.Message)
+      Return texto
+    End Try
+  End Function
 
 End Module
