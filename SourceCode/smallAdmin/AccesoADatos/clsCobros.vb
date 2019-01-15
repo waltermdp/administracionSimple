@@ -1,10 +1,13 @@
-﻿Imports libCommon.Comunes
+﻿Imports Excel = Microsoft.Office.Interop.Excel
+Imports libCommon.Comunes
 Public Class clsCobros
 
 
   Public Shared Function ShowResumen(ByVal vListMov As List(Of clsInfoMovimiento)) As Result
     Try
       Dim lstResumen As New List(Of clsInfoResumen)
+
+      ConvertirEnArchivo(vListMov)
 
       For Each mov In vListMov
         Dim lstPago As New clsListPagos
@@ -30,7 +33,7 @@ Public Class clsCobros
         lstResumen.Add(Resumen)
       Next
 
-
+      ConvertirEnArchivo(vListMov)
       Return Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -74,7 +77,35 @@ Public Class clsCobros
       Next
 
 
+
         Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function ConvertirEnArchivo(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim xls As New Excel.Application
+      Dim worksheet As Excel.Worksheet
+      Dim workbook As Excel.Workbook
+      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQDempty.xls"))
+      worksheet = workbook.Worksheets("Facturas")
+      For i As Integer = 2 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+        worksheet.Cells(i, 1).value = vMovimientos(i - 2).NumeroTarjeta
+        worksheet.Cells(i, 2).value = vMovimientos(i - 2).NumeroComprobante
+        worksheet.Cells(i, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+        worksheet.Cells(i, 4).value = vMovimientos(i - 2).Importe 'acepta 1.23
+        worksheet.Cells(i, 5).value = vMovimientos(i - 2).IdentificadorDebito
+        worksheet.Cells(i, 6).value = vMovimientos(i - 2).Param1 ' N o E ver especificacion
+      Next
+
+      workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
+
+      MsgBox("Finalizo exportacion a excel")
+
+      Return Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
       Return Result.ErrorEx
