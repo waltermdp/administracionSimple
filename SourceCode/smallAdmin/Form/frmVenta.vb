@@ -16,6 +16,7 @@ Public Class frmVenta
   Private m_lstArticulos As clsListArticulos
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
   Private m_lstArticulosEnStock As List(Of clsListaStorage)
+  Private m_NumOperacion As Integer
 
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
@@ -57,8 +58,10 @@ Public Class frmVenta
       ListView1.Columns(0).Width = CInt(0.7 * ListView1.Width)
       ListView1.Columns(1).Width = ListView1.Width - ListView1.Columns(0).Width - 5
 
-
-
+      Dim lstpagos As New clsListPagos
+      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
+      lstpagos.RefreshData()
+      m_NumOperacion = lstpagos.Items.First.NumComprobante + 1
       If m_CurrentPersona Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub
       If m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing Then
         vResult = clsPersona.Load(m_Producto.GuidCliente, m_CurrentPersona)
@@ -85,6 +88,8 @@ Public Class frmVenta
         If vResult <> Result.OK Then
           Call Print_msg("Falloo carga de cuenta")
         End If
+
+      
 
         DateVenta.Value = m_Producto.FechaVenta
         dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
@@ -330,6 +335,7 @@ Public Class frmVenta
 
 
       auxPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.Adelanto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
+      auxPago.NumComprobante = m_NumOperacion
       m_lstPagos.Add(auxPago)
 
       Call ReloadListPagos()

@@ -59,6 +59,8 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.txtAdelantoVendedor = New System.Windows.Forms.TextBox()
+    Me.Label15 = New System.Windows.Forms.Label()
     Me.txtAdelanto = New System.Windows.Forms.TextBox()
     Me.Label14 = New System.Windows.Forms.Label()
     Me.ListView1 = New System.Windows.Forms.ListView()
@@ -78,8 +80,6 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
-    Me.Label15 = New System.Windows.Forms.Label()
-    Me.txtAdelantoVendedor = New System.Windows.Forms.TextBox()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
@@ -189,9 +189,9 @@ Partial Class frmVenta
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
-    Me.dgvCuotas.Location = New System.Drawing.Point(254, 406)
+    Me.dgvCuotas.Location = New System.Drawing.Point(15, 379)
     Me.dgvCuotas.Name = "dgvCuotas"
-    Me.dgvCuotas.Size = New System.Drawing.Size(831, 67)
+    Me.dgvCuotas.Size = New System.Drawing.Size(1053, 67)
     Me.dgvCuotas.TabIndex = 15
     '
     'IdPagoDataGridViewTextBoxColumn
@@ -409,6 +409,23 @@ Partial Class frmVenta
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
     '
+    'txtAdelantoVendedor
+    '
+    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(685, 275)
+    Me.txtAdelantoVendedor.Name = "txtAdelantoVendedor"
+    Me.txtAdelantoVendedor.Size = New System.Drawing.Size(100, 20)
+    Me.txtAdelantoVendedor.TabIndex = 37
+    Me.txtAdelantoVendedor.Text = "0"
+    '
+    'Label15
+    '
+    Me.Label15.AutoSize = True
+    Me.Label15.Location = New System.Drawing.Point(682, 253)
+    Me.Label15.Name = "Label15"
+    Me.Label15.Size = New System.Drawing.Size(132, 13)
+    Me.Label15.TabIndex = 36
+    Me.Label15.Text = "Adelanto para el vendedor"
+    '
     'txtAdelanto
     '
     Me.txtAdelanto.Location = New System.Drawing.Point(553, 275)
@@ -560,23 +577,6 @@ Partial Class frmVenta
     Me.Label12.Size = New System.Drawing.Size(47, 13)
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
-    '
-    'Label15
-    '
-    Me.Label15.AutoSize = True
-    Me.Label15.Location = New System.Drawing.Point(682, 253)
-    Me.Label15.Name = "Label15"
-    Me.Label15.Size = New System.Drawing.Size(132, 13)
-    Me.Label15.TabIndex = 36
-    Me.Label15.Text = "Adelanto para el vendedor"
-    '
-    'txtAdelantoVendedor
-    '
-    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(685, 275)
-    Me.txtAdelantoVendedor.Name = "txtAdelantoVendedor"
-    Me.txtAdelantoVendedor.Size = New System.Drawing.Size(100, 20)
-    Me.txtAdelantoVendedor.TabIndex = 37
-    Me.txtAdelantoVendedor.Text = "0"
     '
     'frmVenta
     '

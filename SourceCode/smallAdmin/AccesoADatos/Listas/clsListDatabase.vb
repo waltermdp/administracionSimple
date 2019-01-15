@@ -5,12 +5,9 @@ Public Class clsListDatabase
   Inherits clsList(Of clsInfoDatabase)
   Private m_DBConnectionString As String
 
-  Public Sub New(ByVal vDBConnectionString As String, ByVal vCFG_RegXPag As Integer, Optional ByVal vCFG_Filtro As String = "")
+  Public Sub New()
     Try
-      Call InitDB()
-      m_DBConnectionString = vDBConnectionString
-
-      Call Init(vCFG_RegXPag, vCFG_Filtro)
+      Call Init(10)
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -25,13 +22,14 @@ Public Class clsListDatabase
       Try
         objDB = New libDB.clsAcceso
 
-        objResult = objDB.OpenDB(m_DBConnectionString)
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
         If objResult <> Result.OK Then Return objResult
 
         Dim objListDBInfo As clsInfoDatabase
         Dim strCommand As String = "Clientes" ', (select max(bcospac.fecha) as LastVisitDate from BcosPac where BcosPac.idPac = Pac.idPac) as  LastVisitDate from Pac)"
         Dim objDatos As libDB.clsTabla
         objDatos = New libDB.clsTabla(strCommand)
+        objDatos.Filter = m_Cfg_Filtro
         Dim auxResult As Result = objDatos.GetData(objDB)
         If auxResult > 0 Then
           For Each fila As DataRow In objDatos.Table.Rows

@@ -392,6 +392,10 @@ Public Class frmDeben
       modFile.Load(AbrirArchivo.FileName, archivo)
       Dim mov As New List(Of clsInfoMovimiento)
       GetCuerpo(archivo, mov)
+
+      clsCobros.ShowResumen(mov)
+
+
       Dim s As Integer = 0
 
       modFile.Save("c:\1.txt", archivo)

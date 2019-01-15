@@ -52,7 +52,7 @@ Public Class frmListaClientes
 
 
 
-      m_objDatabaseList = New clsListDatabase(Entorno.DB_SLocal_ConnectionString, CONST_COUNT_PACS_FOR_PAGE)
+      m_objDatabaseList = New clsListDatabase()
 
 
       '///////////////TODO_A: OJO ver order by. Agregar icono asc desc //////////////////////////////////////
