@@ -52,8 +52,10 @@ Partial Class frmLiquidacionVendedores
     Me.dtInicio = New System.Windows.Forms.DateTimePicker()
     Me.lblNombre = New System.Windows.Forms.Label()
     Me.btnVolver = New System.Windows.Forms.Button()
+    Me.pbxResumen = New System.Windows.Forms.PictureBox()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'lblFecha
@@ -81,7 +83,7 @@ Partial Class frmLiquidacionVendedores
     Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnLiquidar.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidar.Location = New System.Drawing.Point(184, 203)
+    Me.btnLiquidar.Location = New System.Drawing.Point(987, 65)
     Me.btnLiquidar.Name = "btnLiquidar"
     Me.btnLiquidar.Size = New System.Drawing.Size(110, 61)
     Me.btnLiquidar.TabIndex = 14
@@ -262,21 +264,21 @@ Partial Class frmLiquidacionVendedores
     'cmbPeriodo
     '
     Me.cmbPeriodo.FormattingEnabled = True
-    Me.cmbPeriodo.Location = New System.Drawing.Point(893, 149)
+    Me.cmbPeriodo.Location = New System.Drawing.Point(691, 65)
     Me.cmbPeriodo.Name = "cmbPeriodo"
     Me.cmbPeriodo.Size = New System.Drawing.Size(189, 21)
     Me.cmbPeriodo.TabIndex = 35
     '
     'dtFinal
     '
-    Me.dtFinal.Location = New System.Drawing.Point(843, 78)
+    Me.dtFinal.Location = New System.Drawing.Point(473, 66)
     Me.dtFinal.Name = "dtFinal"
     Me.dtFinal.Size = New System.Drawing.Size(200, 20)
     Me.dtFinal.TabIndex = 36
     '
     'dtInicio
     '
-    Me.dtInicio.Location = New System.Drawing.Point(637, 78)
+    Me.dtInicio.Location = New System.Drawing.Point(255, 66)
     Me.dtInicio.Name = "dtInicio"
     Me.dtInicio.Size = New System.Drawing.Size(200, 20)
     Me.dtInicio.TabIndex = 37
@@ -304,12 +306,21 @@ Partial Class frmLiquidacionVendedores
     Me.btnVolver.Text = "Volver"
     Me.btnVolver.UseVisualStyleBackColor = False
     '
+    'pbxResumen
+    '
+    Me.pbxResumen.Location = New System.Drawing.Point(307, 132)
+    Me.pbxResumen.Name = "pbxResumen"
+    Me.pbxResumen.Size = New System.Drawing.Size(896, 537)
+    Me.pbxResumen.TabIndex = 41
+    Me.pbxResumen.TabStop = False
+    '
     'frmLiquidacionVendedores
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-    Me.ClientSize = New System.Drawing.Size(1264, 681)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.pbxResumen)
     Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.lblNombre)
     Me.Controls.Add(Me.dtInicio)
@@ -325,6 +336,7 @@ Partial Class frmLiquidacionVendedores
     Me.Text = "frmLiquidacionVendedores"
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -354,4 +366,5 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents dtInicio As System.Windows.Forms.DateTimePicker
   Friend WithEvents lblNombre As System.Windows.Forms.Label
   Friend WithEvents btnVolver As System.Windows.Forms.Button
+  Friend WithEvents pbxResumen As System.Windows.Forms.PictureBox
 End Class
