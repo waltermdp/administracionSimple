@@ -1,6 +1,10 @@
 ﻿Imports libCommon.Comunes
 Imports manDB
 Imports System.Drawing
+Imports System.Windows.Forms
+Imports System.Drawing.Printing
+Imports System.Drawing.Drawing2D
+
 Public Class frmLiquidacionVendedores
   Private m_Vendedor As clsInfoVendedor
   Private m_objListPagos As clsListPagos
@@ -48,6 +52,8 @@ Public Class frmLiquidacionVendedores
   Private fuente As New Font("Arial", 10)
 
   Private m_Liq As New Liquidacion
+  Private WithEvents m_PrintDoc As New PrintDocument
+  Private m_CantidadRengloes As Integer = 0
 
 
   Public Sub New(ByVal vVendedor As manDB.clsInfoVendedor)
@@ -71,9 +77,9 @@ Public Class frmLiquidacionVendedores
 
   Private Sub frmLiquidacionVendedores_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
-      'DateTimePicker1.Format = DateTimePickerFormat.Custom
+      dtInicio.Format = DateTimePickerFormat.Custom
       'DateTimePicker1.MaxDate = Today
-      'DateTimePicker1.CustomFormat = "MMMM YYYYY"
+      dtInicio.CustomFormat = "MMMM, yyyy"
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -85,6 +91,7 @@ Public Class frmLiquidacionVendedores
 
   Private Sub btnLiquidar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnLiquidar.MouseClick
     Try
+      
       'Buscar los pagos realizados entre el periodo de tiempo
       m_lstResumenVentas = New List(Of clsInfoResumenVenta)
 
@@ -92,6 +99,7 @@ Public Class frmLiquidacionVendedores
       Call ResolverLiquidacion()
       pbxResumen.Size = New Size(pbxResumen.Size.Width, 80 * 20)
       Call pbxResumen.Refresh()
+      btnImprimir.Visible = True
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -103,8 +111,12 @@ Public Class frmLiquidacionVendedores
     Try
       If m_objListPagos IsNot Nothing Then m_objListPagos.Dispose()
 
+
+      m_FechaFin = New Date(dtInicio.Value.Year, dtInicio.Value.Month, Date.DaysInMonth(dtInicio.Value.Year, dtInicio.Value.Month))
+      m_FechaInicio = New Date(dtInicio.Value.Year, dtInicio.Value.Month, 1)
+
       m_objListPagos = New clsListPagos
-      m_objListPagos.Cfg_Filtro = "where EstadoPago = " & E_EstadoPago.Pago & " and NumCuota=1 and FechaPago between #" & Format(dtInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dtFinal.Value, strFormatoAnsiStdFecha) & "#"
+      m_objListPagos.Cfg_Filtro = "where EstadoPago = " & E_EstadoPago.Pago & " and NumCuota=1 and FechaPago between #" & Format(m_FechaInicio, strFormatoAnsiStdFecha) & "# and #" & Format(m_FechaFin, strFormatoAnsiStdFecha) & "#"
       m_objListPagos.RefreshData()
 
       If m_objListProductos IsNot Nothing Then m_objListProductos.Dispose()
@@ -183,16 +195,16 @@ Public Class frmLiquidacionVendedores
 
  
       With m_Liq
-        .Zona = Zona * .Zona / 100
+        If chkZona.Checked Then .Zona = Zona * .Zona / 100
         .VLiquidadas50 = VLiquidadas50 * .VLiquidadas50 / 100
         .VLiquidadas70 = VLiquidadas70 * .VLiquidadas70 / 100
         .VLiquidadas90 = VLiquidadas90 * .VLiquidadas90 / 100
         .VLiquidadas110 = VLiquidadas110 * .VLiquidadas110 / 100
         .PremMen80Vent = PremMen80Vent * .PremMen80Vent / 100
         .CarpetaDeProb = CarpetaDeProb * .CarpetaDeProb / 100
-        .Auto = Auto * .Auto / 100
-        .Vendedores = Vendedores * .Vendedores / 100
-        .Aguinaldo = Aguinaldo * .Aguinaldo / 100
+        If chkAuto.Checked Then .Auto = Auto * .Auto / 100
+        If chkVendedores.Checked Then .Vendedores = Vendedores * .Vendedores / 100
+        If chkAguinaldo.Checked Then .Aguinaldo = Aguinaldo * .Aguinaldo / 100
         .Vales = Vales
 
       End With
@@ -219,6 +231,39 @@ Public Class frmLiquidacionVendedores
       If m_Liq.TotalesIntervalos Is Nothing Then Exit Sub
       e.Graphics.Clear(Color.White)
       Call Preview(e.Graphics)
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Dim paginas As Integer = 0
+  Private Sub m_PrintDoc_PrintPage(sender As Object, e As PrintPageEventArgs) Handles m_PrintDoc.PrintPage
+    Try
+      If m_Liq.TotalesIntervalos Is Nothing Then Exit Sub
+
+
+
+
+      Dim c0 As GraphicsContainer = e.Graphics.BeginContainer
+      e.Graphics.ScaleTransform(0.8, 0.8)
+      If paginas = 0 Then
+
+      Else
+        e.Graphics.TranslateTransform(0, -200) 'desplazar n renglones con cada hoja extra
+      End If
+      e.Graphics.Clear(Color.White)
+      Call Preview(e.Graphics)
+      e.Graphics.EndContainer(c0)
+
+      paginas += 1
+      If paginas < 2 Then
+        e.HasMorePages = True
+      Else
+        e.HasMorePages = False
+        paginas = 0
+      End If
+
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -293,66 +338,77 @@ Public Class frmLiquidacionVendedores
       g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
       renglon += 1
       g.DrawString("VENTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString("PORCENTAJES", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString("CANT. DE LIBROS", fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString("%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString("REFERENCIA", fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString("IMPORTE", fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       'g.DrawString("TOTAL", fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
       renglon += 1
+      sf = New StringFormat(StringFormatFlags.DirectionRightToLeft)
+      sf.Alignment = StringAlignment.Center
       g.DrawString(Comision(0), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(pVenta1, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(pVenta1 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(0)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(0)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(0)(4), fuente, Brushes.Black, New Rectangle(Columna * 3, RenAltura * renglon, Columna, RenAltura), sf)
       renglon += 1
       g.DrawString(Comision(1), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(pVenta2, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(pVenta2 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(1)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(1)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString(Comision(2), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(pVenta3, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(pVenta3 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(2)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(2)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString(Comision(3), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(pVenta4, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(pVenta4 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(3)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.TotalesIntervalos(3)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
 
       g.DrawString("ZONA", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(Zona, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(Zona & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.Zona, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 50", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas50, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(VLiquidadas50 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.VLiquidadas50, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 70", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas70, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(VLiquidadas70 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.VLiquidadas70, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 90", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas90, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(VLiquidadas90 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.VLiquidadas90, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 110", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas110, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(VLiquidadas110 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.VLiquidadas110, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("PREMIO MENSUAL 80 VTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(PremMen80Vent, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(PremMen80Vent & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.PremMen80Vent, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("CARPETA DE PROBLEMAS + DE 5", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(CarpetaDeProb, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(CarpetaDeProb & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.CarpetaDeProb, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("AUTO", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(Auto, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(Auto & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.Auto, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("VENDEDORES", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(Vendedores, fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(Vendedores & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.Vendedores, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("PARCIAL", fuente, Brushes.Black, 0, RenAltura * renglon)
@@ -367,6 +423,7 @@ Public Class frmLiquidacionVendedores
       renglon += 1
       g.DrawLine(New Pen(Brushes.Black, 3), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
       g.DrawString("AGUINALDO", fuente, Brushes.Black, 0, RenAltura * renglon)
+      g.DrawString(Aguinaldo & "%", fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
       g.DrawString(m_Liq.Aguinaldo, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
 
       renglon += 4
@@ -384,9 +441,27 @@ Public Class frmLiquidacionVendedores
       'g.DrawString("IMPORTE", fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
       'g.DrawString(Comision(i), fuente, Brushes.Black, Columna * 5, RenAltura * renglon)
 
-
+      m_CantidadRengloes = renglon
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub btnImprimir_MouseClick(sender As Object, e As MouseEventArgs) Handles btnImprimir.MouseClick
+    Try
+      Dim obj As New PrintDialog
+      If obj.ShowDialog = Windows.Forms.DialogResult.OK Then
+        Dim y As Integer = 0
+        m_PrintDoc.PrinterSettings = obj.PrinterSettings
+        m_PrintDoc.Print()
+
+      End If
+
+
+    Catch ex As Exception
+      Call libCommon.Comunes.Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
 End Class
