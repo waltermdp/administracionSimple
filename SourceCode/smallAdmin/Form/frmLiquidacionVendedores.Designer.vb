@@ -53,9 +53,11 @@ Partial Class frmLiquidacionVendedores
     Me.lblNombre = New System.Windows.Forms.Label()
     Me.btnVolver = New System.Windows.Forms.Button()
     Me.pbxResumen = New System.Windows.Forms.PictureBox()
+    Me.Panel1 = New System.Windows.Forms.Panel()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
     '
     'lblFecha
@@ -308,11 +310,20 @@ Partial Class frmLiquidacionVendedores
     '
     'pbxResumen
     '
-    Me.pbxResumen.Location = New System.Drawing.Point(307, 132)
+    Me.pbxResumen.Location = New System.Drawing.Point(22, 26)
     Me.pbxResumen.Name = "pbxResumen"
     Me.pbxResumen.Size = New System.Drawing.Size(896, 537)
     Me.pbxResumen.TabIndex = 41
     Me.pbxResumen.TabStop = False
+    '
+    'Panel1
+    '
+    Me.Panel1.AutoScroll = True
+    Me.Panel1.Controls.Add(Me.pbxResumen)
+    Me.Panel1.Location = New System.Drawing.Point(227, 164)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(950, 406)
+    Me.Panel1.TabIndex = 42
     '
     'frmLiquidacionVendedores
     '
@@ -320,7 +331,7 @@ Partial Class frmLiquidacionVendedores
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
-    Me.Controls.Add(Me.pbxResumen)
+    Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.lblNombre)
     Me.Controls.Add(Me.dtInicio)
@@ -337,6 +348,7 @@ Partial Class frmLiquidacionVendedores
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.Panel1.ResumeLayout(False)
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -367,4 +379,5 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents lblNombre As System.Windows.Forms.Label
   Friend WithEvents btnVolver As System.Windows.Forms.Button
   Friend WithEvents pbxResumen As System.Windows.Forms.PictureBox
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class
