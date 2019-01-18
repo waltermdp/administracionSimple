@@ -106,7 +106,7 @@ Partial Class frmVendedores
     Me.dgvListVendedores.RowTemplate.Height = 24
     Me.dgvListVendedores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
     Me.dgvListVendedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvListVendedores.Size = New System.Drawing.Size(1071, 373)
+    Me.dgvListVendedores.Size = New System.Drawing.Size(1071, 523)
     Me.dgvListVendedores.TabIndex = 25
     Me.dgvListVendedores.TabStop = False
     '
@@ -311,11 +311,12 @@ Partial Class frmVendedores
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(346, 74)
+    Me.Label2.BackColor = System.Drawing.Color.White
+    Me.Label2.Location = New System.Drawing.Point(180, 75)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(39, 13)
+    Me.Label2.Size = New System.Drawing.Size(29, 13)
     Me.Label2.TabIndex = 32
-    Me.Label2.Text = "Label2"
+    Me.Label2.Text = "Filtro"
     '
     'btnBuscar
     '
@@ -324,7 +325,7 @@ Partial Class frmVendedores
     Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnBuscar.ForeColor = System.Drawing.Color.White
-    Me.btnBuscar.Location = New System.Drawing.Point(524, 89)
+    Me.btnBuscar.Location = New System.Drawing.Point(491, 89)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
     Me.btnBuscar.TabIndex = 34
@@ -333,9 +334,9 @@ Partial Class frmVendedores
     '
     'txtFiltro
     '
-    Me.txtFiltro.Location = New System.Drawing.Point(183, 116)
+    Me.txtFiltro.Location = New System.Drawing.Point(183, 89)
     Me.txtFiltro.Name = "txtFiltro"
-    Me.txtFiltro.Size = New System.Drawing.Size(241, 20)
+    Me.txtFiltro.Size = New System.Drawing.Size(292, 20)
     Me.txtFiltro.TabIndex = 33
     '
     'frmVendedores

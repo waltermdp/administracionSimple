@@ -192,6 +192,7 @@ Public Class frmCuenta
       End If
       If (indice >= 0) Then
         m_objCuentaCurrent = CType(lstCuentas.SelectedItem, clsInfoCuenta)
+
       End If
 
       Call FillCuentaData()
@@ -245,4 +246,49 @@ Public Class frmCuenta
     End Try
   End Sub
 
+  Private Sub NombrarCampos(ByVal vTipoDeCuenta As clsTipoPago)
+    Try
+      If vTipoDeCuenta Is Nothing Then
+        lblCodigo1.Visible = False
+        txtCodigo1.Visible = False
+        lblCodigo2.Visible = False
+        txtCodigo2.Visible = False
+        lblCodigo3.Visible = False
+        txtCodigo3.Visible = False
+        lblCodigo4.Visible = False
+        txtCodigo4.Visible = False
+        Exit Sub
+      End If
+      lblCodigo1.Text = vTipoDeCuenta.NombreCodigo1
+      lblCodigo1.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo1)
+      txtCodigo1.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo1)
+
+      lblCodigo2.Text = vTipoDeCuenta.NombreCodigo2
+      lblCodigo2.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo2)
+      txtCodigo2.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo2)
+
+      lblCodigo3.Visible = False
+      txtCodigo3.Visible = False
+      lblCodigo3.Text = vTipoDeCuenta.NombreCodigo3
+      If vTipoDeCuenta.NombreCodigo3 Is Nothing Then
+
+      End If
+      lblCodigo4.Text = vTipoDeCuenta.NombreCodigo4
+      lblCodigo4.Visible = False
+      txtCodigo4.Visible = False
+      If vTipoDeCuenta.NombreCodigo4 Is Nothing Then
+
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub cmbTipoDeCuenta_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbTipoDeCuenta.SelectedValueChanged
+    Try
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

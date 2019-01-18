@@ -58,7 +58,8 @@ Module Entorno
   Public Function GuardarTipoPago(ByRef rListTipoListaPago As List(Of manDB.clsTipoPago)) As Result
 
     Try
-
+      MsgBox("FALTA CARGAR PARAMETROS!")
+      Return Result.NOK
       Dim Fila As Integer
       Dim objResult As Result
 
@@ -81,7 +82,6 @@ Module Entorno
           WriteLine(Fila, auxstr)
           auxstr = CStr(rListTipoListaPago(i).GuidTipo.ToString)
           WriteLine(Fila, auxstr)
-
         Next
         objResult = Result.OK
 
@@ -136,10 +136,16 @@ Module Entorno
             Else
               auxTipoPago.PermiteCuotas = True
             End If
-
+            Input(Fila, auxstr)
+            auxTipoPago.NombreCodigo1 = auxstr
+            Input(Fila, auxstr)
+            auxTipoPago.NombreCodigo2 = auxstr
+            Input(Fila, auxstr)
+            auxTipoPago.NombreCodigo3 = auxstr
+            Input(Fila, auxstr)
+            auxTipoPago.NombreCodigo4 = auxstr
             Input(Fila, auxstr)
             auxTipoPago.GuidTipo = New Guid(auxstr)
-
             rListTipoPago.Add(auxTipoPago)
           Catch ex As Exception
             objResult = Result.ErrorEx

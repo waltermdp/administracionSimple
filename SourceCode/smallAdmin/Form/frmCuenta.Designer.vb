@@ -126,26 +126,36 @@ Partial Class frmCuenta
     '
     'btnVolver
     '
-    Me.btnVolver.Location = New System.Drawing.Point(23, 257)
+    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnVolver.FlatAppearance.BorderSize = 0
+    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnVolver.ForeColor = System.Drawing.Color.White
+    Me.btnVolver.Location = New System.Drawing.Point(11, 237)
     Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(98, 23)
+    Me.btnVolver.Size = New System.Drawing.Size(110, 61)
     Me.btnVolver.TabIndex = 10
     Me.btnVolver.Text = "Volver"
-    Me.btnVolver.UseVisualStyleBackColor = True
+    Me.btnVolver.UseVisualStyleBackColor = False
     '
     'btnGuardar
     '
-    Me.btnGuardar.Location = New System.Drawing.Point(23, 62)
+    Me.btnGuardar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnGuardar.FlatAppearance.BorderSize = 0
+    Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnGuardar.ForeColor = System.Drawing.Color.White
+    Me.btnGuardar.Location = New System.Drawing.Point(11, 22)
     Me.btnGuardar.Name = "btnGuardar"
-    Me.btnGuardar.Size = New System.Drawing.Size(98, 23)
+    Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
     Me.btnGuardar.TabIndex = 11
     Me.btnGuardar.Text = "Guardar"
-    Me.btnGuardar.UseVisualStyleBackColor = True
+    Me.btnGuardar.UseVisualStyleBackColor = False
     '
     'lblCliente
     '
     Me.lblCliente.AutoSize = True
-    Me.lblCliente.Location = New System.Drawing.Point(611, 38)
+    Me.lblCliente.Location = New System.Drawing.Point(141, 47)
     Me.lblCliente.Name = "lblCliente"
     Me.lblCliente.Size = New System.Drawing.Size(39, 13)
     Me.lblCliente.TabIndex = 12
@@ -166,26 +176,37 @@ Partial Class frmCuenta
     '
     'btnNuevo
     '
-    Me.btnNuevo.Location = New System.Drawing.Point(23, 28)
+    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnNuevo.FlatAppearance.BorderSize = 0
+    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNuevo.ForeColor = System.Drawing.Color.White
+    Me.btnNuevo.Location = New System.Drawing.Point(11, 22)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(98, 23)
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
     Me.btnNuevo.TabIndex = 14
     Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = True
+    Me.btnNuevo.UseVisualStyleBackColor = False
     '
     'btnCancelar
     '
-    Me.btnCancelar.Location = New System.Drawing.Point(23, 91)
+    Me.btnCancelar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancelar.FlatAppearance.BorderSize = 0
+    Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancelar.ForeColor = System.Drawing.Color.White
+    Me.btnCancelar.Location = New System.Drawing.Point(11, 94)
     Me.btnCancelar.Name = "btnCancelar"
-    Me.btnCancelar.Size = New System.Drawing.Size(98, 24)
+    Me.btnCancelar.Size = New System.Drawing.Size(110, 61)
     Me.btnCancelar.TabIndex = 15
     Me.btnCancelar.Text = "Cancelar"
-    Me.btnCancelar.UseVisualStyleBackColor = True
+    Me.btnCancelar.UseVisualStyleBackColor = False
     '
     'frmCuenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.ClientSize = New System.Drawing.Size(810, 310)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnNuevo)

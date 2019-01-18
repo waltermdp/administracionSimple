@@ -5,7 +5,10 @@ Public Class clsTipoPago
   Private m_GuidTipoPago As Guid
   Private m_Nombre As String
   Private m_PermiteCuotas As Boolean
-  'TODO: VALIDAR
+  Private m_NombreCodigo1 As String
+  Private m_NombreCodigo2 As String
+  Private m_NombreCodigo3 As String
+  Private m_NombreCodigo4 As String
 
   Public Property Nombre As String
     Get
@@ -34,11 +37,49 @@ Public Class clsTipoPago
     End Set
   End Property
 
+  Public Property NombreCodigo1 As String
+    Get
+      Return m_NombreCodigo1
+    End Get
+    Set(value As String)
+      m_NombreCodigo1 = value
+    End Set
+  End Property
+
+  Public Property NombreCodigo2 As String
+    Get
+      Return m_NombreCodigo2
+    End Get
+    Set(value As String)
+      m_NombreCodigo2 = value
+    End Set
+  End Property
+  Public Property NombreCodigo3 As String
+    Get
+      Return m_NombreCodigo3
+    End Get
+    Set(value As String)
+      m_NombreCodigo3 = value
+    End Set
+  End Property
+  Public Property NombreCodigo4 As String
+    Get
+      Return m_NombreCodigo4
+    End Get
+    Set(value As String)
+      m_NombreCodigo4 = value
+    End Set
+  End Property
+
   Public Sub New()
     Try
       m_Nombre = ""
       m_GuidTipoPago = Guid.Empty
       m_PermiteCuotas = False
+      NombreCodigo1 = ""
+      NombreCodigo2 = ""
+      NombreCodigo3 = ""
+      NombreCodigo4 = ""
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

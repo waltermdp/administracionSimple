@@ -74,6 +74,7 @@
     End Set
   End Property
 
+
   Public Property TipoDeCuenta As Guid
     Get
       Return m_TipoDeCuenta

@@ -35,10 +35,14 @@ Partial Class frmLiquidacionVendedores
     Me.chkZona = New System.Windows.Forms.CheckBox()
     Me.chkAguinaldo = New System.Windows.Forms.CheckBox()
     Me.chkVendedores = New System.Windows.Forms.CheckBox()
-    Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnImprimir = New System.Windows.Forms.Button()
+    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.txtVale = New System.Windows.Forms.TextBox()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
+    Me.GroupBox1.SuspendLayout()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -67,7 +71,7 @@ Partial Class frmLiquidacionVendedores
     Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnLiquidar.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidar.Location = New System.Drawing.Point(522, 66)
+    Me.btnLiquidar.Location = New System.Drawing.Point(1142, 66)
     Me.btnLiquidar.Name = "btnLiquidar"
     Me.btnLiquidar.Size = New System.Drawing.Size(110, 61)
     Me.btnLiquidar.TabIndex = 14
@@ -109,17 +113,18 @@ Partial Class frmLiquidacionVendedores
     '
     Me.Panel1.AutoScroll = True
     Me.Panel1.BackColor = System.Drawing.Color.Silver
+    Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
     Me.Panel1.Controls.Add(Me.pbxResumen)
-    Me.Panel1.Location = New System.Drawing.Point(196, 157)
+    Me.Panel1.Location = New System.Drawing.Point(196, 213)
     Me.Panel1.Name = "Panel1"
-    Me.Panel1.Size = New System.Drawing.Size(1056, 541)
+    Me.Panel1.Size = New System.Drawing.Size(1056, 485)
     Me.Panel1.TabIndex = 42
     '
     'chkAuto
     '
     Me.chkAuto.AutoSize = True
     Me.chkAuto.BackColor = System.Drawing.Color.White
-    Me.chkAuto.Location = New System.Drawing.Point(196, 103)
+    Me.chkAuto.Location = New System.Drawing.Point(6, 19)
     Me.chkAuto.Name = "chkAuto"
     Me.chkAuto.Size = New System.Drawing.Size(48, 17)
     Me.chkAuto.TabIndex = 43
@@ -130,7 +135,7 @@ Partial Class frmLiquidacionVendedores
     '
     Me.chkZona.AutoSize = True
     Me.chkZona.BackColor = System.Drawing.Color.White
-    Me.chkZona.Location = New System.Drawing.Point(196, 126)
+    Me.chkZona.Location = New System.Drawing.Point(6, 42)
     Me.chkZona.Name = "chkZona"
     Me.chkZona.Size = New System.Drawing.Size(51, 17)
     Me.chkZona.TabIndex = 44
@@ -141,7 +146,7 @@ Partial Class frmLiquidacionVendedores
     '
     Me.chkAguinaldo.AutoSize = True
     Me.chkAguinaldo.BackColor = System.Drawing.Color.White
-    Me.chkAguinaldo.Location = New System.Drawing.Point(311, 103)
+    Me.chkAguinaldo.Location = New System.Drawing.Point(121, 19)
     Me.chkAguinaldo.Name = "chkAguinaldo"
     Me.chkAguinaldo.Size = New System.Drawing.Size(73, 17)
     Me.chkAguinaldo.TabIndex = 45
@@ -152,16 +157,12 @@ Partial Class frmLiquidacionVendedores
     '
     Me.chkVendedores.AutoSize = True
     Me.chkVendedores.BackColor = System.Drawing.Color.White
-    Me.chkVendedores.Location = New System.Drawing.Point(311, 126)
+    Me.chkVendedores.Location = New System.Drawing.Point(121, 42)
     Me.chkVendedores.Name = "chkVendedores"
     Me.chkVendedores.Size = New System.Drawing.Size(83, 17)
     Me.chkVendedores.TabIndex = 46
     Me.chkVendedores.Text = "Vendedores"
     Me.chkVendedores.UseVisualStyleBackColor = False
-    '
-    'bsVendedores
-    '
-    Me.bsVendedores.DataSource = GetType(manDB.clsInfoVendedor)
     '
     'btnImprimir
     '
@@ -170,12 +171,51 @@ Partial Class frmLiquidacionVendedores
     Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnImprimir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnImprimir.ForeColor = System.Drawing.Color.White
-    Me.btnImprimir.Location = New System.Drawing.Point(1142, 70)
+    Me.btnImprimir.Location = New System.Drawing.Point(1142, 133)
     Me.btnImprimir.Name = "btnImprimir"
     Me.btnImprimir.Size = New System.Drawing.Size(110, 61)
     Me.btnImprimir.TabIndex = 47
     Me.btnImprimir.Text = "Imprimir"
     Me.btnImprimir.UseVisualStyleBackColor = False
+    Me.btnImprimir.Visible = False
+    '
+    'GroupBox1
+    '
+    Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.Label2)
+    Me.GroupBox1.Controls.Add(Me.txtVale)
+    Me.GroupBox1.Controls.Add(Me.chkAuto)
+    Me.GroupBox1.Controls.Add(Me.chkZona)
+    Me.GroupBox1.Controls.Add(Me.chkVendedores)
+    Me.GroupBox1.Controls.Add(Me.chkAguinaldo)
+    Me.GroupBox1.Location = New System.Drawing.Point(196, 108)
+    Me.GroupBox1.Name = "GroupBox1"
+    Me.GroupBox1.Size = New System.Drawing.Size(450, 66)
+    Me.GroupBox1.TabIndex = 48
+    Me.GroupBox1.TabStop = False
+    Me.GroupBox1.Text = "Aplicar"
+    '
+    'txtVale
+    '
+    Me.txtVale.Location = New System.Drawing.Point(283, 16)
+    Me.txtVale.Name = "txtVale"
+    Me.txtVale.Size = New System.Drawing.Size(127, 20)
+    Me.txtVale.TabIndex = 47
+    Me.txtVale.Text = "0"
+    Me.txtVale.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'Label2
+    '
+    Me.Label2.AutoSize = True
+    Me.Label2.Location = New System.Drawing.Point(241, 20)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(36, 13)
+    Me.Label2.TabIndex = 48
+    Me.Label2.Text = "Vales:"
+    '
+    'bsVendedores
+    '
+    Me.bsVendedores.DataSource = GetType(manDB.clsInfoVendedor)
     '
     'frmLiquidacionVendedores
     '
@@ -183,11 +223,8 @@ Partial Class frmLiquidacionVendedores
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.btnImprimir)
-    Me.Controls.Add(Me.chkVendedores)
-    Me.Controls.Add(Me.chkAguinaldo)
-    Me.Controls.Add(Me.chkZona)
-    Me.Controls.Add(Me.chkAuto)
     Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.dtInicio)
@@ -200,6 +237,8 @@ Partial Class frmLiquidacionVendedores
     Me.Text = "frmLiquidacionVendedores"
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).EndInit()
     Me.Panel1.ResumeLayout(False)
+    Me.GroupBox1.ResumeLayout(False)
+    Me.GroupBox1.PerformLayout()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
@@ -218,4 +257,7 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents chkAguinaldo As System.Windows.Forms.CheckBox
   Friend WithEvents chkVendedores As System.Windows.Forms.CheckBox
   Friend WithEvents btnImprimir As System.Windows.Forms.Button
+  Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+  Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents txtVale As System.Windows.Forms.TextBox
 End Class

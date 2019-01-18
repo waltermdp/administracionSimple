@@ -85,7 +85,7 @@ Partial Class frmVendedorData
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(434, 88)
+    Me.Label1.Location = New System.Drawing.Point(345, 88)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(44, 13)
     Me.Label1.TabIndex = 2
@@ -93,16 +93,16 @@ Partial Class frmVendedorData
     '
     'txtNombre
     '
-    Me.txtNombre.Location = New System.Drawing.Point(437, 104)
+    Me.txtNombre.Location = New System.Drawing.Point(348, 104)
     Me.txtNombre.Name = "txtNombre"
-    Me.txtNombre.Size = New System.Drawing.Size(230, 20)
+    Me.txtNombre.Size = New System.Drawing.Size(327, 20)
     Me.txtNombre.TabIndex = 3
     '
     'txtApellido
     '
     Me.txtApellido.Location = New System.Drawing.Point(693, 104)
     Me.txtApellido.Name = "txtApellido"
-    Me.txtApellido.Size = New System.Drawing.Size(230, 20)
+    Me.txtApellido.Size = New System.Drawing.Size(298, 20)
     Me.txtApellido.TabIndex = 5
     '
     'Label2
@@ -116,15 +116,15 @@ Partial Class frmVendedorData
     '
     'txtId
     '
-    Me.txtId.Location = New System.Drawing.Point(437, 157)
+    Me.txtId.Location = New System.Drawing.Point(348, 157)
     Me.txtId.Name = "txtId"
-    Me.txtId.Size = New System.Drawing.Size(230, 20)
+    Me.txtId.Size = New System.Drawing.Size(327, 20)
     Me.txtId.TabIndex = 7
     '
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(434, 141)
+    Me.Label3.Location = New System.Drawing.Point(345, 141)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(26, 13)
     Me.Label3.TabIndex = 6
@@ -134,7 +134,7 @@ Partial Class frmVendedorData
     '
     Me.txtCiudad.Location = New System.Drawing.Point(693, 157)
     Me.txtCiudad.Name = "txtCiudad"
-    Me.txtCiudad.Size = New System.Drawing.Size(230, 20)
+    Me.txtCiudad.Size = New System.Drawing.Size(298, 20)
     Me.txtCiudad.TabIndex = 9
     '
     'Label4
@@ -148,15 +148,15 @@ Partial Class frmVendedorData
     '
     'txtProvincia
     '
-    Me.txtProvincia.Location = New System.Drawing.Point(437, 196)
+    Me.txtProvincia.Location = New System.Drawing.Point(348, 196)
     Me.txtProvincia.Name = "txtProvincia"
-    Me.txtProvincia.Size = New System.Drawing.Size(230, 20)
+    Me.txtProvincia.Size = New System.Drawing.Size(327, 20)
     Me.txtProvincia.TabIndex = 11
     '
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(434, 180)
+    Me.Label5.Location = New System.Drawing.Point(345, 180)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(51, 13)
     Me.Label5.TabIndex = 10
@@ -166,7 +166,7 @@ Partial Class frmVendedorData
     '
     Me.txtCodigoPostal.Location = New System.Drawing.Point(693, 196)
     Me.txtCodigoPostal.Name = "txtCodigoPostal"
-    Me.txtCodigoPostal.Size = New System.Drawing.Size(230, 20)
+    Me.txtCodigoPostal.Size = New System.Drawing.Size(298, 20)
     Me.txtCodigoPostal.TabIndex = 13
     '
     'Label6
@@ -180,15 +180,15 @@ Partial Class frmVendedorData
     '
     'txtNumVendedor
     '
-    Me.txtNumVendedor.Location = New System.Drawing.Point(437, 235)
+    Me.txtNumVendedor.Location = New System.Drawing.Point(348, 235)
     Me.txtNumVendedor.Name = "txtNumVendedor"
-    Me.txtNumVendedor.Size = New System.Drawing.Size(230, 20)
+    Me.txtNumVendedor.Size = New System.Drawing.Size(327, 20)
     Me.txtNumVendedor.TabIndex = 15
     '
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(434, 219)
+    Me.Label7.Location = New System.Drawing.Point(345, 219)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(93, 13)
     Me.Label7.TabIndex = 14
@@ -198,7 +198,7 @@ Partial Class frmVendedorData
     '
     Me.txtGrupo.Location = New System.Drawing.Point(693, 235)
     Me.txtGrupo.Name = "txtGrupo"
-    Me.txtGrupo.Size = New System.Drawing.Size(230, 20)
+    Me.txtGrupo.Size = New System.Drawing.Size(298, 20)
     Me.txtGrupo.TabIndex = 17
     '
     'Label8
@@ -212,15 +212,15 @@ Partial Class frmVendedorData
     '
     'txtTel1
     '
-    Me.txtTel1.Location = New System.Drawing.Point(437, 274)
+    Me.txtTel1.Location = New System.Drawing.Point(348, 274)
     Me.txtTel1.Name = "txtTel1"
-    Me.txtTel1.Size = New System.Drawing.Size(230, 20)
+    Me.txtTel1.Size = New System.Drawing.Size(327, 20)
     Me.txtTel1.TabIndex = 19
     '
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(434, 258)
+    Me.Label9.Location = New System.Drawing.Point(345, 258)
     Me.Label9.Name = "Label9"
     Me.Label9.Size = New System.Drawing.Size(28, 13)
     Me.Label9.TabIndex = 18
@@ -230,7 +230,7 @@ Partial Class frmVendedorData
     '
     Me.txtTel2.Location = New System.Drawing.Point(693, 274)
     Me.txtTel2.Name = "txtTel2"
-    Me.txtTel2.Size = New System.Drawing.Size(230, 20)
+    Me.txtTel2.Size = New System.Drawing.Size(298, 20)
     Me.txtTel2.TabIndex = 21
     '
     'Label10
@@ -244,15 +244,15 @@ Partial Class frmVendedorData
     '
     'txtEmail
     '
-    Me.txtEmail.Location = New System.Drawing.Point(437, 313)
+    Me.txtEmail.Location = New System.Drawing.Point(348, 313)
     Me.txtEmail.Name = "txtEmail"
-    Me.txtEmail.Size = New System.Drawing.Size(230, 20)
+    Me.txtEmail.Size = New System.Drawing.Size(327, 20)
     Me.txtEmail.TabIndex = 23
     '
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(434, 297)
+    Me.Label11.Location = New System.Drawing.Point(345, 297)
     Me.Label11.Name = "Label11"
     Me.Label11.Size = New System.Drawing.Size(32, 13)
     Me.Label11.TabIndex = 22
@@ -262,7 +262,7 @@ Partial Class frmVendedorData
     '
     Me.txtCategoria.Location = New System.Drawing.Point(693, 313)
     Me.txtCategoria.Name = "txtCategoria"
-    Me.txtCategoria.Size = New System.Drawing.Size(230, 20)
+    Me.txtCategoria.Size = New System.Drawing.Size(298, 20)
     Me.txtCategoria.TabIndex = 25
     '
     'Label12
@@ -276,16 +276,16 @@ Partial Class frmVendedorData
     '
     'txtComentarios
     '
-    Me.txtComentarios.Location = New System.Drawing.Point(437, 352)
+    Me.txtComentarios.Location = New System.Drawing.Point(348, 352)
     Me.txtComentarios.Multiline = True
     Me.txtComentarios.Name = "txtComentarios"
-    Me.txtComentarios.Size = New System.Drawing.Size(486, 41)
+    Me.txtComentarios.Size = New System.Drawing.Size(643, 118)
     Me.txtComentarios.TabIndex = 27
     '
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(434, 336)
+    Me.Label13.Location = New System.Drawing.Point(345, 336)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(65, 13)
     Me.Label13.TabIndex = 26

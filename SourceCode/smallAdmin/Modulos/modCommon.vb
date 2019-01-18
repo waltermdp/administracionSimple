@@ -40,7 +40,6 @@
     End Try
   End Function
 
-
   Public Function Vencimiento(ByVal PrimerPago As Date, Optional ByVal fechaInicial As Date = Nothing) As Date
     Try
       If fechaInicial = Nothing Then
@@ -49,7 +48,7 @@
 
       fechaInicial = fechaInicial.AddMonths(1)
       Dim auxFecha As New Date(fechaInicial.Year, fechaInicial.Month, PrimerPago.Day)
-      
+
       Return auxFecha
     Catch ex As Exception
       Call libCommon.Comunes.Print_msg(ex.Message)
