@@ -54,8 +54,9 @@ Public Class frmLiquidacionVendedores
 
   Private m_Liq As New Liquidacion
   Private WithEvents m_PrintDoc As New PrintDocument
-  Private m_CantidadRengloes As Integer = 0
-
+  Private m_CantidadRenglones As Integer = 0
+  Private TotalPaginas As Integer = 0
+  Private Const MAX_RENGLONES As Integer = 70
 
   Public Sub New(ByVal vVendedor As manDB.clsInfoVendedor)
 
@@ -92,7 +93,7 @@ Public Class frmLiquidacionVendedores
 
   Private Sub btnLiquidar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnLiquidar.MouseClick
     Try
-      
+
       'Buscar los pagos realizados entre el periodo de tiempo
       m_lstResumenVentas = New List(Of clsInfoResumenVenta)
 
@@ -100,7 +101,10 @@ Public Class frmLiquidacionVendedores
       Call ResolverLiquidacion()
       pbxResumen.Size = New Size(pbxResumen.Size.Width, 80 * 20)
       Call pbxResumen.Refresh()
+      pbxResumen.Height = m_CantidadRenglones * 20
+      Call pbxResumen.Refresh()
       btnImprimir.Visible = True
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -216,7 +220,7 @@ Public Class frmLiquidacionVendedores
       End With
 
 
-      
+
 
 
     Catch ex As Exception
@@ -236,6 +240,7 @@ Public Class frmLiquidacionVendedores
     Try
       If m_Liq.TotalesIntervalos Is Nothing Then Exit Sub
       e.Graphics.Clear(Color.White)
+
       Call Preview(e.Graphics)
 
     Catch ex As Exception
@@ -243,32 +248,32 @@ Public Class frmLiquidacionVendedores
     End Try
   End Sub
 
-  Dim paginas As Integer = 0
+
   Private Sub m_PrintDoc_PrintPage(sender As Object, e As PrintPageEventArgs) Handles m_PrintDoc.PrintPage
     Try
       If m_Liq.TotalesIntervalos Is Nothing Then Exit Sub
 
 
-
+      If TotalPaginas <= 0 Then
+        e.HasMorePages = False
+        Exit Sub
+      End If
 
       Dim c0 As GraphicsContainer = e.Graphics.BeginContainer
       e.Graphics.ScaleTransform(0.8, 0.8)
-      If paginas = 0 Then
 
-      Else
-        e.Graphics.TranslateTransform(0, -200) 'desplazar n renglones con cada hoja extra
-      End If
+      e.Graphics.TranslateTransform(40, -20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas)) 'desplazar n renglones con cada hoja extra
+      e.Graphics.Clip = New Region(New Rectangle(0, 20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas), pbxResumen.Width, 20 * MAX_RENGLONES))
       e.Graphics.Clear(Color.White)
+
       Call Preview(e.Graphics)
       e.Graphics.EndContainer(c0)
 
-      paginas += 1
-      If paginas < 2 Then
-        e.HasMorePages = True
-      Else
-        e.HasMorePages = False
-        paginas = 0
-      End If
+      TotalPaginas -= 1
+      e.HasMorePages = TotalPaginas > 0
+
+
+
 
 
     Catch ex As Exception
@@ -290,7 +295,7 @@ Public Class frmLiquidacionVendedores
       Dim sf As New Drawing.StringFormat
       sf.Trimming = StringTrimming.Word
 
-      g.DrawString("LIQUIDACION " & m_Vendedor.ToString, fuente, Brushes.Black, 0, 0)
+      g.DrawString("LIQUIDACION " & MonthName(dtInicio.Value.Month).ToUpper & ": " & m_Vendedor.ToString, fuente, Brushes.Black, 0, 0)
       g.DrawLine(New Pen(Brushes.Black, 3), New Point(0, RenAltura), New Point(300, RenAltura))
 
       'espacio
@@ -440,7 +445,12 @@ Public Class frmLiquidacionVendedores
       g.DrawString("ACLARACION", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(500, RenAltura * (renglon)))
 
-      m_CantidadRengloes = renglon
+      'Do
+      '  renglon += 1
+      '  g.DrawString(renglon, fuente, Brushes.Black, 0, RenAltura * renglon)
+      'Loop Until renglon = 200
+      m_CantidadRenglones = renglon
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -450,13 +460,13 @@ Public Class frmLiquidacionVendedores
     Try
       Dim obj As New PrintDialog
       If obj.ShowDialog = Windows.Forms.DialogResult.OK Then
-        Dim y As Integer = 0
+
         m_PrintDoc.PrinterSettings = obj.PrinterSettings
+       
+        TotalPaginas = Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES)
+
         m_PrintDoc.Print()
-
       End If
-
-
     Catch ex As Exception
       Call libCommon.Comunes.Print_msg(ex.Message)
     End Try

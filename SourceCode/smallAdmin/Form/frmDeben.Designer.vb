@@ -67,7 +67,14 @@ Partial Class frmDeben
     Me.rbtnClientName = New System.Windows.Forms.RadioButton()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.Label5 = New System.Windows.Forms.Label()
-    Me.Button1 = New System.Windows.Forms.Button()
+    Me.btnRVisaDebito = New System.Windows.Forms.Button()
+    Me.btnWVisaDebito = New System.Windows.Forms.Button()
+    Me.btnRVisaCredito = New System.Windows.Forms.Button()
+    Me.btnWVisaCredito = New System.Windows.Forms.Button()
+    Me.btnReadCBU = New System.Windows.Forms.Button()
+    Me.btnWCBU = New System.Windows.Forms.Button()
+    Me.Button7 = New System.Windows.Forms.Button()
+    Me.Button8 = New System.Windows.Forms.Button()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -511,14 +518,77 @@ Partial Class frmDeben
     Me.Label5.TabIndex = 50
     Me.Label5.Text = "PRODUCTOS VENDIDOS"
     '
-    'Button1
+    'btnRVisaDebito
     '
-    Me.Button1.Location = New System.Drawing.Point(895, 472)
-    Me.Button1.Name = "Button1"
-    Me.Button1.Size = New System.Drawing.Size(139, 32)
-    Me.Button1.TabIndex = 51
-    Me.Button1.Text = "Button1"
-    Me.Button1.UseVisualStyleBackColor = True
+    Me.btnRVisaDebito.Location = New System.Drawing.Point(895, 518)
+    Me.btnRVisaDebito.Name = "btnRVisaDebito"
+    Me.btnRVisaDebito.Size = New System.Drawing.Size(139, 32)
+    Me.btnRVisaDebito.TabIndex = 51
+    Me.btnRVisaDebito.Text = "Leer Visa Debito"
+    Me.btnRVisaDebito.UseVisualStyleBackColor = True
+    '
+    'btnWVisaDebito
+    '
+    Me.btnWVisaDebito.Location = New System.Drawing.Point(895, 476)
+    Me.btnWVisaDebito.Name = "btnWVisaDebito"
+    Me.btnWVisaDebito.Size = New System.Drawing.Size(139, 36)
+    Me.btnWVisaDebito.TabIndex = 52
+    Me.btnWVisaDebito.Text = "Generar Visa Debito"
+    Me.btnWVisaDebito.UseVisualStyleBackColor = True
+    '
+    'btnRVisaCredito
+    '
+    Me.btnRVisaCredito.Location = New System.Drawing.Point(895, 554)
+    Me.btnRVisaCredito.Name = "btnRVisaCredito"
+    Me.btnRVisaCredito.Size = New System.Drawing.Size(139, 33)
+    Me.btnRVisaCredito.TabIndex = 53
+    Me.btnRVisaCredito.Text = "Leer Visa Credito"
+    Me.btnRVisaCredito.UseVisualStyleBackColor = True
+    '
+    'btnWVisaCredito
+    '
+    Me.btnWVisaCredito.Location = New System.Drawing.Point(895, 593)
+    Me.btnWVisaCredito.Name = "btnWVisaCredito"
+    Me.btnWVisaCredito.Size = New System.Drawing.Size(139, 34)
+    Me.btnWVisaCredito.TabIndex = 54
+    Me.btnWVisaCredito.Text = "Generar Visa Credito"
+    Me.btnWVisaCredito.UseVisualStyleBackColor = True
+    '
+    'btnReadCBU
+    '
+    Me.btnReadCBU.Location = New System.Drawing.Point(895, 631)
+    Me.btnReadCBU.Name = "btnReadCBU"
+    Me.btnReadCBU.Size = New System.Drawing.Size(139, 34)
+    Me.btnReadCBU.TabIndex = 55
+    Me.btnReadCBU.Text = "Leer CBU"
+    Me.btnReadCBU.UseVisualStyleBackColor = True
+    '
+    'btnWCBU
+    '
+    Me.btnWCBU.Location = New System.Drawing.Point(895, 671)
+    Me.btnWCBU.Name = "btnWCBU"
+    Me.btnWCBU.Size = New System.Drawing.Size(139, 34)
+    Me.btnWCBU.TabIndex = 56
+    Me.btnWCBU.Text = "Generar CBU"
+    Me.btnWCBU.UseVisualStyleBackColor = True
+    '
+    'Button7
+    '
+    Me.Button7.Location = New System.Drawing.Point(1040, 631)
+    Me.Button7.Name = "Button7"
+    Me.Button7.Size = New System.Drawing.Size(139, 34)
+    Me.Button7.TabIndex = 57
+    Me.Button7.Text = "Leer Master Debito"
+    Me.Button7.UseVisualStyleBackColor = True
+    '
+    'Button8
+    '
+    Me.Button8.Location = New System.Drawing.Point(1040, 671)
+    Me.Button8.Name = "Button8"
+    Me.Button8.Size = New System.Drawing.Size(139, 34)
+    Me.Button8.TabIndex = 58
+    Me.Button8.Text = "Generar Master Debito"
+    Me.Button8.UseVisualStyleBackColor = True
     '
     'frmDeben
     '
@@ -528,7 +598,14 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
-    Me.Controls.Add(Me.Button1)
+    Me.Controls.Add(Me.Button8)
+    Me.Controls.Add(Me.Button7)
+    Me.Controls.Add(Me.btnWCBU)
+    Me.Controls.Add(Me.btnReadCBU)
+    Me.Controls.Add(Me.btnWVisaCredito)
+    Me.Controls.Add(Me.btnRVisaCredito)
+    Me.Controls.Add(Me.btnWVisaDebito)
+    Me.Controls.Add(Me.btnRVisaDebito)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.btnListaClientes)
@@ -599,5 +676,12 @@ Partial Class frmDeben
   Friend WithEvents rbtnClientName As System.Windows.Forms.RadioButton
   Friend WithEvents btnMinimize As System.Windows.Forms.Button
   Friend WithEvents Label5 As System.Windows.Forms.Label
-  Friend WithEvents Button1 As System.Windows.Forms.Button
+  Friend WithEvents btnRVisaDebito As System.Windows.Forms.Button
+  Friend WithEvents btnWVisaDebito As System.Windows.Forms.Button
+  Friend WithEvents btnRVisaCredito As System.Windows.Forms.Button
+  Friend WithEvents btnWVisaCredito As System.Windows.Forms.Button
+  Friend WithEvents btnReadCBU As System.Windows.Forms.Button
+  Friend WithEvents btnWCBU As System.Windows.Forms.Button
+  Friend WithEvents Button7 As System.Windows.Forms.Button
+  Friend WithEvents Button8 As System.Windows.Forms.Button
 End Class

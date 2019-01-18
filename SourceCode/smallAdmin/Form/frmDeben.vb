@@ -384,7 +384,7 @@ Public Class frmDeben
     End Try
   End Sub
 
-  Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+  Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnRVisaDebito.Click
     Try
       Dim archivo As New List(Of String)
       Dim AbrirArchivo As New OpenFileDialog
@@ -393,7 +393,10 @@ Public Class frmDeben
       Dim mov As New List(Of clsInfoMovimiento)
       GetCuerpo(archivo, mov)
 
-      clsCobros.ShowResumen(mov)
+
+
+      Dim Resumen As String = String.Empty
+      clsCobros.ShowResumen(mov, Resumen)
 
 
       Dim s As Integer = 0

@@ -249,7 +249,7 @@ Partial Class frmVenta
     'Label6
     '
     Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(234, 137)
+    Me.Label6.Location = New System.Drawing.Point(182, 165)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(128, 13)
     Me.Label6.TabIndex = 17
@@ -268,7 +268,7 @@ Partial Class frmVenta
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(234, 38)
+    Me.Label7.Location = New System.Drawing.Point(191, 75)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(114, 13)
     Me.Label7.TabIndex = 20
@@ -276,7 +276,7 @@ Partial Class frmVenta
     '
     'btnSelectClient
     '
-    Me.btnSelectClient.Location = New System.Drawing.Point(237, 65)
+    Me.btnSelectClient.Location = New System.Drawing.Point(185, 93)
     Me.btnSelectClient.Name = "btnSelectClient"
     Me.btnSelectClient.Size = New System.Drawing.Size(125, 23)
     Me.btnSelectClient.TabIndex = 21
@@ -285,7 +285,7 @@ Partial Class frmVenta
     '
     'btnNewClient
     '
-    Me.btnNewClient.Location = New System.Drawing.Point(237, 94)
+    Me.btnNewClient.Location = New System.Drawing.Point(185, 122)
     Me.btnNewClient.Name = "btnNewClient"
     Me.btnNewClient.Size = New System.Drawing.Size(125, 23)
     Me.btnNewClient.TabIndex = 22
@@ -294,7 +294,7 @@ Partial Class frmVenta
     '
     'btnSelectVendedor
     '
-    Me.btnSelectVendedor.Location = New System.Drawing.Point(237, 153)
+    Me.btnSelectVendedor.Location = New System.Drawing.Point(185, 181)
     Me.btnSelectVendedor.Name = "btnSelectVendedor"
     Me.btnSelectVendedor.Size = New System.Drawing.Size(125, 23)
     Me.btnSelectVendedor.TabIndex = 23
@@ -304,7 +304,7 @@ Partial Class frmVenta
     'txtNombreCliente
     '
     Me.txtNombreCliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtNombreCliente.Location = New System.Drawing.Point(424, 81)
+    Me.txtNombreCliente.Location = New System.Drawing.Point(372, 92)
     Me.txtNombreCliente.Name = "txtNombreCliente"
     Me.txtNombreCliente.ReadOnly = True
     Me.txtNombreCliente.Size = New System.Drawing.Size(230, 20)
@@ -313,7 +313,7 @@ Partial Class frmVenta
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.Location = New System.Drawing.Point(421, 65)
+    Me.Label8.Location = New System.Drawing.Point(369, 76)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(44, 13)
     Me.Label8.TabIndex = 25
@@ -322,7 +322,7 @@ Partial Class frmVenta
     'txtDNICliente
     '
     Me.txtDNICliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtDNICliente.Location = New System.Drawing.Point(660, 81)
+    Me.txtDNICliente.Location = New System.Drawing.Point(608, 92)
     Me.txtDNICliente.Name = "txtDNICliente"
     Me.txtDNICliente.ReadOnly = True
     Me.txtDNICliente.Size = New System.Drawing.Size(184, 20)
@@ -331,7 +331,7 @@ Partial Class frmVenta
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(657, 65)
+    Me.Label9.Location = New System.Drawing.Point(605, 76)
     Me.Label9.Name = "Label9"
     Me.Label9.Size = New System.Drawing.Size(26, 13)
     Me.Label9.TabIndex = 27
@@ -340,7 +340,7 @@ Partial Class frmVenta
     'txtNombreVendedor
     '
     Me.txtNombreVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtNombreVendedor.Location = New System.Drawing.Point(424, 169)
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(372, 181)
     Me.txtNombreVendedor.Name = "txtNombreVendedor"
     Me.txtNombreVendedor.ReadOnly = True
     Me.txtNombreVendedor.Size = New System.Drawing.Size(230, 20)
@@ -349,7 +349,7 @@ Partial Class frmVenta
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.Location = New System.Drawing.Point(421, 153)
+    Me.Label10.Location = New System.Drawing.Point(369, 165)
     Me.Label10.Name = "Label10"
     Me.Label10.Size = New System.Drawing.Size(53, 13)
     Me.Label10.TabIndex = 29
@@ -358,7 +358,7 @@ Partial Class frmVenta
     'txtDNIVendedor
     '
     Me.txtDNIVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtDNIVendedor.Location = New System.Drawing.Point(660, 169)
+    Me.txtDNIVendedor.Location = New System.Drawing.Point(608, 181)
     Me.txtDNIVendedor.Name = "txtDNIVendedor"
     Me.txtDNIVendedor.ReadOnly = True
     Me.txtDNIVendedor.Size = New System.Drawing.Size(184, 20)
@@ -367,7 +367,7 @@ Partial Class frmVenta
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(657, 153)
+    Me.Label11.Location = New System.Drawing.Point(605, 165)
     Me.Label11.Name = "Label11"
     Me.Label11.Size = New System.Drawing.Size(26, 13)
     Me.Label11.TabIndex = 32

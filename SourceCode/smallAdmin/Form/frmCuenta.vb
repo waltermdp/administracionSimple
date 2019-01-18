@@ -5,11 +5,14 @@ Public Class frmCuenta
   Private m_objCuentaCurrent As clsInfoCuenta
   Private WithEvents m_objCuentaList As clsListaCuentas = Nothing
   Private m_GuidCliente As Guid
-
+  Private m_skip As Boolean
   Public Sub New(ByVal vGuidClient As Guid)
     InitializeComponent()
     Try
       m_GuidCliente = vGuidClient
+      m_skip = True
+      cmbTipoDeCuenta.DataSource = g_TipoPago
+      m_skip = False
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -26,8 +29,8 @@ Public Class frmCuenta
 
       Call AllowEditNew(False)
 
-      cmbTipoDeCuenta.DataSource = g_TipoPago
 
+      cmbTipoDeCuenta.SelectedIndex = -1
 
 
     Catch ex As Exception
@@ -267,18 +270,14 @@ Public Class frmCuenta
       lblCodigo2.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo2)
       txtCodigo2.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo2)
 
-      lblCodigo3.Visible = False
-      txtCodigo3.Visible = False
       lblCodigo3.Text = vTipoDeCuenta.NombreCodigo3
-      If vTipoDeCuenta.NombreCodigo3 Is Nothing Then
+      lblCodigo3.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo3)
+      txtCodigo3.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo3)
 
-      End If
       lblCodigo4.Text = vTipoDeCuenta.NombreCodigo4
-      lblCodigo4.Visible = False
-      txtCodigo4.Visible = False
-      If vTipoDeCuenta.NombreCodigo4 Is Nothing Then
-
-      End If
+      lblCodigo4.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo4)
+      txtCodigo4.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo4)
+      
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -286,7 +285,14 @@ Public Class frmCuenta
 
   Private Sub cmbTipoDeCuenta_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbTipoDeCuenta.SelectedValueChanged
     Try
-
+      If m_skip Then Exit Sub
+      Dim objCMB As ComboBox = TryCast(sender, ComboBox)
+      If objCMB.SelectedIndex < 0 Then
+        Call NombrarCampos(Nothing)
+      Else
+        Call NombrarCampos(CType(objCMB.SelectedItem, clsTipoPago))
+      End If
+      
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

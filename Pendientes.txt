@@ -1,0 +1,6 @@
+Efectivo
+CBU  		leer	escribir
+visa debito 	leer	escribir
+visa tarjeta 	leer	escribir
+Master debito 	leer	escribir
+Mercado Pago

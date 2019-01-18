@@ -3,13 +3,14 @@ Imports libCommon.Comunes
 Public Class clsCobros
 
 
-  Public Shared Function ShowResumen(ByVal vListMov As List(Of clsInfoMovimiento)) As Result
+  Public Shared Function ShowResumen(ByVal vListMov As List(Of clsInfoMovimiento), ByRef rResumen As String) As Result
     Try
       Dim lstResumen As New List(Of clsInfoResumen)
-
-      ConvertirEnArchivo(vListMov)
-
+      Dim lineas As New List(Of String)
+      lineas.Add("Resumen")
+      'ConvertirEnArchivo(vListMov)
       For Each mov In vListMov
+
         Dim lstPago As New clsListPagos
         Dim Resumen As New clsInfoResumen
 
@@ -31,9 +32,15 @@ Public Class clsCobros
         lstCliente.RefreshData()
         Resumen.Cliente = lstCliente.Items.First.Clone
         lstResumen.Add(Resumen)
+        lineas.Add(String.Format("{},{}", Resumen.Cliente.ToString, Resumen.Estado.ToString))
       Next
 
-      ConvertirEnArchivo(vListMov)
+      For Each lin In lineas
+        rResumen += lin + vbNewLine
+      Next
+
+
+      'ConvertirEnArchivo(vListMov)
       Return Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
