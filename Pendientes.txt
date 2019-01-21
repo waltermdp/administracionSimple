@@ -3,4 +3,13 @@ CBU  		leer	escribir
 visa debito 	leer	escribir
 visa tarjeta 	leer	escribir
 Master debito 	leer	escribir
-Mercado Pago
+Mercado Pago	leer	escribir
+
+
+Puntos a aclarar
+-Valor N y E de visa credito y debito, como lo establecen?
+-El numero de comprobante que se envia a visa debito credito? como lo generan? lo genero de forma automatica. Es unico?
+-como generan el txt de los cbu.
+el cbu que retorna es el de galicia?
+-Cuando realizan una venta, establecen un numero de comprobante? remito como lo designan?
+-Vales? son adelantos?
