@@ -111,6 +111,7 @@
     <Compile Include="AccesoADatos\clsStock.vb" />
     <Compile Include="AccesoADatos\clsVendedor.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaCuentas.vb" />
+    <Compile Include="AccesoADatos\Listas\clsListAdelantos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaPrincipal.vb" />
     <Compile Include="AccesoADatos\Listas\clsListArticulos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaStorage.vb" />

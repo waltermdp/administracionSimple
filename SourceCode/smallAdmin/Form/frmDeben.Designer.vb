@@ -73,11 +73,16 @@ Partial Class frmDeben
     Me.btnWVisaCredito = New System.Windows.Forms.Button()
     Me.btnReadCBU = New System.Windows.Forms.Button()
     Me.btnWCBU = New System.Windows.Forms.Button()
-    Me.Button7 = New System.Windows.Forms.Button()
-    Me.Button8 = New System.Windows.Forms.Button()
+    Me.btnRMasterDebito = New System.Windows.Forms.Button()
+    Me.btnWMasterDebito = New System.Windows.Forms.Button()
+    Me.pnlResumen = New System.Windows.Forms.Panel()
+    Me.lstViewResumen = New System.Windows.Forms.ListView()
+    Me.btnOK = New System.Windows.Forms.Button()
+    Me.btnCancel = New System.Windows.Forms.Button()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
+    Me.pnlResumen.SuspendLayout()
     Me.SuspendLayout()
     '
     'dateInicio
@@ -572,23 +577,71 @@ Partial Class frmDeben
     Me.btnWCBU.Text = "Generar CBU"
     Me.btnWCBU.UseVisualStyleBackColor = True
     '
-    'Button7
+    'btnRMasterDebito
     '
-    Me.Button7.Location = New System.Drawing.Point(1040, 631)
-    Me.Button7.Name = "Button7"
-    Me.Button7.Size = New System.Drawing.Size(139, 34)
-    Me.Button7.TabIndex = 57
-    Me.Button7.Text = "Leer Master Debito"
-    Me.Button7.UseVisualStyleBackColor = True
+    Me.btnRMasterDebito.Location = New System.Drawing.Point(1040, 631)
+    Me.btnRMasterDebito.Name = "btnRMasterDebito"
+    Me.btnRMasterDebito.Size = New System.Drawing.Size(139, 34)
+    Me.btnRMasterDebito.TabIndex = 57
+    Me.btnRMasterDebito.Text = "Leer Master Debito"
+    Me.btnRMasterDebito.UseVisualStyleBackColor = True
     '
-    'Button8
+    'btnWMasterDebito
     '
-    Me.Button8.Location = New System.Drawing.Point(1040, 671)
-    Me.Button8.Name = "Button8"
-    Me.Button8.Size = New System.Drawing.Size(139, 34)
-    Me.Button8.TabIndex = 58
-    Me.Button8.Text = "Generar Master Debito"
-    Me.Button8.UseVisualStyleBackColor = True
+    Me.btnWMasterDebito.Location = New System.Drawing.Point(1040, 671)
+    Me.btnWMasterDebito.Name = "btnWMasterDebito"
+    Me.btnWMasterDebito.Size = New System.Drawing.Size(139, 34)
+    Me.btnWMasterDebito.TabIndex = 58
+    Me.btnWMasterDebito.Text = "Generar Master Debito"
+    Me.btnWMasterDebito.UseVisualStyleBackColor = True
+    '
+    'pnlResumen
+    '
+    Me.pnlResumen.Controls.Add(Me.lstViewResumen)
+    Me.pnlResumen.Controls.Add(Me.btnOK)
+    Me.pnlResumen.Controls.Add(Me.btnCancel)
+    Me.pnlResumen.Location = New System.Drawing.Point(272, 93)
+    Me.pnlResumen.Name = "pnlResumen"
+    Me.pnlResumen.Size = New System.Drawing.Size(729, 494)
+    Me.pnlResumen.TabIndex = 59
+    Me.pnlResumen.Visible = False
+    '
+    'lstViewResumen
+    '
+    Me.lstViewResumen.Location = New System.Drawing.Point(150, 44)
+    Me.lstViewResumen.Name = "lstViewResumen"
+    Me.lstViewResumen.Size = New System.Drawing.Size(554, 367)
+    Me.lstViewResumen.TabIndex = 41
+    Me.lstViewResumen.UseCompatibleStateImageBehavior = False
+    Me.lstViewResumen.View = System.Windows.Forms.View.Details
+    '
+    'btnOK
+    '
+    Me.btnOK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnOK.FlatAppearance.BorderSize = 0
+    Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnOK.ForeColor = System.Drawing.Color.White
+    Me.btnOK.Location = New System.Drawing.Point(20, 17)
+    Me.btnOK.Name = "btnOK"
+    Me.btnOK.Size = New System.Drawing.Size(110, 61)
+    Me.btnOK.TabIndex = 40
+    Me.btnOK.Text = "OK"
+    Me.btnOK.UseVisualStyleBackColor = False
+    '
+    'btnCancel
+    '
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
+    Me.btnCancel.Location = New System.Drawing.Point(20, 420)
+    Me.btnCancel.Name = "btnCancel"
+    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.TabIndex = 39
+    Me.btnCancel.Text = "Cancel"
+    Me.btnCancel.UseVisualStyleBackColor = False
     '
     'frmDeben
     '
@@ -598,8 +651,9 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
-    Me.Controls.Add(Me.Button8)
-    Me.Controls.Add(Me.Button7)
+    Me.Controls.Add(Me.pnlResumen)
+    Me.Controls.Add(Me.btnWMasterDebito)
+    Me.Controls.Add(Me.btnRMasterDebito)
     Me.Controls.Add(Me.btnWCBU)
     Me.Controls.Add(Me.btnReadCBU)
     Me.Controls.Add(Me.btnWVisaCredito)
@@ -630,6 +684,7 @@ Partial Class frmDeben
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gpxBuscar.ResumeLayout(False)
     Me.gpxBuscar.PerformLayout()
+    Me.pnlResumen.ResumeLayout(False)
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -682,6 +737,10 @@ Partial Class frmDeben
   Friend WithEvents btnWVisaCredito As System.Windows.Forms.Button
   Friend WithEvents btnReadCBU As System.Windows.Forms.Button
   Friend WithEvents btnWCBU As System.Windows.Forms.Button
-  Friend WithEvents Button7 As System.Windows.Forms.Button
-  Friend WithEvents Button8 As System.Windows.Forms.Button
+  Friend WithEvents btnRMasterDebito As System.Windows.Forms.Button
+  Friend WithEvents btnWMasterDebito As System.Windows.Forms.Button
+  Friend WithEvents pnlResumen As System.Windows.Forms.Panel
+  Friend WithEvents lstViewResumen As System.Windows.Forms.ListView
+  Friend WithEvents btnOK As System.Windows.Forms.Button
+  Friend WithEvents btnCancel As System.Windows.Forms.Button
 End Class

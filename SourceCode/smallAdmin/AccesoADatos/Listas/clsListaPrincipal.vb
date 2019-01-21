@@ -92,6 +92,10 @@ Public Class clsListaPrincipal
             objInfoPrincipal.ValorCuota = objPagos.Last.ValorCuota
             objInfoPrincipal.FechaUltimoPago = UltimoPago(objPagos)
 
+            Dim objArticulosVendidos As New List(Of clsInfoArticuloVendido)
+            clsRelArtProd.Load(objArticulosVendidos, objListProdInfo.GuidProducto)
+            objInfoPrincipal.ArticulosVendidod = objArticulosVendidos.Count
+
             If Deben = "0" Then
               '
             ElseIf Deben = "1" Then
@@ -156,6 +160,7 @@ Public Class clsListaPrincipal
       Dim pagadas As Integer = 0
       For Each pago In lstPagos
         If pago.EstadoPago = 1 Then
+
           pagadas += 1
         End If
       Next

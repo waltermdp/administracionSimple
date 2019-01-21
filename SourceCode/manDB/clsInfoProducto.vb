@@ -165,6 +165,15 @@
     End Set
   End Property
 
+  Public Property NumComprobante As Integer
+    Get
+      Return m_NumComprobante
+    End Get
+    Set(value As Integer)
+      m_NumComprobante = value
+    End Set
+  End Property
+
   Public Sub New()
     MyBase.New()
     IdProducto = -1
@@ -182,6 +191,7 @@
     m_listPagos.Clear()
     Cuenta = New clsInfoCuenta
     m_listArticulos.Clear()
+    NumComprobante = -1
   End Sub
 
 

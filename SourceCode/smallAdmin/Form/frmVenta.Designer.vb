@@ -36,6 +36,7 @@ Partial Class frmVenta
     Me.Label5 = New System.Windows.Forms.Label()
     Me.dgvCuotas = New System.Windows.Forms.DataGridView()
     Me.IdPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumComprobanteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NumCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -59,6 +60,7 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.lblNumComprobante = New System.Windows.Forms.Label()
     Me.txtAdelantoVendedor = New System.Windows.Forms.TextBox()
     Me.Label15 = New System.Windows.Forms.Label()
     Me.txtAdelanto = New System.Windows.Forms.TextBox()
@@ -80,6 +82,8 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
+    Me.Label16 = New System.Windows.Forms.Label()
+    Me.txtNumVenta = New System.Windows.Forms.TextBox()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
@@ -187,7 +191,7 @@ Partial Class frmVenta
     '
     Me.dgvCuotas.AutoGenerateColumns = False
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
+    Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.NumComprobanteDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
     Me.dgvCuotas.Location = New System.Drawing.Point(15, 379)
     Me.dgvCuotas.Name = "dgvCuotas"
@@ -199,6 +203,12 @@ Partial Class frmVenta
     Me.IdPagoDataGridViewTextBoxColumn.DataPropertyName = "IdPago"
     Me.IdPagoDataGridViewTextBoxColumn.HeaderText = "IdPago"
     Me.IdPagoDataGridViewTextBoxColumn.Name = "IdPagoDataGridViewTextBoxColumn"
+    '
+    'NumComprobanteDataGridViewTextBoxColumn
+    '
+    Me.NumComprobanteDataGridViewTextBoxColumn.DataPropertyName = "NumComprobante"
+    Me.NumComprobanteDataGridViewTextBoxColumn.HeaderText = "NumComprobante"
+    Me.NumComprobanteDataGridViewTextBoxColumn.Name = "NumComprobanteDataGridViewTextBoxColumn"
     '
     'GuidProductoDataGridViewTextBoxColumn
     '
@@ -249,9 +259,11 @@ Partial Class frmVenta
     'Label6
     '
     Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(182, 165)
+    Me.Label6.BackColor = System.Drawing.Color.White
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.Location = New System.Drawing.Point(182, 163)
     Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(128, 13)
+    Me.Label6.Size = New System.Drawing.Size(172, 15)
     Me.Label6.TabIndex = 17
     Me.Label6.Text = "Informacion del Vendedor"
     '
@@ -268,9 +280,11 @@ Partial Class frmVenta
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(191, 75)
+    Me.Label7.BackColor = System.Drawing.Color.White
+    Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label7.Location = New System.Drawing.Point(182, 75)
     Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(114, 13)
+    Me.Label7.Size = New System.Drawing.Size(156, 15)
     Me.Label7.TabIndex = 20
     Me.Label7.Text = "Informacion del Cliente"
     '
@@ -313,9 +327,11 @@ Partial Class frmVenta
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.Location = New System.Drawing.Point(369, 76)
+    Me.Label8.BackColor = System.Drawing.Color.White
+    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label8.Location = New System.Drawing.Point(369, 73)
     Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(44, 13)
+    Me.Label8.Size = New System.Drawing.Size(58, 15)
     Me.Label8.TabIndex = 25
     Me.Label8.Text = "Nombre"
     '
@@ -331,9 +347,11 @@ Partial Class frmVenta
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(605, 76)
+    Me.Label9.BackColor = System.Drawing.Color.White
+    Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label9.Location = New System.Drawing.Point(605, 73)
     Me.Label9.Name = "Label9"
-    Me.Label9.Size = New System.Drawing.Size(26, 13)
+    Me.Label9.Size = New System.Drawing.Size(31, 15)
     Me.Label9.TabIndex = 27
     Me.Label9.Text = "DNI"
     '
@@ -349,9 +367,11 @@ Partial Class frmVenta
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.Location = New System.Drawing.Point(369, 165)
+    Me.Label10.BackColor = System.Drawing.Color.White
+    Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label10.Location = New System.Drawing.Point(369, 163)
     Me.Label10.Name = "Label10"
-    Me.Label10.Size = New System.Drawing.Size(53, 13)
+    Me.Label10.Size = New System.Drawing.Size(68, 15)
     Me.Label10.TabIndex = 29
     Me.Label10.Text = "Vendedor"
     '
@@ -367,14 +387,19 @@ Partial Class frmVenta
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(605, 165)
+    Me.Label11.BackColor = System.Drawing.Color.White
+    Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label11.Location = New System.Drawing.Point(605, 163)
     Me.Label11.Name = "Label11"
-    Me.Label11.Size = New System.Drawing.Size(26, 13)
+    Me.Label11.Size = New System.Drawing.Size(31, 15)
     Me.Label11.TabIndex = 32
     Me.Label11.Text = "DNI"
     '
     'gpVenta
     '
+    Me.gpVenta.Controls.Add(Me.txtNumVenta)
+    Me.gpVenta.Controls.Add(Me.Label16)
+    Me.gpVenta.Controls.Add(Me.lblNumComprobante)
     Me.gpVenta.Controls.Add(Me.txtAdelantoVendedor)
     Me.gpVenta.Controls.Add(Me.Label15)
     Me.gpVenta.Controls.Add(Me.txtAdelanto)
@@ -408,6 +433,15 @@ Partial Class frmVenta
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "Venta"
+    '
+    'lblNumComprobante
+    '
+    Me.lblNumComprobante.AutoSize = True
+    Me.lblNumComprobante.Location = New System.Drawing.Point(791, 69)
+    Me.lblNumComprobante.Name = "lblNumComprobante"
+    Me.lblNumComprobante.Size = New System.Drawing.Size(42, 13)
+    Me.lblNumComprobante.TabIndex = 38
+    Me.lblNumComprobante.Text = "#####"
     '
     'txtAdelantoVendedor
     '
@@ -475,6 +509,7 @@ Partial Class frmVenta
     Me.dtDiaVencimiento.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
     Me.dtDiaVencimiento.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
     Me.dtDiaVencimiento.Name = "dtDiaVencimiento"
+    Me.dtDiaVencimiento.ReadOnly = True
     Me.dtDiaVencimiento.Size = New System.Drawing.Size(60, 20)
     Me.dtDiaVencimiento.TabIndex = 32
     Me.dtDiaVencimiento.Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -578,6 +613,22 @@ Partial Class frmVenta
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
     '
+    'Label16
+    '
+    Me.Label16.AutoSize = True
+    Me.Label16.Location = New System.Drawing.Point(12, 277)
+    Me.Label16.Name = "Label16"
+    Me.Label16.Size = New System.Drawing.Size(90, 13)
+    Me.Label16.TabIndex = 39
+    Me.Label16.Text = "Numero de Venta"
+    '
+    'txtNumVenta
+    '
+    Me.txtNumVenta.Location = New System.Drawing.Point(15, 293)
+    Me.txtNumVenta.Name = "txtNumVenta"
+    Me.txtNumVenta.Size = New System.Drawing.Size(223, 20)
+    Me.txtNumVenta.TabIndex = 40
+    '
     'frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -629,14 +680,6 @@ Partial Class frmVenta
   Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents chkEditarCuotas As System.Windows.Forms.CheckBox
   Friend WithEvents IdProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents IdPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents NumCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ValorCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents VencimientoCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents EstadoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents Label7 As System.Windows.Forms.Label
   Friend WithEvents btnSelectClient As System.Windows.Forms.Button
   Friend WithEvents btnNewClient As System.Windows.Forms.Button
@@ -671,4 +714,16 @@ Partial Class frmVenta
   Friend WithEvents Label14 As System.Windows.Forms.Label
   Friend WithEvents txtAdelantoVendedor As System.Windows.Forms.TextBox
   Friend WithEvents Label15 As System.Windows.Forms.Label
+  Friend WithEvents lblNumComprobante As System.Windows.Forms.Label
+  Friend WithEvents IdPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NumComprobanteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NumCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ValorCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents VencimientoCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents EstadoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents txtNumVenta As System.Windows.Forms.TextBox
+  Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class

@@ -6,7 +6,7 @@ Public Class frmDeben
   Private WithEvents m_objPrincipal As clsListaPrincipal = Nothing
   Private m_CurrentProducto As clsInfoPrincipal = Nothing
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
-
+  Private m_Movimientos As List(Of clsInfoMovimiento)
 
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     Try
@@ -384,7 +384,79 @@ Public Class frmDeben
     End Try
   End Sub
 
-  Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnRVisaDebito.Click
+  Private Sub FillResumenView(ByVal vMovimientos As List(Of clsInfoMovimiento))
+    Try
+      lstViewResumen.Clear()
+      lstViewResumen.MultiSelect = False
+      lstViewResumen.FullRowSelect = True
+      lstViewResumen.Columns.Add("NumComprobante")
+      lstViewResumen.Columns.Add("NumTarjeta")
+      lstViewResumen.Columns.Add("Estado")
+      lstViewResumen.Columns.Add("Importe")
+      lstViewResumen.Columns.Add("Detalle")
+      Dim item As ListViewItem
+      For Each movimiento In vMovimientos
+        item = New ListViewItem
+        item.Text = CInt(movimiento.NumeroComprobante).ToString
+        item.SubItems.Add(movimiento.NumeroTarjeta)
+        If IsNumeric(movimiento.Codigo) Then
+          movimiento.Estado = E_EstadoPago.Debe
+          item.SubItems.Add(E_EstadoPago.Debe.ToString)
+        Else
+          movimiento.Estado = E_EstadoPago.Pago
+          item.SubItems.Add(E_EstadoPago.Pago.ToString)
+        End If
+        item.SubItems.Add(CDec(movimiento.Importe.Insert(movimiento.Importe.Length - 2, ".")).ToString)
+        item.SubItems.Add(movimiento.Detalle)
+        lstViewResumen.Items.Add(item)
+      Next
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    Finally
+      pnlResumen.Visible = True
+    End Try
+  End Sub
+
+  Private Sub FillResumenViewCBU(ByVal vMovimientos As List(Of clsInfoMovimiento))
+    Try
+      lstViewResumen.Clear()
+      lstViewResumen.MultiSelect = False
+      lstViewResumen.FullRowSelect = True
+      lstViewResumen.Columns.Add("Identificador")
+      lstViewResumen.Columns.Add("CBU")
+      lstViewResumen.Columns.Add("Concepto")
+      lstViewResumen.Columns.Add("Importe Cobrado")
+      lstViewResumen.Columns.Add("Detalle")
+      Dim item As ListViewItem
+
+      For Each movimiento In vMovimientos
+
+        item = New ListViewItem
+        item.Text = CInt(movimiento.IdentificadorDebito).ToString
+        item.SubItems.Add(movimiento.NumeroTarjeta)
+        If Not IsNumeric(movimiento.Importe) Then
+          movimiento.Estado = E_EstadoPago.Debe
+          item.SubItems.Add(E_EstadoPago.Debe.ToString)
+          item.SubItems.Add(CDec(0.0))
+        Else
+          movimiento.Estado = E_EstadoPago.Pago
+          item.SubItems.Add(E_EstadoPago.Pago.ToString)
+          item.SubItems.Add(CDec(movimiento.Importe.Insert(movimiento.Importe.Length - 2, ".")).ToString)
+        End If
+
+        item.SubItems.Add(movimiento.Detalle)
+        lstViewResumen.Items.Add(item)
+      Next
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    Finally
+      pnlResumen.Visible = True
+    End Try
+  End Sub
+
+  Private Sub btnRVisaDebito_Click(sender As Object, e As EventArgs) Handles btnRVisaDebito.Click
     Try
       Dim archivo As New List(Of String)
       Dim AbrirArchivo As New OpenFileDialog
@@ -392,20 +464,161 @@ Public Class frmDeben
       modFile.Load(AbrirArchivo.FileName, archivo)
       Dim mov As New List(Of clsInfoMovimiento)
       GetCuerpo(archivo, mov)
-
-
-
-      Dim Resumen As String = String.Empty
-      clsCobros.ShowResumen(mov, Resumen)
-
-
-      Dim s As Integer = 0
-
-      modFile.Save("c:\1.txt", archivo)
-
-      s = 1
+      FillResumenView(mov)
+      m_Movimientos = New List(Of clsInfoMovimiento)
+      m_Movimientos.AddRange(mov.ToList)
     Catch ex As Exception
       Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnWVisaDebito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWVisaDebito.MouseClick
+    Try
+      clsCobros.GenerateResumen(g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("d167e036-b175-4a67-9305-a47c116e8f5c")))
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub btnRVisaCredito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnRVisaCredito.MouseClick
+    Try
+      Dim archivo As New List(Of String)
+      Dim AbrirArchivo As New OpenFileDialog
+      If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
+      modFile.Load(AbrirArchivo.FileName, archivo)
+      Dim mov As New List(Of clsInfoMovimiento)
+      GetCuerpoVISACredito(archivo, mov)
+      FillResumenView(mov)
+      m_Movimientos = New List(Of clsInfoMovimiento)
+      m_Movimientos.AddRange(mov.ToList)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnWVisaCredito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWVisaCredito.MouseClick
+    Try
+      clsCobros.GenerateResumen(g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("7580f2d4-d9ec-477b-9e3a-50afb7141ab5")))
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnReadCBU_MouseClick(sender As Object, e As MouseEventArgs) Handles btnReadCBU.MouseClick
+    Try
+      Dim archivo As New List(Of String)
+      Dim AbrirArchivo As New OpenFileDialog
+      If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
+      modFile.Load(AbrirArchivo.FileName, archivo)
+      Dim mov As New List(Of clsInfoMovimiento)
+      GetCuerpoCBU(archivo, mov)
+      FillResumenViewCBU(mov)
+      m_Movimientos = New List(Of clsInfoMovimiento)
+      m_Movimientos.AddRange(mov.ToList)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+  Private Sub btnWCBU_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWCBU.MouseClick
+    Try
+      clsCobros.GenerateResumen(g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117924")))
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnRMasterDebito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnRMasterDebito.MouseClick
+    Try
+      Exit Sub
+      'm_Movimientos = New List(Of clsInfoMovimiento)
+      'm_Movimientos.AddRange(mov.ToList)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+  Private Sub btnWMasterDebito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWMasterDebito.MouseClick
+    Try
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+
+  Private Sub btnOK_MouseClick(sender As Object, e As MouseEventArgs) Handles btnOK.MouseClick
+    Try
+      'aplicar pagos
+      If m_Movimientos Is Nothing Then Exit Sub
+      Dim vResult As Result
+      Dim lstPagos As clsListPagos
+      Dim lstProducto = New clsListProductos
+
+      For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
+        lstPagos = New clsListPagos
+        lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante
+        lstPagos.RefreshData()
+        If lstPagos.Items.Count <> 1 Then
+          MsgBox("Existen o no, mas de un ticket")
+          Exit Sub
+        End If
+        Dim Pago As New clsInfoPagos
+        Pago = lstPagos.Items.First.Clone
+        lstProducto = New clsListProductos
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & Pago.GuidProducto.ToString & "}"
+        lstProducto.RefreshData()
+        Dim Producto As New clsInfoProducto
+        Producto = lstProducto.Items.First.Clone
+        Pago.EstadoPago = E_EstadoPago.Pago
+        Pago.FechaPago = Date.Now
+
+        vResult = clsPago.Save(Pago)
+        If vResult <> Result.OK Then
+          MsgBox("Fallo guardar pagos")
+          Exit Sub
+        End If
+
+        Dim auxPago As New clsInfoPagos
+        If (lstProducto.Items.First.CuotasDebe - 1) > 0 Then
+          auxPago = GetProximoPago(Pago.GuidProducto, Producto.Adelanto, Producto.ValorCuotaFija, Pago.NumCuota + 1, Producto.FechaVenta, Pago.VencimientoCuota)
+        End If
+        If auxPago IsNot Nothing Then
+          vResult = clsPago.Save(auxPago)
+          If vResult <> Result.OK Then
+            MsgBox("Fallo guardar nuevo pago")
+            Exit Sub
+          End If
+        End If
+
+      Next
+
+      ''collectar la informacion a mostrar antes de aplicar el pago elgido
+      'Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
+      '                                  "Nombre: {0}" & vbNewLine & _
+      '                                  "DNI: {1}" & vbNewLine & _
+      '                                  "Metodo Pago: {2}" & vbNewLine & _
+      '                                  "Numero: {3}" & vbNewLine & _
+      '                                  "Valor Cuota: {4}" & vbNewLine & _
+      '                                   "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.NombreCliente, m_CurrentProducto.DNI, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuota, Today)
+
+      Call MostrarDeben()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    Finally
+      pnlResumen.Visible = False
+    End Try
+  End Sub
+
+  Private Sub btnCancel_MouseClick(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseClick
+    Try
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    Finally
+      pnlResumen.Visible = False
     End Try
   End Sub
 End Class

@@ -9,6 +9,26 @@
   Private m_param2 As String
   Private m_Codigo As String
   Private m_Detalle As String
+  Private m_CodigoDeALta As String
+  Private m_Estado As libCommon.Comunes.E_EstadoPago
+
+  Public Property Estado As libCommon.Comunes.E_EstadoPago
+    Get
+      Return m_Estado
+    End Get
+    Set(value As libCommon.Comunes.E_EstadoPago)
+      m_Estado = value
+    End Set
+  End Property
+
+  Public Property CodigoDeAlta As String
+    Get
+      Return m_CodigoDeALta
+    End Get
+    Set(value As String)
+      m_CodigoDeALta = value
+    End Set
+  End Property
 
   Public Property NumeroTarjeta As String
     Get
@@ -93,15 +113,16 @@
 
   Public Sub New()
     MyBase.New()
-    NumeroTarjeta = String.Empty
-    NumeroComprobante = String.Empty
-    Fecha = String.Empty
-    Importe = String.Empty
-    IdentificadorDebito = String.Empty
-    Param1 = String.Empty
-    Param2 = String.Empty
-    Codigo = String.Empty
-    Detalle = String.Empty
-
+    NumeroTarjeta = 0
+    NumeroComprobante = 0
+    Fecha = 0
+    Importe = 0
+    IdentificadorDebito = 0
+    Param1 = 0
+    Param2 = 0
+    Codigo = 0
+    Detalle = 0
+    CodigoDeAlta = 0
+    Estado = libCommon.Comunes.E_EstadoPago.Debe
   End Sub
 End Class

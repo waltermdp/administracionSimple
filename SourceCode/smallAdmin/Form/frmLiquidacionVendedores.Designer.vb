@@ -37,9 +37,10 @@ Partial Class frmLiquidacionVendedores
     Me.chkVendedores = New System.Windows.Forms.CheckBox()
     Me.btnImprimir = New System.Windows.Forms.Button()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-    Me.txtVale = New System.Windows.Forms.TextBox()
     Me.Label2 = New System.Windows.Forms.Label()
+    Me.txtVale = New System.Windows.Forms.TextBox()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
+    Me.lblAdelantos = New System.Windows.Forms.Label()
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
@@ -182,6 +183,7 @@ Partial Class frmLiquidacionVendedores
     'GroupBox1
     '
     Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.lblAdelantos)
     Me.GroupBox1.Controls.Add(Me.Label2)
     Me.GroupBox1.Controls.Add(Me.txtVale)
     Me.GroupBox1.Controls.Add(Me.chkAuto)
@@ -190,19 +192,10 @@ Partial Class frmLiquidacionVendedores
     Me.GroupBox1.Controls.Add(Me.chkAguinaldo)
     Me.GroupBox1.Location = New System.Drawing.Point(196, 108)
     Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(450, 66)
+    Me.GroupBox1.Size = New System.Drawing.Size(625, 66)
     Me.GroupBox1.TabIndex = 48
     Me.GroupBox1.TabStop = False
     Me.GroupBox1.Text = "Aplicar"
-    '
-    'txtVale
-    '
-    Me.txtVale.Location = New System.Drawing.Point(283, 16)
-    Me.txtVale.Name = "txtVale"
-    Me.txtVale.Size = New System.Drawing.Size(127, 20)
-    Me.txtVale.TabIndex = 47
-    Me.txtVale.Text = "0"
-    Me.txtVale.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'Label2
     '
@@ -213,9 +206,27 @@ Partial Class frmLiquidacionVendedores
     Me.Label2.TabIndex = 48
     Me.Label2.Text = "Vales:"
     '
+    'txtVale
+    '
+    Me.txtVale.Location = New System.Drawing.Point(283, 16)
+    Me.txtVale.Name = "txtVale"
+    Me.txtVale.Size = New System.Drawing.Size(127, 20)
+    Me.txtVale.TabIndex = 47
+    Me.txtVale.Text = "0"
+    Me.txtVale.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
     'bsVendedores
     '
     Me.bsVendedores.DataSource = GetType(manDB.clsInfoVendedor)
+    '
+    'lblAdelantos
+    '
+    Me.lblAdelantos.AutoSize = True
+    Me.lblAdelantos.Location = New System.Drawing.Point(241, 43)
+    Me.lblAdelantos.Name = "lblAdelantos"
+    Me.lblAdelantos.Size = New System.Drawing.Size(66, 13)
+    Me.lblAdelantos.TabIndex = 49
+    Me.lblAdelantos.Text = "Adelantos: 0"
     '
     'frmLiquidacionVendedores
     '
@@ -260,4 +271,5 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents txtVale As System.Windows.Forms.TextBox
+  Friend WithEvents lblAdelantos As System.Windows.Forms.Label
 End Class

@@ -24,7 +24,87 @@ Module modVisa
           .Param2 = linea.Substring(84, 1) 'param2
           '15 espacios
           .Codigo = linea.Substring(100, 3) 'codigo
-          .Detalle = linea.Substring(101, 48) 'descripcion OJO no se si es hasta el final o hay espacion fijo en el final
+          .Detalle = linea.Substring(103, 46) 'descripcion OJO no se si es hasta el final o hay espacion fijo en el final
+        End With
+        rMovimiento.Add(movimiento)
+      Next
+
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Public Function GetCuerpoVISACredito(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoMovimiento)) As Result
+    Try
+
+      rMovimiento = New List(Of clsInfoMovimiento)
+      If vLineas.Count <= 0 Then Return Result.OK
+      If vLineas.GetRange(1, vLineas.Count - 2).TrueForAll(Function(c) c.First = "1" AndAlso c.Last = "*") = False Then Return Result.NOK
+      Dim aux As String = String.Empty
+      Dim movimiento As clsInfoMovimiento
+      For Each linea In vLineas.GetRange(1, vLineas.Count - 2)
+        movimiento = New clsInfoMovimiento
+        With movimiento
+          .NumeroTarjeta = linea.Substring(26, 16) 'num tar
+          '.NumeroComprobante = linea.Substring(20, 8) 'num comprobante
+          '.Fecha = linea.Substring(28, 8) 'fecha
+          'aux = linea.Substring(36, 4) 'c transac = 0005
+          .Importe = linea.Substring(62, 15) 'importe incluye 2 dec
+          .IdentificadorDebito = linea.Substring(79, 15) 'identificador debito
+          ''11 espacios
+          '.Param1 = linea.Substring(81, 1) 'param1
+          ''2 espacio 
+          '.Param2 = linea.Substring(84, 1) 'param2
+          ''15 espacios
+          '.Codigo = linea.Substring(100, 3) 'codigo
+          '.Detalle = linea.Substring(103, 46) 'descripcion OJO no se si es hasta el final o hay espacion fijo en el final
+        End With
+        rMovimiento.Add(movimiento)
+      Next
+
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Public Function GetCuerpoCBU(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoMovimiento)) As Result
+    Try
+
+      rMovimiento = New List(Of clsInfoMovimiento)
+      If vLineas.Count <= 0 Then Return Result.OK
+      'If vLineas.GetRange(1, vLineas.Count - 2).TrueForAll(Function(c) c.First = "1" AndAlso c.Last = "*") = False Then Return Result.NOK
+      Dim aux As String = String.Empty
+      Dim movimiento As clsInfoMovimiento
+      For Each linea In vLineas.GetRange(1, vLineas.Count - 8) ' header mas tail
+        movimiento = New clsInfoMovimiento
+        With movimiento
+          .NumeroTarjeta = linea.Substring(51, 26) 'CBU
+          .IdentificadorDebito = linea.Substring(28, 22) 'Identificador
+          .Fecha = linea.Substring(78, 8) 'Fecha Compensacion
+          .Param1 = linea.Substring(112, 10) 'Concepto
+          .Param2 = linea.Substring(123, 9) 'Importe del vencimiento
+          .Importe = linea.Substring(133, 9) 'Importe cobrado
+          .Detalle = linea.Substring(143, 56) 'Detalle
+
+          '.NumeroTarjeta = linea.Substring(26, 16) 'num tar
+          '.NumeroComprobante = linea.Substring(20, 8) 'num comprobante
+          '.Fecha = linea.Substring(28, 8) 'fecha
+          'aux = linea.Substring(36, 4) 'c transac = 0005
+          '.Importe = linea.Substring(62, 15) 'importe incluye 2 dec
+          '.IdentificadorDebito = linea.Substring(79, 15) 'identificador debito
+          ''11 espacios
+          '.Param1 = linea.Substring(81, 1) 'param1
+          ''2 espacio 
+          '.Param2 = linea.Substring(84, 1) 'param2
+          ''15 espacios
+          '.Codigo = linea.Substring(100, 3) 'codigo
+          '.Detalle = linea.Substring(103, 46) 'descripcion OJO no se si es hasta el final o hay espacion fijo en el final
         End With
         rMovimiento.Add(movimiento)
       Next

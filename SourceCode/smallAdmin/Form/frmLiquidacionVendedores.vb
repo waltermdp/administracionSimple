@@ -98,6 +98,8 @@ Public Class frmLiquidacionVendedores
       m_lstResumenVentas = New List(Of clsInfoResumenVenta)
 
       Call SearchPagos()
+      Call SearchAdelantos()
+
       Call ResolverLiquidacion()
       pbxResumen.Size = New Size(pbxResumen.Size.Width, 80 * 20)
       Call pbxResumen.Refresh()
@@ -152,11 +154,29 @@ Public Class frmLiquidacionVendedores
         m_lstResumenVentas.Add(ResumenVenta)
       Next
 
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 
 
+  Private Sub SearchAdelantos()
+    Try
+
+      If m_objListPagos IsNot Nothing Then m_objListPagos.Dispose()
 
 
+      m_FechaFin = New Date(dtInicio.Value.Year, dtInicio.Value.Month, Date.DaysInMonth(dtInicio.Value.Year, dtInicio.Value.Month))
+      m_FechaInicio = New Date(dtInicio.Value.Year, dtInicio.Value.Month, 1)
 
+      Dim Adelantos As New clsListAdelantos
+      Adelantos.Cfg_Filtro = "where GuidVendedor={" & m_Vendedor.GuidVendedor.ToString & "} and Fecha between #" & Format(m_FechaInicio, strFormatoAnsiStdFecha) & "# and #" & Format(m_FechaFin, strFormatoAnsiStdFecha) & "#"
+      Adelantos.RefreshData()
+      Dim valor As Decimal = 0
+      For Each adelanto In Adelantos.Items
+        valor += adelanto.Valor
+      Next
+      lblAdelantos.Text = "Adelantos: " & valor.ToString
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

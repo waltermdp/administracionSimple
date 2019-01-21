@@ -61,7 +61,10 @@ Public Class frmVenta
       Dim lstpagos As New clsListPagos
       lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
       lstpagos.RefreshData()
-      m_NumOperacion = lstpagos.Items.First.NumComprobante + 1
+      m_NumOperacion = 1
+      lblNumComprobante.Text = m_NumOperacion.ToString
+      If lstpagos.Items.Count > 0 Then m_NumOperacion = lstpagos.Items.First.NumComprobante + 1
+
       If m_CurrentPersona Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub
       If m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing Then
         vResult = clsPersona.Load(m_Producto.GuidCliente, m_CurrentPersona)
@@ -77,6 +80,8 @@ Public Class frmVenta
           Call Print_msg("Falloo carga de Pagos")
         End If
         m_lstPagos = m_Producto.ListaPagos.ToList
+        m_NumOperacion = m_lstPagos.Last.NumComprobante
+        lblNumComprobante.Text = m_NumOperacion.ToString
         If TerminoDePagar(m_Producto) Then btnSave.Enabled = False
 
         vResult = clsRelArtProd.Load(m_Producto.ListaArticulos, m_Producto.GuidProducto)
@@ -89,7 +94,7 @@ Public Class frmVenta
           Call Print_msg("Falloo carga de cuenta")
         End If
 
-      
+
 
         DateVenta.Value = m_Producto.FechaVenta
         dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
@@ -161,12 +166,7 @@ Public Class frmVenta
         txtPrecio.Text = .Precio
         DateVenta.Value = .FechaVenta
         dtDiaVencimiento.Value = .FechaPrimerPago.Day
-        'For Each item As clsCuota In cmbCuotas.Items
-        '  If .ListaPagos.Count = item.Cantidad Then
-        '    cmbCuotas.SelectedItem = item
-        '    Exit For
-        '  End If
-        'Next
+        
         For Each cuota In g_Cuotas
           If cuota.Cantidad = .TotalCuotas Then
             cmbCuotas.SelectedItem = cuota
@@ -174,11 +174,11 @@ Public Class frmVenta
           End If
         Next
         If .ListaPagos.Count > 0 Then
-          txtValorCuota.Text = .ListaPagos.First.ValorCuota.ToString
+          txtValorCuota.Text = .ValorCuotaFija.ToString  ' .ListaPagos.Last.ValorCuota.ToString
         Else
           txtValorCuota.Text = .Precio.ToString
         End If
-
+        txtNumVenta.Text = .NumComprobante
 
       End With
       Call FillMedioDePagoDescripcion()
@@ -325,7 +325,7 @@ Public Class frmVenta
       If m_lstPagos.Count > 0 Then
         If m_lstPagos.Last.EstadoPago = E_EstadoPago.Debe Then
           numProxCouta = m_lstPagos.Last.NumCuota
-          m_lstPagos.Last.EstadoPago = 2 'editado
+          m_lstPagos.Last.EstadoPago = E_EstadoPago.Anulo_Editado
 
         ElseIf m_lstPagos.Last.EstadoPago = E_EstadoPago.Pago Then
           Exit Sub
@@ -335,7 +335,8 @@ Public Class frmVenta
 
 
       auxPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.Adelanto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
-      auxPago.NumComprobante = m_NumOperacion
+      
+      lblNumComprobante.Text = auxPago.NumComprobante.ToString
       m_lstPagos.Add(auxPago)
 
       Call ReloadListPagos()
@@ -401,6 +402,7 @@ Public Class frmVenta
         End If
         .ListaPagos.Clear()
         .ListaPagos = m_lstPagos.ToList
+        .NumComprobante = txtNumVenta.Text
       End With
       
 
@@ -444,6 +446,7 @@ Public Class frmVenta
   Private Sub AplicarPagoAdelantado()
     Try
       If IsNumeric(txtAdelanto.Text.Trim) Then
+        If CDec(txtAdelanto.Text) <= 0 Then Exit Sub
         Dim AdelantoCuota As Decimal
         Dim AdelantoVendedor As Decimal
         text2decimal(txtAdelanto.Text, AdelantoCuota)
@@ -459,7 +462,7 @@ Public Class frmVenta
         newPago = aux.Items.First.Clone
         newPago.ValorCuota = AdelantoCuota
         newPago.FechaPago = Today
-        newPago.EstadoPago = E_EstadoPago.Pago
+        newPago.EstadoPago = E_EstadoPago.PagoParcial
         Vencimiento = newPago.VencimientoCuota
         clsPago.Save(newPago)
 
@@ -467,7 +470,7 @@ Public Class frmVenta
         newPago = New clsInfoPagos
         newPago = aux.Items.First.Clone
         newPago = GetProximoPago(m_Producto.GuidProducto, 0, m_Producto.ValorCuotaFija, newPago.NumCuota, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
-        
+
         If AdelantoCuota < m_Producto.ValorCuotaFija Then
           newPago.ValorCuota = m_Producto.ValorCuotaFija - AdelantoCuota
           newPago.VencimientoCuota = Vencimiento
@@ -655,6 +658,7 @@ Public Class frmVenta
       Using objForm As New frmCuenta(m_CurrentPersona.GuidCliente)
         objForm.ShowDialog(Me)
         objForm.GetCuentaSeleccionada(m_CurrentCuenta)
+        Call GenerarPlanCuotas()
         Call FillMedioDePagoDescripcion()
       End Using
     Catch ex As Exception
@@ -667,6 +671,7 @@ Public Class frmVenta
       Using objForm As New frmCuenta(m_CurrentPersona.GuidCliente)
         objForm.ShowDialog(Me)
         objForm.GetCuentaSeleccionada(m_CurrentCuenta)
+        Call GenerarPlanCuotas()
         Call FillMedioDePagoDescripcion()
       End Using
     Catch ex As Exception

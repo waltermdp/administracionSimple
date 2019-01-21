@@ -31,10 +31,11 @@ Module Entorno
       End If
       DB_SLocal_ConnectionString = GetAccessConectionStringDBS(DB_path)
 
-      'TODO:CARGAR
+
       CargarTipoPago(g_TipoPago)
       CargarCuotas(g_Cuotas)
 
+      Call ActualizarCuotasVencidas()
 
       Return Result.OK
     Catch ex As Exception

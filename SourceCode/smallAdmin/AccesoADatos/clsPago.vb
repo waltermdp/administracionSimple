@@ -161,7 +161,7 @@ Public Class clsPago
         End Try
 
         Try
-          vInfoPago.ValorCuota = CDbl(IIf(IsDBNull(.Item("ValorCuota")), 0, .Item("ValorCuota")))
+          vInfoPago.ValorCuota = CDec(IIf(IsDBNull(.Item("ValorCuota")), 0, .Item("ValorCuota")))
         Catch ex As Exception
           vInfoPago.ValorCuota = 0
           Call Print_msg(ex.Message)
@@ -185,6 +185,13 @@ Public Class clsPago
           vInfoPago.EstadoPago = CInt(IIf(IsDBNull(.Item("EstadoPago")), -1, .Item("EstadoPago")))
         Catch ex As Exception
           vInfoPago.EstadoPago = -1
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoPago.NumComprobante = CInt(IIf(IsDBNull(.Item("NumComprobante")), -1, .Item("NumComprobante")))
+        Catch ex As Exception
+          vInfoPago.NumComprobante = -1
           Call Print_msg(ex.Message)
         End Try
 
@@ -227,8 +234,8 @@ Public Class clsPago
             strSQL.Append("[ValorCuota],")
             strSQL.Append("[VencimientoCuota],")
             strSQL.Append("[FechaPago],")
-            strSQL.Append("[EstadoPago]")
-
+            strSQL.Append("[EstadoPago],")
+            strSQL.Append("[NumComprobante]")
 
             strSQL.Append(") VALUES (")
 
@@ -238,7 +245,8 @@ Public Class clsPago
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.ValorCuota) & """,")
             strSQL.Append("""" & .VencimientoCuota & """,")
             strSQL.Append("""" & .FechaPago & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.EstadoPago) & """")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.EstadoPago) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.NumComprobante) & """")
 
             strSQL.Append(")")
 
@@ -263,7 +271,8 @@ Public Class clsPago
             strSQL.Append("[ValorCuota]=""" & libDB.clsAcceso.Field_Correcting(.ValorCuota) & """,")
             strSQL.Append("[VencimientoCuota]=""" & .VencimientoCuota & """,")
             strSQL.Append("[FechaPago]=""" & .FechaPago & """,")
-            strSQL.Append("[EstadoPago]=""" & libDB.clsAcceso.Field_Correcting(.EstadoPago) & """")
+            strSQL.Append("[EstadoPago]=""" & libDB.clsAcceso.Field_Correcting(.EstadoPago) & """,")
+            strSQL.Append("[NumComprobante]=""" & libDB.clsAcceso.Field_Correcting(.NumComprobante) & """")
 
             strSQL.Append(" WHERE [IdPago]=" & .IdPago)
 

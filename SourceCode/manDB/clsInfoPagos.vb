@@ -6,7 +6,7 @@
   Private m_GuidProducto As Guid
   Private m_GuidPago As Guid
   Private m_NumCuota As Integer
-  Private m_ValorCuota As Double
+  Private m_ValorCuota As Decimal
   Private m_VencimientoCuota As Date
   Private m_FechaPago As Date
   Private m_EstadoPago As Integer
@@ -58,11 +58,11 @@
     End Set
   End Property
 
-  Public Property ValorCuota As Double
+  Public Property ValorCuota As Decimal
     Get
       Return m_ValorCuota
     End Get
-    Set(value As Double)
+    Set(value As Decimal)
       m_ValorCuota = value
     End Set
   End Property
@@ -107,7 +107,7 @@
       VencimientoCuota = Nothing
       FechaPago = Nothing
       EstadoPago = -1
-      NumComprobante = 0
+      NumComprobante = -1
 
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)

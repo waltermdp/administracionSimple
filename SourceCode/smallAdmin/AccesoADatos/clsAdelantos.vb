@@ -218,7 +218,7 @@ Public Class clsAdelantos
         End Try
 
         Try
-          vInfo.Valor = CStr(IIf(IsDBNull(.Item("Valor")), "", .Item("Valor")))
+          vInfo.Valor = CDec(IIf(IsDBNull(.Item("Valor")), "", .Item("Valor")))
         Catch ex As Exception
           vInfo.Valor = ""
           Call Print_msg(ex.Message)
