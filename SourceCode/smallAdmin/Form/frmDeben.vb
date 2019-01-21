@@ -40,7 +40,7 @@ Public Class frmDeben
 
   Private Sub frmDeben_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      Call MostrarDeben()
+      'Call MostrarDeben()
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -68,9 +68,9 @@ Public Class frmDeben
 
   Private Function Filtro(ByVal modo As String) As Result
     Try
-      'strFiltro = "Pac.Fecha between #" & Format(m_dFiltroFechaDesde, strFormatoAnsiStdFecha) & "# and #" & Format(m_dFiltroFechaHasta, strFormatoAnsiStdFecha) & "#"
+
       If rbtnVendidos.Checked = True Then
-        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value, strFormatoAnsiStdFecha) & "#"
+        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "#"
         m_objPrincipal.Deben = "0"
       ElseIf rbtnDeben.Checked Then
         m_objPrincipal.Cfg_Filtro = ""
@@ -84,11 +84,11 @@ Public Class frmDeben
       ElseIf rbtnClientName.Checked Then
         'Mostrar los productos vendidos a este cliente
         'strSQL = "SELECT * FROM [Articulos] INNER JOIN [RelArtProd] ON Articulos.GuidArticulo = RelArtProd.GuidArticulo WHERE [RelArtProd.GuidProducto]={" & vGuidProducto.ToString & "}"
-        m_objPrincipal.Cfg_Filtro = "where GuidCliente in (select GuidCliente from Clientes where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR ID Like '%" & txtBusqueda.Text.Trim & "%')"
+        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "# and GuidCliente in (select GuidCliente from Clientes where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR Apellido Like '%" & txtBusqueda.Text.Trim & "%' OR ID Like '%" & txtBusqueda.Text.Trim & "%')"
         m_objPrincipal.Deben = "0"
       ElseIf rbtnNombreVendedor.Checked Then
         'Mostrar los productos vendidos por este vendedor
-        m_objPrincipal.Cfg_Filtro = "where GuidVendedor in (select GuidVendedor from Vendedores where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR NumVendedor Like '%" & txtBusqueda.Text.Trim & "%' OR Grupo Like '%" & txtBusqueda.Text.Trim & "%')"
+        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "# and GuidVendedor in (select GuidVendedor from Vendedores where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR Apellido Like '%" & txtBusqueda.Text.Trim & "%' OR NumVendedor Like '%" & txtBusqueda.Text.Trim & "%' OR Grupo Like '%" & txtBusqueda.Text.Trim & "%')"
 
       End If
 

@@ -23,6 +23,7 @@ Partial Class frmVenta
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
+    Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmVenta))
     Me.txtPrecio = New System.Windows.Forms.TextBox()
     Me.Label1 = New System.Windows.Forms.Label()
@@ -45,9 +46,7 @@ Partial Class frmVenta
     Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.EstadoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsCuotas = New System.Windows.Forms.BindingSource(Me.components)
-    Me.Label6 = New System.Windows.Forms.Label()
     Me.chkEditarCuotas = New System.Windows.Forms.CheckBox()
-    Me.Label7 = New System.Windows.Forms.Label()
     Me.btnSelectClient = New System.Windows.Forms.Button()
     Me.btnNewClient = New System.Windows.Forms.Button()
     Me.btnSelectVendedor = New System.Windows.Forms.Button()
@@ -60,6 +59,8 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.txtNumVenta = New System.Windows.Forms.TextBox()
+    Me.Label16 = New System.Windows.Forms.Label()
     Me.lblNumComprobante = New System.Windows.Forms.Label()
     Me.txtAdelantoVendedor = New System.Windows.Forms.TextBox()
     Me.Label15 = New System.Windows.Forms.Label()
@@ -82,44 +83,48 @@ Partial Class frmVenta
     Me.lstArticulos = New System.Windows.Forms.ListBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label12 = New System.Windows.Forms.Label()
-    Me.Label16 = New System.Windows.Forms.Label()
-    Me.txtNumVenta = New System.Windows.Forms.TextBox()
+    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.GroupBox2 = New System.Windows.Forms.GroupBox()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
     CType(Me.dtDiaVencimiento, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.GroupBox1.SuspendLayout()
+    Me.GroupBox2.SuspendLayout()
     Me.SuspendLayout()
     '
     'txtPrecio
     '
-    Me.txtPrecio.Location = New System.Drawing.Point(553, 207)
+    Me.txtPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtPrecio.Location = New System.Drawing.Point(554, 204)
     Me.txtPrecio.Name = "txtPrecio"
-    Me.txtPrecio.Size = New System.Drawing.Size(100, 20)
+    Me.txtPrecio.Size = New System.Drawing.Size(100, 21)
     Me.txtPrecio.TabIndex = 0
     '
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(554, 188)
+    Me.Label1.Location = New System.Drawing.Point(555, 185)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(37, 13)
+    Me.Label1.Size = New System.Drawing.Size(48, 15)
     Me.Label1.TabIndex = 2
     Me.Label1.Text = "Precio"
     '
     'DateVenta
     '
-    Me.DateVenta.Location = New System.Drawing.Point(553, 69)
+    Me.DateVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.DateVenta.Location = New System.Drawing.Point(553, 43)
     Me.DateVenta.Name = "DateVenta"
-    Me.DateVenta.Size = New System.Drawing.Size(200, 20)
+    Me.DateVenta.Size = New System.Drawing.Size(200, 21)
     Me.DateVenta.TabIndex = 4
     '
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(550, 96)
+    Me.Label3.Location = New System.Drawing.Point(551, 83)
     Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(70, 13)
+    Me.Label3.Size = New System.Drawing.Size(91, 15)
     Me.Label3.TabIndex = 6
     Me.Label3.Text = "Tipo de pago"
     '
@@ -153,39 +158,40 @@ Partial Class frmVenta
     '
     'cmbCuotas
     '
+    Me.cmbCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.cmbCuotas.FormattingEnabled = True
     Me.cmbCuotas.Items.AddRange(New Object() {"Contado", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-    Me.cmbCuotas.Location = New System.Drawing.Point(659, 206)
+    Me.cmbCuotas.Location = New System.Drawing.Point(660, 203)
     Me.cmbCuotas.Name = "cmbCuotas"
-    Me.cmbCuotas.Size = New System.Drawing.Size(121, 21)
+    Me.cmbCuotas.Size = New System.Drawing.Size(121, 23)
     Me.cmbCuotas.TabIndex = 9
     '
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(656, 188)
+    Me.Label4.Location = New System.Drawing.Point(657, 185)
     Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(40, 13)
+    Me.Label4.Size = New System.Drawing.Size(51, 15)
     Me.Label4.TabIndex = 10
     Me.Label4.Text = "Cuotas"
     '
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(550, 53)
+    Me.Label2.Location = New System.Drawing.Point(550, 27)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(65, 13)
+    Me.Label2.Size = New System.Drawing.Size(82, 15)
     Me.Label2.TabIndex = 12
     Me.Label2.Text = "FechaVenta"
     '
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(901, 191)
+    Me.Label5.Location = New System.Drawing.Point(555, 244)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(124, 13)
+    Me.Label5.Size = New System.Drawing.Size(112, 15)
     Me.Label5.TabIndex = 13
-    Me.Label5.Text = "FechaPrimerVencimiento"
+    Me.Label5.Text = "Dia Vencimiento"
     '
     'dgvCuotas
     '
@@ -193,9 +199,17 @@ Partial Class frmVenta
     Me.dgvCuotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.NumComprobanteDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
-    Me.dgvCuotas.Location = New System.Drawing.Point(15, 379)
+    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+    Me.dgvCuotas.DefaultCellStyle = DataGridViewCellStyle1
+    Me.dgvCuotas.Location = New System.Drawing.Point(15, 392)
     Me.dgvCuotas.Name = "dgvCuotas"
-    Me.dgvCuotas.Size = New System.Drawing.Size(1053, 67)
+    Me.dgvCuotas.Size = New System.Drawing.Size(1053, 89)
     Me.dgvCuotas.TabIndex = 15
     '
     'IdPagoDataGridViewTextBoxColumn
@@ -256,147 +270,146 @@ Partial Class frmVenta
     '
     Me.bsCuotas.DataSource = GetType(manDB.clsInfoPagos)
     '
-    'Label6
-    '
-    Me.Label6.AutoSize = True
-    Me.Label6.BackColor = System.Drawing.Color.White
-    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.Location = New System.Drawing.Point(182, 163)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(172, 15)
-    Me.Label6.TabIndex = 17
-    Me.Label6.Text = "Informacion del Vendedor"
-    '
     'chkEditarCuotas
     '
     Me.chkEditarCuotas.AutoSize = True
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(786, 231)
+    Me.chkEditarCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(915, 203)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
-    Me.chkEditarCuotas.Size = New System.Drawing.Size(86, 17)
+    Me.chkEditarCuotas.Size = New System.Drawing.Size(96, 19)
     Me.chkEditarCuotas.TabIndex = 18
     Me.chkEditarCuotas.Text = "EditarCuotas"
     Me.chkEditarCuotas.UseVisualStyleBackColor = True
     '
-    'Label7
-    '
-    Me.Label7.AutoSize = True
-    Me.Label7.BackColor = System.Drawing.Color.White
-    Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label7.Location = New System.Drawing.Point(182, 75)
-    Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(156, 15)
-    Me.Label7.TabIndex = 20
-    Me.Label7.Text = "Informacion del Cliente"
-    '
     'btnSelectClient
     '
-    Me.btnSelectClient.Location = New System.Drawing.Point(185, 93)
+    Me.btnSelectClient.BackColor = System.Drawing.Color.White
+    Me.btnSelectClient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSelectClient.FlatAppearance.BorderSize = 2
+    Me.btnSelectClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSelectClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSelectClient.Location = New System.Drawing.Point(23, 26)
     Me.btnSelectClient.Name = "btnSelectClient"
-    Me.btnSelectClient.Size = New System.Drawing.Size(125, 23)
+    Me.btnSelectClient.Size = New System.Drawing.Size(113, 49)
     Me.btnSelectClient.TabIndex = 21
     Me.btnSelectClient.Text = "Seleccionar Cliente"
-    Me.btnSelectClient.UseVisualStyleBackColor = True
+    Me.btnSelectClient.UseVisualStyleBackColor = False
     '
     'btnNewClient
     '
-    Me.btnNewClient.Location = New System.Drawing.Point(185, 122)
+    Me.btnNewClient.BackColor = System.Drawing.Color.White
+    Me.btnNewClient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnNewClient.FlatAppearance.BorderSize = 2
+    Me.btnNewClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnNewClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNewClient.Location = New System.Drawing.Point(23, 79)
     Me.btnNewClient.Name = "btnNewClient"
-    Me.btnNewClient.Size = New System.Drawing.Size(125, 23)
+    Me.btnNewClient.Size = New System.Drawing.Size(113, 46)
     Me.btnNewClient.TabIndex = 22
     Me.btnNewClient.Text = "Cliente Nuevo"
-    Me.btnNewClient.UseVisualStyleBackColor = True
+    Me.btnNewClient.UseVisualStyleBackColor = False
     '
     'btnSelectVendedor
     '
-    Me.btnSelectVendedor.Location = New System.Drawing.Point(185, 181)
+    Me.btnSelectVendedor.BackColor = System.Drawing.Color.White
+    Me.btnSelectVendedor.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSelectVendedor.FlatAppearance.BorderSize = 2
+    Me.btnSelectVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSelectVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSelectVendedor.Location = New System.Drawing.Point(18, 31)
     Me.btnSelectVendedor.Name = "btnSelectVendedor"
-    Me.btnSelectVendedor.Size = New System.Drawing.Size(125, 23)
+    Me.btnSelectVendedor.Size = New System.Drawing.Size(112, 43)
     Me.btnSelectVendedor.TabIndex = 23
     Me.btnSelectVendedor.Text = "Seleccionar Vendedor"
-    Me.btnSelectVendedor.UseVisualStyleBackColor = True
+    Me.btnSelectVendedor.UseVisualStyleBackColor = False
     '
     'txtNombreCliente
     '
-    Me.txtNombreCliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtNombreCliente.Location = New System.Drawing.Point(372, 92)
+    Me.txtNombreCliente.BackColor = System.Drawing.SystemColors.Control
+    Me.txtNombreCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNombreCliente.Location = New System.Drawing.Point(227, 36)
     Me.txtNombreCliente.Name = "txtNombreCliente"
     Me.txtNombreCliente.ReadOnly = True
-    Me.txtNombreCliente.Size = New System.Drawing.Size(230, 20)
+    Me.txtNombreCliente.Size = New System.Drawing.Size(291, 21)
     Me.txtNombreCliente.TabIndex = 24
     '
     'Label8
     '
     Me.Label8.AutoSize = True
     Me.Label8.BackColor = System.Drawing.Color.White
-    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label8.Location = New System.Drawing.Point(369, 73)
+    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label8.Location = New System.Drawing.Point(224, 17)
     Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(58, 15)
+    Me.Label8.Size = New System.Drawing.Size(52, 15)
     Me.Label8.TabIndex = 25
     Me.Label8.Text = "Nombre"
     '
     'txtDNICliente
     '
-    Me.txtDNICliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtDNICliente.Location = New System.Drawing.Point(608, 92)
+    Me.txtDNICliente.BackColor = System.Drawing.SystemColors.Control
+    Me.txtDNICliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtDNICliente.Location = New System.Drawing.Point(227, 79)
     Me.txtDNICliente.Name = "txtDNICliente"
     Me.txtDNICliente.ReadOnly = True
-    Me.txtDNICliente.Size = New System.Drawing.Size(184, 20)
+    Me.txtDNICliente.Size = New System.Drawing.Size(291, 21)
     Me.txtDNICliente.TabIndex = 26
     '
     'Label9
     '
     Me.Label9.AutoSize = True
     Me.Label9.BackColor = System.Drawing.Color.White
-    Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label9.Location = New System.Drawing.Point(605, 73)
+    Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label9.Location = New System.Drawing.Point(224, 60)
     Me.Label9.Name = "Label9"
-    Me.Label9.Size = New System.Drawing.Size(31, 15)
+    Me.Label9.Size = New System.Drawing.Size(28, 15)
     Me.Label9.TabIndex = 27
     Me.Label9.Text = "DNI"
     '
     'txtNombreVendedor
     '
-    Me.txtNombreVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtNombreVendedor.Location = New System.Drawing.Point(372, 181)
+    Me.txtNombreVendedor.BackColor = System.Drawing.SystemColors.Control
+    Me.txtNombreVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(154, 36)
     Me.txtNombreVendedor.Name = "txtNombreVendedor"
     Me.txtNombreVendedor.ReadOnly = True
-    Me.txtNombreVendedor.Size = New System.Drawing.Size(230, 20)
+    Me.txtNombreVendedor.Size = New System.Drawing.Size(281, 21)
     Me.txtNombreVendedor.TabIndex = 28
     '
     'Label10
     '
     Me.Label10.AutoSize = True
     Me.Label10.BackColor = System.Drawing.Color.White
-    Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label10.Location = New System.Drawing.Point(369, 163)
+    Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label10.Location = New System.Drawing.Point(151, 18)
     Me.Label10.Name = "Label10"
-    Me.Label10.Size = New System.Drawing.Size(68, 15)
+    Me.Label10.Size = New System.Drawing.Size(52, 15)
     Me.Label10.TabIndex = 29
-    Me.Label10.Text = "Vendedor"
+    Me.Label10.Text = "Nombre"
     '
     'txtDNIVendedor
     '
-    Me.txtDNIVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(255, Byte), Integer))
-    Me.txtDNIVendedor.Location = New System.Drawing.Point(608, 181)
+    Me.txtDNIVendedor.BackColor = System.Drawing.SystemColors.Control
+    Me.txtDNIVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtDNIVendedor.Location = New System.Drawing.Point(154, 80)
     Me.txtDNIVendedor.Name = "txtDNIVendedor"
     Me.txtDNIVendedor.ReadOnly = True
-    Me.txtDNIVendedor.Size = New System.Drawing.Size(184, 20)
+    Me.txtDNIVendedor.Size = New System.Drawing.Size(281, 21)
     Me.txtDNIVendedor.TabIndex = 30
     '
     'Label11
     '
     Me.Label11.AutoSize = True
     Me.Label11.BackColor = System.Drawing.Color.White
-    Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label11.Location = New System.Drawing.Point(605, 163)
+    Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label11.Location = New System.Drawing.Point(151, 60)
     Me.Label11.Name = "Label11"
-    Me.Label11.Size = New System.Drawing.Size(31, 15)
+    Me.Label11.Size = New System.Drawing.Size(28, 15)
     Me.Label11.TabIndex = 32
     Me.Label11.Text = "DNI"
     '
     'gpVenta
     '
+    Me.gpVenta.BackColor = System.Drawing.Color.White
     Me.gpVenta.Controls.Add(Me.txtNumVenta)
     Me.gpVenta.Controls.Add(Me.Label16)
     Me.gpVenta.Controls.Add(Me.lblNumComprobante)
@@ -427,53 +440,74 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.Label5)
     Me.gpVenta.Controls.Add(Me.dgvCuotas)
     Me.gpVenta.Controls.Add(Me.chkEditarCuotas)
+    Me.gpVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.gpVenta.Location = New System.Drawing.Point(170, 221)
     Me.gpVenta.Name = "gpVenta"
     Me.gpVenta.Size = New System.Drawing.Size(1098, 487)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
-    Me.gpVenta.Text = "Venta"
+    Me.gpVenta.Text = "3- Venta"
+    '
+    'txtNumVenta
+    '
+    Me.txtNumVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNumVenta.Location = New System.Drawing.Point(786, 43)
+    Me.txtNumVenta.Name = "txtNumVenta"
+    Me.txtNumVenta.Size = New System.Drawing.Size(223, 21)
+    Me.txtNumVenta.TabIndex = 40
+    '
+    'Label16
+    '
+    Me.Label16.AutoSize = True
+    Me.Label16.Location = New System.Drawing.Point(783, 27)
+    Me.Label16.Name = "Label16"
+    Me.Label16.Size = New System.Drawing.Size(118, 15)
+    Me.Label16.TabIndex = 39
+    Me.Label16.Text = "Numero de Venta"
     '
     'lblNumComprobante
     '
     Me.lblNumComprobante.AutoSize = True
-    Me.lblNumComprobante.Location = New System.Drawing.Point(791, 69)
+    Me.lblNumComprobante.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblNumComprobante.Location = New System.Drawing.Point(783, 244)
     Me.lblNumComprobante.Name = "lblNumComprobante"
-    Me.lblNumComprobante.Size = New System.Drawing.Size(42, 13)
+    Me.lblNumComprobante.Size = New System.Drawing.Size(42, 15)
     Me.lblNumComprobante.TabIndex = 38
     Me.lblNumComprobante.Text = "#####"
     '
     'txtAdelantoVendedor
     '
-    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(685, 275)
+    Me.txtAdelantoVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(689, 328)
     Me.txtAdelantoVendedor.Name = "txtAdelantoVendedor"
-    Me.txtAdelantoVendedor.Size = New System.Drawing.Size(100, 20)
+    Me.txtAdelantoVendedor.Size = New System.Drawing.Size(100, 21)
     Me.txtAdelantoVendedor.TabIndex = 37
     Me.txtAdelantoVendedor.Text = "0"
     '
     'Label15
     '
     Me.Label15.AutoSize = True
-    Me.Label15.Location = New System.Drawing.Point(682, 253)
+    Me.Label15.Location = New System.Drawing.Point(686, 306)
     Me.Label15.Name = "Label15"
-    Me.Label15.Size = New System.Drawing.Size(132, 13)
+    Me.Label15.Size = New System.Drawing.Size(175, 15)
     Me.Label15.TabIndex = 36
     Me.Label15.Text = "Adelanto para el vendedor"
     '
     'txtAdelanto
     '
-    Me.txtAdelanto.Location = New System.Drawing.Point(553, 275)
+    Me.txtAdelanto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtAdelanto.Location = New System.Drawing.Point(557, 328)
     Me.txtAdelanto.Name = "txtAdelanto"
-    Me.txtAdelanto.Size = New System.Drawing.Size(100, 20)
+    Me.txtAdelanto.Size = New System.Drawing.Size(100, 21)
     Me.txtAdelanto.TabIndex = 35
     Me.txtAdelanto.Text = "0"
     '
     'Label14
     '
     Me.Label14.AutoSize = True
-    Me.Label14.Location = New System.Drawing.Point(554, 254)
+    Me.Label14.Location = New System.Drawing.Point(558, 307)
     Me.Label14.Name = "Label14"
-    Me.Label14.Size = New System.Drawing.Size(94, 13)
+    Me.Label14.Size = New System.Drawing.Size(122, 15)
     Me.Label14.TabIndex = 34
     Me.Label14.Text = "Adelanto de cuota"
     '
@@ -481,12 +515,13 @@ Partial Class frmVenta
     '
     Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cArticulos, Me.cCantidad, Me.cGuid})
+    Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.ListView1.FullRowSelect = True
     Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-    Me.ListView1.Location = New System.Drawing.Point(295, 96)
+    Me.ListView1.Location = New System.Drawing.Point(295, 83)
     Me.ListView1.MultiSelect = False
     Me.ListView1.Name = "ListView1"
-    Me.ListView1.Size = New System.Drawing.Size(223, 173)
+    Me.ListView1.Size = New System.Drawing.Size(223, 272)
     Me.ListView1.TabIndex = 33
     Me.ListView1.UseCompatibleStateImageBehavior = False
     '
@@ -505,62 +540,73 @@ Partial Class frmVenta
     '
     'dtDiaVencimiento
     '
-    Me.dtDiaVencimiento.Location = New System.Drawing.Point(904, 207)
+    Me.dtDiaVencimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.dtDiaVencimiento.Location = New System.Drawing.Point(679, 244)
     Me.dtDiaVencimiento.Maximum = New Decimal(New Integer() {30, 0, 0, 0})
     Me.dtDiaVencimiento.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
     Me.dtDiaVencimiento.Name = "dtDiaVencimiento"
     Me.dtDiaVencimiento.ReadOnly = True
-    Me.dtDiaVencimiento.Size = New System.Drawing.Size(60, 20)
+    Me.dtDiaVencimiento.Size = New System.Drawing.Size(60, 21)
     Me.dtDiaVencimiento.TabIndex = 32
     Me.dtDiaVencimiento.Value = New Decimal(New Integer() {1, 0, 0, 0})
     '
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
-    Me.lblValorCuota.Location = New System.Drawing.Point(791, 191)
+    Me.lblValorCuota.Location = New System.Drawing.Point(792, 188)
     Me.lblValorCuota.Name = "lblValorCuota"
-    Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
+    Me.lblValorCuota.Size = New System.Drawing.Size(117, 15)
     Me.lblValorCuota.TabIndex = 31
     Me.lblValorCuota.Text = "Valor de la Cuota"
     '
     'txtValorCuota
     '
-    Me.txtValorCuota.Location = New System.Drawing.Point(786, 206)
+    Me.txtValorCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtValorCuota.Location = New System.Drawing.Point(787, 203)
     Me.txtValorCuota.Name = "txtValorCuota"
-    Me.txtValorCuota.Size = New System.Drawing.Size(96, 20)
+    Me.txtValorCuota.Size = New System.Drawing.Size(122, 21)
     Me.txtValorCuota.TabIndex = 30
     '
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(762, 112)
+    Me.Label13.Location = New System.Drawing.Point(792, 100)
     Me.Label13.Name = "Label13"
-    Me.Label13.Size = New System.Drawing.Size(81, 13)
+    Me.Label13.Size = New System.Drawing.Size(106, 15)
     Me.Label13.TabIndex = 29
     Me.Label13.Text = "Medio De Pago"
     '
     'txtMedioPagoDescripcion
     '
-    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(765, 128)
+    Me.txtMedioPagoDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(795, 116)
     Me.txtMedioPagoDescripcion.Name = "txtMedioPagoDescripcion"
     Me.txtMedioPagoDescripcion.ReadOnly = True
-    Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(303, 20)
+    Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(283, 21)
     Me.txtMedioPagoDescripcion.TabIndex = 28
     '
     'btnSeleccionarCuenta
     '
-    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(553, 141)
+    Me.btnSeleccionarCuenta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSeleccionarCuenta.FlatAppearance.BorderSize = 2
+    Me.btnSeleccionarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSeleccionarCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(673, 103)
     Me.btnSeleccionarCuenta.Name = "btnSeleccionarCuenta"
-    Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(117, 23)
+    Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnSeleccionarCuenta.TabIndex = 27
     Me.btnSeleccionarCuenta.Text = "Seleccionar Cuenta"
     Me.btnSeleccionarCuenta.UseVisualStyleBackColor = True
     '
     'btnAddCuenta
     '
-    Me.btnAddCuenta.Location = New System.Drawing.Point(553, 112)
+    Me.btnAddCuenta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnAddCuenta.FlatAppearance.BorderSize = 2
+    Me.btnAddCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnAddCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnAddCuenta.Location = New System.Drawing.Point(553, 103)
     Me.btnAddCuenta.Name = "btnAddCuenta"
-    Me.btnAddCuenta.Size = New System.Drawing.Size(117, 23)
+    Me.btnAddCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnAddCuenta.TabIndex = 26
     Me.btnAddCuenta.Text = "Agregar Cuenta"
     Me.btnAddCuenta.UseVisualStyleBackColor = True
@@ -585,19 +631,22 @@ Partial Class frmVenta
     '
     'txtBuscarArticulo
     '
-    Me.txtBuscarArticulo.Location = New System.Drawing.Point(15, 72)
+    Me.txtBuscarArticulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtBuscarArticulo.Location = New System.Drawing.Point(15, 53)
     Me.txtBuscarArticulo.Name = "txtBuscarArticulo"
-    Me.txtBuscarArticulo.Size = New System.Drawing.Size(223, 20)
+    Me.txtBuscarArticulo.Size = New System.Drawing.Size(223, 21)
     Me.txtBuscarArticulo.TabIndex = 21
     '
     'lstArticulos
     '
     Me.lstArticulos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lstArticulos.DataSource = Me.bsArticulos
+    Me.lstArticulos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.lstArticulos.FormattingEnabled = True
-    Me.lstArticulos.Location = New System.Drawing.Point(15, 96)
+    Me.lstArticulos.ItemHeight = 15
+    Me.lstArticulos.Location = New System.Drawing.Point(15, 83)
     Me.lstArticulos.Name = "lstArticulos"
-    Me.lstArticulos.Size = New System.Drawing.Size(223, 171)
+    Me.lstArticulos.Size = New System.Drawing.Size(223, 272)
     Me.lstArticulos.TabIndex = 20
     '
     'bsArticulos
@@ -607,27 +656,45 @@ Partial Class frmVenta
     'Label12
     '
     Me.Label12.AutoSize = True
+    Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label12.Location = New System.Drawing.Point(12, 27)
     Me.Label12.Name = "Label12"
-    Me.Label12.Size = New System.Drawing.Size(47, 13)
+    Me.Label12.Size = New System.Drawing.Size(62, 15)
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos"
     '
-    'Label16
+    'GroupBox1
     '
-    Me.Label16.AutoSize = True
-    Me.Label16.Location = New System.Drawing.Point(12, 277)
-    Me.Label16.Name = "Label16"
-    Me.Label16.Size = New System.Drawing.Size(90, 13)
-    Me.Label16.TabIndex = 39
-    Me.Label16.Text = "Numero de Venta"
+    Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.Label8)
+    Me.GroupBox1.Controls.Add(Me.txtNombreCliente)
+    Me.GroupBox1.Controls.Add(Me.Label9)
+    Me.GroupBox1.Controls.Add(Me.txtDNICliente)
+    Me.GroupBox1.Controls.Add(Me.btnSelectClient)
+    Me.GroupBox1.Controls.Add(Me.btnNewClient)
+    Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.GroupBox1.Location = New System.Drawing.Point(170, 78)
+    Me.GroupBox1.Name = "GroupBox1"
+    Me.GroupBox1.Size = New System.Drawing.Size(550, 131)
+    Me.GroupBox1.TabIndex = 34
+    Me.GroupBox1.TabStop = False
+    Me.GroupBox1.Text = "1- Informacion Del Cliente"
     '
-    'txtNumVenta
+    'GroupBox2
     '
-    Me.txtNumVenta.Location = New System.Drawing.Point(15, 293)
-    Me.txtNumVenta.Name = "txtNumVenta"
-    Me.txtNumVenta.Size = New System.Drawing.Size(223, 20)
-    Me.txtNumVenta.TabIndex = 40
+    Me.GroupBox2.BackColor = System.Drawing.Color.White
+    Me.GroupBox2.Controls.Add(Me.Label10)
+    Me.GroupBox2.Controls.Add(Me.txtNombreVendedor)
+    Me.GroupBox2.Controls.Add(Me.Label11)
+    Me.GroupBox2.Controls.Add(Me.btnSelectVendedor)
+    Me.GroupBox2.Controls.Add(Me.txtDNIVendedor)
+    Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.GroupBox2.Location = New System.Drawing.Point(727, 78)
+    Me.GroupBox2.Name = "GroupBox2"
+    Me.GroupBox2.Size = New System.Drawing.Size(541, 131)
+    Me.GroupBox2.TabIndex = 35
+    Me.GroupBox2.TabStop = False
+    Me.GroupBox2.Text = "2- Informacion del Vendedor"
     '
     'frmVenta
     '
@@ -635,20 +702,9 @@ Partial Class frmVenta
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.GroupBox2)
+    Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.gpVenta)
-    Me.Controls.Add(Me.Label11)
-    Me.Controls.Add(Me.txtDNIVendedor)
-    Me.Controls.Add(Me.Label10)
-    Me.Controls.Add(Me.txtNombreVendedor)
-    Me.Controls.Add(Me.Label9)
-    Me.Controls.Add(Me.txtDNICliente)
-    Me.Controls.Add(Me.Label8)
-    Me.Controls.Add(Me.txtNombreCliente)
-    Me.Controls.Add(Me.btnSelectVendedor)
-    Me.Controls.Add(Me.btnNewClient)
-    Me.Controls.Add(Me.btnSelectClient)
-    Me.Controls.Add(Me.Label7)
-    Me.Controls.Add(Me.Label6)
     Me.Controls.Add(Me.btnCancel)
     Me.Controls.Add(Me.btnSave)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -661,8 +717,11 @@ Partial Class frmVenta
     Me.gpVenta.PerformLayout()
     CType(Me.dtDiaVencimiento, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.GroupBox1.ResumeLayout(False)
+    Me.GroupBox1.PerformLayout()
+    Me.GroupBox2.ResumeLayout(False)
+    Me.GroupBox2.PerformLayout()
     Me.ResumeLayout(False)
-    Me.PerformLayout()
 
   End Sub
   Friend WithEvents txtPrecio As System.Windows.Forms.TextBox
@@ -677,10 +736,8 @@ Partial Class frmVenta
   Friend WithEvents Label5 As System.Windows.Forms.Label
   Friend WithEvents dgvCuotas As System.Windows.Forms.DataGridView
   Friend WithEvents bsCuotas As System.Windows.Forms.BindingSource
-  Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents chkEditarCuotas As System.Windows.Forms.CheckBox
   Friend WithEvents IdProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Label7 As System.Windows.Forms.Label
   Friend WithEvents btnSelectClient As System.Windows.Forms.Button
   Friend WithEvents btnNewClient As System.Windows.Forms.Button
   Friend WithEvents btnSelectVendedor As System.Windows.Forms.Button
@@ -726,4 +783,6 @@ Partial Class frmVenta
   Friend WithEvents EstadoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents txtNumVenta As System.Windows.Forms.TextBox
   Friend WithEvents Label16 As System.Windows.Forms.Label
+  Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+  Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
 End Class

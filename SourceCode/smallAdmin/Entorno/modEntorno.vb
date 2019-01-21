@@ -5,7 +5,9 @@ Module Entorno
   Public DB_path As String = String.Empty
   Public App_path As String = String.Empty
   Public NameDB As String = String.Empty
+  Public bkp_Folder As String = String.Empty
   Public DB_SLocal_ConnectionString As String = String.Empty
+  Public BKPDB_path As String = String.Empty
   Private dbpw As String = String.Empty
 
   Public g_TipoPago As New List(Of manDB.clsTipoPago)
@@ -15,15 +17,14 @@ Module Entorno
   Public Function init() As Result
     Try
       NameDB = "bdcli.mdb"
+      bkp_Folder = "bkpdb"
       App_path = My.Application.Info.DirectoryPath
       If App_path.Contains("SourceCode") Then
         Dim tmop As String = App_path.Substring(0, App_path.IndexOf("SourceCode"))
         App_path = IO.Path.Combine(tmop, "work")
       End If
 
-
       'App_path = "c:\repositorio\personal\smallAdmin\work\"
-
 
       DB_path = IO.Path.Combine(App_path, NameDB)
       If IO.File.Exists(DB_path) = False Then
@@ -31,7 +32,14 @@ Module Entorno
       End If
       DB_SLocal_ConnectionString = GetAccessConectionStringDBS(DB_path)
 
+      g_Today = Today
 
+      BKPDB_path = IO.Path.Combine(App_path, bkp_Folder)
+      If Not IO.Directory.Exists(BKPDB_path) Then
+        IO.Directory.CreateDirectory(BKPDB_path)
+      End If
+      Dim vresult As Result = bkpDatabase()
+      If vresult <> Result.OK Then Return vresult
       CargarTipoPago(g_TipoPago)
       CargarCuotas(g_Cuotas)
 
@@ -55,6 +63,16 @@ Module Entorno
     End Try
   End Function
 
+  Private Function bkpDatabase() As Result
+    Try
+      Dim name As String = Today.ToString("dd") & ".bk"
+      IO.File.Copy(DB_path, IO.Path.Combine(BKPDB_path, name), True)
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.NOK
+    End Try
+  End Function
 
   Public Function GuardarTipoPago(ByRef rListTipoListaPago As List(Of manDB.clsTipoPago)) As Result
 
