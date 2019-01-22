@@ -9,7 +9,7 @@
   Private m_ValorCuota As Decimal
   Private m_VencimientoCuota As Date
   Private m_FechaPago As Date
-  Private m_EstadoPago As Integer
+  Private m_EstadoPago As libCommon.Comunes.E_EstadoPago
   Private m_NumComprobante As Integer
 
   Public Property IdPago As Integer
@@ -85,11 +85,11 @@
     End Set
   End Property
 
-  Public Property EstadoPago As Integer
+  Public Property EstadoPago As libCommon.Comunes.E_EstadoPago
     Get
       Return m_EstadoPago
     End Get
-    Set(value As Integer)
+    Set(value As libCommon.Comunes.E_EstadoPago)
       m_EstadoPago = value
     End Set
   End Property
@@ -106,7 +106,7 @@
       ValorCuota = 0
       VencimientoCuota = Nothing
       FechaPago = Nothing
-      EstadoPago = -1
+      EstadoPago = libCommon.Comunes.E_EstadoPago.NA
       NumComprobante = -1
 
     Catch ex As Exception

@@ -199,7 +199,7 @@
     <Compile Include="Modulos\clsParsear.vb" />
     <Compile Include="Modulos\modCommon.vb" />
     <Compile Include="Modulos\modFile.vb" />
-    <Compile Include="Modulos\modVisa.vb" />
+    <Compile Include="Modulos\modInOut.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

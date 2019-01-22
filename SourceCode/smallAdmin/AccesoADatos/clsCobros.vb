@@ -135,7 +135,9 @@ Public Class clsCobros
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
-      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQDempty.xls"))
+      IO.File.Copy(IO.Path.Combine(Entorno.App_path, "DEBLIQDempty.xls"), IO.Path.Combine(Entorno.App_path, "DEBLIQD.xls"), True)
+
+      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQD.xls"))
       worksheet = workbook.Worksheets("Facturas")
       For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
         worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
@@ -147,6 +149,7 @@ Public Class clsCobros
       Next
 
       workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
+      workbook.Close(False)
 
       MsgBox("Finalizo exportacion a excel")
 
@@ -162,7 +165,8 @@ Public Class clsCobros
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
-      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQCempty.xls"))
+      IO.File.Copy(IO.Path.Combine(Entorno.App_path, "DEBLIQCempty.xls"), IO.Path.Combine(Entorno.App_path, "DEBLIQC.xls"), True)
+      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQC.xls"))
       worksheet = workbook.Worksheets("Facturas")
       For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
         worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
@@ -174,7 +178,7 @@ Public Class clsCobros
       Next
 
       workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
-
+      workbook.Close(False)
       MsgBox("Finalizo GeneracionArchivo")
 
       Return Result.OK

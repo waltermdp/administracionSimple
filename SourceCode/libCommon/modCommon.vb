@@ -11,6 +11,7 @@
       Vencido = 3  'se anula el pago porque no pago dentro del plazo
       Observado = 4 ' el pago tiene algun defecto no se considera pagado ni debe 'MOSTRARLO SIEMPRE EN LA LISTA PRINCIPAL HASTA SACARLO DE ESTA SITUACION
       PagoParcial = 5
+      NA = -1 'No Asignado, valor inicial
     End Enum
 
     Enum Result As Integer

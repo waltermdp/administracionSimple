@@ -67,27 +67,29 @@ Partial Class frmDeben
     Me.rbtnClientName = New System.Windows.Forms.RadioButton()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.Label5 = New System.Windows.Forms.Label()
-    Me.btnRVisaDebito = New System.Windows.Forms.Button()
-    Me.btnWVisaDebito = New System.Windows.Forms.Button()
-    Me.btnRVisaCredito = New System.Windows.Forms.Button()
-    Me.btnWVisaCredito = New System.Windows.Forms.Button()
-    Me.btnReadCBU = New System.Windows.Forms.Button()
-    Me.btnWCBU = New System.Windows.Forms.Button()
-    Me.btnRMasterDebito = New System.Windows.Forms.Button()
-    Me.btnWMasterDebito = New System.Windows.Forms.Button()
     Me.pnlResumen = New System.Windows.Forms.Panel()
     Me.lstViewResumen = New System.Windows.Forms.ListView()
     Me.btnOK = New System.Windows.Forms.Button()
     Me.btnCancel = New System.Windows.Forms.Button()
+    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.btnImportar = New System.Windows.Forms.Button()
+    Me.btnExportar = New System.Windows.Forms.Button()
+    Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
+    Me.pnlSeleccionarPago = New System.Windows.Forms.Panel()
+    Me.btnCancelImpExp = New System.Windows.Forms.Button()
+    Me.btnContinuarImpExp = New System.Windows.Forms.Button()
+    Me.lblInfoImpExp = New System.Windows.Forms.Label()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.pnlResumen.SuspendLayout()
+    Me.GroupBox1.SuspendLayout()
+    Me.pnlSeleccionarPago.SuspendLayout()
     Me.SuspendLayout()
     '
     'dateInicio
     '
-    Me.dateInicio.Location = New System.Drawing.Point(152, 182)
+    Me.dateInicio.Location = New System.Drawing.Point(18, 39)
     Me.dateInicio.Name = "dateInicio"
     Me.dateInicio.Size = New System.Drawing.Size(200, 20)
     Me.dateInicio.TabIndex = 2
@@ -109,14 +111,14 @@ Partial Class frmDeben
     '
     'dateFin
     '
-    Me.dateFin.Location = New System.Drawing.Point(152, 221)
+    Me.dateFin.Location = New System.Drawing.Point(228, 39)
     Me.dateFin.Name = "dateFin"
     Me.dateFin.Size = New System.Drawing.Size(200, 20)
     Me.dateFin.TabIndex = 28
     '
     'btnBuscar
     '
-    Me.btnBuscar.Location = New System.Drawing.Point(391, 107)
+    Me.btnBuscar.Location = New System.Drawing.Point(458, 30)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(85, 43)
     Me.btnBuscar.TabIndex = 29
@@ -126,7 +128,7 @@ Partial Class frmDeben
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(149, 166)
+    Me.Label3.Location = New System.Drawing.Point(15, 23)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(32, 13)
     Me.Label3.TabIndex = 32
@@ -135,7 +137,7 @@ Partial Class frmDeben
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(149, 205)
+    Me.Label4.Location = New System.Drawing.Point(225, 23)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(21, 13)
     Me.Label4.TabIndex = 33
@@ -144,7 +146,7 @@ Partial Class frmDeben
     'rbtnVendidos
     '
     Me.rbtnVendidos.AutoSize = True
-    Me.rbtnVendidos.Location = New System.Drawing.Point(32, 163)
+    Me.rbtnVendidos.Location = New System.Drawing.Point(18, 107)
     Me.rbtnVendidos.Name = "rbtnVendidos"
     Me.rbtnVendidos.Size = New System.Drawing.Size(69, 17)
     Me.rbtnVendidos.TabIndex = 34
@@ -155,7 +157,7 @@ Partial Class frmDeben
     'rbtnDeben
     '
     Me.rbtnDeben.AutoSize = True
-    Me.rbtnDeben.Location = New System.Drawing.Point(6, 75)
+    Me.rbtnDeben.Location = New System.Drawing.Point(18, 156)
     Me.rbtnDeben.Name = "rbtnDeben"
     Me.rbtnDeben.Size = New System.Drawing.Size(88, 17)
     Me.rbtnDeben.TabIndex = 35
@@ -166,7 +168,7 @@ Partial Class frmDeben
     'rbtnCuotaPagaron
     '
     Me.rbtnCuotaPagaron.AutoSize = True
-    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(6, 98)
+    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(18, 179)
     Me.rbtnCuotaPagaron.Name = "rbtnCuotaPagaron"
     Me.rbtnCuotaPagaron.Size = New System.Drawing.Size(96, 17)
     Me.rbtnCuotaPagaron.TabIndex = 37
@@ -177,7 +179,7 @@ Partial Class frmDeben
     'rbtnCancelados
     '
     Me.rbtnCancelados.AutoSize = True
-    Me.rbtnCancelados.Location = New System.Drawing.Point(32, 186)
+    Me.rbtnCancelados.Location = New System.Drawing.Point(18, 127)
     Me.rbtnCancelados.Name = "rbtnCancelados"
     Me.rbtnCancelados.Size = New System.Drawing.Size(81, 17)
     Me.rbtnCancelados.TabIndex = 36
@@ -259,18 +261,18 @@ Partial Class frmDeben
     '
     'btnUpPago
     '
-    Me.btnUpPago.Location = New System.Drawing.Point(1165, 450)
+    Me.btnUpPago.Location = New System.Drawing.Point(228, 70)
     Me.btnUpPago.Name = "btnUpPago"
-    Me.btnUpPago.Size = New System.Drawing.Size(90, 23)
+    Me.btnUpPago.Size = New System.Drawing.Size(92, 23)
     Me.btnUpPago.TabIndex = 33
     Me.btnUpPago.Text = "AgregarPago"
     Me.btnUpPago.UseVisualStyleBackColor = True
     '
     'btnDownPago
     '
-    Me.btnDownPago.Location = New System.Drawing.Point(1165, 479)
+    Me.btnDownPago.Location = New System.Drawing.Point(228, 99)
     Me.btnDownPago.Name = "btnDownPago"
-    Me.btnDownPago.Size = New System.Drawing.Size(90, 24)
+    Me.btnDownPago.Size = New System.Drawing.Size(92, 24)
     Me.btnDownPago.TabIndex = 43
     Me.btnDownPago.Text = "revertirPago"
     Me.btnDownPago.UseVisualStyleBackColor = True
@@ -451,7 +453,7 @@ Partial Class frmDeben
     '
     'txtBusqueda
     '
-    Me.txtBusqueda.Location = New System.Drawing.Point(6, 47)
+    Me.txtBusqueda.Location = New System.Drawing.Point(150, 73)
     Me.txtBusqueda.Name = "txtBusqueda"
     Me.txtBusqueda.Size = New System.Drawing.Size(278, 20)
     Me.txtBusqueda.TabIndex = 47
@@ -472,7 +474,7 @@ Partial Class frmDeben
     Me.gpxBuscar.Controls.Add(Me.btnBuscar)
     Me.gpxBuscar.Location = New System.Drawing.Point(186, 437)
     Me.gpxBuscar.Name = "gpxBuscar"
-    Me.gpxBuscar.Size = New System.Drawing.Size(502, 261)
+    Me.gpxBuscar.Size = New System.Drawing.Size(564, 214)
     Me.gpxBuscar.TabIndex = 48
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Busqueda"
@@ -480,7 +482,7 @@ Partial Class frmDeben
     'rbtnNombreVendedor
     '
     Me.rbtnNombreVendedor.AutoSize = True
-    Me.rbtnNombreVendedor.Location = New System.Drawing.Point(201, 20)
+    Me.rbtnNombreVendedor.Location = New System.Drawing.Point(18, 81)
     Me.rbtnNombreVendedor.Name = "rbtnNombreVendedor"
     Me.rbtnNombreVendedor.Size = New System.Drawing.Size(71, 17)
     Me.rbtnNombreVendedor.TabIndex = 49
@@ -491,7 +493,7 @@ Partial Class frmDeben
     'rbtnClientName
     '
     Me.rbtnClientName.AutoSize = True
-    Me.rbtnClientName.Location = New System.Drawing.Point(6, 20)
+    Me.rbtnClientName.Location = New System.Drawing.Point(18, 63)
     Me.rbtnClientName.Name = "rbtnClientName"
     Me.rbtnClientName.Size = New System.Drawing.Size(57, 17)
     Me.rbtnClientName.TabIndex = 48
@@ -523,86 +525,14 @@ Partial Class frmDeben
     Me.Label5.TabIndex = 50
     Me.Label5.Text = "PRODUCTOS VENDIDOS"
     '
-    'btnRVisaDebito
-    '
-    Me.btnRVisaDebito.Location = New System.Drawing.Point(895, 518)
-    Me.btnRVisaDebito.Name = "btnRVisaDebito"
-    Me.btnRVisaDebito.Size = New System.Drawing.Size(139, 32)
-    Me.btnRVisaDebito.TabIndex = 51
-    Me.btnRVisaDebito.Text = "Leer Visa Debito"
-    Me.btnRVisaDebito.UseVisualStyleBackColor = True
-    '
-    'btnWVisaDebito
-    '
-    Me.btnWVisaDebito.Location = New System.Drawing.Point(895, 476)
-    Me.btnWVisaDebito.Name = "btnWVisaDebito"
-    Me.btnWVisaDebito.Size = New System.Drawing.Size(139, 36)
-    Me.btnWVisaDebito.TabIndex = 52
-    Me.btnWVisaDebito.Text = "Generar Visa Debito"
-    Me.btnWVisaDebito.UseVisualStyleBackColor = True
-    '
-    'btnRVisaCredito
-    '
-    Me.btnRVisaCredito.Location = New System.Drawing.Point(895, 554)
-    Me.btnRVisaCredito.Name = "btnRVisaCredito"
-    Me.btnRVisaCredito.Size = New System.Drawing.Size(139, 33)
-    Me.btnRVisaCredito.TabIndex = 53
-    Me.btnRVisaCredito.Text = "Leer Visa Credito"
-    Me.btnRVisaCredito.UseVisualStyleBackColor = True
-    '
-    'btnWVisaCredito
-    '
-    Me.btnWVisaCredito.Location = New System.Drawing.Point(895, 593)
-    Me.btnWVisaCredito.Name = "btnWVisaCredito"
-    Me.btnWVisaCredito.Size = New System.Drawing.Size(139, 34)
-    Me.btnWVisaCredito.TabIndex = 54
-    Me.btnWVisaCredito.Text = "Generar Visa Credito"
-    Me.btnWVisaCredito.UseVisualStyleBackColor = True
-    '
-    'btnReadCBU
-    '
-    Me.btnReadCBU.Location = New System.Drawing.Point(895, 631)
-    Me.btnReadCBU.Name = "btnReadCBU"
-    Me.btnReadCBU.Size = New System.Drawing.Size(139, 34)
-    Me.btnReadCBU.TabIndex = 55
-    Me.btnReadCBU.Text = "Leer CBU"
-    Me.btnReadCBU.UseVisualStyleBackColor = True
-    '
-    'btnWCBU
-    '
-    Me.btnWCBU.Location = New System.Drawing.Point(895, 671)
-    Me.btnWCBU.Name = "btnWCBU"
-    Me.btnWCBU.Size = New System.Drawing.Size(139, 34)
-    Me.btnWCBU.TabIndex = 56
-    Me.btnWCBU.Text = "Generar CBU"
-    Me.btnWCBU.UseVisualStyleBackColor = True
-    '
-    'btnRMasterDebito
-    '
-    Me.btnRMasterDebito.Location = New System.Drawing.Point(1040, 631)
-    Me.btnRMasterDebito.Name = "btnRMasterDebito"
-    Me.btnRMasterDebito.Size = New System.Drawing.Size(139, 34)
-    Me.btnRMasterDebito.TabIndex = 57
-    Me.btnRMasterDebito.Text = "Leer Master Debito"
-    Me.btnRMasterDebito.UseVisualStyleBackColor = True
-    '
-    'btnWMasterDebito
-    '
-    Me.btnWMasterDebito.Location = New System.Drawing.Point(1040, 671)
-    Me.btnWMasterDebito.Name = "btnWMasterDebito"
-    Me.btnWMasterDebito.Size = New System.Drawing.Size(139, 34)
-    Me.btnWMasterDebito.TabIndex = 58
-    Me.btnWMasterDebito.Text = "Generar Master Debito"
-    Me.btnWMasterDebito.UseVisualStyleBackColor = True
-    '
     'pnlResumen
     '
     Me.pnlResumen.Controls.Add(Me.lstViewResumen)
     Me.pnlResumen.Controls.Add(Me.btnOK)
     Me.pnlResumen.Controls.Add(Me.btnCancel)
-    Me.pnlResumen.Location = New System.Drawing.Point(272, 93)
+    Me.pnlResumen.Location = New System.Drawing.Point(186, 64)
     Me.pnlResumen.Name = "pnlResumen"
-    Me.pnlResumen.Size = New System.Drawing.Size(729, 494)
+    Me.pnlResumen.Size = New System.Drawing.Size(743, 360)
     Me.pnlResumen.TabIndex = 59
     Me.pnlResumen.Visible = False
     '
@@ -610,7 +540,7 @@ Partial Class frmDeben
     '
     Me.lstViewResumen.Location = New System.Drawing.Point(150, 44)
     Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(554, 367)
+    Me.lstViewResumen.Size = New System.Drawing.Size(554, 269)
     Me.lstViewResumen.TabIndex = 41
     Me.lstViewResumen.UseCompatibleStateImageBehavior = False
     Me.lstViewResumen.View = System.Windows.Forms.View.Details
@@ -636,12 +566,89 @@ Partial Class frmDeben
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(20, 420)
+    Me.btnCancel.Location = New System.Drawing.Point(20, 252)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 39
     Me.btnCancel.Text = "Cancel"
     Me.btnCancel.UseVisualStyleBackColor = False
+    '
+    'GroupBox1
+    '
+    Me.GroupBox1.Controls.Add(Me.btnImportar)
+    Me.GroupBox1.Controls.Add(Me.btnExportar)
+    Me.GroupBox1.Controls.Add(Me.btnUpPago)
+    Me.GroupBox1.Controls.Add(Me.btnDownPago)
+    Me.GroupBox1.Location = New System.Drawing.Point(929, 442)
+    Me.GroupBox1.Name = "GroupBox1"
+    Me.GroupBox1.Size = New System.Drawing.Size(326, 139)
+    Me.GroupBox1.TabIndex = 60
+    Me.GroupBox1.TabStop = False
+    Me.GroupBox1.Text = "Pagos - Cobros"
+    '
+    'btnImportar
+    '
+    Me.btnImportar.Location = New System.Drawing.Point(228, 26)
+    Me.btnImportar.Name = "btnImportar"
+    Me.btnImportar.Size = New System.Drawing.Size(92, 35)
+    Me.btnImportar.TabIndex = 62
+    Me.btnImportar.Text = "Importar"
+    Me.btnImportar.UseVisualStyleBackColor = True
+    '
+    'btnExportar
+    '
+    Me.btnExportar.Location = New System.Drawing.Point(16, 23)
+    Me.btnExportar.Name = "btnExportar"
+    Me.btnExportar.Size = New System.Drawing.Size(92, 38)
+    Me.btnExportar.TabIndex = 61
+    Me.btnExportar.Text = "Exportar"
+    Me.btnExportar.UseVisualStyleBackColor = True
+    '
+    'cmbTipoPago
+    '
+    Me.cmbTipoPago.FormattingEnabled = True
+    Me.cmbTipoPago.Location = New System.Drawing.Point(39, 73)
+    Me.cmbTipoPago.Name = "cmbTipoPago"
+    Me.cmbTipoPago.Size = New System.Drawing.Size(162, 21)
+    Me.cmbTipoPago.TabIndex = 0
+    '
+    'pnlSeleccionarPago
+    '
+    Me.pnlSeleccionarPago.Controls.Add(Me.lblInfoImpExp)
+    Me.pnlSeleccionarPago.Controls.Add(Me.btnCancelImpExp)
+    Me.pnlSeleccionarPago.Controls.Add(Me.btnContinuarImpExp)
+    Me.pnlSeleccionarPago.Controls.Add(Me.cmbTipoPago)
+    Me.pnlSeleccionarPago.Location = New System.Drawing.Point(596, 283)
+    Me.pnlSeleccionarPago.Name = "pnlSeleccionarPago"
+    Me.pnlSeleccionarPago.Size = New System.Drawing.Size(239, 158)
+    Me.pnlSeleccionarPago.TabIndex = 42
+    Me.pnlSeleccionarPago.Visible = False
+    '
+    'btnCancelImpExp
+    '
+    Me.btnCancelImpExp.Location = New System.Drawing.Point(161, 109)
+    Me.btnCancelImpExp.Name = "btnCancelImpExp"
+    Me.btnCancelImpExp.Size = New System.Drawing.Size(62, 32)
+    Me.btnCancelImpExp.TabIndex = 3
+    Me.btnCancelImpExp.Text = "Cancelar"
+    Me.btnCancelImpExp.UseVisualStyleBackColor = True
+    '
+    'btnContinuarImpExp
+    '
+    Me.btnContinuarImpExp.Location = New System.Drawing.Point(20, 109)
+    Me.btnContinuarImpExp.Name = "btnContinuarImpExp"
+    Me.btnContinuarImpExp.Size = New System.Drawing.Size(61, 32)
+    Me.btnContinuarImpExp.TabIndex = 2
+    Me.btnContinuarImpExp.Text = "Continuar"
+    Me.btnContinuarImpExp.UseVisualStyleBackColor = True
+    '
+    'lblInfoImpExp
+    '
+    Me.lblInfoImpExp.Location = New System.Drawing.Point(39, 11)
+    Me.lblInfoImpExp.Name = "lblInfoImpExp"
+    Me.lblInfoImpExp.Size = New System.Drawing.Size(162, 46)
+    Me.lblInfoImpExp.TabIndex = 4
+    Me.lblInfoImpExp.Text = "Label1"
     '
     'frmDeben
     '
@@ -651,15 +658,9 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.pnlSeleccionarPago)
+    Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.pnlResumen)
-    Me.Controls.Add(Me.btnWMasterDebito)
-    Me.Controls.Add(Me.btnRMasterDebito)
-    Me.Controls.Add(Me.btnWCBU)
-    Me.Controls.Add(Me.btnReadCBU)
-    Me.Controls.Add(Me.btnWVisaCredito)
-    Me.Controls.Add(Me.btnRVisaCredito)
-    Me.Controls.Add(Me.btnWVisaDebito)
-    Me.Controls.Add(Me.btnRVisaDebito)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.btnListaClientes)
@@ -670,8 +671,6 @@ Partial Class frmDeben
     Me.Controls.Add(Me.btnConfiguracion)
     Me.Controls.Add(Me.btnLiquidVendedores)
     Me.Controls.Add(Me.dgvData)
-    Me.Controls.Add(Me.btnDownPago)
-    Me.Controls.Add(Me.btnUpPago)
     Me.Controls.Add(Me.btnEditarVenta)
     Me.Controls.Add(Me.btnBack)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -685,6 +684,8 @@ Partial Class frmDeben
     Me.gpxBuscar.ResumeLayout(False)
     Me.gpxBuscar.PerformLayout()
     Me.pnlResumen.ResumeLayout(False)
+    Me.GroupBox1.ResumeLayout(False)
+    Me.pnlSeleccionarPago.ResumeLayout(False)
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -731,16 +732,16 @@ Partial Class frmDeben
   Friend WithEvents rbtnClientName As System.Windows.Forms.RadioButton
   Friend WithEvents btnMinimize As System.Windows.Forms.Button
   Friend WithEvents Label5 As System.Windows.Forms.Label
-  Friend WithEvents btnRVisaDebito As System.Windows.Forms.Button
-  Friend WithEvents btnWVisaDebito As System.Windows.Forms.Button
-  Friend WithEvents btnRVisaCredito As System.Windows.Forms.Button
-  Friend WithEvents btnWVisaCredito As System.Windows.Forms.Button
-  Friend WithEvents btnReadCBU As System.Windows.Forms.Button
-  Friend WithEvents btnWCBU As System.Windows.Forms.Button
-  Friend WithEvents btnRMasterDebito As System.Windows.Forms.Button
-  Friend WithEvents btnWMasterDebito As System.Windows.Forms.Button
   Friend WithEvents pnlResumen As System.Windows.Forms.Panel
   Friend WithEvents lstViewResumen As System.Windows.Forms.ListView
   Friend WithEvents btnOK As System.Windows.Forms.Button
   Friend WithEvents btnCancel As System.Windows.Forms.Button
+  Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+  Friend WithEvents btnExportar As System.Windows.Forms.Button
+  Friend WithEvents cmbTipoPago As System.Windows.Forms.ComboBox
+  Friend WithEvents btnImportar As System.Windows.Forms.Button
+  Friend WithEvents pnlSeleccionarPago As System.Windows.Forms.Panel
+  Friend WithEvents btnCancelImpExp As System.Windows.Forms.Button
+  Friend WithEvents btnContinuarImpExp As System.Windows.Forms.Button
+  Friend WithEvents lblInfoImpExp As System.Windows.Forms.Label
 End Class

@@ -37,10 +37,10 @@ Partial Class frmLiquidacionVendedores
     Me.chkVendedores = New System.Windows.Forms.CheckBox()
     Me.btnImprimir = New System.Windows.Forms.Button()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.lblAdelantos = New System.Windows.Forms.Label()
     Me.Label2 = New System.Windows.Forms.Label()
     Me.txtVale = New System.Windows.Forms.TextBox()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
-    Me.lblAdelantos = New System.Windows.Forms.Label()
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
@@ -94,7 +94,7 @@ Partial Class frmLiquidacionVendedores
     Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(30, 556)
+    Me.btnVolver.Location = New System.Drawing.Point(24, 636)
     Me.btnVolver.Name = "btnVolver"
     Me.btnVolver.Size = New System.Drawing.Size(110, 61)
     Me.btnVolver.TabIndex = 39
@@ -197,6 +197,15 @@ Partial Class frmLiquidacionVendedores
     Me.GroupBox1.TabStop = False
     Me.GroupBox1.Text = "Aplicar"
     '
+    'lblAdelantos
+    '
+    Me.lblAdelantos.AutoSize = True
+    Me.lblAdelantos.Location = New System.Drawing.Point(241, 43)
+    Me.lblAdelantos.Name = "lblAdelantos"
+    Me.lblAdelantos.Size = New System.Drawing.Size(66, 13)
+    Me.lblAdelantos.TabIndex = 49
+    Me.lblAdelantos.Text = "Adelantos: 0"
+    '
     'Label2
     '
     Me.Label2.AutoSize = True
@@ -218,15 +227,6 @@ Partial Class frmLiquidacionVendedores
     'bsVendedores
     '
     Me.bsVendedores.DataSource = GetType(manDB.clsInfoVendedor)
-    '
-    'lblAdelantos
-    '
-    Me.lblAdelantos.AutoSize = True
-    Me.lblAdelantos.Location = New System.Drawing.Point(241, 43)
-    Me.lblAdelantos.Name = "lblAdelantos"
-    Me.lblAdelantos.Size = New System.Drawing.Size(66, 13)
-    Me.lblAdelantos.TabIndex = 49
-    Me.lblAdelantos.Text = "Adelantos: 0"
     '
     'frmLiquidacionVendedores
     '
