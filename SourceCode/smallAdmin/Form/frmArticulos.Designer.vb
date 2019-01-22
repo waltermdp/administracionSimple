@@ -57,10 +57,15 @@ Partial Class frmArticulos
     Me.btnVendido = New System.Windows.Forms.Button()
     Me.cmbResponsables = New System.Windows.Forms.ComboBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label6 = New System.Windows.Forms.Label()
+    Me.Label7 = New System.Windows.Forms.Label()
+    Me.Label8 = New System.Windows.Forms.Label()
+    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.gbProducto.SuspendLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.GroupBox1.SuspendLayout()
     Me.SuspendLayout()
     '
     'txtNombre
@@ -233,38 +238,39 @@ Partial Class frmArticulos
     'rbtnResponsables
     '
     Me.rbtnResponsables.AutoSize = True
-    Me.rbtnResponsables.Location = New System.Drawing.Point(269, 210)
+    Me.rbtnResponsables.Location = New System.Drawing.Point(6, 45)
     Me.rbtnResponsables.Name = "rbtnResponsables"
-    Me.rbtnResponsables.Size = New System.Drawing.Size(92, 17)
+    Me.rbtnResponsables.Size = New System.Drawing.Size(137, 19)
     Me.rbtnResponsables.TabIndex = 29
-    Me.rbtnResponsables.Text = "Responsables"
+    Me.rbtnResponsables.Text = "Articulos distribuidos"
     Me.rbtnResponsables.UseVisualStyleBackColor = True
     '
     'rbtnByStock
     '
     Me.rbtnByStock.AutoSize = True
     Me.rbtnByStock.Checked = True
-    Me.rbtnByStock.Location = New System.Drawing.Point(200, 210)
+    Me.rbtnByStock.Location = New System.Drawing.Point(6, 20)
     Me.rbtnByStock.Name = "rbtnByStock"
-    Me.rbtnByStock.Size = New System.Drawing.Size(51, 17)
+    Me.rbtnByStock.Size = New System.Drawing.Size(119, 19)
     Me.rbtnByStock.TabIndex = 30
     Me.rbtnByStock.TabStop = True
-    Me.rbtnByStock.Text = "stock"
+    Me.rbtnByStock.Text = "Articulos en stock"
     Me.rbtnByStock.UseVisualStyleBackColor = True
     '
     'txtFiltro
     '
-    Me.txtFiltro.Location = New System.Drawing.Point(492, 212)
+    Me.txtFiltro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.txtFiltro.Location = New System.Drawing.Point(162, 67)
     Me.txtFiltro.Name = "txtFiltro"
-    Me.txtFiltro.Size = New System.Drawing.Size(187, 20)
+    Me.txtFiltro.Size = New System.Drawing.Size(187, 21)
     Me.txtFiltro.TabIndex = 31
     '
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(386, 212)
+    Me.Label5.Location = New System.Drawing.Point(34, 67)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(92, 13)
+    Me.Label5.Size = New System.Drawing.Size(109, 15)
     Me.Label5.TabIndex = 32
     Me.Label5.Text = "Filtrar responsable"
     '
@@ -300,7 +306,7 @@ Partial Class frmArticulos
     Me.dgvStock.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvStock.EnableHeadersVisualStyles = False
     Me.dgvStock.GridColor = System.Drawing.Color.White
-    Me.dgvStock.Location = New System.Drawing.Point(200, 246)
+    Me.dgvStock.Location = New System.Drawing.Point(200, 221)
     Me.dgvStock.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvStock.MultiSelect = False
     Me.dgvStock.Name = "dgvStock"
@@ -317,7 +323,7 @@ Partial Class frmArticulos
     Me.dgvStock.RowTemplate.Height = 24
     Me.dgvStock.ScrollBars = System.Windows.Forms.ScrollBars.None
     Me.dgvStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvStock.Size = New System.Drawing.Size(497, 343)
+    Me.dgvStock.Size = New System.Drawing.Size(586, 476)
     Me.dgvStock.TabIndex = 33
     Me.dgvStock.TabStop = False
     '
@@ -363,7 +369,7 @@ Partial Class frmArticulos
     '
     'btnAddDeposito
     '
-    Me.btnAddDeposito.Location = New System.Drawing.Point(727, 293)
+    Me.btnAddDeposito.Location = New System.Drawing.Point(816, 364)
     Me.btnAddDeposito.Name = "btnAddDeposito"
     Me.btnAddDeposito.Size = New System.Drawing.Size(26, 23)
     Me.btnAddDeposito.TabIndex = 34
@@ -372,7 +378,7 @@ Partial Class frmArticulos
     '
     'btnRemDeposito
     '
-    Me.btnRemDeposito.Location = New System.Drawing.Point(727, 322)
+    Me.btnRemDeposito.Location = New System.Drawing.Point(816, 393)
     Me.btnRemDeposito.Name = "btnRemDeposito"
     Me.btnRemDeposito.Size = New System.Drawing.Size(26, 23)
     Me.btnRemDeposito.TabIndex = 35
@@ -381,7 +387,7 @@ Partial Class frmArticulos
     '
     'btnVendido
     '
-    Me.btnVendido.Location = New System.Drawing.Point(727, 351)
+    Me.btnVendido.Location = New System.Drawing.Point(816, 422)
     Me.btnVendido.Name = "btnVendido"
     Me.btnVendido.Size = New System.Drawing.Size(69, 23)
     Me.btnVendido.TabIndex = 37
@@ -391,14 +397,59 @@ Partial Class frmArticulos
     'cmbResponsables
     '
     Me.cmbResponsables.FormattingEnabled = True
-    Me.cmbResponsables.Location = New System.Drawing.Point(893, 295)
+    Me.cmbResponsables.Location = New System.Drawing.Point(982, 366)
     Me.cmbResponsables.Name = "cmbResponsables"
-    Me.cmbResponsables.Size = New System.Drawing.Size(121, 21)
+    Me.cmbResponsables.Size = New System.Drawing.Size(210, 21)
     Me.cmbResponsables.TabIndex = 38
     '
     'bsArticulos
     '
     Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
+    '
+    'Label6
+    '
+    Me.Label6.AutoSize = True
+    Me.Label6.BackColor = System.Drawing.Color.White
+    Me.Label6.Location = New System.Drawing.Point(985, 344)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(69, 13)
+    Me.Label6.TabIndex = 39
+    Me.Label6.Text = "Responsable"
+    '
+    'Label7
+    '
+    Me.Label7.AutoSize = True
+    Me.Label7.BackColor = System.Drawing.Color.White
+    Me.Label7.Location = New System.Drawing.Point(848, 364)
+    Me.Label7.Name = "Label7"
+    Me.Label7.Size = New System.Drawing.Size(87, 13)
+    Me.Label7.TabIndex = 40
+    Me.Label7.Text = "Incrementar en 1"
+    '
+    'Label8
+    '
+    Me.Label8.AutoSize = True
+    Me.Label8.BackColor = System.Drawing.Color.White
+    Me.Label8.Location = New System.Drawing.Point(858, 399)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(80, 13)
+    Me.Label8.TabIndex = 41
+    Me.Label8.Text = "Descontar en 1"
+    '
+    'GroupBox1
+    '
+    Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.rbtnByStock)
+    Me.GroupBox1.Controls.Add(Me.rbtnResponsables)
+    Me.GroupBox1.Controls.Add(Me.Label5)
+    Me.GroupBox1.Controls.Add(Me.txtFiltro)
+    Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.GroupBox1.Location = New System.Drawing.Point(810, 221)
+    Me.GroupBox1.Name = "GroupBox1"
+    Me.GroupBox1.Size = New System.Drawing.Size(428, 100)
+    Me.GroupBox1.TabIndex = 42
+    Me.GroupBox1.TabStop = False
+    Me.GroupBox1.Text = "Vistas"
     '
     'frmArticulos
     '
@@ -406,15 +457,15 @@ Partial Class frmArticulos
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.GroupBox1)
+    Me.Controls.Add(Me.Label8)
+    Me.Controls.Add(Me.Label7)
+    Me.Controls.Add(Me.Label6)
     Me.Controls.Add(Me.cmbResponsables)
     Me.Controls.Add(Me.btnVendido)
     Me.Controls.Add(Me.btnRemDeposito)
     Me.Controls.Add(Me.btnAddDeposito)
     Me.Controls.Add(Me.dgvStock)
-    Me.Controls.Add(Me.Label5)
-    Me.Controls.Add(Me.txtFiltro)
-    Me.Controls.Add(Me.rbtnByStock)
-    Me.Controls.Add(Me.rbtnResponsables)
     Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.gbProducto)
     Me.Controls.Add(Me.btnCancelar)
@@ -432,10 +483,12 @@ Partial Class frmArticulos
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.GroupBox1.ResumeLayout(False)
+    Me.GroupBox1.PerformLayout()
     Me.ResumeLayout(False)
-    Me.PerformLayout()
+    Me.PerformLayout
 
-  End Sub
+End Sub
   Friend WithEvents txtNombre As System.Windows.Forms.TextBox
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -466,4 +519,8 @@ Partial Class frmArticulos
   Friend WithEvents NombreDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CantidadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DescripcionDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents Label7 As System.Windows.Forms.Label
+  Friend WithEvents Label8 As System.Windows.Forms.Label
+  Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
 End Class

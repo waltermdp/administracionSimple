@@ -1,0 +1,12 @@
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Release\libDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Release\libDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Release\libDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Release\libCommon.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Release\libCommon.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Release\libCommon.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.Resources.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbproj.GenerateResource.Cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.pdb

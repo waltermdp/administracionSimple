@@ -3,6 +3,7 @@ Imports libCommon.Comunes
 Public Class clsListArticulos
   Inherits clsList(Of clsInfoArticulos)
 
+
   Public Sub New()
     Try
       Call Init(10)
@@ -72,4 +73,6 @@ Public Class clsListArticulos
       Return Result.ErrorEx
     End Try
   End Function
+
+  
 End Class

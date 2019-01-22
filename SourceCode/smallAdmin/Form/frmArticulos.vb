@@ -3,11 +3,13 @@ Imports System.ComponentModel
 Public Class frmArticulos
   Private WithEvents m_objArticulosList As clsListArticulos = Nothing
   Private WithEvents m_ObjListaStock As clsListStock = Nothing
-  Private m_objStock As BindingList(Of clsListaStorage)
+  Private m_objStock As List(Of clsListaStorage)
   Private m_ObjCurrent As clsListaStorage
   Private m_listResponsables As New List(Of clsInfoResponsable)
   Private m_Skip As Boolean = False
   Private m_Deposito As New clsInfoResponsable With {.Nombre = "Deposito", .GuidResponsable = New Guid("7b841601-2cd4-4e0e-b75b-b3a072b58eb1"), .Codigo = "0000"}
+
+
 
   Private Sub frmArticulos_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
@@ -45,11 +47,12 @@ Public Class frmArticulos
 
       Call ArticulosList_RefreshData()
       Call ListaStock_RefreshData()
-      'ya tengo las dos lista actualizadas
+      'Las listas de los articulos y la del stock estan actualizadas
 
 
       Dim auxArticulo As clsListaStorage
-      m_objStock = New BindingList(Of clsListaStorage)
+      m_objStock = New List(Of clsListaStorage)
+
       BindingSource1.DataSource = m_objStock
       dgvStock.DataSource = BindingSource1
 
@@ -113,17 +116,6 @@ Public Class frmArticulos
     End Try
   End Sub
 
-  'Private Sub dgvListArticulos_SelectionChanged(sender As Object, e As EventArgs) Handles dgvListArticulos.SelectionChanged
-  '  Try
-  '    If dgvListArticulos.SelectedRows.Count <> 1 Then Exit Sub
-
-  '    Call Refresh_Selection(dgvListArticulos.SelectedRows(0).Index)
-
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-
   Private Sub Refresh_Selection(ByVal indice As Integer)
     Try
       If m_Skip Then Exit Sub
@@ -145,6 +137,66 @@ Public Class frmArticulos
       End If
 
       Call FillArticuloData()
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub dgvStock_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvStock.ColumnHeaderMouseClick
+    Try
+      Dim m_CurrentSortColumn As DataGridViewColumn = dgvStock.Columns(e.ColumnIndex)
+      'BindingSource1.Sort = m_CurrentSortColumn.DataPropertyName & " DESC"
+      'BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.Nombre)
+      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+        For Each col As DataGridViewColumn In dgvStock.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        BindingSource1.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
+      Else
+        For Each col As DataGridViewColumn In dgvStock.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        BindingSource1.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
+      End If
+      
+
+      'm_ColumnName = m_CurrentSortColumn.DataPropertyName
+
+
+      'If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+      '  m_Order = "ASC"
+      'ElseIf m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Ascending Then
+      '  m_Order = "DESC"
+      'Else
+      '  m_Order = "ASC"
+      'End If
+      'm_objPrincipal.SetOrder(m_ColumnName, m_Order)
+      ''dgvData.Sort(m_CurrentSortColumn, System.ComponentModel.ListSortDirection.Ascending)
+      ''Set the sortColumn and sortDirection variables.
+      ''If (m_CurrentSortColumnName = columnName) Then
+      ''  m_CurrentSortDirection = CStr(IIf(m_CurrentSortDirection = "ASC", "DESC", "ASC"))
+      ''Else
+      ''  m_CurrentSortDirection = "ASC"
+      ''  m_CurrentSortColumnName = columnName
+      ''End If
+
+      ''Perform the sort
+      ''m_objPrincipal.Cfg_Orden = "ORDER BY " & columnName & " " & direccion
+
+      'Call MostrarDeben()
+      'm_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(IIf(m_Order = "ASC", SortOrder.Ascending, SortOrder.Descending), Windows.Forms.SortOrder)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub dgvStock_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgvStock.DataError
+    Try
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -294,6 +346,7 @@ Public Class frmArticulos
   Private Sub rbtnResponsables_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnResponsables.CheckedChanged
     Try
       cmbResponsables.Enabled = rbtnResponsables.Checked
+      txtFiltro.Enabled = rbtnResponsables.Checked
       If rbtnResponsables.Checked = False Then
         cmbResponsables.SelectedIndex = 0
       End If
@@ -519,6 +572,15 @@ Public Class frmArticulos
       Finally
         Refresh_Selection(objSelectedIndex)
       End Try
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
+    Try
+      BindingSource1.DataSource = m_objStock.FindAll(Function(c) c.Responsable.ToUpper.Contains(txtFiltro.Text.ToUpper.Trim))
+      BindingSource1.ResetBindings(False)
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

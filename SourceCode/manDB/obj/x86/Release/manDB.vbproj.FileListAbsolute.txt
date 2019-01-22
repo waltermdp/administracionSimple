@@ -1,0 +1,15 @@
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\manDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\manDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\manDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\libCommon.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\libDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\libCommon.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\libCommon.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\libDB.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\bin\x86\Release\libDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbprojResolveAssemblyReference.cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.Resources.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbproj.GenerateResource.Cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.pdb

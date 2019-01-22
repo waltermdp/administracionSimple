@@ -1,0 +1,8 @@
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Release\libCommon.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Release\libCommon.pdb
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Release\libCommon.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.Resources.resources
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.vbproj.GenerateResource.Cache
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.dll
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.xml
+C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.pdb
