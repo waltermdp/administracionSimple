@@ -20,7 +20,11 @@ Public Class frmArticulos
           column.Visible = False
         End If
       Next
-
+      lblDetalle.Text = "Accion:" & vbNewLine & _
+                        "+: Suma 1 unidad al responsable, si el responsable es Stock entonces el stock crece en 1 unidad, si el responsable es otro entonces, descuenta una unidad de Stock y se la pasa al responsable" & vbNewLine & _
+                        "-: Resta 1 unidad al responsable, si el responsable es Stock entonces el stock descuenta en 1 unidad, si el responsable es otro entonces, descuenta una unidad al Responsable e incrementa a Stock" & vbNewLine & _
+                        "Vendido: Resta una unidad al responsable" & vbNewLine & _
+                        "Solo es posible seleccionar un responsable distinto de stock cuando esta seleccionado la opcion Articulo Distribuidos"
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -146,54 +150,36 @@ Public Class frmArticulos
   Private Sub dgvStock_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvStock.ColumnHeaderMouseClick
     Try
       Dim m_CurrentSortColumn As DataGridViewColumn = dgvStock.Columns(e.ColumnIndex)
-      'BindingSource1.Sort = m_CurrentSortColumn.DataPropertyName & " DESC"
-      'BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.Nombre)
       If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CODIGO") Or m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CANTIDAD") Then
+          BindingSource1.DataSource = m_objStock.OrderBy(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
+        Else
+          BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        End If
+
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
       Else
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CODIGO") Or m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CANTIDAD") Then
+          BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
+        Else
+          BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        End If
+
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
       End If
-      
-
-      'm_ColumnName = m_CurrentSortColumn.DataPropertyName
-
-
-      'If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
-      '  m_Order = "ASC"
-      'ElseIf m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Ascending Then
-      '  m_Order = "DESC"
-      'Else
-      '  m_Order = "ASC"
-      'End If
-      'm_objPrincipal.SetOrder(m_ColumnName, m_Order)
-      ''dgvData.Sort(m_CurrentSortColumn, System.ComponentModel.ListSortDirection.Ascending)
-      ''Set the sortColumn and sortDirection variables.
-      ''If (m_CurrentSortColumnName = columnName) Then
-      ''  m_CurrentSortDirection = CStr(IIf(m_CurrentSortDirection = "ASC", "DESC", "ASC"))
-      ''Else
-      ''  m_CurrentSortDirection = "ASC"
-      ''  m_CurrentSortColumnName = columnName
-      ''End If
-
-      ''Perform the sort
-      ''m_objPrincipal.Cfg_Orden = "ORDER BY " & columnName & " " & direccion
-
-      'Call MostrarDeben()
-      'm_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(IIf(m_Order = "ASC", SortOrder.Ascending, SortOrder.Descending), Windows.Forms.SortOrder)
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
 
   Private Sub dgvStock_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgvStock.DataError
     Try
@@ -325,8 +311,18 @@ Public Class frmArticulos
       btnEliminar.Visible = Not permitir
       btnGuardar.Visible = permitir
       btnCancelar.Visible = permitir
-
       btnVolver.Visible = Not permitir
+      If permitir Then
+        txtNombre.BackColor = Color.White
+        txtCodigo.BackColor = Color.White
+        txtDescripcion.BackColor = Color.White
+      Else
+        txtNombre.BackColor = SystemColors.Control
+        txtCodigo.BackColor = SystemColors.Control
+        txtDescripcion.BackColor = SystemColors.Control
+      End If
+      GroupBox1.Enabled = Not permitir
+      GroupBox2.Enabled = Not permitir
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

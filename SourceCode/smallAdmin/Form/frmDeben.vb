@@ -313,7 +313,7 @@ Public Class frmDeben
             End If
 
             If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.Adelanto, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
+              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
             End If
             If auxPago IsNot Nothing Then
               vResult = clsPago.Save(auxPago)
@@ -522,7 +522,7 @@ Public Class frmDeben
             Exit Sub
           Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito
             FillResumenView(mov)
-            GetCuerpo(archivo, mov)
+            GetCuerpoVISAdebito(archivo, mov)
           Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
             GetCuerpoCBU(archivo, mov)
             FillResumenViewCBU(mov)
@@ -662,7 +662,7 @@ Public Class frmDeben
 
         Dim auxPago As New clsInfoPagos
         If (lstProducto.Items.First.CuotasDebe - 1) > 0 Then
-          auxPago = GetProximoPago(Pago.GuidProducto, Producto.Adelanto, Producto.ValorCuotaFija, Pago.NumCuota + 1, Producto.FechaVenta, Pago.VencimientoCuota)
+          auxPago = GetProximoPago(Pago.GuidProducto, Producto.NumComprobante, Producto.ValorCuotaFija, Pago.NumCuota + 1, Producto.FechaVenta, Pago.VencimientoCuota)
         End If
         If auxPago IsNot Nothing Then
           vResult = clsPago.Save(auxPago)

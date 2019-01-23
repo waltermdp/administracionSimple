@@ -66,6 +66,7 @@ Public Class clsListaPrincipal
             objInfoPrincipal.Precio = objListProdInfo.Precio
             objInfoPrincipal.Adelanto = objListProdInfo.Adelanto
             objInfoPrincipal.ValorCuotaFija = objListProdInfo.ValorCuotaFija
+            objInfoPrincipal.NumPago = objListProdInfo.NumComprobante
 
             Dim objPersona As New ClsInfoPersona
             objResult = clsPersona.Load(objListProdInfo.GuidCliente, objPersona)

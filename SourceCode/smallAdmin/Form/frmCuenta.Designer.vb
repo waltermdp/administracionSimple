@@ -45,6 +45,7 @@ Partial Class frmCuenta
     '
     'cmbTipoDeCuenta
     '
+    Me.cmbTipoDeCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbTipoDeCuenta.FormattingEnabled = True
     Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(413, 38)
     Me.cmbTipoDeCuenta.Name = "cmbTipoDeCuenta"
@@ -56,9 +57,9 @@ Partial Class frmCuenta
     Me.Label1.AutoSize = True
     Me.Label1.Location = New System.Drawing.Point(410, 22)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(76, 13)
+    Me.Label1.Size = New System.Drawing.Size(78, 13)
     Me.Label1.TabIndex = 1
-    Me.Label1.Text = "TipoDeCuenta"
+    Me.Label1.Text = "Medio de pago"
     '
     'lblCodigo1
     '
@@ -155,11 +156,12 @@ Partial Class frmCuenta
     'lblCliente
     '
     Me.lblCliente.AutoSize = True
-    Me.lblCliente.Location = New System.Drawing.Point(141, 47)
+    Me.lblCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCliente.Location = New System.Drawing.Point(141, 54)
     Me.lblCliente.Name = "lblCliente"
-    Me.lblCliente.Size = New System.Drawing.Size(39, 13)
+    Me.lblCliente.Size = New System.Drawing.Size(215, 15)
     Me.lblCliente.TabIndex = 12
-    Me.lblCliente.Text = "Label6"
+    Me.lblCliente.Text = "Medios de pagos asociados al Cliente" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
     '
     'lstCuentas
     '

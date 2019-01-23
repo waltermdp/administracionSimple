@@ -2,13 +2,25 @@
 Module Entorno
 
   Public Const NameSoftware As String = "NA"
-  Public DB_path As String = String.Empty
+
+
+  Private Const NAMEDB As String = "bdcli.mdb"
+  Private Const BKP_FOLDER As String = "bkpdb"
+  Private Const CONFIG_FOLDER As String = "config"
+  Private Const TEMP_FOLDER As String = "temp"
+  Private Const EXPORT_FOLDER As String = "export"
+  Private Const MODEL_FOLDER As String = "model"
+
   Public App_path As String = String.Empty
-  Public NameDB As String = String.Empty
-  Public bkp_Folder As String = String.Empty
-  Public DB_SLocal_ConnectionString As String = String.Empty
-  Public BKPDB_path As String = String.Empty
+  Public DB_path As String = String.Empty
+  Private BKPDB_path As String = String.Empty
+  Public CONFIG_PATH As String = String.Empty
+  Public TEMP_PATH As String = String.Empty
+  Public EXPORT_PATH As String = String.Empty
+  Public MODEL_PATH As String = String.Empty
+
   Private dbpw As String = String.Empty
+  Public DB_SLocal_ConnectionString As String = String.Empty
 
   Public g_TipoPago As New List(Of manDB.clsTipoPago)
   Public g_Cuotas As New List(Of clsCuota)
@@ -16,8 +28,8 @@ Module Entorno
 
   Public Function init() As Result
     Try
-      NameDB = "bdcli.mdb"
-      bkp_Folder = "bkpdb"
+
+
       App_path = My.Application.Info.DirectoryPath
       If App_path.Contains("SourceCode") Then
         Dim tmop As String = App_path.Substring(0, App_path.IndexOf("SourceCode"))
@@ -25,7 +37,7 @@ Module Entorno
       End If
 
       'App_path = "c:\repositorio\personal\smallAdmin\work\"
-
+      'Database'
       DB_path = IO.Path.Combine(App_path, NameDB)
       If IO.File.Exists(DB_path) = False Then
         MsgBox("Database missing")
@@ -33,13 +45,45 @@ Module Entorno
       DB_SLocal_ConnectionString = GetAccessConectionStringDBS(DB_path)
 
       g_Today = Today
-
+      'BKP FOLDER
       BKPDB_path = IO.Path.Combine(App_path, bkp_Folder)
       If Not IO.Directory.Exists(BKPDB_path) Then
         IO.Directory.CreateDirectory(BKPDB_path)
       End If
       Dim vresult As Result = bkpDatabase()
       If vresult <> Result.OK Then Return vresult
+
+      'CONFIG FOLDER
+      CONFIG_PATH = IO.Path.Combine(App_path, CONFIG_FOLDER)
+      If Not IO.Directory.Exists(CONFIG_PATH) Then
+        MsgBox("No existe carpeta config, No se puede continuar")
+        Return Result.NOK
+      End If
+
+      'MODEL_PATH
+      MODEL_PATH = IO.Path.Combine(App_path, MODEL_FOLDER)
+      If Not IO.Directory.Exists(MODEL_PATH) Then
+        MsgBox("No existe carpeta model, No se puede continuar")
+        Return Result.NOK
+      End If
+
+      'TEMP FOLDER
+      TEMP_PATH = IO.Path.Combine(App_path, TEMP_FOLDER)
+      If Not IO.Directory.Exists(TEMP_PATH) Then
+        IO.Directory.CreateDirectory(TEMP_PATH)
+      End If
+
+      'EXPORT FOLDER
+      Dim FolderExport As String = String.Empty
+      If LoadExportFolder(FolderExport) = Result.OK Then
+        EXPORT_PATH = FolderExport
+      Else
+        EXPORT_PATH = IO.Path.Combine(App_path, EXPORT_FOLDER)
+        If Not IO.Directory.Exists(EXPORT_PATH) Then
+          IO.Directory.CreateDirectory(EXPORT_PATH)
+        End If
+      End If
+
       CargarTipoPago(g_TipoPago)
       CargarCuotas(g_Cuotas)
 
@@ -89,7 +133,7 @@ Module Entorno
       End If
 
       Try
-        FileOpen(Fila, IO.Path.Combine(App_path, "TipoPagos.inf"), OpenMode.Output)
+        FileOpen(Fila, IO.Path.Combine(CONFIG_PATH, "TipoPagos.inf"), OpenMode.Output)
         Dim auxstr As String = ""
 
         auxstr = rListTipoListaPago.Count.ToString
@@ -136,7 +180,7 @@ Module Entorno
 
       Try
 
-        FileOpen(Fila, IO.Path.Combine(App_path, "TipoPagos.inf"), OpenMode.Input)
+        FileOpen(Fila, IO.Path.Combine(CONFIG_PATH, "TipoPagos.inf"), OpenMode.Input)
         Dim auxstr As String = ""
         Dim auxTipoPago As manDB.clsTipoPago
 
@@ -214,7 +258,7 @@ Module Entorno
       End If
 
       Try
-        FileOpen(Fila, IO.Path.Combine(App_path, "Cuotas.inf"), OpenMode.Output)
+        FileOpen(Fila, IO.Path.Combine(CONFIG_PATH, "Cuotas.inf"), OpenMode.Output)
         Dim auxstr As String = ""
 
         auxstr = rListCuotas.Count.ToString
@@ -261,7 +305,7 @@ Module Entorno
 
       Try
 
-        FileOpen(Fila, IO.Path.Combine(App_path, "Cuotas.inf"), OpenMode.Input)
+        FileOpen(Fila, IO.Path.Combine(CONFIG_PATH, "Cuotas.inf"), OpenMode.Input)
         Dim auxstr As String = ""
         Dim auxTipoPago As clsCuota
 
@@ -310,6 +354,21 @@ Module Entorno
       Return Result.ErrorEx
     End Try
 
+  End Function
+
+  Public Function LoadExportFolder(ByRef rPath As String) As Result
+    Try
+      Dim lineas As New List(Of String)
+      Dim vResult As Result = Load(IO.Path.Combine(CONFIG_PATH, "options.dat"), lineas)
+      If vResult <> Result.OK Then Return Result.NOK
+      If lineas(1).Trim Is Nothing Then Return Result.NOK
+      If Not IO.Directory.Exists(lineas(1)) Then Return Result.NOK
+      rPath = lineas(1).Trim
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
   End Function
 
 End Module

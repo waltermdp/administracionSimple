@@ -76,9 +76,9 @@ Partial Class frmDeben
     Me.btnExportar = New System.Windows.Forms.Button()
     Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
     Me.pnlSeleccionarPago = New System.Windows.Forms.Panel()
+    Me.lblInfoImpExp = New System.Windows.Forms.Label()
     Me.btnCancelImpExp = New System.Windows.Forms.Button()
     Me.btnContinuarImpExp = New System.Windows.Forms.Button()
-    Me.lblInfoImpExp = New System.Windows.Forms.Label()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -453,6 +453,7 @@ Partial Class frmDeben
     '
     'txtBusqueda
     '
+    Me.txtBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtBusqueda.Location = New System.Drawing.Point(150, 73)
     Me.txtBusqueda.Name = "txtBusqueda"
     Me.txtBusqueda.Size = New System.Drawing.Size(278, 20)
@@ -606,6 +607,7 @@ Partial Class frmDeben
     '
     'cmbTipoPago
     '
+    Me.cmbTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbTipoPago.FormattingEnabled = True
     Me.cmbTipoPago.Location = New System.Drawing.Point(39, 73)
     Me.cmbTipoPago.Name = "cmbTipoPago"
@@ -624,6 +626,14 @@ Partial Class frmDeben
     Me.pnlSeleccionarPago.TabIndex = 42
     Me.pnlSeleccionarPago.Visible = False
     '
+    'lblInfoImpExp
+    '
+    Me.lblInfoImpExp.Location = New System.Drawing.Point(39, 11)
+    Me.lblInfoImpExp.Name = "lblInfoImpExp"
+    Me.lblInfoImpExp.Size = New System.Drawing.Size(162, 46)
+    Me.lblInfoImpExp.TabIndex = 4
+    Me.lblInfoImpExp.Text = "Label1"
+    '
     'btnCancelImpExp
     '
     Me.btnCancelImpExp.Location = New System.Drawing.Point(161, 109)
@@ -641,14 +651,6 @@ Partial Class frmDeben
     Me.btnContinuarImpExp.TabIndex = 2
     Me.btnContinuarImpExp.Text = "Continuar"
     Me.btnContinuarImpExp.UseVisualStyleBackColor = True
-    '
-    'lblInfoImpExp
-    '
-    Me.lblInfoImpExp.Location = New System.Drawing.Point(39, 11)
-    Me.lblInfoImpExp.Name = "lblInfoImpExp"
-    Me.lblInfoImpExp.Size = New System.Drawing.Size(162, 46)
-    Me.lblInfoImpExp.TabIndex = 4
-    Me.lblInfoImpExp.Text = "Label1"
     '
     'frmDeben
     '

@@ -5,8 +5,10 @@ Module modFile
     Try
       Dim Fila As Integer
       Dim vResult As Result = Result.OK
+      If Not IO.File.Exists(pathFile) Then Return Result.NOK
       Fila = FreeFile()
       Try
+
         FileOpen(Fila, pathFile, OpenMode.Input)
         rLista = New List(Of String)
         Do Until EOF(Fila)

@@ -19,7 +19,7 @@ Module modCommon
     End Try
   End Function
 
-  Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal vACuenta As Decimal, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vFechaVenta As Date, ByVal vPrimerVencimiento As Date, Optional ByVal vFechaVencimiento As Date = Nothing) As manDB.clsInfoPagos
+  Public Function GetProximoPago(ByVal vGuidProducto As Guid, ByVal NumComprobante As Integer, ByVal vValorCuota As Decimal, ByVal vNumCuota As Integer, ByVal vFechaVenta As Date, ByVal vPrimerVencimiento As Date, Optional ByVal vFechaVencimiento As Date = Nothing) As manDB.clsInfoPagos
     Try
       Dim pago As New manDB.clsInfoPagos
       pago.EstadoPago = libCommon.Comunes.E_EstadoPago.Debe
@@ -34,13 +34,15 @@ Module modCommon
       pago.NumCuota = vNumCuota
       pago.ValorCuota = vValorCuota
 
-      Dim numComprobante As Integer = 1
-      Dim lstpagos As New clsListPagos
-      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
-      lstpagos.RefreshData()
-      numComprobante = 1
-      If lstpagos.Items.Count > 0 Then numComprobante = lstpagos.Items.First.NumComprobante + 1
-      pago.NumComprobante = numComprobante
+
+      'Dim numComprobante As Integer = 1
+      'Dim lstpagos As New clsListPagos
+      'lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
+      'lstpagos.RefreshData()
+      'numComprobante = 1
+      'If lstpagos.Items.Count > 0 Then numComprobante = lstpagos.Items.First.NumComprobante + 1
+      pago.NumComprobante = NumComprobante
+
 
       Return pago
     Catch ex As Exception
@@ -116,7 +118,7 @@ Module modCommon
           MsgBox("Fallo load producto")
           Exit Sub
         End If
-        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, objProducto.Adelanto, objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
+        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, objProducto.NumComprobante, objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
         If newpago IsNot Nothing Then
           vResult = clsPago.Save(newpago)
         Else

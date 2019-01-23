@@ -178,7 +178,7 @@ Public Class frmVenta
         Else
           txtValorCuota.Text = .Precio.ToString
         End If
-        txtNumVenta.Text = .NumComprobante
+        txtNumVenta.Text = .NumComprobante.ToString
 
       End With
       Call FillMedioDePagoDescripcion()
@@ -333,10 +333,9 @@ Public Class frmVenta
       End If
       m_Producto.FechaPrimerPago = New Date(DateVenta.Value.Year, DateVenta.Value.Month, dtDiaVencimiento.Value)
 
-
-      auxPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.Adelanto, ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
+      auxPago = GetProximoPago(m_Producto.GuidProducto, CInt(txtNumVenta.Text.Trim), ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
       
-      lblNumComprobante.Text = auxPago.NumComprobante.ToString
+      'lblNumComprobante.Text = auxPago.NumComprobante.ToString
       m_lstPagos.Add(auxPago)
 
       Call ReloadListPagos()
@@ -402,7 +401,7 @@ Public Class frmVenta
         End If
         .ListaPagos.Clear()
         .ListaPagos = m_lstPagos.ToList
-        .NumComprobante = txtNumVenta.Text
+        .NumComprobante = CInt(txtNumVenta.Text)
       End With
       
 
@@ -424,6 +423,9 @@ Public Class frmVenta
         Exit Sub
       ElseIf m_Producto.TotalCuotas < 0 Then
         MsgBox("No hay ninguna Cuota seleccionada")
+        Exit Sub
+      ElseIf CInt(txtNumVenta.Text.Trim) <= 0 Then
+        MsgBox("El numero de comprobante es invalido")
         Exit Sub
       End If
       m_hayCambios = True
@@ -469,7 +471,7 @@ Public Class frmVenta
         'proximo pago
         newPago = New clsInfoPagos
         newPago = aux.Items.First.Clone
-        newPago = GetProximoPago(m_Producto.GuidProducto, 0, m_Producto.ValorCuotaFija, newPago.NumCuota, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
+        newPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.NumComprobante, m_Producto.ValorCuotaFija, newPago.NumCuota, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
 
         If AdelantoCuota < m_Producto.ValorCuotaFija Then
           newPago.ValorCuota = m_Producto.ValorCuotaFija - AdelantoCuota

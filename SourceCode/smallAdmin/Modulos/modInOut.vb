@@ -20,7 +20,7 @@ Module modInOut
   '    Return Result.ErrorEx
   '  End Try
   'End Function
-  Public Function GetCuerpo(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoMovimiento)) As Result
+  Public Function GetCuerpoVISADebito(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoMovimiento)) As Result
     Try
 
       rMovimiento = New List(Of clsInfoMovimiento)

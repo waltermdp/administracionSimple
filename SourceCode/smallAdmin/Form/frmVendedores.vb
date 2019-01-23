@@ -66,6 +66,39 @@ Public Class frmVendedores
     End Try
   End Sub
 
+  Private Sub dgvListVendedores_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvListVendedores.ColumnHeaderMouseClick
+    Try
+      Dim m_CurrentSortColumn As DataGridViewColumn = dgvListVendedores.Columns(e.ColumnIndex)
+      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+        For Each col As DataGridViewColumn In dgvListVendedores.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMVENDEDOR") Then
+          bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
+        Else
+          bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        End If
+
+        bsVendedores.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
+      Else
+        For Each col As DataGridViewColumn In dgvListVendedores.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMVENDEDOR") Then
+          bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
+        Else
+          bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        End If
+
+        bsVendedores.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
+      End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub dgvListVendedores_SelectionChanged(sender As Object, e As EventArgs) Handles dgvListVendedores.SelectionChanged
     Try
 

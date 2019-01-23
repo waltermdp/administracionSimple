@@ -85,209 +85,263 @@ Partial Class frmVendedorData
     'Label1
     '
     Me.Label1.AutoSize = True
+    Me.Label1.BackColor = System.Drawing.Color.White
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label1.Location = New System.Drawing.Point(345, 88)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(44, 13)
+    Me.Label1.Size = New System.Drawing.Size(52, 15)
     Me.Label1.TabIndex = 2
     Me.Label1.Text = "Nombre"
     '
     'txtNombre
     '
+    Me.txtNombre.BackColor = System.Drawing.Color.White
+    Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.txtNombre.Location = New System.Drawing.Point(348, 104)
     Me.txtNombre.Name = "txtNombre"
-    Me.txtNombre.Size = New System.Drawing.Size(327, 20)
+    Me.txtNombre.Size = New System.Drawing.Size(327, 21)
     Me.txtNombre.TabIndex = 3
     '
     'txtApellido
     '
+    Me.txtApellido.BackColor = System.Drawing.Color.White
+    Me.txtApellido.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.txtApellido.Location = New System.Drawing.Point(693, 104)
     Me.txtApellido.Name = "txtApellido"
-    Me.txtApellido.Size = New System.Drawing.Size(298, 20)
-    Me.txtApellido.TabIndex = 5
+    Me.txtApellido.Size = New System.Drawing.Size(298, 21)
+    Me.txtApellido.TabIndex = 4
     '
     'Label2
     '
     Me.Label2.AutoSize = True
+    Me.Label2.BackColor = System.Drawing.Color.White
+    Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label2.Location = New System.Drawing.Point(690, 88)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(44, 13)
+    Me.Label2.Size = New System.Drawing.Size(51, 15)
     Me.Label2.TabIndex = 4
     Me.Label2.Text = "Apellido"
     '
     'txtId
     '
-    Me.txtId.Location = New System.Drawing.Point(348, 157)
+    Me.txtId.BackColor = System.Drawing.Color.White
+    Me.txtId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtId.Location = New System.Drawing.Point(348, 331)
     Me.txtId.Name = "txtId"
-    Me.txtId.Size = New System.Drawing.Size(327, 20)
-    Me.txtId.TabIndex = 7
+    Me.txtId.Size = New System.Drawing.Size(327, 21)
+    Me.txtId.TabIndex = 5
     '
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(345, 141)
+    Me.Label3.BackColor = System.Drawing.Color.White
+    Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label3.Location = New System.Drawing.Point(345, 315)
     Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(26, 13)
+    Me.Label3.Size = New System.Drawing.Size(28, 15)
     Me.Label3.TabIndex = 6
     Me.Label3.Text = "DNI"
     '
     'txtCiudad
     '
-    Me.txtCiudad.Location = New System.Drawing.Point(693, 157)
+    Me.txtCiudad.BackColor = System.Drawing.Color.White
+    Me.txtCiudad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtCiudad.Location = New System.Drawing.Point(693, 251)
     Me.txtCiudad.Name = "txtCiudad"
-    Me.txtCiudad.Size = New System.Drawing.Size(298, 20)
-    Me.txtCiudad.TabIndex = 9
+    Me.txtCiudad.Size = New System.Drawing.Size(298, 21)
+    Me.txtCiudad.TabIndex = 6
     '
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(690, 141)
+    Me.Label4.BackColor = System.Drawing.Color.White
+    Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label4.Location = New System.Drawing.Point(690, 233)
     Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(40, 13)
+    Me.Label4.Size = New System.Drawing.Size(46, 15)
     Me.Label4.TabIndex = 8
     Me.Label4.Text = "Ciudad"
     '
     'txtProvincia
     '
-    Me.txtProvincia.Location = New System.Drawing.Point(348, 196)
+    Me.txtProvincia.BackColor = System.Drawing.Color.White
+    Me.txtProvincia.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtProvincia.Location = New System.Drawing.Point(348, 291)
     Me.txtProvincia.Name = "txtProvincia"
-    Me.txtProvincia.Size = New System.Drawing.Size(327, 20)
-    Me.txtProvincia.TabIndex = 11
+    Me.txtProvincia.Size = New System.Drawing.Size(327, 21)
+    Me.txtProvincia.TabIndex = 7
     '
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(345, 180)
+    Me.Label5.BackColor = System.Drawing.Color.White
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.Location = New System.Drawing.Point(345, 275)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(51, 13)
+    Me.Label5.Size = New System.Drawing.Size(57, 15)
     Me.Label5.TabIndex = 10
     Me.Label5.Text = "Provincia"
     '
     'txtCodigoPostal
     '
-    Me.txtCodigoPostal.Location = New System.Drawing.Point(693, 196)
+    Me.txtCodigoPostal.BackColor = System.Drawing.Color.White
+    Me.txtCodigoPostal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtCodigoPostal.Location = New System.Drawing.Point(693, 291)
     Me.txtCodigoPostal.Name = "txtCodigoPostal"
-    Me.txtCodigoPostal.Size = New System.Drawing.Size(298, 20)
-    Me.txtCodigoPostal.TabIndex = 13
+    Me.txtCodigoPostal.Size = New System.Drawing.Size(298, 21)
+    Me.txtCodigoPostal.TabIndex = 8
     '
     'Label6
     '
     Me.Label6.AutoSize = True
-    Me.Label6.Location = New System.Drawing.Point(690, 180)
+    Me.Label6.BackColor = System.Drawing.Color.White
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.Location = New System.Drawing.Point(690, 275)
     Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(21, 13)
+    Me.Label6.Size = New System.Drawing.Size(23, 15)
     Me.Label6.TabIndex = 12
     Me.Label6.Text = "CP"
     '
     'txtNumVendedor
     '
-    Me.txtNumVendedor.Location = New System.Drawing.Point(348, 235)
+    Me.txtNumVendedor.BackColor = System.Drawing.Color.White
+    Me.txtNumVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNumVendedor.Location = New System.Drawing.Point(348, 151)
     Me.txtNumVendedor.Name = "txtNumVendedor"
-    Me.txtNumVendedor.Size = New System.Drawing.Size(327, 20)
-    Me.txtNumVendedor.TabIndex = 15
+    Me.txtNumVendedor.Size = New System.Drawing.Size(327, 21)
+    Me.txtNumVendedor.TabIndex = 9
     '
     'Label7
     '
     Me.Label7.AutoSize = True
-    Me.Label7.Location = New System.Drawing.Point(345, 219)
+    Me.Label7.BackColor = System.Drawing.Color.White
+    Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label7.Location = New System.Drawing.Point(345, 135)
     Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(93, 13)
+    Me.Label7.Size = New System.Drawing.Size(108, 15)
     Me.Label7.TabIndex = 14
     Me.Label7.Text = "Numero Vendedor"
     '
     'txtGrupo
     '
-    Me.txtGrupo.Location = New System.Drawing.Point(693, 235)
+    Me.txtGrupo.BackColor = System.Drawing.Color.White
+    Me.txtGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtGrupo.Location = New System.Drawing.Point(693, 151)
     Me.txtGrupo.Name = "txtGrupo"
-    Me.txtGrupo.Size = New System.Drawing.Size(298, 20)
-    Me.txtGrupo.TabIndex = 17
+    Me.txtGrupo.Size = New System.Drawing.Size(298, 21)
+    Me.txtGrupo.TabIndex = 10
     '
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.Location = New System.Drawing.Point(690, 219)
+    Me.Label8.BackColor = System.Drawing.Color.White
+    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label8.Location = New System.Drawing.Point(690, 135)
     Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(36, 13)
+    Me.Label8.Size = New System.Drawing.Size(41, 15)
     Me.Label8.TabIndex = 16
     Me.Label8.Text = "Grupo"
     '
     'txtTel1
     '
-    Me.txtTel1.Location = New System.Drawing.Point(348, 274)
+    Me.txtTel1.BackColor = System.Drawing.Color.White
+    Me.txtTel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtTel1.Location = New System.Drawing.Point(348, 199)
     Me.txtTel1.Name = "txtTel1"
-    Me.txtTel1.Size = New System.Drawing.Size(327, 20)
-    Me.txtTel1.TabIndex = 19
+    Me.txtTel1.Size = New System.Drawing.Size(327, 21)
+    Me.txtTel1.TabIndex = 11
     '
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(345, 258)
+    Me.Label9.BackColor = System.Drawing.Color.White
+    Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label9.Location = New System.Drawing.Point(345, 183)
     Me.Label9.Name = "Label9"
-    Me.Label9.Size = New System.Drawing.Size(28, 13)
+    Me.Label9.Size = New System.Drawing.Size(31, 15)
     Me.Label9.TabIndex = 18
     Me.Label9.Text = "Tel1"
     '
     'txtTel2
     '
-    Me.txtTel2.Location = New System.Drawing.Point(693, 274)
+    Me.txtTel2.BackColor = System.Drawing.Color.White
+    Me.txtTel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtTel2.Location = New System.Drawing.Point(693, 199)
     Me.txtTel2.Name = "txtTel2"
-    Me.txtTel2.Size = New System.Drawing.Size(298, 20)
-    Me.txtTel2.TabIndex = 21
+    Me.txtTel2.Size = New System.Drawing.Size(298, 21)
+    Me.txtTel2.TabIndex = 12
     '
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.Location = New System.Drawing.Point(690, 258)
+    Me.Label10.BackColor = System.Drawing.Color.White
+    Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label10.Location = New System.Drawing.Point(690, 183)
     Me.Label10.Name = "Label10"
-    Me.Label10.Size = New System.Drawing.Size(28, 13)
+    Me.Label10.Size = New System.Drawing.Size(31, 15)
     Me.Label10.TabIndex = 20
     Me.Label10.Text = "Tel2"
     '
     'txtEmail
     '
-    Me.txtEmail.Location = New System.Drawing.Point(348, 313)
+    Me.txtEmail.BackColor = System.Drawing.Color.White
+    Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtEmail.Location = New System.Drawing.Point(348, 251)
     Me.txtEmail.Name = "txtEmail"
-    Me.txtEmail.Size = New System.Drawing.Size(327, 20)
-    Me.txtEmail.TabIndex = 23
+    Me.txtEmail.Size = New System.Drawing.Size(327, 21)
+    Me.txtEmail.TabIndex = 13
     '
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.Location = New System.Drawing.Point(345, 297)
+    Me.Label11.BackColor = System.Drawing.Color.White
+    Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label11.Location = New System.Drawing.Point(345, 235)
     Me.Label11.Name = "Label11"
-    Me.Label11.Size = New System.Drawing.Size(32, 13)
+    Me.Label11.Size = New System.Drawing.Size(39, 15)
     Me.Label11.TabIndex = 22
     Me.Label11.Text = "Email"
     '
     'txtCategoria
     '
-    Me.txtCategoria.Location = New System.Drawing.Point(693, 313)
+    Me.txtCategoria.BackColor = System.Drawing.Color.White
+    Me.txtCategoria.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtCategoria.Location = New System.Drawing.Point(693, 331)
     Me.txtCategoria.Name = "txtCategoria"
-    Me.txtCategoria.Size = New System.Drawing.Size(298, 20)
-    Me.txtCategoria.TabIndex = 25
+    Me.txtCategoria.Size = New System.Drawing.Size(298, 21)
+    Me.txtCategoria.TabIndex = 14
+    Me.txtCategoria.Visible = False
     '
     'Label12
     '
     Me.Label12.AutoSize = True
-    Me.Label12.Location = New System.Drawing.Point(690, 297)
+    Me.Label12.BackColor = System.Drawing.Color.White
+    Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label12.Location = New System.Drawing.Point(690, 315)
     Me.Label12.Name = "Label12"
-    Me.Label12.Size = New System.Drawing.Size(52, 13)
+    Me.Label12.Size = New System.Drawing.Size(60, 15)
     Me.Label12.TabIndex = 24
     Me.Label12.Text = "Categoria"
+    Me.Label12.Visible = False
     '
     'txtComentarios
     '
-    Me.txtComentarios.Location = New System.Drawing.Point(348, 352)
+    Me.txtComentarios.BackColor = System.Drawing.Color.White
+    Me.txtComentarios.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtComentarios.Location = New System.Drawing.Point(348, 381)
     Me.txtComentarios.Multiline = True
     Me.txtComentarios.Name = "txtComentarios"
-    Me.txtComentarios.Size = New System.Drawing.Size(643, 118)
-    Me.txtComentarios.TabIndex = 27
+    Me.txtComentarios.Size = New System.Drawing.Size(643, 159)
+    Me.txtComentarios.TabIndex = 15
     '
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(345, 336)
+    Me.Label13.BackColor = System.Drawing.Color.White
+    Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label13.Location = New System.Drawing.Point(345, 365)
     Me.Label13.Name = "Label13"
-    Me.Label13.Size = New System.Drawing.Size(65, 13)
+    Me.Label13.Size = New System.Drawing.Size(77, 15)
     Me.Label13.TabIndex = 26
     Me.Label13.Text = "Comentarios"
     '

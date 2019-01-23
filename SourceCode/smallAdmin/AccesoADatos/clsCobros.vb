@@ -108,7 +108,7 @@ Public Class clsCobros
       Dim rLineas As New List(Of String)
       Select Case vTipoPago.GuidTipo
         Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
-
+          ExportAEfectivo(ListMov)
         Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito 
           ExportarAVisaDebito(ListMov)
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
@@ -116,7 +116,7 @@ Public Class clsCobros
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
           ExportarAVisaCredito(ListMov)
         Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
-
+          ExportAMaster(ListMov)
         Case Else
           MsgBox("No se encuentra tipo de pago")
       End Select
@@ -135,21 +135,26 @@ Public Class clsCobros
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
-      IO.File.Copy(IO.Path.Combine(Entorno.App_path, "DEBLIQDempty.xls"), IO.Path.Combine(Entorno.App_path, "DEBLIQD.xls"), True)
+      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "DEBLIQDempty.xls"), IO.Path.Combine(TEMP_PATH, "DEBLIQD.xls"), True)
 
-      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQD.xls"))
-      worksheet = workbook.Worksheets("Facturas")
-      For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
-        worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
-        worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
-        worksheet.Cells(i + 2, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-        worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
-        worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
-        worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
-      Next
+      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQD.xls"))
+      Try
+        worksheet = workbook.Worksheets("Facturas")
+        For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+          worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
+          worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
+          worksheet.Cells(i + 2, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+          worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
+          worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
+          worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
+        Next
 
-      workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
-      workbook.Close(False)
+        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
+      Finally
+        workbook.Close(False)
+      End Try
+      
+
 
       MsgBox("Finalizo exportacion a excel")
 
@@ -157,6 +162,7 @@ Public Class clsCobros
     Catch ex As Exception
       Call Print_msg(ex.Message)
       Return Result.ErrorEx
+
     End Try
   End Function
 
@@ -165,21 +171,26 @@ Public Class clsCobros
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
-      IO.File.Copy(IO.Path.Combine(Entorno.App_path, "DEBLIQCempty.xls"), IO.Path.Combine(Entorno.App_path, "DEBLIQC.xls"), True)
-      workbook = xls.Workbooks.Open(IO.Path.Combine(Entorno.App_path, "DEBLIQC.xls"))
-      worksheet = workbook.Worksheets("Facturas")
-      For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
-        worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
-        worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
-        worksheet.Cells(i + 2, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-        worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
-        worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
-        worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
-      Next
+      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "DEBLIQCempty.xls"), IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"), True)
+      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"))
+      Try
+        worksheet = workbook.Worksheets("Facturas")
+        For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+          worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
+          worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
+          worksheet.Cells(i + 2, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+          worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
+          worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
+          worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
+        Next
+        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, Today.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
 
-      workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
-      workbook.Close(False)
+      Finally
+        workbook.Close(False)
+      End Try
+
       MsgBox("Finalizo GeneracionArchivo")
+
 
       Return Result.OK
     Catch ex As Exception
@@ -211,16 +222,10 @@ Public Class clsCobros
         linea += vMovimientos(i).IdentificadorDebito
         linea += ";"
         lineas.Add(linea)
-        'Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-        'worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
-        'worksheet.Cells(i + 2, 3).value =
-        'worksheet.Cells(i + 2, 4).value =
-        'worksheet.Cells(i + 2, 5).value =
-        'worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
       Next
 
       'workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
-      Dim vResult As Result = Save(Today.ToString("yyyyMMddhhmmss") & "_CBU.txt", lineas)
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, Now.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas)
       MsgBox("Finalizo exportacion a txt")
 
       Return Result.OK
@@ -229,4 +234,53 @@ Public Class clsCobros
       Return Result.ErrorEx
     End Try
   End Function
+
+  Private Shared Function ExportAEfectivo(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim lineas As New List(Of String)
+
+      lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
+      lineas.Add("NumComprobante;".PadLeft(15) & "Identificador;".PadLeft(14) & "Fecha;".PadLeft(12) & "Importe;".PadLeft(10))
+      Dim linea As String = String.Empty
+      For i As Integer = 0 To vMovimientos.Count - 1
+        linea = String.Format("{0};", vMovimientos(i).NumeroComprobante).PadLeft(15)
+        linea += String.Format("{0};", vMovimientos(i).IdentificadorDebito).PadLeft(14)
+        linea += String.Format("{0};", Today.ToString("dd/MM/yyyy")).PadLeft(12)
+        linea += String.Format("{0};", vMovimientos(i).Importe).PadLeft(10)
+        lineas.Add(linea)
+      Next
+      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_Efectivo.txt"), lineas)
+      MsgBox("Finalizo exportacion a txt")
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function ExportAMaster(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim lineas As New List(Of String)
+
+      lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
+      lineas.Add("NumComprobante;".PadLeft(15) & "Identificador;".PadLeft(14) & "Fecha;".PadLeft(12) & "Importe;".PadLeft(10))
+      Dim linea As String = String.Empty
+      For i As Integer = 0 To vMovimientos.Count - 1
+        linea = String.Format("{0};", vMovimientos(i).NumeroComprobante).PadLeft(15)
+        linea += String.Format("{0};", vMovimientos(i).IdentificadorDebito).PadLeft(14)
+        linea += String.Format("{0};", Today.ToString("dd/MM/yyyy")).PadLeft(12)
+        linea += String.Format("{0};", vMovimientos(i).Importe).PadLeft(10)
+        lineas.Add(linea)
+      Next
+      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
+      MsgBox("Finalizo exportacion a txt")
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
 End Class
