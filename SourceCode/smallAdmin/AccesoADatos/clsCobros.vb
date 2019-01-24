@@ -85,7 +85,7 @@ Public Class clsCobros
 
         With movimiento
           .NumeroTarjeta = lstCuenta.Items.First.Codigo1
-          .NumeroComprobante = item.NumComprobante
+          .NumeroComprobante = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
           .IdentificadorDebito = lstCliente.Items.First.NumCliente
           .Fecha = Today

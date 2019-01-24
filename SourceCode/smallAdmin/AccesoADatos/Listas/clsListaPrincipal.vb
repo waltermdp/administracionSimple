@@ -66,18 +66,18 @@ Public Class clsListaPrincipal
             objInfoPrincipal.Precio = objListProdInfo.Precio
             objInfoPrincipal.Adelanto = objListProdInfo.Adelanto
             objInfoPrincipal.ValorCuotaFija = objListProdInfo.ValorCuotaFija
-            objInfoPrincipal.NumPago = objListProdInfo.NumComprobante
+            objInfoPrincipal.Comprobante = objListProdInfo.NumComprobante
 
             Dim objPersona As New ClsInfoPersona
             objResult = clsPersona.Load(objListProdInfo.GuidCliente, objPersona)
             If objResult <> Result.OK Then Return objResult
-            objInfoPrincipal.NombreCliente = objPersona.ToString
-            objInfoPrincipal.DNI = objPersona.DNI
+            objInfoPrincipal.Cliente = objPersona.ToString
+            objInfoPrincipal.NumCliente = objPersona.DNI
 
             Dim objVendedor As New clsInfoVendedor
             objResult = clsVendedor.Load(objListProdInfo.GuidVendedor, objVendedor)
             If objResult <> Result.OK Then Return objResult
-            objInfoPrincipal.NombreVendedor = objVendedor.ToString
+            objInfoPrincipal.Vendedor = objVendedor.ToString
 
             Dim ObjCuenta As New clsInfoCuenta
             objResult = clsCuenta.Load(objListProdInfo.GuidCuenta, ObjCuenta)
@@ -95,7 +95,7 @@ Public Class clsListaPrincipal
 
             Dim objArticulosVendidos As New List(Of clsInfoArticuloVendido)
             clsRelArtProd.Load(objArticulosVendidos, objListProdInfo.GuidProducto)
-            objInfoPrincipal.ArticulosVendidod = objArticulosVendidos.Count
+            objInfoPrincipal.ArticulosVendidos = objArticulosVendidos.Count
 
             If Deben = "0" Then
               '
@@ -160,7 +160,7 @@ Public Class clsListaPrincipal
     Try
       Dim pagadas As Integer = 0
       For Each pago In lstPagos
-        If pago.EstadoPago = 1 Then
+        If pago.EstadoPago = E_EstadoPago.Pago Then
 
           pagadas += 1
         End If
@@ -176,10 +176,9 @@ Public Class clsListaPrincipal
     Try
       Dim pagadas As Integer = 0
       If lstPagos.Count < 0 Then Return Nothing
-      If lstPagos.Where(Function(c) c.EstadoPago = 1).ToList.Count <= 0 Then Return Nothing
+      If lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).ToList.Count <= 0 Then Return Nothing
 
-
-      Dim auxpago As clsInfoPagos = lstPagos.Where(Function(c) c.EstadoPago = 1).OrderBy(Function(c) c.NumCuota).ToList.Last
+      Dim auxpago As clsInfoPagos = lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).OrderBy(Function(c) c.NumCuota).ToList.Last
 
       Return auxpago.FechaPago
     Catch ex As Exception

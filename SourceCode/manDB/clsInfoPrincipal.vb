@@ -13,7 +13,7 @@
   Private m_ValorCouta As Decimal
   Private m_MetodoPago As String
   Private m_CantidadArticulosVendidos As Integer
-  Private m_DNICliente As String
+  Private m_NumCliente As String
   Private m_NumPago As String
   Private m_FechaUltimoPago As Date
 
@@ -36,7 +36,7 @@
     End Set
   End Property
 
-  Public Property NombreCliente As String
+  Public Property Cliente As String
     Get
       Return m_NombreCliente
     End Get
@@ -45,7 +45,7 @@
     End Set
   End Property
 
-  Public Property NombreVendedor As String
+  Public Property Vendedor As String
     Get
       Return m_NombreVendedor
     End Get
@@ -117,7 +117,7 @@
     End Set
   End Property
 
-  Public Property ArticulosVendidod As Integer
+  Public Property ArticulosVendidos As Integer
     Get
       Return m_CantidadArticulosVendidos
     End Get
@@ -126,16 +126,16 @@
     End Set
   End Property
 
-  Public Property DNI As String
+  Public Property NumCliente As String
     Get
-      Return m_DNICliente
+      Return m_NumCliente
     End Get
     Set(value As String)
-      m_DNICliente = value
+      m_NumCliente = value
     End Set
   End Property
 
-  Public Property NumPago As String
+  Public Property Comprobante As String
     Get
       Return m_NumPago
     End Get
@@ -162,7 +162,7 @@
     m_ValorCouta = 0
     m_MetodoPago = "--"
     m_CantidadArticulosVendidos = 0
-    m_DNICliente = "--"
+    m_NumCliente = "--"
     m_NumPago = "--"
     m_FechaUltimoPago = Date.MaxValue
   End Sub

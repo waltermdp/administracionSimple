@@ -33,14 +33,6 @@ Module modCommon
       End If
       pago.NumCuota = vNumCuota
       pago.ValorCuota = vValorCuota
-
-
-      'Dim numComprobante As Integer = 1
-      'Dim lstpagos As New clsListPagos
-      'lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
-      'lstpagos.RefreshData()
-      'numComprobante = 1
-      'If lstpagos.Items.Count > 0 Then numComprobante = lstpagos.Items.First.NumComprobante + 1
       pago.NumComprobante = NumComprobante
 
 

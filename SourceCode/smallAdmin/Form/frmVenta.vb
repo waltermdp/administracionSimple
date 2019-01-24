@@ -424,8 +424,17 @@ Public Class frmVenta
       ElseIf m_Producto.TotalCuotas < 0 Then
         MsgBox("No hay ninguna Cuota seleccionada")
         Exit Sub
+      ElseIf CDec(txtValorCuota.Text) < 0 OrElse CDec(txtValorCuota.Text) > CDec(m_Producto.Precio) Then
+        MsgBox("El valor de la cuota debe ser mayor a cero y menor o igual que el precio")
+        Exit Sub
       ElseIf CInt(txtNumVenta.Text.Trim) <= 0 Then
         MsgBox("El numero de comprobante es invalido")
+        Exit Sub
+      ElseIf CDec(txtAdelanto.Text) < 0 OrElse CDec(txtAdelanto.Text) > CDec(m_Producto.Precio) Then
+        MsgBox("El valor de adelanto debe ser mayor o igual a cero y menor o igual al precio de venta")
+        Exit Sub
+      ElseIf CDec(txtAdelantoVendedor.Text) > CDec(txtAdelanto.Text) Then
+        MsgBox("El valor de adelantovendendor debe ser menor o igual que el adelanto del cliente")
         Exit Sub
       End If
       m_hayCambios = True
@@ -454,37 +463,65 @@ Public Class frmVenta
         text2decimal(txtAdelanto.Text, AdelantoCuota)
         text2decimal(txtAdelantoVendedor.Text, AdelantoVendedor)
         Dim Vencimiento As Date
-        Dim aux As New clsListPagos
-        aux.Cfg_Filtro = "where GuidProducto={" & m_Producto.GuidProducto.ToString & "} and EstadoPago= " & E_EstadoPago.Debe '(Pagos.VencimientoCuota < #" & Format(Today, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
-        aux.RefreshData()
-        Dim newPago As clsInfoPagos
-        'realizar el pago del adelanto
+       
 
-        'pago parte de la cuota actual y genero modifico el valor de la cuota a pagar
-        newPago = aux.Items.First.Clone
-        newPago.ValorCuota = AdelantoCuota
-        newPago.FechaPago = Today
-        newPago.EstadoPago = E_EstadoPago.PagoParcial
-        Vencimiento = newPago.VencimientoCuota
-        clsPago.Save(newPago)
 
-        'proximo pago
-        newPago = New clsInfoPagos
-        newPago = aux.Items.First.Clone
-        newPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.NumComprobante, m_Producto.ValorCuotaFija, newPago.NumCuota, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
 
-        If AdelantoCuota < m_Producto.ValorCuotaFija Then
-          newPago.ValorCuota = m_Producto.ValorCuotaFija - AdelantoCuota
-          newPago.VencimientoCuota = Vencimiento
-        Else
-          Dim n As Integer = Math.Ceiling(AdelantoCuota / m_Producto.ValorCuotaFija)
+        While AdelantoCuota > 0
+          Dim aux As New clsListPagos
+          aux.Cfg_Filtro = "where GuidProducto={" & m_Producto.GuidProducto.ToString & "} and EstadoPago= " & E_EstadoPago.Debe '(Pagos.VencimientoCuota < #" & Format(Today, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
+          aux.RefreshData()
+          Dim newPago As clsInfoPagos
+          newPago = aux.Items.First.Clone
 
-          newPago.ValorCuota = m_Producto.ValorCuotaFija * n - AdelantoCuota
-          newPago.VencimientoCuota = Vencimiento.AddMonths(n - 1)
+          If AdelantoCuota < newPago.ValorCuota Then
+            Dim ProximoPago As Decimal = newPago.ValorCuota - AdelantoCuota
+            newPago.EstadoPago = E_EstadoPago.PagoParcial
+            newPago.ValorCuota = AdelantoCuota
+            newPago.FechaPago = Now
+            Vencimiento = newPago.VencimientoCuota
+            clsPago.Save(newPago)
+            AdelantoCuota = 0
+            'proximo pago
+            newPago = New clsInfoPagos
+            newPago = aux.Items.First.Clone
+            newPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.NumComprobante, ProximoPago, newPago.NumCuota, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
+            newPago.VencimientoCuota = Vencimiento 'uso la misma fecha de vencimiento
+            clsPago.Save(newPago)
+          Else
+            newPago.EstadoPago = E_EstadoPago.Pago
+            newPago.ValorCuota = newPago.ValorCuota
+            newPago.FechaPago = Now
+            Vencimiento = newPago.VencimientoCuota
+            clsPago.Save(newPago)
+            AdelantoCuota = AdelantoCuota - newPago.ValorCuota
+            'proximo Pago
+            newPago = New clsInfoPagos
+            newPago = aux.Items.First.Clone
+            newPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.NumComprobante, m_Producto.ValorCuotaFija, newPago.NumCuota + 1, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
+            newPago.VencimientoCuota = Vencimiento.AddMonths(1)
+            clsPago.Save(newPago)
+            'If (AdelantoCuota = newPago.ValorCuota) Then
+            '  'marcarla como pagada
+            'Else
+            '  'es mayor al valor de parte de la cuota a pagar
+            '  Dim n As Integer = Math.Ceiling(AdelantoCuota / m_Producto.ValorCuotaFija)
+            '  If n = 0 Then
+            '  Else
+            '  End If
+            'End If
+          End If
 
-        End If
-
-        clsPago.Save(newPago)
+        End While
+        'If AdelantoCuota < m_Producto.ValorCuotaFija Then
+        '  newPago.ValorCuota = m_Producto.ValorCuotaFija - AdelantoCuota
+        '  newPago.VencimientoCuota = Vencimiento
+        'Else
+        '  Dim n As Integer = Math.Ceiling(AdelantoCuota / m_Producto.ValorCuotaFija)
+        '  newPago.ValorCuota = m_Producto.ValorCuotaFija * n - AdelantoCuota
+        '  newPago.VencimientoCuota = Vencimiento.AddMonths(n - 1)
+        'End If
+        'clsPago.Save(newPago)
 
         Dim objAdelanto As New clsInfoAdelanto
         objAdelanto.GuidVendedor = m_Producto.GuidVendedor

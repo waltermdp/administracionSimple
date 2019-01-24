@@ -7,6 +7,8 @@ Public Class frmDeben
   Private m_CurrentProducto As clsInfoPrincipal = Nothing
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
   Private m_Movimientos As List(Of clsInfoMovimiento)
+  Private m_ColumnName As String = String.Empty
+  Private m_Order As String = String.Empty
 
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     Try
@@ -41,7 +43,7 @@ Public Class frmDeben
   Private Sub frmDeben_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
       'Call MostrarDeben()
-
+      Call FillResumen()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -60,7 +62,7 @@ Public Class frmDeben
 
 
       bsInfoPrincipal.ResetBindings(False)
-
+      FillResumen()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -107,8 +109,7 @@ Public Class frmDeben
     End Try
   End Sub
 
-  Private m_ColumnName As String = String.Empty
-  Private m_Order As String = String.Empty
+
 
   Private Sub dgvData_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData.ColumnHeaderMouseClick
     Try
@@ -255,6 +256,24 @@ Public Class frmDeben
     End Try
   End Sub
 
+  Private Sub FillResumen()
+    Try
+      If m_objPrincipal Is Nothing Then
+        lblTotalArticulos.Text = "Total de Articulos = 0"
+        lblTotalProductos.Text = "Total de Productos = 0"
+      Else
+        If m_objPrincipal.Items.Count = 0 Then
+          lblTotalArticulos.Text = "Total de Articulos = 0"
+          lblTotalProductos.Text = "Total de Productos = 0"
+        Else
+          lblTotalArticulos.Text = String.Format("Total de Articulos = {0}", m_objPrincipal.Items.Sum(Function(c) c.ArticulosVendidos))
+          lblTotalProductos.Text = String.Format("Total de Productos = {0}", m_objPrincipal.Items.Count)
+        End If
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 
   Private Sub btnArticulos_MouseClick(sender As Object, e As MouseEventArgs) Handles btnArticulos.MouseClick
     Try
@@ -288,7 +307,7 @@ Public Class frmDeben
                                         "Metodo Pago: {2}" & vbNewLine & _
                                         "Numero: {3}" & vbNewLine & _
                                         "Valor Cuota: {4}" & vbNewLine & _
-                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.NombreCliente, m_CurrentProducto.DNI, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuota, Today)
+                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, Today)
       Dim rsta As MsgBoxResult = MsgBox(msg, MsgBoxStyle.YesNo)
 
       If rsta = MsgBoxResult.Yes Then
@@ -313,7 +332,7 @@ Public Class frmDeben
             End If
 
             If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
+              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
             End If
             If auxPago IsNot Nothing Then
               vResult = clsPago.Save(auxPago)
@@ -521,14 +540,14 @@ Public Class frmDeben
             MsgBox("No implementado")
             Exit Sub
           Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito
+            GetCuerpoVISADebito(archivo, mov)
             FillResumenView(mov)
-            GetCuerpoVISAdebito(archivo, mov)
           Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
             GetCuerpoCBU(archivo, mov)
             FillResumenViewCBU(mov)
           Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-            FillResumenView(mov)
             GetCuerpoVISACredito(archivo, mov)
+            FillResumenView(mov)
           Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
             MsgBox("No implementado")
             Exit Sub
@@ -640,8 +659,12 @@ Public Class frmDeben
         lstPagos = New clsListPagos
         lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante
         lstPagos.RefreshData()
-        If lstPagos.Items.Count <> 1 Then
-          MsgBox("Existen o no, mas de un ticket")
+        If lstPagos.Items.Count = 0 Then
+          MsgBox("No exite el comprobante " & mov.NumeroComprobante)
+          Exit Sub
+        End If
+        If lstPagos.Items.Count > 1 Then
+          MsgBox("Existe mas de un producto con el mismo comprobante " & mov.NumeroComprobante)
           Exit Sub
         End If
         Dim Pago As New clsInfoPagos

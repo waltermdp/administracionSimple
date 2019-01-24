@@ -108,7 +108,6 @@
     <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
     <Compile Include="AccesoADatos\clsInfoResumen.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
-    <Compile Include="AccesoADatos\clsPrincipal.vb" />
     <Compile Include="AccesoADatos\clsProducto.vb" />
     <Compile Include="AccesoADatos\clsRelArtProd.vb" />
     <Compile Include="AccesoADatos\clsStock.vb" />

@@ -29,31 +29,31 @@ Partial Class frmListaClientes
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmListaClientes))
     Me.btnEdit = New System.Windows.Forms.Button()
     Me.dgvData1 = New System.Windows.Forms.DataGridView()
-    Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ApellidoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.DNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ProfesionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaNacDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NumCalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaIngresoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.EmailDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.Tel1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.Tel2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CiudadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ProvinciaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.Calle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NumCalle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoPostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ComentariosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnEliminar = New System.Windows.Forms.Button()
     Me.btnVolver = New System.Windows.Forms.Button()
     Me.Label1 = New System.Windows.Forms.Label()
+    Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ApellidoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ProfesionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.Tel1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.EmailDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaNacDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumCalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaIngresoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.Tel2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CiudadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ProvinciaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.Calle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumCalle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoPostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ComentariosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -91,7 +91,7 @@ Partial Class frmListaClientes
     Me.dgvData1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.dgvData1.ColumnHeadersHeight = 24
     Me.dgvData1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn})
+    Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn})
     Me.dgvData1.DataSource = Me.bsInfoCliente
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
@@ -124,156 +124,6 @@ Partial Class frmListaClientes
     Me.dgvData1.Size = New System.Drawing.Size(1062, 447)
     Me.dgvData1.TabIndex = 24
     Me.dgvData1.TabStop = False
-    '
-    'IDClienteDataGridViewTextBoxColumn
-    '
-    Me.IDClienteDataGridViewTextBoxColumn.DataPropertyName = "IDCliente"
-    Me.IDClienteDataGridViewTextBoxColumn.HeaderText = "IDCliente"
-    Me.IDClienteDataGridViewTextBoxColumn.Name = "IDClienteDataGridViewTextBoxColumn"
-    Me.IDClienteDataGridViewTextBoxColumn.ReadOnly = True
-    Me.IDClienteDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidClienteDataGridViewTextBoxColumn
-    '
-    Me.GuidClienteDataGridViewTextBoxColumn.DataPropertyName = "GuidCliente"
-    Me.GuidClienteDataGridViewTextBoxColumn.HeaderText = "GuidCliente"
-    Me.GuidClienteDataGridViewTextBoxColumn.Name = "GuidClienteDataGridViewTextBoxColumn"
-    Me.GuidClienteDataGridViewTextBoxColumn.ReadOnly = True
-    Me.GuidClienteDataGridViewTextBoxColumn.Visible = False
-    '
-    'NombreDataGridViewTextBoxColumn
-    '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ApellidoDataGridViewTextBoxColumn
-    '
-    Me.ApellidoDataGridViewTextBoxColumn.DataPropertyName = "Apellido"
-    Me.ApellidoDataGridViewTextBoxColumn.HeaderText = "Apellido"
-    Me.ApellidoDataGridViewTextBoxColumn.Name = "ApellidoDataGridViewTextBoxColumn"
-    Me.ApellidoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'DNIDataGridViewTextBoxColumn
-    '
-    Me.DNIDataGridViewTextBoxColumn.DataPropertyName = "DNI"
-    Me.DNIDataGridViewTextBoxColumn.HeaderText = "DNI"
-    Me.DNIDataGridViewTextBoxColumn.Name = "DNIDataGridViewTextBoxColumn"
-    Me.DNIDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ProfesionDataGridViewTextBoxColumn
-    '
-    Me.ProfesionDataGridViewTextBoxColumn.DataPropertyName = "Profesion"
-    Me.ProfesionDataGridViewTextBoxColumn.HeaderText = "Profesion"
-    Me.ProfesionDataGridViewTextBoxColumn.Name = "ProfesionDataGridViewTextBoxColumn"
-    Me.ProfesionDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaNacDataGridViewTextBoxColumn
-    '
-    Me.FechaNacDataGridViewTextBoxColumn.DataPropertyName = "FechaNac"
-    Me.FechaNacDataGridViewTextBoxColumn.HeaderText = "FechaNac"
-    Me.FechaNacDataGridViewTextBoxColumn.Name = "FechaNacDataGridViewTextBoxColumn"
-    Me.FechaNacDataGridViewTextBoxColumn.ReadOnly = True
-    Me.FechaNacDataGridViewTextBoxColumn.Visible = False
-    '
-    'CalleDataGridViewTextBoxColumn
-    '
-    Me.CalleDataGridViewTextBoxColumn.DataPropertyName = "Calle"
-    Me.CalleDataGridViewTextBoxColumn.HeaderText = "Calle"
-    Me.CalleDataGridViewTextBoxColumn.Name = "CalleDataGridViewTextBoxColumn"
-    Me.CalleDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'NumCalleDataGridViewTextBoxColumn
-    '
-    Me.NumCalleDataGridViewTextBoxColumn.DataPropertyName = "NumCalle"
-    Me.NumCalleDataGridViewTextBoxColumn.HeaderText = "NumCalle"
-    Me.NumCalleDataGridViewTextBoxColumn.Name = "NumCalleDataGridViewTextBoxColumn"
-    Me.NumCalleDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaIngresoDataGridViewTextBoxColumn
-    '
-    Me.FechaIngresoDataGridViewTextBoxColumn.DataPropertyName = "FechaIngreso"
-    Me.FechaIngresoDataGridViewTextBoxColumn.HeaderText = "FechaIngreso"
-    Me.FechaIngresoDataGridViewTextBoxColumn.Name = "FechaIngresoDataGridViewTextBoxColumn"
-    Me.FechaIngresoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.FechaIngresoDataGridViewTextBoxColumn.Visible = False
-    '
-    'EmailDataGridViewTextBoxColumn
-    '
-    Me.EmailDataGridViewTextBoxColumn.DataPropertyName = "Email"
-    Me.EmailDataGridViewTextBoxColumn.HeaderText = "Email"
-    Me.EmailDataGridViewTextBoxColumn.Name = "EmailDataGridViewTextBoxColumn"
-    Me.EmailDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'Tel1DataGridViewTextBoxColumn
-    '
-    Me.Tel1DataGridViewTextBoxColumn.DataPropertyName = "Tel1"
-    Me.Tel1DataGridViewTextBoxColumn.HeaderText = "Tel1"
-    Me.Tel1DataGridViewTextBoxColumn.Name = "Tel1DataGridViewTextBoxColumn"
-    Me.Tel1DataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'Tel2DataGridViewTextBoxColumn
-    '
-    Me.Tel2DataGridViewTextBoxColumn.DataPropertyName = "Tel2"
-    Me.Tel2DataGridViewTextBoxColumn.HeaderText = "Tel2"
-    Me.Tel2DataGridViewTextBoxColumn.Name = "Tel2DataGridViewTextBoxColumn"
-    Me.Tel2DataGridViewTextBoxColumn.ReadOnly = True
-    Me.Tel2DataGridViewTextBoxColumn.Visible = False
-    '
-    'CiudadDataGridViewTextBoxColumn
-    '
-    Me.CiudadDataGridViewTextBoxColumn.DataPropertyName = "Ciudad"
-    Me.CiudadDataGridViewTextBoxColumn.HeaderText = "Ciudad"
-    Me.CiudadDataGridViewTextBoxColumn.Name = "CiudadDataGridViewTextBoxColumn"
-    Me.CiudadDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ProvinciaDataGridViewTextBoxColumn
-    '
-    Me.ProvinciaDataGridViewTextBoxColumn.DataPropertyName = "Provincia"
-    Me.ProvinciaDataGridViewTextBoxColumn.HeaderText = "Provincia"
-    Me.ProvinciaDataGridViewTextBoxColumn.Name = "ProvinciaDataGridViewTextBoxColumn"
-    Me.ProvinciaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'Calle2DataGridViewTextBoxColumn
-    '
-    Me.Calle2DataGridViewTextBoxColumn.DataPropertyName = "Calle2"
-    Me.Calle2DataGridViewTextBoxColumn.HeaderText = "Calle2"
-    Me.Calle2DataGridViewTextBoxColumn.Name = "Calle2DataGridViewTextBoxColumn"
-    Me.Calle2DataGridViewTextBoxColumn.ReadOnly = True
-    Me.Calle2DataGridViewTextBoxColumn.Visible = False
-    '
-    'NumCalle2DataGridViewTextBoxColumn
-    '
-    Me.NumCalle2DataGridViewTextBoxColumn.DataPropertyName = "NumCalle2"
-    Me.NumCalle2DataGridViewTextBoxColumn.HeaderText = "NumCalle2"
-    Me.NumCalle2DataGridViewTextBoxColumn.Name = "NumCalle2DataGridViewTextBoxColumn"
-    Me.NumCalle2DataGridViewTextBoxColumn.ReadOnly = True
-    Me.NumCalle2DataGridViewTextBoxColumn.Visible = False
-    '
-    'NumClienteDataGridViewTextBoxColumn
-    '
-    Me.NumClienteDataGridViewTextBoxColumn.DataPropertyName = "NumCliente"
-    Me.NumClienteDataGridViewTextBoxColumn.HeaderText = "NumCliente"
-    Me.NumClienteDataGridViewTextBoxColumn.Name = "NumClienteDataGridViewTextBoxColumn"
-    Me.NumClienteDataGridViewTextBoxColumn.ReadOnly = True
-    Me.NumClienteDataGridViewTextBoxColumn.Visible = False
-    '
-    'CodigoPostalDataGridViewTextBoxColumn
-    '
-    Me.CodigoPostalDataGridViewTextBoxColumn.DataPropertyName = "CodigoPostal"
-    Me.CodigoPostalDataGridViewTextBoxColumn.HeaderText = "CodigoPostal"
-    Me.CodigoPostalDataGridViewTextBoxColumn.Name = "CodigoPostalDataGridViewTextBoxColumn"
-    Me.CodigoPostalDataGridViewTextBoxColumn.ReadOnly = True
-    Me.CodigoPostalDataGridViewTextBoxColumn.Visible = False
-    '
-    'ComentariosDataGridViewTextBoxColumn
-    '
-    Me.ComentariosDataGridViewTextBoxColumn.DataPropertyName = "Comentarios"
-    Me.ComentariosDataGridViewTextBoxColumn.HeaderText = "Comentarios"
-    Me.ComentariosDataGridViewTextBoxColumn.Name = "ComentariosDataGridViewTextBoxColumn"
-    Me.ComentariosDataGridViewTextBoxColumn.ReadOnly = True
-    Me.ComentariosDataGridViewTextBoxColumn.Visible = False
     '
     'bsInfoCliente
     '
@@ -332,6 +182,155 @@ Partial Class frmListaClientes
     Me.Label1.TabIndex = 29
     Me.Label1.Text = "LISTA DE CLIENTES"
     '
+    'IDClienteDataGridViewTextBoxColumn
+    '
+    Me.IDClienteDataGridViewTextBoxColumn.DataPropertyName = "IDCliente"
+    Me.IDClienteDataGridViewTextBoxColumn.HeaderText = "IDCliente"
+    Me.IDClienteDataGridViewTextBoxColumn.Name = "IDClienteDataGridViewTextBoxColumn"
+    Me.IDClienteDataGridViewTextBoxColumn.ReadOnly = True
+    Me.IDClienteDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidClienteDataGridViewTextBoxColumn
+    '
+    Me.GuidClienteDataGridViewTextBoxColumn.DataPropertyName = "GuidCliente"
+    Me.GuidClienteDataGridViewTextBoxColumn.HeaderText = "GuidCliente"
+    Me.GuidClienteDataGridViewTextBoxColumn.Name = "GuidClienteDataGridViewTextBoxColumn"
+    Me.GuidClienteDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidClienteDataGridViewTextBoxColumn.Visible = False
+    '
+    'NumClienteDataGridViewTextBoxColumn
+    '
+    Me.NumClienteDataGridViewTextBoxColumn.DataPropertyName = "NumCliente"
+    Me.NumClienteDataGridViewTextBoxColumn.HeaderText = "NumCliente"
+    Me.NumClienteDataGridViewTextBoxColumn.Name = "NumClienteDataGridViewTextBoxColumn"
+    Me.NumClienteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ApellidoDataGridViewTextBoxColumn
+    '
+    Me.ApellidoDataGridViewTextBoxColumn.DataPropertyName = "Apellido"
+    Me.ApellidoDataGridViewTextBoxColumn.HeaderText = "Apellido"
+    Me.ApellidoDataGridViewTextBoxColumn.Name = "ApellidoDataGridViewTextBoxColumn"
+    Me.ApellidoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NombreDataGridViewTextBoxColumn
+    '
+    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ProfesionDataGridViewTextBoxColumn
+    '
+    Me.ProfesionDataGridViewTextBoxColumn.DataPropertyName = "Profesion"
+    Me.ProfesionDataGridViewTextBoxColumn.HeaderText = "Profesion"
+    Me.ProfesionDataGridViewTextBoxColumn.Name = "ProfesionDataGridViewTextBoxColumn"
+    Me.ProfesionDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'Tel1DataGridViewTextBoxColumn
+    '
+    Me.Tel1DataGridViewTextBoxColumn.DataPropertyName = "Tel1"
+    Me.Tel1DataGridViewTextBoxColumn.HeaderText = "Tel1"
+    Me.Tel1DataGridViewTextBoxColumn.Name = "Tel1DataGridViewTextBoxColumn"
+    Me.Tel1DataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'EmailDataGridViewTextBoxColumn
+    '
+    Me.EmailDataGridViewTextBoxColumn.DataPropertyName = "Email"
+    Me.EmailDataGridViewTextBoxColumn.HeaderText = "Email"
+    Me.EmailDataGridViewTextBoxColumn.Name = "EmailDataGridViewTextBoxColumn"
+    Me.EmailDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'DNIDataGridViewTextBoxColumn
+    '
+    Me.DNIDataGridViewTextBoxColumn.DataPropertyName = "DNI"
+    Me.DNIDataGridViewTextBoxColumn.HeaderText = "DNI"
+    Me.DNIDataGridViewTextBoxColumn.Name = "DNIDataGridViewTextBoxColumn"
+    Me.DNIDataGridViewTextBoxColumn.ReadOnly = True
+    Me.DNIDataGridViewTextBoxColumn.Visible = False
+    '
+    'FechaNacDataGridViewTextBoxColumn
+    '
+    Me.FechaNacDataGridViewTextBoxColumn.DataPropertyName = "FechaNac"
+    Me.FechaNacDataGridViewTextBoxColumn.HeaderText = "FechaNac"
+    Me.FechaNacDataGridViewTextBoxColumn.Name = "FechaNacDataGridViewTextBoxColumn"
+    Me.FechaNacDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaNacDataGridViewTextBoxColumn.Visible = False
+    '
+    'CalleDataGridViewTextBoxColumn
+    '
+    Me.CalleDataGridViewTextBoxColumn.DataPropertyName = "Calle"
+    Me.CalleDataGridViewTextBoxColumn.HeaderText = "Calle"
+    Me.CalleDataGridViewTextBoxColumn.Name = "CalleDataGridViewTextBoxColumn"
+    Me.CalleDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NumCalleDataGridViewTextBoxColumn
+    '
+    Me.NumCalleDataGridViewTextBoxColumn.DataPropertyName = "NumCalle"
+    Me.NumCalleDataGridViewTextBoxColumn.HeaderText = "NumCalle"
+    Me.NumCalleDataGridViewTextBoxColumn.Name = "NumCalleDataGridViewTextBoxColumn"
+    Me.NumCalleDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaIngresoDataGridViewTextBoxColumn
+    '
+    Me.FechaIngresoDataGridViewTextBoxColumn.DataPropertyName = "FechaIngreso"
+    Me.FechaIngresoDataGridViewTextBoxColumn.HeaderText = "FechaIngreso"
+    Me.FechaIngresoDataGridViewTextBoxColumn.Name = "FechaIngresoDataGridViewTextBoxColumn"
+    Me.FechaIngresoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaIngresoDataGridViewTextBoxColumn.Visible = False
+    '
+    'Tel2DataGridViewTextBoxColumn
+    '
+    Me.Tel2DataGridViewTextBoxColumn.DataPropertyName = "Tel2"
+    Me.Tel2DataGridViewTextBoxColumn.HeaderText = "Tel2"
+    Me.Tel2DataGridViewTextBoxColumn.Name = "Tel2DataGridViewTextBoxColumn"
+    Me.Tel2DataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CiudadDataGridViewTextBoxColumn
+    '
+    Me.CiudadDataGridViewTextBoxColumn.DataPropertyName = "Ciudad"
+    Me.CiudadDataGridViewTextBoxColumn.HeaderText = "Ciudad"
+    Me.CiudadDataGridViewTextBoxColumn.Name = "CiudadDataGridViewTextBoxColumn"
+    Me.CiudadDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ProvinciaDataGridViewTextBoxColumn
+    '
+    Me.ProvinciaDataGridViewTextBoxColumn.DataPropertyName = "Provincia"
+    Me.ProvinciaDataGridViewTextBoxColumn.HeaderText = "Provincia"
+    Me.ProvinciaDataGridViewTextBoxColumn.Name = "ProvinciaDataGridViewTextBoxColumn"
+    Me.ProvinciaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ProvinciaDataGridViewTextBoxColumn.Visible = False
+    '
+    'Calle2DataGridViewTextBoxColumn
+    '
+    Me.Calle2DataGridViewTextBoxColumn.DataPropertyName = "Calle2"
+    Me.Calle2DataGridViewTextBoxColumn.HeaderText = "Calle2"
+    Me.Calle2DataGridViewTextBoxColumn.Name = "Calle2DataGridViewTextBoxColumn"
+    Me.Calle2DataGridViewTextBoxColumn.ReadOnly = True
+    Me.Calle2DataGridViewTextBoxColumn.Visible = False
+    '
+    'NumCalle2DataGridViewTextBoxColumn
+    '
+    Me.NumCalle2DataGridViewTextBoxColumn.DataPropertyName = "NumCalle2"
+    Me.NumCalle2DataGridViewTextBoxColumn.HeaderText = "NumCalle2"
+    Me.NumCalle2DataGridViewTextBoxColumn.Name = "NumCalle2DataGridViewTextBoxColumn"
+    Me.NumCalle2DataGridViewTextBoxColumn.ReadOnly = True
+    Me.NumCalle2DataGridViewTextBoxColumn.Visible = False
+    '
+    'CodigoPostalDataGridViewTextBoxColumn
+    '
+    Me.CodigoPostalDataGridViewTextBoxColumn.DataPropertyName = "CodigoPostal"
+    Me.CodigoPostalDataGridViewTextBoxColumn.HeaderText = "CodigoPostal"
+    Me.CodigoPostalDataGridViewTextBoxColumn.Name = "CodigoPostalDataGridViewTextBoxColumn"
+    Me.CodigoPostalDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CodigoPostalDataGridViewTextBoxColumn.Visible = False
+    '
+    'ComentariosDataGridViewTextBoxColumn
+    '
+    Me.ComentariosDataGridViewTextBoxColumn.DataPropertyName = "Comentarios"
+    Me.ComentariosDataGridViewTextBoxColumn.HeaderText = "Comentarios"
+    Me.ComentariosDataGridViewTextBoxColumn.Name = "ComentariosDataGridViewTextBoxColumn"
+    Me.ComentariosDataGridViewTextBoxColumn.ReadOnly = True
+    '
     'frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -360,26 +359,26 @@ Partial Class frmListaClientes
   Friend WithEvents btnNuevo As System.Windows.Forms.Button
   Friend WithEvents btnEliminar As System.Windows.Forms.Button
   Friend WithEvents btnVolver As System.Windows.Forms.Button
+  Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents IDClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NumClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ApellidoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents DNIDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ProfesionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents Tel1DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents EmailDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DNIDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaNacDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CalleDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NumCalleDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaIngresoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents EmailDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Tel1DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents Tel2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CiudadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ProvinciaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents Calle2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NumCalle2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents NumClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CodigoPostalDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentariosDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Label1 As System.Windows.Forms.Label
 
 End Class
