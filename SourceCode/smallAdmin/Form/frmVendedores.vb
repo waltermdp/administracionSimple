@@ -48,7 +48,6 @@ Public Class frmVendedores
     Try
       Dim Command As String = "where Nombre Like '%" & txtFiltro.Text.Trim & _
                               "%' OR Apellido Like '%" & txtFiltro.Text.Trim & _
-                              "%' OR ID Like '%" & txtFiltro.Text.Trim & _
                               "%' OR NumVendedor Like '%" & txtFiltro.Text.Trim & _
                               "%' OR Grupo like '%" & txtFiltro.Text.Trim & "%'"
       Return Command
@@ -96,6 +95,14 @@ Public Class frmVendedores
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub dgvListVendedores_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgvListVendedores.DataError
+    Try
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
     End Try
   End Sub
 
@@ -216,7 +223,6 @@ Public Class frmVendedores
 
   Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
     Try
-
       Call MostrarListaVendedores()
     Catch ex As Exception
       Call Print_msg(ex.Message)

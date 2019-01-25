@@ -1,25 +1,6 @@
 ﻿Imports libCommon.Comunes
 Module modInOut
 
-  'Public Function DetectarTipo(ByVal header As String, ByRef vTipo As manDB.clsTipoPago) As Result
-  '  Try
-
-  '    If header.ToUpper.Contains("EMPRESA;TRANSACCION;IDENTIFICADOR;C.B.U.;") Then
-  '      vTipo = g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117924"))
-  '    ElseIf header.ToUpper.Contains("DEBLIQD9") Then
-
-  '    ElseIf header.ToUpper.Contains("DEBLIQC9") Then
-
-  '    ElseIf header.ToUpper.Contains("DEBLIQC9") Then
-
-  '    End If
-
-  '    Return Result.OK
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '    Return Result.ErrorEx
-  '  End Try
-  'End Function
   Public Function GetCuerpoVISADebito(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoMovimiento)) As Result
     Try
 

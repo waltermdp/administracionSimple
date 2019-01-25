@@ -35,6 +35,12 @@ Public Class frmDeben
       dateFin.Value = New Date(Date.Today.Year, Today.Month, Date.DaysInMonth(Today.Year, Today.Month))
       rbtnVendidos.Checked = True
       cmbTipoPago.DataSource = g_TipoPago
+      Dim MetodosBusqueda As New List(Of clsTipoPago)
+      MetodosBusqueda.Add(New clsTipoPago With {.GuidTipo = Guid.Empty, .Nombre = "Todos Los Medios"})
+      MetodosBusqueda.AddRange(g_TipoPago.ToList)
+      cmbMetodosDePago.DataSource = MetodosBusqueda
+      cmbMetodosDePago.SelectedIndex = 0
+      rbtnClientName.Checked = True
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -70,28 +76,33 @@ Public Class frmDeben
 
   Private Function Filtro(ByVal modo As String) As Result
     Try
+      Dim sqlDate As String = "Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "#"
+      Dim sqlClient As String = "GuidCliente in (select GuidCliente from Clientes where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR Apellido Like '%" & txtBusqueda.Text.Trim & "%' OR NumCliente Like '%" & txtBusqueda.Text.Trim & "%')"
+      Dim sqlVendedor As String = "GuidVendedor in (select GuidVendedor from Vendedores where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR Apellido Like '%" & txtBusqueda.Text.Trim & "%' OR NumVendedor Like '%" & txtBusqueda.Text.Trim & "%' OR Grupo Like '%" & txtBusqueda.Text.Trim & "%')"
+
+      Dim filtrar As String = String.Empty
+      If rbtnClientName.Checked Then
+        filtrar = " and " & sqlClient
+      ElseIf rbtnNombreVendedor.Checked Then
+        filtrar = " and " & sqlVendedor
+      Else
+        filtrar = String.Empty
+      End If
+
+      m_objPrincipal.MetodoPago = CType(cmbMetodosDePago.SelectedItem, clsTipoPago).GuidTipo
+      m_objPrincipal.Cfg_Filtro = "where " & sqlDate & filtrar
 
       If rbtnVendidos.Checked = True Then
-        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "#"
         m_objPrincipal.Deben = "0"
       ElseIf rbtnDeben.Checked Then
-        m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "1"
       ElseIf rbtnCancelados.Checked Then
-        m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "2"
       ElseIf rbtnCuotaPagaron.Checked Then
-        m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "3"
-      ElseIf rbtnClientName.Checked Then
-        'Mostrar los productos vendidos a este cliente
-        'strSQL = "SELECT * FROM [Articulos] INNER JOIN [RelArtProd] ON Articulos.GuidArticulo = RelArtProd.GuidArticulo WHERE [RelArtProd.GuidProducto]={" & vGuidProducto.ToString & "}"
-        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "# and GuidCliente in (select GuidCliente from Clientes where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR Apellido Like '%" & txtBusqueda.Text.Trim & "%' OR ID Like '%" & txtBusqueda.Text.Trim & "%')"
+      Else
+        m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "0"
-      ElseIf rbtnNombreVendedor.Checked Then
-        'Mostrar los productos vendidos por este vendedor
-        m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(dateInicio.Value, strFormatoAnsiStdFecha) & "# and #" & Format(dateFin.Value.AddDays(1), strFormatoAnsiStdFecha) & "# and GuidVendedor in (select GuidVendedor from Vendedores where Nombre Like '%" & txtBusqueda.Text.Trim & "%' OR Apellido Like '%" & txtBusqueda.Text.Trim & "%' OR NumVendedor Like '%" & txtBusqueda.Text.Trim & "%' OR Grupo Like '%" & txtBusqueda.Text.Trim & "%')"
-
       End If
 
       Return Result.OK
@@ -551,6 +562,9 @@ Public Class frmDeben
           Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
             MsgBox("No implementado")
             Exit Sub
+          Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'master debito
+            MsgBox("No implementado")
+            Exit Sub
           Case Else
             MsgBox("No se encuentra tipo de pago")
             Exit Sub
@@ -635,15 +649,7 @@ Public Class frmDeben
   '  End Try
   'End Sub
 
-  Private Sub btnRMasterDebito_MouseClick(sender As Object, e As MouseEventArgs)
-    Try
-      Exit Sub
-      'm_Movimientos = New List(Of clsInfoMovimiento)
-      'm_Movimientos.AddRange(mov.ToList)
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
+  
 
 
 
@@ -726,4 +732,17 @@ Public Class frmDeben
 
 
 
+  Private Sub rbtnClientVendeor_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnClientName.CheckedChanged, rbtnNombreVendedor.CheckedChanged
+    Try
+      If rbtnClientName.Checked Then
+        lblInfoFiltro.Text = "Nombre, Apellido o Numero de cliente"
+      ElseIf rbtnNombreVendedor.Checked Then
+        lblInfoFiltro.Text = "Nombre, Apellido, Numero vendedor o grupo"
+      Else
+        lblInfoFiltro.Text = ""
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

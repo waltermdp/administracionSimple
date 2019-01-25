@@ -29,11 +29,6 @@ Partial Class frmListaClientes
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmListaClientes))
     Me.btnEdit = New System.Windows.Forms.Button()
     Me.dgvData1 = New System.Windows.Forms.DataGridView()
-    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnNuevo = New System.Windows.Forms.Button()
-    Me.btnEliminar = New System.Windows.Forms.Button()
-    Me.btnVolver = New System.Windows.Forms.Button()
-    Me.Label1 = New System.Windows.Forms.Label()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,6 +49,14 @@ Partial Class frmListaClientes
     Me.NumCalle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoPostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComentariosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnEliminar = New System.Windows.Forms.Button()
+    Me.btnVolver = New System.Windows.Forms.Button()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.btnBuscar = New System.Windows.Forms.Button()
+    Me.txtFiltro = New System.Windows.Forms.TextBox()
+    Me.Label2 = New System.Windows.Forms.Label()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -104,7 +107,7 @@ Partial Class frmListaClientes
     Me.dgvData1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData1.EnableHeadersVisualStyles = False
     Me.dgvData1.GridColor = System.Drawing.Color.White
-    Me.dgvData1.Location = New System.Drawing.Point(186, 69)
+    Me.dgvData1.Location = New System.Drawing.Point(183, 158)
     Me.dgvData1.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvData1.MultiSelect = False
     Me.dgvData1.Name = "dgvData1"
@@ -121,66 +124,9 @@ Partial Class frmListaClientes
     Me.dgvData1.RowTemplate.Height = 24
     Me.dgvData1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
     Me.dgvData1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData1.Size = New System.Drawing.Size(1062, 447)
+    Me.dgvData1.Size = New System.Drawing.Size(1071, 523)
     Me.dgvData1.TabIndex = 24
     Me.dgvData1.TabStop = False
-    '
-    'bsInfoCliente
-    '
-    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
-    '
-    'btnNuevo
-    '
-    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnNuevo.FlatAppearance.BorderSize = 0
-    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(24, 51)
-    Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
-    Me.btnNuevo.TabIndex = 25
-    Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = False
-    '
-    'btnEliminar
-    '
-    Me.btnEliminar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnEliminar.FlatAppearance.BorderSize = 0
-    Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnEliminar.ForeColor = System.Drawing.Color.White
-    Me.btnEliminar.Location = New System.Drawing.Point(24, 203)
-    Me.btnEliminar.Name = "btnEliminar"
-    Me.btnEliminar.Size = New System.Drawing.Size(110, 61)
-    Me.btnEliminar.TabIndex = 26
-    Me.btnEliminar.Text = "Eliminar"
-    Me.btnEliminar.UseVisualStyleBackColor = False
-    '
-    'btnVolver
-    '
-    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnVolver.FlatAppearance.BorderSize = 0
-    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(24, 636)
-    Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(110, 61)
-    Me.btnVolver.TabIndex = 28
-    Me.btnVolver.Text = "Volver"
-    Me.btnVolver.UseVisualStyleBackColor = False
-    '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(551, 9)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(180, 20)
-    Me.Label1.TabIndex = 29
-    Me.Label1.Text = "LISTA DE CLIENTES"
     '
     'IDClienteDataGridViewTextBoxColumn
     '
@@ -331,12 +277,104 @@ Partial Class frmListaClientes
     Me.ComentariosDataGridViewTextBoxColumn.Name = "ComentariosDataGridViewTextBoxColumn"
     Me.ComentariosDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'bsInfoCliente
+    '
+    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
+    '
+    'btnNuevo
+    '
+    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnNuevo.FlatAppearance.BorderSize = 0
+    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNuevo.ForeColor = System.Drawing.Color.White
+    Me.btnNuevo.Location = New System.Drawing.Point(24, 51)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
+    Me.btnNuevo.TabIndex = 25
+    Me.btnNuevo.Text = "Nuevo"
+    Me.btnNuevo.UseVisualStyleBackColor = False
+    '
+    'btnEliminar
+    '
+    Me.btnEliminar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnEliminar.FlatAppearance.BorderSize = 0
+    Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEliminar.ForeColor = System.Drawing.Color.White
+    Me.btnEliminar.Location = New System.Drawing.Point(24, 203)
+    Me.btnEliminar.Name = "btnEliminar"
+    Me.btnEliminar.Size = New System.Drawing.Size(110, 61)
+    Me.btnEliminar.TabIndex = 26
+    Me.btnEliminar.Text = "Eliminar"
+    Me.btnEliminar.UseVisualStyleBackColor = False
+    '
+    'btnVolver
+    '
+    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnVolver.FlatAppearance.BorderSize = 0
+    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnVolver.ForeColor = System.Drawing.Color.White
+    Me.btnVolver.Location = New System.Drawing.Point(24, 636)
+    Me.btnVolver.Name = "btnVolver"
+    Me.btnVolver.Size = New System.Drawing.Size(110, 61)
+    Me.btnVolver.TabIndex = 28
+    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.UseVisualStyleBackColor = False
+    '
+    'Label1
+    '
+    Me.Label1.AutoSize = True
+    Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.Location = New System.Drawing.Point(551, 9)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(180, 20)
+    Me.Label1.TabIndex = 29
+    Me.Label1.Text = "LISTA DE CLIENTES"
+    '
+    'btnBuscar
+    '
+    Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnBuscar.FlatAppearance.BorderSize = 0
+    Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnBuscar.ForeColor = System.Drawing.Color.White
+    Me.btnBuscar.Location = New System.Drawing.Point(497, 75)
+    Me.btnBuscar.Name = "btnBuscar"
+    Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
+    Me.btnBuscar.TabIndex = 37
+    Me.btnBuscar.Text = "Buscar"
+    Me.btnBuscar.UseVisualStyleBackColor = False
+    '
+    'txtFiltro
+    '
+    Me.txtFiltro.Location = New System.Drawing.Point(183, 94)
+    Me.txtFiltro.Name = "txtFiltro"
+    Me.txtFiltro.Size = New System.Drawing.Size(292, 20)
+    Me.txtFiltro.TabIndex = 36
+    '
+    'Label2
+    '
+    Me.Label2.AutoSize = True
+    Me.Label2.BackColor = System.Drawing.Color.White
+    Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label2.Location = New System.Drawing.Point(180, 75)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(272, 15)
+    Me.Label2.TabIndex = 35
+    Me.Label2.Text = "Filtro por Apellido, Nombre  o Numero de Cliente"
+    '
     'frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnBuscar)
+    Me.Controls.Add(Me.txtFiltro)
+    Me.Controls.Add(Me.Label2)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.btnEliminar)
@@ -380,5 +418,8 @@ Partial Class frmListaClientes
   Friend WithEvents NumCalle2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CodigoPostalDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentariosDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents btnBuscar As System.Windows.Forms.Button
+  Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
+  Friend WithEvents Label2 As System.Windows.Forms.Label
 
 End Class

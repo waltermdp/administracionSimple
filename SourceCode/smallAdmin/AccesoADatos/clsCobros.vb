@@ -117,6 +117,8 @@ Public Class clsCobros
           ExportarAVisaCredito(ListMov)
         Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
           ExportAMaster(ListMov)
+        Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
+          ExportAMercadoPago(ListMov)
         Case Else
           MsgBox("No se encuentra tipo de pago")
       End Select
@@ -283,4 +285,27 @@ Public Class clsCobros
     End Try
   End Function
 
+  Private Shared Function ExportAMercadoPago(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim lineas As New List(Of String)
+
+      lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
+      lineas.Add("NumComprobante;".PadLeft(15) & "Identificador;".PadLeft(14) & "Fecha;".PadLeft(12) & "Importe;".PadLeft(10))
+      Dim linea As String = String.Empty
+      For i As Integer = 0 To vMovimientos.Count - 1
+        linea = String.Format("{0};", vMovimientos(i).NumeroComprobante).PadLeft(15)
+        linea += String.Format("{0};", vMovimientos(i).IdentificadorDebito).PadLeft(14)
+        linea += String.Format("{0};", Today.ToString("dd/MM/yyyy")).PadLeft(12)
+        linea += String.Format("{0};", vMovimientos(i).Importe).PadLeft(10)
+        lineas.Add(linea)
+      Next
+      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_MercadoPago.txt"), lineas)
+      MsgBox("Finalizo exportacion a txt")
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 End Class

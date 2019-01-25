@@ -80,7 +80,6 @@ Public Class frmLiquidacionVendedores
   Private Sub frmLiquidacionVendedores_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
       dtInicio.Format = DateTimePickerFormat.Custom
-      'DateTimePicker1.MaxDate = Today
       dtInicio.CustomFormat = "MMMM, yyyy"
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -88,7 +87,11 @@ Public Class frmLiquidacionVendedores
   End Sub
 
   Private Sub frmLiquidacionVendedores_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
+    Try
+      lblTitulo.Text = "VENDEDOR: " & m_Vendedor.ToString
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
   End Sub
 
   Private Sub btnLiquidar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnLiquidar.MouseClick
@@ -491,6 +494,7 @@ Public Class frmLiquidacionVendedores
       Call libCommon.Comunes.Print_msg(ex.Message)
     End Try
   End Sub
+
 
 
 End Class

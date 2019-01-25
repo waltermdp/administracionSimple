@@ -8,6 +8,7 @@ Public Class clsListaPrincipal
   Private m_str As String
   Private m_NameSort As String
   Private m_Order As String
+  Private m_MetodoPago As Guid = Guid.Empty
 
   Public Sub New()
     Try
@@ -25,6 +26,15 @@ Public Class clsListaPrincipal
     End Get
     Set(value As String)
       m_str = value
+    End Set
+  End Property
+
+  Public Property MetodoPago As Guid
+    Get
+      Return m_MetodoPago
+    End Get
+    Set(value As Guid)
+      m_MetodoPago = value
     End Set
   End Property
 
@@ -82,6 +92,10 @@ Public Class clsListaPrincipal
             Dim ObjCuenta As New clsInfoCuenta
             objResult = clsCuenta.Load(objListProdInfo.GuidCuenta, ObjCuenta)
             If objResult <> Result.OK Then Return objResult
+
+            If MetodoPago <> Guid.Empty Then
+              If MetodoPago <> ObjCuenta.TipoDeCuenta Then Continue For ' no agregar a la lista, next
+            End If
             ObjCuenta.SetDelegadoCustomString(New clsInfoCuenta.delToString(AddressOf GetName))
             objInfoPrincipal.MetodoPago = ObjCuenta.ToString
 

@@ -45,26 +45,6 @@ Partial Class frmDeben
     Me.btnUpPago = New System.Windows.Forms.Button()
     Me.btnDownPago = New System.Windows.Forms.Button()
     Me.dgvData = New System.Windows.Forms.DataGridView()
-    Me.btnLiquidVendedores = New System.Windows.Forms.Button()
-    Me.btnConfiguracion = New System.Windows.Forms.Button()
-    Me.txtBusqueda = New System.Windows.Forms.TextBox()
-    Me.gpxBuscar = New System.Windows.Forms.GroupBox()
-    Me.rbtnNombreVendedor = New System.Windows.Forms.RadioButton()
-    Me.rbtnClientName = New System.Windows.Forms.RadioButton()
-    Me.btnMinimize = New System.Windows.Forms.Button()
-    Me.Label5 = New System.Windows.Forms.Label()
-    Me.pnlResumen = New System.Windows.Forms.Panel()
-    Me.lstViewResumen = New System.Windows.Forms.ListView()
-    Me.btnOK = New System.Windows.Forms.Button()
-    Me.btnCancel = New System.Windows.Forms.Button()
-    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-    Me.btnImportar = New System.Windows.Forms.Button()
-    Me.btnExportar = New System.Windows.Forms.Button()
-    Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
-    Me.pnlSeleccionarPago = New System.Windows.Forms.Panel()
-    Me.lblInfoImpExp = New System.Windows.Forms.Label()
-    Me.btnCancelImpExp = New System.Windows.Forms.Button()
-    Me.btnContinuarImpExp = New System.Windows.Forms.Button()
     Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComprobanteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ArticulosVendidosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,21 +61,48 @@ Partial Class frmDeben
     Me.AdelantoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ValorCuotaFijaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnLiquidVendedores = New System.Windows.Forms.Button()
+    Me.btnConfiguracion = New System.Windows.Forms.Button()
+    Me.txtBusqueda = New System.Windows.Forms.TextBox()
+    Me.gpxBuscar = New System.Windows.Forms.GroupBox()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.rbtnClientName = New System.Windows.Forms.RadioButton()
+    Me.lblInfoFiltro = New System.Windows.Forms.Label()
+    Me.rbtnNombreVendedor = New System.Windows.Forms.RadioButton()
+    Me.cmbMetodosDePago = New System.Windows.Forms.ComboBox()
+    Me.btnMinimize = New System.Windows.Forms.Button()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.pnlResumen = New System.Windows.Forms.Panel()
+    Me.lstViewResumen = New System.Windows.Forms.ListView()
+    Me.btnOK = New System.Windows.Forms.Button()
+    Me.btnCancel = New System.Windows.Forms.Button()
+    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.btnImportar = New System.Windows.Forms.Button()
+    Me.btnExportar = New System.Windows.Forms.Button()
+    Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
+    Me.pnlSeleccionarPago = New System.Windows.Forms.Panel()
+    Me.lblInfoImpExp = New System.Windows.Forms.Label()
+    Me.btnCancelImpExp = New System.Windows.Forms.Button()
+    Me.btnContinuarImpExp = New System.Windows.Forms.Button()
     Me.lblTotalProductos = New System.Windows.Forms.Label()
     Me.lblTotalArticulos = New System.Windows.Forms.Label()
+    Me.GroupBox2 = New System.Windows.Forms.GroupBox()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
+    Me.Panel1.SuspendLayout()
     Me.pnlResumen.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
     Me.pnlSeleccionarPago.SuspendLayout()
-    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.GroupBox2.SuspendLayout()
     Me.SuspendLayout()
     '
     'dateInicio
     '
     Me.dateInicio.Location = New System.Drawing.Point(18, 39)
     Me.dateInicio.Name = "dateInicio"
-    Me.dateInicio.Size = New System.Drawing.Size(200, 20)
+    Me.dateInicio.Size = New System.Drawing.Size(235, 21)
     Me.dateInicio.TabIndex = 2
     '
     'btnBack
@@ -115,14 +122,14 @@ Partial Class frmDeben
     '
     'dateFin
     '
-    Me.dateFin.Location = New System.Drawing.Point(228, 39)
+    Me.dateFin.Location = New System.Drawing.Point(259, 39)
     Me.dateFin.Name = "dateFin"
-    Me.dateFin.Size = New System.Drawing.Size(200, 20)
+    Me.dateFin.Size = New System.Drawing.Size(232, 21)
     Me.dateFin.TabIndex = 28
     '
     'btnBuscar
     '
-    Me.btnBuscar.Location = New System.Drawing.Point(458, 30)
+    Me.btnBuscar.Location = New System.Drawing.Point(548, 30)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(85, 43)
     Me.btnBuscar.TabIndex = 29
@@ -134,61 +141,61 @@ Partial Class frmDeben
     Me.Label3.AutoSize = True
     Me.Label3.Location = New System.Drawing.Point(15, 23)
     Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(32, 13)
+    Me.Label3.Size = New System.Drawing.Size(90, 15)
     Me.Label3.TabIndex = 32
-    Me.Label3.Text = "Inicio"
+    Me.Label3.Text = "Fecha de Inicio"
     '
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(225, 23)
+    Me.Label4.Location = New System.Drawing.Point(256, 23)
     Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(21, 13)
+    Me.Label4.Size = New System.Drawing.Size(71, 15)
     Me.Label4.TabIndex = 33
-    Me.Label4.Text = "Fin"
+    Me.Label4.Text = "Fecha Final"
     '
     'rbtnVendidos
     '
     Me.rbtnVendidos.AutoSize = True
-    Me.rbtnVendidos.Location = New System.Drawing.Point(18, 107)
+    Me.rbtnVendidos.Location = New System.Drawing.Point(18, 76)
     Me.rbtnVendidos.Name = "rbtnVendidos"
-    Me.rbtnVendidos.Size = New System.Drawing.Size(69, 17)
+    Me.rbtnVendidos.Size = New System.Drawing.Size(134, 19)
     Me.rbtnVendidos.TabIndex = 34
     Me.rbtnVendidos.TabStop = True
-    Me.rbtnVendidos.Text = "Vendidos"
+    Me.rbtnVendidos.Text = "Productos Vendidos"
     Me.rbtnVendidos.UseVisualStyleBackColor = True
     '
     'rbtnDeben
     '
     Me.rbtnDeben.AutoSize = True
-    Me.rbtnDeben.Location = New System.Drawing.Point(18, 156)
+    Me.rbtnDeben.Location = New System.Drawing.Point(18, 99)
     Me.rbtnDeben.Name = "rbtnDeben"
-    Me.rbtnDeben.Size = New System.Drawing.Size(88, 17)
+    Me.rbtnDeben.Size = New System.Drawing.Size(155, 19)
     Me.rbtnDeben.TabIndex = 35
     Me.rbtnDeben.TabStop = True
-    Me.rbtnDeben.Text = "Cuota Deben"
+    Me.rbtnDeben.Text = "Productos Deben Cuota"
     Me.rbtnDeben.UseVisualStyleBackColor = True
     '
     'rbtnCuotaPagaron
     '
     Me.rbtnCuotaPagaron.AutoSize = True
-    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(18, 179)
+    Me.rbtnCuotaPagaron.Location = New System.Drawing.Point(171, 99)
     Me.rbtnCuotaPagaron.Name = "rbtnCuotaPagaron"
-    Me.rbtnCuotaPagaron.Size = New System.Drawing.Size(96, 17)
+    Me.rbtnCuotaPagaron.Size = New System.Drawing.Size(130, 19)
     Me.rbtnCuotaPagaron.TabIndex = 37
     Me.rbtnCuotaPagaron.TabStop = True
-    Me.rbtnCuotaPagaron.Text = "Cuota Pagaron"
+    Me.rbtnCuotaPagaron.Text = "Productos Pagaron"
     Me.rbtnCuotaPagaron.UseVisualStyleBackColor = True
     '
     'rbtnCancelados
     '
     Me.rbtnCancelados.AutoSize = True
-    Me.rbtnCancelados.Location = New System.Drawing.Point(18, 127)
+    Me.rbtnCancelados.Location = New System.Drawing.Point(171, 76)
     Me.rbtnCancelados.Name = "rbtnCancelados"
-    Me.rbtnCancelados.Size = New System.Drawing.Size(81, 17)
+    Me.rbtnCancelados.Size = New System.Drawing.Size(148, 19)
     Me.rbtnCancelados.TabIndex = 36
     Me.rbtnCancelados.TabStop = True
-    Me.rbtnCancelados.Text = "Cancelados"
+    Me.rbtnCancelados.Text = "Productos Cancelados"
     Me.rbtnCancelados.UseVisualStyleBackColor = True
     '
     'btnLstVendedores
@@ -265,20 +272,20 @@ Partial Class frmDeben
     '
     'btnUpPago
     '
-    Me.btnUpPago.Location = New System.Drawing.Point(228, 70)
+    Me.btnUpPago.Location = New System.Drawing.Point(16, 133)
     Me.btnUpPago.Name = "btnUpPago"
-    Me.btnUpPago.Size = New System.Drawing.Size(92, 23)
+    Me.btnUpPago.Size = New System.Drawing.Size(276, 23)
     Me.btnUpPago.TabIndex = 33
-    Me.btnUpPago.Text = "AgregarPago"
+    Me.btnUpPago.Text = "Aplicar Pago Manual al Producto Seleccionado"
     Me.btnUpPago.UseVisualStyleBackColor = True
     '
     'btnDownPago
     '
-    Me.btnDownPago.Location = New System.Drawing.Point(228, 99)
+    Me.btnDownPago.Location = New System.Drawing.Point(16, 162)
     Me.btnDownPago.Name = "btnDownPago"
-    Me.btnDownPago.Size = New System.Drawing.Size(92, 24)
+    Me.btnDownPago.Size = New System.Drawing.Size(276, 24)
     Me.btnDownPago.TabIndex = 43
-    Me.btnDownPago.Text = "revertirPago"
+    Me.btnDownPago.Text = "Revertir Ultimo Pago al Producto seleccionado"
     Me.btnDownPago.UseVisualStyleBackColor = True
     '
     'dgvData
@@ -329,236 +336,9 @@ Partial Class frmDeben
     Me.dgvData.RowHeadersVisible = False
     Me.dgvData.RowTemplate.Height = 24
     Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData.Size = New System.Drawing.Size(1069, 359)
+    Me.dgvData.Size = New System.Drawing.Size(1069, 339)
     Me.dgvData.TabIndex = 44
     Me.dgvData.TabStop = False
-    '
-    'btnLiquidVendedores
-    '
-    Me.btnLiquidVendedores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnLiquidVendedores.FlatAppearance.BorderSize = 0
-    Me.btnLiquidVendedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnLiquidVendedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnLiquidVendedores.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidVendedores.Location = New System.Drawing.Point(24, 201)
-    Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
-    Me.btnLiquidVendedores.Size = New System.Drawing.Size(110, 61)
-    Me.btnLiquidVendedores.TabIndex = 45
-    Me.btnLiquidVendedores.Text = "Liquidacion Vendedores"
-    Me.btnLiquidVendedores.UseVisualStyleBackColor = False
-    '
-    'btnConfiguracion
-    '
-    Me.btnConfiguracion.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.btnConfiguracion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnConfiguracion.Location = New System.Drawing.Point(157, 24)
-    Me.btnConfiguracion.Name = "btnConfiguracion"
-    Me.btnConfiguracion.Size = New System.Drawing.Size(92, 25)
-    Me.btnConfiguracion.TabIndex = 46
-    Me.btnConfiguracion.Text = "Configuracion"
-    Me.btnConfiguracion.UseVisualStyleBackColor = False
-    '
-    'txtBusqueda
-    '
-    Me.txtBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.txtBusqueda.Location = New System.Drawing.Point(150, 73)
-    Me.txtBusqueda.Name = "txtBusqueda"
-    Me.txtBusqueda.Size = New System.Drawing.Size(278, 20)
-    Me.txtBusqueda.TabIndex = 47
-    '
-    'gpxBuscar
-    '
-    Me.gpxBuscar.Controls.Add(Me.rbtnCuotaPagaron)
-    Me.gpxBuscar.Controls.Add(Me.rbtnNombreVendedor)
-    Me.gpxBuscar.Controls.Add(Me.rbtnCancelados)
-    Me.gpxBuscar.Controls.Add(Me.Label3)
-    Me.gpxBuscar.Controls.Add(Me.dateInicio)
-    Me.gpxBuscar.Controls.Add(Me.rbtnClientName)
-    Me.gpxBuscar.Controls.Add(Me.rbtnVendidos)
-    Me.gpxBuscar.Controls.Add(Me.dateFin)
-    Me.gpxBuscar.Controls.Add(Me.rbtnDeben)
-    Me.gpxBuscar.Controls.Add(Me.txtBusqueda)
-    Me.gpxBuscar.Controls.Add(Me.Label4)
-    Me.gpxBuscar.Controls.Add(Me.btnBuscar)
-    Me.gpxBuscar.Location = New System.Drawing.Point(186, 483)
-    Me.gpxBuscar.Name = "gpxBuscar"
-    Me.gpxBuscar.Size = New System.Drawing.Size(564, 214)
-    Me.gpxBuscar.TabIndex = 48
-    Me.gpxBuscar.TabStop = False
-    Me.gpxBuscar.Text = "Busqueda"
-    '
-    'rbtnNombreVendedor
-    '
-    Me.rbtnNombreVendedor.AutoSize = True
-    Me.rbtnNombreVendedor.Location = New System.Drawing.Point(18, 81)
-    Me.rbtnNombreVendedor.Name = "rbtnNombreVendedor"
-    Me.rbtnNombreVendedor.Size = New System.Drawing.Size(71, 17)
-    Me.rbtnNombreVendedor.TabIndex = 49
-    Me.rbtnNombreVendedor.TabStop = True
-    Me.rbtnNombreVendedor.Text = "Vendedor"
-    Me.rbtnNombreVendedor.UseVisualStyleBackColor = True
-    '
-    'rbtnClientName
-    '
-    Me.rbtnClientName.AutoSize = True
-    Me.rbtnClientName.Location = New System.Drawing.Point(18, 63)
-    Me.rbtnClientName.Name = "rbtnClientName"
-    Me.rbtnClientName.Size = New System.Drawing.Size(57, 17)
-    Me.rbtnClientName.TabIndex = 48
-    Me.rbtnClientName.TabStop = True
-    Me.rbtnClientName.Text = "Cliente"
-    Me.rbtnClientName.UseVisualStyleBackColor = True
-    '
-    'btnMinimize
-    '
-    Me.btnMinimize.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.btnMinimize.FlatAppearance.BorderSize = 0
-    Me.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnMinimize.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnMinimize.Location = New System.Drawing.Point(1246, 3)
-    Me.btnMinimize.Name = "btnMinimize"
-    Me.btnMinimize.Size = New System.Drawing.Size(31, 26)
-    Me.btnMinimize.TabIndex = 49
-    Me.btnMinimize.Text = "_"
-    Me.btnMinimize.UseVisualStyleBackColor = False
-    '
-    'Label5
-    '
-    Me.Label5.AutoSize = True
-    Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label5.Location = New System.Drawing.Point(616, 3)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(217, 20)
-    Me.Label5.TabIndex = 50
-    Me.Label5.Text = "PRODUCTOS VENDIDOS"
-    '
-    'pnlResumen
-    '
-    Me.pnlResumen.Controls.Add(Me.lstViewResumen)
-    Me.pnlResumen.Controls.Add(Me.btnOK)
-    Me.pnlResumen.Controls.Add(Me.btnCancel)
-    Me.pnlResumen.Location = New System.Drawing.Point(186, 64)
-    Me.pnlResumen.Name = "pnlResumen"
-    Me.pnlResumen.Size = New System.Drawing.Size(743, 360)
-    Me.pnlResumen.TabIndex = 59
-    Me.pnlResumen.Visible = False
-    '
-    'lstViewResumen
-    '
-    Me.lstViewResumen.Location = New System.Drawing.Point(150, 44)
-    Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(554, 269)
-    Me.lstViewResumen.TabIndex = 41
-    Me.lstViewResumen.UseCompatibleStateImageBehavior = False
-    Me.lstViewResumen.View = System.Windows.Forms.View.Details
-    '
-    'btnOK
-    '
-    Me.btnOK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnOK.FlatAppearance.BorderSize = 0
-    Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnOK.ForeColor = System.Drawing.Color.White
-    Me.btnOK.Location = New System.Drawing.Point(20, 17)
-    Me.btnOK.Name = "btnOK"
-    Me.btnOK.Size = New System.Drawing.Size(110, 61)
-    Me.btnOK.TabIndex = 40
-    Me.btnOK.Text = "OK"
-    Me.btnOK.UseVisualStyleBackColor = False
-    '
-    'btnCancel
-    '
-    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnCancel.FlatAppearance.BorderSize = 0
-    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(20, 252)
-    Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
-    Me.btnCancel.TabIndex = 39
-    Me.btnCancel.Text = "Cancel"
-    Me.btnCancel.UseVisualStyleBackColor = False
-    '
-    'GroupBox1
-    '
-    Me.GroupBox1.Controls.Add(Me.btnImportar)
-    Me.GroupBox1.Controls.Add(Me.btnExportar)
-    Me.GroupBox1.Controls.Add(Me.btnUpPago)
-    Me.GroupBox1.Controls.Add(Me.btnDownPago)
-    Me.GroupBox1.Location = New System.Drawing.Point(929, 442)
-    Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(326, 139)
-    Me.GroupBox1.TabIndex = 60
-    Me.GroupBox1.TabStop = False
-    Me.GroupBox1.Text = "Pagos - Cobros"
-    '
-    'btnImportar
-    '
-    Me.btnImportar.Location = New System.Drawing.Point(228, 26)
-    Me.btnImportar.Name = "btnImportar"
-    Me.btnImportar.Size = New System.Drawing.Size(92, 35)
-    Me.btnImportar.TabIndex = 62
-    Me.btnImportar.Text = "Importar"
-    Me.btnImportar.UseVisualStyleBackColor = True
-    '
-    'btnExportar
-    '
-    Me.btnExportar.Location = New System.Drawing.Point(16, 23)
-    Me.btnExportar.Name = "btnExportar"
-    Me.btnExportar.Size = New System.Drawing.Size(92, 38)
-    Me.btnExportar.TabIndex = 61
-    Me.btnExportar.Text = "Exportar"
-    Me.btnExportar.UseVisualStyleBackColor = True
-    '
-    'cmbTipoPago
-    '
-    Me.cmbTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-    Me.cmbTipoPago.FormattingEnabled = True
-    Me.cmbTipoPago.Location = New System.Drawing.Point(39, 73)
-    Me.cmbTipoPago.Name = "cmbTipoPago"
-    Me.cmbTipoPago.Size = New System.Drawing.Size(162, 21)
-    Me.cmbTipoPago.TabIndex = 0
-    '
-    'pnlSeleccionarPago
-    '
-    Me.pnlSeleccionarPago.Controls.Add(Me.lblInfoImpExp)
-    Me.pnlSeleccionarPago.Controls.Add(Me.btnCancelImpExp)
-    Me.pnlSeleccionarPago.Controls.Add(Me.btnContinuarImpExp)
-    Me.pnlSeleccionarPago.Controls.Add(Me.cmbTipoPago)
-    Me.pnlSeleccionarPago.Location = New System.Drawing.Point(596, 283)
-    Me.pnlSeleccionarPago.Name = "pnlSeleccionarPago"
-    Me.pnlSeleccionarPago.Size = New System.Drawing.Size(239, 158)
-    Me.pnlSeleccionarPago.TabIndex = 42
-    Me.pnlSeleccionarPago.Visible = False
-    '
-    'lblInfoImpExp
-    '
-    Me.lblInfoImpExp.Location = New System.Drawing.Point(39, 11)
-    Me.lblInfoImpExp.Name = "lblInfoImpExp"
-    Me.lblInfoImpExp.Size = New System.Drawing.Size(162, 46)
-    Me.lblInfoImpExp.TabIndex = 4
-    Me.lblInfoImpExp.Text = "Label1"
-    '
-    'btnCancelImpExp
-    '
-    Me.btnCancelImpExp.Location = New System.Drawing.Point(161, 109)
-    Me.btnCancelImpExp.Name = "btnCancelImpExp"
-    Me.btnCancelImpExp.Size = New System.Drawing.Size(62, 32)
-    Me.btnCancelImpExp.TabIndex = 3
-    Me.btnCancelImpExp.Text = "Cancelar"
-    Me.btnCancelImpExp.UseVisualStyleBackColor = True
-    '
-    'btnContinuarImpExp
-    '
-    Me.btnContinuarImpExp.Location = New System.Drawing.Point(20, 109)
-    Me.btnContinuarImpExp.Name = "btnContinuarImpExp"
-    Me.btnContinuarImpExp.Size = New System.Drawing.Size(61, 32)
-    Me.btnContinuarImpExp.TabIndex = 2
-    Me.btnContinuarImpExp.Text = "Continuar"
-    Me.btnContinuarImpExp.UseVisualStyleBackColor = True
     '
     'FechaVentaDataGridViewTextBoxColumn
     '
@@ -672,11 +452,281 @@ Partial Class frmDeben
     '
     Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
     '
+    'btnLiquidVendedores
+    '
+    Me.btnLiquidVendedores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnLiquidVendedores.FlatAppearance.BorderSize = 0
+    Me.btnLiquidVendedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnLiquidVendedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnLiquidVendedores.ForeColor = System.Drawing.Color.White
+    Me.btnLiquidVendedores.Location = New System.Drawing.Point(24, 201)
+    Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
+    Me.btnLiquidVendedores.Size = New System.Drawing.Size(110, 61)
+    Me.btnLiquidVendedores.TabIndex = 45
+    Me.btnLiquidVendedores.Text = "Liquidacion Vendedores"
+    Me.btnLiquidVendedores.UseVisualStyleBackColor = False
+    '
+    'btnConfiguracion
+    '
+    Me.btnConfiguracion.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.btnConfiguracion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnConfiguracion.Location = New System.Drawing.Point(157, 24)
+    Me.btnConfiguracion.Name = "btnConfiguracion"
+    Me.btnConfiguracion.Size = New System.Drawing.Size(92, 25)
+    Me.btnConfiguracion.TabIndex = 46
+    Me.btnConfiguracion.Text = "Configuracion"
+    Me.btnConfiguracion.UseVisualStyleBackColor = False
+    '
+    'txtBusqueda
+    '
+    Me.txtBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.txtBusqueda.Location = New System.Drawing.Point(268, 26)
+    Me.txtBusqueda.Name = "txtBusqueda"
+    Me.txtBusqueda.Size = New System.Drawing.Size(278, 21)
+    Me.txtBusqueda.TabIndex = 47
+    '
+    'gpxBuscar
+    '
+    Me.gpxBuscar.BackColor = System.Drawing.Color.White
+    Me.gpxBuscar.Controls.Add(Me.Panel1)
+    Me.gpxBuscar.Controls.Add(Me.rbtnCuotaPagaron)
+    Me.gpxBuscar.Controls.Add(Me.rbtnCancelados)
+    Me.gpxBuscar.Controls.Add(Me.Label3)
+    Me.gpxBuscar.Controls.Add(Me.dateInicio)
+    Me.gpxBuscar.Controls.Add(Me.rbtnVendidos)
+    Me.gpxBuscar.Controls.Add(Me.dateFin)
+    Me.gpxBuscar.Controls.Add(Me.rbtnDeben)
+    Me.gpxBuscar.Controls.Add(Me.Label4)
+    Me.gpxBuscar.Controls.Add(Me.btnBuscar)
+    Me.gpxBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.gpxBuscar.Location = New System.Drawing.Point(186, 475)
+    Me.gpxBuscar.Name = "gpxBuscar"
+    Me.gpxBuscar.Size = New System.Drawing.Size(665, 230)
+    Me.gpxBuscar.TabIndex = 48
+    Me.gpxBuscar.TabStop = False
+    Me.gpxBuscar.Text = "Buscar Producto"
+    '
+    'Label1
+    '
+    Me.Label1.AutoSize = True
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.Location = New System.Drawing.Point(163, 57)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(98, 15)
+    Me.Label1.TabIndex = 64
+    Me.Label1.Text = "Metodo de Pago"
+    '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+    Me.Panel1.Controls.Add(Me.Label1)
+    Me.Panel1.Controls.Add(Me.rbtnClientName)
+    Me.Panel1.Controls.Add(Me.cmbMetodosDePago)
+    Me.Panel1.Controls.Add(Me.lblInfoFiltro)
+    Me.Panel1.Controls.Add(Me.txtBusqueda)
+    Me.Panel1.Controls.Add(Me.rbtnNombreVendedor)
+    Me.Panel1.Location = New System.Drawing.Point(14, 131)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(633, 91)
+    Me.Panel1.TabIndex = 63
+    '
+    'rbtnClientName
+    '
+    Me.rbtnClientName.AutoSize = True
+    Me.rbtnClientName.Location = New System.Drawing.Point(4, 10)
+    Me.rbtnClientName.Name = "rbtnClientName"
+    Me.rbtnClientName.Size = New System.Drawing.Size(85, 19)
+    Me.rbtnClientName.TabIndex = 48
+    Me.rbtnClientName.TabStop = True
+    Me.rbtnClientName.Text = "Por Cliente"
+    Me.rbtnClientName.UseVisualStyleBackColor = True
+    '
+    'lblInfoFiltro
+    '
+    Me.lblInfoFiltro.AutoSize = True
+    Me.lblInfoFiltro.Location = New System.Drawing.Point(268, 10)
+    Me.lblInfoFiltro.Name = "lblInfoFiltro"
+    Me.lblInfoFiltro.Size = New System.Drawing.Size(45, 15)
+    Me.lblInfoFiltro.TabIndex = 51
+    Me.lblInfoFiltro.Text = "Label1"
+    '
+    'rbtnNombreVendedor
+    '
+    Me.rbtnNombreVendedor.AutoSize = True
+    Me.rbtnNombreVendedor.Location = New System.Drawing.Point(157, 10)
+    Me.rbtnNombreVendedor.Name = "rbtnNombreVendedor"
+    Me.rbtnNombreVendedor.Size = New System.Drawing.Size(100, 19)
+    Me.rbtnNombreVendedor.TabIndex = 49
+    Me.rbtnNombreVendedor.TabStop = True
+    Me.rbtnNombreVendedor.Text = "Por Vendedor"
+    Me.rbtnNombreVendedor.UseVisualStyleBackColor = True
+    '
+    'cmbMetodosDePago
+    '
+    Me.cmbMetodosDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.cmbMetodosDePago.FormattingEnabled = True
+    Me.cmbMetodosDePago.Location = New System.Drawing.Point(267, 56)
+    Me.cmbMetodosDePago.Name = "cmbMetodosDePago"
+    Me.cmbMetodosDePago.Size = New System.Drawing.Size(162, 23)
+    Me.cmbMetodosDePago.TabIndex = 50
+    '
+    'btnMinimize
+    '
+    Me.btnMinimize.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.btnMinimize.FlatAppearance.BorderSize = 0
+    Me.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMinimize.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMinimize.Location = New System.Drawing.Point(1246, 3)
+    Me.btnMinimize.Name = "btnMinimize"
+    Me.btnMinimize.Size = New System.Drawing.Size(31, 26)
+    Me.btnMinimize.TabIndex = 49
+    Me.btnMinimize.Text = "_"
+    Me.btnMinimize.UseVisualStyleBackColor = False
+    '
+    'Label5
+    '
+    Me.Label5.AutoSize = True
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.Location = New System.Drawing.Point(616, 3)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(217, 20)
+    Me.Label5.TabIndex = 50
+    Me.Label5.Text = "PRODUCTOS VENDIDOS"
+    '
+    'pnlResumen
+    '
+    Me.pnlResumen.Controls.Add(Me.lstViewResumen)
+    Me.pnlResumen.Controls.Add(Me.btnOK)
+    Me.pnlResumen.Controls.Add(Me.btnCancel)
+    Me.pnlResumen.Location = New System.Drawing.Point(186, 64)
+    Me.pnlResumen.Name = "pnlResumen"
+    Me.pnlResumen.Size = New System.Drawing.Size(743, 360)
+    Me.pnlResumen.TabIndex = 59
+    Me.pnlResumen.Visible = False
+    '
+    'lstViewResumen
+    '
+    Me.lstViewResumen.Location = New System.Drawing.Point(150, 44)
+    Me.lstViewResumen.Name = "lstViewResumen"
+    Me.lstViewResumen.Size = New System.Drawing.Size(554, 269)
+    Me.lstViewResumen.TabIndex = 41
+    Me.lstViewResumen.UseCompatibleStateImageBehavior = False
+    Me.lstViewResumen.View = System.Windows.Forms.View.Details
+    '
+    'btnOK
+    '
+    Me.btnOK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnOK.FlatAppearance.BorderSize = 0
+    Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnOK.ForeColor = System.Drawing.Color.White
+    Me.btnOK.Location = New System.Drawing.Point(20, 17)
+    Me.btnOK.Name = "btnOK"
+    Me.btnOK.Size = New System.Drawing.Size(110, 61)
+    Me.btnOK.TabIndex = 40
+    Me.btnOK.Text = "OK"
+    Me.btnOK.UseVisualStyleBackColor = False
+    '
+    'btnCancel
+    '
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
+    Me.btnCancel.Location = New System.Drawing.Point(20, 252)
+    Me.btnCancel.Name = "btnCancel"
+    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.TabIndex = 39
+    Me.btnCancel.Text = "Cancel"
+    Me.btnCancel.UseVisualStyleBackColor = False
+    '
+    'GroupBox1
+    '
+    Me.GroupBox1.Controls.Add(Me.btnImportar)
+    Me.GroupBox1.Controls.Add(Me.btnExportar)
+    Me.GroupBox1.Controls.Add(Me.btnUpPago)
+    Me.GroupBox1.Controls.Add(Me.btnDownPago)
+    Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.GroupBox1.Location = New System.Drawing.Point(929, 475)
+    Me.GroupBox1.Name = "GroupBox1"
+    Me.GroupBox1.Size = New System.Drawing.Size(326, 230)
+    Me.GroupBox1.TabIndex = 60
+    Me.GroupBox1.TabStop = False
+    Me.GroupBox1.Text = "Pagos - Cobros"
+    '
+    'btnImportar
+    '
+    Me.btnImportar.Location = New System.Drawing.Point(228, 26)
+    Me.btnImportar.Name = "btnImportar"
+    Me.btnImportar.Size = New System.Drawing.Size(92, 35)
+    Me.btnImportar.TabIndex = 62
+    Me.btnImportar.Text = "Importar"
+    Me.btnImportar.UseVisualStyleBackColor = True
+    '
+    'btnExportar
+    '
+    Me.btnExportar.Location = New System.Drawing.Point(16, 23)
+    Me.btnExportar.Name = "btnExportar"
+    Me.btnExportar.Size = New System.Drawing.Size(92, 38)
+    Me.btnExportar.TabIndex = 61
+    Me.btnExportar.Text = "Exportar"
+    Me.btnExportar.UseVisualStyleBackColor = True
+    '
+    'cmbTipoPago
+    '
+    Me.cmbTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.cmbTipoPago.FormattingEnabled = True
+    Me.cmbTipoPago.Location = New System.Drawing.Point(39, 73)
+    Me.cmbTipoPago.Name = "cmbTipoPago"
+    Me.cmbTipoPago.Size = New System.Drawing.Size(162, 21)
+    Me.cmbTipoPago.TabIndex = 0
+    '
+    'pnlSeleccionarPago
+    '
+    Me.pnlSeleccionarPago.Controls.Add(Me.lblInfoImpExp)
+    Me.pnlSeleccionarPago.Controls.Add(Me.btnCancelImpExp)
+    Me.pnlSeleccionarPago.Controls.Add(Me.btnContinuarImpExp)
+    Me.pnlSeleccionarPago.Controls.Add(Me.cmbTipoPago)
+    Me.pnlSeleccionarPago.Location = New System.Drawing.Point(596, 283)
+    Me.pnlSeleccionarPago.Name = "pnlSeleccionarPago"
+    Me.pnlSeleccionarPago.Size = New System.Drawing.Size(239, 158)
+    Me.pnlSeleccionarPago.TabIndex = 42
+    Me.pnlSeleccionarPago.Visible = False
+    '
+    'lblInfoImpExp
+    '
+    Me.lblInfoImpExp.Location = New System.Drawing.Point(39, 11)
+    Me.lblInfoImpExp.Name = "lblInfoImpExp"
+    Me.lblInfoImpExp.Size = New System.Drawing.Size(162, 46)
+    Me.lblInfoImpExp.TabIndex = 4
+    Me.lblInfoImpExp.Text = "Label1"
+    '
+    'btnCancelImpExp
+    '
+    Me.btnCancelImpExp.Location = New System.Drawing.Point(161, 109)
+    Me.btnCancelImpExp.Name = "btnCancelImpExp"
+    Me.btnCancelImpExp.Size = New System.Drawing.Size(62, 32)
+    Me.btnCancelImpExp.TabIndex = 3
+    Me.btnCancelImpExp.Text = "Cancelar"
+    Me.btnCancelImpExp.UseVisualStyleBackColor = True
+    '
+    'btnContinuarImpExp
+    '
+    Me.btnContinuarImpExp.Location = New System.Drawing.Point(20, 109)
+    Me.btnContinuarImpExp.Name = "btnContinuarImpExp"
+    Me.btnContinuarImpExp.Size = New System.Drawing.Size(61, 32)
+    Me.btnContinuarImpExp.TabIndex = 2
+    Me.btnContinuarImpExp.Text = "Continuar"
+    Me.btnContinuarImpExp.UseVisualStyleBackColor = True
+    '
     'lblTotalProductos
     '
     Me.lblTotalProductos.AutoSize = True
     Me.lblTotalProductos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotalProductos.Location = New System.Drawing.Point(201, 427)
+    Me.lblTotalProductos.Location = New System.Drawing.Point(6, 16)
     Me.lblTotalProductos.Name = "lblTotalProductos"
     Me.lblTotalProductos.Size = New System.Drawing.Size(45, 15)
     Me.lblTotalProductos.TabIndex = 61
@@ -686,11 +736,23 @@ Partial Class frmDeben
     '
     Me.lblTotalArticulos.AutoSize = True
     Me.lblTotalArticulos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotalArticulos.Location = New System.Drawing.Point(201, 447)
+    Me.lblTotalArticulos.Location = New System.Drawing.Point(6, 36)
     Me.lblTotalArticulos.Name = "lblTotalArticulos"
     Me.lblTotalArticulos.Size = New System.Drawing.Size(45, 15)
     Me.lblTotalArticulos.TabIndex = 62
     Me.lblTotalArticulos.Text = "Label2"
+    '
+    'GroupBox2
+    '
+    Me.GroupBox2.Controls.Add(Me.lblTotalProductos)
+    Me.GroupBox2.Controls.Add(Me.lblTotalArticulos)
+    Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.GroupBox2.Location = New System.Drawing.Point(186, 411)
+    Me.GroupBox2.Name = "GroupBox2"
+    Me.GroupBox2.Size = New System.Drawing.Size(1069, 58)
+    Me.GroupBox2.TabIndex = 63
+    Me.GroupBox2.TabStop = False
+    Me.GroupBox2.Text = "Resumen"
     '
     'frmDeben
     '
@@ -700,8 +762,6 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
-    Me.Controls.Add(Me.lblTotalArticulos)
-    Me.Controls.Add(Me.lblTotalProductos)
     Me.Controls.Add(Me.pnlSeleccionarPago)
     Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.pnlResumen)
@@ -717,6 +777,7 @@ Partial Class frmDeben
     Me.Controls.Add(Me.dgvData)
     Me.Controls.Add(Me.btnEditarVenta)
     Me.Controls.Add(Me.btnBack)
+    Me.Controls.Add(Me.GroupBox2)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.MaximizeBox = False
     Me.MinimizeBox = False
@@ -724,12 +785,16 @@ Partial Class frmDeben
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmDeben"
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gpxBuscar.ResumeLayout(False)
     Me.gpxBuscar.PerformLayout()
+    Me.Panel1.ResumeLayout(False)
+    Me.Panel1.PerformLayout()
     Me.pnlResumen.ResumeLayout(False)
     Me.GroupBox1.ResumeLayout(False)
     Me.pnlSeleccionarPago.ResumeLayout(False)
-    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.GroupBox2.ResumeLayout(False)
+    Me.GroupBox2.PerformLayout()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -796,4 +861,9 @@ Partial Class frmDeben
   Friend WithEvents ValorCuotaFijaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents lblTotalProductos As System.Windows.Forms.Label
   Friend WithEvents lblTotalArticulos As System.Windows.Forms.Label
+  Friend WithEvents cmbMetodosDePago As System.Windows.Forms.ComboBox
+  Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+  Friend WithEvents lblInfoFiltro As System.Windows.Forms.Label
+  Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

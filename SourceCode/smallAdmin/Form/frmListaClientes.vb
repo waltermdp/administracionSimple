@@ -53,21 +53,13 @@ Public Class frmListaClientes
 
 
       m_objDatabaseList = New clsListDatabase()
-
-
-      '///////////////TODO_A: OJO ver order by. Agregar icono asc desc //////////////////////////////////////
-      m_CurrentSortDirection = "DESC"
-      m_CurrentSortColumnName = "Nombre" 'Nothing
-      m_objDatabaseList.Cfg_Orden = "ORDER BY " & m_CurrentSortColumnName & " " & m_CurrentSortDirection
-      '///////////////////////////////////////////////////////////////////////////}
-
-
+      'm_CurrentSortDirection = "DESC"
+      'm_CurrentSortColumnName = "Nombre" 'Nothing
+      'm_objDatabaseList.Cfg_Orden = "ORDER BY " & m_CurrentSortColumnName & " " & m_CurrentSortDirection
+      m_objDatabaseList.Cfg_Filtro = GetFiltro()
       bsInfoCliente.DataSource = m_objDatabaseList.Binding
 
       m_objPersona_Current = Nothing
-      Call Refresh_InfoCliente()
-
-
       Call ClientList_RefreshData()
       bsInfoCliente.ResetBindings(False)
 
@@ -78,11 +70,57 @@ Public Class frmListaClientes
     End Try
   End Sub
 
+  Private Function GetFiltro() As String
+    Try
+      Dim Command As String = "where Nombre Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR Apellido Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR NumCliente Like '%" & txtFiltro.Text.Trim
+
+      Return Command
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return ""
+    End Try
+  End Function
+
   Private Sub ClientList_RefreshData()
     Try
       m_objDatabaseList.RefreshData()
 
 
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub dgvData1_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData1.ColumnHeaderMouseClick
+    Try
+      Dim m_CurrentSortColumn As DataGridViewColumn = dgvData1.Columns(e.ColumnIndex)
+      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+        For Each col As DataGridViewColumn In dgvData1.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMCLIENTE") Then
+          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
+        Else
+          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        End If
+
+        bsInfoCliente.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
+      Else
+        For Each col As DataGridViewColumn In dgvData1.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMCLIENTE") Then
+          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
+        Else
+          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
+        End If
+
+        bsInfoCliente.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
+      End If
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -131,7 +169,6 @@ Public Class frmListaClientes
 
       If (indice >= 0) Then
         m_objPersona_Current = CType(dgvData1.Rows(indice).DataBoundItem, ClsInfoPersona)
-        Call Refresh_InfoCliente()
       End If
 
       If dgvData1.Rows(indice).Selected <> True Then
@@ -147,62 +184,7 @@ Public Class frmListaClientes
   End Sub
 
 
-  Private Sub Refresh_InfoCliente()
 
-    Try
-
-      Dim iResult As Integer
-
-      If m_objPersona_Current Is Nothing Then
-        'Paciente
-        'txtPaciente.Text = ""
-        'txtChart.Text = ""
-        'txtID.Text = ""
-
-        'Profesional
-        'txtRequestBy.Text = ""
-
-        'Lista de Visitas
-
-        'm_objVisitList.Cfg_Filtro = "WHERE False"
-
-
-        'm_objVisitList.Cfg_Orden = "ORDER BY Fecha DESC"
-        'iResult = VisitList_RefreshData()
-        'If iResult <> libCommon.E_OpResult.OK Then Exit Sub
-      Else
-
-        With m_objPersona_Current
-          'Paciente
-          'txtPaciente.Text = .ToString
-          'txtChart.Text = .NHC
-          'txtID.Text = .DNI
-
-          'Profesional
-          'txtRequestBy.Text = ""
-          'm_objProfPacList.Cfg_Filtro = "WHERE IdPac = " & .IdPac
-          'iResult = ProfPacList_RefreshData()
-          'If iResult <> libCommon.E_OpResult.OK Then Exit Sub
-
-          'If m_objProfPacList.Items.Count > 0 Then
-          '  'Muestro el Primero (No debería haber más)
-          '  txtRequestBy.Text = m_objProfPacList.Items.First.ToString
-          'End If
-
-          'Lista de Visitas
-          'm_objVisitList.Cfg_Filtro = "WHERE IdPac = " & .IdPac
-          'm_objVisitList.Cfg_Orden = "ORDER BY Fecha DESC"
-          'iResult = VisitList_RefreshData()
-          'If iResult <> libCommon.E_OpResult.OK Then Exit Sub
-
-        End With
-      End If
-
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-
-  End Sub
 
   Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
     Try
@@ -261,5 +243,12 @@ Public Class frmListaClientes
     End Try
   End Sub
 
- 
+  
+  Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
+    Try
+      Call MostrarClientes()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class
