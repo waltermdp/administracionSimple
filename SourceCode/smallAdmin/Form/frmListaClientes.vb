@@ -56,7 +56,7 @@ Public Class frmListaClientes
       'm_CurrentSortDirection = "DESC"
       'm_CurrentSortColumnName = "Nombre" 'Nothing
       'm_objDatabaseList.Cfg_Orden = "ORDER BY " & m_CurrentSortColumnName & " " & m_CurrentSortDirection
-      m_objDatabaseList.Cfg_Filtro = GetFiltro()
+      'm_objDatabaseList.Cfg_Filtro = GetFiltro()
       bsInfoCliente.DataSource = m_objDatabaseList.Binding
 
       m_objPersona_Current = Nothing
