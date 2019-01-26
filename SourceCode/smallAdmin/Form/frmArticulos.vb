@@ -8,7 +8,7 @@ Public Class frmArticulos
   Private m_listResponsables As New List(Of clsInfoResponsable)
   Private m_Skip As Boolean = False
   Private m_Deposito As New clsInfoResponsable With {.Nombre = "Deposito", .GuidResponsable = New Guid("7b841601-2cd4-4e0e-b75b-b3a072b58eb1"), .Codigo = "0000"}
-
+  Private m_LastColumnEvent As DataGridViewCellMouseEventArgs = Nothing
 
 
   Private Sub frmArticulos_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -90,7 +90,11 @@ Public Class frmArticulos
 
 
       Next
-
+      If txtFiltro.Enabled Then
+        If Not String.IsNullOrEmpty(txtFiltro.Text.Trim) Then
+          BindingSource1.DataSource = m_objStock.FindAll(Function(c) c.Responsable.ToUpper.Contains(txtFiltro.Text.ToUpper.Trim))
+        End If
+      End If
       BindingSource1.ResetBindings(False)
 
     Catch ex As Exception
@@ -147,9 +151,14 @@ Public Class frmArticulos
     End Try
   End Sub
 
+
+
+
   Private Sub dgvStock_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvStock.ColumnHeaderMouseClick
     Try
       Dim m_CurrentSortColumn As DataGridViewColumn = dgvStock.Columns(e.ColumnIndex)
+      m_LastColumnEvent = e
+
       If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
@@ -162,6 +171,7 @@ Public Class frmArticulos
 
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
+
       Else
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
@@ -174,6 +184,7 @@ Public Class frmArticulos
 
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
+
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -343,6 +354,7 @@ Public Class frmArticulos
     Try
       cmbResponsables.Enabled = rbtnResponsables.Checked
       txtFiltro.Enabled = rbtnResponsables.Checked
+      
       If rbtnResponsables.Checked = False Then
         cmbResponsables.SelectedIndex = 0
       End If
@@ -379,7 +391,13 @@ Public Class frmArticulos
     Try
 
       If m_ObjCurrent Is Nothing Then Exit Sub
+      If txtIncrementar.Text.Trim <= 0 Then
+        MsgBox("El valor deve ser mayor que cero")
+        Exit Sub
+      End If
+      Dim cCantidad As Integer = CInt(txtIncrementar.Text)
       Dim objSelectedIndex As Integer = dgvStock.SelectedRows(0).Index
+      Dim ArticuloSeleccionado As clsListaStorage = CType(dgvStock.Rows(objSelectedIndex).DataBoundItem, clsListaStorage)
       Try
 
 
@@ -421,10 +439,14 @@ Public Class frmArticulos
 
           End If
           If GuidResponsable <> m_Deposito.GuidResponsable Then
-            ArticuloDelDeposito.Cantidad -= 1
+            If cCantidad > ArticuloDelDeposito.Cantidad Then
+              MsgBox("No se mover esa cantidad al responsable, elija un valor menor o igual al maximo disponibles en stock")
+              Exit Sub
+            End If
+            ArticuloDelDeposito.Cantidad -= cCantidad
           End If
 
-          ArticuloDelResponsable.Cantidad += 1
+          ArticuloDelResponsable.Cantidad += cCantidad
           clsStock.Save(ArticuloDelDeposito)
           clsStock.Save(ArticuloDelResponsable)
         Else
@@ -436,7 +458,7 @@ Public Class frmArticulos
             ArticuloNuevoEnStock.GuidArticulo = m_ObjCurrent.GuidArticulo
             ArticuloNuevoEnStock.Responsable = m_Deposito.ToString
             ArticuloNuevoEnStock.GuidResponsable = m_Deposito.GuidResponsable
-            ArticuloNuevoEnStock.Cantidad = 1
+            ArticuloNuevoEnStock.Cantidad = cCantidad
             clsStock.Save(ArticuloNuevoEnStock)
           End If
         End If
@@ -444,9 +466,17 @@ Public Class frmArticulos
 
         m_Skip = True
         Call MostrarListaArticulos()
+        If m_LastColumnEvent IsNot Nothing Then Call dgvStock_ColumnHeaderMouseClick(dgvStock, m_LastColumnEvent)
         m_Skip = False
       Finally
-        Refresh_Selection(objSelectedIndex)
+
+        For Each item As DataGridViewRow In dgvStock.Rows
+          If CType(item.DataBoundItem, clsListaStorage).Equals(ArticuloSeleccionado) Then
+            Refresh_Selection(dgvStock.Rows.IndexOf(item))
+            Exit For
+          End If
+        Next
+
       End Try
 
     Catch ex As Exception
@@ -457,7 +487,13 @@ Public Class frmArticulos
   Private Sub btnRemDeposito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnRemDeposito.MouseClick
     Try
       If m_ObjCurrent Is Nothing Then Exit Sub
+      If txtDecrementar.Text.Trim <= 0 Then
+        MsgBox("El valor deve ser mayor que cero")
+        Exit Sub
+      End If
+      Dim cCantidad As Integer = CInt(txtDecrementar.Text)
       Dim objSelectedIndex As Integer = dgvStock.SelectedRows(0).Index
+      Dim ArticuloSeleccionado As clsListaStorage = CType(dgvStock.Rows(objSelectedIndex).DataBoundItem, clsListaStorage)
       Try
 
 
@@ -491,22 +527,35 @@ Public Class frmArticulos
             Exit Sub
           End If
 
-          If GuidResponsable <> m_Deposito.GuidResponsable Then
-            'mover a deposito
-            ArticuloDelDeposito.Cantidad += 1
+          If cCantidad > ArticuloDelDeposito.Cantidad Then
+            MsgBox("No se mover esa cantidad al responsable, elija un valor menor o igual al maximo disponibles en stock")
+            Exit Sub
           End If
 
-          ArticuloDelResponsable.Cantidad -= 1
+          If GuidResponsable <> m_Deposito.GuidResponsable Then
+            'mover a deposito
+            ArticuloDelDeposito.Cantidad += cCantidad
+          End If
+
+          ArticuloDelResponsable.Cantidad -= cCantidad
           clsStock.Save(ArticuloDelDeposito)
           clsStock.Save(ArticuloDelResponsable)
 
         End If
 
 
-
+        m_Skip = True
         Call MostrarListaArticulos()
+        If m_LastColumnEvent IsNot Nothing Then Call dgvStock_ColumnHeaderMouseClick(dgvStock, m_LastColumnEvent)
+        m_Skip = False
+
       Finally
-        Refresh_Selection(objSelectedIndex)
+        For Each item As DataGridViewRow In dgvStock.Rows
+          If CType(item.DataBoundItem, clsListaStorage).Equals(ArticuloSeleccionado) Then
+            Refresh_Selection(dgvStock.Rows.IndexOf(item))
+            Exit For
+          End If
+        Next
       End Try
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -536,30 +585,10 @@ Public Class frmArticulos
         m_ObjListaStock.RefreshData()
 
         If m_ObjListaStock.Items.Count > 0 Then
-          'El responsable tiene objetos
+
           Dim ArticuloDelResponsable As manDB.clsInfoStock = m_ObjListaStock.Items.First.Clone
-          'Dim ArticuloDelDeposito As manDB.clsInfoStock
-
-          'Cargo el articulo del deposito
-          'm_ObjListaStock = New clsListStock
-          'm_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & ArticuloDelResponsable.GuidArticulo.ToString & "} and GuidResponsable={" & m_Deposito.GuidResponsable.ToString & "}"
-          'm_ObjListaStock.RefreshData()
-          'If m_ObjListaStock.Items.Count > 0 Then
-          '  ArticuloDelDeposito = m_ObjListaStock.Items.First.Clone
-          'Else
-          '  MsgBox("No estaba en stock")
-          '  Exit Sub
-          'End If
-
-          'If GuidResponsable <> m_Deposito.GuidResponsable Then
-          'mover a deposito
-          '  ArticuloDelDeposito.Cantidad += 1
-          'End If
-
           ArticuloDelResponsable.Cantidad -= 1
-          'clsStock.Save(ArticuloDelDeposito)
           clsStock.Save(ArticuloDelResponsable)
-
         End If
 
 

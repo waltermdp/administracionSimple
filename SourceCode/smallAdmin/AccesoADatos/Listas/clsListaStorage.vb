@@ -85,6 +85,14 @@
     GuidResponsable = Nothing
   End Sub
 
+  Public Overrides Function Equals(obj As Object) As Boolean
+    If obj.GetType Is GetType(clsListaStorage) Then
+      Return (CType(obj, clsListaStorage).GuidArticulo.Equals(Me.GuidArticulo) AndAlso CType(obj, clsListaStorage).GuidResponsable.Equals(Me.GuidResponsable))
+    Else
+      Return False
+    End If
+  End Function
+
 #Region "Interface: ICloneable"
 
   Private Function ClonePrivate() As Object Implements ICloneable.Clone

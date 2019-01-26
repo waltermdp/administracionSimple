@@ -58,6 +58,8 @@ Partial Class frmArticulos
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
     Me.Label9 = New System.Windows.Forms.Label()
     Me.lblDetalle = New System.Windows.Forms.Label()
+    Me.txtIncrementar = New System.Windows.Forms.TextBox()
+    Me.txtDecrementar = New System.Windows.Forms.TextBox()
     Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -333,7 +335,7 @@ Partial Class frmArticulos
     '
     'btnAddDeposito
     '
-    Me.btnAddDeposito.Location = New System.Drawing.Point(21, 39)
+    Me.btnAddDeposito.Location = New System.Drawing.Point(165, 58)
     Me.btnAddDeposito.Name = "btnAddDeposito"
     Me.btnAddDeposito.Size = New System.Drawing.Size(26, 23)
     Me.btnAddDeposito.TabIndex = 34
@@ -342,7 +344,7 @@ Partial Class frmArticulos
     '
     'btnRemDeposito
     '
-    Me.btnRemDeposito.Location = New System.Drawing.Point(21, 68)
+    Me.btnRemDeposito.Location = New System.Drawing.Point(165, 87)
     Me.btnRemDeposito.Name = "btnRemDeposito"
     Me.btnRemDeposito.Size = New System.Drawing.Size(26, 23)
     Me.btnRemDeposito.TabIndex = 35
@@ -351,7 +353,7 @@ Partial Class frmArticulos
     '
     'btnVendido
     '
-    Me.btnVendido.Location = New System.Drawing.Point(21, 121)
+    Me.btnVendido.Location = New System.Drawing.Point(21, 139)
     Me.btnVendido.Name = "btnVendido"
     Me.btnVendido.Size = New System.Drawing.Size(75, 32)
     Me.btnVendido.TabIndex = 37
@@ -362,7 +364,7 @@ Partial Class frmArticulos
     '
     Me.cmbResponsables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbResponsables.FormattingEnabled = True
-    Me.cmbResponsables.Location = New System.Drawing.Point(187, 41)
+    Me.cmbResponsables.Location = New System.Drawing.Point(105, 33)
     Me.cmbResponsables.Name = "cmbResponsables"
     Me.cmbResponsables.Size = New System.Drawing.Size(210, 21)
     Me.cmbResponsables.TabIndex = 38
@@ -371,7 +373,7 @@ Partial Class frmArticulos
     '
     Me.Label6.AutoSize = True
     Me.Label6.BackColor = System.Drawing.Color.White
-    Me.Label6.Location = New System.Drawing.Point(190, 19)
+    Me.Label6.Location = New System.Drawing.Point(18, 39)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(69, 13)
     Me.Label6.TabIndex = 39
@@ -381,21 +383,21 @@ Partial Class frmArticulos
     '
     Me.Label7.AutoSize = True
     Me.Label7.BackColor = System.Drawing.Color.White
-    Me.Label7.Location = New System.Drawing.Point(53, 44)
+    Me.Label7.Location = New System.Drawing.Point(18, 63)
     Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(87, 13)
+    Me.Label7.Size = New System.Drawing.Size(81, 13)
     Me.Label7.TabIndex = 40
-    Me.Label7.Text = "Incrementar en 1"
+    Me.Label7.Text = "Incrementar en:"
     '
     'Label8
     '
     Me.Label8.AutoSize = True
     Me.Label8.BackColor = System.Drawing.Color.White
-    Me.Label8.Location = New System.Drawing.Point(53, 73)
+    Me.Label8.Location = New System.Drawing.Point(18, 93)
     Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(80, 13)
+    Me.Label8.Size = New System.Drawing.Size(74, 13)
     Me.Label8.TabIndex = 41
-    Me.Label8.Text = "Descontar en 1"
+    Me.Label8.Text = "Descontar en:"
     '
     'GroupBox1
     '
@@ -419,6 +421,8 @@ Partial Class frmArticulos
     'GroupBox2
     '
     Me.GroupBox2.BackColor = System.Drawing.Color.White
+    Me.GroupBox2.Controls.Add(Me.txtDecrementar)
+    Me.GroupBox2.Controls.Add(Me.txtIncrementar)
     Me.GroupBox2.Controls.Add(Me.Label9)
     Me.GroupBox2.Controls.Add(Me.btnAddDeposito)
     Me.GroupBox2.Controls.Add(Me.btnRemDeposito)
@@ -429,7 +433,7 @@ Partial Class frmArticulos
     Me.GroupBox2.Controls.Add(Me.Label6)
     Me.GroupBox2.Location = New System.Drawing.Point(810, 347)
     Me.GroupBox2.Name = "GroupBox2"
-    Me.GroupBox2.Size = New System.Drawing.Size(428, 170)
+    Me.GroupBox2.Size = New System.Drawing.Size(428, 190)
     Me.GroupBox2.TabIndex = 43
     Me.GroupBox2.TabStop = False
     Me.GroupBox2.Text = "Acciones"
@@ -437,7 +441,7 @@ Partial Class frmArticulos
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(18, 105)
+    Me.Label9.Location = New System.Drawing.Point(102, 139)
     Me.Label9.Name = "Label9"
     Me.Label9.Size = New System.Drawing.Size(100, 13)
     Me.Label9.TabIndex = 42
@@ -451,6 +455,24 @@ Partial Class frmArticulos
     Me.lblDetalle.Size = New System.Drawing.Size(428, 157)
     Me.lblDetalle.TabIndex = 44
     Me.lblDetalle.Text = "Acciones: "
+    '
+    'txtIncrementar
+    '
+    Me.txtIncrementar.Location = New System.Drawing.Point(105, 60)
+    Me.txtIncrementar.Name = "txtIncrementar"
+    Me.txtIncrementar.Size = New System.Drawing.Size(54, 20)
+    Me.txtIncrementar.TabIndex = 43
+    Me.txtIncrementar.Text = "1"
+    Me.txtIncrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'txtDecrementar
+    '
+    Me.txtDecrementar.Location = New System.Drawing.Point(105, 90)
+    Me.txtDecrementar.Name = "txtDecrementar"
+    Me.txtDecrementar.Size = New System.Drawing.Size(54, 20)
+    Me.txtDecrementar.TabIndex = 44
+    Me.txtDecrementar.Text = "1"
+    Me.txtDecrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'ResponsableDataGridViewTextBoxColumn
     '
@@ -568,4 +590,6 @@ End Sub
   Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
   Friend WithEvents Label9 As System.Windows.Forms.Label
   Friend WithEvents lblDetalle As System.Windows.Forms.Label
+  Friend WithEvents txtDecrementar As System.Windows.Forms.TextBox
+  Friend WithEvents txtIncrementar As System.Windows.Forms.TextBox
 End Class
