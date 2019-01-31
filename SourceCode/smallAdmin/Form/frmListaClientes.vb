@@ -100,11 +100,9 @@ Public Class frmListaClientes
         For Each col As DataGridViewColumn In dgvData1.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMCLIENTE") Then
-          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
-        Else
-          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
-        End If
+
+        bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+
 
         bsInfoCliente.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
@@ -112,11 +110,9 @@ Public Class frmListaClientes
         For Each col As DataGridViewColumn In dgvData1.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMCLIENTE") Then
-          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
-        Else
-          bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
-        End If
+
+        bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+
 
         bsInfoCliente.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)

@@ -65,12 +65,12 @@ Partial Class frmDeben
     Me.btnConfiguracion = New System.Windows.Forms.Button()
     Me.txtBusqueda = New System.Windows.Forms.TextBox()
     Me.gpxBuscar = New System.Windows.Forms.GroupBox()
-    Me.Label1 = New System.Windows.Forms.Label()
     Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.Label1 = New System.Windows.Forms.Label()
     Me.rbtnClientName = New System.Windows.Forms.RadioButton()
+    Me.cmbMetodosDePago = New System.Windows.Forms.ComboBox()
     Me.lblInfoFiltro = New System.Windows.Forms.Label()
     Me.rbtnNombreVendedor = New System.Windows.Forms.RadioButton()
-    Me.cmbMetodosDePago = New System.Windows.Forms.ComboBox()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.Label5 = New System.Windows.Forms.Label()
     Me.pnlResumen = New System.Windows.Forms.Panel()
@@ -88,6 +88,14 @@ Partial Class frmDeben
     Me.lblTotalProductos = New System.Windows.Forms.Label()
     Me.lblTotalArticulos = New System.Windows.Forms.Label()
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+    Me.TabControl1 = New System.Windows.Forms.TabControl()
+    Me.tbBuscar = New System.Windows.Forms.TabPage()
+    Me.tbResumen = New System.Windows.Forms.TabPage()
+    Me.tbPagos = New System.Windows.Forms.TabPage()
+    Me.lblPrecioTotal = New System.Windows.Forms.Label()
+    Me.lblPagos = New System.Windows.Forms.Label()
+    Me.lblPorcentaje = New System.Windows.Forms.Label()
+    Me.lblPrecioInteres = New System.Windows.Forms.Label()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -96,6 +104,10 @@ Partial Class frmDeben
     Me.GroupBox1.SuspendLayout()
     Me.pnlSeleccionarPago.SuspendLayout()
     Me.GroupBox2.SuspendLayout()
+    Me.TabControl1.SuspendLayout()
+    Me.tbBuscar.SuspendLayout()
+    Me.tbResumen.SuspendLayout()
+    Me.tbPagos.SuspendLayout()
     Me.SuspendLayout()
     '
     'dateInicio
@@ -500,22 +512,12 @@ Partial Class frmDeben
     Me.gpxBuscar.Controls.Add(Me.Label4)
     Me.gpxBuscar.Controls.Add(Me.btnBuscar)
     Me.gpxBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.gpxBuscar.Location = New System.Drawing.Point(186, 475)
+    Me.gpxBuscar.Location = New System.Drawing.Point(6, 6)
     Me.gpxBuscar.Name = "gpxBuscar"
     Me.gpxBuscar.Size = New System.Drawing.Size(665, 230)
     Me.gpxBuscar.TabIndex = 48
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Buscar Producto"
-    '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(163, 57)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(98, 15)
-    Me.Label1.TabIndex = 64
-    Me.Label1.Text = "Metodo de Pago"
     '
     'Panel1
     '
@@ -531,6 +533,16 @@ Partial Class frmDeben
     Me.Panel1.Size = New System.Drawing.Size(633, 91)
     Me.Panel1.TabIndex = 63
     '
+    'Label1
+    '
+    Me.Label1.AutoSize = True
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.Location = New System.Drawing.Point(163, 57)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(98, 15)
+    Me.Label1.TabIndex = 64
+    Me.Label1.Text = "Metodo de Pago"
+    '
     'rbtnClientName
     '
     Me.rbtnClientName.AutoSize = True
@@ -541,6 +553,15 @@ Partial Class frmDeben
     Me.rbtnClientName.TabStop = True
     Me.rbtnClientName.Text = "Por Cliente"
     Me.rbtnClientName.UseVisualStyleBackColor = True
+    '
+    'cmbMetodosDePago
+    '
+    Me.cmbMetodosDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.cmbMetodosDePago.FormattingEnabled = True
+    Me.cmbMetodosDePago.Location = New System.Drawing.Point(267, 56)
+    Me.cmbMetodosDePago.Name = "cmbMetodosDePago"
+    Me.cmbMetodosDePago.Size = New System.Drawing.Size(162, 23)
+    Me.cmbMetodosDePago.TabIndex = 50
     '
     'lblInfoFiltro
     '
@@ -561,15 +582,6 @@ Partial Class frmDeben
     Me.rbtnNombreVendedor.TabStop = True
     Me.rbtnNombreVendedor.Text = "Por Vendedor"
     Me.rbtnNombreVendedor.UseVisualStyleBackColor = True
-    '
-    'cmbMetodosDePago
-    '
-    Me.cmbMetodosDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-    Me.cmbMetodosDePago.FormattingEnabled = True
-    Me.cmbMetodosDePago.Location = New System.Drawing.Point(267, 56)
-    Me.cmbMetodosDePago.Name = "cmbMetodosDePago"
-    Me.cmbMetodosDePago.Size = New System.Drawing.Size(162, 23)
-    Me.cmbMetodosDePago.TabIndex = 50
     '
     'btnMinimize
     '
@@ -650,7 +662,7 @@ Partial Class frmDeben
     Me.GroupBox1.Controls.Add(Me.btnUpPago)
     Me.GroupBox1.Controls.Add(Me.btnDownPago)
     Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox1.Location = New System.Drawing.Point(929, 475)
+    Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
     Me.GroupBox1.Name = "GroupBox1"
     Me.GroupBox1.Size = New System.Drawing.Size(326, 230)
     Me.GroupBox1.TabIndex = 60
@@ -736,7 +748,7 @@ Partial Class frmDeben
     '
     Me.lblTotalArticulos.AutoSize = True
     Me.lblTotalArticulos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotalArticulos.Location = New System.Drawing.Point(6, 36)
+    Me.lblTotalArticulos.Location = New System.Drawing.Point(7, 42)
     Me.lblTotalArticulos.Name = "lblTotalArticulos"
     Me.lblTotalArticulos.Size = New System.Drawing.Size(45, 15)
     Me.lblTotalArticulos.TabIndex = 62
@@ -744,15 +756,100 @@ Partial Class frmDeben
     '
     'GroupBox2
     '
+    Me.GroupBox2.Controls.Add(Me.lblPrecioInteres)
+    Me.GroupBox2.Controls.Add(Me.lblPorcentaje)
+    Me.GroupBox2.Controls.Add(Me.lblPagos)
+    Me.GroupBox2.Controls.Add(Me.lblPrecioTotal)
     Me.GroupBox2.Controls.Add(Me.lblTotalProductos)
     Me.GroupBox2.Controls.Add(Me.lblTotalArticulos)
     Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox2.Location = New System.Drawing.Point(186, 411)
+    Me.GroupBox2.Location = New System.Drawing.Point(6, 6)
     Me.GroupBox2.Name = "GroupBox2"
-    Me.GroupBox2.Size = New System.Drawing.Size(1069, 58)
+    Me.GroupBox2.Size = New System.Drawing.Size(1040, 252)
     Me.GroupBox2.TabIndex = 63
     Me.GroupBox2.TabStop = False
     Me.GroupBox2.Text = "Resumen"
+    '
+    'TabControl1
+    '
+    Me.TabControl1.Controls.Add(Me.tbBuscar)
+    Me.TabControl1.Controls.Add(Me.tbResumen)
+    Me.TabControl1.Controls.Add(Me.tbPagos)
+    Me.TabControl1.Location = New System.Drawing.Point(186, 416)
+    Me.TabControl1.Name = "TabControl1"
+    Me.TabControl1.SelectedIndex = 0
+    Me.TabControl1.Size = New System.Drawing.Size(1069, 290)
+    Me.TabControl1.TabIndex = 64
+    '
+    'tbBuscar
+    '
+    Me.tbBuscar.Controls.Add(Me.gpxBuscar)
+    Me.tbBuscar.Location = New System.Drawing.Point(4, 22)
+    Me.tbBuscar.Name = "tbBuscar"
+    Me.tbBuscar.Padding = New System.Windows.Forms.Padding(3)
+    Me.tbBuscar.Size = New System.Drawing.Size(1061, 264)
+    Me.tbBuscar.TabIndex = 0
+    Me.tbBuscar.Text = "Buscar Productos"
+    Me.tbBuscar.UseVisualStyleBackColor = True
+    '
+    'tbResumen
+    '
+    Me.tbResumen.Controls.Add(Me.GroupBox2)
+    Me.tbResumen.Location = New System.Drawing.Point(4, 22)
+    Me.tbResumen.Name = "tbResumen"
+    Me.tbResumen.Padding = New System.Windows.Forms.Padding(3)
+    Me.tbResumen.Size = New System.Drawing.Size(1061, 264)
+    Me.tbResumen.TabIndex = 1
+    Me.tbResumen.Text = "Resumen"
+    Me.tbResumen.UseVisualStyleBackColor = True
+    '
+    'tbPagos
+    '
+    Me.tbPagos.Controls.Add(Me.GroupBox1)
+    Me.tbPagos.Location = New System.Drawing.Point(4, 22)
+    Me.tbPagos.Name = "tbPagos"
+    Me.tbPagos.Size = New System.Drawing.Size(1061, 264)
+    Me.tbPagos.TabIndex = 2
+    Me.tbPagos.Text = "Pagos - Cobros"
+    Me.tbPagos.UseVisualStyleBackColor = True
+    '
+    'lblPrecioTotal
+    '
+    Me.lblPrecioTotal.AutoSize = True
+    Me.lblPrecioTotal.Location = New System.Drawing.Point(272, 67)
+    Me.lblPrecioTotal.Name = "lblPrecioTotal"
+    Me.lblPrecioTotal.Size = New System.Drawing.Size(45, 15)
+    Me.lblPrecioTotal.TabIndex = 63
+    Me.lblPrecioTotal.Text = "Label2"
+    '
+    'lblPagos
+    '
+    Me.lblPagos.AutoSize = True
+    Me.lblPagos.Location = New System.Drawing.Point(6, 91)
+    Me.lblPagos.Name = "lblPagos"
+    Me.lblPagos.Size = New System.Drawing.Size(45, 15)
+    Me.lblPagos.TabIndex = 64
+    Me.lblPagos.Text = "Label2"
+    '
+    'lblPorcentaje
+    '
+    Me.lblPorcentaje.AutoSize = True
+    Me.lblPorcentaje.Location = New System.Drawing.Point(6, 115)
+    Me.lblPorcentaje.Margin = New System.Windows.Forms.Padding(3)
+    Me.lblPorcentaje.Name = "lblPorcentaje"
+    Me.lblPorcentaje.Size = New System.Drawing.Size(45, 15)
+    Me.lblPorcentaje.TabIndex = 65
+    Me.lblPorcentaje.Text = "Label2"
+    '
+    'lblPrecioInteres
+    '
+    Me.lblPrecioInteres.AutoSize = True
+    Me.lblPrecioInteres.Location = New System.Drawing.Point(6, 66)
+    Me.lblPrecioInteres.Margin = New System.Windows.Forms.Padding(3)
+    Me.lblPrecioInteres.Name = "lblPrecioInteres"
+    Me.lblPrecioInteres.Size = New System.Drawing.Size(45, 15)
+    Me.lblPrecioInteres.TabIndex = 66
+    Me.lblPrecioInteres.Text = "Label2"
     '
     'frmDeben
     '
@@ -763,21 +860,19 @@ Partial Class frmDeben
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
     Me.Controls.Add(Me.pnlSeleccionarPago)
-    Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.pnlResumen)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.btnListaClientes)
     Me.Controls.Add(Me.btnMinimize)
     Me.Controls.Add(Me.btnArticulos)
-    Me.Controls.Add(Me.gpxBuscar)
     Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.btnConfiguracion)
     Me.Controls.Add(Me.btnLiquidVendedores)
     Me.Controls.Add(Me.dgvData)
     Me.Controls.Add(Me.btnEditarVenta)
     Me.Controls.Add(Me.btnBack)
-    Me.Controls.Add(Me.GroupBox2)
+    Me.Controls.Add(Me.TabControl1)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.MaximizeBox = False
     Me.MinimizeBox = False
@@ -795,6 +890,10 @@ Partial Class frmDeben
     Me.pnlSeleccionarPago.ResumeLayout(False)
     Me.GroupBox2.ResumeLayout(False)
     Me.GroupBox2.PerformLayout()
+    Me.TabControl1.ResumeLayout(False)
+    Me.tbBuscar.ResumeLayout(False)
+    Me.tbResumen.ResumeLayout(False)
+    Me.tbPagos.ResumeLayout(False)
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -866,4 +965,12 @@ Partial Class frmDeben
   Friend WithEvents lblInfoFiltro As System.Windows.Forms.Label
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents Panel1 As System.Windows.Forms.Panel
+  Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+  Friend WithEvents tbBuscar As System.Windows.Forms.TabPage
+  Friend WithEvents tbResumen As System.Windows.Forms.TabPage
+  Friend WithEvents tbPagos As System.Windows.Forms.TabPage
+  Friend WithEvents lblPorcentaje As System.Windows.Forms.Label
+  Friend WithEvents lblPagos As System.Windows.Forms.Label
+  Friend WithEvents lblPrecioTotal As System.Windows.Forms.Label
+  Friend WithEvents lblPrecioInteres As System.Windows.Forms.Label
 End Class

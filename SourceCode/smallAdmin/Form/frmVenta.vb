@@ -522,12 +522,14 @@ Public Class frmVenta
         '  newPago.VencimientoCuota = Vencimiento.AddMonths(n - 1)
         'End If
         'clsPago.Save(newPago)
-
-        Dim objAdelanto As New clsInfoAdelanto
-        objAdelanto.GuidVendedor = m_Producto.GuidVendedor
-        objAdelanto.Valor = AdelantoVendedor
-        objAdelanto.Fecha = Today
-        clsAdelantos.Save(objAdelanto)
+        If AdelantoVendedor > 0 Then
+          Dim objAdelanto As New clsInfoAdelanto
+          objAdelanto.GuidVendedor = m_Producto.GuidVendedor
+          objAdelanto.Valor = AdelantoVendedor
+          objAdelanto.Fecha = Date.Now
+          clsAdelantos.Save(objAdelanto)
+        End If
+       
 
       End If
 

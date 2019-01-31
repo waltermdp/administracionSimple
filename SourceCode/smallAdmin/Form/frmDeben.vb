@@ -7,8 +7,8 @@ Public Class frmDeben
   Private m_CurrentProducto As clsInfoPrincipal = Nothing
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
   Private m_Movimientos As List(Of clsInfoMovimiento)
-  Private m_ColumnName As String = String.Empty
-  Private m_Order As String = String.Empty
+  'Private m_ColumnName As String = String.Empty
+  'Private m_Order As String = String.Empty
 
   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
     Try
@@ -61,7 +61,7 @@ Public Class frmDeben
 
       m_objPrincipal = New clsListaPrincipal()
       Call Filtro("")
-      m_objPrincipal.SetOrder(m_ColumnName, m_Order)
+      'm_objPrincipal.SetOrder(m_ColumnName, m_Order)
       bsInfoPrincipal.DataSource = m_objPrincipal.Binding
       Call ProductList_RefreshData()
 
@@ -125,31 +125,40 @@ Public Class frmDeben
   Private Sub dgvData_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData.ColumnHeaderMouseClick
     Try
       Dim m_CurrentSortColumn As DataGridViewColumn = dgvData.Columns(e.ColumnIndex)
-      m_ColumnName = m_CurrentSortColumn.DataPropertyName
+      'm_ColumnName = m_CurrentSortColumn.DataPropertyName
 
 
-      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
-        m_Order = "ASC"
-      ElseIf m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Ascending Then
-        m_Order = "DESC"
-      Else
-        m_Order = "ASC"
-      End If
-      m_objPrincipal.SetOrder(m_ColumnName, m_Order)
-      'dgvData.Sort(m_CurrentSortColumn, System.ComponentModel.ListSortDirection.Ascending)
-      'Set the sortColumn and sortDirection variables.
-      'If (m_CurrentSortColumnName = columnName) Then
-      '  m_CurrentSortDirection = CStr(IIf(m_CurrentSortDirection = "ASC", "DESC", "ASC"))
+      'If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+      '  m_Order = "ASC"
+      'ElseIf m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Ascending Then
+      '  m_Order = "DESC"
       'Else
-      '  m_CurrentSortDirection = "ASC"
-      '  m_CurrentSortColumnName = columnName
+      '  m_Order = "ASC"
       'End If
+      'm_objPrincipal.SetOrder(m_ColumnName, m_Order)
+      
+      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+        For Each col As DataGridViewColumn In dgvData.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        bsInfoPrincipal.DataSource = m_objPrincipal.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
 
-      'Perform the sort
-      'm_objPrincipal.Cfg_Orden = "ORDER BY " & columnName & " " & direccion
+        bsInfoPrincipal.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
 
-      Call MostrarDeben()
-      m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(IIf(m_Order = "ASC", SortOrder.Ascending, SortOrder.Descending), Windows.Forms.SortOrder)
+      Else
+        For Each col As DataGridViewColumn In dgvData.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        bsInfoPrincipal.DataSource = m_objPrincipal.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+
+        bsInfoPrincipal.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
+
+      End If
+
+      'Call MostrarDeben()
+      'm_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(IIf(m_Order = "ASC", SortOrder.Ascending, SortOrder.Descending), Windows.Forms.SortOrder)
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -279,6 +288,24 @@ Public Class frmDeben
         Else
           lblTotalArticulos.Text = String.Format("Total de Articulos = {0}", m_objPrincipal.Items.Sum(Function(c) c.ArticulosVendidos))
           lblTotalProductos.Text = String.Format("Total de Productos = {0}", m_objPrincipal.Items.Count)
+          lblPrecioTotal.Text = String.Format("Total de Vendidos = {0}", m_objPrincipal.Items.Sum(Function(c) c.Precio))
+          Dim ValorNominal As Decimal = 0
+          Dim parcial As Decimal = 0
+          For Each item In m_objPrincipal.Items
+            ValorNominal = ValorNominal + item.ValorCuotaFija * item.CuotasTotales
+            Dim lstPagos As New List(Of clsInfoPagos)
+            clsPago.Load(lstPagos, item.GuidProducto)
+            parcial += lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago Or c.EstadoPago = E_EstadoPago.PagoParcial).Sum(Function(c) c.ValorCuota)
+          Next
+          lblPrecioInteres.Text = String.Format("Total de Vendidos con interes = {0}", ValorNominal)
+          lblPagos.Text = String.Format("Total de Pagos = {0}", parcial)
+          If ValorNominal > 0 Then
+            lblPorcentaje.Text = String.Format("Porcentaje Pagado: {0:N2}%", CDec(parcial * 100 / ValorNominal))
+          Else
+            lblPorcentaje.Text = ""
+          End If
+
+
         End If
       End If
     Catch ex As Exception

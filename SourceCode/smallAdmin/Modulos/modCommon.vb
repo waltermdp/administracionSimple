@@ -48,9 +48,12 @@ Module modCommon
       If fechaInicial = Nothing Then
         fechaInicial = Today
       End If
-
+      Dim DiaDePago As Integer = PrimerPago.Day
       fechaInicial = fechaInicial.AddMonths(1)
-      Dim auxFecha As New Date(fechaInicial.Year, fechaInicial.Month, PrimerPago.Day)
+      If PrimerPago.Day > DateTime.DaysInMonth(fechaInicial.Year, fechaInicial.Month) Then
+        DiaDePago = DateTime.DaysInMonth(fechaInicial.Year, fechaInicial.Month)
+      End If
+      Dim auxFecha As New Date(fechaInicial.Year, fechaInicial.Month, DiaDePago)
 
       Return auxFecha
     Catch ex As Exception

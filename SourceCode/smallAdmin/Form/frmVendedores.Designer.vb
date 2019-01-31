@@ -103,6 +103,7 @@ Partial Class frmVendedores
     DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
     Me.dgvListVendedores.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
     Me.dgvListVendedores.RowHeadersVisible = False
+    Me.dgvListVendedores.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
     Me.dgvListVendedores.RowTemplate.Height = 24
     Me.dgvListVendedores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
     Me.dgvListVendedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect

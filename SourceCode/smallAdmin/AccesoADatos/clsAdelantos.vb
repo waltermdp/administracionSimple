@@ -128,7 +128,7 @@ Public Class clsAdelantos
 
         '--- Comando en DB -->
 
-        objResult = vObjDB.EjecutarConsulta("SELECT [IdAdelanto] FROM [Adelantos] WHERE [GuidVendedor]={" & rInfoAdelanto.GuidVendedor.ToString & "} and [Fecha] = #" & Format(rInfoAdelanto.Fecha, strFormatoAnsiStdFecha) & "# AND [Valor]=" & rInfoAdelanto.Valor, rInfoAdelanto.IdAdelanto)
+        objResult = vObjDB.EjecutarConsulta("SELECT [IdAdelanto] FROM [Adelantos] WHERE [GuidVendedor]={" & rInfoAdelanto.GuidVendedor.ToString & "} and [Fecha] = #" & Format(rInfoAdelanto.Fecha, strFormatoAnsiStdFecha) & "#", rInfoAdelanto.IdAdelanto) ' AND [Valor]=" & rInfoAdelanto.Valor
         If objResult <> Result.OK Then Return objResult
 
         Dim strSQL As New System.Text.StringBuilder("")

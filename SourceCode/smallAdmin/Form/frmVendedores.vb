@@ -72,11 +72,9 @@ Public Class frmVendedores
         For Each col As DataGridViewColumn In dgvListVendedores.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMVENDEDOR") Then
-          bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
-        Else
-          bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
-        End If
+
+        bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+
 
         bsVendedores.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
@@ -84,11 +82,9 @@ Public Class frmVendedores
         For Each col As DataGridViewColumn In dgvListVendedores.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("NUMVENDEDOR") Then
-          bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
-        Else
-          bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
-        End If
+
+        bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+
 
         bsVendedores.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)

@@ -163,11 +163,7 @@ Public Class frmArticulos
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CODIGO") Or m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CANTIDAD") Then
-          BindingSource1.DataSource = m_objStock.OrderBy(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
-        Else
-          BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
-        End If
+        BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
 
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
@@ -176,11 +172,7 @@ Public Class frmArticulos
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        If m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CODIGO") Or m_CurrentSortColumn.DataPropertyName.ToUpper.Equals("CANTIDAD") Then
-          BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) Integer.Parse(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c))).ToList()
-        Else
-          BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)).ToList()
-        End If
+        BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
 
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
