@@ -127,6 +127,12 @@
     <Compile Include="clsImportPago.vb" />
     <Compile Include="clsInfoResumenVenta.vb" />
     <Compile Include="Entorno\modEntorno.vb" />
+    <Compile Include="Form\Auxiliar\frmTipoDeArchivo.Designer.vb">
+      <DependentUpon>frmTipoDeArchivo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Auxiliar\frmTipoDeArchivo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmArticulos.Designer.vb">
       <DependentUpon>frmArticulos.vb</DependentUpon>
     </Compile>
@@ -217,6 +223,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Auxiliar\frmTipoDeArchivo.resx">
+      <DependentUpon>frmTipoDeArchivo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmArticulos.resx">
       <DependentUpon>frmArticulos.vb</DependentUpon>
     </EmbeddedResource>

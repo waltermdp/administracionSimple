@@ -6,7 +6,7 @@ Public Class frmDeben
   Private WithEvents m_objPrincipal As clsListaPrincipal = Nothing
   Private m_CurrentProducto As clsInfoPrincipal = Nothing
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
-  Private m_Movimientos As List(Of clsInfoMovimiento)
+
   'Private m_ColumnName As String = String.Empty
   'Private m_Order As String = String.Empty
 
@@ -34,7 +34,7 @@ Public Class frmDeben
       dateInicio.Value = New Date(Date.Today.Year, Today.Month, 1)
       dateFin.Value = New Date(Date.Today.Year, Today.Month, Date.DaysInMonth(Today.Year, Today.Month))
       rbtnVendidos.Checked = True
-      cmbTipoPago.DataSource = g_TipoPago
+
       Dim MetodosBusqueda As New List(Of clsTipoPago)
       MetodosBusqueda.Add(New clsTipoPago With {.GuidTipo = Guid.Empty, .Nombre = "Todos Los Medios"})
       MetodosBusqueda.AddRange(g_TipoPago.ToList)
@@ -463,7 +463,7 @@ Public Class frmDeben
           movimiento.Estado = E_EstadoPago.Pago
           item.SubItems.Add(E_EstadoPago.Pago.ToString)
         End If
-        item.SubItems.Add(CDec(movimiento.Importe.Insert(movimiento.Importe.Length - 2, ".")).ToString)
+        item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
         item.SubItems.Add(movimiento.Detalle)
         lstViewResumen.Items.Add(item)
       Next
@@ -499,7 +499,7 @@ Public Class frmDeben
         Else
           movimiento.Estado = E_EstadoPago.Pago
           item.SubItems.Add(E_EstadoPago.Pago.ToString)
-          item.SubItems.Add(CDec(movimiento.Importe.Insert(movimiento.Importe.Length - 2, ".")).ToString)
+          item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
         End If
 
         item.SubItems.Add(movimiento.Detalle)
@@ -513,31 +513,15 @@ Public Class frmDeben
     End Try
   End Sub
 
-  'Private Sub btnRVisaDebito_Click(sender As Object, e As EventArgs) Handles btnRVisaDebito.Click
-  '  Try
-  '    Dim archivo As New List(Of String)
-  '    Dim AbrirArchivo As New OpenFileDialog
-  '    If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
-  '    modFile.Load(AbrirArchivo.FileName, archivo)
-  '    Dim mov As New List(Of clsInfoMovimiento)
-  '    GetCuerpo(archivo, mov)
-  '    FillResumenView(mov)
-  '    m_Movimientos = New List(Of clsInfoMovimiento)
-  '    m_Movimientos.AddRange(mov.ToList)
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
 
-  Private m_ExportImport As Integer = 0
 
   Private Sub btnExportar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnExportar.MouseClick
     Try
-      m_ExportImport = 1
-      lblInfoImpExp.Text = "Seleccione el tipo de pago a Exportar"
-      cmbTipoPago.SelectedIndex = 1
-      pnlSeleccionarPago.Visible = True
-      
+      Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Exportar)
+        If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+        End If
+      End Using
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -547,138 +531,15 @@ Public Class frmDeben
 
   Private Sub btnImportar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnImportar.MouseClick
     Try
-      m_ExportImport = 2
-      lblInfoImpExp.Text = "Seleccione el tipo de pago a Importar"
-      cmbTipoPago.SelectedIndex = 1
-      pnlSeleccionarPago.Visible = True
+      Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Importar)
+        If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+        End If
+      End Using
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
-
-  Private Sub btnContinuarImpExp_MouseClick(sender As Object, e As MouseEventArgs) Handles btnContinuarImpExp.MouseClick
-    Try
-      If cmbTipoPago.SelectedIndex < 0 Then
-        MsgBox("Debe seleccionar un modo de pago/cobro")
-        Exit Sub
-      End If
-      Dim objPago As clsTipoPago = CType(cmbTipoPago.SelectedItem, clsTipoPago)
-
-      If m_ExportImport = 1 Then 'exportar
-
-        clsCobros.GenerateResumen(objPago)
-      ElseIf m_ExportImport = 2 Then 'importar
-        Dim archivo As New List(Of String)
-        Dim AbrirArchivo As New OpenFileDialog
-        If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
-        modFile.Load(AbrirArchivo.FileName, archivo)
-        Dim mov As New List(Of clsInfoMovimiento)
-        Select Case objPago.GuidTipo
-          Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
-            MsgBox("No implementado")
-            Exit Sub
-          Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito
-            GetCuerpoVISADebito(archivo, mov)
-            FillResumenView(mov)
-          Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
-            GetCuerpoCBU(archivo, mov)
-            FillResumenViewCBU(mov)
-          Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-            GetCuerpoVISACredito(archivo, mov)
-            FillResumenView(mov)
-          Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
-            MsgBox("No implementado")
-            Exit Sub
-          Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'master debito
-            MsgBox("No implementado")
-            Exit Sub
-          Case Else
-            MsgBox("No se encuentra tipo de pago")
-            Exit Sub
-        End Select
-
-        m_Movimientos = New List(Of clsInfoMovimiento)
-        m_Movimientos.AddRange(mov.ToList)
-      End If
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    Finally
-      m_ExportImport = 0
-      pnlSeleccionarPago.Visible = False
-    End Try
-  End Sub
-
-  Private Sub btnCancelImpExp_MouseClick(sender As Object, e As MouseEventArgs) Handles btnCancelImpExp.MouseClick
-    Try
-
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    Finally
-      m_ExportImport = 0
-      pnlSeleccionarPago.Visible = False
-    End Try
-  End Sub
-
-  'Private Sub btnWVisaDebito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWVisaDebito.MouseClick
-  '  Try
-  '    clsCobros.GenerateResumen(g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("d167e036-b175-4a67-9305-a47c116e8f5c")))
-
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-
-
-  'Private Sub btnRVisaCredito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnRVisaCredito.MouseClick
-  '  Try
-  '    Dim archivo As New List(Of String)
-  '    Dim AbrirArchivo As New OpenFileDialog
-  '    If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
-  '    modFile.Load(AbrirArchivo.FileName, archivo)
-  '    Dim mov As New List(Of clsInfoMovimiento)
-  '    GetCuerpoVISACredito(archivo, mov)
-  '    FillResumenView(mov)
-  '    m_Movimientos = New List(Of clsInfoMovimiento)
-  '    m_Movimientos.AddRange(mov.ToList)
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-
-  'Private Sub btnWVisaCredito_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWVisaCredito.MouseClick
-  '  Try
-  '    clsCobros.GenerateResumen(g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("7580f2d4-d9ec-477b-9e3a-50afb7141ab5")))
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-
-  'Private Sub btnReadCBU_MouseClick(sender As Object, e As MouseEventArgs) Handles btnReadCBU.MouseClick
-  '  Try
-  '    Dim archivo As New List(Of String)
-  '    Dim AbrirArchivo As New OpenFileDialog
-  '    If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then Exit Sub
-  '    modFile.Load(AbrirArchivo.FileName, archivo)
-  '    Dim mov As New List(Of clsInfoMovimiento)
-  '    GetCuerpoCBU(archivo, mov)
-  '    FillResumenViewCBU(mov)
-  '    m_Movimientos = New List(Of clsInfoMovimiento)
-  '    m_Movimientos.AddRange(mov.ToList)
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-  'Private Sub btnWCBU_MouseClick(sender As Object, e As MouseEventArgs) Handles btnWCBU.MouseClick
-  '  Try
-  '    clsCobros.GenerateResumen(g_TipoPago.Find(Function(c) c.GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117924")))
-  '  Catch ex As Exception
-  '    Call Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-
-  
-
-
 
   Private Sub btnOK_MouseClick(sender As Object, e As MouseEventArgs) Handles btnOK.MouseClick
     Try

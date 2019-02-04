@@ -80,29 +80,23 @@ Partial Class frmDeben
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.btnImportar = New System.Windows.Forms.Button()
     Me.btnExportar = New System.Windows.Forms.Button()
-    Me.cmbTipoPago = New System.Windows.Forms.ComboBox()
-    Me.pnlSeleccionarPago = New System.Windows.Forms.Panel()
-    Me.lblInfoImpExp = New System.Windows.Forms.Label()
-    Me.btnCancelImpExp = New System.Windows.Forms.Button()
-    Me.btnContinuarImpExp = New System.Windows.Forms.Button()
     Me.lblTotalProductos = New System.Windows.Forms.Label()
     Me.lblTotalArticulos = New System.Windows.Forms.Label()
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+    Me.lblPrecioInteres = New System.Windows.Forms.Label()
+    Me.lblPorcentaje = New System.Windows.Forms.Label()
+    Me.lblPagos = New System.Windows.Forms.Label()
+    Me.lblPrecioTotal = New System.Windows.Forms.Label()
     Me.TabControl1 = New System.Windows.Forms.TabControl()
     Me.tbBuscar = New System.Windows.Forms.TabPage()
     Me.tbResumen = New System.Windows.Forms.TabPage()
     Me.tbPagos = New System.Windows.Forms.TabPage()
-    Me.lblPrecioTotal = New System.Windows.Forms.Label()
-    Me.lblPagos = New System.Windows.Forms.Label()
-    Me.lblPorcentaje = New System.Windows.Forms.Label()
-    Me.lblPrecioInteres = New System.Windows.Forms.Label()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.Panel1.SuspendLayout()
     Me.pnlResumen.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
-    Me.pnlSeleccionarPago.SuspendLayout()
     Me.GroupBox2.SuspendLayout()
     Me.TabControl1.SuspendLayout()
     Me.tbBuscar.SuspendLayout()
@@ -614,7 +608,7 @@ Partial Class frmDeben
     Me.pnlResumen.Controls.Add(Me.btnCancel)
     Me.pnlResumen.Location = New System.Drawing.Point(186, 64)
     Me.pnlResumen.Name = "pnlResumen"
-    Me.pnlResumen.Size = New System.Drawing.Size(743, 360)
+    Me.pnlResumen.Size = New System.Drawing.Size(1069, 644)
     Me.pnlResumen.TabIndex = 59
     Me.pnlResumen.Visible = False
     '
@@ -687,53 +681,6 @@ Partial Class frmDeben
     Me.btnExportar.Text = "Exportar"
     Me.btnExportar.UseVisualStyleBackColor = True
     '
-    'cmbTipoPago
-    '
-    Me.cmbTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-    Me.cmbTipoPago.FormattingEnabled = True
-    Me.cmbTipoPago.Location = New System.Drawing.Point(39, 73)
-    Me.cmbTipoPago.Name = "cmbTipoPago"
-    Me.cmbTipoPago.Size = New System.Drawing.Size(162, 21)
-    Me.cmbTipoPago.TabIndex = 0
-    '
-    'pnlSeleccionarPago
-    '
-    Me.pnlSeleccionarPago.Controls.Add(Me.lblInfoImpExp)
-    Me.pnlSeleccionarPago.Controls.Add(Me.btnCancelImpExp)
-    Me.pnlSeleccionarPago.Controls.Add(Me.btnContinuarImpExp)
-    Me.pnlSeleccionarPago.Controls.Add(Me.cmbTipoPago)
-    Me.pnlSeleccionarPago.Location = New System.Drawing.Point(596, 283)
-    Me.pnlSeleccionarPago.Name = "pnlSeleccionarPago"
-    Me.pnlSeleccionarPago.Size = New System.Drawing.Size(239, 158)
-    Me.pnlSeleccionarPago.TabIndex = 42
-    Me.pnlSeleccionarPago.Visible = False
-    '
-    'lblInfoImpExp
-    '
-    Me.lblInfoImpExp.Location = New System.Drawing.Point(39, 11)
-    Me.lblInfoImpExp.Name = "lblInfoImpExp"
-    Me.lblInfoImpExp.Size = New System.Drawing.Size(162, 46)
-    Me.lblInfoImpExp.TabIndex = 4
-    Me.lblInfoImpExp.Text = "Label1"
-    '
-    'btnCancelImpExp
-    '
-    Me.btnCancelImpExp.Location = New System.Drawing.Point(161, 109)
-    Me.btnCancelImpExp.Name = "btnCancelImpExp"
-    Me.btnCancelImpExp.Size = New System.Drawing.Size(62, 32)
-    Me.btnCancelImpExp.TabIndex = 3
-    Me.btnCancelImpExp.Text = "Cancelar"
-    Me.btnCancelImpExp.UseVisualStyleBackColor = True
-    '
-    'btnContinuarImpExp
-    '
-    Me.btnContinuarImpExp.Location = New System.Drawing.Point(20, 109)
-    Me.btnContinuarImpExp.Name = "btnContinuarImpExp"
-    Me.btnContinuarImpExp.Size = New System.Drawing.Size(61, 32)
-    Me.btnContinuarImpExp.TabIndex = 2
-    Me.btnContinuarImpExp.Text = "Continuar"
-    Me.btnContinuarImpExp.UseVisualStyleBackColor = True
-    '
     'lblTotalProductos
     '
     Me.lblTotalProductos.AutoSize = True
@@ -769,6 +716,44 @@ Partial Class frmDeben
     Me.GroupBox2.TabIndex = 63
     Me.GroupBox2.TabStop = False
     Me.GroupBox2.Text = "Resumen"
+    '
+    'lblPrecioInteres
+    '
+    Me.lblPrecioInteres.AutoSize = True
+    Me.lblPrecioInteres.Location = New System.Drawing.Point(6, 66)
+    Me.lblPrecioInteres.Margin = New System.Windows.Forms.Padding(3)
+    Me.lblPrecioInteres.Name = "lblPrecioInteres"
+    Me.lblPrecioInteres.Size = New System.Drawing.Size(45, 15)
+    Me.lblPrecioInteres.TabIndex = 66
+    Me.lblPrecioInteres.Text = "Label2"
+    '
+    'lblPorcentaje
+    '
+    Me.lblPorcentaje.AutoSize = True
+    Me.lblPorcentaje.Location = New System.Drawing.Point(6, 115)
+    Me.lblPorcentaje.Margin = New System.Windows.Forms.Padding(3)
+    Me.lblPorcentaje.Name = "lblPorcentaje"
+    Me.lblPorcentaje.Size = New System.Drawing.Size(45, 15)
+    Me.lblPorcentaje.TabIndex = 65
+    Me.lblPorcentaje.Text = "Label2"
+    '
+    'lblPagos
+    '
+    Me.lblPagos.AutoSize = True
+    Me.lblPagos.Location = New System.Drawing.Point(6, 91)
+    Me.lblPagos.Name = "lblPagos"
+    Me.lblPagos.Size = New System.Drawing.Size(45, 15)
+    Me.lblPagos.TabIndex = 64
+    Me.lblPagos.Text = "Label2"
+    '
+    'lblPrecioTotal
+    '
+    Me.lblPrecioTotal.AutoSize = True
+    Me.lblPrecioTotal.Location = New System.Drawing.Point(272, 67)
+    Me.lblPrecioTotal.Name = "lblPrecioTotal"
+    Me.lblPrecioTotal.Size = New System.Drawing.Size(45, 15)
+    Me.lblPrecioTotal.TabIndex = 63
+    Me.lblPrecioTotal.Text = "Label2"
     '
     'TabControl1
     '
@@ -813,44 +798,6 @@ Partial Class frmDeben
     Me.tbPagos.Text = "Pagos - Cobros"
     Me.tbPagos.UseVisualStyleBackColor = True
     '
-    'lblPrecioTotal
-    '
-    Me.lblPrecioTotal.AutoSize = True
-    Me.lblPrecioTotal.Location = New System.Drawing.Point(272, 67)
-    Me.lblPrecioTotal.Name = "lblPrecioTotal"
-    Me.lblPrecioTotal.Size = New System.Drawing.Size(45, 15)
-    Me.lblPrecioTotal.TabIndex = 63
-    Me.lblPrecioTotal.Text = "Label2"
-    '
-    'lblPagos
-    '
-    Me.lblPagos.AutoSize = True
-    Me.lblPagos.Location = New System.Drawing.Point(6, 91)
-    Me.lblPagos.Name = "lblPagos"
-    Me.lblPagos.Size = New System.Drawing.Size(45, 15)
-    Me.lblPagos.TabIndex = 64
-    Me.lblPagos.Text = "Label2"
-    '
-    'lblPorcentaje
-    '
-    Me.lblPorcentaje.AutoSize = True
-    Me.lblPorcentaje.Location = New System.Drawing.Point(6, 115)
-    Me.lblPorcentaje.Margin = New System.Windows.Forms.Padding(3)
-    Me.lblPorcentaje.Name = "lblPorcentaje"
-    Me.lblPorcentaje.Size = New System.Drawing.Size(45, 15)
-    Me.lblPorcentaje.TabIndex = 65
-    Me.lblPorcentaje.Text = "Label2"
-    '
-    'lblPrecioInteres
-    '
-    Me.lblPrecioInteres.AutoSize = True
-    Me.lblPrecioInteres.Location = New System.Drawing.Point(6, 66)
-    Me.lblPrecioInteres.Margin = New System.Windows.Forms.Padding(3)
-    Me.lblPrecioInteres.Name = "lblPrecioInteres"
-    Me.lblPrecioInteres.Size = New System.Drawing.Size(45, 15)
-    Me.lblPrecioInteres.TabIndex = 66
-    Me.lblPrecioInteres.Text = "Label2"
-    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -859,7 +806,6 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
-    Me.Controls.Add(Me.pnlSeleccionarPago)
     Me.Controls.Add(Me.pnlResumen)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
@@ -887,7 +833,6 @@ Partial Class frmDeben
     Me.Panel1.PerformLayout()
     Me.pnlResumen.ResumeLayout(False)
     Me.GroupBox1.ResumeLayout(False)
-    Me.pnlSeleccionarPago.ResumeLayout(False)
     Me.GroupBox2.ResumeLayout(False)
     Me.GroupBox2.PerformLayout()
     Me.TabControl1.ResumeLayout(False)
@@ -933,12 +878,7 @@ Partial Class frmDeben
   Friend WithEvents btnCancel As System.Windows.Forms.Button
   Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
   Friend WithEvents btnExportar As System.Windows.Forms.Button
-  Friend WithEvents cmbTipoPago As System.Windows.Forms.ComboBox
   Friend WithEvents btnImportar As System.Windows.Forms.Button
-  Friend WithEvents pnlSeleccionarPago As System.Windows.Forms.Panel
-  Friend WithEvents btnCancelImpExp As System.Windows.Forms.Button
-  Friend WithEvents btnContinuarImpExp As System.Windows.Forms.Button
-  Friend WithEvents lblInfoImpExp As System.Windows.Forms.Label
   Friend WithEvents NombreClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NombreVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NumPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
