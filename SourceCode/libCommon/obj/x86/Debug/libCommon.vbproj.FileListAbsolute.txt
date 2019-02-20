@@ -6,14 +6,6 @@ C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\x86\Debug\libCommon.
 C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
 C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
 C:\repositorio\personal\smallAdmin\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.dll
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.Resources.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.GenerateResource.Cache
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\libCommon\bin\x86\Debug\libCommon.dll
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\libCommon\bin\x86\Debug\libCommon.pdb
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\libCommon\bin\x86\Debug\libCommon.xml
@@ -30,3 +22,11 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Deb
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.dll
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.Resources.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.GenerateResource.Cache
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb

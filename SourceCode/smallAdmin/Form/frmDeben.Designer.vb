@@ -73,10 +73,6 @@ Partial Class frmDeben
     Me.rbtnNombreVendedor = New System.Windows.Forms.RadioButton()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.Label5 = New System.Windows.Forms.Label()
-    Me.pnlResumen = New System.Windows.Forms.Panel()
-    Me.lstViewResumen = New System.Windows.Forms.ListView()
-    Me.btnOK = New System.Windows.Forms.Button()
-    Me.btnCancel = New System.Windows.Forms.Button()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.btnImportar = New System.Windows.Forms.Button()
     Me.btnExportar = New System.Windows.Forms.Button()
@@ -95,7 +91,6 @@ Partial Class frmDeben
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.Panel1.SuspendLayout()
-    Me.pnlResumen.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
     Me.GroupBox2.SuspendLayout()
     Me.TabControl1.SuspendLayout()
@@ -601,54 +596,6 @@ Partial Class frmDeben
     Me.Label5.TabIndex = 50
     Me.Label5.Text = "PRODUCTOS VENDIDOS"
     '
-    'pnlResumen
-    '
-    Me.pnlResumen.Controls.Add(Me.lstViewResumen)
-    Me.pnlResumen.Controls.Add(Me.btnOK)
-    Me.pnlResumen.Controls.Add(Me.btnCancel)
-    Me.pnlResumen.Location = New System.Drawing.Point(186, 64)
-    Me.pnlResumen.Name = "pnlResumen"
-    Me.pnlResumen.Size = New System.Drawing.Size(1069, 644)
-    Me.pnlResumen.TabIndex = 59
-    Me.pnlResumen.Visible = False
-    '
-    'lstViewResumen
-    '
-    Me.lstViewResumen.Location = New System.Drawing.Point(150, 44)
-    Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(554, 269)
-    Me.lstViewResumen.TabIndex = 41
-    Me.lstViewResumen.UseCompatibleStateImageBehavior = False
-    Me.lstViewResumen.View = System.Windows.Forms.View.Details
-    '
-    'btnOK
-    '
-    Me.btnOK.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnOK.FlatAppearance.BorderSize = 0
-    Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnOK.ForeColor = System.Drawing.Color.White
-    Me.btnOK.Location = New System.Drawing.Point(20, 17)
-    Me.btnOK.Name = "btnOK"
-    Me.btnOK.Size = New System.Drawing.Size(110, 61)
-    Me.btnOK.TabIndex = 40
-    Me.btnOK.Text = "OK"
-    Me.btnOK.UseVisualStyleBackColor = False
-    '
-    'btnCancel
-    '
-    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnCancel.FlatAppearance.BorderSize = 0
-    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(20, 252)
-    Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
-    Me.btnCancel.TabIndex = 39
-    Me.btnCancel.Text = "Cancel"
-    Me.btnCancel.UseVisualStyleBackColor = False
-    '
     'GroupBox1
     '
     Me.GroupBox1.Controls.Add(Me.btnImportar)
@@ -806,7 +753,6 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
-    Me.Controls.Add(Me.pnlResumen)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.btnLstVendedores)
     Me.Controls.Add(Me.btnListaClientes)
@@ -831,7 +777,6 @@ Partial Class frmDeben
     Me.gpxBuscar.PerformLayout()
     Me.Panel1.ResumeLayout(False)
     Me.Panel1.PerformLayout()
-    Me.pnlResumen.ResumeLayout(False)
     Me.GroupBox1.ResumeLayout(False)
     Me.GroupBox2.ResumeLayout(False)
     Me.GroupBox2.PerformLayout()
@@ -872,10 +817,6 @@ Partial Class frmDeben
   Friend WithEvents rbtnClientName As System.Windows.Forms.RadioButton
   Friend WithEvents btnMinimize As System.Windows.Forms.Button
   Friend WithEvents Label5 As System.Windows.Forms.Label
-  Friend WithEvents pnlResumen As System.Windows.Forms.Panel
-  Friend WithEvents lstViewResumen As System.Windows.Forms.ListView
-  Friend WithEvents btnOK As System.Windows.Forms.Button
-  Friend WithEvents btnCancel As System.Windows.Forms.Button
   Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
   Friend WithEvents btnExportar As System.Windows.Forms.Button
   Friend WithEvents btnImportar As System.Windows.Forms.Button

@@ -21,34 +21,6 @@ c:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\x86\Debug\smallAdmi
 c:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
 c:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\x86\Debug\main.frmDeben.resources
 c:\repositorio\personal\smallAdmin\SourceCode\smallAdmin\obj\x86\Debug\main.frmVenta.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe.config
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.exe
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libCommon.dll
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.dll
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.dll
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libCommon.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libCommon.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.pdb
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.xml
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbprojResolveAssemblyReference.cache
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCliente.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmDeben.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVenta.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.Resources.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.GenerateResource.Cache
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmPreviewAplicarPago.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedorData.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedores.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmListaClientes.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCuenta.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulos.resources
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe.config
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.exe
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
@@ -65,8 +37,6 @@ C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smal
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.frmListaClientes.resources
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\main.Resources.resources
 C:\repositorio\personal\AdminSimple\administracionSimple - copia\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.GenerateResource.Cache
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmConfig.resources
-C:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmLiquidacionVendedores.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe.config
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.pdb
@@ -97,3 +67,35 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\De
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.exe
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbprojResolveAssemblyReference.cache
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmTipoDeArchivo.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulos.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCliente.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmConfig.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCuenta.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmDeben.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmLiquidacionVendedores.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmPreviewAplicarPago.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedorData.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVendedores.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmVenta.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmListaClientes.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.Resources.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.GenerateResource.Cache
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe.config
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.exe
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\smallAdmin.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libCommon.dll
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.dll
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.dll
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libCommon.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libCommon.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.pdb
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmResumen.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.exe
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb

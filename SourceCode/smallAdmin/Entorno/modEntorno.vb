@@ -9,6 +9,7 @@ Module Entorno
   Private Const CONFIG_FOLDER As String = "config"
   Private Const TEMP_FOLDER As String = "temp"
   Private Const EXPORT_FOLDER As String = "export"
+  Private Const IMPORT_FOLDER As String = "import"
   Private Const MODEL_FOLDER As String = "model"
 
   Public App_path As String = String.Empty
@@ -17,6 +18,7 @@ Module Entorno
   Public CONFIG_PATH As String = String.Empty
   Public TEMP_PATH As String = String.Empty
   Public EXPORT_PATH As String = String.Empty
+  Public IMPORT_PATH As String = String.Empty
   Public MODEL_PATH As String = String.Empty
 
   Private dbpw As String = String.Empty
@@ -74,13 +76,24 @@ Module Entorno
       End If
 
       'EXPORT FOLDER
-      Dim FolderExport As String = String.Empty
-      If LoadExportFolder(FolderExport) = Result.OK Then
-        EXPORT_PATH = FolderExport
+      Dim Folder As String = String.Empty
+      If LoadExportFolder(Folder) = Result.OK Then
+        EXPORT_PATH = Folder
       Else
         EXPORT_PATH = IO.Path.Combine(App_path, EXPORT_FOLDER)
         If Not IO.Directory.Exists(EXPORT_PATH) Then
           IO.Directory.CreateDirectory(EXPORT_PATH)
+        End If
+      End If
+
+      'IMPORT_PATH
+      Folder = String.Empty
+      If LoadImportFolder(Folder) = Result.OK Then
+        IMPORT_PATH = Folder
+      Else
+        IMPORT_PATH = IO.Path.Combine(App_path, IMPORT_FOLDER)
+        If Not IO.Directory.Exists(IMPORT_PATH) Then
+          IO.Directory.CreateDirectory(IMPORT_PATH)
         End If
       End If
 
@@ -364,6 +377,21 @@ Module Entorno
       If lineas(1).Trim Is Nothing Then Return Result.NOK
       If Not IO.Directory.Exists(lineas(1)) Then Return Result.NOK
       rPath = lineas(1).Trim
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Public Function LoadImportFolder(ByRef rPath As String) As Result
+    Try
+      Dim lineas As New List(Of String)
+      Dim vResult As Result = Load(IO.Path.Combine(CONFIG_PATH, "options.dat"), lineas)
+      If vResult <> Result.OK Then Return Result.NOK
+      If lineas(2).Trim Is Nothing Then Return Result.NOK
+      If Not IO.Directory.Exists(lineas(2)) Then Return Result.NOK
+      rPath = lineas(2).Trim
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)

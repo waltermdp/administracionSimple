@@ -58,3 +58,5 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Re
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmListaClientes.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.Resources.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.vbproj.GenerateResource.Cache
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmResumen.resources
+c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmTipoDeArchivo.resources

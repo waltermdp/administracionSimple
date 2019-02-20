@@ -22,6 +22,7 @@ Partial Class frmTipoDeArchivo
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTipoDeArchivo))
     Me.pnlSeleccionarPago = New System.Windows.Forms.Panel()
     Me.lblInfoImpExp = New System.Windows.Forms.Label()
     Me.btnCancelImpExp = New System.Windows.Forms.Button()
@@ -32,6 +33,7 @@ Partial Class frmTipoDeArchivo
     '
     'pnlSeleccionarPago
     '
+    Me.pnlSeleccionarPago.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.pnlSeleccionarPago.Controls.Add(Me.lblInfoImpExp)
     Me.pnlSeleccionarPago.Controls.Add(Me.btnCancelImpExp)
     Me.pnlSeleccionarPago.Controls.Add(Me.btnContinuarImpExp)
@@ -40,10 +42,10 @@ Partial Class frmTipoDeArchivo
     Me.pnlSeleccionarPago.Name = "pnlSeleccionarPago"
     Me.pnlSeleccionarPago.Size = New System.Drawing.Size(325, 172)
     Me.pnlSeleccionarPago.TabIndex = 43
-    Me.pnlSeleccionarPago.Visible = False
     '
     'lblInfoImpExp
     '
+    Me.lblInfoImpExp.ForeColor = System.Drawing.Color.Black
     Me.lblInfoImpExp.Location = New System.Drawing.Point(13, 13)
     Me.lblInfoImpExp.Name = "lblInfoImpExp"
     Me.lblInfoImpExp.Size = New System.Drawing.Size(298, 59)
@@ -52,27 +54,37 @@ Partial Class frmTipoDeArchivo
     '
     'btnCancelImpExp
     '
-    Me.btnCancelImpExp.Location = New System.Drawing.Point(239, 126)
+    Me.btnCancelImpExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancelImpExp.FlatAppearance.BorderSize = 0
+    Me.btnCancelImpExp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancelImpExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancelImpExp.ForeColor = System.Drawing.Color.White
+    Me.btnCancelImpExp.Location = New System.Drawing.Point(227, 126)
     Me.btnCancelImpExp.Name = "btnCancelImpExp"
-    Me.btnCancelImpExp.Size = New System.Drawing.Size(72, 37)
+    Me.btnCancelImpExp.Size = New System.Drawing.Size(84, 37)
     Me.btnCancelImpExp.TabIndex = 3
     Me.btnCancelImpExp.Text = "Cancelar"
-    Me.btnCancelImpExp.UseVisualStyleBackColor = True
+    Me.btnCancelImpExp.UseVisualStyleBackColor = False
     '
     'btnContinuarImpExp
     '
+    Me.btnContinuarImpExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnContinuarImpExp.FlatAppearance.BorderSize = 0
+    Me.btnContinuarImpExp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnContinuarImpExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnContinuarImpExp.ForeColor = System.Drawing.Color.White
     Me.btnContinuarImpExp.Location = New System.Drawing.Point(13, 126)
     Me.btnContinuarImpExp.Name = "btnContinuarImpExp"
-    Me.btnContinuarImpExp.Size = New System.Drawing.Size(71, 37)
+    Me.btnContinuarImpExp.Size = New System.Drawing.Size(90, 37)
     Me.btnContinuarImpExp.TabIndex = 2
     Me.btnContinuarImpExp.Text = "Continuar"
-    Me.btnContinuarImpExp.UseVisualStyleBackColor = True
+    Me.btnContinuarImpExp.UseVisualStyleBackColor = False
     '
     'cmbTipoPago
     '
     Me.cmbTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbTipoPago.FormattingEnabled = True
-    Me.cmbTipoPago.Location = New System.Drawing.Point(70, 85)
+    Me.cmbTipoPago.Location = New System.Drawing.Point(70, 81)
     Me.cmbTipoPago.Name = "cmbTipoPago"
     Me.cmbTipoPago.Size = New System.Drawing.Size(188, 23)
     Me.cmbTipoPago.TabIndex = 0
@@ -82,6 +94,7 @@ Partial Class frmTipoDeArchivo
     Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.White
+    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(349, 196)
     Me.Controls.Add(Me.pnlSeleccionarPago)
     Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
