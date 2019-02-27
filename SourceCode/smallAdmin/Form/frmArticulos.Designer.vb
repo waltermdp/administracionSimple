@@ -46,6 +46,12 @@ Partial Class frmArticulos
     Me.txtFiltro = New System.Windows.Forms.TextBox()
     Me.Label5 = New System.Windows.Forms.Label()
     Me.dgvStock = New System.Windows.Forms.DataGridView()
+    Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DescripcionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnAddDeposito = New System.Windows.Forms.Button()
     Me.btnRemDeposito = New System.Windows.Forms.Button()
     Me.btnVendido = New System.Windows.Forms.Button()
@@ -56,22 +62,17 @@ Partial Class frmArticulos
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+    Me.txtDecrementar = New System.Windows.Forms.TextBox()
+    Me.txtIncrementar = New System.Windows.Forms.TextBox()
     Me.Label9 = New System.Windows.Forms.Label()
     Me.lblDetalle = New System.Windows.Forms.Label()
-    Me.txtIncrementar = New System.Windows.Forms.TextBox()
-    Me.txtDecrementar = New System.Windows.Forms.TextBox()
-    Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CantidadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.DescripcionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnGrupos = New System.Windows.Forms.Button()
     Me.gbProducto.SuspendLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.GroupBox1.SuspendLayout()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.GroupBox2.SuspendLayout()
-    CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtNombre
@@ -333,6 +334,50 @@ Partial Class frmArticulos
     Me.dgvStock.TabIndex = 33
     Me.dgvStock.TabStop = False
     '
+    'ResponsableDataGridViewTextBoxColumn
+    '
+    Me.ResponsableDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+    Me.ResponsableDataGridViewTextBoxColumn.DataPropertyName = "Responsable"
+    Me.ResponsableDataGridViewTextBoxColumn.HeaderText = "Responsable"
+    Me.ResponsableDataGridViewTextBoxColumn.Name = "ResponsableDataGridViewTextBoxColumn"
+    Me.ResponsableDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CodigoDataGridViewTextBoxColumn1
+    '
+    Me.CodigoDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+    Me.CodigoDataGridViewTextBoxColumn1.DataPropertyName = "Codigo"
+    Me.CodigoDataGridViewTextBoxColumn1.HeaderText = "Codigo"
+    Me.CodigoDataGridViewTextBoxColumn1.Name = "CodigoDataGridViewTextBoxColumn1"
+    Me.CodigoDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'NombreDataGridViewTextBoxColumn1
+    '
+    Me.NombreDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+    Me.NombreDataGridViewTextBoxColumn1.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn1.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn1.Name = "NombreDataGridViewTextBoxColumn1"
+    Me.NombreDataGridViewTextBoxColumn1.ReadOnly = True
+    '
+    'CantidadDataGridViewTextBoxColumn
+    '
+    Me.CantidadDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+    Me.CantidadDataGridViewTextBoxColumn.DataPropertyName = "Cantidad"
+    Me.CantidadDataGridViewTextBoxColumn.HeaderText = "Cantidad"
+    Me.CantidadDataGridViewTextBoxColumn.Name = "CantidadDataGridViewTextBoxColumn"
+    Me.CantidadDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'DescripcionDataGridViewTextBoxColumn1
+    '
+    Me.DescripcionDataGridViewTextBoxColumn1.DataPropertyName = "Descripcion"
+    Me.DescripcionDataGridViewTextBoxColumn1.HeaderText = "Descripcion"
+    Me.DescripcionDataGridViewTextBoxColumn1.Name = "DescripcionDataGridViewTextBoxColumn1"
+    Me.DescripcionDataGridViewTextBoxColumn1.ReadOnly = True
+    Me.DescripcionDataGridViewTextBoxColumn1.Visible = False
+    '
+    'BindingSource1
+    '
+    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
+    '
     'btnAddDeposito
     '
     Me.btnAddDeposito.Location = New System.Drawing.Point(165, 58)
@@ -438,6 +483,24 @@ Partial Class frmArticulos
     Me.GroupBox2.TabStop = False
     Me.GroupBox2.Text = "Acciones"
     '
+    'txtDecrementar
+    '
+    Me.txtDecrementar.Location = New System.Drawing.Point(105, 90)
+    Me.txtDecrementar.Name = "txtDecrementar"
+    Me.txtDecrementar.Size = New System.Drawing.Size(54, 20)
+    Me.txtDecrementar.TabIndex = 44
+    Me.txtDecrementar.Text = "1"
+    Me.txtDecrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'txtIncrementar
+    '
+    Me.txtIncrementar.Location = New System.Drawing.Point(105, 60)
+    Me.txtIncrementar.Name = "txtIncrementar"
+    Me.txtIncrementar.Size = New System.Drawing.Size(54, 20)
+    Me.txtIncrementar.TabIndex = 43
+    Me.txtIncrementar.Text = "1"
+    Me.txtIncrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
     'Label9
     '
     Me.Label9.AutoSize = True
@@ -456,67 +519,19 @@ Partial Class frmArticulos
     Me.lblDetalle.TabIndex = 44
     Me.lblDetalle.Text = "Acciones: "
     '
-    'txtIncrementar
+    'btnGrupos
     '
-    Me.txtIncrementar.Location = New System.Drawing.Point(105, 60)
-    Me.txtIncrementar.Name = "txtIncrementar"
-    Me.txtIncrementar.Size = New System.Drawing.Size(54, 20)
-    Me.txtIncrementar.TabIndex = 43
-    Me.txtIncrementar.Text = "1"
-    Me.txtIncrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'txtDecrementar
-    '
-    Me.txtDecrementar.Location = New System.Drawing.Point(105, 90)
-    Me.txtDecrementar.Name = "txtDecrementar"
-    Me.txtDecrementar.Size = New System.Drawing.Size(54, 20)
-    Me.txtDecrementar.TabIndex = 44
-    Me.txtDecrementar.Text = "1"
-    Me.txtDecrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'ResponsableDataGridViewTextBoxColumn
-    '
-    Me.ResponsableDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-    Me.ResponsableDataGridViewTextBoxColumn.DataPropertyName = "Responsable"
-    Me.ResponsableDataGridViewTextBoxColumn.HeaderText = "Responsable"
-    Me.ResponsableDataGridViewTextBoxColumn.Name = "ResponsableDataGridViewTextBoxColumn"
-    Me.ResponsableDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CodigoDataGridViewTextBoxColumn1
-    '
-    Me.CodigoDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-    Me.CodigoDataGridViewTextBoxColumn1.DataPropertyName = "Codigo"
-    Me.CodigoDataGridViewTextBoxColumn1.HeaderText = "Codigo"
-    Me.CodigoDataGridViewTextBoxColumn1.Name = "CodigoDataGridViewTextBoxColumn1"
-    Me.CodigoDataGridViewTextBoxColumn1.ReadOnly = True
-    '
-    'NombreDataGridViewTextBoxColumn1
-    '
-    Me.NombreDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-    Me.NombreDataGridViewTextBoxColumn1.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn1.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn1.Name = "NombreDataGridViewTextBoxColumn1"
-    Me.NombreDataGridViewTextBoxColumn1.ReadOnly = True
-    '
-    'CantidadDataGridViewTextBoxColumn
-    '
-    Me.CantidadDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-    Me.CantidadDataGridViewTextBoxColumn.DataPropertyName = "Cantidad"
-    Me.CantidadDataGridViewTextBoxColumn.HeaderText = "Cantidad"
-    Me.CantidadDataGridViewTextBoxColumn.Name = "CantidadDataGridViewTextBoxColumn"
-    Me.CantidadDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'DescripcionDataGridViewTextBoxColumn1
-    '
-    Me.DescripcionDataGridViewTextBoxColumn1.DataPropertyName = "Descripcion"
-    Me.DescripcionDataGridViewTextBoxColumn1.HeaderText = "Descripcion"
-    Me.DescripcionDataGridViewTextBoxColumn1.Name = "DescripcionDataGridViewTextBoxColumn1"
-    Me.DescripcionDataGridViewTextBoxColumn1.ReadOnly = True
-    Me.DescripcionDataGridViewTextBoxColumn1.Visible = False
-    '
-    'BindingSource1
-    '
-    Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
+    Me.btnGrupos.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnGrupos.FlatAppearance.BorderSize = 0
+    Me.btnGrupos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnGrupos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnGrupos.ForeColor = System.Drawing.Color.White
+    Me.btnGrupos.Location = New System.Drawing.Point(24, 280)
+    Me.btnGrupos.Name = "btnGrupos"
+    Me.btnGrupos.Size = New System.Drawing.Size(110, 61)
+    Me.btnGrupos.TabIndex = 45
+    Me.btnGrupos.Text = "Grupos"
+    Me.btnGrupos.UseVisualStyleBackColor = False
     '
     'frmArticulos
     '
@@ -524,6 +539,7 @@ Partial Class frmArticulos
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnGrupos)
     Me.Controls.Add(Me.lblDetalle)
     Me.Controls.Add(Me.GroupBox2)
     Me.Controls.Add(Me.GroupBox1)
@@ -543,12 +559,12 @@ Partial Class frmArticulos
     Me.gbProducto.ResumeLayout(False)
     Me.gbProducto.PerformLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
     Me.GroupBox1.ResumeLayout(False)
     Me.GroupBox1.PerformLayout()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.GroupBox2.ResumeLayout(False)
     Me.GroupBox2.PerformLayout()
-    CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout
 
@@ -592,4 +608,5 @@ End Sub
   Friend WithEvents lblDetalle As System.Windows.Forms.Label
   Friend WithEvents txtDecrementar As System.Windows.Forms.TextBox
   Friend WithEvents txtIncrementar As System.Windows.Forms.TextBox
+  Friend WithEvents btnGrupos As System.Windows.Forms.Button
 End Class

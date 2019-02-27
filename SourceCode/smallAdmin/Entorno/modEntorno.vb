@@ -5,6 +5,8 @@ Module Entorno
 
 
   Private Const NAMEDB As String = "bdcli.mdb"
+
+
   Private Const BKP_FOLDER As String = "bkpdb"
   Private Const CONFIG_FOLDER As String = "config"
   Private Const TEMP_FOLDER As String = "temp"
@@ -26,8 +28,31 @@ Module Entorno
 
   Public g_TipoPago As New List(Of manDB.clsTipoPago)
   Public g_Cuotas As New List(Of clsCuota)
+
+
   Public g_Today As Date 'TODO: crear fecha para saber si se cambia la fecha de la pc con respecto al ultimo uso
 
+  'Public Enum GRUPOS As Integer
+  '  NA = 0
+  '  A = 1
+  '  B = 2
+  '  C = 3
+  '  D = 4
+  '  E = 5
+  '  F = 6
+  '  G = 7
+  '  H = 8
+  '  I = 9
+  '  J = 10
+  '  K = 11
+  '  L = 12
+  'End Enum
+
+  Public Enum CATEGORIA As Integer
+    NA = 0
+    PRINCIPAL = 1
+    SECUNDARIO = 2
+  End Enum
   Public Function init() As Result
     Try
 
@@ -99,6 +124,7 @@ Module Entorno
 
       CargarTipoPago(g_TipoPago)
       CargarCuotas(g_Cuotas)
+      
 
       Call ActualizarCuotasVencidas()
 
@@ -398,5 +424,9 @@ Module Entorno
       Return Result.ErrorEx
     End Try
   End Function
+
+ 
+
+
 
 End Module

@@ -39,7 +39,6 @@ Partial Class frmVendedorData
     Me.Label6 = New System.Windows.Forms.Label()
     Me.txtNumVendedor = New System.Windows.Forms.TextBox()
     Me.Label7 = New System.Windows.Forms.Label()
-    Me.txtGrupo = New System.Windows.Forms.TextBox()
     Me.Label8 = New System.Windows.Forms.Label()
     Me.txtTel1 = New System.Windows.Forms.TextBox()
     Me.Label9 = New System.Windows.Forms.Label()
@@ -47,11 +46,12 @@ Partial Class frmVendedorData
     Me.Label10 = New System.Windows.Forms.Label()
     Me.txtEmail = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
-    Me.txtCategoria = New System.Windows.Forms.TextBox()
     Me.Label12 = New System.Windows.Forms.Label()
     Me.txtComentarios = New System.Windows.Forms.TextBox()
     Me.Label13 = New System.Windows.Forms.Label()
     Me.Label14 = New System.Windows.Forms.Label()
+    Me.cmbGrupo = New System.Windows.Forms.ComboBox()
+    Me.cmbCategoria = New System.Windows.Forms.ComboBox()
     Me.SuspendLayout()
     '
     'btnGuardar
@@ -222,15 +222,6 @@ Partial Class frmVendedorData
     Me.Label7.TabIndex = 14
     Me.Label7.Text = "Numero Vendedor"
     '
-    'txtGrupo
-    '
-    Me.txtGrupo.BackColor = System.Drawing.Color.White
-    Me.txtGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtGrupo.Location = New System.Drawing.Point(693, 151)
-    Me.txtGrupo.Name = "txtGrupo"
-    Me.txtGrupo.Size = New System.Drawing.Size(298, 21)
-    Me.txtGrupo.TabIndex = 10
-    '
     'Label8
     '
     Me.Label8.AutoSize = True
@@ -302,16 +293,6 @@ Partial Class frmVendedorData
     Me.Label11.TabIndex = 22
     Me.Label11.Text = "Email"
     '
-    'txtCategoria
-    '
-    Me.txtCategoria.BackColor = System.Drawing.Color.White
-    Me.txtCategoria.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtCategoria.Location = New System.Drawing.Point(693, 331)
-    Me.txtCategoria.Name = "txtCategoria"
-    Me.txtCategoria.Size = New System.Drawing.Size(298, 21)
-    Me.txtCategoria.TabIndex = 14
-    Me.txtCategoria.Visible = False
-    '
     'Label12
     '
     Me.Label12.AutoSize = True
@@ -356,16 +337,35 @@ Partial Class frmVendedorData
     Me.Label14.TabIndex = 28
     Me.Label14.Text = "Datos del Vendedor"
     '
+    'cmbGrupo
+    '
+    Me.cmbGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.cmbGrupo.FormattingEnabled = True
+    Me.cmbGrupo.Location = New System.Drawing.Point(693, 153)
+    Me.cmbGrupo.Name = "cmbGrupo"
+    Me.cmbGrupo.Size = New System.Drawing.Size(298, 23)
+    Me.cmbGrupo.TabIndex = 29
+    '
+    'cmbCategoria
+    '
+    Me.cmbCategoria.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.cmbCategoria.FormattingEnabled = True
+    Me.cmbCategoria.Location = New System.Drawing.Point(693, 333)
+    Me.cmbCategoria.Name = "cmbCategoria"
+    Me.cmbCategoria.Size = New System.Drawing.Size(298, 23)
+    Me.cmbCategoria.TabIndex = 30
+    '
     'frmVendedorData
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.cmbCategoria)
+    Me.Controls.Add(Me.cmbGrupo)
     Me.Controls.Add(Me.Label14)
     Me.Controls.Add(Me.txtComentarios)
     Me.Controls.Add(Me.Label13)
-    Me.Controls.Add(Me.txtCategoria)
     Me.Controls.Add(Me.Label12)
     Me.Controls.Add(Me.txtEmail)
     Me.Controls.Add(Me.Label11)
@@ -373,7 +373,6 @@ Partial Class frmVendedorData
     Me.Controls.Add(Me.Label10)
     Me.Controls.Add(Me.txtTel1)
     Me.Controls.Add(Me.Label9)
-    Me.Controls.Add(Me.txtGrupo)
     Me.Controls.Add(Me.Label8)
     Me.Controls.Add(Me.txtNumVendedor)
     Me.Controls.Add(Me.Label7)
@@ -399,33 +398,33 @@ Partial Class frmVendedorData
     Me.PerformLayout()
 
   End Sub
-    Friend WithEvents btnGuardar As System.Windows.Forms.Button
-    Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtNombre As System.Windows.Forms.TextBox
-    Friend WithEvents txtApellido As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txtId As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents txtCiudad As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents txtProvincia As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents txtCodigoPostal As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txtNumVendedor As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents txtGrupo As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtTel1 As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents txtTel2 As System.Windows.Forms.TextBox
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtEmail As System.Windows.Forms.TextBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents txtCategoria As System.Windows.Forms.TextBox
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents txtComentarios As System.Windows.Forms.TextBox
+  Friend WithEvents btnGuardar As System.Windows.Forms.Button
+  Friend WithEvents btnCancel As System.Windows.Forms.Button
+  Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents txtNombre As System.Windows.Forms.TextBox
+  Friend WithEvents txtApellido As System.Windows.Forms.TextBox
+  Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents txtId As System.Windows.Forms.TextBox
+  Friend WithEvents Label3 As System.Windows.Forms.Label
+  Friend WithEvents txtCiudad As System.Windows.Forms.TextBox
+  Friend WithEvents Label4 As System.Windows.Forms.Label
+  Friend WithEvents txtProvincia As System.Windows.Forms.TextBox
+  Friend WithEvents Label5 As System.Windows.Forms.Label
+  Friend WithEvents txtCodigoPostal As System.Windows.Forms.TextBox
+  Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents txtNumVendedor As System.Windows.Forms.TextBox
+  Friend WithEvents Label7 As System.Windows.Forms.Label
+  Friend WithEvents Label8 As System.Windows.Forms.Label
+  Friend WithEvents txtTel1 As System.Windows.Forms.TextBox
+  Friend WithEvents Label9 As System.Windows.Forms.Label
+  Friend WithEvents txtTel2 As System.Windows.Forms.TextBox
+  Friend WithEvents Label10 As System.Windows.Forms.Label
+  Friend WithEvents txtEmail As System.Windows.Forms.TextBox
+  Friend WithEvents Label11 As System.Windows.Forms.Label
+  Friend WithEvents Label12 As System.Windows.Forms.Label
+  Friend WithEvents txtComentarios As System.Windows.Forms.TextBox
   Friend WithEvents Label13 As System.Windows.Forms.Label
   Friend WithEvents Label14 As System.Windows.Forms.Label
+  Friend WithEvents cmbGrupo As System.Windows.Forms.ComboBox
+  Friend WithEvents cmbCategoria As System.Windows.Forms.ComboBox
 End Class

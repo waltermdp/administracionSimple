@@ -4,7 +4,7 @@ Public Class frmVendedorData
  
 
   Private m_Vendedor As clsInfoVendedor
-
+  Private m_Grupos As New clsListGrupos
 
   Public Sub New(ByVal vVendedor As clsInfoVendedor)
     InitializeComponent()
@@ -58,6 +58,9 @@ Public Class frmVendedorData
         MsgBox("Falla buscar vendedor")
         Me.Close()
       End If
+      m_Grupos.RefreshData()
+      cmbGrupo.DataSource = m_Grupos.Items ' [Enum].GetNames(GetType(GRUPOS))
+      cmbCategoria.DataSource = [Enum].GetNames(GetType(CATEGORIA))
       Call FillData()
 
     Catch ex As Exception
@@ -92,16 +95,16 @@ Public Class frmVendedorData
         If .CodigoPostal = "" Then .CodigoPostal = "--"
         .ID = txtId.Text.Trim
         If .ID = "" Then .ID = "--"
-        .Grupo = txtGrupo.Text.Trim
-        If .Grupo = "" Then .Grupo = "--"
+        .Grupo = cmbGrupo.SelectedItem.ToString
+        
         .Tel1 = txtTel1.Text.Trim
         If .Tel1 = "" Then .Tel1 = "--"
         .Tel2 = txtTel2.Text.Trim
         If .Tel2 = "" Then .Tel2 = "--"
         .Email = txtEmail.Text.Trim
         If .Email = "" Then .Email = "--"
-        .Categoria = txtCategoria.Text.Trim
-        If .Categoria = "" Then .Categoria = "--"
+        .Categoria = cmbCategoria.SelectedItem
+
         .Comentario = txtComentarios.Text.Trim
         If .Comentario = "" Then .Comentario = "--"
       End With
@@ -124,11 +127,20 @@ Public Class frmVendedorData
         txtProvincia.Text = .Provincia
         txtCodigoPostal.Text = .Provincia
         txtId.Text = .ID
-        txtGrupo.Text = .Grupo
+
+
+        If m_Grupos.Items.Exists(Function(c) c.Nombre.ToUpper = .Grupo.ToUpper) Then
+          cmbGrupo.SelectedItem = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = .Grupo.ToUpper)
+        Else
+          cmbGrupo.SelectedItem = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "NINGUNO")
+        End If
+
+
+
         txtTel1.Text = .Tel1
         txtTel2.Text = .Tel2
         txtEmail.Text = .Email
-        txtCategoria.Text = .Categoria
+        cmbCategoria.SelectedItem = .Categoria
         txtComentarios.Text = .Comentario
       End With
     Catch ex As Exception

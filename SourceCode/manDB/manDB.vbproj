@@ -88,6 +88,7 @@
     <Compile Include="clsInfoArticulos.vb" />
     <Compile Include="clsInfoArticuloVendido.vb" />
     <Compile Include="clsInfoCuenta.vb" />
+    <Compile Include="clsInfoGrupo.vb" />
     <Compile Include="clsInfoPagos.vb" />
     <Compile Include="clsInfoCliente.vb" />
     <Compile Include="clsInfoDatabase.vb" />

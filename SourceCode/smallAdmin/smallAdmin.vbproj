@@ -71,6 +71,9 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -105,6 +108,7 @@
     <Compile Include="AccesoADatos\clsCobros.vb" />
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
+    <Compile Include="AccesoADatos\clsGrupo.vb" />
     <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
     <Compile Include="AccesoADatos\clsInfoResumen.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
@@ -117,6 +121,7 @@
     <Compile Include="AccesoADatos\Listas\clsListaPrincipal.vb" />
     <Compile Include="AccesoADatos\Listas\clsListArticulos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListaStorage.vb" />
+    <Compile Include="AccesoADatos\Listas\clsListGrupos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListPagos.vb" />
     <Compile Include="AccesoADatos\Listas\clsListRelArtProd.vb" />
     <Compile Include="AccesoADatos\Listas\clsListStock.vb" />
@@ -207,6 +212,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modulos\clsComparar.vb" />
+    <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
     <Compile Include="Modulos\modCommon.vb" />
@@ -285,6 +291,7 @@
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoDatabase.datasource" />
+    <None Include="My Project\DataSources\manDB.clsInfoGrupo.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoPagos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoPrincipal.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoProducto.datasource" />
@@ -297,7 +304,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="logo.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libCommon\libCommon.vbproj">
       <Project>{92489aa4-b088-4573-9142-d9daa554bba0}</Project>

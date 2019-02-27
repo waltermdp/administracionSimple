@@ -4,6 +4,8 @@ Public Class frmVendedores
   Private m_objVendedorCurrent As manDB.clsInfoVendedor = Nothing
 
   Private m_Modo As Boolean = False
+  Private m_Grupos As New clsListGrupos
+
 
   Public Sub New(Optional ByVal vModo As Boolean = False)
 
@@ -23,6 +25,10 @@ Public Class frmVendedores
         btnBorrar.Visible = False
         btnLiquidar.Visible = True
       End If
+      m_Grupos.RefreshData()
+      cmbGrupo.DataSource = m_Grupos.Items ' [Enum].GetNames(GetType(GRUPOS))
+
+
       Call MostrarListaVendedores()
       Call Refresh_Selection(-1)
     Catch ex As Exception
@@ -119,11 +125,12 @@ Public Class frmVendedores
       If indice < 0 Then
         dgvListVendedores.ClearSelection()
         m_objVendedorCurrent = Nothing
+        cmbGrupo.SelectedIndex = Nothing
         Exit Sub
       End If
       If (indice >= 0) Then
         m_objVendedorCurrent = CType(dgvListVendedores.Rows(indice).DataBoundItem, manDB.clsInfoVendedor)
-
+        cmbGrupo.SelectedItem = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = m_objVendedorCurrent.Grupo.ToUpper) ' m_objVendedorCurrent.Grupo
       End If
       If dgvListVendedores.Rows(indice).Selected <> True Then
         dgvListVendedores.Rows(indice).Selected = True
@@ -220,6 +227,22 @@ Public Class frmVendedores
   Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
     Try
       Call MostrarListaVendedores()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub cmbGrupo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbGrupo.SelectedValueChanged
+    Try
+      If m_objVendedorCurrent Is Nothing Then Exit Sub
+      If m_objVendedorCurrent.Grupo = cmbGrupo.SelectedItem.ToString Then Exit Sub
+      m_objVendedorCurrent.Grupo = cmbGrupo.SelectedItem.ToString
+      Dim vResult As Result = clsVendedor.Save(m_objVendedorCurrent)
+      If vResult <> Result.OK Then
+        MsgBox("No se puedo guardar el grupo seleccionado")
+      End If
+      'Call Refresh_Selection(dgvListVendedores.SelectedRows(0).Index)
+      dgvListVendedores.Refresh()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

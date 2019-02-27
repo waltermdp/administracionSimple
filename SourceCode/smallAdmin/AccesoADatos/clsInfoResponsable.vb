@@ -37,9 +37,15 @@
   End Sub
 
   Public Overrides Function ToString() As String
+    If m_Codigo <> "--" AndAlso m_Codigo <> String.Empty Then
+      Return String.Format("{0},{1}", Nombre, Codigo)
+    Else
+      Return String.Format("{0}", Nombre)
+    End If
 
-    Return String.Format("{0},{1}", Nombre, Codigo)
 
   End Function
+
+
 
 End Class

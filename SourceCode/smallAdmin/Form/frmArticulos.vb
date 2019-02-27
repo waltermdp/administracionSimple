@@ -7,9 +7,9 @@ Public Class frmArticulos
   Private m_ObjCurrent As clsListaStorage
   Private m_listResponsables As New List(Of clsInfoResponsable)
   Private m_Skip As Boolean = False
-  Private m_Deposito As New clsInfoResponsable With {.Nombre = "Deposito", .GuidResponsable = New Guid("7b841601-2cd4-4e0e-b75b-b3a072b58eb1"), .Codigo = "0000"}
+  Private m_Deposito As manDB.clsInfoGrupo
   Private m_LastColumnEvent As DataGridViewCellMouseEventArgs = Nothing
-
+  Private m_Grupos As New clsListGrupos
 
   Private Sub frmArticulos_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
@@ -25,6 +25,8 @@ Public Class frmArticulos
                         "-: Resta 1 unidad al responsable, si el responsable es Stock entonces el stock descuenta en 1 unidad, si el responsable es otro entonces, descuenta una unidad al Responsable e incrementa a Stock" & vbNewLine & _
                         "Vendido: Resta una unidad al responsable" & vbNewLine & _
                         "Solo es posible seleccionar un responsable distinto de stock cuando esta seleccionado la opcion Articulo Distribuidos"
+      m_Grupos.RefreshData()
+      m_Deposito = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO")
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -73,7 +75,7 @@ Public Class frmArticulos
               auxArticulo.Cantidad += elemento.Cantidad
             End If
           Next
-          auxArticulo.GuidResponsable = m_Deposito.GuidResponsable
+          auxArticulo.GuidResponsable = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO").GuidGrupo  ' m_Deposito.GuidResponsable
           m_objStock.Add(auxArticulo)
         Else
           For Each elemento In m_ObjListaStock.Items
@@ -133,11 +135,11 @@ Public Class frmArticulos
       End If
       If (indice >= 0) Then
         m_ObjCurrent = CType(dgvStock.Rows(indice).DataBoundItem, clsListaStorage)
-        If rbtnResponsables.Checked = True AndAlso m_ObjCurrent.GuidResponsable <> m_Deposito.GuidResponsable Then
+        If rbtnResponsables.Checked = True AndAlso m_ObjCurrent.GuidResponsable <> m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO").GuidGrupo Then
           cmbResponsables.SelectedItem = m_listResponsables.First(Function(c) c.GuidResponsable = m_ObjCurrent.GuidResponsable)
         End If
-        If rbtnResponsables.Checked = True AndAlso m_ObjCurrent.GuidResponsable = m_Deposito.GuidResponsable AndAlso m_ObjCurrent.Cantidad = 0 Then
-          cmbResponsables.SelectedItem = m_listResponsables.First(Function(c) c.GuidResponsable = m_Deposito.GuidResponsable)
+        If rbtnResponsables.Checked = True AndAlso m_ObjCurrent.GuidResponsable = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO").GuidGrupo AndAlso m_ObjCurrent.Cantidad = 0 Then
+          cmbResponsables.SelectedItem = m_listResponsables.First(Function(c) c.GuidResponsable = m_Grupos.Items.First(Function(d) d.Nombre.ToUpper = "DEPOSITO").GuidGrupo)
         End If
       End If
       If dgvStock.Rows(indice).Selected <> True Then
@@ -368,9 +370,21 @@ Public Class frmArticulos
       m_listResponsables.Clear()
       Dim objlistVendedores As clsListVendedores = New clsListVendedores()
       objlistVendedores.RefreshData()
-      m_listResponsables.Add(m_Deposito)
+      'm_listResponsables.Add(m_Deposito)
       For Each vendedor In objlistVendedores.Items
-        m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = vendedor.ToString, .GuidResponsable = vendedor.GuidVendedor, .Codigo = vendedor.NumVendedor})
+
+        If vendedor.Grupo.ToUpper = "NINGUNO" Then 'Entorno.GRUPOS.NA.ToString Then
+          'agregar vendedor como responsable
+          m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = vendedor.ToString, .GuidResponsable = vendedor.GuidVendedor, .Codigo = vendedor.NumVendedor})
+        Else
+          If Not m_listResponsables.Exists(Function(c) c.Nombre = vendedor.Grupo) Then
+            'agregar grupo como responsable
+            Dim aux As manDB.clsInfoGrupo = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = vendedor.Grupo.ToUpper)
+
+            m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = aux.Nombre, .GuidResponsable = aux.GuidGrupo, .Codigo = ""})
+          End If
+        End If
+
       Next
       cmbResponsables.DataSource = m_listResponsables
       'TODO: llenar la lista
@@ -395,7 +409,7 @@ Public Class frmArticulos
 
         If m_ObjListaStock IsNot Nothing Then m_ObjListaStock.Dispose()
         m_ObjListaStock = New clsListStock
-        m_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & m_ObjCurrent.GuidArticulo.ToString & "} and GuidResponsable={" & m_Deposito.GuidResponsable.ToString & "} and Cantidad > 0"
+        m_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & m_ObjCurrent.GuidArticulo.ToString & "} and GuidResponsable={" & m_Deposito.GuidGrupo.ToString & "} and Cantidad > 0"
         m_ObjListaStock.RefreshData()
 
         If m_ObjListaStock.Items.Count > 0 Then
@@ -403,8 +417,8 @@ Public Class frmArticulos
           Dim GuidResponsable As Guid
           Dim Responsable As String
           If rbtnByStock.Checked = True Then
-            GuidResponsable = m_Deposito.GuidResponsable
-            Responsable = m_Deposito.Codigo
+            GuidResponsable = m_Deposito.GuidGrupo
+            Responsable = m_Deposito.Nombre
           Else
             If cmbResponsables.SelectedIndex < 0 Then Exit Sub
             GuidResponsable = CType(cmbResponsables.SelectedItem, clsInfoResponsable).GuidResponsable
@@ -430,7 +444,7 @@ Public Class frmArticulos
             ArticuloDelResponsable.Cantidad = 0
 
           End If
-          If GuidResponsable <> m_Deposito.GuidResponsable Then
+          If GuidResponsable <> m_Deposito.GuidGrupo Then
             If cCantidad > ArticuloDelDeposito.Cantidad Then
               MsgBox("No se mover esa cantidad al responsable, elija un valor menor o igual al maximo disponibles en stock")
               Exit Sub
@@ -443,13 +457,13 @@ Public Class frmArticulos
           clsStock.Save(ArticuloDelResponsable)
         Else
           'No existe en deposito
-          If m_ObjCurrent.GuidResponsable = m_Deposito.GuidResponsable Then
+          If m_ObjCurrent.GuidResponsable = m_Deposito.GuidGrupo Then
 
 
             Dim ArticuloNuevoEnStock As New manDB.clsInfoStock
             ArticuloNuevoEnStock.GuidArticulo = m_ObjCurrent.GuidArticulo
             ArticuloNuevoEnStock.Responsable = m_Deposito.ToString
-            ArticuloNuevoEnStock.GuidResponsable = m_Deposito.GuidResponsable
+            ArticuloNuevoEnStock.GuidResponsable = m_Deposito.GuidGrupo
             ArticuloNuevoEnStock.Cantidad = cCantidad
             clsStock.Save(ArticuloNuevoEnStock)
           End If
@@ -494,7 +508,7 @@ Public Class frmArticulos
         Dim GuidResponsable As Guid
         Dim Responsable As String
         If rbtnByStock.Checked = True Then
-          GuidResponsable = m_Deposito.GuidResponsable
+          GuidResponsable = m_Deposito.GuidGrupo
           Responsable = m_Deposito.ToString
         Else
           GuidResponsable = m_ObjCurrent.GuidResponsable
@@ -510,7 +524,7 @@ Public Class frmArticulos
 
           'Cargo el articulo del deposito
           m_ObjListaStock = New clsListStock
-          m_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & ArticuloDelResponsable.GuidArticulo.ToString & "} and GuidResponsable={" & m_Deposito.GuidResponsable.ToString & "}"
+          m_ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & ArticuloDelResponsable.GuidArticulo.ToString & "} and GuidResponsable={" & m_Deposito.GuidGrupo.ToString & "}"
           m_ObjListaStock.RefreshData()
           If m_ObjListaStock.Items.Count > 0 Then
             ArticuloDelDeposito = m_ObjListaStock.Items.First.Clone
@@ -524,7 +538,7 @@ Public Class frmArticulos
             Exit Sub
           End If
 
-          If GuidResponsable <> m_Deposito.GuidResponsable Then
+          If GuidResponsable <> m_Deposito.GuidGrupo Then
             'mover a deposito
             ArticuloDelDeposito.Cantidad += cCantidad
           End If
@@ -567,7 +581,7 @@ Public Class frmArticulos
         Dim GuidResponsable As Guid
         Dim Responsable As String
         If rbtnByStock.Checked = True Then
-          GuidResponsable = m_Deposito.GuidResponsable
+          GuidResponsable = m_Deposito.GuidGrupo
           Responsable = m_Deposito.ToString
         Else
           GuidResponsable = m_ObjCurrent.GuidResponsable

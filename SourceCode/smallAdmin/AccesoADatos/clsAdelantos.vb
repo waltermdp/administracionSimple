@@ -197,9 +197,6 @@ Public Class clsAdelantos
     End Try
   End Function
 
-
-
-
   Public Shared Function AdelantoIgualDataRow(ByRef vInfo As clsInfoAdelanto, ByVal vData As DataRow) As Result
     Try
       With vData
@@ -231,7 +228,7 @@ Public Class clsAdelantos
           Call Print_msg(ex.Message)
         End Try
 
-       
+
       End With
 
       Return Result.OK
@@ -240,7 +237,5 @@ Public Class clsAdelantos
       Return Result.ErrorEx
     End Try
   End Function
-
-
 
 End Class

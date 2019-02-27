@@ -53,6 +53,7 @@ Partial Class frmVendedores
     Me.Label2 = New System.Windows.Forms.Label()
     Me.btnBuscar = New System.Windows.Forms.Button()
     Me.txtFiltro = New System.Windows.Forms.TextBox()
+    Me.cmbGrupo = New System.Windows.Forms.ComboBox()
     CType(Me.dgvListVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -341,12 +342,21 @@ Partial Class frmVendedores
     Me.txtFiltro.Size = New System.Drawing.Size(319, 20)
     Me.txtFiltro.TabIndex = 33
     '
+    'cmbGrupo
+    '
+    Me.cmbGrupo.FormattingEnabled = True
+    Me.cmbGrupo.Location = New System.Drawing.Point(753, 96)
+    Me.cmbGrupo.Name = "cmbGrupo"
+    Me.cmbGrupo.Size = New System.Drawing.Size(206, 21)
+    Me.cmbGrupo.TabIndex = 35
+    '
     'frmVendedores
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.cmbGrupo)
     Me.Controls.Add(Me.btnBuscar)
     Me.Controls.Add(Me.txtFiltro)
     Me.Controls.Add(Me.Label2)
@@ -393,4 +403,5 @@ Partial Class frmVendedores
   Friend WithEvents EmailDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CategoriaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentarioDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents cmbGrupo As System.Windows.Forms.ComboBox
 End Class

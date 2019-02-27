@@ -1,6 +1,9 @@
 ﻿Imports libCommon.Comunes
 Module modFile
 
+
+
+
   Public Function Load(ByVal pathFile As String, ByRef rLista As List(Of String)) As libCommon.Comunes.Result
     Try
       Dim Fila As Integer
