@@ -69,15 +69,15 @@ Public Class frmVenta
       If m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing Then
         vResult = clsPersona.Load(m_Producto.GuidCliente, m_CurrentPersona)
         If vResult <> Result.OK Then
-          Call Print_msg("Falloo carga de cliente")
+          Call Print_msg("Fallo carga de cliente")
         End If
         vResult = clsVendedor.Load(m_Producto.GuidVendedor, m_CurrentVendedor)
         If vResult <> Result.OK Then
-          Call Print_msg("Falloo carga de vendedor")
+          Call Print_msg("Fallo carga de vendedor")
         End If
         vResult = clsPago.Load(m_Producto.ListaPagos, m_Producto.GuidProducto)
         If vResult <> Result.OK Then
-          Call Print_msg("Falloo carga de Pagos")
+          Call Print_msg("Fallo carga de Pagos")
         End If
         m_lstPagos = m_Producto.ListaPagos.ToList
         m_NumOperacion = m_lstPagos.Last.NumComprobante
@@ -86,12 +86,12 @@ Public Class frmVenta
 
         vResult = clsRelArtProd.Load(m_Producto.ListaArticulos, m_Producto.GuidProducto)
         If vResult <> Result.OK Then
-          Call Print_msg("Falloo carga de Articulos Vendidos")
+          Call Print_msg("Fallo carga de Articulos Vendidos")
         End If
 
         vResult = clsCuenta.Load(m_Producto.GuidCuenta, m_CurrentCuenta)
         If vResult <> Result.OK Then
-          Call Print_msg("Falloo carga de cuenta")
+          Call Print_msg("Fallo carga de cuenta")
         End If
 
 
@@ -403,7 +403,13 @@ Public Class frmVenta
         .ListaPagos = m_lstPagos.ToList
         .NumComprobante = CInt(txtNumVenta.Text)
       End With
-      
+
+      'Descontar los libros del vendedor y luego los del grupo, el resto marcar como debe, en esta venta.
+      For Each articulo In m_Producto.ListaArticulos
+
+      Next
+
+
 
       'Verificamos campos
       If m_CurrentPersona Is Nothing Then
@@ -449,6 +455,32 @@ Public Class frmVenta
 
 
       Me.Close()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub DescontarArticulos(ByVal vArticulos As List(Of clsInfoArticuloVendido))
+    Try
+      Dim ArtenStock As New clsListStock
+      ArtenStock.RefreshData()
+
+      For Each articuloVendido In vArticulos
+        'si el vendedor es responsable
+        If ArtenStock.Items.Exists(Function(c) (c.GuidResponsable = m_CurrentVendedor.GuidVendedor AndAlso c.GuidArticulo = articuloVendido.GuidArticulo)) Then
+          Dim auxArtStock As clsInfoStock = ArtenStock.Items.Find(Function(c) (c.GuidResponsable = m_CurrentVendedor.GuidVendedor AndAlso c.GuidArticulo = articuloVendido.GuidArticulo))
+          If auxArtStock.Cantidad >= articuloVendido.CantidadArticulos Then
+            'descontar y guardar
+          Else
+            'descontar los que se puedan, guardarlos y marcarcomo pendiente
+          End If
+        End If
+
+        If ArtenStock.Items.Exists(Function(c) (c.GuidResponsable = clsGrupo.GetByName(m_CurrentVendedor.Grupo) AndAlso c.GuidArticulo = articuloVendido.GuidArticulo)) Then
+          'esta contenido en el grupo
+        End If
+
+      Next
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -811,7 +843,8 @@ Public Class frmVenta
     End Try
   End Sub
 
- 
+
+
   'Private Sub cmbResponsables_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbResponsables.SelectedValueChanged
   '  Try
   '    If cmbResponsables.SelectedIndex < 0 Then Exit Sub

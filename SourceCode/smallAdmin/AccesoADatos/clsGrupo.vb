@@ -2,7 +2,7 @@
 Imports manDB
 Public Class clsGrupo
 
-  
+
 
   Public Shared Function Save(ByRef rObj As manDB.clsInfoGrupo) As libCommon.Comunes.Result
     Try
@@ -211,6 +211,71 @@ Public Class clsGrupo
       Return Result.ErrorEx
     End Try
 
+  End Function
+
+  Public Shared Function GetByName(ByVal Nombre As String) As Guid
+    Try
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+
+      Try
+        objDB = New libDB.clsAcceso
+
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        '--- Comando en DB -->
+        Dim strCommand As String
+
+        strCommand = "SELECT [IdGrupo] FROM [Grupos] WHERE [Nombre] = '" & Nombre & "'"
+        'strCommand = "SELECT [IdGrupo] FROM [Grupos] WHERE [GuidGrupo] = {" & vGrupo.GuidGrupo.ToString & "}"
+
+        Dim rID As Integer
+        objResult = objDB.EjecutarConsulta(strCommand, rID)
+        If objResult <> Result.OK Then Return Guid.Empty
+        '<-- Comando en DB ---
+        If rID > 0 Then
+          Dim dt As DataTable = Nothing
+          objResult = objDB.GetDato(strCommand, dt)
+
+          '--- Devuelvo OK cuando no hay resultados -->
+          If objResult = Result.NOK Then Return Guid.Empty
+          If objResult <> Result.OK Then Return Guid.Empty
+          '<-- Devuelvo OK cuando no hay resultados ---
+
+          '<-- Comando en DB ---
+          Dim vGrupo As New clsInfoGrupo
+          objResult = GrupoIgualDataRow(vGrupo, dt.Rows(0))
+          If objResult <> Result.OK Then Return Guid.Empty
+          Return vGrupo.GuidGrupo
+        Else
+          Return Guid.Empty
+        End If
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+
+        If objDB IsNot Nothing Then
+
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+
+        End If
+
+      End Try
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Guid.Empty
+    End Try
   End Function
 
   Public Shared Function Find(ByVal vGrupo As manDB.clsInfoGrupo) As Result
