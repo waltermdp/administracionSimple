@@ -137,6 +137,7 @@ Public Class frmArticulos
         m_ObjCurrent = CType(dgvStock.Rows(indice).DataBoundItem, clsListaStorage)
         If rbtnResponsables.Checked = True AndAlso m_ObjCurrent.GuidResponsable <> m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO").GuidGrupo Then
           cmbResponsables.SelectedItem = m_listResponsables.First(Function(c) c.GuidResponsable = m_ObjCurrent.GuidResponsable)
+
         End If
         If rbtnResponsables.Checked = True AndAlso m_ObjCurrent.GuidResponsable = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO").GuidGrupo AndAlso m_ObjCurrent.Cantidad = 0 Then
           cmbResponsables.SelectedItem = m_listResponsables.First(Function(c) c.GuidResponsable = m_Grupos.Items.First(Function(d) d.Nombre.ToUpper = "DEPOSITO").GuidGrupo)
@@ -368,24 +369,31 @@ Public Class frmArticulos
   Private Sub FillResponsables()
     Try
       m_listResponsables.Clear()
-      Dim objlistVendedores As clsListVendedores = New clsListVendedores()
-      objlistVendedores.RefreshData()
-      'm_listResponsables.Add(m_Deposito)
-      For Each vendedor In objlistVendedores.Items
+      'Dim objlistVendedores As clsListVendedores = New clsListVendedores()
+      'objlistVendedores.RefreshData()
 
-        If vendedor.Grupo.ToUpper = "NINGUNO" Then 'Entorno.GRUPOS.NA.ToString Then
-          'agregar vendedor como responsable
-          m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = vendedor.ToString, .GuidResponsable = vendedor.GuidVendedor, .Codigo = vendedor.NumVendedor})
-        Else
-          If Not m_listResponsables.Exists(Function(c) c.Nombre = vendedor.Grupo) Then
-            'agregar grupo como responsable
-            Dim aux As manDB.clsInfoGrupo = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = vendedor.Grupo.ToUpper)
-
-            m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = aux.Nombre, .GuidResponsable = aux.GuidGrupo, .Codigo = ""})
-          End If
-        End If
-
+      For Each grupo In m_Grupos.Items
+        m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = grupo.Nombre, .GuidResponsable = grupo.GuidGrupo, .Codigo = ""})
       Next
+      For Each responsable In m_ObjListaStock.Items
+        If m_listResponsables.Exists(Function(c) c.GuidResponsable = responsable.GuidResponsable) Then Continue For
+        m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = responsable.Responsable, .GuidResponsable = responsable.GuidResponsable, .Codigo = ""})
+      Next
+      'For Each vendedor In objlistVendedores.Items
+
+      '  If vendedor.Grupo.ToUpper = "NINGUNO" Then 'Entorno.GRUPOS.NA.ToString Then
+      '    'agregar vendedor como responsable
+      '    m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = vendedor.ToString, .GuidResponsable = vendedor.GuidVendedor, .Codigo = vendedor.NumVendedor})
+      '  Else
+      '    If Not m_listResponsables.Exists(Function(c) c.Nombre = vendedor.Grupo) Then
+      '      'agregar grupo como responsable
+      '      Dim aux As manDB.clsInfoGrupo = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = vendedor.Grupo.ToUpper)
+
+      '      m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = aux.Nombre, .GuidResponsable = aux.GuidGrupo, .Codigo = ""})
+      '    End If
+      '  End If
+
+      'Next
       cmbResponsables.DataSource = m_listResponsables
       'TODO: llenar la lista
     Catch ex As Exception
@@ -612,6 +620,16 @@ Public Class frmArticulos
     Try
       BindingSource1.DataSource = m_objStock.FindAll(Function(c) c.Responsable.ToUpper.Contains(txtFiltro.Text.ToUpper.Trim))
       BindingSource1.ResetBindings(False)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnGrupos_MouseClick(sender As Object, e As MouseEventArgs) Handles btnGrupos.MouseClick
+    Try
+      Using objForm As New frmVendedores
+        objForm.ShowDialog()
+      End Using
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

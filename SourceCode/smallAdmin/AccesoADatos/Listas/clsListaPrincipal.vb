@@ -123,6 +123,12 @@ Public Class clsListaPrincipal
             ElseIf Deben = "3" Then
               'Mostrar los productos con la cuota pagada
               If DebePeriodoActual(objPagos) = True Then Continue For 'todos los que ya pagaron este mes
+            ElseIf Deben = "4" Then
+              Dim consulta As String = ""
+              Dim lstEntregados As New clsListRelArtProd
+              lstEntregados.Cfg_Filtro = "where guidProducto={" & objInfoPrincipal.GuidProducto.ToString & "} and CantidadArticulos <> Entregados"
+              lstEntregados.RefreshData()
+              If lstEntregados.Items.Count <= 0 Then Continue For
             End If
 
             auxList.Add(objInfoPrincipal)

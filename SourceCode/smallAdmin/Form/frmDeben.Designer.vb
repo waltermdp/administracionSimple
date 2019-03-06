@@ -87,6 +87,7 @@ Partial Class frmDeben
     Me.tbBuscar = New System.Windows.Forms.TabPage()
     Me.tbResumen = New System.Windows.Forms.TabPage()
     Me.tbPagos = New System.Windows.Forms.TabPage()
+    Me.rbtnSinEntregar = New System.Windows.Forms.RadioButton()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -490,6 +491,7 @@ Partial Class frmDeben
     'gpxBuscar
     '
     Me.gpxBuscar.BackColor = System.Drawing.Color.White
+    Me.gpxBuscar.Controls.Add(Me.rbtnSinEntregar)
     Me.gpxBuscar.Controls.Add(Me.Panel1)
     Me.gpxBuscar.Controls.Add(Me.rbtnCuotaPagaron)
     Me.gpxBuscar.Controls.Add(Me.rbtnCancelados)
@@ -745,6 +747,17 @@ Partial Class frmDeben
     Me.tbPagos.Text = "Pagos - Cobros"
     Me.tbPagos.UseVisualStyleBackColor = True
     '
+    'rbtnSinEntregar
+    '
+    Me.rbtnSinEntregar.AutoSize = True
+    Me.rbtnSinEntregar.Location = New System.Drawing.Point(325, 76)
+    Me.rbtnSinEntregar.Name = "rbtnSinEntregar"
+    Me.rbtnSinEntregar.Size = New System.Drawing.Size(139, 19)
+    Me.rbtnSinEntregar.TabIndex = 64
+    Me.rbtnSinEntregar.TabStop = True
+    Me.rbtnSinEntregar.Text = "Articulos sin entregar"
+    Me.rbtnSinEntregar.UseVisualStyleBackColor = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -854,4 +867,5 @@ Partial Class frmDeben
   Friend WithEvents lblPagos As System.Windows.Forms.Label
   Friend WithEvents lblPrecioTotal As System.Windows.Forms.Label
   Friend WithEvents lblPrecioInteres As System.Windows.Forms.Label
+  Friend WithEvents rbtnSinEntregar As System.Windows.Forms.RadioButton
 End Class

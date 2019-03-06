@@ -99,3 +99,5 @@ c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\o
 c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.exe
 c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
 c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmResumen.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmTipoDeArchivo.resources
