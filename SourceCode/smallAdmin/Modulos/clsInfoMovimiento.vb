@@ -10,6 +10,7 @@
   Private m_Codigo As String
   Private m_Detalle As String
   Private m_CodigoDeALta As String
+
   Private m_Estado As libCommon.Comunes.E_EstadoPago
 
   Public Property Estado As libCommon.Comunes.E_EstadoPago

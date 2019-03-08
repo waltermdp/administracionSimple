@@ -117,6 +117,40 @@ Module modInOut
     End Try
   End Function
 
+  Public Function GetCuerpoFirstData(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoMovimiento)) As Result
+    Try
+
+      rMovimiento = New List(Of clsInfoMovimiento)
+      If vLineas.Count <= 0 Then Return Result.OK
+      'primer linea de header
+      'If vLineas.GetRange(1, vLineas.Count - 2).TrueForAll(Function(c) c.First = "1" AndAlso c.Last = "*") = False Then Return Result.NOK
+      Dim aux As String = String.Empty
+      Dim movimiento As clsInfoMovimiento
+      For Each linea In vLineas.GetRange(1, vLineas.Count - 8) ' header mas tail
+        movimiento = New clsInfoMovimiento
+        With movimiento
+          .NumeroTarjeta = linea.Substring(4, 16)
+          .IdentificadorDebito = linea.Substring(27, 12) 'Identificador
+          .Importe = linea.Substring(41, 11) 'Importe cobrado
+          .Param1 = linea.Substring(59, 2) 'codigo error
+          .Fecha = linea.Substring(112, 6) 'Fecha Compensacion
+          '.Param2 = linea.Substring(123, 9) 'Importe del vencimiento
+
+          '.Detalle = linea.Substring(143, 56) 'Detalle
+
+        End With
+        rMovimiento.Add(movimiento)
+      Next
+
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+
   Public Function SetCuerpo(ByRef rLineas As List(Of String), ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       If vMovimientos.Count <= 0 Then Return Result.OK

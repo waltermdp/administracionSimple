@@ -132,6 +132,7 @@ Public Class clsCobros
     End Try
   End Function
 
+  'Verificado
   Private Shared Function ExportarAVisaDebito(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim xls As New Excel.Application
@@ -167,7 +168,7 @@ Public Class clsCobros
 
     End Try
   End Function
-
+  'verificado
   Private Shared Function ExportarAVisaCredito(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim xls As New Excel.Application
@@ -201,6 +202,50 @@ Public Class clsCobros
     End Try
   End Function
 
+  Private Shared Function ExportAMaster(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim fechaPresentacion As Date = Date.Now
+      Dim lineas As New List(Of String)
+      'HEADER
+      Dim header As String = String.Empty
+      header += vMovimientos.First.Param1.PadLeft(8, "0")
+      header += "1" 'identificador fijo
+      header += fechaPresentacion.ToString("ddMMyy").PadLeft(6)
+      header += vMovimientos.Count.ToString.PadLeft(7, "0")
+      header += "0" 'signo
+      header += vMovimientos.Sum(Function(c) c.Importe).ToString.PadLeft(14, "0")
+      header += " ".PadLeft(91, " ")
+
+
+      lineas.Add(header)
+      Dim linea As String = String.Empty
+      For i As Integer = 0 To vMovimientos.Count - 1
+        linea = vMovimientos(i).Param1.PadLeft(8, "0")
+        linea += "2" 'Tipo de registro 2 o 3
+        linea += vMovimientos(i).NumeroTarjeta.PadLeft(16, "0")
+        linea += vMovimientos(i).IdentificadorDebito.PadLeft(12, "0")
+        linea += "1".PadLeft(3, "0")  'cuotas
+        linea += vMovimientos(i).Param2.PadLeft(3, "0") 'cuotas plan
+        linea += "01" 'frecuencia db
+        linea += vMovimientos(i).Importe.PadLeft(11, "0")
+        linea += "CRED".PadLeft(5, " ") 'periodo
+        linea += " "
+        linea += vMovimientos(i).Fecha.PadLeft(6)
+        linea += " ".PadLeft(40, " ") 'datos auxiliares
+        linea += " ".PadLeft(20, " ") 'filler
+        lineas.Add(linea)
+      Next
+      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
+      MsgBox("Finalizo exportacion a txt")
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  'no es real
   Private Shared Function ExportarACBU(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim lineas As New List(Of String)
@@ -237,6 +282,7 @@ Public Class clsCobros
     End Try
   End Function
 
+  'customizado
   Private Shared Function ExportAEfectivo(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim lineas As New List(Of String)
@@ -261,30 +307,7 @@ Public Class clsCobros
     End Try
   End Function
 
-  Private Shared Function ExportAMaster(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
-    Try
-      Dim lineas As New List(Of String)
-
-      lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
-      lineas.Add("NumComprobante;".PadLeft(15) & "Identificador;".PadLeft(14) & "Fecha;".PadLeft(12) & "Importe;".PadLeft(10))
-      Dim linea As String = String.Empty
-      For i As Integer = 0 To vMovimientos.Count - 1
-        linea = String.Format("{0};", vMovimientos(i).NumeroComprobante).PadLeft(15)
-        linea += String.Format("{0};", vMovimientos(i).IdentificadorDebito).PadLeft(14)
-        linea += String.Format("{0};", Today.ToString("dd/MM/yyyy")).PadLeft(12)
-        linea += String.Format("{0};", vMovimientos(i).Importe).PadLeft(10)
-        lineas.Add(linea)
-      Next
-      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
-      MsgBox("Finalizo exportacion a txt")
-
-      Return Result.OK
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Function
-
+  'customizado
   Private Shared Function ExportAMercadoPago(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim lineas As New List(Of String)
@@ -308,4 +331,5 @@ Public Class clsCobros
       Return Result.ErrorEx
     End Try
   End Function
+
 End Class

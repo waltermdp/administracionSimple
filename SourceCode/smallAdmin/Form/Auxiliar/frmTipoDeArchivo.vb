@@ -109,9 +109,9 @@ Public Class frmTipoDeArchivo
             GetCuerpoVISACredito(archivo, mov)
             'FillResumenView(mov)
           Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
-            MsgBox("No implementado")
-            DialogResult = Windows.Forms.DialogResult.Cancel
-            Exit Sub
+            GetCuerpoFirstData(archivo, mov)
+            'DialogResult = Windows.Forms.DialogResult.Cancel
+            'Exit Sub
           Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc")
             MsgBox("No implementado")
             DialogResult = Windows.Forms.DialogResult.Cancel
