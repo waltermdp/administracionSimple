@@ -75,6 +75,7 @@ Public Class clsRelArtProd
         rlistArticulos.Add(New clsInfoArticuloVendido)
         rlistArticulos.Last.copy(auxInfoArticulo)
         rlistArticulos.Last.CantidadArticulos = auxInfoRel.CantidadArticulos
+        rlistArticulos.Last.Entregados = auxInfoRel.Entregados
       Next
 
       Return Result.OK
@@ -98,7 +99,7 @@ Public Class clsRelArtProd
         If objResult <> Result.OK Then Exit Try
 
         For Each articulo In rListArticulos
-          objResult = SaveRel(objDB, articulo.GuidArticulo, vGuidProducto, articulo.CantidadArticulos)
+          objResult = SaveRel(objDB, articulo.GuidArticulo, vGuidProducto, articulo.CantidadArticulos, articulo.Entregados)
           If objResult <> Result.OK Then Exit For
         Next
 
@@ -129,7 +130,7 @@ Public Class clsRelArtProd
     End Try
   End Function
 
-  Private Shared Function SaveRel(ByVal vObjDB As libDB.clsAcceso, ByVal vGuidArticulo As Guid, ByVal vGuidProducto As Guid, ByVal vCantidadArticulos As Integer) As Result
+  Private Shared Function SaveRel(ByVal vObjDB As libDB.clsAcceso, ByVal vGuidArticulo As Guid, ByVal vGuidProducto As Guid, ByVal vCantidadArticulos As Integer, ByVal vEntregados As Integer) As Result
     Try
       Dim objResult As Result
 
@@ -149,13 +150,15 @@ Public Class clsRelArtProd
 
           strSQL.Append("[GuidArticulo],")
           strSQL.Append("[GuidProducto],")
-          strSQL.Append("[CantidadArticulos]")
+          strSQL.Append("[CantidadArticulos],")
+          strSQL.Append("[Entregados]")
 
           strSQL.Append(") VALUES (")
 
           strSQL.Append("""{" & vGuidArticulo.ToString & "}"",")
           strSQL.Append("""{" & vGuidProducto.ToString & "}"",")
-          strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos.ToString) & """")
+          strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos.ToString) & """,")
+          strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(vEntregados.ToString) & """")
 
           strSQL.Append(")")
 
@@ -176,7 +179,8 @@ Public Class clsRelArtProd
           strSQL.Append("UPDATE [RelArtProd] SET ")
           strSQL.Append("[GuidArticulo]=""{" & vGuidArticulo.ToString & "}"",")
           strSQL.Append("[GuidProducto]=""{" & vGuidProducto.ToString & "}"",")
-          strSQL.Append("[CantidadArticulos]=""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos) & """")
+          strSQL.Append("[CantidadArticulos]=""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos) & """,")
+          strSQL.Append("[Entregados]=""" & libDB.clsAcceso.Field_Correcting(vEntregados) & """")
           strSQL.Append(" WHERE [IdRel]=" & IdRel)
 
           objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)
@@ -195,7 +199,7 @@ Public Class clsRelArtProd
     End Try
   End Function
 
-  Private Shared Function RelArtProdIgualDataRow(ByRef vInfoArticulo As clsInfoRelArtProd, ByVal vData As DataRow) As Result
+  Public Shared Function RelArtProdIgualDataRow(ByRef vInfoArticulo As clsInfoRelArtProd, ByVal vData As DataRow) As Result
     Try
       With vData
         Try
@@ -220,12 +224,18 @@ Public Class clsRelArtProd
         End Try
 
         Try
-          vInfoArticulo.CantidadArticulos = CStr(IIf(IsDBNull(.Item("CantidadArticulos")), "", .Item("CantidadArticulos")))
+          vInfoArticulo.CantidadArticulos = CInt(IIf(IsDBNull(.Item("CantidadArticulos")), 0, .Item("CantidadArticulos")))
         Catch ex As Exception
-          vInfoArticulo.CantidadArticulos = ""
+          vInfoArticulo.CantidadArticulos = 0
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfoArticulo.Entregados = CInt(IIf(IsDBNull(.Item("Entregados")), 0, .Item("Entregados")))
+        Catch ex As Exception
+          vInfoArticulo.Entregados = 0
+          Call Print_msg(ex.Message)
+        End Try
       End With
 
       Return Result.OK

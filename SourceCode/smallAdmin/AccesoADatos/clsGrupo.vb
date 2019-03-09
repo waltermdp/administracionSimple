@@ -238,6 +238,7 @@ Public Class clsGrupo
         '<-- Comando en DB ---
         If rID > 0 Then
           Dim dt As DataTable = Nothing
+          strCommand = "SELECT * FROM [Grupos] WHERE [IdGrupo]=" & rID.ToString
           objResult = objDB.GetDato(strCommand, dt)
 
           '--- Devuelvo OK cuando no hay resultados -->

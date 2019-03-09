@@ -97,6 +97,8 @@ Public Class frmDeben
         m_objPrincipal.Deben = "2"
       ElseIf rbtnCuotaPagaron.Checked Then
         m_objPrincipal.Deben = "3"
+      ElseIf rbtnSinEntregar.Checked Then
+        m_objPrincipal.Deben = "4"
       Else
         m_objPrincipal.Cfg_Filtro = ""
         m_objPrincipal.Deben = "0"

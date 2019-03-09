@@ -55,8 +55,10 @@ Public Class frmVenta
       m_hayCambios = False
 
       ListView1.View = View.Details
-      ListView1.Columns(0).Width = CInt(0.7 * ListView1.Width)
-      ListView1.Columns(1).Width = ListView1.Width - ListView1.Columns(0).Width - 5
+      ListView1.Columns(0).Width = CInt(0.5 * ListView1.Width)
+      ListView1.Columns(1).Width = CInt(0.25 * ListView1.Width)
+      ListView1.Columns(2).Width = CInt(0.25 * ListView1.Width)
+
 
       Dim lstpagos As New clsListPagos
       lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
@@ -404,13 +406,6 @@ Public Class frmVenta
         .NumComprobante = CInt(txtNumVenta.Text)
       End With
 
-      'Descontar los libros del vendedor y luego los del grupo, el resto marcar como debe, en esta venta.
-      For Each articulo In m_Producto.ListaArticulos
-
-      Next
-
-
-
       'Verificamos campos
       If m_CurrentPersona Is Nothing Then
         MsgBox("No hay ningun Cliente seleccionado")
@@ -451,6 +446,9 @@ Public Class frmVenta
         MsgBox("Fallo save producto")
         Exit Sub
       End If
+
+      'Descontar los libros del vendedor y luego los del grupo, el resto marcar como debe, en esta venta.
+      DescontarArticulos(m_lstArticulosVendidos)
       Call AplicarPagoAdelantado()
 
 
@@ -462,23 +460,45 @@ Public Class frmVenta
 
   Private Sub DescontarArticulos(ByVal vArticulos As List(Of clsInfoArticuloVendido))
     Try
-      Dim ArtenStock As New clsListStock
-      ArtenStock.RefreshData()
+      Dim ArtParaVender As New clsListStock
+      ArtParaVender.RefreshData()
+      Dim lstResponsables As New List(Of Guid)
+      lstResponsables.Add(m_CurrentVendedor.GuidVendedor)
+      lstResponsables.Add(clsGrupo.GetByName(m_CurrentVendedor.Grupo))
+
 
       For Each articuloVendido In vArticulos
         'si el vendedor es responsable
-        If ArtenStock.Items.Exists(Function(c) (c.GuidResponsable = m_CurrentVendedor.GuidVendedor AndAlso c.GuidArticulo = articuloVendido.GuidArticulo)) Then
-          Dim auxArtStock As clsInfoStock = ArtenStock.Items.Find(Function(c) (c.GuidResponsable = m_CurrentVendedor.GuidVendedor AndAlso c.GuidArticulo = articuloVendido.GuidArticulo))
-          If auxArtStock.Cantidad >= articuloVendido.CantidadArticulos Then
-            'descontar y guardar
-          Else
-            'descontar los que se puedan, guardarlos y marcarcomo pendiente
-          End If
-        End If
+        Dim CantidadArticuloDebe As Integer = articuloVendido.Entregados
 
-        If ArtenStock.Items.Exists(Function(c) (c.GuidResponsable = clsGrupo.GetByName(m_CurrentVendedor.Grupo) AndAlso c.GuidArticulo = articuloVendido.GuidArticulo)) Then
-          'esta contenido en el grupo
-        End If
+        For Each responsable In lstResponsables
+          If ArtParaVender.Items.Exists(Function(c) (c.GuidResponsable = responsable AndAlso c.GuidArticulo = articuloVendido.GuidArticulo)) Then
+            Dim auxArtStock As clsInfoStock = ArtParaVender.Items.Find(Function(c) (c.GuidResponsable = responsable AndAlso c.GuidArticulo = articuloVendido.GuidArticulo))
+            If auxArtStock.Cantidad >= CantidadArticuloDebe Then
+              'descontar
+              auxArtStock.Cantidad = auxArtStock.Cantidad - CantidadArticuloDebe
+              CantidadArticuloDebe = 0
+            Else
+              'descontar los que se puedan
+              auxArtStock.Cantidad = 0
+              CantidadArticuloDebe = CantidadArticuloDebe - auxArtStock.Cantidad
+            End If
+            clsStock.Save(auxArtStock)
+            If CantidadArticuloDebe <= 0 Then Exit For
+          End If
+
+        Next
+        'If CantidadArticuloDebe > 0 Then
+        '  'La cantidad de articulos entregados es mayor a la cantidad de articulos diponibles en el grupo/vendedor, desea disminuir la cantidad de articulos entregados?
+        '  Dim mResult As MsgBoxResult = MsgBox("La cantidad de articulos entregados es mayor a la cantidad de articulos diponibles en el grupo/vendedor, desea disminuir la cantidad de articulos entregados?", MsgBoxStyle.YesNo)
+        '  If mResult = MsgBoxResult.Yes Then
+        '    articuloVendido.Entregados -= CantidadArticuloDebe
+        '    clsRelArtProd.Save()
+        '  End If
+
+        'End If
+
+
 
       Next
     Catch ex As Exception
@@ -677,10 +697,12 @@ Public Class frmVenta
       Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = (CType(lstArticulos.SelectedItem, clsInfoArticulos).GuidArticulo))
       If index >= 0 Then
         m_lstArticulosVendidos(index).CantidadArticulos += 1
+        m_lstArticulosVendidos(index).Entregados += 1
       Else
         Dim auxArticulo As New clsInfoArticuloVendido
         auxArticulo.copy(CType(lstArticulos.SelectedItem, clsInfoArticulos))
         auxArticulo.CantidadArticulos = 1
+        auxArticulo.Entregados = 1
         m_lstArticulosVendidos.Add(auxArticulo)
       End If
       Call FillListArticulosVendidos(m_lstArticulosVendidos)
@@ -694,11 +716,12 @@ Public Class frmVenta
     Try
 
       If ListView1.SelectedIndices.Count <= 0 Then Exit Sub
-      Dim sGuid As Guid = New Guid(ListView1.SelectedItems.Item(0).SubItems(2).Text)
+      Dim sGuid As Guid = New Guid(ListView1.SelectedItems.Item(0).SubItems(3).Text)
       Dim index As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = sGuid)
 
       If m_lstArticulosVendidos(index).CantidadArticulos > 1 Then
         m_lstArticulosVendidos(index).CantidadArticulos -= 1
+        m_lstArticulosVendidos(index).Entregados -= 1
       Else
         m_lstArticulosVendidos.RemoveAt(index)
       End If
@@ -710,17 +733,22 @@ Public Class frmVenta
     End Try
   End Sub
 
+
+
   Private Sub FillListArticulosVendidos(ByVal lstArticulosVendidos As List(Of clsInfoArticuloVendido))
     Try
       ListView1.Items.Clear()
+      pnlCtrlEntregados.Visible = False
       For Each articulo In lstArticulosVendidos
         Dim item As New ListViewItem
 
         item.Text = articulo.ToString
         item.SubItems.Add(articulo.CantidadArticulos.ToString)
+        item.SubItems.Add(articulo.Entregados.ToString)
         item.SubItems.Add(articulo.GuidArticulo.ToString)
         ListView1.Items.Add(item)
       Next
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -830,6 +858,59 @@ Public Class frmVenta
     End Try
   End Sub
 
+
+
+  Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+    Try
+      If ListView1.SelectedItems.Count > 0 Then
+        pnlCtrlEntregados.Visible = True
+        pnlCtrlEntregados.Location = New Point(pnlCtrlEntregados.Location.X, ListView1.Location.Y + ListView1.SelectedItems.Item(0).Position.Y)
+      Else
+        pnlCtrlEntregados.Visible = False
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub btnUP_MouseClick(sender As Object, e As MouseEventArgs) Handles btnUP.MouseClick
+    Try
+      If ListView1.SelectedItems.Count > 0 Then
+        Dim GuidArticulo As Guid = New Guid(ListView1.SelectedItems.Item(0).SubItems(3).Text)
+        Dim indice As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = GuidArticulo)
+
+        If m_lstArticulosVendidos(indice).Entregados < m_lstArticulosVendidos(indice).CantidadArticulos Then
+          m_lstArticulosVendidos(indice).Entregados += 1
+        Else
+          m_lstArticulosVendidos(indice).Entregados = m_lstArticulosVendidos(indice).CantidadArticulos
+        End If
+        Call FillListArticulosVendidos(m_lstArticulosVendidos)
+
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnDown_MouseDown(sender As Object, e As MouseEventArgs) Handles btnDown.MouseDown
+    Try
+      If ListView1.SelectedItems.Count > 0 Then
+        Dim GuidArticulo As Guid = New Guid(ListView1.SelectedItems.Item(0).SubItems(3).Text)
+        Dim indice As Integer = m_lstArticulosVendidos.FindIndex(Function(c) c.GuidArticulo = GuidArticulo)
+
+        If m_lstArticulosVendidos(indice).Entregados > 0 Then
+          m_lstArticulosVendidos(indice).Entregados -= 1
+        Else
+          m_lstArticulosVendidos(indice).Entregados = 0
+        End If
+        Call FillListArticulosVendidos(m_lstArticulosVendidos)
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub ListView1_LostFocus(sender As Object, e As EventArgs) Handles ListView1.LostFocus
     Try
 
@@ -862,4 +943,9 @@ Public Class frmVenta
   '    Call Print_msg(ex.Message)
   '  End Try
   'End Sub
+
+
+
+
+
 End Class
