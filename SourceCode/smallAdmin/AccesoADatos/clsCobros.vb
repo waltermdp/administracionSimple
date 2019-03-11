@@ -94,6 +94,7 @@ Public Class clsCobros
           Else
             .CodigoDeAlta = "E"
           End If
+          .Param2 = lstProducto.Items.First.TotalCuotas  'NUMERO TOTAL DE CUOTAS
         End With
         ListMov.Add(movimiento)
       Next
@@ -204,38 +205,44 @@ Public Class clsCobros
 
   Private Shared Function ExportAMaster(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
-      Dim fechaPresentacion As Date = Date.Now
+
       Dim lineas As New List(Of String)
+      'NUMERO DE COMERCIO
+      For Each item In vMovimientos
+        item.Param1 = "24063119"
+      Next
+      Dim periodo As String = Date.Now.ToString("MM/yy")
+
       'HEADER
       Dim header As String = String.Empty
-      header += vMovimientos.First.Param1.PadLeft(8, "0")
+      header += vMovimientos.First.Param1.PadLeft(8, "0") 'Numero de comercio
       header += "1" 'identificador fijo
-      header += fechaPresentacion.ToString("ddMMyy").PadLeft(6)
-      header += vMovimientos.Count.ToString.PadLeft(7, "0")
+      header += Date.Now.ToString("ddMMyy").PadLeft(6)
+      header += vMovimientos.Count.ToString.PadLeft(7, "0") 'Cantidad de registros
       header += "0" 'signo
-      header += vMovimientos.Sum(Function(c) c.Importe).ToString.PadLeft(14, "0")
+      header += vMovimientos.Sum(Function(c) c.Importe * 100).ToString.PadLeft(14, "0")
       header += " ".PadLeft(91, " ")
 
 
       lineas.Add(header)
       Dim linea As String = String.Empty
       For i As Integer = 0 To vMovimientos.Count - 1
-        linea = vMovimientos(i).Param1.PadLeft(8, "0")
+        linea = vMovimientos(i).Param1.PadLeft(8, "0") 'NUMERO DE COMERCIO
         linea += "2" 'Tipo de registro 2 o 3
         linea += vMovimientos(i).NumeroTarjeta.PadLeft(16, "0")
-        linea += vMovimientos(i).IdentificadorDebito.PadLeft(12, "0")
+        linea += vMovimientos(i).IdentificadorDebito.PadLeft(12, "0") 'NUMERO DE REFERENCIA' identificacion del socio
         linea += "1".PadLeft(3, "0")  'cuotas
-        linea += vMovimientos(i).Param2.PadLeft(3, "0") 'cuotas plan
-        linea += "01" 'frecuencia db
-        linea += vMovimientos(i).Importe.PadLeft(11, "0")
-        linea += "CRED".PadLeft(5, " ") 'periodo
+        linea += vMovimientos(i).Param2.PadLeft(3, "0") 'CUOTAS PLAN
+        linea += "01" 'FRECUENCIA DB
+        linea += (vMovimientos(i).Importe * 100).ToString.PadLeft(11, "0") 'IMPORTE
+        linea += periodo.PadLeft(5, " ") 'PERIODO
         linea += " "
-        linea += vMovimientos(i).Fecha.PadLeft(6)
+        linea += Date.Now.AddMonths(1).ToString("ddMMyy").PadLeft(6) 'FECHA VENCIMIENTO PAGO
         linea += " ".PadLeft(40, " ") 'datos auxiliares
         linea += " ".PadLeft(20, " ") 'filler
         lineas.Add(linea)
       Next
-      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, Now.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
       MsgBox("Finalizo exportacion a txt")
 
       Return Result.OK
