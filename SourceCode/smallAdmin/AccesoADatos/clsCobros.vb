@@ -136,6 +136,7 @@ Public Class clsCobros
   'Verificado
   Private Shared Function ExportarAVisaDebito(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
+      ExportVisaTXT(vMovimientos, "DEBLIQD")
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
@@ -157,7 +158,7 @@ Public Class clsCobros
       Finally
         workbook.Close(False)
       End Try
-      
+
 
 
       MsgBox("Finalizo exportacion a excel")
@@ -169,9 +170,68 @@ Public Class clsCobros
 
     End Try
   End Function
+
+  Private Shared Function ExportVisaTXT(ByVal vMovimientos As List(Of clsInfoMovimiento), ByVal constante As String) As Result
+    Try
+      Dim lineas As New List(Of String)
+      Dim aux As String = String.Empty
+      Dim FechaGeneracion As Date = Date.Now
+      'HEADER
+      aux = "0"
+      aux += constante.PadRight(8, " ")
+      aux += "40832883".PadLeft(10, "0") 'NUMERO DE ESTABLECIMIENTO 900000
+      aux += "900000".PadRight(10, " ")
+      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
+      aux += FechaGeneracion.ToString("hhmm").PadLeft(4)
+      aux += "0".PadLeft(1)
+      aux += " ".PadLeft(2, " ")
+      aux += " ".PadLeft(55, " ")
+      aux += "*".PadLeft(1)
+      lineas.Add(aux)
+
+      'BODY
+      For Each movimiento In vMovimientos
+        aux = "1"
+        aux += movimiento.NumeroTarjeta.PadLeft(16)
+        aux += " ".PadLeft(3, " ")
+        aux += movimiento.NumeroComprobante.PadLeft(8, "0")
+        aux += Today.ToString("yyyyMMdd").PadLeft(8)
+        aux += "0005".PadLeft(4)
+        aux += CInt(CSng(movimiento.Importe) * 100).ToString.PadLeft(15, "0")
+        aux += movimiento.IdentificadorDebito.PadLeft(15, "0")
+        aux += IIf(movimiento.CodigoDeAlta = "E", "E", " ").ToString
+        aux += " ".PadLeft(2, " ")
+        aux += " ".PadLeft(26, " ")
+        aux += "*".PadLeft(1)
+        lineas.Add(aux)
+      Next
+
+      'TAIL
+      aux = "9"
+      aux += constante.PadRight(8, " ")
+      aux += "40832883".PadLeft(10, "0") 'NUMERO DE ESTABLECIMIENTO
+      aux += "900000".PadRight(10, " ")
+      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
+      aux += FechaGeneracion.ToString("hhmm").PadLeft(4)
+      aux += vMovimientos.Count.ToString.PadLeft(7, "0")
+      aux += CInt(vMovimientos.Sum(Function(c) CSng(c.Importe)) * 100).ToString.PadLeft(15, "0")
+      aux += " ".PadLeft(36, " ")
+      aux += "*".PadLeft(1)
+      lineas.Add(aux)
+
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, FechaGeneracion.ToString("yyyyMMddhhmm") & "_" & constante & ".txt"), lineas)
+      Return vResult
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+
   'verificado
   Private Shared Function ExportarAVisaCredito(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
+      ExportVisaTXT(vMovimientos, "DEBLIQC")
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
@@ -187,6 +247,7 @@ Public Class clsCobros
           worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
           worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
         Next
+
         workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, Today.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
 
       Finally
@@ -238,7 +299,7 @@ Public Class clsCobros
         linea += periodo.PadLeft(5, " ") 'PERIODO
         linea += " "
         linea += Date.Now.AddMonths(1).ToString("ddMMyy").PadLeft(6) 'FECHA VENCIMIENTO PAGO
-        linea += " ".PadLeft(40, " ") 'datos auxiliares
+        linea += vMovimientos(i).NumeroComprobante.PadLeft(40, " ") 'datos auxiliares
         linea += " ".PadLeft(20, " ") 'filler
         lineas.Add(linea)
       Next

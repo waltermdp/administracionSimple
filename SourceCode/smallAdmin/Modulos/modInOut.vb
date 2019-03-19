@@ -129,13 +129,12 @@ Module modInOut
       For Each linea In vLineas.GetRange(1, vLineas.Count - 8) ' header mas tail
         movimiento = New clsInfoMovimiento
         With movimiento
-          .NumeroTarjeta = linea.Substring(4, 16)
-          .IdentificadorDebito = linea.Substring(27, 12) 'Identificador
-          .Importe = linea.Substring(41, 11) 'Importe cobrado
-          .Param1 = linea.Substring(59, 2) 'codigo error
-          .Fecha = linea.Substring(112, 6) 'Fecha Compensacion
-          '.Param2 = linea.Substring(123, 9) 'Importe del vencimiento
-
+          .NumeroTarjeta = linea.Substring(3, 16)
+          .IdentificadorDebito = linea.Substring(26, 12) 'Identificador
+          .Importe = linea.Substring(40, 11) 'Importe cobrado
+          .Codigo = linea.Substring(58, 2) 'codigo Rechazo
+          .NumeroComprobante = CInt(linea.Substring(71, 40)).ToString  'DATO AUXILIAR
+          .Fecha = linea.Substring(111, 6) 'Fecha Compensacion
           '.Detalle = linea.Substring(143, 56) 'Detalle
 
         End With

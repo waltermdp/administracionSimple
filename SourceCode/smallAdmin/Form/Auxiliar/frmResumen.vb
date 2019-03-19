@@ -34,18 +34,25 @@ Public Class frmResumen
 
       For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
         lstPagos = New clsListPagos
-        lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante
+        Dim Pago As New clsInfoPagos
+
+        If m_TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") Then
+          MsgBox("No se encuentra tipo de pago")
+          Me.Close()
+        End If
+
+        lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante & " and EstadoPago=0"
         lstPagos.RefreshData()
         If lstPagos.Items.Count = 0 Then
           MsgBox("No exite el comprobante " & mov.NumeroComprobante)
-          Exit Sub
+          Continue For
         End If
-        If lstPagos.Items.Count > 1 Then
-          MsgBox("Existe mas de un producto con el mismo comprobante " & mov.NumeroComprobante)
-          Exit Sub
-        End If
-        Dim Pago As New clsInfoPagos
+        'If lstPagos.Items.Count > 1 Then
+        '  MsgBox("Existe mas de un producto con el mismo comprobante " & mov.NumeroComprobante)
+        '  Exit Sub
+        'End If
         Pago = lstPagos.Items.First.Clone
+
         lstProducto = New clsListProductos
         lstProducto.Cfg_Filtro = "where GuidProducto={" & Pago.GuidProducto.ToString & "}"
         lstProducto.RefreshData()
@@ -114,9 +121,43 @@ Public Class frmResumen
       Dim item As ListViewItem
       For Each movimiento In vMovimientos
         item = New ListViewItem
-        item.Text = CInt(movimiento.NumeroComprobante).ToString
+        item.Text = CLng(movimiento.NumeroComprobante).ToString
         item.SubItems.Add(movimiento.NumeroTarjeta)
         If IsNumeric(movimiento.Codigo) Then
+          movimiento.Estado = E_EstadoPago.Debe
+          item.SubItems.Add(E_EstadoPago.Debe.ToString)
+        Else
+          movimiento.Estado = E_EstadoPago.Pago
+          item.SubItems.Add(E_EstadoPago.Pago.ToString)
+        End If
+        item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
+        item.SubItems.Add(movimiento.Detalle)
+        lstViewResumen.Items.Add(item)
+      Next
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    Finally
+
+    End Try
+  End Sub
+
+  Private Sub FillResumenViewMASTER(ByVal vMovimientos As List(Of clsInfoMovimiento))
+    Try
+      lstViewResumen.Clear()
+      lstViewResumen.MultiSelect = False
+      lstViewResumen.FullRowSelect = True
+      lstViewResumen.Columns.Add("NumComprobante")
+      lstViewResumen.Columns.Add("NumTarjeta")
+      lstViewResumen.Columns.Add("Estado")
+      lstViewResumen.Columns.Add("Importe")
+      lstViewResumen.Columns.Add("Detalle")
+      Dim item As ListViewItem
+      For Each movimiento In vMovimientos
+        item = New ListViewItem
+        item.Text = CInt(movimiento.NumeroComprobante).ToString
+        item.SubItems.Add(movimiento.NumeroTarjeta)
+        If movimiento.Codigo <> "00" Then
           movimiento.Estado = E_EstadoPago.Debe
           item.SubItems.Add(E_EstadoPago.Debe.ToString)
         Else
@@ -150,7 +191,7 @@ Public Class frmResumen
       For Each movimiento In vMovimientos
 
         item = New ListViewItem
-        item.Text = CInt(movimiento.IdentificadorDebito).ToString
+        item.Text = movimiento.IdentificadorDebito
         item.SubItems.Add(movimiento.NumeroTarjeta)
         If Not IsNumeric(movimiento.Importe) Then
           movimiento.Estado = E_EstadoPago.Debe
@@ -189,6 +230,8 @@ Public Class frmResumen
           FillResumenViewCBU(m_Movimientos)
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
           FillResumenView(m_Movimientos)
+        Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
+          FillResumenViewMASTER(m_Movimientos)
         Case Else
           MsgBox("No se encuentra tipo de pago")
           Me.Close()
