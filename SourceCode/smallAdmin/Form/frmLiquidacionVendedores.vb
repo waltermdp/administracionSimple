@@ -228,11 +228,11 @@ Public Class frmLiquidacionVendedores
 
       With m_Liq
         If chkZona.Checked Then .Zona = Zona * m_Liq.ImporteTotal / 100
-        .VLiquidadas50 = VLiquidadas50 * m_Liq.ImporteTotal / 100
-        .VLiquidadas70 = VLiquidadas70 * m_Liq.ImporteTotal / 100
-        .VLiquidadas90 = VLiquidadas90 * m_Liq.ImporteTotal / 100
-        .VLiquidadas110 = VLiquidadas110 * m_Liq.ImporteTotal / 100
-        .PremMen80Vent = PremMen80Vent * m_Liq.ImporteTotal / 100
+        If chk50.Checked Then .VLiquidadas50 = VLiquidadas50 * m_Liq.ImporteTotal / 100
+        If chk70.Checked Then .VLiquidadas70 = VLiquidadas70 * m_Liq.ImporteTotal / 100
+        If chk90.Checked Then .VLiquidadas90 = VLiquidadas90 * m_Liq.ImporteTotal / 100
+        If chk110.Checked Then .VLiquidadas110 = VLiquidadas110 * m_Liq.ImporteTotal / 100
+        If chkPremio80Vent.Checked Then .PremMen80Vent = PremMen80Vent * m_Liq.ImporteTotal / 100
         If chkCarpetaProb.Checked Then .CarpetaDeProb = CarpetaDeProb * m_Liq.ImporteTotal / 100
         If chkAuto.Checked Then .Auto = Auto * m_Liq.ImporteTotal / 100
         If chkVendedores.Checked Then .Vendedores = Vendedores * m_Liq.ImporteTotal / 100

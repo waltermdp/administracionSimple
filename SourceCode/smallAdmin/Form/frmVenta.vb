@@ -961,4 +961,16 @@ Public Class frmVenta
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub txtNumVenta_TextChanged(sender As Object, e As EventArgs) Handles txtNumVenta.TextChanged
+    Try
+      If Not IsNumeric(txtNumVenta.Text.Trim) Then
+        MsgBox("Solo ingresar numeros menores a " + Integer.MaxValue.ToString)
+      ElseIf CDbl(txtNumVenta.Text.Trim) >= Integer.MaxValue Then
+        MsgBox("Solo ingresar numeros menores a " + Integer.MaxValue.ToString)
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

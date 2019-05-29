@@ -37,12 +37,17 @@ Partial Class frmLiquidacionVendedores
     Me.chkVendedores = New System.Windows.Forms.CheckBox()
     Me.btnImprimir = New System.Windows.Forms.Button()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.chkCarpetaProb = New System.Windows.Forms.CheckBox()
     Me.lblAdelantos = New System.Windows.Forms.Label()
     Me.Label2 = New System.Windows.Forms.Label()
     Me.txtVale = New System.Windows.Forms.TextBox()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblTitulo = New System.Windows.Forms.Label()
-    Me.chkCarpetaProb = New System.Windows.Forms.CheckBox()
+    Me.chkPremio80Vent = New System.Windows.Forms.CheckBox()
+    Me.chk50 = New System.Windows.Forms.CheckBox()
+    Me.chk70 = New System.Windows.Forms.CheckBox()
+    Me.chk90 = New System.Windows.Forms.CheckBox()
+    Me.chk110 = New System.Windows.Forms.CheckBox()
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
@@ -186,6 +191,11 @@ Partial Class frmLiquidacionVendedores
     'GroupBox1
     '
     Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.chk110)
+    Me.GroupBox1.Controls.Add(Me.chk90)
+    Me.GroupBox1.Controls.Add(Me.chk70)
+    Me.GroupBox1.Controls.Add(Me.chk50)
+    Me.GroupBox1.Controls.Add(Me.chkPremio80Vent)
     Me.GroupBox1.Controls.Add(Me.chkCarpetaProb)
     Me.GroupBox1.Controls.Add(Me.lblAdelantos)
     Me.GroupBox1.Controls.Add(Me.Label2)
@@ -197,15 +207,26 @@ Partial Class frmLiquidacionVendedores
     Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.GroupBox1.Location = New System.Drawing.Point(196, 108)
     Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(625, 66)
+    Me.GroupBox1.Size = New System.Drawing.Size(924, 66)
     Me.GroupBox1.TabIndex = 48
     Me.GroupBox1.TabStop = False
     Me.GroupBox1.Text = "Aplicar"
     '
+    'chkCarpetaProb
+    '
+    Me.chkCarpetaProb.AutoSize = True
+    Me.chkCarpetaProb.BackColor = System.Drawing.Color.White
+    Me.chkCarpetaProb.Location = New System.Drawing.Point(244, 19)
+    Me.chkCarpetaProb.Name = "chkCarpetaProb"
+    Me.chkCarpetaProb.Size = New System.Drawing.Size(135, 19)
+    Me.chkCarpetaProb.TabIndex = 50
+    Me.chkCarpetaProb.Text = "Carpeta de Prob + 5"
+    Me.chkCarpetaProb.UseVisualStyleBackColor = False
+    '
     'lblAdelantos
     '
     Me.lblAdelantos.AutoSize = True
-    Me.lblAdelantos.Location = New System.Drawing.Point(241, 43)
+    Me.lblAdelantos.Location = New System.Drawing.Point(543, 20)
     Me.lblAdelantos.Name = "lblAdelantos"
     Me.lblAdelantos.Size = New System.Drawing.Size(74, 15)
     Me.lblAdelantos.TabIndex = 49
@@ -214,7 +235,7 @@ Partial Class frmLiquidacionVendedores
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(399, 21)
+    Me.Label2.Location = New System.Drawing.Point(742, 17)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(40, 15)
     Me.Label2.TabIndex = 48
@@ -222,7 +243,7 @@ Partial Class frmLiquidacionVendedores
     '
     'txtVale
     '
-    Me.txtVale.Location = New System.Drawing.Point(441, 17)
+    Me.txtVale.Location = New System.Drawing.Point(784, 13)
     Me.txtVale.Name = "txtVale"
     Me.txtVale.Size = New System.Drawing.Size(127, 21)
     Me.txtVale.TabIndex = 47
@@ -244,16 +265,60 @@ Partial Class frmLiquidacionVendedores
     Me.lblTitulo.Text = "VENDEDOR"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
-    'chkCarpetaProb
+    'chkPremio80Vent
     '
-    Me.chkCarpetaProb.AutoSize = True
-    Me.chkCarpetaProb.BackColor = System.Drawing.Color.White
-    Me.chkCarpetaProb.Location = New System.Drawing.Point(244, 19)
-    Me.chkCarpetaProb.Name = "chkCarpetaProb"
-    Me.chkCarpetaProb.Size = New System.Drawing.Size(135, 19)
-    Me.chkCarpetaProb.TabIndex = 50
-    Me.chkCarpetaProb.Text = "Carpeta de Prob + 5"
-    Me.chkCarpetaProb.UseVisualStyleBackColor = False
+    Me.chkPremio80Vent.AutoSize = True
+    Me.chkPremio80Vent.BackColor = System.Drawing.Color.White
+    Me.chkPremio80Vent.Location = New System.Drawing.Point(385, 19)
+    Me.chkPremio80Vent.Name = "chkPremio80Vent"
+    Me.chkPremio80Vent.Size = New System.Drawing.Size(152, 19)
+    Me.chkPremio80Vent.TabIndex = 51
+    Me.chkPremio80Vent.Text = "Premio mensual 80 vta"
+    Me.chkPremio80Vent.UseVisualStyleBackColor = False
+    '
+    'chk50
+    '
+    Me.chk50.AutoSize = True
+    Me.chk50.BackColor = System.Drawing.Color.White
+    Me.chk50.Location = New System.Drawing.Point(244, 41)
+    Me.chk50.Name = "chk50"
+    Me.chk50.Size = New System.Drawing.Size(80, 19)
+    Me.chk50.TabIndex = 52
+    Me.chk50.Text = "Vta Liq 50"
+    Me.chk50.UseVisualStyleBackColor = False
+    '
+    'chk70
+    '
+    Me.chk70.AutoSize = True
+    Me.chk70.BackColor = System.Drawing.Color.White
+    Me.chk70.Location = New System.Drawing.Point(342, 41)
+    Me.chk70.Name = "chk70"
+    Me.chk70.Size = New System.Drawing.Size(80, 19)
+    Me.chk70.TabIndex = 53
+    Me.chk70.Text = "Vta Liq 70"
+    Me.chk70.UseVisualStyleBackColor = False
+    '
+    'chk90
+    '
+    Me.chk90.AutoSize = True
+    Me.chk90.BackColor = System.Drawing.Color.White
+    Me.chk90.Location = New System.Drawing.Point(440, 41)
+    Me.chk90.Name = "chk90"
+    Me.chk90.Size = New System.Drawing.Size(80, 19)
+    Me.chk90.TabIndex = 54
+    Me.chk90.Text = "Vta Liq 90"
+    Me.chk90.UseVisualStyleBackColor = False
+    '
+    'chk110
+    '
+    Me.chk110.AutoSize = True
+    Me.chk110.BackColor = System.Drawing.Color.White
+    Me.chk110.Location = New System.Drawing.Point(526, 41)
+    Me.chk110.Name = "chk110"
+    Me.chk110.Size = New System.Drawing.Size(87, 19)
+    Me.chk110.TabIndex = 55
+    Me.chk110.Text = "Vta Liq 110"
+    Me.chk110.UseVisualStyleBackColor = False
     '
     'frmLiquidacionVendedores
     '
@@ -302,4 +367,9 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents lblAdelantos As System.Windows.Forms.Label
   Friend WithEvents lblTitulo As System.Windows.Forms.Label
   Friend WithEvents chkCarpetaProb As System.Windows.Forms.CheckBox
+  Friend WithEvents chkPremio80Vent As System.Windows.Forms.CheckBox
+  Friend WithEvents chk90 As System.Windows.Forms.CheckBox
+  Friend WithEvents chk70 As System.Windows.Forms.CheckBox
+  Friend WithEvents chk50 As System.Windows.Forms.CheckBox
+  Friend WithEvents chk110 As System.Windows.Forms.CheckBox
 End Class

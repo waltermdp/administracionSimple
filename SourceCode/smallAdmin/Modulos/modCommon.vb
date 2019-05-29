@@ -129,9 +129,14 @@ Module modCommon
 
   Public Function ConvStr2Dec(ByVal vText As String, ByRef rValor As Decimal) As Boolean
     Try
+      If Not IsNumeric(vText.Trim) Then Return False
 
-      Dim esCorrecto As Boolean = Decimal.TryParse(vText.Replace(".", ","), rValor)
-      If esCorrecto = False Then Return False
+      If Not Decimal.TryParse(vText.Trim, Globalization.NumberStyles.AllowDecimalPoint, Globalization.CultureInfo.InvariantCulture, rValor) Then
+        Return False
+      End If
+
+      'Dim esCorrecto As Boolean = Decimal.TryParse(vText, rValor)
+      'If esCorrecto = False Then Return False
 
       Dim auxString As String = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", Math.Truncate(rValor * 100) / 100)
       rValor = Math.Truncate(rValor * 100) / 100 ' FormatNumber(rValor, 2)

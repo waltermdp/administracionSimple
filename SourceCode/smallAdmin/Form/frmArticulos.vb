@@ -167,7 +167,9 @@ Public Class frmArticulos
     Try
       Dim m_CurrentSortColumn As DataGridViewColumn = dgvStock.Columns(e.ColumnIndex)
       m_LastColumnEvent = e
-
+      Cursor = Cursors.WaitCursor
+      Try
+      
       If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
@@ -186,7 +188,10 @@ Public Class frmArticulos
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
 
-      End If
+        End If
+      Finally
+        Cursor = Cursors.Default
+      End Try
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -257,6 +262,11 @@ Public Class frmArticulos
   Private Sub btnGuardar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnGuardar.MouseClick
     Try
       Call CargarData()
+      Dim auxD As Decimal = 0
+      If Not ConvStr2Dec(txtPrecio.Text.Trim, auxD) Then
+        MsgBox("El precio no corresponde a un valor valido")
+        Exit Sub
+      End If
       Dim aux As New manDB.clsInfoArticulos
       aux.GuidArticulo = m_ObjCurrent.GuidArticulo
       aux.Nombre = m_ObjCurrent.Nombre
