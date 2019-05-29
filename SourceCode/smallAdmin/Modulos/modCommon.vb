@@ -126,4 +126,19 @@ Module modCommon
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  Public Function ConvStr2Dec(ByVal vText As String, ByRef rValor As Decimal) As Boolean
+    Try
+
+      Dim esCorrecto As Boolean = Decimal.TryParse(vText.Replace(".", ","), rValor)
+      If esCorrecto = False Then Return False
+
+      Dim auxString As String = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", Math.Truncate(rValor * 100) / 100)
+      rValor = Math.Truncate(rValor * 100) / 100 ' FormatNumber(rValor, 2)
+      Return True
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
 End Module

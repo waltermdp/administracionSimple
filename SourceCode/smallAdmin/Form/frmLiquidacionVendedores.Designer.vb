@@ -42,6 +42,7 @@ Partial Class frmLiquidacionVendedores
     Me.txtVale = New System.Windows.Forms.TextBox()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblTitulo = New System.Windows.Forms.Label()
+    Me.chkCarpetaProb = New System.Windows.Forms.CheckBox()
     CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
@@ -185,6 +186,7 @@ Partial Class frmLiquidacionVendedores
     'GroupBox1
     '
     Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.chkCarpetaProb)
     Me.GroupBox1.Controls.Add(Me.lblAdelantos)
     Me.GroupBox1.Controls.Add(Me.Label2)
     Me.GroupBox1.Controls.Add(Me.txtVale)
@@ -212,7 +214,7 @@ Partial Class frmLiquidacionVendedores
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(241, 20)
+    Me.Label2.Location = New System.Drawing.Point(399, 21)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(40, 15)
     Me.Label2.TabIndex = 48
@@ -220,7 +222,7 @@ Partial Class frmLiquidacionVendedores
     '
     'txtVale
     '
-    Me.txtVale.Location = New System.Drawing.Point(283, 16)
+    Me.txtVale.Location = New System.Drawing.Point(441, 17)
     Me.txtVale.Name = "txtVale"
     Me.txtVale.Size = New System.Drawing.Size(127, 21)
     Me.txtVale.TabIndex = 47
@@ -241,6 +243,17 @@ Partial Class frmLiquidacionVendedores
     Me.lblTitulo.TabIndex = 49
     Me.lblTitulo.Text = "VENDEDOR"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
+    'chkCarpetaProb
+    '
+    Me.chkCarpetaProb.AutoSize = True
+    Me.chkCarpetaProb.BackColor = System.Drawing.Color.White
+    Me.chkCarpetaProb.Location = New System.Drawing.Point(244, 19)
+    Me.chkCarpetaProb.Name = "chkCarpetaProb"
+    Me.chkCarpetaProb.Size = New System.Drawing.Size(135, 19)
+    Me.chkCarpetaProb.TabIndex = 50
+    Me.chkCarpetaProb.Text = "Carpeta de Prob + 5"
+    Me.chkCarpetaProb.UseVisualStyleBackColor = False
     '
     'frmLiquidacionVendedores
     '
@@ -288,4 +301,5 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents txtVale As System.Windows.Forms.TextBox
   Friend WithEvents lblAdelantos As System.Windows.Forms.Label
   Friend WithEvents lblTitulo As System.Windows.Forms.Label
+  Friend WithEvents chkCarpetaProb As System.Windows.Forms.CheckBox
 End Class

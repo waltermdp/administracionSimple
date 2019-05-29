@@ -207,14 +207,16 @@ Public Class clsArticulo
             strSQL.Append("[GuidArticulo],")
             strSQL.Append("[Nombre],")
             strSQL.Append("[Codigo],")
-            strSQL.Append("[Descripcion]")
+            strSQL.Append("[Descripcion],")
+            strSQL.Append("[Precio]")
             
             strSQL.Append(") VALUES (")
 
             strSQL.Append("""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo) & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Precio) & """")
 
             strSQL.Append(")")
 
@@ -236,7 +238,8 @@ Public Class clsArticulo
             strSQL.Append("[GuidArticulo]=""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("[Nombre]=""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("[Codigo]=""" & libDB.clsAcceso.Field_Correcting(.Codigo) & """,")
-            strSQL.Append("[Descripcion]=""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """")
+            strSQL.Append("[Descripcion]=""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """,")
+            strSQL.Append("[Precio]=""" & libDB.clsAcceso.Field_Correcting(.Precio) & """")
 
             strSQL.Append(" WHERE [IdArticulo]=" & .IdArticulo)
 
@@ -381,6 +384,13 @@ Public Class clsArticulo
           vInfoArticulo.Descripcion = CStr(IIf(IsDBNull(.Item("Descripcion")), "", .Item("Descripcion")))
         Catch ex As Exception
           vInfoArticulo.Descripcion = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoArticulo.Precio = CDec(IIf(IsDBNull(.Item("Precio")), 0, .Item("Precio")))
+        Catch ex As Exception
+          vInfoArticulo.Precio = 0
           Call Print_msg(ex.Message)
         End Try
 

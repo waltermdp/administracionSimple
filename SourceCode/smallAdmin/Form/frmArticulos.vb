@@ -51,6 +51,7 @@ Public Class frmArticulos
       m_ObjListaStock = New clsListStock
       bsArticulos.DataSource = m_objArticulosList.Binding
 
+      'm_objArticulosList.Cfg_Orden = "ORDER BY Codigo ASC"
       Call ArticulosList_RefreshData()
       Call ListaStock_RefreshData()
       'Las listas de los articulos y la del stock estan actualizadas
@@ -68,6 +69,7 @@ Public Class frmArticulos
         auxArticulo.Nombre = item.Nombre
         auxArticulo.Codigo = item.Codigo
         auxArticulo.Descripcion = item.Descripcion
+        auxArticulo.Precio = item.Precio
 
         If rbtnByStock.Checked Then
           For Each elemento In m_ObjListaStock.Items
@@ -89,9 +91,13 @@ Public Class frmArticulos
             End If
           Next
         End If
-
-
       Next
+      If rbtnByStock.Checked Then
+        m_objStock.Sort(Function(x, y) x.Codigo.CompareTo(y.Codigo))
+      Else
+        m_objStock.Sort(Function(x, y) x.Responsable.CompareTo(y.Responsable))
+      End If
+
       If txtFiltro.Enabled Then
         If Not String.IsNullOrEmpty(txtFiltro.Text.Trim) Then
           BindingSource1.DataSource = m_objStock.FindAll(Function(c) c.Responsable.ToUpper.Contains(txtFiltro.Text.ToUpper.Trim))
@@ -256,6 +262,7 @@ Public Class frmArticulos
       aux.Nombre = m_ObjCurrent.Nombre
       aux.Codigo = m_ObjCurrent.Codigo
       aux.Descripcion = m_ObjCurrent.Descripcion
+      aux.Precio = m_ObjCurrent.Precio
       If clsArticulo.Save(aux) <> Result.OK Then
         MsgBox("No se puede guardar vendedor en la Base de Datos")
         Exit Sub
@@ -286,6 +293,8 @@ Public Class frmArticulos
         If .Codigo = "" Then .Codigo = "--"
         .Descripcion = txtDescripcion.Text.Trim
         If .Descripcion = "" Then .Descripcion = "--"
+        .Precio = 0
+        ConvStr2Dec(txtPrecio.Text.Trim, .Precio)
 
       End With
     Catch ex As Exception
@@ -300,6 +309,7 @@ Public Class frmArticulos
         txtNombre.Text = .Nombre
         txtCodigo.Text = .Codigo
         txtDescripcion.Text = .Descripcion
+        txtPrecio.Text = .Precio
       End With
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -311,6 +321,7 @@ Public Class frmArticulos
 
       txtNombre.ReadOnly = Not permitir
       txtCodigo.ReadOnly = Not permitir
+      txtPrecio.ReadOnly = Not permitir
       txtDescripcion.ReadOnly = Not permitir
       btnNuevo.Visible = Not permitir
       btnEditar.Visible = Not permitir
@@ -321,11 +332,13 @@ Public Class frmArticulos
       If permitir Then
         txtNombre.BackColor = Color.White
         txtCodigo.BackColor = Color.White
+        txtPrecio.BackColor = Color.White
         txtDescripcion.BackColor = Color.White
       Else
         txtNombre.BackColor = SystemColors.Control
         txtCodigo.BackColor = SystemColors.Control
         txtDescripcion.BackColor = SystemColors.Control
+        txtPrecio.BackColor = SystemColors.Control
       End If
       GroupBox1.Enabled = Not permitir
       GroupBox2.Enabled = Not permitir
@@ -349,17 +362,22 @@ Public Class frmArticulos
     Try
       cmbResponsables.Enabled = rbtnResponsables.Checked
       txtFiltro.Enabled = rbtnResponsables.Checked
-      
+
+      'dgvStock.Columns("Responsable").Visible = rbtnResponsables.Checked
+
       If rbtnResponsables.Checked = False Then
         cmbResponsables.SelectedIndex = 0
       End If
+
       For Each column As DataGridViewColumn In dgvStock.Columns
         If column.DataPropertyName = "Responsable" Then
           column.Visible = rbtnResponsables.Checked
         End If
       Next
 
+
       Call MostrarListaArticulos()
+     
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -369,8 +387,7 @@ Public Class frmArticulos
   Private Sub FillResponsables()
     Try
       m_listResponsables.Clear()
-      'Dim objlistVendedores As clsListVendedores = New clsListVendedores()
-      'objlistVendedores.RefreshData()
+
 
       For Each grupo In m_Grupos.Items
         m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = grupo.Nombre, .GuidResponsable = grupo.GuidGrupo, .Codigo = ""})
@@ -379,23 +396,9 @@ Public Class frmArticulos
         If m_listResponsables.Exists(Function(c) c.GuidResponsable = responsable.GuidResponsable) Then Continue For
         m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = responsable.Responsable, .GuidResponsable = responsable.GuidResponsable, .Codigo = ""})
       Next
-      'For Each vendedor In objlistVendedores.Items
-
-      '  If vendedor.Grupo.ToUpper = "NINGUNO" Then 'Entorno.GRUPOS.NA.ToString Then
-      '    'agregar vendedor como responsable
-      '    m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = vendedor.ToString, .GuidResponsable = vendedor.GuidVendedor, .Codigo = vendedor.NumVendedor})
-      '  Else
-      '    If Not m_listResponsables.Exists(Function(c) c.Nombre = vendedor.Grupo) Then
-      '      'agregar grupo como responsable
-      '      Dim aux As manDB.clsInfoGrupo = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = vendedor.Grupo.ToUpper)
-
-      '      m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = aux.Nombre, .GuidResponsable = aux.GuidGrupo, .Codigo = ""})
-      '    End If
-      '  End If
-
-      'Next
+     
       cmbResponsables.DataSource = m_listResponsables
-      'TODO: llenar la lista
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

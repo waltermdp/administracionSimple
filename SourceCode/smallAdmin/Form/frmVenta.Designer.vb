@@ -92,6 +92,7 @@ Partial Class frmVenta
     Me.Label12 = New System.Windows.Forms.Label()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+    Me.tTip = New System.Windows.Forms.ToolTip(Me.components)
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpVenta.SuspendLayout()
@@ -909,4 +910,5 @@ Partial Class frmVenta
   Friend WithEvents pnlCtrlEntregados As System.Windows.Forms.Panel
   Friend WithEvents btnUP As System.Windows.Forms.Button
   Friend WithEvents btnDown As System.Windows.Forms.Button
+  Friend WithEvents tTip As System.Windows.Forms.ToolTip
 End Class

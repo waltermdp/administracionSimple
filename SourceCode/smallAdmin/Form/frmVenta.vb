@@ -58,6 +58,8 @@ Public Class frmVenta
       ListView1.Columns(0).Width = CInt(0.5 * ListView1.Width)
       ListView1.Columns(1).Width = CInt(0.25 * ListView1.Width)
       ListView1.Columns(2).Width = CInt(0.25 * ListView1.Width)
+      ListView1.ShowItemToolTips = True
+
 
 
       Dim lstpagos As New clsListPagos
@@ -237,7 +239,7 @@ Public Class frmVenta
       Try
         Dim auxValue As String = CType(sender, TextBox).Text
         Dim Precio As Decimal
-        If text2decimal(auxValue, Precio) Then
+        If ConvStr2Dec(auxValue, Precio) Then
           'El valor ingresado es valido
           Dim NCuotas As Integer
           If cmbCuotas.SelectedIndex >= 0 Then
@@ -277,7 +279,7 @@ Public Class frmVenta
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
       If chkEditarCuotas.Checked = False Then
         Dim precio As Decimal
-        text2decimal(txtPrecio.Text, precio)
+        ConvStr2Dec(txtPrecio.Text, precio)
 
         txtValorCuota.Text = CuotasIguales(Precio, Cuota.Cantidad).tostring
       Else
@@ -293,19 +295,7 @@ Public Class frmVenta
 
 
 
-  Private Function text2decimal(ByVal vText As String, ByRef rValor As Decimal) As Boolean
-    Try
-      Dim esCorrecto As Boolean = Decimal.TryParse(vText, rValor)
-      If esCorrecto = False Then Return False
-
-      Dim auxString As String = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", rValor)
-      rValor = FormatNumber(rValor, 2)
-      Return True
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return False
-    End Try
-  End Function
+  
 
   Private Sub GenerarPlanCuotas()
     Try
@@ -318,9 +308,9 @@ Public Class frmVenta
 
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
       Dim Precio As Decimal
-      text2decimal(txtPrecio.Text, Precio)
+      ConvStr2Dec(txtPrecio.Text, Precio)
       Dim ValorCuota As Decimal
-      text2decimal(txtValorCuota.Text, ValorCuota)
+      ConvStr2Dec(txtValorCuota.Text, ValorCuota)
       Dim auxPago As New clsInfoPagos
 
       Dim numProxCouta As Integer = 1
@@ -361,7 +351,7 @@ Public Class frmVenta
     Try
       Dim valorCuota As Decimal
       If cuotas = 0 Then cuotas = 1
-      text2decimal(CDec(vPrecio / cuotas).ToString, valorCuota)
+      ConvStr2Dec(CDec(vPrecio / cuotas).ToString, valorCuota)
       Return valorCuota
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -512,8 +502,8 @@ Public Class frmVenta
         If CDec(txtAdelanto.Text) <= 0 Then Exit Sub
         Dim AdelantoCuota As Decimal
         Dim AdelantoVendedor As Decimal
-        text2decimal(txtAdelanto.Text, AdelantoCuota)
-        text2decimal(txtAdelantoVendedor.Text, AdelantoVendedor)
+        ConvStr2Dec(txtAdelanto.Text, AdelantoCuota)
+        ConvStr2Dec(txtAdelantoVendedor.Text, AdelantoVendedor)
         Dim Vencimiento As Date
        
 
@@ -785,7 +775,7 @@ Public Class frmVenta
       txtValorCuota.Enabled = chkEditarCuotas.Checked
       If chkEditarCuotas.Checked = False Then
         Dim precio As Decimal
-        text2decimal(txtPrecio.Text, precio)
+        ConvStr2Dec(txtPrecio.Text, precio)
         txtValorCuota.Text = CuotasIguales(precio, CType(cmbCuotas.SelectedItem, clsCuota).Cantidad).ToString
         Call GenerarPlanCuotas()
       End If
@@ -799,7 +789,7 @@ Public Class frmVenta
       If chkEditarCuotas.Checked = True Then
         Dim auxValue As String = CType(sender, TextBox).Text
         Dim dec As Decimal
-        If text2decimal(auxValue, dec) Then
+        If ConvStr2Dec(auxValue, dec) Then
           Call GenerarPlanCuotas()
         End If
       End If
@@ -862,6 +852,7 @@ Public Class frmVenta
 
   Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
     Try
+
       If ListView1.SelectedItems.Count > 0 Then
         pnlCtrlEntregados.Visible = True
         pnlCtrlEntregados.Location = New Point(pnlCtrlEntregados.Location.X, ListView1.Location.Y + ListView1.SelectedItems.Item(0).Position.Y)
@@ -947,5 +938,27 @@ Public Class frmVenta
 
 
 
+  Private m_index As Integer = -1
+  
+  Private Sub lstArticulos_MouseMove1(sender As Object, e As MouseEventArgs) Handles lstArticulos.MouseMove
+    Try
 
+      Dim index As Integer = lstArticulos.IndexFromPoint(e.Location)
+      If m_index = index Then Exit Sub
+      If index < 0 Then Exit Sub
+      m_index = index
+      Dim itemOver As clsInfoArticulos = CType(lstArticulos.Items(index), clsInfoArticulos)
+      If itemOver.ToString.Length <= 30 Then
+        tTip.RemoveAll()
+        Exit Sub
+      End If
+
+      tTip.SetToolTip(lstArticulos, itemOver.ToString)
+
+
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

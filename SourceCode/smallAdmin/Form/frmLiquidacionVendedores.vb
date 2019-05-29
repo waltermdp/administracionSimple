@@ -233,7 +233,7 @@ Public Class frmLiquidacionVendedores
         .VLiquidadas90 = VLiquidadas90 * m_Liq.ImporteTotal / 100
         .VLiquidadas110 = VLiquidadas110 * m_Liq.ImporteTotal / 100
         .PremMen80Vent = PremMen80Vent * m_Liq.ImporteTotal / 100
-        .CarpetaDeProb = CarpetaDeProb * m_Liq.ImporteTotal / 100
+        If chkCarpetaProb.Checked Then .CarpetaDeProb = CarpetaDeProb * m_Liq.ImporteTotal / 100
         If chkAuto.Checked Then .Auto = Auto * m_Liq.ImporteTotal / 100
         If chkVendedores.Checked Then .Vendedores = Vendedores * m_Liq.ImporteTotal / 100
         If chkAguinaldo.Checked Then .Aguinaldo = Aguinaldo * m_Liq.ImporteTotal / 100

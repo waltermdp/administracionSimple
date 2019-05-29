@@ -1,5 +1,6 @@
 ﻿Public Class clsListaStorage
   Implements ICloneable
+  Implements IComparable(Of clsListaStorage)
 
   Private m_Nombre As String
   Private m_Codigo As String
@@ -8,6 +9,7 @@
   Private m_GuidResponsable As Guid
   Private m_GuidArticulo As Guid
   Private m_Cantidad As Integer
+  Private m_Precio As Decimal
 
 
 
@@ -75,6 +77,15 @@
     End Set
   End Property
 
+  Public Property Precio As Decimal
+    Get
+      Return m_Precio
+    End Get
+    Set(value As Decimal)
+      m_Precio = value
+    End Set
+  End Property
+
   Public Sub New()
     GuidArticulo = Nothing
     Nombre = "--"
@@ -83,6 +94,7 @@
     Responsable = "--"
     Cantidad = 0
     GuidResponsable = Nothing
+    Precio = 0
   End Sub
 
   Public Overrides Function Equals(obj As Object) As Boolean
@@ -105,4 +117,14 @@
   End Function
 
 #End Region
+
+  Public Function CompareTo(ByVal other As clsListaStorage) As Integer Implements IComparable(Of clsListaStorage).CompareTo
+    Return Responsable.CompareTo(other.Responsable)
+    '=0
+    'own < other return -1
+    'own > other return 1
+    
+  End Function
+
+
 End Class

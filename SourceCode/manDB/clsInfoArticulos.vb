@@ -6,6 +6,7 @@
   Private m_Nombre As String
   Private m_Codigo As String
   Private m_Descripcion As String
+  Private m_Precio As Decimal
 
   Public Property IdArticulo As Integer
     Get
@@ -34,6 +35,15 @@
     End Set
   End Property
 
+  Public Property Precio As Decimal
+    Get
+      Return m_Precio
+    End Get
+    Set(value As Decimal)
+      m_Precio = value
+    End Set
+  End Property
+
   Public Property Codigo As String
     Get
       Return m_Codigo
@@ -58,7 +68,7 @@
     Nombre = "--"
     Codigo = "--"
     Descripcion = "--"
-
+    Precio = 0
   End Sub
 
 #Region "Overrides"
