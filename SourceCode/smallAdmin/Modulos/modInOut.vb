@@ -49,18 +49,21 @@ Module modInOut
         movimiento = New clsInfoMovimiento
         With movimiento
           .NumeroTarjeta = linea.Substring(26, 16) 'num tar
-          '.NumeroComprobante = linea.Substring(20, 8) 'num comprobante
-          '.Fecha = linea.Substring(28, 8) 'fecha
+          .NumeroComprobante = linea.Substring(42, 8) 'num comprobante
+          .Fecha = linea.Substring(224, 6) 'fecha
           'aux = linea.Substring(36, 4) 'c transac = 0005
           .Importe = linea.Substring(62, 15) 'importe incluye 2 dec
-          .IdentificadorDebito = linea.Substring(79, 15) 'identificador debito
+          .IdentificadorDebito = linea.Substring(94, 15) 'identificador debito
           ''11 espacios
           '.Param1 = linea.Substring(81, 1) 'param1
           ''2 espacio 
           '.Param2 = linea.Substring(84, 1) 'param2
           ''15 espacios
-          '.Codigo = linea.Substring(100, 3) 'codigo
-          '.Detalle = linea.Substring(103, 46) 'descripcion OJO no se si es hasta el final o hay espacion fijo en el final
+          .Codigo = linea.Substring(129, 1) 'estado del movimiento 
+          .Param1 = linea.Substring(130, 2) 'yy: Rechazo Código Motivo 1
+          .Detalle = linea.Substring(132, 29) 'descripcion 1 del codigo 1
+
+
         End With
         rMovimiento.Add(movimiento)
       Next

@@ -35,6 +35,14 @@ Public Class frmResumen
       For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
         lstPagos = New clsListPagos
         Dim Pago As New clsInfoPagos
+        If CInt(mov.NumeroComprobante) = 6251 Then
+          Dim j = 9
+
+        End If
+        If CInt(mov.NumeroComprobante) = 6165 Then
+          Dim j = 9
+
+        End If
 
         If m_TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") Then
           MsgBox("No se encuentra tipo de pago")
@@ -142,6 +150,41 @@ Public Class frmResumen
     End Try
   End Sub
 
+  Private Sub FillResumenViewVisaCredito(ByVal vMovimientos As List(Of clsInfoMovimiento))
+    Try
+      lstViewResumen.Clear()
+      lstViewResumen.MultiSelect = False
+      lstViewResumen.FullRowSelect = True
+      lstViewResumen.Columns.Add("Identificado")
+      lstViewResumen.Columns.Add("NumComprobante")
+      lstViewResumen.Columns.Add("NumTarjeta")
+      lstViewResumen.Columns.Add("Importe")
+      lstViewResumen.Columns.Add("Estado")
+      lstViewResumen.Columns.Add("Detalle")
+      Dim item As ListViewItem
+      For Each movimiento In vMovimientos
+        item = New ListViewItem
+        item.Text = CLng(movimiento.IdentificadorDebito).ToString
+        item.SubItems.Add(CLng(movimiento.NumeroComprobante).ToString)
+        item.SubItems.Add(movimiento.NumeroTarjeta)
+        item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
+        If CInt(movimiento.Codigo) = 0 Then
+          movimiento.Estado = E_EstadoPago.Pago
+        Else
+          movimiento.Estado = E_EstadoPago.Debe
+        End If
+        item.SubItems.Add(movimiento.Estado.ToString)
+        item.SubItems.Add(movimiento.Detalle)
+        lstViewResumen.Items.Add(item)
+      Next
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    Finally
+
+    End Try
+  End Sub
+
   Private Sub FillResumenViewMASTER(ByVal vMovimientos As List(Of clsInfoMovimiento))
     Try
       lstViewResumen.Clear()
@@ -229,7 +272,7 @@ Public Class frmResumen
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
           FillResumenViewCBU(m_Movimientos)
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-          FillResumenView(m_Movimientos)
+          FillResumenViewVisaCredito(m_Movimientos)
         Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
           FillResumenViewMASTER(m_Movimientos)
         Case Else
