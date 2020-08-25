@@ -17,7 +17,7 @@ Public Class frmConfig
       Dim vResult As libCommon.Comunes.Result
       Dim lstPago As New List(Of manDB.clsInfoPagos)
       Dim aux As New clsListPagos
-      aux.Cfg_Filtro = "where (Pagos.VencimientoCuota < #" & Format(Today, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
+      aux.Cfg_Filtro = "where (Pagos.VencimientoCuota < #" & Format(GetHoy, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
       aux.RefreshData()
       lstPago.AddRange(aux.Items)
       For Each item In aux.Items

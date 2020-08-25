@@ -88,7 +88,7 @@ Public Class clsCobros
           .NumeroComprobante = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
           .IdentificadorDebito = lstCliente.Items.First.NumCliente
-          .Fecha = Today
+          .Fecha = GetHoy()
           If auxPrimerPago.Items.Count > 0 Then
             .CodigoDeAlta = "N"
           Else
@@ -148,13 +148,13 @@ Public Class clsCobros
         For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
           worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
           worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
-          worksheet.Cells(i + 2, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+          worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
           worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
           worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
           worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
         Next
 
-        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
+        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
       Finally
         workbook.Close(False)
       End Try
@@ -175,7 +175,7 @@ Public Class clsCobros
     Try
       Dim lineas As New List(Of String)
       Dim aux As String = String.Empty
-      Dim FechaGeneracion As Date = Date.Now
+      Dim FechaGeneracion As Date = GetAhora()
       'HEADER
       aux = "0"
       aux += constante.PadRight(8, " ")
@@ -195,7 +195,7 @@ Public Class clsCobros
         aux += movimiento.NumeroTarjeta.PadLeft(16)
         aux += " ".PadLeft(3, " ")
         aux += movimiento.NumeroComprobante.PadLeft(8, "0")
-        aux += Today.ToString("yyyyMMdd").PadLeft(8)
+        aux += GetHoy.ToString("yyyyMMdd").PadLeft(8)
         aux += "0005".PadLeft(4)
         aux += CInt(CSng(movimiento.Importe) * 100).ToString.PadLeft(15, "0")
         aux += movimiento.IdentificadorDebito.PadLeft(15, "0")
@@ -242,13 +242,13 @@ Public Class clsCobros
         For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
           worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
           worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
-          worksheet.Cells(i + 2, 3).value = Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+          worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
           worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
           worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
           worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
         Next
 
-        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, Today.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
+        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
 
       Finally
         workbook.Close(False)
@@ -272,13 +272,13 @@ Public Class clsCobros
       For Each item In vMovimientos
         item.Param1 = "24063119"
       Next
-      Dim periodo As String = Date.Now.ToString("MM/yy")
+      Dim periodo As String = GetAhora.ToString("MM/yy")
 
       'HEADER
       Dim header As String = String.Empty
       header += vMovimientos.First.Param1.PadLeft(8, "0") 'Numero de comercio
       header += "1" 'identificador fijo
-      header += Date.Now.ToString("ddMMyy").PadLeft(6)
+      header += GetAhora.ToString("ddMMyy").PadLeft(6)
       header += vMovimientos.Count.ToString.PadLeft(7, "0") 'Cantidad de registros
       header += "0" 'signo
       header += vMovimientos.Sum(Function(c) c.Importe * 100).ToString.PadLeft(14, "0")
@@ -298,12 +298,12 @@ Public Class clsCobros
         linea += (vMovimientos(i).Importe * 100).ToString.PadLeft(11, "0") 'IMPORTE
         linea += periodo.PadLeft(5, " ") 'PERIODO
         linea += " "
-        linea += Date.Now.AddMonths(1).ToString("ddMMyy").PadLeft(6) 'FECHA VENCIMIENTO PAGO
+        linea += GetAhora.AddMonths(1).ToString("ddMMyy").PadLeft(6) 'FECHA VENCIMIENTO PAGO
         linea += vMovimientos(i).NumeroComprobante.PadLeft(40, " ") 'datos auxiliares
         linea += " ".PadLeft(20, " ") 'filler
         lineas.Add(linea)
       Next
-      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, Now.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_Master.txt"), lineas)
       MsgBox("Finalizo exportacion a txt")
 
       Return Result.OK
@@ -330,7 +330,7 @@ Public Class clsCobros
         linea += ";"
         linea += vMovimientos(i).NumeroComprobante
         linea += ";"
-        linea += Today.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+        linea += GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
         linea += ";"
         linea += vMovimientos(i).Importe 'acepta 1.23
         linea += ";"
@@ -340,7 +340,7 @@ Public Class clsCobros
       Next
 
       'workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
-      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, Now.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas)
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas)
       MsgBox("Finalizo exportacion a txt")
 
       Return Result.OK
@@ -361,11 +361,11 @@ Public Class clsCobros
       For i As Integer = 0 To vMovimientos.Count - 1
         linea = String.Format("{0};", vMovimientos(i).NumeroComprobante).PadLeft(15)
         linea += String.Format("{0};", vMovimientos(i).IdentificadorDebito).PadLeft(14)
-        linea += String.Format("{0};", Today.ToString("dd/MM/yyyy")).PadLeft(12)
+        linea += String.Format("{0};", GetHoy.ToString("dd/MM/yyyy")).PadLeft(12)
         linea += String.Format("{0};", vMovimientos(i).Importe).PadLeft(10)
         lineas.Add(linea)
       Next
-      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_Efectivo.txt"), lineas)
+      Dim vResult As Result = Save(IO.Path.Combine(GetAhora.ToString("yyyyMMddhhmmss") & "_Efectivo.txt"), lineas)
       MsgBox("Finalizo exportacion a txt")
 
       Return Result.OK
@@ -386,11 +386,11 @@ Public Class clsCobros
       For i As Integer = 0 To vMovimientos.Count - 1
         linea = String.Format("{0};", vMovimientos(i).NumeroComprobante).PadLeft(15)
         linea += String.Format("{0};", vMovimientos(i).IdentificadorDebito).PadLeft(14)
-        linea += String.Format("{0};", Today.ToString("dd/MM/yyyy")).PadLeft(12)
+        linea += String.Format("{0};", GetHoy.ToString("dd/MM/yyyy")).PadLeft(12)
         linea += String.Format("{0};", vMovimientos(i).Importe).PadLeft(10)
         lineas.Add(linea)
       Next
-      Dim vResult As Result = Save(IO.Path.Combine(Now.ToString("yyyyMMddhhmmss") & "_MercadoPago.txt"), lineas)
+      Dim vResult As Result = Save(IO.Path.Combine(GetAhora.ToString("yyyyMMddhhmmss") & "_MercadoPago.txt"), lineas)
       MsgBox("Finalizo exportacion a txt")
 
       Return Result.OK

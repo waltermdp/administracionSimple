@@ -28,8 +28,8 @@ Public Class frmDeben
         MsgBox("No continua application, error init")
       End If
 
-      dateInicio.Value = New Date(Date.Today.Year, Today.Month, 1)
-      dateFin.Value = New Date(Date.Today.Year, Today.Month, Date.DaysInMonth(Today.Year, Today.Month))
+      dateInicio.Value = New Date(GetHoy.Year, GetHoy.Month, 1)
+      dateFin.Value = New Date(GetHoy.Year, GetHoy.Month, Date.DaysInMonth(GetHoy.Year, GetHoy.Month))
       rbtnVendidos.Checked = True
 
       Dim MetodosBusqueda As New List(Of clsTipoPago)
@@ -331,15 +331,29 @@ Public Class frmDeben
   Private Sub btnUpPago_MouseClick(sender As Object, e As MouseEventArgs) Handles btnUpPago.MouseClick
     Try
       Dim vResult As Result
-      If m_CurrentProducto Is Nothing Then Exit Sub
-      If m_CurrentProducto.CuotasTotales > 0 AndAlso m_CurrentProducto.CuotasPagas >= m_CurrentProducto.CuotasTotales Then Exit Sub
+      If m_CurrentProducto Is Nothing Then
+        MsgBox("Debe seleccionar un producto")
+        Exit Sub
+      End If
+
+      If m_CurrentProducto.CuotasTotales > 0 AndAlso m_CurrentProducto.CuotasPagas >= m_CurrentProducto.CuotasTotales Then
+        MsgBox("No hay cuotas pendientes, no se puede aplicar un pago")
+        Exit Sub
+      End If
+
       Dim lstPagos As New List(Of manDB.clsInfoPagos)
       vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
       If vResult <> Result.OK Then
         MsgBox("Fallo cargar pagos")
         Exit Sub
       End If
-      If Not DebePeriodoActual(lstPagos) Then Exit Sub
+      Dim rsta As MsgBoxResult
+      If Not DebePeriodoActual(lstPagos) Then
+        rsta = MsgBox("Las cuotas estan al dia, desea continuar?", MsgBoxStyle.YesNo)
+        If rsta <> MsgBoxResult.Yes Then Exit Sub
+
+      End If
+
       'collectar la informacion a mostrar antes de aplicar el pago elgido
       Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
                                         "Nombre: {0}" & vbNewLine & _
@@ -347,9 +361,9 @@ Public Class frmDeben
                                         "Metodo Pago: {2}" & vbNewLine & _
                                         "Numero: {3}" & vbNewLine & _
                                         "Valor Cuota: {4}" & vbNewLine & _
-                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, Today)
-      Dim rsta As MsgBoxResult = MsgBox(msg, MsgBoxStyle.YesNo)
+                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, GetAhora)
 
+      rsta = MsgBox(msg, MsgBoxStyle.YesNo)
       If rsta = MsgBoxResult.Yes Then
 
         'Dim lstPagos As New List(Of manDB.clsInfoPagos)
@@ -364,7 +378,7 @@ Public Class frmDeben
           If pago.EstadoPago = E_EstadoPago.Debe Then
 
             pago.EstadoPago = E_EstadoPago.Pago
-            pago.FechaPago = Date.Now
+            pago.FechaPago = GetAhora()
             vResult = clsPago.Save(pago)
             If vResult <> Result.OK Then
               MsgBox("Fallo guardar pagos")
@@ -398,8 +412,76 @@ Public Class frmDeben
 
   Private Sub btnDownPago_MouseClick(sender As Object, e As MouseEventArgs) Handles btnDownPago.MouseClick
     Try
-      If m_CurrentProducto Is Nothing Then Exit Sub
+      Dim vResult As Result
+
+      If m_CurrentProducto Is Nothing Then
+        MsgBox("Debe seleccionar un producto")
+        Exit Sub
+      End If
+
       'If m_CurrentProducto.CuotasDebe >= m_CurrentProducto.TotalCuotas Then Exit Sub
+      If m_CurrentProducto.CuotasTotales > 0 AndAlso m_CurrentProducto.CuotasPagas <= 0 Then
+        MsgBox("No hay ningun pago aplicado para eliminar")
+        Exit Sub
+      End If
+
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar pagos")
+        Exit Sub
+      End If
+      Dim rsta As MsgBoxResult
+      Dim msg As String = String.Format("Se descontara el ultimo pago a: " & vbNewLine & _
+                                       "Nombre: {0}" & vbNewLine & _
+                                       "DNI: {1}" & vbNewLine & _
+                                       "Metodo Pago: {2}" & vbNewLine & _
+                                       "Numero: {3}" & vbNewLine & _
+                                       "Valor Cuota: {4}" & vbNewLine & _
+                                        "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, GetAhora)
+
+      rsta = MsgBox(msg, MsgBoxStyle.YesNo)
+      If rsta = MsgBoxResult.Yes Then
+
+        vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
+        If vResult <> Result.OK Then
+          MsgBox("Fallo cargar pagos")
+          Exit Sub
+        End If
+
+        Dim auxPago As clsInfoPagos = Nothing
+        For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota).Reverse
+          If pago.EstadoPago = E_EstadoPago.Pago OrElse pago.EstadoPago = E_EstadoPago.PagoParcial Then
+
+            pago.EstadoPago = E_EstadoPago.Anulo_Editado
+            pago.FechaPago = GetAhora()
+            vResult = clsPago.Save(pago)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo guardar pagos")
+              Exit Sub
+            End If
+
+            If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
+              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
+            End If
+            If auxPago IsNot Nothing Then
+              vResult = clsPago.Save(auxPago)
+              If vResult <> Result.OK Then
+                MsgBox("Fallo guardar nuevo pago")
+                Exit Sub
+              End If
+            End If
+            Exit For
+          End If
+        Next
+
+
+
+        Call MostrarDeben()
+
+
+      End If
+
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

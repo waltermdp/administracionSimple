@@ -47,7 +47,7 @@ Module modCommon
   Public Function Vencimiento(ByVal PrimerPago As Date, Optional ByVal fechaInicial As Date = Nothing) As Date
     Try
       If fechaInicial = Nothing Then
-        fechaInicial = Today
+        fechaInicial = GetHoy()
       End If
       Dim DiaDePago As Integer = PrimerPago.Day
       fechaInicial = fechaInicial.AddMonths(1)
@@ -68,7 +68,7 @@ Module modCommon
       Dim pagadas As Integer = 0
       If lstPagos.Where(Function(c) c.EstadoPago = 1).ToList.Count <= 0 Then Return True
       Dim auxpago As manDB.clsInfoPagos = lstPagos.Where(Function(c) c.EstadoPago = 1).OrderBy(Function(c) c.NumCuota).ToList.Last
-      If Today < auxpago.VencimientoCuota Then
+      If GetHoy() < auxpago.VencimientoCuota Then
         Return False
       End If
       Return True
@@ -98,7 +98,7 @@ Module modCommon
       Dim vResult As libCommon.Comunes.Result
       Dim lstPago As New List(Of manDB.clsInfoPagos)
       Dim aux As New clsListPagos
-      aux.Cfg_Filtro = "where (Pagos.VencimientoCuota < #" & Format(Today, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
+      aux.Cfg_Filtro = "where (Pagos.VencimientoCuota < #" & Format(GetHoy, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
       aux.RefreshData()
       lstPago.AddRange(aux.Items)
       For Each item In aux.Items
@@ -146,4 +146,7 @@ Module modCommon
       Return False
     End Try
   End Function
+
+  
+
 End Module

@@ -32,6 +32,9 @@ Module Entorno
 
   Public g_Today As Date 'TODO: crear fecha para saber si se cambia la fecha de la pc con respecto al ultimo uso
 
+  Public g_debug As Boolean = False
+
+
   'Public Enum GRUPOS As Integer
   '  NA = 0
   '  A = 1
@@ -71,7 +74,14 @@ Module Entorno
       End If
       DB_SLocal_ConnectionString = GetAccessConectionStringDBS(DB_path)
 
-      g_Today = Today
+      If g_debug Then
+        g_Today = New Date(2020, 12, 31)
+      Else
+        g_Today = Today
+      End If
+
+      'LIB COMMON
+      SetFecha(g_Today)
       'BKP FOLDER
       BKPDB_path = IO.Path.Combine(App_path, bkp_Folder)
       If Not IO.Directory.Exists(BKPDB_path) Then
@@ -148,7 +158,7 @@ Module Entorno
 
   Private Function bkpDatabase() As Result
     Try
-      Dim name As String = Today.ToString("dd") & ".bk"
+      Dim name As String = GetHoy.ToString("dd") & ".bk"
       IO.File.Copy(DB_path, IO.Path.Combine(BKPDB_path, name), True)
       Return Result.OK
     Catch ex As Exception

@@ -1,4 +1,6 @@
-﻿Public Class ClsInfoPersona
+﻿Imports libCommon.Comunes
+
+Public Class ClsInfoPersona
   Implements ICloneable
 
   Private m_IdCliente As Integer
@@ -209,10 +211,10 @@
     Nombre = "--"
     Apellido = "--"
     DNI = "--"
-    FechaNac = Date.Now
+    FechaNac = GetAhora
     Calle = "--"
     NumCalle = "--"
-    FechaIngreso = Date.Now
+    FechaIngreso = GetAhora
     Email = "--"
     Tel1 = "--"
     Tel2 = "--"
@@ -234,7 +236,7 @@
 
   Public Overrides Function Equals(ByVal obj As Object) As Boolean
 
-    If obj.GetType Is GetType(clsInfoPersona) Then
+    If obj.GetType Is GetType(ClsInfoPersona) Then
       Return CType(obj, ClsInfoPersona).GuidCliente.Equals(Me.GuidCliente)
     Else
       Return False
@@ -243,13 +245,13 @@
   End Function
 
   Public Function Clone() As ClsInfoPersona
-    Return CType(ClonePrivate(), clsInfoPersona)
+    Return CType(ClonePrivate(), ClsInfoPersona)
   End Function
 
   Private Function ClonePrivate() As Object Implements ICloneable.Clone
-    Dim objResult As New clsInfoPersona
+    Dim objResult As New ClsInfoPersona
     'Clonación Superficial
-    objResult = CType(Me.MemberwiseClone, clsInfoPersona)
+    objResult = CType(Me.MemberwiseClone, ClsInfoPersona)
     Return objResult
   End Function
 

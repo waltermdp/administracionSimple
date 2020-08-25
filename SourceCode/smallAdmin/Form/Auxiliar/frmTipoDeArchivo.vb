@@ -90,7 +90,7 @@ Public Class frmTipoDeArchivo
           DialogResult = Windows.Forms.DialogResult.Cancel
           Close()
         End If
-        Dim s As String = IO.Path.Combine(IMPORT_PATH, Now.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
+        Dim s As String = IO.Path.Combine(IMPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
 
         IO.File.Copy(AbrirArchivo.FileName, s)
         Dim mov As New List(Of clsInfoMovimiento)

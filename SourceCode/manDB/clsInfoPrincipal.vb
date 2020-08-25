@@ -1,4 +1,6 @@
-﻿Public Class clsInfoPrincipal
+﻿Imports libCommon.Comunes
+
+Public Class clsInfoPrincipal
   Implements ICloneable
 
   Private m_FechaVenta As Date
@@ -155,7 +157,7 @@
 
   Public Sub New()
     MyBase.New()
-    FechaVenta = Date.Now
+    FechaVenta = GetAhora
     CuotasPagas = -1
     m_NombreCliente = "--"
     m_GuidProducto = Nothing
@@ -179,7 +181,7 @@
 
     'Clonación Superficial
     objResult = CType(Me.MemberwiseClone, clsInfoPrincipal)
- 
+
     Return objResult
 
   End Function

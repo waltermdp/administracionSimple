@@ -1,4 +1,5 @@
-﻿Public Class clsInfoProducto
+﻿Imports libCommon.Comunes
+Public Class clsInfoProducto
   Implements ICloneable
 
 
@@ -183,8 +184,8 @@
     GuidTipoPago = Nothing
     TotalCuotas = 0
     Precio = 0
-    FechaPrimerPago = Date.Now
-    FechaVenta = Date.Now
+    FechaPrimerPago = GetAhora
+    FechaVenta = GetAhora
     GuidCuenta = Nothing
     Adelanto = 0
     ValorCuotaFija = 0

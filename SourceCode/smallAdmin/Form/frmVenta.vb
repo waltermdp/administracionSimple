@@ -45,7 +45,7 @@ Public Class frmVenta
     Try
       m_skip = True
       Dim vResult As Result = Result.NOK
-      DateVenta.Value = Today
+      DateVenta.Value = GetHoy()
       cmbCuotas.DataSource = g_Cuotas
 
       chkEditarCuotas.Checked = False
@@ -169,8 +169,13 @@ Public Class frmVenta
       With m_Producto
         txtPrecio.Text = .Precio
         DateVenta.Value = .FechaVenta
-        dtDiaVencimiento.Value = .FechaPrimerPago.Day
-        
+        If .FechaPrimerPago.Day > 30 Then
+          dtDiaVencimiento.Value = dtDiaVencimiento.Maximum
+        Else
+          dtDiaVencimiento.Value = .FechaPrimerPago.Day
+        End If
+
+
         For Each cuota In g_Cuotas
           If cuota.Cantidad = .TotalCuotas Then
             cmbCuotas.SelectedItem = cuota
@@ -380,6 +385,10 @@ Public Class frmVenta
       With m_Producto
         .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
         .Precio = CDec(txtPrecio.Text)
+        If m_CurrentCuenta Is Nothing Then
+          MsgBox("No hay ningun Medio de pago seleccionado")
+          Exit Sub
+        End If
         .GuidTipoPago = m_CurrentCuenta.TipoDeCuenta
         .GuidCuenta = m_CurrentCuenta.GuidCuenta
         .Cuenta = m_CurrentCuenta.Clone
@@ -520,7 +529,7 @@ Public Class frmVenta
             Dim ProximoPago As Decimal = newPago.ValorCuota - AdelantoCuota
             newPago.EstadoPago = E_EstadoPago.PagoParcial
             newPago.ValorCuota = AdelantoCuota
-            newPago.FechaPago = Now
+            newPago.FechaPago = GetAhora()
             Vencimiento = newPago.VencimientoCuota
             clsPago.Save(newPago)
             AdelantoCuota = 0
@@ -533,7 +542,7 @@ Public Class frmVenta
           Else
             newPago.EstadoPago = E_EstadoPago.Pago
             newPago.ValorCuota = newPago.ValorCuota
-            newPago.FechaPago = Now
+            newPago.FechaPago = GetAhora()
             Vencimiento = newPago.VencimientoCuota
             clsPago.Save(newPago)
             AdelantoCuota = AdelantoCuota - newPago.ValorCuota
@@ -568,7 +577,7 @@ Public Class frmVenta
           Dim objAdelanto As New clsInfoAdelanto
           objAdelanto.GuidVendedor = m_Producto.GuidVendedor
           objAdelanto.Valor = AdelantoVendedor
-          objAdelanto.Fecha = Date.Now
+          objAdelanto.Fecha = GetAhora()
           clsAdelantos.Save(objAdelanto)
         End If
        

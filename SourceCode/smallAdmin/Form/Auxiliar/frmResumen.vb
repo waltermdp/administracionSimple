@@ -67,7 +67,7 @@ Public Class frmResumen
         Dim Producto As New clsInfoProducto
         Producto = lstProducto.Items.First.Clone
         Pago.EstadoPago = E_EstadoPago.Pago
-        Pago.FechaPago = Date.Now
+        Pago.FechaPago = GetAhora()
 
         vResult = clsPago.Save(Pago)
         If vResult <> Result.OK Then

@@ -1,4 +1,6 @@
-﻿Public Class clsInfoAdelanto
+﻿Imports libCommon.Comunes
+Public Class clsInfoAdelanto
+
   Implements ICloneable
 
   Private m_IdAdelanto As Integer
@@ -47,7 +49,7 @@
     IdAdelanto = -1
     GuidVendedor = Nothing
     Valor = 0
-    Fecha = Today
+    Fecha = gethoy
   End Sub
 
   Public Function Clone() As clsInfoAdelanto

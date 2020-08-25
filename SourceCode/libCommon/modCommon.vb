@@ -3,6 +3,7 @@
   Public Module modCommon
 
     Private Const RELEASE As Boolean = False
+    Private g_Today As Date
 
     Public Enum E_EstadoPago As Integer
       Debe = 0
@@ -30,6 +31,32 @@
         MsgBox(ex.ToString)
       End Try
     End Sub
+
+    Public Sub SetFecha(ByVal vFecha As Date)
+      Try
+        g_Today = vFecha
+      Catch ex As Exception
+        MsgBox(ex.ToString)
+      End Try
+    End Sub
+
+    Public Function GetHoy() As Date
+      Try
+        Return g_Today
+      Catch ex As Exception
+        Print_msg(ex.Message)
+        Return Today
+      End Try
+    End Function
+
+    Public Function GetAhora() As Date
+      Try
+        Return New Date(g_Today.Year, g_Today.Month, g_Today.Day, Now.Hour, Now.Minute, Now.Second)
+      Catch ex As Exception
+        Print_msg(ex.Message)
+        Return Today
+      End Try
+    End Function
 
   End Module
 
