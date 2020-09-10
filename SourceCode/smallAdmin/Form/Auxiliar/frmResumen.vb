@@ -31,72 +31,115 @@ Public Class frmResumen
       Dim vResult As Result
       Dim lstPagos As clsListPagos
       Dim lstProducto = New clsListProductos
-
+      If m_TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") Then
+        MsgBox("No se encuentra tipo de pago")
+        Me.Close()
+      End If
+      Dim lError As String = String.Empty
+      'Simular pagos
+      Dim lstNoExisten As New List(Of String)
       For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
         lstPagos = New clsListPagos
-        Dim Pago As New clsInfoPagos
-        If CInt(mov.NumeroComprobante) = 6251 Then
-          Dim j = 9
-
+        lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante
+        lstPagos.RefreshData()
+        If lstPagos.Items.Count = 0 Then
+          lstNoExisten.Add(mov.NumeroComprobante)
         End If
-        If CInt(mov.NumeroComprobante) = 6165 Then
-          Dim j = 9
-
-        End If
-
-        If m_TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") Then
-          MsgBox("No se encuentra tipo de pago")
-          Me.Close()
-        End If
-
+      Next
+      If lstNoExisten.Count > 0 Then
+        For Each comp In lstNoExisten
+          lError += comp + vbNewLine
+        Next
+        MsgBox("Estos comprobantes no existen la base de datos. Se cancela operacion" & vbNewLine & lError)
+      End If
+      Dim lstNoDebeCuota As New List(Of String)
+      For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
+        lstPagos = New clsListPagos
         lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante & " and EstadoPago=0"
         lstPagos.RefreshData()
         If lstPagos.Items.Count = 0 Then
-          MsgBox("No exite el comprobante " & mov.NumeroComprobante)
-          Continue For
+          lstNoDebeCuota.Add(mov.NumeroComprobante)
         End If
-        'If lstPagos.Items.Count > 1 Then
-        '  MsgBox("Existe mas de un producto con el mismo comprobante " & mov.NumeroComprobante)
-        '  Exit Sub
-        'End If
-        Pago = lstPagos.Items.First.Clone
+      Next
+      lError = String.Empty
+      If lstNoDebeCuota.Count > 0 Then
+        For Each comp In lstNoDebeCuota
+          lError += comp + vbNewLine
+        Next
+        MsgBox("Estos comprobantes no Deben cuota. Se cancela operacion" & vbNewLine & lError)
+      End If
 
-        lstProducto = New clsListProductos
-        lstProducto.Cfg_Filtro = "where GuidProducto={" & Pago.GuidProducto.ToString & "}"
-        lstProducto.RefreshData()
-        Dim Producto As New clsInfoProducto
-        Producto = lstProducto.Items.First.Clone
-        Pago.EstadoPago = E_EstadoPago.Pago
-        Pago.FechaPago = GetAhora()
+      For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
+        lstPagos = New clsListPagos
+        lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante
+        lstPagos.RefreshData()
 
-        vResult = clsPago.Save(Pago)
-        If vResult <> Result.OK Then
-          MsgBox("Fallo guardar pagos")
-          Exit Sub
-        End If
-
-        Dim auxPago As New clsInfoPagos
-        If (lstProducto.Items.First.CuotasDebe - 1) > 0 Then
-          auxPago = GetProximoPago(Pago.GuidProducto, Producto.NumComprobante, Producto.ValorCuotaFija, Pago.NumCuota + 1, Producto.FechaVenta, Pago.VencimientoCuota)
-        End If
-        If auxPago IsNot Nothing Then
-          vResult = clsPago.Save(auxPago)
-          If vResult <> Result.OK Then
-            MsgBox("Fallo guardar nuevo pago")
-            Exit Sub
-          End If
-        End If
-
+        AplicarCuota(1, lstPagos.Items.First.GuidProducto)
       Next
 
-      ''collectar la informacion a mostrar antes de aplicar el pago elgido
-      'Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
-      '                                  "Nombre: {0}" & vbNewLine & _
-      '                                  "DNI: {1}" & vbNewLine & _
-      '                                  "Metodo Pago: {2}" & vbNewLine & _
-      '                                  "Numero: {3}" & vbNewLine & _
-      '                                  "Valor Cuota: {4}" & vbNewLine & _
-      '                                   "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.NombreCliente, m_CurrentProducto.DNI, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuota, Today)
+
+      'For Each mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
+      '  lstPagos = New clsListPagos
+      '  Dim Pago As New clsInfoPagos
+      '  If CInt(mov.NumeroComprobante) = 6251 Then
+      '    Dim j = 9
+
+      '  End If
+      '  If CInt(mov.NumeroComprobante) = 6165 Then
+      '    Dim j = 9
+
+      '  End If
+
+
+
+      '  lstPagos.Cfg_Filtro = "where NumComprobante=" & mov.NumeroComprobante & " and EstadoPago=0"
+      '  lstPagos.RefreshData()
+      '  If lstPagos.Items.Count = 0 Then
+      '    MsgBox("No exite el comprobante " & mov.NumeroComprobante)
+      '    Continue For
+      '  End If
+      '  'If lstPagos.Items.Count > 1 Then
+      '  '  MsgBox("Existe mas de un producto con el mismo comprobante " & mov.NumeroComprobante)
+      '  '  Exit Sub
+      '  'End If
+      '  Pago = lstPagos.Items.First.Clone
+
+      '  lstProducto = New clsListProductos
+      '  lstProducto.Cfg_Filtro = "where GuidProducto={" & Pago.GuidProducto.ToString & "}"
+      '  lstProducto.RefreshData()
+      '  Dim Producto As New clsInfoProducto
+      '  Producto = lstProducto.Items.First.Clone
+      '  Pago.EstadoPago = E_EstadoPago.Pago
+      '  Pago.FechaPago = GetAhora()
+
+      '  vResult = clsPago.Save(Pago)
+      '  If vResult <> Result.OK Then
+      '    MsgBox("Fallo guardar pagos")
+      '    Exit Sub
+      '  End If
+
+      '  Dim auxPago As New clsInfoPagos
+      '  If (lstProducto.Items.First.CuotasDebe - 1) > 0 Then
+      '    auxPago = GetProximoPago(Pago.GuidProducto, Producto.NumComprobante, Producto.ValorCuotaFija, Pago.NumCuota + 1, Producto.FechaVenta, Pago.VencimientoCuota)
+      '  End If
+      '  If auxPago IsNot Nothing Then
+      '    vResult = clsPago.Save(auxPago)
+      '    If vResult <> Result.OK Then
+      '      MsgBox("Fallo guardar nuevo pago")
+      '      Exit Sub
+      '    End If
+      '  End If
+
+      'Next
+
+      ' ''collectar la informacion a mostrar antes de aplicar el pago elgido
+      ''Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
+      ''                                  "Nombre: {0}" & vbNewLine & _
+      ''                                  "DNI: {1}" & vbNewLine & _
+      ''                                  "Metodo Pago: {2}" & vbNewLine & _
+      ''                                  "Numero: {3}" & vbNewLine & _
+      ''                                  "Valor Cuota: {4}" & vbNewLine & _
+      ''                                   "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.NombreCliente, m_CurrentProducto.DNI, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.NumPago, m_CurrentProducto.ValorCuota, Today)
 
 
     Catch ex As Exception

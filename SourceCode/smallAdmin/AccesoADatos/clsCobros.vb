@@ -80,16 +80,45 @@ Public Class clsCobros
         lstCliente.RefreshData()
 
         Dim auxPrimerPago As New clsListProductos
-        auxPrimerPago.Cfg_Filtro = "where (TotalCuotas-CuotasDebe)>=1 and GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
-        auxPrimerPago.RefreshData()
+        'auxPrimerPago.Cfg_Filtro = "where (TotalCuotas-CuotasDebe)>=1 and GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+        'auxPrimerPago.RefreshData()
+        Dim bCodigoAlta As Boolean
+        If item.NumCuota > 1 Then
+          bCodigoAlta = False
+        Else
+          'verificar si es la primer cuota, buscan si la cuenta se uso en algun pago de cuota
+          Dim bAlta As Boolean = True
+          auxPrimerPago = New clsListProductos
+          auxPrimerPago.RefreshData()
+          auxPrimerPago.Cfg_Filtro = "where GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+          If auxPrimerPago.Items.Count > 1 Then
 
+            For Each producto In auxPrimerPago.Items
+              Dim aux As New clsListPagos
+              aux.Cfg_Filtro = "where GuidProducto={" & producto.GuidProducto.ToString & "}"
+              aux.RefreshData()
+              For Each pago In aux.Items
+                If pago.EstadoPago = E_EstadoPago.Pago Then
+                  bAlta = False
+                  Exit For
+                End If
+              Next
+              If bAlta = False Then Exit For
+            Next
+          End If
+          bCodigoAlta = bAlta
+        End If
+        If item.NumComprobante = 6737 Then
+          Dim k As Integer = 1
+        End If
         With movimiento
           .NumeroTarjeta = lstCuenta.Items.First.Codigo1
           .NumeroComprobante = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
           .IdentificadorDebito = lstCliente.Items.First.NumCliente
           .Fecha = GetHoy()
-          If auxPrimerPago.Items.Count > 0 Then
+
+          If bCodigoAlta = False Then
             .CodigoDeAlta = "N"
           Else
             .CodigoDeAlta = "E"
@@ -190,7 +219,7 @@ Public Class clsCobros
       lineas.Add(aux)
 
       'BODY
-      For Each movimiento In vMovimientos
+      For Each movimiento In vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante))
         aux = "1"
         aux += movimiento.NumeroTarjeta.PadLeft(16)
         aux += " ".PadLeft(3, " ")
@@ -239,13 +268,14 @@ Public Class clsCobros
       workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"))
       Try
         worksheet = workbook.Worksheets("Facturas")
+        Dim lista As List(Of clsInfoMovimiento) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
         For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
-          worksheet.Cells(i + 2, 1).value = vMovimientos(i).NumeroTarjeta
-          worksheet.Cells(i + 2, 2).value = vMovimientos(i).NumeroComprobante
+          worksheet.Cells(i + 2, 1).value = lista(i).NumeroTarjeta
+          worksheet.Cells(i + 2, 2).value = lista(i).NumeroComprobante
           worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-          worksheet.Cells(i + 2, 4).value = vMovimientos(i).Importe 'acepta 1.23
-          worksheet.Cells(i + 2, 5).value = vMovimientos(i).IdentificadorDebito
-          worksheet.Cells(i + 2, 6).value = vMovimientos(i).CodigoDeAlta  ' N o E ver especificacion
+          worksheet.Cells(i + 2, 4).value = lista(i).Importe 'acepta 1.23
+          worksheet.Cells(i + 2, 5).value = lista(i).IdentificadorDebito
+          worksheet.Cells(i + 2, 6).value = lista(i).CodigoDeAlta  ' N o E ver especificacion
         Next
 
         workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))

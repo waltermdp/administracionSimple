@@ -1,4 +1,5 @@
 ﻿Imports libCommon.Comunes
+Imports manDB
 Module modCommon
 
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
@@ -94,33 +95,33 @@ Module modCommon
 
   Public Sub ActualizarCuotasVencidas()
     Try
-      'Marcar los pagos vencidos como Vencidos y crear un nuevo talon de pago
-      Dim vResult As libCommon.Comunes.Result
-      Dim lstPago As New List(Of manDB.clsInfoPagos)
-      Dim aux As New clsListPagos
-      aux.Cfg_Filtro = "where (Pagos.VencimientoCuota < #" & Format(GetHoy, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
-      aux.RefreshData()
-      lstPago.AddRange(aux.Items)
-      For Each item In aux.Items
-        item.EstadoPago = E_EstadoPago.Vencido
-        vResult = clsPago.Save(item)
-        If vResult <> Result.OK Then
-          MsgBox("Fallo update pago")
-          Exit Sub
-        End If
-        Dim objProducto As New manDB.clsInfoProducto
-        vResult = clsProducto.Load(item.GuidProducto, objProducto)
-        If vResult <> Result.OK Then
-          MsgBox("Fallo load producto")
-          Exit Sub
-        End If
-        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, objProducto.NumComprobante, objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
-        If newpago IsNot Nothing Then
-          vResult = clsPago.Save(newpago)
-        Else
-          MsgBox("Fallo guardar newpago")
-        End If
-      Next
+      ''Marcar los pagos vencidos como Vencidos y crear un nuevo talon de pago
+      'Dim vResult As libCommon.Comunes.Result
+      'Dim lstPago As New List(Of manDB.clsInfoPagos)
+      'Dim aux As New clsListPagos
+      'aux.Cfg_Filtro = "where (Pagos.VencimientoCuota < #" & Format(GetHoy, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
+      'aux.RefreshData()
+      'lstPago.AddRange(aux.Items)
+      'For Each item In aux.Items
+      '  item.EstadoPago = E_EstadoPago.Vencido
+      '  vResult = clsPago.Save(item)
+      '  If vResult <> Result.OK Then
+      '    MsgBox("Fallo update pago")
+      '    Exit Sub
+      '  End If
+      '  Dim objProducto As New manDB.clsInfoProducto
+      '  vResult = clsProducto.Load(item.GuidProducto, objProducto)
+      '  If vResult <> Result.OK Then
+      '    MsgBox("Fallo load producto")
+      '    Exit Sub
+      '  End If
+      '  Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, objProducto.NumComprobante, objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
+      '  If newpago IsNot Nothing Then
+      '    vResult = clsPago.Save(newpago)
+      '  Else
+      '    MsgBox("Fallo guardar newpago")
+      '  End If
+      'Next
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -147,6 +148,65 @@ Module modCommon
     End Try
   End Function
 
-  
+  Public Sub AplicarCuota(ByVal nCuotas As Integer, ByVal vGuidProducto As Guid)
+    Try
+      Dim vResult As libCommon.Comunes.Result
+      Dim auxPago As clsInfoPagos = Nothing
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      Dim lstProducto = New clsListProductos
+      lstProducto = New clsListProductos
+      lstProducto.Cfg_Filtro = "where GuidProducto={" & vGuidProducto.ToString & "}"
+      lstProducto.RefreshData()
+      Dim Producto As New clsInfoProducto
+      If lstProducto.Items.Count <= 0 Then
+        MsgBox("No existe el producto")
+        Exit Sub
+      End If
+      Producto = lstProducto.Items.First.Clone
+
+      vResult = clsPago.Load(lstPagos, vGuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar pagos")
+        Exit Sub
+      End If
+      While (nCuotas > 0) 'lstPagos.Exists(Function(c) c.EstadoPago = E_EstadoPago.Debe))
+
+        Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Debe)
+        If index < 0 Then
+          MsgBox("No se encontro cuota debe")
+          Exit Sub
+        End If
+        lstPagos(index).EstadoPago = E_EstadoPago.Pago
+        lstPagos(index).FechaPago = GetAhora()
+        vResult = clsPago.Save(lstPagos(index))
+        If vResult <> Result.OK Then
+          MsgBox("Fallo guardar pagos")
+          Exit Sub
+        End If
+        Dim cuotasPagadas As Integer = lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
+        If cuotasPagadas < Producto.TotalCuotas Then
+          auxPago = GetProximoPago(vGuidProducto, Producto.NumComprobante, Producto.ValorCuotaFija, lstPagos(index).NumCuota + 1, Producto.FechaVenta, lstPagos(index).VencimientoCuota)
+          If auxPago IsNot Nothing Then
+            vResult = clsPago.Save(auxPago)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo guardar nuevo pago")
+              Exit Sub
+            End If
+          End If
+        End If
+
+        lstPagos.Clear()
+        vResult = clsPago.Load(lstPagos, vGuidProducto)
+        If vResult <> Result.OK Then
+          MsgBox("Fallo cargar pagos")
+          Exit Sub
+        End If
+        auxPago = Nothing
+        nCuotas = nCuotas - 1
+      End While
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 
 End Module

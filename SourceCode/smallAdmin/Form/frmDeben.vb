@@ -307,8 +307,16 @@ Public Class frmDeben
             lblPorcentaje.Text = "Porcentaje Pagado: --"
           End If
 
+          '''''RESUMEN INTERNO
+          Dim auxStr As String = String.Empty
 
+          auxStr = String.Format("LIQUIDADO:{0}", m_objPrincipal.Items.Where(Function(c) c.CuotasPagas = c.CuotasTotales).Count)
+
+
+          lblResumen.Text = auxStr
         End If
+
+
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -366,38 +374,7 @@ Public Class frmDeben
       rsta = MsgBox(msg, MsgBoxStyle.YesNo)
       If rsta = MsgBoxResult.Yes Then
 
-        'Dim lstPagos As New List(Of manDB.clsInfoPagos)
-        vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
-        If vResult <> Result.OK Then
-          MsgBox("Fallo cargar pagos")
-          Exit Sub
-        End If
-
-        Dim auxPago As clsInfoPagos = Nothing
-        For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota)
-          If pago.EstadoPago = E_EstadoPago.Debe Then
-
-            pago.EstadoPago = E_EstadoPago.Pago
-            pago.FechaPago = GetAhora()
-            vResult = clsPago.Save(pago)
-            If vResult <> Result.OK Then
-              MsgBox("Fallo guardar pagos")
-              Exit Sub
-            End If
-
-            If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
-            End If
-            If auxPago IsNot Nothing Then
-              vResult = clsPago.Save(auxPago)
-              If vResult <> Result.OK Then
-                MsgBox("Fallo guardar nuevo pago")
-                Exit Sub
-              End If
-            End If
-            Exit For
-          End If
-        Next
+        Call AplicarCuota(1, m_CurrentProducto)
 
 
 
@@ -451,29 +428,31 @@ Public Class frmDeben
 
         Dim auxPago As clsInfoPagos = Nothing
         For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota).Reverse
-          If pago.EstadoPago = E_EstadoPago.Pago OrElse pago.EstadoPago = E_EstadoPago.PagoParcial Then
-
+          If pago.EstadoPago = E_EstadoPago.Debe Then 'pago.EstadoPago = E_EstadoPago.Pago OrElse pago.EstadoPago = E_EstadoPago.PagoParcial Then
             pago.EstadoPago = E_EstadoPago.Anulo_Editado
-            pago.FechaPago = GetAhora()
             vResult = clsPago.Save(pago)
             If vResult <> Result.OK Then
               MsgBox("Fallo guardar pagos")
               Exit Sub
             End If
-
-            If (m_CurrentProducto.CuotasPagas + 1) < m_CurrentProducto.CuotasTotales Then
-              auxPago = GetProximoPago(m_CurrentProducto.GuidProducto, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuotaFija, pago.NumCuota + 1, m_CurrentProducto.FechaVenta, pago.VencimientoCuota)
-            End If
-            If auxPago IsNot Nothing Then
-              vResult = clsPago.Save(auxPago)
-              If vResult <> Result.OK Then
-                MsgBox("Fallo guardar nuevo pago")
-                Exit Sub
-              End If
-            End If
             Exit For
           End If
         Next
+
+        For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota).Reverse
+          If pago.EstadoPago = E_EstadoPago.Pago OrElse pago.EstadoPago = E_EstadoPago.PagoParcial Then
+            pago.EstadoPago = E_EstadoPago.Debe
+            vResult = clsPago.Save(pago)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo guardar pagos")
+              Exit Sub
+            End If
+            Exit For
+
+          End If
+        Next
+
+        
 
 
 
@@ -534,6 +513,10 @@ Public Class frmDeben
           clsCobros.GenerateResumen(objForm.TipoPagoSeleccionado)
         End If
       End Using
+      Dim msgResult As MsgBoxResult = MsgBox("Desea abrir la carpeta del archivo exportado?", MsgBoxStyle.YesNo)
+      If msgResult = MsgBoxResult.Yes Then
+        Process.Start(Entorno.EXPORT_PATH)
+      End If
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -651,6 +634,213 @@ Public Class frmDeben
         lblInfoFiltro.Text = "Nombre, Apellido, Numero vendedor o grupo"
       Else
         lblInfoFiltro.Text = ""
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Try
+      Dim vResult As Result
+      Dim iPagosRepetidos As Integer
+      Dim iDebeRepetidos As Integer
+      Dim iDebeYPago As Integer
+      Dim iProductos As Integer
+      If m_objPrincipal IsNot Nothing Then
+        
+
+        Dim lstPagos As List(Of manDB.clsInfoPagos) = Nothing
+        For Each item In m_objPrincipal.Items
+
+          lstPagos = New List(Of manDB.clsInfoPagos)
+          vResult = clsPago.Load(lstPagos, item.GuidProducto)
+          If vResult <> Result.OK Then
+            MsgBox("Fallo cargar pagos")
+            Exit Sub
+          End If
+          If item.Comprobante = 3838 Then
+            Continue For
+          End If
+          Dim issue As Boolean = False
+          Dim numCuota As Integer = 1
+          numCuota = item.CuotasPagas - item.CuotasTotales
+          While numCuota > 0
+            Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Pago)
+            If index >= 0 Then
+              lstPagos(index).EstadoPago = E_EstadoPago.Eliminado
+              vResult = clsPago.Save(lstPagos(index))
+              If vResult <> Result.OK Then
+                MsgBox("Fallo save pago")
+              End If
+            End If
+            numCuota = numCuota - 1
+          End While
+
+          numCuota = 1
+          If item.CuotasPagas = item.CuotasTotales AndAlso lstPagos.Count = item.CuotasTotales Then
+            For Each pago In lstPagos.OrderBy(Function(d) d.NumCuota)
+              If numCuota <> pago.NumCuota Then
+                iPagosRepetidos = iPagosRepetidos + 1
+              End If
+            Next
+
+          End If
+
+          Dim iCount As Integer = lstPagos.FindAll(Function(c) c.EstadoPago = E_EstadoPago.Debe).Count
+          If iCount > 1 Then
+            While iCount > 1
+              Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Debe)
+              If index >= 0 Then
+                lstPagos(index).EstadoPago = E_EstadoPago.Eliminado
+                vResult = clsPago.Save(lstPagos(index))
+                If vResult <> Result.OK Then
+                  MsgBox("Fallo save pago")
+                End If
+              End If
+              iCount = iCount - 1
+
+            End While
+          End If
+
+          If item.CuotasPagas = item.CuotasTotales Then
+            Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Debe)
+            If index >= 0 Then
+              lstPagos(index).EstadoPago = E_EstadoPago.Eliminado
+              vResult = clsPago.Save(lstPagos(index))
+              If vResult <> Result.OK Then
+                MsgBox("Fallo save pago")
+              End If
+            End If
+
+          End If
+
+          If item.CuotasPagas <= item.CuotasTotales Then
+            numCuota = 1
+            For Each pago In lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).OrderBy(Function(d) d.IdPago)
+
+              Dim index As Integer = lstPagos.FindIndex(Function(c) c.GuidPago = pago.GuidPago)
+              If index >= 0 Then
+                lstPagos(index).NumCuota = numCuota
+                vResult = clsPago.Save(lstPagos(index))
+                If vResult <> Result.OK Then
+                  MsgBox("Fallo save pago")
+                End If
+              End If
+              numCuota = numCuota + 1
+            Next
+          End If
+
+
+
+
+
+          'For i As Integer = 1 To item.CuotasTotales
+          '  Dim j As Integer = i
+
+          '  If lstPagos.Exists(Function(c) c.NumCuota = j AndAlso c.EstadoPago = E_EstadoPago.Pago) AndAlso lstPagos.Exists(Function(c) c.NumCuota = j AndAlso c.EstadoPago = E_EstadoPago.Debe) Then
+          '    iDebeYPago = iDebeYPago + 1
+          '    issue = True
+          '    'analizar manual
+          '    Exit For
+          '  End If
+
+          '  While (lstPagos.FindAll(Function(c) c.NumCuota = j AndAlso c.EstadoPago = E_EstadoPago.Pago).Count > 1)
+          '    iPagosRepetidos = iPagosRepetidos + 1
+          '    issue = True
+          '    Dim index As Integer = lstPagos.FindLastIndex(Function(c) c.NumCuota = j AndAlso c.EstadoPago = E_EstadoPago.Pago)
+          '    lstPagos(index).EstadoPago = E_EstadoPago.Eliminado
+          '    vResult = clsPago.Save(lstPagos(index))
+          '    If vResult <> Result.OK Then
+          '      MsgBox("Fallo save pago")
+          '    End If
+          '  End While
+
+
+          'Next
+          'iDebeRepetidos = iDebeRepetidos + lstPagos.FindAll(Function(c) c.EstadoPago = E_EstadoPago.Debe).Count - 1
+          'If lstPagos.FindAll(Function(c) c.EstadoPago = E_EstadoPago.Debe).Count > 1 Then
+          '  issue = True
+          'End If
+
+          'If issue = True Then iProductos = iProductos + 1
+        Next
+      End If
+      MsgBox(String.Format("pagos repetid = {0}   debe repetidos = {1}  debeypago = {2}  productosModificar = {3}", iPagosRepetidos, iDebeRepetidos, iDebeYPago, iProductos))
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Try
+      Dim vResult As Result
+      If m_CurrentProducto Is Nothing Then
+        MsgBox("Debe seleccionar un producto")
+        Exit Sub
+      End If
+
+      If m_CurrentProducto.CuotasTotales > 0 AndAlso m_CurrentProducto.CuotasPagas >= m_CurrentProducto.CuotasTotales Then
+        MsgBox("No hay cuotas pendientes, no se puede aplicar un pago")
+        Exit Sub
+      End If
+
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      vResult = clsPago.Load(lstPagos, m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar pagos")
+        Exit Sub
+      End If
+      Dim rsta As MsgBoxResult
+      'If Not DebePeriodoActual(lstPagos) Then
+      '  rsta = MsgBox("Las cuotas estan al dia, desea continuar?", MsgBoxStyle.YesNo)
+      '  If rsta <> MsgBoxResult.Yes Then Exit Sub
+
+      'End If
+
+      'collectar la informacion a mostrar antes de aplicar el pago elgido
+      'Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
+      '                                  "Nombre: {0}" & vbNewLine & _
+      '                                  "DNI: {1}" & vbNewLine & _
+      '                                  "Metodo Pago: {2}" & vbNewLine & _
+      '                                  "Numero: {3}" & vbNewLine & _
+      '                                  "Valor Cuota: {4}" & vbNewLine & _
+      '                                   "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, GetAhora)
+      Dim msg As String = "Desea liquidar todas las cuotas?"
+      rsta = MsgBox(msg, MsgBoxStyle.YesNo)
+      If rsta = MsgBoxResult.Yes Then
+
+        Dim CuotasRestantes As Integer = m_CurrentProducto.CuotasTotales - m_CurrentProducto.CuotasPagas
+        Dim CuotasAPagar As Integer
+        CuotasAPagar = CuotasRestantes
+        Call AplicarCuota(CuotasAPagar, m_CurrentProducto.GuidProducto)
+        Call MostrarDeben()
+
+
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+ 
+
+
+  Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Try
+      Dim rsta As MsgBoxResult = MsgBox("DEBUG CONTINUAR?", MsgBoxStyle.YesNo)
+      If rsta = MsgBoxResult.Yes Then
+        Dim lstProductos As New List(Of Integer)({2426, 2631, 2713, 2718, 2757, 2760, 2766, 2811, 2814, 2816, 2832, 2836, 2857, 2868, 2875, 2884, 2887, 2908, 2916, 2921, 2922, 2935, 2938, 2939, 2947, 3012, 3016, 3027, 3058, 3065, 3082, 3084, 3088, 3117, 3122, 3148, 3161, 3172, 3188, 3189, 3200, 3214, 3323, 3356, 3374, 3472, 3510, 3516, 3728, 3730, 3838, 3858, 3871, 3880, 3896, 3927, 3934, 3973, 4067, 4081, 4082, 4087, 4118, 4124, 4132, 4139, 4141, 4317, 4318, 4433, 4580, 4582, 4674, 4704, 4755, 4804, 4813, 5044, 5054, 5265, 6132, 6307, 6383, 6909})
+        For Each item In m_objPrincipal.Items
+          If lstProductos.Contains(item.Comprobante) Then
+            Dim cuotasAPagar As Integer = item.CuotasTotales - item.CuotasPagas
+            If cuotasAPagar > 0 Then
+              Call AplicarCuota(cuotasAPagar, item.GuidProducto)
+            End If
+          End If
+        Next
+        Call MostrarDeben()
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)

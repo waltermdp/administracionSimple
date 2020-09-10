@@ -193,6 +193,7 @@ Public Class clsInfoProducto
     Cuenta = New clsInfoCuenta
     m_listArticulos.Clear()
     NumComprobante = -1
+    m_CuotasDebe = 0
   End Sub
 
 
