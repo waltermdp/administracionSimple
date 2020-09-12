@@ -62,6 +62,7 @@ Partial Class frmCliente
     Me.Label17 = New System.Windows.Forms.Label()
     Me.txtNumCliente = New System.Windows.Forms.TextBox()
     Me.Label18 = New System.Windows.Forms.Label()
+    Me.chkUsarDNI = New System.Windows.Forms.CheckBox()
     CType(Me.bsinfoProductos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -154,7 +155,7 @@ Partial Class frmCliente
     Me.txtID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.txtID.Location = New System.Drawing.Point(364, 242)
     Me.txtID.Name = "txtID"
-    Me.txtID.Size = New System.Drawing.Size(341, 21)
+    Me.txtID.Size = New System.Drawing.Size(248, 21)
     Me.txtID.TabIndex = 27
     '
     'Label4
@@ -422,7 +423,7 @@ Partial Class frmCliente
     Me.Label17.AutoSize = True
     Me.Label17.BackColor = System.Drawing.Color.White
     Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label17.Location = New System.Drawing.Point(720, 226)
+    Me.Label17.Location = New System.Drawing.Point(831, 224)
     Me.Label17.Name = "Label17"
     Me.Label17.Size = New System.Drawing.Size(75, 15)
     Me.Label17.TabIndex = 58
@@ -432,9 +433,9 @@ Partial Class frmCliente
     '
     Me.txtNumCliente.BackColor = System.Drawing.Color.White
     Me.txtNumCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtNumCliente.Location = New System.Drawing.Point(722, 242)
+    Me.txtNumCliente.Location = New System.Drawing.Point(834, 242)
     Me.txtNumCliente.Name = "txtNumCliente"
-    Me.txtNumCliente.Size = New System.Drawing.Size(341, 21)
+    Me.txtNumCliente.Size = New System.Drawing.Size(229, 21)
     Me.txtNumCliente.TabIndex = 57
     '
     'Label18
@@ -448,12 +449,25 @@ Partial Class frmCliente
     Me.Label18.TabIndex = 59
     Me.Label18.Text = "Datos del Cliente"
     '
+    'chkUsarDNI
+    '
+    Me.chkUsarDNI.AutoSize = True
+    Me.chkUsarDNI.Checked = True
+    Me.chkUsarDNI.CheckState = System.Windows.Forms.CheckState.Checked
+    Me.chkUsarDNI.Location = New System.Drawing.Point(636, 242)
+    Me.chkUsarDNI.Name = "chkUsarDNI"
+    Me.chkUsarDNI.Size = New System.Drawing.Size(189, 17)
+    Me.chkUsarDNI.TabIndex = 60
+    Me.chkUsarDNI.Text = "Usar DNI Como Numero de cliente"
+    Me.chkUsarDNI.UseVisualStyleBackColor = True
+    '
     'frmCliente
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.chkUsarDNI)
     Me.Controls.Add(Me.Label18)
     Me.Controls.Add(Me.Label17)
     Me.Controls.Add(Me.txtNumCliente)
@@ -538,4 +552,5 @@ Partial Class frmCliente
   Friend WithEvents Label17 As System.Windows.Forms.Label
   Friend WithEvents txtNumCliente As System.Windows.Forms.TextBox
   Friend WithEvents Label18 As System.Windows.Forms.Label
+  Friend WithEvents chkUsarDNI As System.Windows.Forms.CheckBox
 End Class

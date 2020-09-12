@@ -105,7 +105,8 @@ Public Class frmCliente
       Call Save_InfoCurrentCliente()
       Dim auxpersona As Integer
       Dim CrearCuentaDefecto As Boolean = Not clsPersona.FindGuid(m_Persona.GuidCliente, auxpersona)
-
+      vResult = Verificar(m_Persona)
+      If vResult <> Result.OK Then Exit Sub
       vResult = clsPersona.Save(m_Persona)
       If vResult <> Result.OK Then
         MsgBox("No se guardo")
@@ -127,6 +128,39 @@ Public Class frmCliente
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Function Verificar(ByVal vObj As ClsInfoPersona) As libCommon.Comunes.Result
+    Try
+      Dim vResult As Result
+      Dim obj = New clsListDatabase()
+      obj.Cfg_Filtro = "where NumCliente Like '%" & vObj.NumCliente & "%'"
+      obj.RefreshData()
+      If obj.Items.Count > 0 Then
+        'El numero de cliente ya existe
+        MsgBox(String.Format("El cliente ya existe, no pueden exisitr Duplicados."))
+        vResult = Result.NOK
+      End If
+      obj.Cfg_Filtro = "where ID Like '%" & vObj.DNI & "%'"
+      obj.RefreshData()
+      If obj.Items.Count > 0 Then
+        'El DNI del cliente existe pero el numero de cliente es diferente
+        Dim rta As MsgBoxResult = MsgBox(String.Format("El DNI introducido ya existe en otro cliente. Si continua existiran dos clientes con los mismos numeros de documentos. Desea continuar?"), MsgBoxStyle.YesNo)
+        If rta = MsgBoxResult.Yes Then
+          vResult = Result.OK
+        Else
+          vResult = Result.NOK
+        End If
+
+
+
+      End If
+
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
   Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
     Try
@@ -171,7 +205,23 @@ Public Class frmCliente
   Private Sub txtID_TextChanged(sender As Object, e As EventArgs) Handles txtID.TextChanged
     Try
       If m_PrimerEntrada = False Then Exit Sub
-      txtNumCliente.Text = txtID.Text
+      If chkUsarDNI.Checked = True Then
+        txtNumCliente.Text = txtID.Text
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub chkUsarDNI_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsarDNI.CheckedChanged
+    Try
+      If chkUsarDNI.Checked = True Then
+        txtNumCliente.Enabled = False
+        txtNumCliente.Text = txtID.Text
+      Else
+        txtNumCliente.Enabled = True
+      End If
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
