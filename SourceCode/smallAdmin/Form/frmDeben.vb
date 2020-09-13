@@ -323,6 +323,32 @@ Public Class frmDeben
     End Try
   End Sub
 
+  Private Sub RefreshDataOperaciones()
+    Try
+      gpPagarCuota.Enabled = False
+      If m_CurrentProducto.CuotasPagas < m_CurrentProducto.CuotasTotales Then
+        gpPagarCuota.Enabled = True
+        cmbNumCuotasCancelar.Items.Clear()
+        Dim c As Integer = 0
+        Do
+          c = c + 1
+          cmbNumCuotasCancelar.Items.Add(c)
+        Loop Until m_CurrentProducto.CuotasTotales = (m_CurrentProducto.CuotasPagas + c)
+        cmbNumCuotasCancelar.SelectedIndex = 0
+
+
+
+
+
+
+
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
   Private Sub btnArticulos_MouseClick(sender As Object, e As MouseEventArgs) Handles btnArticulos.MouseClick
     Try
       'llamar a form articulos
@@ -373,8 +399,8 @@ Public Class frmDeben
 
       rsta = MsgBox(msg, MsgBoxStyle.YesNo)
       If rsta = MsgBoxResult.Yes Then
-
-        Call AplicarCuota(1, m_CurrentProducto)
+        Dim nPagar As Integer = CInt(cmbNumCuotasCancelar.SelectedValue)
+        Call AplicarCuota(nPagar, m_CurrentProducto.GuidProducto)
 
 
 
@@ -842,6 +868,32 @@ Public Class frmDeben
         Next
         Call MostrarDeben()
       End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub btnModificarFormadePago_MouseClick(sender As Object, e As MouseEventArgs) Handles btnModificarFormadePago.MouseClick
+    Try
+      'Mostrar ventana con las opciones de pago o para agregar o modificar los datos y forma de pago
+      Dim objInfoProducto As New clsInfoProducto
+      If clsProducto.Load(m_CurrentProducto.GuidProducto, objInfoProducto) <> Result.OK Then
+        MsgBox("No se puede obtener datos del producto vendido o del cliente")
+        Exit Sub
+      End If
+
+      Dim vInfoCuenta As clsInfoCuenta = Nothing
+      Using objCuenta As New frmCuenta(objInfoProducto.GuidCliente)
+        objCuenta.GetCuentaSeleccionada(vInfoCuenta)
+      End Using
+      If vInfoCuenta Is Nothing Then
+        'no cambio nada. salir
+        Exit Sub
+      End If
+      '
+      objInfoProducto.GuidCuenta = vInfoCuenta.GuidCuenta
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

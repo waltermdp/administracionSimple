@@ -132,6 +132,22 @@ Public Class frmCliente
   Private Function Verificar(ByVal vObj As ClsInfoPersona) As libCommon.Comunes.Result
     Try
       Dim vResult As Result
+      If String.IsNullOrEmpty(vObj.DNI.Trim) Then
+        MsgBox("El campo DNI no puede estar vacio")
+        Return Result.NOK
+      End If
+
+      If Not IsNumeric(vObj.DNI.Trim) Then
+        MsgBox("El campo DNI deberia ser solo numeros, sin espacion ni puntuacion.")
+        Return Result.NOK
+      End If
+
+      If String.IsNullOrEmpty(vObj.Nombre.Trim) OrElse String.IsNullOrEmpty(vObj.Apellido.Trim) Then
+        MsgBox("Los campos nombre y apellidos deben estar completos")
+        Return Result.NOK
+      End If
+
+
       Dim obj = New clsListDatabase()
       obj.Cfg_Filtro = "where NumCliente Like '%" & vObj.NumCliente & "%'"
       obj.RefreshData()
