@@ -26,13 +26,19 @@ Partial Class frmResumen
     Me.lstViewResumen = New System.Windows.Forms.ListView()
     Me.btnOK = New System.Windows.Forms.Button()
     Me.btnCancel = New System.Windows.Forms.Button()
+    Me.btnReprocesarFile = New System.Windows.Forms.Button()
+    Me.lblAprobados = New System.Windows.Forms.Label()
+    Me.lblConflictos = New System.Windows.Forms.Label()
+    Me.lblRechazados = New System.Windows.Forms.Label()
+    Me.lblResumen = New System.Windows.Forms.Label()
+    Me.lblDetalle = New System.Windows.Forms.Label()
     Me.SuspendLayout()
     '
     'lstViewResumen
     '
     Me.lstViewResumen.Location = New System.Drawing.Point(177, 64)
     Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(778, 348)
+    Me.lstViewResumen.Size = New System.Drawing.Size(973, 348)
     Me.lstViewResumen.TabIndex = 44
     Me.lstViewResumen.UseCompatibleStateImageBehavior = False
     Me.lstViewResumen.View = System.Windows.Forms.View.Details
@@ -48,7 +54,7 @@ Partial Class frmResumen
     Me.btnOK.Name = "btnOK"
     Me.btnOK.Size = New System.Drawing.Size(110, 61)
     Me.btnOK.TabIndex = 43
-    Me.btnOK.Text = "OK"
+    Me.btnOK.Text = "Liquidar Archivo"
     Me.btnOK.UseVisualStyleBackColor = False
     '
     'btnCancel
@@ -62,15 +68,80 @@ Partial Class frmResumen
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 42
-    Me.btnCancel.Text = "Salir"
+    Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = False
+    '
+    'btnReprocesarFile
+    '
+    Me.btnReprocesarFile.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnReprocesarFile.FlatAppearance.BorderSize = 0
+    Me.btnReprocesarFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnReprocesarFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnReprocesarFile.ForeColor = System.Drawing.Color.White
+    Me.btnReprocesarFile.Location = New System.Drawing.Point(47, 126)
+    Me.btnReprocesarFile.Name = "btnReprocesarFile"
+    Me.btnReprocesarFile.Size = New System.Drawing.Size(110, 61)
+    Me.btnReprocesarFile.TabIndex = 45
+    Me.btnReprocesarFile.Text = "Reprocesar Archivo"
+    Me.btnReprocesarFile.UseVisualStyleBackColor = False
+    '
+    'lblAprobados
+    '
+    Me.lblAprobados.AutoSize = True
+    Me.lblAprobados.Location = New System.Drawing.Point(207, 428)
+    Me.lblAprobados.Name = "lblAprobados"
+    Me.lblAprobados.Size = New System.Drawing.Size(39, 13)
+    Me.lblAprobados.TabIndex = 46
+    Me.lblAprobados.Text = "Label1"
+    '
+    'lblConflictos
+    '
+    Me.lblConflictos.AutoSize = True
+    Me.lblConflictos.Location = New System.Drawing.Point(207, 450)
+    Me.lblConflictos.Name = "lblConflictos"
+    Me.lblConflictos.Size = New System.Drawing.Size(39, 13)
+    Me.lblConflictos.TabIndex = 47
+    Me.lblConflictos.Text = "Label2"
+    '
+    'lblRechazados
+    '
+    Me.lblRechazados.AutoSize = True
+    Me.lblRechazados.Location = New System.Drawing.Point(207, 473)
+    Me.lblRechazados.Name = "lblRechazados"
+    Me.lblRechazados.Size = New System.Drawing.Size(39, 13)
+    Me.lblRechazados.TabIndex = 48
+    Me.lblRechazados.Text = "Label3"
+    '
+    'lblResumen
+    '
+    Me.lblResumen.AutoSize = True
+    Me.lblResumen.Location = New System.Drawing.Point(207, 495)
+    Me.lblResumen.Name = "lblResumen"
+    Me.lblResumen.Size = New System.Drawing.Size(16, 13)
+    Me.lblResumen.TabIndex = 49
+    Me.lblResumen.Text = "te"
+    '
+    'lblDetalle
+    '
+    Me.lblDetalle.AutoSize = True
+    Me.lblDetalle.Location = New System.Drawing.Point(679, 442)
+    Me.lblDetalle.Name = "lblDetalle"
+    Me.lblDetalle.Size = New System.Drawing.Size(39, 13)
+    Me.lblDetalle.TabIndex = 50
+    Me.lblDetalle.Text = "Label1"
     '
     'frmResumen
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-    Me.ClientSize = New System.Drawing.Size(993, 559)
+    Me.ClientSize = New System.Drawing.Size(1183, 559)
+    Me.Controls.Add(Me.lblDetalle)
+    Me.Controls.Add(Me.lblResumen)
+    Me.Controls.Add(Me.lblRechazados)
+    Me.Controls.Add(Me.lblConflictos)
+    Me.Controls.Add(Me.lblAprobados)
+    Me.Controls.Add(Me.btnReprocesarFile)
     Me.Controls.Add(Me.lstViewResumen)
     Me.Controls.Add(Me.btnOK)
     Me.Controls.Add(Me.btnCancel)
@@ -78,9 +149,16 @@ Partial Class frmResumen
     Me.Name = "frmResumen"
     Me.Text = "frmResumen"
     Me.ResumeLayout(False)
+    Me.PerformLayout()
 
   End Sub
   Friend WithEvents lstViewResumen As System.Windows.Forms.ListView
   Friend WithEvents btnOK As System.Windows.Forms.Button
   Friend WithEvents btnCancel As System.Windows.Forms.Button
+  Friend WithEvents btnReprocesarFile As System.Windows.Forms.Button
+  Friend WithEvents lblAprobados As System.Windows.Forms.Label
+  Friend WithEvents lblConflictos As System.Windows.Forms.Label
+  Friend WithEvents lblRechazados As System.Windows.Forms.Label
+  Friend WithEvents lblResumen As System.Windows.Forms.Label
+  Friend WithEvents lblDetalle As System.Windows.Forms.Label
 End Class

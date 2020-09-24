@@ -40,6 +40,7 @@ Partial Class frmCuenta
     Me.bsCuenta = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnCancelar = New System.Windows.Forms.Button()
+    Me.btnSalirSinCambios = New System.Windows.Forms.Button()
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -136,7 +137,7 @@ Partial Class frmCuenta
     Me.btnVolver.Name = "btnVolver"
     Me.btnVolver.Size = New System.Drawing.Size(110, 61)
     Me.btnVolver.TabIndex = 10
-    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.Text = "OK"
     Me.btnVolver.UseVisualStyleBackColor = False
     '
     'btnGuardar
@@ -204,12 +205,28 @@ Partial Class frmCuenta
     Me.btnCancelar.Text = "Cancelar"
     Me.btnCancelar.UseVisualStyleBackColor = False
     '
+    'btnSalirSinCambios
+    '
+    Me.btnSalirSinCambios.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSalirSinCambios.FlatAppearance.BorderSize = 0
+    Me.btnSalirSinCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSalirSinCambios.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSalirSinCambios.ForeColor = System.Drawing.Color.White
+    Me.btnSalirSinCambios.Location = New System.Drawing.Point(281, 237)
+    Me.btnSalirSinCambios.Name = "btnSalirSinCambios"
+    Me.btnSalirSinCambios.Size = New System.Drawing.Size(110, 61)
+    Me.btnSalirSinCambios.TabIndex = 16
+    Me.btnSalirSinCambios.Text = "Cancelar"
+    Me.btnSalirSinCambios.UseVisualStyleBackColor = False
+    Me.btnSalirSinCambios.Visible = False
+    '
     'frmCuenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.ClientSize = New System.Drawing.Size(810, 310)
+    Me.Controls.Add(Me.btnSalirSinCambios)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnNuevo)
     Me.Controls.Add(Me.lstCuentas)
@@ -252,4 +269,5 @@ Partial Class frmCuenta
   Friend WithEvents btnNuevo As System.Windows.Forms.Button
   Friend WithEvents btnCancelar As System.Windows.Forms.Button
   Friend WithEvents bsCuenta As System.Windows.Forms.BindingSource
+  Friend WithEvents btnSalirSinCambios As System.Windows.Forms.Button
 End Class

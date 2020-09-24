@@ -4,6 +4,7 @@ Imports manDB
 Public Class frmResumen
   Private m_Movimientos As New List(Of clsInfoMovimiento)
   Private m_TipoPagoSeleccionado As clsTipoPago = Nothing
+  Private m_skip As Boolean = False
 
   Public Property Movimientos As List(Of clsInfoMovimiento)
     Get
@@ -183,6 +184,7 @@ Public Class frmResumen
         End If
         item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
         item.SubItems.Add(movimiento.Detalle)
+
         lstViewResumen.Items.Add(item)
       Next
 
@@ -195,38 +197,111 @@ Public Class frmResumen
 
   Private Sub FillResumenViewVisaCredito(ByVal vMovimientos As List(Of clsInfoMovimiento))
     Try
+      m_skip = True
       lstViewResumen.Clear()
       lstViewResumen.MultiSelect = False
       lstViewResumen.FullRowSelect = True
-      lstViewResumen.Columns.Add("Identificado")
-      lstViewResumen.Columns.Add("NumComprobante")
+      lstViewResumen.CheckBoxes = True
+      lstViewResumen.Columns.Add("Aplicar Pago")
+
+      lstViewResumen.Columns.Add("Identificador (DNI)")
+      lstViewResumen.Columns.Add("Nombre")
       lstViewResumen.Columns.Add("NumTarjeta")
       lstViewResumen.Columns.Add("Importe")
       lstViewResumen.Columns.Add("Estado")
+      lstViewResumen.Columns.Add("Comprobante")
+      lstViewResumen.Columns.Add("Ultima Cuota Paga")
+      lstViewResumen.Columns.Add("Fecha Ultimo Pago")
+      lstViewResumen.Columns.Add("Fecha Pago Actual")
       lstViewResumen.Columns.Add("Detalle")
+      lstViewResumen.Columns(0).DisplayIndex = 0 'ListView1.Columns.Count - 1 inidcar la posicion que tendra la columna
       Dim item As ListViewItem
+      Dim lstPagos As New List(Of clsInfoPagos)
+      Dim Cliente As String = String.Empty
+      Dim FechaUltimoPago As Date
+      Dim UltimaCuotaPaga As Integer
+      Dim Cuotas As Integer
+      Dim vResult As libCommon.Comunes.Result
       For Each movimiento In vMovimientos
-        item = New ListViewItem
-        item.Text = CLng(movimiento.IdentificadorDebito).ToString
-        item.SubItems.Add(CLng(movimiento.NumeroComprobante).ToString)
+        item = New ListViewItem()
+        lstPagos.Clear()
+        Cliente = String.Empty
+        UltimaCuotaPaga = 0
+        Cuotas = 0
+        vResult = GetPagosHistorial(movimiento.NumeroComprobante, lstPagos, Cliente, FechaUltimoPago, UltimaCuotaPaga, Cuotas)
+
+        item.SubItems.Add(CLng(movimiento.IdentificadorDebito).ToString) 'USUALMENTE DNI
+        If vResult <> Result.OK Then Cliente = "--"
+        item.SubItems.Add(Cliente)
         item.SubItems.Add(movimiento.NumeroTarjeta)
         item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
         If CInt(movimiento.Codigo) = 0 Then
           movimiento.Estado = E_EstadoPago.Pago
+          item.BackColor = Color.LightGreen
+          item.Checked = True
         Else
           movimiento.Estado = E_EstadoPago.Debe
+          item.Checked = False
+          item.BackColor = Color.LightGray
         End If
         item.SubItems.Add(movimiento.Estado.ToString)
+        item.SubItems.Add(CInt(movimiento.NumeroComprobante).ToString)
+        If vResult = Result.OK Then
+          item.SubItems.Add(String.Format("{0}/{1}", UltimaCuotaPaga, Cuotas))
+          item.SubItems.Add(FechaUltimoPago.ToString("dd/MM/yyyy"))
+        Else
+          item.SubItems.Add("--")
+          item.SubItems.Add("--")
+        End If
+        item.SubItems.Add(movimiento.Fecha.Substring(0, 2) + "/" + movimiento.Fecha.Substring(2, 2) + "/" + movimiento.Fecha.Substring(4, 2))
         item.SubItems.Add(movimiento.Detalle)
+        If item.BackColor = Color.LightGreen AndAlso vResult <> Result.OK Then
+          item.BackColor = Color.LightYellow
+          item.Checked = False
+        End If
         lstViewResumen.Items.Add(item)
+
       Next
+      lstViewResumen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+      Call LoadInformacion()
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
     Finally
-
+      m_skip = False
     End Try
   End Sub
+
+  Private Function GetPagosHistorial(ByVal numComprobante As Integer, ByRef vlstPagos As List(Of clsInfoPagos), ByRef Nombre As String, ByRef fechaUltimoPago As Date, ByRef UltimaCuotaPaga As Integer, ByRef Cuotas As Integer) As libCommon.Comunes.Result
+    Try
+      Dim aux As New clsListPagos()
+      aux.Cfg_Filtro = "where NumComprobante=" & numComprobante
+      aux.RefreshData()
+      vlstPagos = New List(Of clsInfoPagos)
+      If aux.Items.Count <= 0 Then
+        Return Result.NOK
+      End If
+      vlstPagos.AddRange(aux.Items.ToList)
+      Dim auxProducto As New clsInfoProducto
+      clsProducto.Load(vlstPagos.First.GuidProducto, auxProducto)
+      Dim auxPersona As New ClsInfoPersona
+      clsPersona.Load(auxProducto.GuidCliente, auxPersona)
+      Nombre = auxPersona.ToString
+      Cuotas = auxProducto.TotalCuotas
+      For Each pago In vlstPagos.OrderByDescending(Function(c) c.NumCuota)
+        If pago.EstadoPago <> E_EstadoPago.Pago Then Continue For
+        fechaUltimoPago = pago.FechaPago
+        UltimaCuotaPaga = pago.NumCuota
+        Exit For
+      Next
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
 
   Private Sub FillResumenViewMASTER(ByVal vMovimientos As List(Of clsInfoMovimiento))
     Try
@@ -322,6 +397,81 @@ Public Class frmResumen
           MsgBox("No se encuentra tipo de pago")
           Me.Close()
       End Select
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnReprocesarFile_Click(sender As Object, e As EventArgs) Handles btnReprocesarFile.Click
+    Try
+      Call frmResumen_Shown(Nothing, Nothing)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+  Private Sub lstViewResumen_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles lstViewResumen.ItemChecked
+    Try
+      If m_skip Then Exit Sub
+      If e.Item.BackColor = Color.LightGray Then e.Item.Checked = False
+      If e.Item.BackColor = Color.LightYellow Then e.Item.Checked = False
+      Call LoadInformacion()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+
+  End Sub
+
+  Private Sub LoadInformacion()
+    Try
+
+      Dim rechazados As Integer = 0
+      Dim aprobados As Integer = 0
+      Dim conflictos As Integer = 0
+      Dim PagosAProcesar As Integer = 0
+      Dim r As Integer = 0
+      For Each item As ListViewItem In lstViewResumen.Items
+        If item.BackColor = Color.LightGray Then rechazados += 1
+        If item.BackColor = Color.LightGreen Then aprobados += 1
+        If item.BackColor = Color.LightYellow Then conflictos += 1
+        If item.Checked = True Then PagosAProcesar += 1
+      Next
+      lblAprobados.Text = aprobados.ToString + " entradas OK"
+      lblConflictos.Text = conflictos.ToString + " entradas con conflicos"
+      lblRechazados.Text = rechazados.ToString + " entradas rechazadas"
+      lblResumen.Text = String.Format("Existen {0} entradas tildadas de {1} disponibles", PagosAProcesar, aprobados)
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub lstViewResumen_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstViewResumen.SelectedIndexChanged
+    Try
+      lblDetalle.Text = ""
+      If lstViewResumen.SelectedIndices.Count > 0 Then
+        Dim index As Integer = lstViewResumen.SelectedIndices(0)
+        Dim row As ListViewItem = lstViewResumen.Items(index)
+        If row.BackColor = Color.LightGreen Then Exit Sub
+        Dim aux As String = row.SubItems(6).Text
+        Dim item As ListViewItem
+        Dim lstPagos As New List(Of clsInfoPagos)
+        Dim Cliente As String = String.Empty
+        Dim FechaUltimoPago As Date
+        Dim UltimaCuotaPaga As Integer
+        Dim cuotas As Integer
+        Dim vResult As libCommon.Comunes.Result
+        item = New ListViewItem()
+        lstPagos.Clear()
+        Cliente = String.Empty
+        UltimaCuotaPaga = 0
+        vResult = GetPagosHistorial(CInt(aux), lstPagos, Cliente, FechaUltimoPago, UltimaCuotaPaga, cuotas)
+        If vResult <> Result.OK AndAlso String.IsNullOrEmpty(Cliente) Then
+          lblDetalle.Text = "No existe el cliente en la base de datos"
+        End If
+      End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

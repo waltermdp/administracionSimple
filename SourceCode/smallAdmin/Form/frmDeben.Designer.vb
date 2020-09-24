@@ -91,15 +91,21 @@ Partial Class frmDeben
     Me.tbResumen = New System.Windows.Forms.TabPage()
     Me.tbPagos = New System.Windows.Forms.TabPage()
     Me.tbOperaciones = New System.Windows.Forms.TabPage()
+    Me.gbModificarFormadePago = New System.Windows.Forms.GroupBox()
     Me.btnModificarFormadePago = New System.Windows.Forms.Button()
-    Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+    Me.lblInfodeFormadePago = New System.Windows.Forms.Label()
+    Me.gbAnularPago = New System.Windows.Forms.GroupBox()
     Me.gpPagarCuota = New System.Windows.Forms.GroupBox()
+    Me.gbPagoParcial = New System.Windows.Forms.GroupBox()
+    Me.Label7 = New System.Windows.Forms.Label()
+    Me.cmbFormaDePago = New System.Windows.Forms.ComboBox()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.txtImporteParcial = New System.Windows.Forms.TextBox()
+    Me.chkPagoParcial = New System.Windows.Forms.CheckBox()
     Me.Label6 = New System.Windows.Forms.Label()
     Me.cmbNumCuotasCancelar = New System.Windows.Forms.ComboBox()
-    Me.lblInfodeFormadePago = New System.Windows.Forms.Label()
     Me.Button3 = New System.Windows.Forms.Button()
     Me.Button1 = New System.Windows.Forms.Button()
-    Me.GroupBox3 = New System.Windows.Forms.GroupBox()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -111,9 +117,10 @@ Partial Class frmDeben
     Me.tbResumen.SuspendLayout()
     Me.tbPagos.SuspendLayout()
     Me.tbOperaciones.SuspendLayout()
-    Me.GroupBox4.SuspendLayout()
+    Me.gbModificarFormadePago.SuspendLayout()
+    Me.gbAnularPago.SuspendLayout()
     Me.gpPagarCuota.SuspendLayout()
-    Me.GroupBox3.SuspendLayout()
+    Me.gbPagoParcial.SuspendLayout()
     Me.SuspendLayout()
     '
     'dateInicio
@@ -290,7 +297,7 @@ Partial Class frmDeben
     '
     'btnUpPago
     '
-    Me.btnUpPago.Location = New System.Drawing.Point(224, 19)
+    Me.btnUpPago.Location = New System.Drawing.Point(6, 50)
     Me.btnUpPago.Name = "btnUpPago"
     Me.btnUpPago.Size = New System.Drawing.Size(99, 23)
     Me.btnUpPago.TabIndex = 33
@@ -299,9 +306,9 @@ Partial Class frmDeben
     '
     'btnDownPago
     '
-    Me.btnDownPago.Location = New System.Drawing.Point(17, 27)
+    Me.btnDownPago.Location = New System.Drawing.Point(6, 28)
     Me.btnDownPago.Name = "btnDownPago"
-    Me.btnDownPago.Size = New System.Drawing.Size(276, 24)
+    Me.btnDownPago.Size = New System.Drawing.Size(99, 24)
     Me.btnDownPago.TabIndex = 43
     Me.btnDownPago.Text = "Anular 1 cuota"
     Me.btnDownPago.UseVisualStyleBackColor = True
@@ -794,8 +801,10 @@ Partial Class frmDeben
     '
     'tbOperaciones
     '
-    Me.tbOperaciones.Controls.Add(Me.GroupBox3)
-    Me.tbOperaciones.Controls.Add(Me.GroupBox4)
+    Me.tbOperaciones.Controls.Add(Me.chkPagoParcial)
+    Me.tbOperaciones.Controls.Add(Me.gbPagoParcial)
+    Me.tbOperaciones.Controls.Add(Me.gbModificarFormadePago)
+    Me.tbOperaciones.Controls.Add(Me.gbAnularPago)
     Me.tbOperaciones.Controls.Add(Me.gpPagarCuota)
     Me.tbOperaciones.Controls.Add(Me.Button3)
     Me.tbOperaciones.Controls.Add(Me.Button2)
@@ -807,24 +816,44 @@ Partial Class frmDeben
     Me.tbOperaciones.Text = "Operaciones"
     Me.tbOperaciones.UseVisualStyleBackColor = True
     '
+    'gbModificarFormadePago
+    '
+    Me.gbModificarFormadePago.Controls.Add(Me.btnModificarFormadePago)
+    Me.gbModificarFormadePago.Controls.Add(Me.lblInfodeFormadePago)
+    Me.gbModificarFormadePago.Location = New System.Drawing.Point(368, 20)
+    Me.gbModificarFormadePago.Name = "gbModificarFormadePago"
+    Me.gbModificarFormadePago.Size = New System.Drawing.Size(419, 69)
+    Me.gbModificarFormadePago.TabIndex = 70
+    Me.gbModificarFormadePago.TabStop = False
+    Me.gbModificarFormadePago.Text = "Forma de pago"
+    '
     'btnModificarFormadePago
     '
-    Me.btnModificarFormadePago.Location = New System.Drawing.Point(241, 65)
+    Me.btnModificarFormadePago.Location = New System.Drawing.Point(6, 35)
     Me.btnModificarFormadePago.Name = "btnModificarFormadePago"
     Me.btnModificarFormadePago.Size = New System.Drawing.Size(156, 23)
     Me.btnModificarFormadePago.TabIndex = 69
     Me.btnModificarFormadePago.Text = "Modificar Forma de Pago"
     Me.btnModificarFormadePago.UseVisualStyleBackColor = True
     '
-    'GroupBox4
+    'lblInfodeFormadePago
     '
-    Me.GroupBox4.Controls.Add(Me.btnDownPago)
-    Me.GroupBox4.Location = New System.Drawing.Point(23, 85)
-    Me.GroupBox4.Name = "GroupBox4"
-    Me.GroupBox4.Size = New System.Drawing.Size(327, 70)
-    Me.GroupBox4.TabIndex = 68
-    Me.GroupBox4.TabStop = False
-    Me.GroupBox4.Text = "Anular Pago de cuota"
+    Me.lblInfodeFormadePago.AutoSize = True
+    Me.lblInfodeFormadePago.Location = New System.Drawing.Point(6, 19)
+    Me.lblInfodeFormadePago.Name = "lblInfodeFormadePago"
+    Me.lblInfodeFormadePago.Size = New System.Drawing.Size(13, 13)
+    Me.lblInfodeFormadePago.TabIndex = 64
+    Me.lblInfodeFormadePago.Text = "d"
+    '
+    'gbAnularPago
+    '
+    Me.gbAnularPago.Controls.Add(Me.btnDownPago)
+    Me.gbAnularPago.Location = New System.Drawing.Point(23, 118)
+    Me.gbAnularPago.Name = "gbAnularPago"
+    Me.gbAnularPago.Size = New System.Drawing.Size(327, 70)
+    Me.gbAnularPago.TabIndex = 68
+    Me.gbAnularPago.TabStop = False
+    Me.gbAnularPago.Text = "Anular Pago de cuota"
     '
     'gpPagarCuota
     '
@@ -833,10 +862,69 @@ Partial Class frmDeben
     Me.gpPagarCuota.Controls.Add(Me.cmbNumCuotasCancelar)
     Me.gpPagarCuota.Location = New System.Drawing.Point(23, 20)
     Me.gpPagarCuota.Name = "gpPagarCuota"
-    Me.gpPagarCuota.Size = New System.Drawing.Size(354, 59)
+    Me.gpPagarCuota.Size = New System.Drawing.Size(327, 92)
     Me.gpPagarCuota.TabIndex = 67
     Me.gpPagarCuota.TabStop = False
     Me.gpPagarCuota.Text = "Aplicar Pago de Cuota"
+    '
+    'gbPagoParcial
+    '
+    Me.gbPagoParcial.Controls.Add(Me.Label7)
+    Me.gbPagoParcial.Controls.Add(Me.cmbFormaDePago)
+    Me.gbPagoParcial.Controls.Add(Me.Label2)
+    Me.gbPagoParcial.Controls.Add(Me.txtImporteParcial)
+    Me.gbPagoParcial.Location = New System.Drawing.Point(585, 146)
+    Me.gbPagoParcial.Name = "gbPagoParcial"
+    Me.gbPagoParcial.Size = New System.Drawing.Size(321, 90)
+    Me.gbPagoParcial.TabIndex = 71
+    Me.gbPagoParcial.TabStop = False
+    Me.gbPagoParcial.Text = "Pago Parcial"
+    Me.gbPagoParcial.Visible = False
+    '
+    'Label7
+    '
+    Me.Label7.AutoSize = True
+    Me.Label7.Location = New System.Drawing.Point(6, 57)
+    Me.Label7.Name = "Label7"
+    Me.Label7.Size = New System.Drawing.Size(82, 13)
+    Me.Label7.TabIndex = 3
+    Me.Label7.Text = "Forma de Pago:"
+    '
+    'cmbFormaDePago
+    '
+    Me.cmbFormaDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.cmbFormaDePago.FormattingEnabled = True
+    Me.cmbFormaDePago.Location = New System.Drawing.Point(160, 54)
+    Me.cmbFormaDePago.Name = "cmbFormaDePago"
+    Me.cmbFormaDePago.Size = New System.Drawing.Size(121, 21)
+    Me.cmbFormaDePago.TabIndex = 2
+    '
+    'Label2
+    '
+    Me.Label2.AutoSize = True
+    Me.Label2.Location = New System.Drawing.Point(6, 25)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(112, 13)
+    Me.Label2.TabIndex = 1
+    Me.Label2.Text = "Valor del pago parcial:"
+    '
+    'txtImporteParcial
+    '
+    Me.txtImporteParcial.Location = New System.Drawing.Point(160, 22)
+    Me.txtImporteParcial.Name = "txtImporteParcial"
+    Me.txtImporteParcial.Size = New System.Drawing.Size(121, 20)
+    Me.txtImporteParcial.TabIndex = 0
+    '
+    'chkPagoParcial
+    '
+    Me.chkPagoParcial.AutoSize = True
+    Me.chkPagoParcial.Location = New System.Drawing.Point(461, 198)
+    Me.chkPagoParcial.Name = "chkPagoParcial"
+    Me.chkPagoParcial.Size = New System.Drawing.Size(86, 17)
+    Me.chkPagoParcial.TabIndex = 67
+    Me.chkPagoParcial.Text = "Pago Parcial"
+    Me.chkPagoParcial.UseVisualStyleBackColor = True
+    Me.chkPagoParcial.Visible = False
     '
     'Label6
     '
@@ -849,20 +937,12 @@ Partial Class frmDeben
     '
     'cmbNumCuotasCancelar
     '
+    Me.cmbNumCuotasCancelar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbNumCuotasCancelar.FormattingEnabled = True
     Me.cmbNumCuotasCancelar.Location = New System.Drawing.Point(166, 21)
     Me.cmbNumCuotasCancelar.Name = "cmbNumCuotasCancelar"
     Me.cmbNumCuotasCancelar.Size = New System.Drawing.Size(52, 21)
     Me.cmbNumCuotasCancelar.TabIndex = 65
-    '
-    'lblInfodeFormadePago
-    '
-    Me.lblInfodeFormadePago.AutoSize = True
-    Me.lblInfodeFormadePago.Location = New System.Drawing.Point(6, 19)
-    Me.lblInfodeFormadePago.Name = "lblInfodeFormadePago"
-    Me.lblInfodeFormadePago.Size = New System.Drawing.Size(13, 13)
-    Me.lblInfodeFormadePago.TabIndex = 64
-    Me.lblInfodeFormadePago.Text = "d"
     '
     'Button3
     '
@@ -881,17 +961,6 @@ Partial Class frmDeben
     Me.Button1.TabIndex = 65
     Me.Button1.Text = "Service"
     Me.Button1.UseVisualStyleBackColor = True
-    '
-    'GroupBox3
-    '
-    Me.GroupBox3.Controls.Add(Me.btnModificarFormadePago)
-    Me.GroupBox3.Controls.Add(Me.lblInfodeFormadePago)
-    Me.GroupBox3.Location = New System.Drawing.Point(401, 20)
-    Me.GroupBox3.Name = "GroupBox3"
-    Me.GroupBox3.Size = New System.Drawing.Size(419, 100)
-    Me.GroupBox3.TabIndex = 70
-    Me.GroupBox3.TabStop = False
-    Me.GroupBox3.Text = "Forma de pago"
     '
     'frmDeben
     '
@@ -934,11 +1003,14 @@ Partial Class frmDeben
     Me.tbResumen.ResumeLayout(False)
     Me.tbPagos.ResumeLayout(False)
     Me.tbOperaciones.ResumeLayout(False)
-    Me.GroupBox4.ResumeLayout(False)
+    Me.tbOperaciones.PerformLayout()
+    Me.gbModificarFormadePago.ResumeLayout(False)
+    Me.gbModificarFormadePago.PerformLayout()
+    Me.gbAnularPago.ResumeLayout(False)
     Me.gpPagarCuota.ResumeLayout(False)
     Me.gpPagarCuota.PerformLayout()
-    Me.GroupBox3.ResumeLayout(False)
-    Me.GroupBox3.PerformLayout()
+    Me.gbPagoParcial.ResumeLayout(False)
+    Me.gbPagoParcial.PerformLayout()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -1019,7 +1091,13 @@ Partial Class frmDeben
   Friend WithEvents cmbNumCuotasCancelar As System.Windows.Forms.ComboBox
   Friend WithEvents lblInfodeFormadePago As System.Windows.Forms.Label
   Friend WithEvents btnModificarFormadePago As System.Windows.Forms.Button
-  Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+  Friend WithEvents gbAnularPago As System.Windows.Forms.GroupBox
   Friend WithEvents gpPagarCuota As System.Windows.Forms.GroupBox
-  Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+  Friend WithEvents gbModificarFormadePago As System.Windows.Forms.GroupBox
+  Friend WithEvents gbPagoParcial As System.Windows.Forms.GroupBox
+  Friend WithEvents Label7 As System.Windows.Forms.Label
+  Friend WithEvents cmbFormaDePago As System.Windows.Forms.ComboBox
+  Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents txtImporteParcial As System.Windows.Forms.TextBox
+  Friend WithEvents chkPagoParcial As System.Windows.Forms.CheckBox
 End Class

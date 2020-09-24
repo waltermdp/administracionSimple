@@ -6,13 +6,16 @@ Public Class frmCuenta
   Private WithEvents m_objCuentaList As clsListaCuentas = Nothing
   Private m_GuidCliente As Guid
   Private m_skip As Boolean
-  Public Sub New(ByVal vGuidClient As Guid)
+  Public Sub New(ByVal vGuidClient As Guid, Optional ByVal vCancelar As Boolean = False)
     InitializeComponent()
     Try
       m_GuidCliente = vGuidClient
       m_skip = True
       cmbTipoDeCuenta.DataSource = g_TipoPago
       m_skip = False
+   
+      btnSalirSinCambios.Visible = vCancelar
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -293,6 +296,15 @@ Public Class frmCuenta
         Call NombrarCampos(CType(objCMB.SelectedItem, clsTipoPago))
       End If
       
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSalirSinCambios_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSalirSinCambios.MouseClick
+    Try
+      m_objCuentaCurrent = Nothing
+      Me.Close()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

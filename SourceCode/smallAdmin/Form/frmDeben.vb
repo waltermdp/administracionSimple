@@ -66,6 +66,7 @@ Public Class frmDeben
 
       bsInfoPrincipal.ResetBindings(False)
       FillResumen()
+      Call RefreshDataOperaciones()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -176,7 +177,7 @@ Public Class frmDeben
 
       If dgvData.SelectedRows.Count <> 1 Then Exit Sub
       Call Refresh_Selection(dgvData.SelectedRows(0).Index)
-
+      Call RefreshDataOperaciones()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -326,6 +327,16 @@ Public Class frmDeben
   Private Sub RefreshDataOperaciones()
     Try
       gpPagarCuota.Enabled = False
+      gbModificarFormadePago.Enabled = False
+      gbAnularPago.Enabled = False
+      chkPagoParcial.Checked = False
+      txtImporteParcial.Enabled = False
+
+      If m_CurrentProducto Is Nothing Then Exit Sub
+      lblInfodeFormadePago.Text = String.Format("Forma de Pago Actual: {0}", m_CurrentProducto.MetodoPago)
+      If m_CurrentProducto.CuotasPagas >= 1 Then
+        gbAnularPago.Enabled = True
+      End If
       If m_CurrentProducto.CuotasPagas < m_CurrentProducto.CuotasTotales Then
         gpPagarCuota.Enabled = True
         cmbNumCuotasCancelar.Items.Clear()
@@ -336,9 +347,18 @@ Public Class frmDeben
         Loop Until m_CurrentProducto.CuotasTotales = (m_CurrentProducto.CuotasPagas + c)
         cmbNumCuotasCancelar.SelectedIndex = 0
 
+        gbModificarFormadePago.Enabled = True
 
+        'Call CargarMetodosDePago()
+        'For Each item As clsInfoCuenta In cmbFormaDePago.Items
+        '  If item.ToString = m_CurrentProducto.MetodoPago Then
+        '    cmbFormaDePago.SelectedItem = item
+        '    Exit For
+        '  End If
 
+        'Next
 
+        'seleccionar el metodo de pago actual
 
 
 
@@ -387,7 +407,11 @@ Public Class frmDeben
         If rsta <> MsgBoxResult.Yes Then Exit Sub
 
       End If
-
+      'If chkPagoParcial.Checked = True Then
+      '  Call IngresarPagoParcial(m_CurrentProducto)
+      '  Exit Sub
+      'End If
+      Dim nPagar As Integer = CInt(cmbNumCuotasCancelar.SelectedItem)
       'collectar la informacion a mostrar antes de aplicar el pago elgido
       Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
                                         "Nombre: {0}" & vbNewLine & _
@@ -399,7 +423,8 @@ Public Class frmDeben
 
       rsta = MsgBox(msg, MsgBoxStyle.YesNo)
       If rsta = MsgBoxResult.Yes Then
-        Dim nPagar As Integer = CInt(cmbNumCuotasCancelar.SelectedValue)
+
+
         Call AplicarCuota(nPagar, m_CurrentProducto.GuidProducto)
 
 
@@ -412,6 +437,53 @@ Public Class frmDeben
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  'Private Sub IngresarPagoParcial(ByVal vProducto As clsInfoPrincipal)
+  '  Try
+
+
+  '    If CDec(txtImporteParcial.Text) < 0 OrElse CDec(txtImporteParcial.Text) > CDec(vProducto.ValorCuotaFija) Then
+  '      MsgBox("El valor del importe debe ser mayor o igual a cero y menor o igual al precio de venta")
+  '      Exit Sub
+  '    End If
+
+
+
+
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
+
+  'Private Sub CargarMetodosDePago()
+  '  Try
+
+  '    If m_CurrentProducto Is Nothing Then Exit Sub
+  '    cmbFormaDePago.Items.Clear()
+
+  '    Dim lstProducto = New clsListProductos
+  '    lstProducto = New clsListProductos
+  '    lstProducto.Cfg_Filtro = "where GuidProducto={" & m_CurrentProducto.GuidProducto.ToString & "}"
+  '    lstProducto.RefreshData()
+  '    Dim Producto As New clsInfoProducto
+  '    If lstProducto.Items.Count <= 0 Then
+  '      MsgBox("No existe el producto")
+  '      Exit Sub
+  '    End If
+  '    Producto = lstProducto.Items.First.Clone
+  '    Dim lstFormasDePagosAsociadas As New List(Of clsInfoCuenta)
+  '    clsCuenta.Load(Producto.GuidCliente, lstFormasDePagosAsociadas)
+  '    For Each forma In lstFormasDePagosAsociadas
+  '      forma.SetDelegadoCustomString(New clsInfoCuenta.delToString(AddressOf GetNameOfTipoPago))
+  '      cmbFormaDePago.Items.Add(forma)
+  '    Next
+
+
+
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub btnDownPago_MouseClick(sender As Object, e As MouseEventArgs) Handles btnDownPago.MouseClick
     Try
@@ -561,7 +633,7 @@ Public Class frmDeben
           vTipoPagoSeleccionado = objForm.TipoPagoSeleccionado
         End If
       End Using
-
+      'Procesar los movimientos entrantes
       Using objFormResumen As New frmResumen
         objFormResumen.Movimientos = vMovimientos.ToList
         objFormResumen.TipoDePago = vTipoPagoSeleccionado
@@ -882,20 +954,56 @@ Public Class frmDeben
         MsgBox("No se puede obtener datos del producto vendido o del cliente")
         Exit Sub
       End If
+      If clsPago.Load(objInfoProducto.ListaPagos, m_CurrentProducto.GuidProducto) <> Result.OK Then
+        MsgBox("No se puede obtener datos del producto vendido o del cliente")
+        Exit Sub
+      End If
+      If clsRelArtProd.Load(objInfoProducto.ListaArticulos, m_CurrentProducto.GuidProducto) <> Result.OK Then
+        MsgBox("No se puede obtener datos del producto vendido o del cliente")
+        Exit Sub
+      End If
+      If clsCuenta.Load(objInfoProducto.GuidCuenta, objInfoProducto.Cuenta) <> Result.OK Then
+        MsgBox("No se puede obtener datos del producto vendido o del cliente")
+        Exit Sub
+      End If
 
       Dim vInfoCuenta As clsInfoCuenta = Nothing
-      Using objCuenta As New frmCuenta(objInfoProducto.GuidCliente)
+      Using objCuenta As New frmCuenta(objInfoProducto.GuidCliente, True)
+        objCuenta.ShowDialog(Me)
         objCuenta.GetCuentaSeleccionada(vInfoCuenta)
       End Using
       If vInfoCuenta Is Nothing Then
-        'no cambio nada. salir
+        'Sin cambios. salir
         Exit Sub
       End If
       '
-      objInfoProducto.GuidCuenta = vInfoCuenta.GuidCuenta
 
+
+      'se eligio otro forma de pago distinta a la actual.
+      'establecer como nueva forma de pago, y actualizar tb en la cuota que se debe.
+      objInfoProducto.Cuenta = vInfoCuenta.Clone
+      objInfoProducto.GuidCuenta = vInfoCuenta.GuidCuenta
+      If clsProducto.Save(objInfoProducto) <> Result.OK Then
+        MsgBox("Ocurrio un error al guardar el cambio.")
+      End If
+      Call MostrarDeben()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+
+  'Private Sub chkPagoParcial_CheckedChanged(sender As Object, e As EventArgs) Handles chkPagoParcial.CheckedChanged
+  '  Try
+  '    If chkPagoParcial.Checked = True Then
+  '      cmbNumCuotasCancelar.Enabled = False
+  '      txtImporteParcial.Enabled = True
+  '    Else
+  '      cmbNumCuotasCancelar.Enabled = True
+  '      txtImporteParcial.Enabled = False
+  '    End If
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 End Class
