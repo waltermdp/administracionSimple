@@ -57,6 +57,9 @@ Partial Class frmListaClientes
     Me.btnBuscar = New System.Windows.Forms.Button()
     Me.txtFiltro = New System.Windows.Forms.TextBox()
     Me.Label2 = New System.Windows.Forms.Label()
+    Me.btnMostrarErrores = New System.Windows.Forms.Button()
+    Me.btnMostrarDuplicados = New System.Windows.Forms.Button()
+    Me.lblInfo = New System.Windows.Forms.Label()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -362,9 +365,49 @@ Partial Class frmListaClientes
     Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label2.Location = New System.Drawing.Point(180, 75)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(272, 15)
+    Me.Label2.Size = New System.Drawing.Size(299, 15)
     Me.Label2.TabIndex = 35
-    Me.Label2.Text = "Filtro por Apellido, Nombre  o Numero de Cliente"
+    Me.Label2.Text = "Filtro por DNI, Apellido, Nombre  o Numero de Cliente"
+    '
+    'btnMostrarErrores
+    '
+    Me.btnMostrarErrores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnMostrarErrores.FlatAppearance.BorderSize = 0
+    Me.btnMostrarErrores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMostrarErrores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMostrarErrores.ForeColor = System.Drawing.Color.White
+    Me.btnMostrarErrores.Location = New System.Drawing.Point(926, 75)
+    Me.btnMostrarErrores.Name = "btnMostrarErrores"
+    Me.btnMostrarErrores.Size = New System.Drawing.Size(224, 26)
+    Me.btnMostrarErrores.TabIndex = 38
+    Me.btnMostrarErrores.Text = "MostrarSinDNI o numCliente"
+    Me.btnMostrarErrores.UseVisualStyleBackColor = False
+    Me.btnMostrarErrores.Visible = False
+    '
+    'btnMostrarDuplicados
+    '
+    Me.btnMostrarDuplicados.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnMostrarDuplicados.FlatAppearance.BorderSize = 0
+    Me.btnMostrarDuplicados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMostrarDuplicados.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMostrarDuplicados.ForeColor = System.Drawing.Color.White
+    Me.btnMostrarDuplicados.Location = New System.Drawing.Point(926, 110)
+    Me.btnMostrarDuplicados.Name = "btnMostrarDuplicados"
+    Me.btnMostrarDuplicados.Size = New System.Drawing.Size(224, 26)
+    Me.btnMostrarDuplicados.TabIndex = 39
+    Me.btnMostrarDuplicados.Text = "Mostrar duplicados"
+    Me.btnMostrarDuplicados.UseVisualStyleBackColor = False
+    Me.btnMostrarDuplicados.Visible = False
+    '
+    'lblInfo
+    '
+    Me.lblInfo.AutoSize = True
+    Me.lblInfo.BackColor = System.Drawing.Color.White
+    Me.lblInfo.Location = New System.Drawing.Point(180, 145)
+    Me.lblInfo.Name = "lblInfo"
+    Me.lblInfo.Size = New System.Drawing.Size(10, 13)
+    Me.lblInfo.TabIndex = 40
+    Me.lblInfo.Text = " "
     '
     'frmListaClientes
     '
@@ -372,6 +415,9 @@ Partial Class frmListaClientes
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.lblInfo)
+    Me.Controls.Add(Me.btnMostrarDuplicados)
+    Me.Controls.Add(Me.btnMostrarErrores)
     Me.Controls.Add(Me.btnBuscar)
     Me.Controls.Add(Me.txtFiltro)
     Me.Controls.Add(Me.Label2)
@@ -421,5 +467,8 @@ Partial Class frmListaClientes
   Friend WithEvents btnBuscar As System.Windows.Forms.Button
   Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
   Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents btnMostrarErrores As System.Windows.Forms.Button
+  Friend WithEvents btnMostrarDuplicados As System.Windows.Forms.Button
+  Friend WithEvents lblInfo As System.Windows.Forms.Label
 
 End Class

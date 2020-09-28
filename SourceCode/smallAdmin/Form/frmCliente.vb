@@ -17,6 +17,9 @@ Public Class frmCliente
       Else
         m_Persona = vPersona.Clone
         m_PrimerEntrada = False
+        chkUsarDNI.Checked = False
+        chkUsarDNI.Visible = False
+        chkUsarDNI.Enabled = False
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -29,6 +32,7 @@ Public Class frmCliente
         txtNombre.Text = .Nombre
         txtApellido.Text = .Apellido
         txtID.Text = .DNI
+        txtNumCliente.Text = .NumCliente
         txtCalle1.Text = .Calle
         txtNumero1.Text = .NumCalle
         dtFechaIngreso.Value = .FechaIngreso
@@ -132,13 +136,13 @@ Public Class frmCliente
   Private Function Verificar(ByVal vObj As ClsInfoPersona) As libCommon.Comunes.Result
     Try
       Dim vResult As Result
-      If String.IsNullOrEmpty(vObj.DNI.Trim) Then
-        MsgBox("El campo DNI no puede estar vacio")
+      If String.IsNullOrEmpty(vObj.DNI.Trim) OrElse String.IsNullOrEmpty(vObj.NumCliente.Trim) Then
+        MsgBox("El campo DNI o Numero de cliente no pueden estar vacio")
         Return Result.NOK
       End If
 
-      If Not IsNumeric(vObj.DNI.Trim) Then
-        MsgBox("El campo DNI deberia ser solo numeros, sin espacion ni puntuacion.")
+      If Not IsNumeric(vObj.DNI.Trim) OrElse Not IsNumeric(vObj.NumCliente.Trim) Then
+        MsgBox("El campo DNI o Numero de cliente deberian ser solo numeros, sin espacion ni puntuacion.")
         Return Result.NOK
       End If
 

@@ -32,6 +32,7 @@ Partial Class frmResumen
     Me.lblRechazados = New System.Windows.Forms.Label()
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.lblDetalle = New System.Windows.Forms.Label()
+    Me.btnViewDetail = New System.Windows.Forms.Button()
     Me.SuspendLayout()
     '
     'lstViewResumen
@@ -130,12 +131,23 @@ Partial Class frmResumen
     Me.lblDetalle.TabIndex = 50
     Me.lblDetalle.Text = "Label1"
     '
+    'btnViewDetail
+    '
+    Me.btnViewDetail.Location = New System.Drawing.Point(692, 486)
+    Me.btnViewDetail.Name = "btnViewDetail"
+    Me.btnViewDetail.Size = New System.Drawing.Size(75, 23)
+    Me.btnViewDetail.TabIndex = 51
+    Me.btnViewDetail.Text = "Ver Detalle"
+    Me.btnViewDetail.UseVisualStyleBackColor = True
+    Me.btnViewDetail.Visible = False
+    '
     'frmResumen
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-    Me.ClientSize = New System.Drawing.Size(1183, 559)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnViewDetail)
     Me.Controls.Add(Me.lblDetalle)
     Me.Controls.Add(Me.lblResumen)
     Me.Controls.Add(Me.lblRechazados)
@@ -161,4 +173,5 @@ Partial Class frmResumen
   Friend WithEvents lblRechazados As System.Windows.Forms.Label
   Friend WithEvents lblResumen As System.Windows.Forms.Label
   Friend WithEvents lblDetalle As System.Windows.Forms.Label
+  Friend WithEvents btnViewDetail As System.Windows.Forms.Button
 End Class

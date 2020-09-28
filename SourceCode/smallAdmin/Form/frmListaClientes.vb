@@ -63,7 +63,7 @@ Public Class frmListaClientes
       Call ClientList_RefreshData()
       bsInfoCliente.ResetBindings(False)
 
-
+      lblInfo.Text = String.Format("Resultados: {0}", m_objDatabaseList.Items.Count)
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -74,6 +74,7 @@ Public Class frmListaClientes
     Try
       Dim Command As String = "where Nombre Like '%" & txtFiltro.Text.Trim & _
                               "%' OR Apellido Like '%" & txtFiltro.Text.Trim & _
+                              "%' OR ID Like '%" & txtFiltro.Text.Trim & _
                               "%' OR NumCliente Like '%" & txtFiltro.Text.Trim & "%'"
 
       Return Command
@@ -243,6 +244,55 @@ Public Class frmListaClientes
   Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
     Try
       Call MostrarClientes()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub btnMostrarErrores_Click(sender As Object, e As EventArgs) Handles btnMostrarErrores.Click
+    Try
+      Dim strFilterUser As String = ""
+
+      If m_objDatabaseList IsNot Nothing Then m_objDatabaseList.Dispose()
+      m_objDatabaseList = New clsListDatabase()
+      'm_CurrentSortDirection = "DESC"
+      'm_CurrentSortColumnName = "Nombre" 'Nothing
+      'm_objDatabaseList.Cfg_Orden = "ORDER BY " & m_CurrentSortColumnName & " " & m_CurrentSortDirection
+      Dim Command As String = "where ID='" & String.Empty & _
+                              "' OR NumCliente='" & String.Empty & "'"
+      m_objDatabaseList.Cfg_Filtro = Command
+
+      bsInfoCliente.DataSource = m_objDatabaseList.Binding
+
+      m_objPersona_Current = Nothing
+      Call ClientList_RefreshData()
+
+      bsInfoCliente.ResetBindings(False)
+      lblInfo.Text = String.Format("Resultados: {0}", m_objDatabaseList.Items.Count)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnMostrarDuplicados_Click(sender As Object, e As EventArgs) Handles btnMostrarDuplicados.Click
+    Try
+      Dim strFilterUser As String = ""
+
+      If m_objDatabaseList IsNot Nothing Then m_objDatabaseList.Dispose()
+      m_objDatabaseList = New clsListDatabase()
+      'm_CurrentSortDirection = "DESC"
+      'm_CurrentSortColumnName = "Nombre" 'Nothing
+      'm_objDatabaseList.Cfg_Orden = "ORDER BY " & m_CurrentSortColumnName & " " & m_CurrentSortDirection
+      Dim Command As String = "GROUP BY ID"
+      m_objDatabaseList.Cfg_Filtro = Command
+
+      bsInfoCliente.DataSource = m_objDatabaseList.Binding
+
+      m_objPersona_Current = Nothing
+      Call ClientList_RefreshData()
+
+      bsInfoCliente.ResetBindings(False)
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

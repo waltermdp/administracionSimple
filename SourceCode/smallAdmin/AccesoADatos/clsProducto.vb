@@ -43,6 +43,7 @@ Public Class clsProducto
     Try
       Dim vResult As Result
       Dim vIdProducto As Integer
+      If vGuid = Guid.Empty Then Return Result.NOK
       If FindGuid(vGuid, vIdProducto) = True Then
         vResult = Init(rInfoProducto, vGuid)
         Return vResult
