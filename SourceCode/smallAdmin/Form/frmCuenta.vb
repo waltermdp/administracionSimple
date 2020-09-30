@@ -43,9 +43,11 @@ Public Class frmCuenta
 
   Private Sub AllowEditNew(ByVal permitir As Boolean)
     Try
+      btnEditar.Visible = Not permitir
       btnNuevo.Visible = Not permitir
       btnVolver.Visible = Not permitir
       lstCuentas.Visible = Not permitir
+      btnSalirSinCambios.Visible = Not permitir
       btnGuardar.Visible = permitir
       btnCancelar.Visible = permitir
       cmbTipoDeCuenta.Enabled = permitir
@@ -305,6 +307,16 @@ Public Class frmCuenta
     Try
       m_objCuentaCurrent = Nothing
       Me.Close()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
+    Try
+      Call FillCuentaData()
+      Call AllowEditNew(True)
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

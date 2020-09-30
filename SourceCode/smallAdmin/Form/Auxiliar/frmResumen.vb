@@ -177,13 +177,14 @@ Public Class frmResumen
     End Try
   End Function
 
-  Private Function ComprobanteExiste(ByVal numComprobante As Integer, ByRef rInfoPago As clsInfoPagos, ByRef fechaUltimoPago As Date, ByRef UltimaCuotaPaga As Integer) As libCommon.Comunes.Result
+  Private Function ComprobanteExiste(ByVal numComprobante As Integer, ByRef rInfoPago As clsInfoPagos, ByRef fechaUltimoPago As Date, ByRef UltimaCuotaPaga As Integer, ByRef vError As String) As libCommon.Comunes.Result
     Try
       Dim aux As New clsListPagos()
       aux.Cfg_Filtro = "where NumComprobante=" & numComprobante
       aux.RefreshData()
       Dim vlstPagos = New List(Of clsInfoPagos)
       If aux.Items.Count <= 0 Then
+        vError = "No existe el comprobante"
         Return Result.NOK
       End If
       'El comprobante existe
@@ -200,8 +201,16 @@ Public Class frmResumen
       For Each pago In vlstPagos
         If pago.EstadoPago = E_EstadoPago.Debe Then count += 1
       Next
-      If count = 0 Then Return Result.NOK
-      If count > 1 Then Return Result.NOK
+      If count = 0 Then
+        vError = "No hay cuotas pendientes"
+        Return Result.NOK
+      End If
+
+      If count > 1 Then
+        vError = "Hay dos deudas generadas al mismo producto"
+        Return Result.NOK
+      End If
+
       'hay un solo pago pendiente
       rInfoPago = vlstPagos.Find(Function(c) c.EstadoPago = E_EstadoPago.Debe).Clone
 
@@ -244,10 +253,11 @@ Public Class frmResumen
       Dim auxCuota As Integer
       rResultado.FechaUltimoPago = "--/--/--"
       rResultado.UltimaCuotapaga = "--/--"
-      vResult = ComprobanteExiste(vEntrada.NumeroComprobante, PagoPendiente, auxDate, auxCuota)
+      Dim aux As String = String.Empty
+      vResult = ComprobanteExiste(vEntrada.NumeroComprobante, PagoPendiente, auxDate, auxCuota, aux)
       If vResult <> Result.OK Then
         ContieneErrores = True
-        rResultado.Descripcion &= "No se encuentra el comprobante." + " "
+        rResultado.Descripcion &= aux + " "
       Else
         rResultado.FechaUltimoPago = auxDate.ToString("dd/MM/yyyy")
         rResultado.UltimaCuotapaga = auxCuota & "/"
@@ -301,7 +311,7 @@ Public Class frmResumen
       cuentas.Cfg_Filtro = "where Codigo1='" & numTarjeta & "'" ' "where Codigo1=" & numTarjeta
 
       cuentas.RefreshData()
-      If cuentas.Items.Count <> 1 Then
+      If cuentas.Items.Count <= 0 Then
         Return Result.NOK
       End If
       If cuentas.Items(0).Codigo1.ToUpper <> numTarjeta.ToUpper Then
@@ -552,6 +562,28 @@ Public Class frmResumen
 
   Private Sub btnViewDetail_Click(sender As Object, e As EventArgs) Handles btnViewDetail.Click
     Try
+      If lstViewResumen.SelectedIndices.Count > 0 Then
+        Dim index As Integer = lstViewResumen.SelectedIndices(0)
+        Dim row As ListViewItem = lstViewResumen.Items(index)
+        Dim s As String = row.SubItems(1).Text
+        Dim entrada As clsInfoMovimiento = m_Movimientos(index)
+      
+        Dim cliente As New ClsInfoPersona
+        Dim vResult As libCommon.Comunes.Result = IDExiste(entrada.IdentificadorDebito, cliente)
+        If vResult = Result.OK Then
+          Dim objResultado As New S_EntradaCredito
+          ComprobarEntrada(entrada, objResultado)
+          Using objForm As New frmDetalle(cliente, row.Tag.ToString, objResultado)
+            objForm.ShowDialog(Me)
+          End Using
+        Else
+          Exit Sub
+
+        End If
+
+
+
+      End If
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

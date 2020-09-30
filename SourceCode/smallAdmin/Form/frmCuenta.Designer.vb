@@ -41,6 +41,7 @@ Partial Class frmCuenta
     Me.btnNuevo = New System.Windows.Forms.Button()
     Me.btnCancelar = New System.Windows.Forms.Button()
     Me.btnSalirSinCambios = New System.Windows.Forms.Button()
+    Me.btnEditar = New System.Windows.Forms.Button()
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -220,12 +221,27 @@ Partial Class frmCuenta
     Me.btnSalirSinCambios.UseVisualStyleBackColor = False
     Me.btnSalirSinCambios.Visible = False
     '
+    'btnEditar
+    '
+    Me.btnEditar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnEditar.FlatAppearance.BorderSize = 0
+    Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEditar.ForeColor = System.Drawing.Color.White
+    Me.btnEditar.Location = New System.Drawing.Point(11, 161)
+    Me.btnEditar.Name = "btnEditar"
+    Me.btnEditar.Size = New System.Drawing.Size(110, 61)
+    Me.btnEditar.TabIndex = 17
+    Me.btnEditar.Text = "Editar"
+    Me.btnEditar.UseVisualStyleBackColor = False
+    '
     'frmCuenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.ClientSize = New System.Drawing.Size(810, 310)
+    Me.Controls.Add(Me.btnEditar)
     Me.Controls.Add(Me.btnSalirSinCambios)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnNuevo)
@@ -270,4 +286,5 @@ Partial Class frmCuenta
   Friend WithEvents btnCancelar As System.Windows.Forms.Button
   Friend WithEvents bsCuenta As System.Windows.Forms.BindingSource
   Friend WithEvents btnSalirSinCambios As System.Windows.Forms.Button
+  Friend WithEvents btnEditar As System.Windows.Forms.Button
 End Class

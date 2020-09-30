@@ -132,6 +132,12 @@
     <Compile Include="clsImportPago.vb" />
     <Compile Include="clsInfoResumenVenta.vb" />
     <Compile Include="Entorno\modEntorno.vb" />
+    <Compile Include="Form\Auxiliar\frmDetalle.Designer.vb">
+      <DependentUpon>frmDetalle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Auxiliar\frmDetalle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Auxiliar\frmResumen.Designer.vb">
       <DependentUpon>frmResumen.vb</DependentUpon>
     </Compile>
@@ -235,6 +241,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\Auxiliar\frmDetalle.resx">
+      <DependentUpon>frmDetalle.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmResumen.resx">
       <DependentUpon>frmResumen.vb</DependentUpon>
     </EmbeddedResource>
