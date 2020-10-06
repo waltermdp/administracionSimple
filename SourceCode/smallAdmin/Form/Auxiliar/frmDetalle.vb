@@ -18,7 +18,7 @@ Public Class frmDetalle
         MsgBox("no existe cliente")
         Exit Sub
       End If
-
+      lblInfoCliente.Text = String.Format("Cliente: {0}; Numero de cliente: {1}; ", m_Cliente.Personal.ToString, m_Cliente.Personal.NumCliente)
       Call ReloadListProductos()
       txtEntrada.Text = txtEntrada.Text & "DNI: " & vSResumen.IDCliente & vbNewLine
       txtEntrada.Text = txtEntrada.Text & "NOMBRE:: " & vSResumen.Nombre & vbNewLine
@@ -42,10 +42,16 @@ Public Class frmDetalle
 
       bsCuotas.DataSource = m_lstPagos ' m_Producto.ListaPagos
       bsCuotas.ResetBindings(False)
+      Dim aux As Integer = 0
+      For Each cuota In m_lstPagos
+        If cuota.EstadoPago = E_EstadoPago.Pago Then aux += 1
+      Next
+      Label2.Text = "Registro de las cuotas;      Cuotas pagadas: " & aux
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
 
   Private Sub ReloadListProductos()
     Try
@@ -121,6 +127,30 @@ Public Class frmDetalle
         'Sin cambios. salir
         Exit Sub
       End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnRevertirUnPago_Click(sender As Object, e As EventArgs) Handles btnRevertirUnPago.Click
+    Try
+      Dim index As Integer = dgvProductos.SelectedRows(0).Index
+      Dim InfoProducto As clsInfoProducto = CType(dgvProductos.Rows(index).DataBoundItem, manDB.clsInfoProducto)
+
+      Call AplicarPago(InfoProducto, 1, Today)
+      Call ReloadListProductos()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnAplicarUnPago_Click(sender As Object, e As EventArgs) Handles btnAplicarUnPago.Click
+    Try
+      Dim index As Integer = dgvProductos.SelectedRows(0).Index
+      Dim InfoProducto As clsInfoProducto = CType(dgvProductos.Rows(index).DataBoundItem, manDB.clsInfoProducto)
+
+      Call RevertirUltimoPago(InfoProducto)
+      Call ReloadListProductos()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

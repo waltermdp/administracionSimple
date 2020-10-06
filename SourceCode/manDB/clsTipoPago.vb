@@ -1,6 +1,7 @@
 ﻿Imports libCommon.Comunes
 
 Public Class clsTipoPago
+  Implements ICloneable
 
   Private m_GuidTipoPago As Guid
   Private m_Nombre As String
@@ -121,4 +122,14 @@ Public Class clsTipoPago
     End Try
   End Function
 
+  Public Function Clone() As clsTipoPago
+    Return CType(ClonePrivate(), clsTipoPago)
+  End Function
+
+  Private Function ClonePrivate() As Object Implements ICloneable.Clone
+    Dim objResult As New clsTipoPago
+    'Clonación Superficial
+    objResult = CType(Me.MemberwiseClone, clsTipoPago)
+    Return objResult
+  End Function
 End Class

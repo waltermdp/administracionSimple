@@ -608,13 +608,14 @@ Public Class frmDeben
     Try
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Exportar)
         If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
-          clsCobros.GenerateResumen(objForm.TipoPagoSeleccionado)
+          Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
+            objFormulario.ShowDialog(Me)
+          End Using
+        Else
+          Exit Sub
         End If
       End Using
-      Dim msgResult As MsgBoxResult = MsgBox("Desea abrir la carpeta del archivo exportado?", MsgBoxStyle.YesNo)
-      If msgResult = MsgBoxResult.Yes Then
-        Process.Start(Entorno.EXPORT_PATH)
-      End If
+     
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

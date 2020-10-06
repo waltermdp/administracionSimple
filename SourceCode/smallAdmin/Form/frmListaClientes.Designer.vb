@@ -125,7 +125,6 @@ Partial Class frmListaClientes
     Me.dgvData1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
     Me.dgvData1.RowHeadersVisible = False
     Me.dgvData1.RowTemplate.Height = 24
-    Me.dgvData1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
     Me.dgvData1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
     Me.dgvData1.Size = New System.Drawing.Size(1071, 523)
     Me.dgvData1.TabIndex = 24

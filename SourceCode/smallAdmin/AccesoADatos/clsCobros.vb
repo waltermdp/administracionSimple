@@ -53,10 +53,10 @@ Public Class clsCobros
 
 
 
-  Public Shared Function GenerateResumen(ByVal vTipoPago As manDB.clsTipoPago) As Result
+  Public Shared Function GenerateResumen(ByVal vTipoPago As manDB.clsTipoPago, ByRef rMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim lstPago As New clsListPagos
-      Dim ListMov As New List(Of clsInfoMovimiento)
+      rMovimientos = New List(Of clsInfoMovimiento)
       Dim movimiento As New clsInfoMovimiento
 
       lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
@@ -125,9 +125,9 @@ Public Class clsCobros
           End If
           .Param2 = lstProducto.Items.First.TotalCuotas  'NUMERO TOTAL DE CUOTAS
         End With
-        ListMov.Add(movimiento)
+        rMovimientos.Add(movimiento)
       Next
-      If ListMov.Count < 0 Then
+      If rMovimientos.Count < 0 Then
         MsgBox("Nada que exportar")
         Return Result.OK
       End If
@@ -135,23 +135,7 @@ Public Class clsCobros
 
 
 
-      Dim rLineas As New List(Of String)
-      Select Case vTipoPago.GuidTipo
-        Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
-          ExportAEfectivo(ListMov)
-        Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito 
-          ExportarAVisaDebito(ListMov)
-        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
-          ExportarACBU(ListMov)
-        Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-          ExportarAVisaCredito(ListMov)
-        Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
-          ExportAMaster(ListMov)
-        Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
-          ExportAMercadoPago(ListMov)
-        Case Else
-          MsgBox("No se encuentra tipo de pago")
-      End Select
+
 
 
 
@@ -161,6 +145,30 @@ Public Class clsCobros
       Return Result.ErrorEx
     End Try
   End Function
+
+  Public Shared Sub Exportar(ByVal vMovimientos As List(Of clsInfoMovimiento), ByVal vGuidTipoPago As Guid)
+    Try
+      Select Case vGuidTipoPago
+        Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
+          ExportAEfectivo(vMovimientos)
+        Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito 
+          ExportarAVisaDebito(vMovimientos)
+        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
+          ExportarACBU(vMovimientos)
+        Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
+          ExportarAVisaCredito(vMovimientos)
+        Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
+          ExportAMaster(vMovimientos)
+        Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
+          ExportAMercadoPago(vMovimientos)
+        Case Else
+          MsgBox("No se encuentra tipo de pago")
+      End Select
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
 
   'Verificado
   Private Shared Function ExportarAVisaDebito(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result

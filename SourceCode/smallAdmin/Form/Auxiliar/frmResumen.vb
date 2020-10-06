@@ -177,9 +177,10 @@ Public Class frmResumen
     End Try
   End Function
 
-  Private Function ComprobanteExiste(ByVal numComprobante As Integer, ByRef rInfoPago As clsInfoPagos, ByRef fechaUltimoPago As Date, ByRef UltimaCuotaPaga As Integer, ByRef vError As String) As libCommon.Comunes.Result
+  Private Function ComprobanteExiste(ByVal numComprobante As Integer, ByRef rInfoPago As clsInfoPagos, ByRef fechaUltimoPago As Date, ByRef UltimaCuotaPaga As Integer, ByRef vError As String, ByRef rGuid As Guid) As libCommon.Comunes.Result
     Try
       Dim aux As New clsListPagos()
+      rGuid = Guid.Empty
       aux.Cfg_Filtro = "where NumComprobante=" & numComprobante
       aux.RefreshData()
       Dim vlstPagos = New List(Of clsInfoPagos)
@@ -189,6 +190,7 @@ Public Class frmResumen
       End If
       'El comprobante existe
       vlstPagos.AddRange(aux.Items.ToList)
+      rGuid = vlstPagos.First.GuidProducto
       For Each pago In vlstPagos.OrderByDescending(Function(c) c.NumCuota)
         If pago.EstadoPago <> E_EstadoPago.Pago Then Continue For
         fechaUltimoPago = pago.FechaPago
@@ -202,7 +204,7 @@ Public Class frmResumen
         If pago.EstadoPago = E_EstadoPago.Debe Then count += 1
       Next
       If count = 0 Then
-        vError = "No hay cuotas pendientes"
+        vError = "No se encontraron cuotas pendientes"
         Return Result.NOK
       End If
 
@@ -254,23 +256,26 @@ Public Class frmResumen
       rResultado.FechaUltimoPago = "--/--/--"
       rResultado.UltimaCuotapaga = "--/--"
       Dim aux As String = String.Empty
-      vResult = ComprobanteExiste(vEntrada.NumeroComprobante, PagoPendiente, auxDate, auxCuota, aux)
+      Dim GuidProducto As Guid = Guid.Empty
+      vResult = ComprobanteExiste(vEntrada.NumeroComprobante, PagoPendiente, auxDate, auxCuota, aux, GuidProducto)
       If vResult <> Result.OK Then
         ContieneErrores = True
         rResultado.Descripcion &= aux + " "
+
       Else
         rResultado.FechaUltimoPago = auxDate.ToString("dd/MM/yyyy")
         rResultado.UltimaCuotapaga = auxCuota & "/"
+        If CDec(vEntrada.Importe / 100) <> PagoPendiente.ValorCuota Then
+          ContieneErrores = True
+          rResultado.Descripcion &= "El valor a pagar es distinto." + " "
+        End If
       End If
-      rResultado.Comprobante = CInt(vEntrada.NumeroComprobante).ToString
 
-      If CDec(vEntrada.Importe / 100) <> PagoPendiente.ValorCuota Then
-        ContieneErrores = True
-        rResultado.Descripcion &= "El valor a pagar es distinto." + " "
-      End If
+      rResultado.Comprobante = CInt(vEntrada.NumeroComprobante).ToString
       rResultado.Importe = String.Format("{0:N2}", CDec(vEntrada.Importe / 100))
+
       Dim producto As New clsInfoProducto
-      vResult = clsProducto.Load(PagoPendiente.GuidProducto, producto)
+      vResult = clsProducto.Load(GuidProducto, producto)
       If vResult <> Result.OK Then
         ContieneErrores = True
         rResultado.Descripcion &= "No se encuentra el producto." + " "
@@ -278,13 +283,21 @@ Public Class frmResumen
         rResultado.UltimaCuotapaga &= producto.TotalCuotas
       End If
 
-      Dim cuenta As New clsInfoCuenta
-      vResult = NumTarjetaExiste(vEntrada.NumeroTarjeta, cuenta)
+
+      Dim lstCuentas As New List(Of clsInfoCuenta)
+      vResult = NumTarjetaExiste(vEntrada.NumeroTarjeta, lstCuentas)
       If vResult <> Result.OK Then
         ContieneErrores = True
-        rResultado.Descripcion &= "No se encuentra en numero de tarjeta." + " "
+        rResultado.Descripcion &= "No se encuentra el numero de tarjeta." + " "
       Else
-        If cuenta.GuidCliente <> Cliente.GuidCliente Then
+        Dim existe As Boolean = False
+        For Each cuenta In lstCuentas
+          If cuenta.GuidCliente = Cliente.GuidCliente Then
+            existe = True
+            Exit For
+          End If
+        Next
+        If existe = False Then
           ContieneErrores = True
           rResultado.Descripcion &= "El pago no coincide con el cliente encontrado." + " "
         End If
@@ -305,7 +318,7 @@ Public Class frmResumen
     End Try
   End Sub
 
-  Private Function NumTarjetaExiste(ByVal numTarjeta As String, ByRef rCuentas As clsInfoCuenta) As libCommon.Comunes.Result
+  Private Function NumTarjetaExiste(ByVal numTarjeta As String, ByRef rCuentas As List(Of clsInfoCuenta)) As libCommon.Comunes.Result
     Try
       Dim cuentas As New clsListaCuentas
       cuentas.Cfg_Filtro = "where Codigo1='" & numTarjeta & "'" ' "where Codigo1=" & numTarjeta
@@ -314,10 +327,17 @@ Public Class frmResumen
       If cuentas.Items.Count <= 0 Then
         Return Result.NOK
       End If
-      If cuentas.Items(0).Codigo1.ToUpper <> numTarjeta.ToUpper Then
-        Return Result.NOK
-      End If
-      rCuentas = cuentas.Items(0).Clone
+      For Each objcuentas In cuentas.Items
+        If objcuentas.Codigo1.ToUpper <> numTarjeta.ToUpper Then
+          Return Result.NOK
+        End If
+      Next
+      
+      rCuentas.Clear()
+      For Each cuent In cuentas.Items
+        rCuentas.Add(cuent.Clone)
+      Next
+
 
       Return Result.OK
     Catch ex As Exception

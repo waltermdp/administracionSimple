@@ -30,6 +30,11 @@ Partial Class frmDetalle
     Me.txtEntrada = New System.Windows.Forms.TextBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.Button1 = New System.Windows.Forms.Button()
+    Me.btnAplicarUnPago = New System.Windows.Forms.Button()
+    Me.btnRevertirUnPago = New System.Windows.Forms.Button()
+    Me.btnEditNumComprobante = New System.Windows.Forms.Button()
+    Me.lblProductosDelCliente = New System.Windows.Forms.Label()
+    Me.Label2 = New System.Windows.Forms.Label()
     Me.NumComprobanteDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -56,9 +61,7 @@ Partial Class frmDetalle
     Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.EstadoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsCuotas = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnCambiarEstado = New System.Windows.Forms.Button()
-    Me.Button3 = New System.Windows.Forms.Button()
-    Me.btnEditNumComprobante = New System.Windows.Forms.Button()
+    Me.lblInfoCliente = New System.Windows.Forms.Label()
     CType(Me.dgvCuotas, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsProducto, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,13 +92,13 @@ Partial Class frmDetalle
     Me.dgvCuotas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdPagoDataGridViewTextBoxColumn, Me.NumComprobanteDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.NumCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn})
     Me.dgvCuotas.DataSource = Me.bsCuotas
     Me.dgvCuotas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvCuotas.Location = New System.Drawing.Point(157, 342)
+    Me.dgvCuotas.Location = New System.Drawing.Point(157, 353)
     Me.dgvCuotas.MultiSelect = False
     Me.dgvCuotas.Name = "dgvCuotas"
     Me.dgvCuotas.ReadOnly = True
     Me.dgvCuotas.RowHeadersVisible = False
     Me.dgvCuotas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvCuotas.Size = New System.Drawing.Size(836, 315)
+    Me.dgvCuotas.Size = New System.Drawing.Size(836, 304)
     Me.dgvCuotas.TabIndex = 44
     '
     'lblResumen
@@ -117,14 +120,14 @@ Partial Class frmDetalle
     Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumComprobanteDataGridViewTextBoxColumn1, Me.GuidProductoDataGridViewTextBoxColumn1, Me.GuidClienteDataGridViewTextBoxColumn, Me.GuidVendedorDataGridViewTextBoxColumn, Me.IdProductoDataGridViewTextBoxColumn, Me.GuidTipoPagoDataGridViewTextBoxColumn, Me.TotalCuotasDataGridViewTextBoxColumn, Me.PrecioDataGridViewTextBoxColumn, Me.CuotasDebeDataGridViewTextBoxColumn, Me.FechaPrimerPagoDataGridViewTextBoxColumn, Me.FechaVentaDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn, Me.CuentaDataGridViewTextBoxColumn, Me.AdelantoDataGridViewTextBoxColumn, Me.ValorCuotaFijaDataGridViewTextBoxColumn})
     Me.dgvProductos.DataSource = Me.bsProducto
     Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvProductos.Location = New System.Drawing.Point(434, 48)
+    Me.dgvProductos.Location = New System.Drawing.Point(434, 120)
     Me.dgvProductos.MultiSelect = False
     Me.dgvProductos.Name = "dgvProductos"
     Me.dgvProductos.ReadOnly = True
     Me.dgvProductos.RowHeadersVisible = False
     Me.dgvProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
     Me.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvProductos.Size = New System.Drawing.Size(818, 205)
+    Me.dgvProductos.Size = New System.Drawing.Size(818, 133)
     Me.dgvProductos.TabIndex = 46
     '
     'txtEntrada
@@ -155,6 +158,51 @@ Partial Class frmDetalle
     Me.Button1.TabIndex = 49
     Me.Button1.Text = "Mostrar Cuentas"
     Me.Button1.UseVisualStyleBackColor = True
+    '
+    'btnAplicarUnPago
+    '
+    Me.btnAplicarUnPago.Location = New System.Drawing.Point(1020, 411)
+    Me.btnAplicarUnPago.Name = "btnAplicarUnPago"
+    Me.btnAplicarUnPago.Size = New System.Drawing.Size(177, 30)
+    Me.btnAplicarUnPago.TabIndex = 50
+    Me.btnAplicarUnPago.Text = "Aplicar 1 pago"
+    Me.btnAplicarUnPago.UseVisualStyleBackColor = True
+    '
+    'btnRevertirUnPago
+    '
+    Me.btnRevertirUnPago.Location = New System.Drawing.Point(1020, 363)
+    Me.btnRevertirUnPago.Name = "btnRevertirUnPago"
+    Me.btnRevertirUnPago.Size = New System.Drawing.Size(177, 32)
+    Me.btnRevertirUnPago.TabIndex = 51
+    Me.btnRevertirUnPago.Text = "Revertir el ultimo Pago"
+    Me.btnRevertirUnPago.UseVisualStyleBackColor = True
+    '
+    'btnEditNumComprobante
+    '
+    Me.btnEditNumComprobante.Location = New System.Drawing.Point(434, 259)
+    Me.btnEditNumComprobante.Name = "btnEditNumComprobante"
+    Me.btnEditNumComprobante.Size = New System.Drawing.Size(129, 54)
+    Me.btnEditNumComprobante.TabIndex = 52
+    Me.btnEditNumComprobante.Text = "Cambiar Numero de Comprobante"
+    Me.btnEditNumComprobante.UseVisualStyleBackColor = True
+    '
+    'lblProductosDelCliente
+    '
+    Me.lblProductosDelCliente.AutoSize = True
+    Me.lblProductosDelCliente.Location = New System.Drawing.Point(431, 104)
+    Me.lblProductosDelCliente.Name = "lblProductosDelCliente"
+    Me.lblProductosDelCliente.Size = New System.Drawing.Size(170, 13)
+    Me.lblProductosDelCliente.TabIndex = 53
+    Me.lblProductosDelCliente.Text = "Productos Adquiridos por el cliente"
+    '
+    'Label2
+    '
+    Me.Label2.AutoSize = True
+    Me.Label2.Location = New System.Drawing.Point(154, 337)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(113, 13)
+    Me.Label2.TabIndex = 54
+    Me.Label2.Text = "Registro de las Cuotas"
     '
     'NumComprobanteDataGridViewTextBoxColumn1
     '
@@ -347,41 +395,26 @@ Partial Class frmDetalle
     '
     Me.bsCuotas.DataSource = GetType(manDB.clsInfoPagos)
     '
-    'btnCambiarEstado
+    'lblInfoCliente
     '
-    Me.btnCambiarEstado.Location = New System.Drawing.Point(1122, 435)
-    Me.btnCambiarEstado.Name = "btnCambiarEstado"
-    Me.btnCambiarEstado.Size = New System.Drawing.Size(75, 23)
-    Me.btnCambiarEstado.TabIndex = 50
-    Me.btnCambiarEstado.Text = "CambiarEstado"
-    Me.btnCambiarEstado.UseVisualStyleBackColor = True
-    '
-    'Button3
-    '
-    Me.Button3.Location = New System.Drawing.Point(1020, 363)
-    Me.Button3.Name = "Button3"
-    Me.Button3.Size = New System.Drawing.Size(177, 32)
-    Me.Button3.TabIndex = 51
-    Me.Button3.Text = "Revertir el ultimo Pago"
-    Me.Button3.UseVisualStyleBackColor = True
-    '
-    'btnEditNumComprobante
-    '
-    Me.btnEditNumComprobante.Location = New System.Drawing.Point(434, 259)
-    Me.btnEditNumComprobante.Name = "btnEditNumComprobante"
-    Me.btnEditNumComprobante.Size = New System.Drawing.Size(129, 54)
-    Me.btnEditNumComprobante.TabIndex = 52
-    Me.btnEditNumComprobante.Text = "Cambiar Numero de Comprobante"
-    Me.btnEditNumComprobante.UseVisualStyleBackColor = True
+    Me.lblInfoCliente.AutoSize = True
+    Me.lblInfoCliente.Location = New System.Drawing.Point(431, 50)
+    Me.lblInfoCliente.Name = "lblInfoCliente"
+    Me.lblInfoCliente.Size = New System.Drawing.Size(60, 13)
+    Me.lblInfoCliente.TabIndex = 55
+    Me.lblInfoCliente.Text = "Info Cliente"
     '
     'frmDetalle
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(1264, 681)
+    Me.Controls.Add(Me.lblInfoCliente)
+    Me.Controls.Add(Me.Label2)
+    Me.Controls.Add(Me.lblProductosDelCliente)
     Me.Controls.Add(Me.btnEditNumComprobante)
-    Me.Controls.Add(Me.Button3)
-    Me.Controls.Add(Me.btnCambiarEstado)
+    Me.Controls.Add(Me.btnRevertirUnPago)
+    Me.Controls.Add(Me.btnAplicarUnPago)
     Me.Controls.Add(Me.Button1)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.txtEntrada)
@@ -434,7 +467,10 @@ Partial Class frmDetalle
   Friend WithEvents txtEntrada As System.Windows.Forms.TextBox
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents Button1 As System.Windows.Forms.Button
-  Friend WithEvents btnCambiarEstado As System.Windows.Forms.Button
-  Friend WithEvents Button3 As System.Windows.Forms.Button
+  Friend WithEvents btnAplicarUnPago As System.Windows.Forms.Button
+  Friend WithEvents btnRevertirUnPago As System.Windows.Forms.Button
   Friend WithEvents btnEditNumComprobante As System.Windows.Forms.Button
+  Friend WithEvents lblProductosDelCliente As System.Windows.Forms.Label
+  Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents lblInfoCliente As System.Windows.Forms.Label
 End Class

@@ -274,4 +274,162 @@ Module modCommon
     End Try
   End Sub
 
+
+  Public Sub AplicarPago(ByVal vProducto As clsInfoProducto, ByVal numCuotasACancelar As Integer, ByVal vFechaPago As Date)
+    Try
+      Dim vResult As Result
+      If vProducto.GuidProducto = Guid.Empty Then
+        MsgBox("Debe seleccionar un producto")
+        Exit Sub
+      End If
+
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      vResult = clsPago.Load(lstPagos, vProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar pagos")
+        Exit Sub
+      End If
+      Dim NumCuotasPagas As Integer = 0
+      For Each cuota In lstPagos
+        If cuota.EstadoPago = E_EstadoPago.Pago Then NumCuotasPagas += 1
+      Next
+
+      If (vProducto.TotalCuotas > 0) AndAlso NumCuotasPagas >= vProducto.TotalCuotas Then
+        MsgBox("No hay cuotas pendientes, no se puede aplicar un pago")
+        Exit Sub
+      End If
+
+
+      Dim rsta As MsgBoxResult
+      If Not DebePeriodoActual(lstPagos) Then
+        rsta = MsgBox("Las cuotas estan al dia, desea continuar?", MsgBoxStyle.YesNo)
+        If rsta <> MsgBoxResult.Yes Then Exit Sub
+
+      End If
+      'If chkPagoParcial.Checked = True Then
+      '  Call IngresarPagoParcial(m_CurrentProducto)
+      '  Exit Sub
+      'End If
+      Dim nPagar As Integer = numCuotasACancelar
+      'collectar la informacion a mostrar antes de aplicar el pago elgido
+      Dim vInfoPersona As New ClsInfoPersona
+      If clsPersona.Load(vProducto.GuidCliente, vInfoPersona) <> Result.OK Then
+        MsgBox("No se puede cargar la informacion del cliente")
+        Exit Sub
+      End If
+
+      Dim msg As String = String.Format("Se apilca un pago a: " & vbNewLine & _
+                                        "Nombre: {0}" & vbNewLine & _
+                                        "DNI: {1}" & vbNewLine & _
+                                        "Metodo Pago: {2}" & vbNewLine & _
+                                        "Numero: {3}" & vbNewLine & _
+                                        "Valor Cuota: {4}" & vbNewLine & _
+                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", vInfoPersona.ToString, vInfoPersona.NumCliente, GetNameOfTipoPago(vProducto.GuidTipoPago), vProducto.NumComprobante, vProducto.ValorCuotaFija, vFechaPago)
+
+      rsta = MsgBox(msg, MsgBoxStyle.YesNo)
+      If rsta = MsgBoxResult.Yes Then
+
+
+        Call AplicarCuota(nPagar, vProducto.GuidProducto)
+
+      End If
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+  Public Sub RevertirUltimoPago(ByVal vProducto As clsInfoProducto)
+    Try
+      Dim vResult As Result
+
+      If vProducto.GuidProducto = Guid.Empty Then
+        MsgBox("Debe seleccionar un producto")
+        Exit Sub
+      End If
+
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      vResult = clsPago.Load(lstPagos, vProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar pagos")
+        Exit Sub
+      End If
+      Dim NumCuotasPagas As Integer = 0
+      For Each cuota In lstPagos
+        If cuota.EstadoPago = E_EstadoPago.Pago Then NumCuotasPagas += 1
+      Next
+
+      If vProducto.TotalCuotas > 0 AndAlso NumCuotasPagas <= 0 Then
+        MsgBox("No hay ningun pago aplicado para eliminar")
+        Exit Sub
+      End If
+
+      Dim vInfoPersona As New ClsInfoPersona
+      If clsPersona.Load(vProducto.GuidCliente, vInfoPersona) <> Result.OK Then
+        MsgBox("No se puede cargar la informacion del cliente")
+        Exit Sub
+      End If
+
+      Dim rsta As MsgBoxResult
+      Dim msg As String = String.Format("Se descontara el ultimo pago a: " & vbNewLine & _
+                                       "Nombre: {0}" & vbNewLine & _
+                                       "DNI: {1}" & vbNewLine & _
+                                       "Metodo Pago: {2}" & vbNewLine & _
+                                       "Numero: {3}" & vbNewLine & _
+                                       "Valor Cuota: {4}" & vbNewLine & _
+                                        "Fecha: {5}" & vbNewLine & " Desea continuar?.", vInfoPersona.ToString, vInfoPersona.NumCliente, GetNameOfTipoPago(vProducto.GuidTipoPago), vProducto.NumComprobante, vProducto.ValorCuotaFija, GetAhora)
+
+      rsta = MsgBox(msg, MsgBoxStyle.YesNo)
+      If rsta = MsgBoxResult.Yes Then
+
+        vResult = clsPago.Load(lstPagos, vProducto.GuidProducto)
+        If vResult <> Result.OK Then
+          MsgBox("Fallo cargar pagos")
+          Exit Sub
+        End If
+
+        Dim auxPago As clsInfoPagos = Nothing
+        For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota).Reverse
+          If pago.EstadoPago = E_EstadoPago.Debe Then 'pago.EstadoPago = E_EstadoPago.Pago OrElse pago.EstadoPago = E_EstadoPago.PagoParcial Then
+            pago.EstadoPago = E_EstadoPago.Anulo_Editado
+            vResult = clsPago.Save(pago)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo guardar pagos")
+              Exit Sub
+            End If
+            Exit For
+          End If
+        Next
+
+        For Each pago In lstPagos.OrderBy(Function(c) c.NumCuota).Reverse
+          If pago.EstadoPago = E_EstadoPago.Pago OrElse pago.EstadoPago = E_EstadoPago.PagoParcial Then
+            pago.EstadoPago = E_EstadoPago.Debe
+            vResult = clsPago.Save(pago)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo guardar pagos")
+              Exit Sub
+            End If
+            Exit For
+
+          End If
+        Next
+
+
+
+
+
+
+
+
+      End If
+
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
 End Module

@@ -138,6 +138,12 @@
     <Compile Include="Form\Auxiliar\frmDetalle.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Auxiliar\frmExportarResumen.Designer.vb">
+      <DependentUpon>frmExportarResumen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Auxiliar\frmExportarResumen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Auxiliar\frmResumen.Designer.vb">
       <DependentUpon>frmResumen.vb</DependentUpon>
     </Compile>
@@ -243,6 +249,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form\Auxiliar\frmDetalle.resx">
       <DependentUpon>frmDetalle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Auxiliar\frmExportarResumen.resx">
+      <DependentUpon>frmExportarResumen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmResumen.resx">
       <DependentUpon>frmResumen.vb</DependentUpon>
