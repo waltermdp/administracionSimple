@@ -12,6 +12,7 @@
   Private m_CodigoDeALta As String
   Private m_Nombre As String
   Private m_CuotaActual As Integer
+  Private m_UltimaFechaPago As String
 
   Private m_Estado As libCommon.Comunes.E_EstadoPago
 
@@ -133,6 +134,16 @@
     End Set
   End Property
 
+  Public Property UltimaFechPago As String
+    Get
+      Return m_UltimaFechaPago
+    End Get
+    Set(value As String)
+      m_UltimaFechaPago = value
+    End Set
+  End Property
+
+
   Public Sub New()
     MyBase.New()
     NumeroTarjeta = 0
@@ -148,5 +159,6 @@
     Estado = libCommon.Comunes.E_EstadoPago.Debe
     m_Nombre = String.Empty
     m_CuotaActual = 0
+    m_UltimaFechaPago = "-/-/-"
   End Sub
 End Class

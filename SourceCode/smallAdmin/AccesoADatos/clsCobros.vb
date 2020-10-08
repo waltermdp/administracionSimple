@@ -126,7 +126,7 @@ Public Class clsCobros
             For Each pago In aux.Items.OrderByDescending(Function(c) c.NumCuota)
               If pago.EstadoPago <> E_EstadoPago.Pago Then Continue For
               .CuotaActual = pago.NumCuota
-              'fechaUltimoPago = pago.FechaPago
+              .UltimaFechPago = pago.FechaPago.ToString("dd/MM/yy")
               Exit For
             Next
 

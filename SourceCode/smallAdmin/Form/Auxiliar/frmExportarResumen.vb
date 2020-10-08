@@ -65,6 +65,7 @@ Public Class frmExportarResumen
       lstViewResumen.Columns.Add("Codigo Alta")
       lstViewResumen.Columns.Add("Total de Cuotas")
       lstViewResumen.Columns.Add("Ultima Cuota Paga")
+      lstViewResumen.Columns.Add("Ultima fecha de pago")
 
       lstViewResumen.Columns(0).DisplayIndex = 0 'ListView1.Columns.Count - 1 inidcar la posicion que tendra la columna
       Dim item As ListViewItem
@@ -84,6 +85,7 @@ Public Class frmExportarResumen
         item.SubItems.Add(movimiento.CodigoDeAlta)
         item.SubItems.Add(movimiento.Param2)
         item.SubItems.Add(movimiento.CuotaActual)
+        item.SubItems.Add(movimiento.UltimaFechPago)
         item.Checked = True
         item.Tag = movimiento
         lstViewResumen.Items.Add(item)

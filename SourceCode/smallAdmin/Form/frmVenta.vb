@@ -405,6 +405,10 @@ Public Class frmVenta
         .NumComprobante = CInt(txtNumVenta.Text)
       End With
 
+      Dim lstpagos As New clsListPagos()
+      lstpagos.Cfg_Filtro = "where NumComprobante=" & m_Producto.NumComprobante.ToString
+      lstpagos.RefreshData()
+
       'Verificamos campos
       If m_CurrentPersona Is Nothing Then
         MsgBox("No hay ningun Cliente seleccionado")
@@ -429,6 +433,9 @@ Public Class frmVenta
         Exit Sub
       ElseIf CInt(txtNumVenta.Text.Trim) <= 0 Then
         MsgBox("El numero de comprobante es invalido")
+        Exit Sub
+      ElseIf lstpagos.Items.Count > 0 Then
+        MsgBox(String.Format("Ya existe el numero de comprobante {0}", m_Producto.NumComprobante))
         Exit Sub
       ElseIf CDec(txtAdelanto.Text) < 0 OrElse CDec(txtAdelanto.Text) > CDec(m_Producto.Precio) Then
         MsgBox("El valor de adelanto debe ser mayor o igual a cero y menor o igual al precio de venta")
