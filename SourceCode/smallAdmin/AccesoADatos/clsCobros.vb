@@ -120,10 +120,22 @@ Public Class clsCobros
 
           If bCodigoAlta = False Then
             .CodigoDeAlta = "N"
+            Dim aux As New clsListPagos
+            aux.Cfg_Filtro = "where NumComprobante=" & lstProducto.Items.First.NumComprobante
+            aux.RefreshData()
+            For Each pago In aux.Items.OrderByDescending(Function(c) c.NumCuota)
+              If pago.EstadoPago <> E_EstadoPago.Pago Then Continue For
+              .CuotaActual = pago.NumCuota
+              'fechaUltimoPago = pago.FechaPago
+              Exit For
+            Next
+
           Else
             .CodigoDeAlta = "E"
           End If
           .Param2 = lstProducto.Items.First.TotalCuotas  'NUMERO TOTAL DE CUOTAS
+          .Nombre = lstCliente.Items.First.ToString
+
         End With
         rMovimientos.Add(movimiento)
       Next

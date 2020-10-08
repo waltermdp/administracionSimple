@@ -27,6 +27,7 @@ Partial Class frmExportarResumen
     Me.lstViewResumen = New System.Windows.Forms.ListView()
     Me.btnReload = New System.Windows.Forms.Button()
     Me.lblResumen = New System.Windows.Forms.Label()
+    Me.Label1 = New System.Windows.Forms.Label()
     Me.SuspendLayout()
     '
     'btnCancel
@@ -59,9 +60,9 @@ Partial Class frmExportarResumen
     '
     'lstViewResumen
     '
-    Me.lstViewResumen.Location = New System.Drawing.Point(177, 45)
+    Me.lstViewResumen.Location = New System.Drawing.Point(177, 66)
     Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(1080, 510)
+    Me.lstViewResumen.Size = New System.Drawing.Size(1080, 489)
     Me.lstViewResumen.TabIndex = 45
     Me.lstViewResumen.UseCompatibleStateImageBehavior = False
     Me.lstViewResumen.View = System.Windows.Forms.View.Details
@@ -89,12 +90,22 @@ Partial Class frmExportarResumen
     Me.lblResumen.TabIndex = 47
     Me.lblResumen.Text = "Resumen"
     '
+    'Label1
+    '
+    Me.Label1.AutoSize = True
+    Me.Label1.Location = New System.Drawing.Point(174, 45)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(96, 13)
+    Me.Label1.TabIndex = 48
+    Me.Label1.Text = "Registro a exportar"
+    '
     'frmExportarResumen
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.lblResumen)
     Me.Controls.Add(Me.btnReload)
     Me.Controls.Add(Me.lstViewResumen)
@@ -113,4 +124,5 @@ Partial Class frmExportarResumen
   Friend WithEvents lstViewResumen As System.Windows.Forms.ListView
   Friend WithEvents btnReload As System.Windows.Forms.Button
   Friend WithEvents lblResumen As System.Windows.Forms.Label
+  Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

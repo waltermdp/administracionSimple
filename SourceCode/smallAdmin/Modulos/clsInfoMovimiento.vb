@@ -10,6 +10,8 @@
   Private m_Codigo As String
   Private m_Detalle As String
   Private m_CodigoDeALta As String
+  Private m_Nombre As String
+  Private m_CuotaActual As Integer
 
   Private m_Estado As libCommon.Comunes.E_EstadoPago
 
@@ -112,6 +114,25 @@
   End Property
 
 
+
+  Public Property Nombre As String
+    Get
+      Return m_Nombre
+    End Get
+    Set(value As String)
+      m_Nombre = value
+    End Set
+  End Property
+
+  Public Property CuotaActual As Integer
+    Get
+      Return m_CuotaActual
+    End Get
+    Set(value As Integer)
+      m_CuotaActual = value
+    End Set
+  End Property
+
   Public Sub New()
     MyBase.New()
     NumeroTarjeta = 0
@@ -125,5 +146,7 @@
     Detalle = 0
     CodigoDeAlta = 0
     Estado = libCommon.Comunes.E_EstadoPago.Debe
+    m_Nombre = String.Empty
+    m_CuotaActual = 0
   End Sub
 End Class

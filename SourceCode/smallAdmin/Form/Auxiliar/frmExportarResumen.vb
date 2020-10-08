@@ -63,7 +63,8 @@ Public Class frmExportarResumen
       lstViewResumen.Columns.Add("NumTarjeta")
       lstViewResumen.Columns.Add("Importe")
       lstViewResumen.Columns.Add("Codigo Alta")
-      lstViewResumen.Columns.Add("TotalCuotas")
+      lstViewResumen.Columns.Add("Total de Cuotas")
+      lstViewResumen.Columns.Add("Ultima Cuota Paga")
 
       lstViewResumen.Columns(0).DisplayIndex = 0 'ListView1.Columns.Count - 1 inidcar la posicion que tendra la columna
       Dim item As ListViewItem
@@ -71,17 +72,18 @@ Public Class frmExportarResumen
 
 
 
-      For Each movimiento In vMovimientos
+      For Each movimiento In vMovimientos.OrderBy(Function(c) c.NumeroComprobante)
         item = New ListViewItem()
-        item.SubItems.Add(movimiento.NumeroComprobante) 'USUALMENTE DNI
-        item.SubItems.Add(movimiento.IdentificadorDebito)
-        Dim aux As New ClsInfoPersona
-        IDExiste(movimiento.IdentificadorDebito, aux)
-        item.SubItems.Add(aux.ToString)
+        item.SubItems.Add(movimiento.NumeroComprobante)
+        item.SubItems.Add(movimiento.IdentificadorDebito) 'USUALMENTE DNI
+        'Dim aux As New ClsInfoPersona
+        'IDExiste(movimiento.IdentificadorDebito, aux)
+        item.SubItems.Add(movimiento.Nombre) 'aux.ToString
         item.SubItems.Add(movimiento.NumeroTarjeta)
         item.SubItems.Add(movimiento.Importe)
         item.SubItems.Add(movimiento.CodigoDeAlta)
         item.SubItems.Add(movimiento.Param2)
+        item.SubItems.Add(movimiento.CuotaActual)
         item.Checked = True
         item.Tag = movimiento
         lstViewResumen.Items.Add(item)
@@ -137,18 +139,20 @@ Public Class frmExportarResumen
 
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try
+      m_MovimientosSeleccionados.Clear()
       For Each item As ListViewItem In lstViewResumen.Items
         If item.Checked Then
-          m_MovimientosSeleccionados.Add(m_Movimientos(item.Index))
+          m_MovimientosSeleccionados.Add(m_Movimientos.Find(Function(c) CInt(c.NumeroComprobante) = CInt(item.SubItems(1).Text)))
         End If
       Next
+
       clsCobros.Exportar(m_MovimientosSeleccionados, m_TipoPago.GuidTipo)
       m_Result = Result.OK
       Dim msgResult As MsgBoxResult = MsgBox("Desea abrir la carpeta del archivo exportado?", MsgBoxStyle.YesNo)
       If msgResult = MsgBoxResult.Yes Then
         Process.Start(Entorno.EXPORT_PATH)
       End If
-      Me.Close()
+      'Me.Close()
     Catch ex As Exception
       Print_msg(ex.Message)
       m_Result = Result.ErrorEx
