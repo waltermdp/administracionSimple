@@ -198,6 +198,12 @@
     <Compile Include="Form\frmPreviewAplicarPago.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmProgreso.Designer.vb">
+      <DependentUpon>frmProgreso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmProgreso.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmVendedorData.Designer.vb">
       <DependentUpon>frmVendedorData.vb</DependentUpon>
     </Compile>
@@ -245,6 +251,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ucProgreso.Designer.vb">
+      <DependentUpon>ucProgreso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucProgreso.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form\Auxiliar\frmDetalle.resx">
@@ -280,6 +292,9 @@
     <EmbeddedResource Include="Form\frmPreviewAplicarPago.resx">
       <DependentUpon>frmPreviewAplicarPago.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmProgreso.resx">
+      <DependentUpon>frmProgreso.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmVendedorData.resx">
       <DependentUpon>frmVendedorData.vb</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +312,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucProgreso.resx">
+      <DependentUpon>ucProgreso.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

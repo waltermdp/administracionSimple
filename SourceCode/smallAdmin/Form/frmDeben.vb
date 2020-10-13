@@ -419,13 +419,13 @@ Public Class frmDeben
                                         "Metodo Pago: {2}" & vbNewLine & _
                                         "Numero: {3}" & vbNewLine & _
                                         "Valor Cuota: {4}" & vbNewLine & _
-                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, GetAhora)
+                                         "Fecha: {5}" & vbNewLine & " Desea continuar?.", m_CurrentProducto.Cliente, m_CurrentProducto.NumCliente, m_CurrentProducto.MetodoPago.ToString, m_CurrentProducto.Comprobante, m_CurrentProducto.ValorCuota, dtpFechaPago)
 
       rsta = MsgBox(msg, MsgBoxStyle.YesNo)
       If rsta = MsgBoxResult.Yes Then
 
-
-        Call AplicarCuota(nPagar, m_CurrentProducto.GuidProducto)
+        Dim vFechaPago As Date = dtpFechaPago.Value
+        Call AplicarCuota(nPagar, m_CurrentProducto.GuidProducto, vFechaPago)
 
 
 
@@ -638,7 +638,7 @@ Public Class frmDeben
       Using objFormResumen As New frmResumen
         objFormResumen.Movimientos = vMovimientos.ToList
         objFormResumen.TipoDePago = vTipoPagoSeleccionado
-        objFormResumen.ShowDialog()
+        objFormResumen.ShowDialog(Me)
       End Using
 
     Catch ex As Exception

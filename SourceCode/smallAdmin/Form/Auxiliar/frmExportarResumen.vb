@@ -23,6 +23,18 @@ Public Class frmExportarResumen
 
   Private Sub frmExportarResumen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
+
+
+      Using objForm As New frmProgreso(AddressOf CargarInicio)
+        objForm.ShowDialog(Me)
+      End Using
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub CargarInicio()
+    Try
       clsCobros.GenerateResumen(m_TipoPago, m_Movimientos)
       Select Case m_TipoPago.GuidTipo
         Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
@@ -32,7 +44,7 @@ Public Class frmExportarResumen
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
           FillResumenViewVisaCredito(m_Movimientos)
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-          FillResumenViewVisaCredito(m_Movimientos)
+          lstViewResumen.Invoke(Sub() FillResumenViewVisaCredito(m_Movimientos)) ' FillResumenViewVisaCredito(m_Movimientos)
         Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
           FillResumenViewVisaCredito(m_Movimientos)
         Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
@@ -40,13 +52,19 @@ Public Class frmExportarResumen
         Case Else
           MsgBox("No se encuentra tipo de pago")
       End Select
-      FillResumenViewVisaCredito(m_Movimientos)
+      'FillResumenViewVisaCredito(m_Movimientos)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
   
+  Private Sub LlenarListviewSeguro(ByVal vMovimientos As List(Of clsInfoMovimiento))
+    Try
 
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
 
   Private Sub FillResumenViewVisaCredito(ByVal vMovimientos As List(Of clsInfoMovimiento))

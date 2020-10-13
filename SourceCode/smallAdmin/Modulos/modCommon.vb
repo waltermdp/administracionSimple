@@ -151,16 +151,16 @@ Module modCommon
 
   '1-agregar fecha como parametro, generar proximo pago
   '2- una barra loca de espera
-  P ublic Sub AplicarCuota(ByVal nCuotas As Integer, ByVal vGuidProducto As Guid)
+  Public Sub AplicarCuota(ByVal nCuotas As Integer, ByVal vGuidProducto As Guid, ByVal vFechaPago As Date)
     Try
-  Dim vResult As libCommon.Comunes.Result
-  Dim auxPago As clsInfoPagos = Nothing
-  Dim lstPagos As New List(Of manDB.clsInfoPagos)
-  Dim lstProducto = New clsListProductos
+      Dim vResult As libCommon.Comunes.Result
+      Dim auxPago As clsInfoPagos = Nothing
+      Dim lstPagos As New List(Of manDB.clsInfoPagos)
+      Dim lstProducto = New clsListProductos
       lstProducto = New clsListProductos
       lstProducto.Cfg_Filtro = "where GuidProducto={" & vGuidProducto.ToString & "}"
       lstProducto.RefreshData()
-  Dim Producto As New clsInfoProducto
+      Dim Producto As New clsInfoProducto
       If lstProducto.Items.Count <= 0 Then
         MsgBox("No existe el producto")
         Exit Sub
@@ -174,20 +174,20 @@ Module modCommon
       End If
       While (nCuotas > 0) 'lstPagos.Exists(Function(c) c.EstadoPago = E_EstadoPago.Debe))
 
-  Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Debe)
+        Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Debe)
         If index < 0 Then
           MsgBox("No se encontro cuota debe")
           Exit Sub
         End If
         lstPagos(index).EstadoPago = E_EstadoPago.Pago
-        lstPagos(index).FechaPago = GetAhora()
+        lstPagos(index).FechaPago = vFechaPago
 
         vResult = clsPago.Save(lstPagos(index))
         If vResult <> Result.OK Then
           MsgBox("Fallo guardar pagos")
           Exit Sub
         End If
-  Dim cuotasPagadas As Integer = lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
+        Dim cuotasPagadas As Integer = lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
         If cuotasPagadas < Producto.TotalCuotas Then
           auxPago = GetProximoPago(vGuidProducto, Producto.NumComprobante, Producto.ValorCuotaFija, lstPagos(index).NumCuota + 1, Producto.FechaVenta, lstPagos(index).VencimientoCuota)
           If auxPago IsNot Nothing Then

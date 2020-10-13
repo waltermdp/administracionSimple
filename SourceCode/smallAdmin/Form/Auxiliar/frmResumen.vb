@@ -112,6 +112,7 @@ Public Class frmResumen
     Try
       m_skip = True
       lstViewResumen.Clear()
+      lstViewResumen.BeginUpdate()
       lstViewResumen.MultiSelect = False
       lstViewResumen.FullRowSelect = True
       lstViewResumen.CheckBoxes = True
@@ -132,6 +133,7 @@ Public Class frmResumen
       Dim objResultado As S_EntradaCredito
 
       For Each movimiento In vMovimientos
+        Application.DoEvents()
         item = New ListViewItem()
         objResultado = New S_EntradaCredito
         ComprobarEntrada(movimiento, objResultado)
@@ -153,7 +155,7 @@ Public Class frmResumen
       Next
       lstViewResumen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
       Call LoadInformacion()
-
+      lstViewResumen.EndUpdate()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     Finally
@@ -468,6 +470,17 @@ Public Class frmResumen
 
       End If
 
+      Using obj As New frmProgreso(AddressOf fillLista)
+        obj.ShowDialog(Me)
+      End Using
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub fillLista()
+    Try
       Select Case m_TipoPagoSeleccionado.GuidTipo
 
         Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito
@@ -475,7 +488,7 @@ Public Class frmResumen
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
           FillResumenViewCBU(m_Movimientos)
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-          FillResumenViewVisaCredito(m_Movimientos)
+          lstViewResumen.Invoke(Sub() FillResumenViewVisaCredito(m_Movimientos))
         Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
           FillResumenViewMASTER(m_Movimientos)
         Case Else
