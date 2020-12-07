@@ -65,7 +65,9 @@ Public Class clsListaPrincipal
         Dim auxResult As Result = objDatos.GetData(objDB)
         Dim auxList As New List(Of clsInfoPrincipal)
         If auxResult > 0 Then
+
           For Each fila As DataRow In objDatos.Table.Rows
+
             objInfoPrincipal = New clsInfoPrincipal
             objListProdInfo = New clsInfoProducto
             objResult = clsProducto.ProductoIgualDataRow(objListProdInfo, fila)

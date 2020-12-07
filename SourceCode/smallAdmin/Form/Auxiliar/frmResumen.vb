@@ -28,22 +28,51 @@ Public Class frmResumen
   Private Sub btnOK_MouseClick(sender As Object, e As MouseEventArgs) Handles btnOK.MouseClick
     Try
       'aplicar pagos
-      If m_Movimientos Is Nothing Then Exit Sub
-      Dim vResult As Result
-      Dim lstPagos As clsListPagos
-     
-      For Each item As ListViewItem In lstViewResumen.SelectedItems '  mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
-        If item.BackColor <> Color.LightGreen Then Continue For
-        lstPagos = New clsListPagos
-        lstPagos.Cfg_Filtro = "where NumComprobante=" & item.SubItems(6).ToString
-        lstPagos.RefreshData()
-        AplicarCuota(1, lstPagos.Items.First.GuidProducto)
-      Next
+      If m_Movimientos Is Nothing Then
+        MsgBox("No hay movimientos. presione cancelar para salir")
+        Exit Sub
+      End If
+
+      Using obj As New frmProgreso(AddressOf AplicarPagosSeleccionados)
+        obj.ShowDialog(Me)
+      End Using
+
+      MsgBox("Se procesaron los pagos seleccionados")
+      Me.Close()
 
     Catch ex As Exception
       Call Print_msg(ex.Message)
-    Finally
-      Me.Close()
+    End Try
+  End Sub
+
+  Private Sub AplicarPagosSeleccionados()
+    Try
+      lstViewResumen.Invoke(Sub() AplicarPagos())
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub AplicarPagos()
+    Try
+
+      Dim lstPagos As clsListPagos
+
+      For Each item As ListViewItem In lstViewResumen.CheckedItems  '  mov In m_Movimientos.Where(Function(c) c.Estado = E_EstadoPago.Pago)
+        Application.DoEvents()
+        If item.BackColor <> Color.LightGreen Then Continue For
+        lstPagos = New clsListPagos
+        Dim aux As String = item.SubItems(6).Text.ToString
+        lstPagos.Cfg_Filtro = "where NumComprobante=" & aux
+        lstPagos.RefreshData()
+
+        Dim auxdate As Date = Date.ParseExact(item.SubItems(9).Text, "dd/MM/yy", System.Globalization.CultureInfo.InvariantCulture)
+
+        AplicarCuota(1, lstPagos.Items.First.GuidProducto, auxdate)
+      Next
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
     End Try
   End Sub
 
@@ -199,6 +228,12 @@ Public Class frmResumen
         UltimaCuotaPaga = pago.NumCuota
         Exit For
       Next
+      If vlstPagos.Count = 1 Then
+        If vlstPagos(0).EstadoPago = E_EstadoPago.Debe Then
+          'fechaUltimoPago = pago.FechaPago
+          UltimaCuotaPaga = 0
+        End If
+      End If
 
 
       Dim count As Integer = 0
@@ -254,7 +289,7 @@ Public Class frmResumen
       rResultado.IDCliente = CLng(vEntrada.IdentificadorDebito).ToString
       Dim PagoPendiente As New clsInfoPagos
       Dim auxDate As Date
-      Dim auxCuota As Integer
+      Dim auxCuota As Integer = -1
       rResultado.FechaUltimoPago = "--/--/--"
       rResultado.UltimaCuotapaga = "--/--"
       Dim aux As String = String.Empty
@@ -263,7 +298,10 @@ Public Class frmResumen
       If vResult <> Result.OK Then
         ContieneErrores = True
         rResultado.Descripcion &= aux + " "
-
+        If auxCuota <> -1 Then
+          rResultado.FechaUltimoPago = auxDate.ToString("dd/MM/yyyy")
+          rResultado.UltimaCuotapaga = auxCuota & "/"
+        End If
       Else
         rResultado.FechaUltimoPago = auxDate.ToString("dd/MM/yyyy")
         rResultado.UltimaCuotapaga = auxCuota & "/"
@@ -272,7 +310,7 @@ Public Class frmResumen
           rResultado.Descripcion &= "El valor a pagar es distinto." + " "
         End If
       End If
-
+      
       rResultado.Comprobante = CInt(vEntrada.NumeroComprobante).ToString
       rResultado.Importe = String.Format("{0:N2}", CDec(vEntrada.Importe / 100))
 
@@ -306,7 +344,7 @@ Public Class frmResumen
       End If
       rResultado.NumTarjeta = vEntrada.NumeroTarjeta
 
-      
+
 
       If ContieneErrores Then
         rResultado.colorFondo = Color.LightYellow
@@ -534,11 +572,13 @@ Public Class frmResumen
         If item.SubItems(5).Text = "Debe" Then rechazados += 1
         If item.BackColor = Color.LightGreen Then aprobados += 1
         If item.BackColor = Color.LightYellow Then conflictos += 1
+
         If item.Checked = True Then PagosAProcesar += 1
       Next
+      lblRegistros.Text = String.Format("Total de Registros: {0}", lstViewResumen.Items.Count)
       lblAprobados.Text = aprobados.ToString + " entradas OK"
       lblConflictos.Text = conflictos.ToString + " entradas con conflicos"
-      lblRechazados.Text = rechazados.ToString + " entradas no pagaron"
+      lblRechazados.Text = String.Format("Pagaron: {0}  -- No Pagaron:{1}", lstViewResumen.Items.Count - rechazados, rechazados.ToString)
       lblResumen.Text = String.Format("Existen {0} entradas tildadas de {1} disponibles", PagosAProcesar, aprobados)
 
     Catch ex As Exception

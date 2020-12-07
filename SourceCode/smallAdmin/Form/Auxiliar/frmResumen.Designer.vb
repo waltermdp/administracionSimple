@@ -33,6 +33,7 @@ Partial Class frmResumen
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.lblDetalle = New System.Windows.Forms.Label()
     Me.btnViewDetail = New System.Windows.Forms.Button()
+    Me.lblRegistros = New System.Windows.Forms.Label()
     Me.SuspendLayout()
     '
     'lstViewResumen
@@ -89,7 +90,7 @@ Partial Class frmResumen
     'lblAprobados
     '
     Me.lblAprobados.AutoSize = True
-    Me.lblAprobados.Location = New System.Drawing.Point(220, 590)
+    Me.lblAprobados.Location = New System.Drawing.Point(220, 644)
     Me.lblAprobados.Name = "lblAprobados"
     Me.lblAprobados.Size = New System.Drawing.Size(10, 13)
     Me.lblAprobados.TabIndex = 46
@@ -98,7 +99,7 @@ Partial Class frmResumen
     'lblConflictos
     '
     Me.lblConflictos.AutoSize = True
-    Me.lblConflictos.Location = New System.Drawing.Point(220, 612)
+    Me.lblConflictos.Location = New System.Drawing.Point(220, 623)
     Me.lblConflictos.Name = "lblConflictos"
     Me.lblConflictos.Size = New System.Drawing.Size(10, 13)
     Me.lblConflictos.TabIndex = 47
@@ -107,7 +108,7 @@ Partial Class frmResumen
     'lblRechazados
     '
     Me.lblRechazados.AutoSize = True
-    Me.lblRechazados.Location = New System.Drawing.Point(220, 635)
+    Me.lblRechazados.Location = New System.Drawing.Point(220, 601)
     Me.lblRechazados.Name = "lblRechazados"
     Me.lblRechazados.Size = New System.Drawing.Size(10, 13)
     Me.lblRechazados.TabIndex = 48
@@ -116,7 +117,7 @@ Partial Class frmResumen
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(220, 657)
+    Me.lblResumen.Location = New System.Drawing.Point(220, 668)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(10, 13)
     Me.lblResumen.TabIndex = 49
@@ -124,22 +125,30 @@ Partial Class frmResumen
     '
     'lblDetalle
     '
-    Me.lblDetalle.AutoSize = True
     Me.lblDetalle.Location = New System.Drawing.Point(692, 604)
     Me.lblDetalle.Name = "lblDetalle"
-    Me.lblDetalle.Size = New System.Drawing.Size(10, 13)
+    Me.lblDetalle.Size = New System.Drawing.Size(565, 44)
     Me.lblDetalle.TabIndex = 50
     Me.lblDetalle.Text = "."
     '
     'btnViewDetail
     '
-    Me.btnViewDetail.Location = New System.Drawing.Point(695, 638)
+    Me.btnViewDetail.Location = New System.Drawing.Point(695, 651)
     Me.btnViewDetail.Name = "btnViewDetail"
     Me.btnViewDetail.Size = New System.Drawing.Size(143, 32)
     Me.btnViewDetail.TabIndex = 51
     Me.btnViewDetail.Text = "Ver Detalle"
     Me.btnViewDetail.UseVisualStyleBackColor = True
     Me.btnViewDetail.Visible = False
+    '
+    'lblRegistros
+    '
+    Me.lblRegistros.AutoSize = True
+    Me.lblRegistros.Location = New System.Drawing.Point(220, 581)
+    Me.lblRegistros.Name = "lblRegistros"
+    Me.lblRegistros.Size = New System.Drawing.Size(10, 13)
+    Me.lblRegistros.TabIndex = 52
+    Me.lblRegistros.Text = "."
     '
     'frmResumen
     '
@@ -148,6 +157,7 @@ Partial Class frmResumen
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.lblRegistros)
     Me.Controls.Add(Me.btnViewDetail)
     Me.Controls.Add(Me.lblDetalle)
     Me.Controls.Add(Me.lblResumen)
@@ -176,4 +186,5 @@ Partial Class frmResumen
   Friend WithEvents lblResumen As System.Windows.Forms.Label
   Friend WithEvents lblDetalle As System.Windows.Forms.Label
   Friend WithEvents btnViewDetail As System.Windows.Forms.Button
+  Friend WithEvents lblRegistros As System.Windows.Forms.Label
 End Class

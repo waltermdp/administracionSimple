@@ -82,13 +82,15 @@ Public Class frmTipoDeArchivo
         Dim AbrirArchivo As New OpenFileDialog
         If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then
           DialogResult = Windows.Forms.DialogResult.Cancel
-          Close()
+          Me.Close()
+          Exit Sub
         End If
 
         If modFile.Load(AbrirArchivo.FileName, archivo) <> Result.OK Then
           MsgBox("Error al abrir archivo")
           DialogResult = Windows.Forms.DialogResult.Cancel
           Close()
+          Exit Sub
         End If
         Dim s As String = IO.Path.Combine(IMPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
 

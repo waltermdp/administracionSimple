@@ -213,69 +213,7 @@ Module modCommon
     End Try
   End Sub
 
-  Public Sub AplicarCuota(ByVal precio As Decimal, ByVal vGuidProducto As Guid)
-    Try
-      MsgBox("DEMO")
-      Exit Sub
-      Dim vResult As libCommon.Comunes.Result
-      Dim auxPago As clsInfoPagos = Nothing
-      Dim lstPagos As New List(Of manDB.clsInfoPagos)
-      Dim lstProducto = New clsListProductos
-      lstProducto = New clsListProductos
-      lstProducto.Cfg_Filtro = "where GuidProducto={" & vGuidProducto.ToString & "}"
-      lstProducto.RefreshData()
-      Dim Producto As New clsInfoProducto
-      If lstProducto.Items.Count <= 0 Then
-        MsgBox("No existe el producto")
-        Exit Sub
-      End If
-      Producto = lstProducto.Items.First.Clone
-
-      vResult = clsPago.Load(lstPagos, vGuidProducto)
-      If vResult <> Result.OK Then
-        MsgBox("Fallo cargar pagos")
-        Exit Sub
-      End If
-      Dim nCuotas As Integer = 1
-      While (nCuotas > 0)
-
-        Dim index As Integer = lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Debe)
-        If index < 0 Then
-          MsgBox("No se encontro cuota debe")
-          Exit Sub
-        End If
-        lstPagos(index).EstadoPago = E_EstadoPago.PagoParcial
-        lstPagos(index).FechaPago = GetAhora()
-        vResult = clsPago.Save(lstPagos(index))
-        If vResult <> Result.OK Then
-          MsgBox("Fallo guardar pagos")
-          Exit Sub
-        End If
-        Dim cuotasPagadas As Integer = lstPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
-        If cuotasPagadas < Producto.TotalCuotas Then
-          auxPago = GetProximoPago(vGuidProducto, Producto.NumComprobante, Producto.ValorCuotaFija, lstPagos(index).NumCuota + 1, Producto.FechaVenta, lstPagos(index).VencimientoCuota)
-          If auxPago IsNot Nothing Then
-            vResult = clsPago.Save(auxPago)
-            If vResult <> Result.OK Then
-              MsgBox("Fallo guardar nuevo pago")
-              Exit Sub
-            End If
-          End If
-        End If
-
-        lstPagos.Clear()
-        vResult = clsPago.Load(lstPagos, vGuidProducto)
-        If vResult <> Result.OK Then
-          MsgBox("Fallo cargar pagos")
-          Exit Sub
-        End If
-        auxPago = Nothing
-        nCuotas = nCuotas - 1
-      End While
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
+ 
 
 
   Public Sub AplicarPago(ByVal vProducto As clsInfoProducto, ByVal numCuotasACancelar As Integer, ByVal vFechaPago As Date)
@@ -333,7 +271,7 @@ Module modCommon
       If rsta = MsgBoxResult.Yes Then
 
 
-        Call AplicarCuota(nPagar, vProducto.GuidProducto)
+        Call AplicarCuota(nPagar, vProducto.GuidProducto, Today)
 
       End If
     Catch ex As Exception

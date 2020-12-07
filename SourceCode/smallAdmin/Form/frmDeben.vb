@@ -38,6 +38,8 @@ Public Class frmDeben
       cmbMetodosDePago.DataSource = MetodosBusqueda
       cmbMetodosDePago.SelectedIndex = 0
       rbtnClientName.Checked = True
+
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -47,6 +49,28 @@ Public Class frmDeben
     Try
       'Call MostrarDeben()
       Call FillResumen()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Button4_Click(sender As Object, e As EventArgs)
+    Try
+      If m_objPrincipal IsNot Nothing Then m_objPrincipal.Dispose()
+      m_objPrincipal = New clsListaPrincipal()
+      Dim auxGuid As New Guid("7580f2d4-d9ec-477b-9e3a-50afb7141ab5")
+      m_objPrincipal.MetodoPago = g_TipoPago.Where(Function(c) c.GuidTipo.ToString = auxGuid.ToString).First.GuidTipo
+      m_objPrincipal.Cfg_Filtro = "where Productos.FechaVenta between #" & Format(Date.MinValue, strFormatoAnsiStdFecha) & "# and #" & Format(Date.MaxValue, strFormatoAnsiStdFecha) & "#"
+      m_objPrincipal.Deben = "1"
+      bsInfoPrincipal.DataSource = m_objPrincipal.Binding
+      Call ProductList_RefreshData()
+
+
+
+      bsInfoPrincipal.ResetBindings(False)
+      FillResumen()
+      Call RefreshDataOperaciones()
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -136,7 +160,7 @@ Public Class frmDeben
       '  m_Order = "ASC"
       'End If
       'm_objPrincipal.SetOrder(m_ColumnName, m_Order)
-      
+
       If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
         For Each col As DataGridViewColumn In dgvData.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
@@ -632,6 +656,8 @@ Public Class frmDeben
         If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
           vMovimientos = objForm.Movimientos.ToList
           vTipoPagoSeleccionado = objForm.TipoPagoSeleccionado
+        Else
+          Exit Sub
         End If
       End Using
       'Procesar los movimientos entrantes
@@ -913,7 +939,7 @@ Public Class frmDeben
         Dim CuotasRestantes As Integer = m_CurrentProducto.CuotasTotales - m_CurrentProducto.CuotasPagas
         Dim CuotasAPagar As Integer
         CuotasAPagar = CuotasRestantes
-        Call AplicarCuota(CuotasAPagar, m_CurrentProducto.GuidProducto)
+        Call AplicarCuota(CuotasAPagar, m_CurrentProducto.GuidProducto, Today)
         Call MostrarDeben()
 
 
@@ -928,19 +954,19 @@ Public Class frmDeben
 
   Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
     Try
-      Dim rsta As MsgBoxResult = MsgBox("DEBUG CONTINUAR?", MsgBoxStyle.YesNo)
-      If rsta = MsgBoxResult.Yes Then
-        Dim lstProductos As New List(Of Integer)({2426, 2631, 2713, 2718, 2757, 2760, 2766, 2811, 2814, 2816, 2832, 2836, 2857, 2868, 2875, 2884, 2887, 2908, 2916, 2921, 2922, 2935, 2938, 2939, 2947, 3012, 3016, 3027, 3058, 3065, 3082, 3084, 3088, 3117, 3122, 3148, 3161, 3172, 3188, 3189, 3200, 3214, 3323, 3356, 3374, 3472, 3510, 3516, 3728, 3730, 3838, 3858, 3871, 3880, 3896, 3927, 3934, 3973, 4067, 4081, 4082, 4087, 4118, 4124, 4132, 4139, 4141, 4317, 4318, 4433, 4580, 4582, 4674, 4704, 4755, 4804, 4813, 5044, 5054, 5265, 6132, 6307, 6383, 6909})
-        For Each item In m_objPrincipal.Items
-          If lstProductos.Contains(item.Comprobante) Then
-            Dim cuotasAPagar As Integer = item.CuotasTotales - item.CuotasPagas
-            If cuotasAPagar > 0 Then
-              Call AplicarCuota(cuotasAPagar, item.GuidProducto)
-            End If
-          End If
-        Next
-        Call MostrarDeben()
-      End If
+      '  Dim rsta As MsgBoxResult = MsgBox("DEBUG CONTINUAR?", MsgBoxStyle.YesNo)
+      '  If rsta = MsgBoxResult.Yes Then
+      '    Dim lstProductos As New List(Of Integer)({2426, 2631, 2713, 2718, 2757, 2760, 2766, 2811, 2814, 2816, 2832, 2836, 2857, 2868, 2875, 2884, 2887, 2908, 2916, 2921, 2922, 2935, 2938, 2939, 2947, 3012, 3016, 3027, 3058, 3065, 3082, 3084, 3088, 3117, 3122, 3148, 3161, 3172, 3188, 3189, 3200, 3214, 3323, 3356, 3374, 3472, 3510, 3516, 3728, 3730, 3838, 3858, 3871, 3880, 3896, 3927, 3934, 3973, 4067, 4081, 4082, 4087, 4118, 4124, 4132, 4139, 4141, 4317, 4318, 4433, 4580, 4582, 4674, 4704, 4755, 4804, 4813, 5044, 5054, 5265, 6132, 6307, 6383, 6909})
+      '    For Each item In m_objPrincipal.Items
+      '      If lstProductos.Contains(item.Comprobante) Then
+      '        Dim cuotasAPagar As Integer = item.CuotasTotales - item.CuotasPagas
+      '        If cuotasAPagar > 0 Then
+      '          Call AplicarCuota(cuotasAPagar, item.GuidProducto)
+      '        End If
+      '      End If
+      '    Next
+      '    Call MostrarDeben()
+      '  End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -1007,4 +1033,108 @@ Public Class frmDeben
   '    Call Print_msg(ex.Message)
   '  End Try
   'End Sub
+
+
+  Private Sub btnAnular_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAnular.MouseClick
+    Try
+      Dim vResult As Result
+
+      If m_CurrentProducto Is Nothing Then
+        MsgBox("Debe seleccionar un producto")
+        Exit Sub
+      End If
+      Dim listArticulos As New List(Of clsInfoArticuloVendido)
+      vResult = clsRelArtProd.Load(listArticulos, m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar Articulos vendidos")
+        Exit Sub
+      End If
+
+      If listArticulos.Count <= 0 Then
+        MsgBox("No se encontraron articulos")
+
+      Else
+        MsgBox("Los articulos vendidos seran ingresados a la tabla de articulos en stock")
+        Dim descripcion As String = String.Empty
+        For Each art In listArticulos
+          If art.CantidadArticulos = art.Entregados Then
+            descripcion += String.Format("Art:{0}; Cantidad:{1}" + vbNewLine, art.Nombre, art.Entregados)
+          Else
+            descripcion += String.Format("Art:{0}; Cantidad:{1}/{2}" + vbNewLine, art.Nombre, art.CantidadArticulos, art.Entregados)
+          End If
+        Next
+        MsgBox(descripcion, MsgBoxStyle.OkOnly)
+
+        Dim ObjListaStock As clsListStock
+        Dim ArticuloDelDeposito As manDB.clsInfoStock
+        For Each art In listArticulos
+          ObjListaStock = New clsListStock
+          ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & art.GuidArticulo.ToString & "} and GuidResponsable={B7B5BDDF-8EA5-406A-A5BC-A01723CFD25D}" 'B7B5BDDF-8EA5-406A-A5BC-A01723CFD25D
+          ObjListaStock.RefreshData()
+          If ObjListaStock.Items.Count >= 1 Then
+            ArticuloDelDeposito = ObjListaStock.Items(0).Clone
+            ArticuloDelDeposito.Cantidad += art.CantidadArticulos
+            clsStock.Save(ArticuloDelDeposito)
+          End If
+        Next
+
+        Dim objPagos As New clsListPagos
+        objPagos.Cfg_Filtro = "where GuidProducto={" & m_CurrentProducto.GuidProducto.ToString & "}"
+        objPagos.RefreshData()
+        If objPagos.Items.Count > 0 Then
+          Dim objInfoPago As New clsInfoPagos
+          For Each item In objPagos.Items
+            objInfoPago = item.Clone
+            objInfoPago.EstadoPago = E_EstadoPago.Eliminado
+            clsPago.Save(objInfoPago)
+          Next
+        End If
+        Dim objInfoProducto As New clsInfoProducto
+        If clsProducto.Load(m_CurrentProducto.GuidProducto, objInfoProducto) <> Result.OK Then
+          MsgBox("No se puede obtener datos del producto vendido o del cliente")
+          Exit Sub
+        End If
+        If clsPago.Load(objInfoProducto.ListaPagos, m_CurrentProducto.GuidProducto) <> Result.OK Then
+          MsgBox("No se puede obtener datos del producto vendido o del cliente")
+          Exit Sub
+        End If
+        If clsRelArtProd.Load(objInfoProducto.ListaArticulos, m_CurrentProducto.GuidProducto) <> Result.OK Then
+          MsgBox("No se puede obtener datos del producto vendido o del cliente")
+          Exit Sub
+        End If
+        If clsCuenta.Load(objInfoProducto.GuidCuenta, objInfoProducto.Cuenta) <> Result.OK Then
+          MsgBox("No se puede obtener datos del producto vendido o del cliente")
+          Exit Sub
+        End If
+
+        objInfoProducto.TotalCuotas = 0
+        objInfoProducto.ValorCuotaFija = 0
+        objInfoProducto.CuotasDebe = 0
+        objInfoProducto.Precio = 0
+
+        If clsProducto.Save(objInfoProducto) <> Result.OK Then
+          MsgBox("No se pudo guardar algunos cambios")
+          Exit Sub
+        End If
+
+      End If
+
+
+
+
+
+      Call MostrarDeben()
+
+
+
+
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+
 End Class

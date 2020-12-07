@@ -136,8 +136,8 @@ Public Class frmDetalle
     Try
       Dim index As Integer = dgvProductos.SelectedRows(0).Index
       Dim InfoProducto As clsInfoProducto = CType(dgvProductos.Rows(index).DataBoundItem, manDB.clsInfoProducto)
+      Call RevertirUltimoPago(InfoProducto)
 
-      Call AplicarPago(InfoProducto, 1, Today)
       Call ReloadListProductos()
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -148,8 +148,7 @@ Public Class frmDetalle
     Try
       Dim index As Integer = dgvProductos.SelectedRows(0).Index
       Dim InfoProducto As clsInfoProducto = CType(dgvProductos.Rows(index).DataBoundItem, manDB.clsInfoProducto)
-
-      Call RevertirUltimoPago(InfoProducto)
+      Call AplicarPago(InfoProducto, 1, Today)
       Call ReloadListProductos()
     Catch ex As Exception
       Print_msg(ex.Message)

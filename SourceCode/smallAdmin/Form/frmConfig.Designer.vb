@@ -54,6 +54,7 @@ Partial Class frmConfig
     Me.btnActualizarPagos.TabIndex = 1
     Me.btnActualizarPagos.Text = "ActualizarPagos"
     Me.btnActualizarPagos.UseVisualStyleBackColor = True
+    Me.btnActualizarPagos.Visible = False
     '
     'btnNewGroup
     '
