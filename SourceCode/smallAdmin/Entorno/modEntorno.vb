@@ -156,6 +156,15 @@ Module Entorno
     End Try
   End Function
 
+  Public Function GetVersion() As String
+    Try
+      Return String.Format("Version:{0}.{1}.{2}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return "Version:--"
+    End Try
+  End Function
+
   Private Function bkpDatabase() As Result
     Try
       Dim name As String = GetHoy.ToString("dd") & ".bk"

@@ -1137,4 +1137,62 @@ Public Class frmDeben
 
 
 
+ 
+
+
+  Private m_currentLocationMain As Point
+  Private m_MovingMain As Boolean = False
+
+  Private Sub lblTitulo_MouseEnter(sender As Object, e As EventArgs) Handles lblTitulo.MouseEnter
+    Try
+      Me.Cursor = Cursors.SizeAll
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub lblTitulo_MouseLeave(sender As Object, e As EventArgs) Handles lblTitulo.MouseLeave
+    Try
+      Me.Cursor = Cursors.Default
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub lblTitulo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblTitulo.MouseDown
+    Try
+      m_currentLocationMain = e.Location
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+  Private Sub lblTitulo_MouseMove(sender As Object, e As MouseEventArgs) Handles lblTitulo.MouseMove
+    Try
+      'If m_currentLocationMain.IsEmpty Then Exit Sub
+      'If m_MovingMain Then Exit Sub
+      'm_MovingMain = True
+      'Dim dx As Integer = m_currentLocationMain.X - e.Location.X
+      'Dim dy As Integer = m_currentLocationMain.Y - e.Location.Y
+      'm_currentLocationMain = New Point(m_currentLocationMain.X + dx, m_currentLocationMain.Y + dy)
+      'Me.Location = New Point(Me.Location.X + dx, Me.Location.Y + dy)
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    Finally
+      m_MovingMain = False
+    End Try
+
+  End Sub
+
+  Private Sub lblTitulo_MouseUp(sender As Object, e As MouseEventArgs) Handles lblTitulo.MouseUp
+    Try
+      m_currentLocationMain = Point.Empty
+      m_MovingMain = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class
