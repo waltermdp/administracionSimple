@@ -32,7 +32,7 @@ Module Entorno
 
   Public g_Today As Date 'TODO: crear fecha para saber si se cambia la fecha de la pc con respecto al ultimo uso
 
-  Public g_debug As Boolean = False
+  Public g_debug As Boolean = True
 
 
   'Public Enum GRUPOS As Integer
