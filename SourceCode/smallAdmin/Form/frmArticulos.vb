@@ -14,36 +14,187 @@ Public Class frmArticulos
   Private Sub frmArticulos_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
       Call AllowEditNew(False)
-      cmbResponsables.Enabled = False
-      For Each column As DataGridViewColumn In dgvStock.Columns
-        If column.DataPropertyName = "Responsable" Then
-          column.Visible = False
-        End If
-      Next
-      lblDetalle.Text = "Accion:" & vbNewLine & _
-                        "+: Suma 1 unidad al responsable, si el responsable es Stock entonces el stock crece en 1 unidad, si el responsable es otro entonces, descuenta una unidad de Stock y se la pasa al responsable" & vbNewLine & _
-                        "-: Resta 1 unidad al responsable, si el responsable es Stock entonces el stock descuenta en 1 unidad, si el responsable es otro entonces, descuenta una unidad al Responsable e incrementa a Stock" & vbNewLine & _
-                        "Vendido: Resta una unidad al responsable" & vbNewLine & _
-                        "Solo es posible seleccionar un responsable distinto de stock cuando esta seleccionado la opcion Articulo Distribuidos"
+
+      'For Each column As DataGridViewColumn In dgvStock.Columns
+      '  If column.DataPropertyName = "Responsable" Then
+      '    column.Visible = False
+      '  End If
+      'Next
+      'lblDetalle.Text = "Accion:" & vbNewLine & _
+      '                  "+: Suma 1 unidad al responsable, si el responsable es Stock entonces el stock crece en 1 unidad, si el responsable es otro entonces, descuenta una unidad de Stock y se la pasa al responsable" & vbNewLine & _
+      '                  "-: Resta 1 unidad al responsable, si el responsable es Stock entonces el stock descuenta en 1 unidad, si el responsable es otro entonces, descuenta una unidad al Responsable e incrementa a Stock" & vbNewLine & _
+      '                  "Vendido: Resta una unidad al responsable" & vbNewLine & _
+      '                  "Solo es posible seleccionar un responsable distinto de stock cuando esta seleccionado la opcion Articulo Distribuidos"
       m_Grupos.RefreshData()
-      m_Deposito = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO")
+      'm_Deposito = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO")
+      LoadTodoslosResponsables()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
 
-  Private Sub frmArticulos_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+  Private Sub btnBuscar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnBuscar.MouseClick
     Try
-      Call MostrarListaArticulos()
-      Call FillResponsables()
+      'buscar los articulos
+      If rbtnBuscarResponsables.Checked Then
+        If cmbResponsables.SelectedIndex < 0 Then
+          MsgBox("Debe seleccionar un responsable para realizar una busqueda")
+          Exit Sub
+        End If
+
+        BuscarArtPorResponsable(CType(cmbResponsables.SelectedItem, clsInfoResponsable))
+      ElseIf rbnBuscarPalabra.Checked Then
+        If String.IsNullOrEmpty(txtPalabraBuscar.Text.Trim) Then
+          MsgBox("No se pueden buscar palabras vacias")
+          Exit Sub
+        End If
+        BuscarArtPorPalabra(txtPalabraBuscar.Text.Trim)
+      End If
     Catch ex As Exception
-      Call Print_msg(ex.Message)
+      Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub BuscarArtPorPalabra(ByVal vPalabra As String)
+    Try
+      If m_objArticulosList IsNot Nothing Then m_objArticulosList.Dispose()
+      If m_ObjListaStock IsNot Nothing Then m_ObjListaStock.Dispose()
+      m_objArticulosList = New clsListArticulos()
+      m_ObjListaStock = New clsListStock
+      bsArticulos.DataSource = m_objArticulosList.Binding
+
+      m_objArticulosList.Cfg_Orden = "ORDER BY Codigo ASC"
+      m_objArticulosList.Cfg_Filtro = "WHERE Codigo Like '%" & vPalabra & "%' OR CodigoBarras Like '%" & vPalabra & "%' OR Nombre Like '%" & vPalabra & "%' OR Descripcion Like '%" & vPalabra & "%'"
+      Call ArticulosList_RefreshData()
+      If m_objArticulosList.Items.Count <= 0 Then
+        MsgBox(String.Format("No se encontraron articulos que contengan la palabra ""{0}"".", vPalabra))
+        Exit Sub
+      End If
+      'existen articulos
+
+      m_ObjListaStock.Cfg_Orden = "ORDER BY Responsable ASC"
+      'Armar Filtro tomando el guid de cada articulo
+      Dim strFiltro As String = "WHERE "
+      'GuidArticulo={" & m_ObjCurrent.GuidArticulo.ToString & "} and GuidResponsable={" & GuidResponsable.ToString & "} and Cantidad > 0"
+      For Each item In m_objArticulosList.Items
+        strFiltro += "GuidArticulo={" & item.GuidArticulo.ToString & "}"
+        If Not m_objArticulosList.Items.Last.Equals(item) Then
+          strFiltro += " OR "
+        End If
+      Next
+      m_ObjListaStock.Cfg_Filtro = strFiltro
+      Call ListaStock_RefreshData()
+      'Las listas de los articulos y la del stock estan actualizadas con los datos buscados
+
+
+      'Preparo lista a mostrar
+      Dim auxArticulo As clsListaStorage
+      m_objStock = New List(Of clsListaStorage)
+
+      BindingSource1.DataSource = m_objStock
+      dgvStock.DataSource = BindingSource1
+
+
+      For Each item In m_objArticulosList.Items
+        auxArticulo = New clsListaStorage
+        auxArticulo.GuidArticulo = item.GuidArticulo
+        auxArticulo.Nombre = item.Nombre
+        auxArticulo.Codigo = item.Codigo
+        auxArticulo.CodigoBarras = item.CodigoBarras
+        auxArticulo.Descripcion = item.Descripcion
+        auxArticulo.Precio = item.Precio
+
+        For Each elemento In m_ObjListaStock.Items
+          If elemento.GuidArticulo = item.GuidArticulo Then
+            auxArticulo.Cantidad = elemento.Cantidad
+            auxArticulo.Responsable = elemento.Responsable
+            auxArticulo.GuidResponsable = elemento.GuidResponsable
+            Dim art As New clsListaStorage
+            art = auxArticulo.Clone
+            m_objStock.Add(art)
+          End If
+        Next
+      Next
+      
+      BindingSource1.ResetBindings(False)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub BuscarArtPorResponsable(ByVal vResponsable As clsInfoResponsable)
+    Try
+      If m_objArticulosList IsNot Nothing Then m_objArticulosList.Dispose()
+      If m_ObjListaStock IsNot Nothing Then m_ObjListaStock.Dispose()
+      m_objArticulosList = New clsListArticulos()
+      m_ObjListaStock = New clsListStock
+      
+
+      m_ObjListaStock.Cfg_Orden = "ORDER BY Responsable ASC"
+
+      'GuidArticulo={" & m_ObjCurrent.GuidArticulo.ToString & "} and GuidResponsable={" & GuidResponsable.ToString & "} and Cantidad > 0"
+      m_ObjListaStock.Cfg_Filtro = "WHERE GuidResponsable={" & vResponsable.GuidResponsable.ToString & "}"
+      Call ListaStock_RefreshData()
+      If m_ObjListaStock.Items.Count <= 0 Then
+        MsgBox(String.Format("No se encontraron articulos en ""{0}"".", vResponsable.Nombre))
+        Exit Sub
+      End If
+      'El responsable tiene 0 o mas articulos
+
+
+      bsArticulos.DataSource = m_objArticulosList.Binding
+      m_objArticulosList.Cfg_Orden = "ORDER BY Codigo ASC"
+      Dim strFiltro As String = "WHERE "
+      For Each item In m_ObjListaStock.Items
+        strFiltro += "GuidArticulo={" & item.GuidArticulo.ToString & "}"
+        If Not m_ObjListaStock.Items.Last.Equals(item) Then
+          strFiltro += " OR "
+        End If
+      Next
+      m_objArticulosList.Cfg_Filtro = strFiltro
+      Call ArticulosList_RefreshData()
+      ''existen articulos
+
+
+      'Preparo lista a mostrar
+      Dim auxArticulo As clsListaStorage
+      m_objStock = New List(Of clsListaStorage)
+
+      BindingSource1.DataSource = m_objStock
+      dgvStock.DataSource = BindingSource1
+
+
+      For Each item In m_objArticulosList.Items
+        auxArticulo = New clsListaStorage
+        auxArticulo.GuidArticulo = item.GuidArticulo
+        auxArticulo.Nombre = item.Nombre
+        auxArticulo.Codigo = item.Codigo
+        auxArticulo.CodigoBarras = item.CodigoBarras
+        auxArticulo.Descripcion = item.Descripcion
+        auxArticulo.Precio = item.Precio
+
+        For Each elemento In m_ObjListaStock.Items
+          If elemento.GuidArticulo = item.GuidArticulo Then
+            auxArticulo.Cantidad = elemento.Cantidad
+            auxArticulo.Responsable = elemento.Responsable
+            auxArticulo.GuidResponsable = elemento.GuidResponsable
+            Dim art As New clsListaStorage
+            art = auxArticulo.Clone
+            m_objStock.Add(art)
+          End If
+        Next
+      Next
+
+      BindingSource1.ResetBindings(False)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
 
   Private Sub MostrarListaArticulos()
     Try
-
 
       If m_objArticulosList IsNot Nothing Then m_objArticulosList.Dispose()
       If m_ObjListaStock IsNot Nothing Then m_ObjListaStock.Dispose()
@@ -224,8 +375,12 @@ Public Class frmArticulos
         MsgBox("Debe seleccionar un articulo de la lista")
         Exit Sub
       End If
-      Call AllowEditNew(True)
-
+      Using objForm As New frmArticulo()
+        objForm.SetListaResponsables(m_listResponsables)
+        objForm.EditArticulo(m_ObjCurrent)
+        objForm.ShowDialog(Me)
+      End Using
+      'TODO: refrescar el objeto y dejarlo nuevamente seleccionado
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -233,10 +388,11 @@ Public Class frmArticulos
 
   Private Sub btnNuevo_MouseClick(sender As Object, e As MouseEventArgs) Handles btnNuevo.MouseClick
     Try
-      m_ObjCurrent = New clsListaStorage
-      m_ObjCurrent.GuidArticulo = Guid.NewGuid
-      Call FillArticuloData()
-      Call AllowEditNew(True)
+      Using objForm As New frmArticulo()
+        objForm.SetListaResponsables(m_listResponsables)
+        objForm.ShowDialog(Me)
+      End Using
+      'TODO: refrescar el objeto y dejarlo seleccionado solo el ultimo agregado
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -259,7 +415,7 @@ Public Class frmArticulos
     End Try
   End Sub
 
-  Private Sub btnGuardar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnGuardar.MouseClick
+  Private Sub btnGuardar_MouseClick(sender As Object, e As MouseEventArgs)
     Try
       Call CargarData()
       Dim auxD As Decimal = 0
@@ -285,7 +441,7 @@ Public Class frmArticulos
     End Try
   End Sub
 
-  Private Sub btnCancelar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnCancelar.MouseClick
+  Private Sub btnCancelar_MouseClick(sender As Object, e As MouseEventArgs)
     Try
       Call AllowEditNew(False)
       Call MostrarListaArticulos()
@@ -329,27 +485,18 @@ Public Class frmArticulos
   Private Sub AllowEditNew(ByVal permitir As Boolean)
     Try
 
-      txtNombre.ReadOnly = Not permitir
-      txtCodigo.ReadOnly = Not permitir
-      txtPrecio.ReadOnly = Not permitir
-      txtDescripcion.ReadOnly = Not permitir
-      btnNuevo.Visible = Not permitir
-      btnEditar.Visible = Not permitir
+      txtNombre.ReadOnly = True
+      txtCodigo.ReadOnly = True
+      txtCodigoBarras.ReadOnly = True
+      txtPrecio.ReadOnly = True
+      txtDescripcion.ReadOnly = True
+
+
+
       btnEliminar.Visible = Not permitir
-      btnGuardar.Visible = permitir
-      btnCancelar.Visible = permitir
+      
       btnVolver.Visible = Not permitir
-      If permitir Then
-        txtNombre.BackColor = Color.White
-        txtCodigo.BackColor = Color.White
-        txtPrecio.BackColor = Color.White
-        txtDescripcion.BackColor = Color.White
-      Else
-        txtNombre.BackColor = SystemColors.Control
-        txtCodigo.BackColor = SystemColors.Control
-        txtDescripcion.BackColor = SystemColors.Control
-        txtPrecio.BackColor = SystemColors.Control
-      End If
+
       GroupBox1.Enabled = Not permitir
       GroupBox2.Enabled = Not permitir
     Catch ex As Exception
@@ -373,8 +520,6 @@ Public Class frmArticulos
       cmbResponsables.Enabled = rbtnResponsables.Checked
       txtFiltro.Enabled = rbtnResponsables.Checked
 
-      'dgvStock.Columns("Responsable").Visible = rbtnResponsables.Checked
-
       If rbtnResponsables.Checked = False Then
         cmbResponsables.SelectedIndex = 0
       End If
@@ -394,7 +539,7 @@ Public Class frmArticulos
     End Try
   End Sub
 
-  Private Sub FillResponsables()
+  Private Sub LoadTodoslosResponsables()
     Try
       m_listResponsables.Clear()
 
@@ -402,11 +547,11 @@ Public Class frmArticulos
       For Each grupo In m_Grupos.Items
         m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = grupo.Nombre, .GuidResponsable = grupo.GuidGrupo, .Codigo = ""})
       Next
-      For Each responsable In m_ObjListaStock.Items
-        If m_listResponsables.Exists(Function(c) c.GuidResponsable = responsable.GuidResponsable) Then Continue For
-        m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = responsable.Responsable, .GuidResponsable = responsable.GuidResponsable, .Codigo = ""})
-      Next
-     
+      'For Each responsable In m_ObjListaStock.Items
+      '  If m_listResponsables.Exists(Function(c) c.GuidResponsable = responsable.GuidResponsable) Then Continue For
+      '  m_listResponsables.Add(New clsInfoResponsable() With {.Nombre = responsable.Responsable, .GuidResponsable = responsable.GuidResponsable, .Codigo = ""})
+      'Next
+
       cmbResponsables.DataSource = m_listResponsables
 
     Catch ex As Exception
@@ -644,7 +789,11 @@ Public Class frmArticulos
         objForm.ShowDialog()
       End Using
     Catch ex As Exception
-      Call Print_msg(ex.Message)
+      Print_msg(ex.Message)
     End Try
   End Sub
+
+  
+
+  
 End Class

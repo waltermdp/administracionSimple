@@ -24,7 +24,7 @@ Public Class clsListGrupos
         If objResult <> Result.OK Then Return objResult
 
         Dim objListStock As clsInfoGrupo
-        Dim strCommand As String = "Grupos" ', (select max(bcospac.fecha) as LastVisitDate from BcosPac where BcosPac.idPac = Pac.idPac) as  LastVisitDate from Pac)"
+        Dim strCommand As String = "Grupos"
         Dim objDatos As libDB.clsTabla
         objDatos = New libDB.clsTabla(strCommand)
         objDatos.Filter = m_Cfg_Filtro

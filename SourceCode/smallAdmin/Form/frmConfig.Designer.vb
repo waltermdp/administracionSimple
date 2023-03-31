@@ -34,6 +34,25 @@ Partial Class frmConfig
     Me.txtInCategoria = New System.Windows.Forms.TextBox()
     Me.bsGrupos = New System.Windows.Forms.BindingSource(Me.components)
     Me.lstGrupo = New System.Windows.Forms.ListBox()
+    Me.cmbModosPagos = New System.Windows.Forms.ComboBox()
+    Me.btnLoadTipoPagos = New System.Windows.Forms.Button()
+    Me.txtNombre = New System.Windows.Forms.TextBox()
+    Me.lblNombre = New System.Windows.Forms.Label()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.txtCodigo1 = New System.Windows.Forms.TextBox()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.txtCodigo2 = New System.Windows.Forms.TextBox()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.txtCodigo3 = New System.Windows.Forms.TextBox()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.txtCodigo4 = New System.Windows.Forms.TextBox()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.txtGUID = New System.Windows.Forms.TextBox()
+    Me.Label6 = New System.Windows.Forms.Label()
+    Me.rbtnSi = New System.Windows.Forms.RadioButton()
+    Me.rbtnNo = New System.Windows.Forms.RadioButton()
+    Me.btnGuardarCambios = New System.Windows.Forms.Button()
+    Me.btnGuardarComoNuevo = New System.Windows.Forms.Button()
     CType(Me.bsGrupos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -48,7 +67,7 @@ Partial Class frmConfig
     '
     'btnActualizarPagos
     '
-    Me.btnActualizarPagos.Location = New System.Drawing.Point(118, 64)
+    Me.btnActualizarPagos.Location = New System.Drawing.Point(54, 22)
     Me.btnActualizarPagos.Name = "btnActualizarPagos"
     Me.btnActualizarPagos.Size = New System.Drawing.Size(92, 52)
     Me.btnActualizarPagos.TabIndex = 1
@@ -58,7 +77,7 @@ Partial Class frmConfig
     '
     'btnNewGroup
     '
-    Me.btnNewGroup.Location = New System.Drawing.Point(561, 62)
+    Me.btnNewGroup.Location = New System.Drawing.Point(350, 24)
     Me.btnNewGroup.Name = "btnNewGroup"
     Me.btnNewGroup.Size = New System.Drawing.Size(66, 55)
     Me.btnNewGroup.TabIndex = 3
@@ -67,7 +86,7 @@ Partial Class frmConfig
     '
     'btnRemGroup
     '
-    Me.btnRemGroup.Location = New System.Drawing.Point(561, 123)
+    Me.btnRemGroup.Location = New System.Drawing.Point(350, 85)
     Me.btnRemGroup.Name = "btnRemGroup"
     Me.btnRemGroup.Size = New System.Drawing.Size(66, 52)
     Me.btnRemGroup.TabIndex = 4
@@ -76,7 +95,7 @@ Partial Class frmConfig
     '
     'btnRemCategoria
     '
-    Me.btnRemCategoria.Location = New System.Drawing.Point(849, 121)
+    Me.btnRemCategoria.Location = New System.Drawing.Point(638, 83)
     Me.btnRemCategoria.Name = "btnRemCategoria"
     Me.btnRemCategoria.Size = New System.Drawing.Size(66, 52)
     Me.btnRemCategoria.TabIndex = 7
@@ -85,7 +104,7 @@ Partial Class frmConfig
     '
     'btnNewCategoria
     '
-    Me.btnNewCategoria.Location = New System.Drawing.Point(849, 62)
+    Me.btnNewCategoria.Location = New System.Drawing.Point(638, 24)
     Me.btnNewCategoria.Name = "btnNewCategoria"
     Me.btnNewCategoria.Size = New System.Drawing.Size(66, 53)
     Me.btnNewCategoria.TabIndex = 6
@@ -94,7 +113,7 @@ Partial Class frmConfig
     '
     'lstvCategoria
     '
-    Me.lstvCategoria.Location = New System.Drawing.Point(673, 95)
+    Me.lstvCategoria.Location = New System.Drawing.Point(462, 57)
     Me.lstvCategoria.Name = "lstvCategoria"
     Me.lstvCategoria.Size = New System.Drawing.Size(170, 209)
     Me.lstvCategoria.TabIndex = 5
@@ -104,7 +123,7 @@ Partial Class frmConfig
     'txtInGrupo
     '
     Me.txtInGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtInGrupo.Location = New System.Drawing.Point(385, 62)
+    Me.txtInGrupo.Location = New System.Drawing.Point(174, 24)
     Me.txtInGrupo.Name = "txtInGrupo"
     Me.txtInGrupo.Size = New System.Drawing.Size(170, 21)
     Me.txtInGrupo.TabIndex = 8
@@ -112,7 +131,7 @@ Partial Class frmConfig
     'txtInCategoria
     '
     Me.txtInCategoria.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtInCategoria.Location = New System.Drawing.Point(673, 62)
+    Me.txtInCategoria.Location = New System.Drawing.Point(462, 24)
     Me.txtInCategoria.Name = "txtInCategoria"
     Me.txtInCategoria.Size = New System.Drawing.Size(170, 21)
     Me.txtInCategoria.TabIndex = 9
@@ -126,16 +145,191 @@ Partial Class frmConfig
     Me.lstGrupo.DataSource = Me.bsGrupos
     Me.lstGrupo.DisplayMember = "Nombre"
     Me.lstGrupo.FormattingEnabled = True
-    Me.lstGrupo.Location = New System.Drawing.Point(385, 92)
+    Me.lstGrupo.Location = New System.Drawing.Point(174, 54)
     Me.lstGrupo.Name = "lstGrupo"
     Me.lstGrupo.Size = New System.Drawing.Size(170, 212)
     Me.lstGrupo.TabIndex = 10
+    '
+    'cmbModosPagos
+    '
+    Me.cmbModosPagos.FormattingEnabled = True
+    Me.cmbModosPagos.Location = New System.Drawing.Point(976, 53)
+    Me.cmbModosPagos.Name = "cmbModosPagos"
+    Me.cmbModosPagos.Size = New System.Drawing.Size(239, 21)
+    Me.cmbModosPagos.TabIndex = 11
+    '
+    'btnLoadTipoPagos
+    '
+    Me.btnLoadTipoPagos.Location = New System.Drawing.Point(843, 51)
+    Me.btnLoadTipoPagos.Name = "btnLoadTipoPagos"
+    Me.btnLoadTipoPagos.Size = New System.Drawing.Size(127, 23)
+    Me.btnLoadTipoPagos.TabIndex = 12
+    Me.btnLoadTipoPagos.Text = "Cargar Modos Pagos"
+    Me.btnLoadTipoPagos.UseVisualStyleBackColor = True
+    '
+    'txtNombre
+    '
+    Me.txtNombre.Location = New System.Drawing.Point(976, 85)
+    Me.txtNombre.Name = "txtNombre"
+    Me.txtNombre.Size = New System.Drawing.Size(239, 20)
+    Me.txtNombre.TabIndex = 13
+    '
+    'lblNombre
+    '
+    Me.lblNombre.Location = New System.Drawing.Point(843, 85)
+    Me.lblNombre.Name = "lblNombre"
+    Me.lblNombre.Size = New System.Drawing.Size(127, 20)
+    Me.lblNombre.TabIndex = 14
+    Me.lblNombre.Text = "Nombre"
+    '
+    'Label2
+    '
+    Me.Label2.Location = New System.Drawing.Point(843, 111)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(127, 20)
+    Me.Label2.TabIndex = 16
+    Me.Label2.Text = "Codigo 1"
+    '
+    'txtCodigo1
+    '
+    Me.txtCodigo1.Location = New System.Drawing.Point(976, 111)
+    Me.txtCodigo1.Name = "txtCodigo1"
+    Me.txtCodigo1.Size = New System.Drawing.Size(239, 20)
+    Me.txtCodigo1.TabIndex = 15
+    '
+    'Label3
+    '
+    Me.Label3.Location = New System.Drawing.Point(843, 137)
+    Me.Label3.Name = "Label3"
+    Me.Label3.Size = New System.Drawing.Size(127, 20)
+    Me.Label3.TabIndex = 18
+    Me.Label3.Text = "Codigo 2"
+    '
+    'txtCodigo2
+    '
+    Me.txtCodigo2.Location = New System.Drawing.Point(976, 137)
+    Me.txtCodigo2.Name = "txtCodigo2"
+    Me.txtCodigo2.Size = New System.Drawing.Size(239, 20)
+    Me.txtCodigo2.TabIndex = 17
+    '
+    'Label1
+    '
+    Me.Label1.Location = New System.Drawing.Point(843, 163)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(127, 20)
+    Me.Label1.TabIndex = 20
+    Me.Label1.Text = "Codigo 3"
+    '
+    'txtCodigo3
+    '
+    Me.txtCodigo3.Location = New System.Drawing.Point(976, 163)
+    Me.txtCodigo3.Name = "txtCodigo3"
+    Me.txtCodigo3.Size = New System.Drawing.Size(239, 20)
+    Me.txtCodigo3.TabIndex = 19
+    '
+    'Label4
+    '
+    Me.Label4.Location = New System.Drawing.Point(843, 189)
+    Me.Label4.Name = "Label4"
+    Me.Label4.Size = New System.Drawing.Size(127, 20)
+    Me.Label4.TabIndex = 22
+    Me.Label4.Text = "Codigo 4"
+    '
+    'txtCodigo4
+    '
+    Me.txtCodigo4.Location = New System.Drawing.Point(976, 189)
+    Me.txtCodigo4.Name = "txtCodigo4"
+    Me.txtCodigo4.Size = New System.Drawing.Size(239, 20)
+    Me.txtCodigo4.TabIndex = 21
+    '
+    'Label5
+    '
+    Me.Label5.Location = New System.Drawing.Point(843, 215)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(127, 20)
+    Me.Label5.TabIndex = 24
+    Me.Label5.Text = "GUID"
+    '
+    'txtGUID
+    '
+    Me.txtGUID.Location = New System.Drawing.Point(976, 215)
+    Me.txtGUID.Name = "txtGUID"
+    Me.txtGUID.ReadOnly = True
+    Me.txtGUID.Size = New System.Drawing.Size(239, 20)
+    Me.txtGUID.TabIndex = 23
+    '
+    'Label6
+    '
+    Me.Label6.Location = New System.Drawing.Point(843, 235)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(127, 20)
+    Me.Label6.TabIndex = 25
+    Me.Label6.Text = "Cuotas"
+    '
+    'rbtnSi
+    '
+    Me.rbtnSi.AutoSize = True
+    Me.rbtnSi.Location = New System.Drawing.Point(992, 255)
+    Me.rbtnSi.Name = "rbtnSi"
+    Me.rbtnSi.Size = New System.Drawing.Size(34, 17)
+    Me.rbtnSi.TabIndex = 26
+    Me.rbtnSi.TabStop = True
+    Me.rbtnSi.Text = "Si"
+    Me.rbtnSi.UseVisualStyleBackColor = True
+    '
+    'rbtnNo
+    '
+    Me.rbtnNo.AutoSize = True
+    Me.rbtnNo.Location = New System.Drawing.Point(1098, 257)
+    Me.rbtnNo.Name = "rbtnNo"
+    Me.rbtnNo.Size = New System.Drawing.Size(39, 17)
+    Me.rbtnNo.TabIndex = 27
+    Me.rbtnNo.TabStop = True
+    Me.rbtnNo.Text = "No"
+    Me.rbtnNo.UseVisualStyleBackColor = True
+    '
+    'btnGuardarCambios
+    '
+    Me.btnGuardarCambios.Location = New System.Drawing.Point(846, 292)
+    Me.btnGuardarCambios.Name = "btnGuardarCambios"
+    Me.btnGuardarCambios.Size = New System.Drawing.Size(98, 30)
+    Me.btnGuardarCambios.TabIndex = 28
+    Me.btnGuardarCambios.Text = "Guardar Cambios"
+    Me.btnGuardarCambios.UseVisualStyleBackColor = True
+    '
+    'btnGuardarComoNuevo
+    '
+    Me.btnGuardarComoNuevo.Location = New System.Drawing.Point(976, 292)
+    Me.btnGuardarComoNuevo.Name = "btnGuardarComoNuevo"
+    Me.btnGuardarComoNuevo.Size = New System.Drawing.Size(92, 30)
+    Me.btnGuardarComoNuevo.TabIndex = 29
+    Me.btnGuardarComoNuevo.Text = "Guardar Nuevo"
+    Me.btnGuardarComoNuevo.UseVisualStyleBackColor = True
     '
     'frmConfig
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnGuardarComoNuevo)
+    Me.Controls.Add(Me.btnGuardarCambios)
+    Me.Controls.Add(Me.rbtnNo)
+    Me.Controls.Add(Me.rbtnSi)
+    Me.Controls.Add(Me.Label6)
+    Me.Controls.Add(Me.Label5)
+    Me.Controls.Add(Me.txtGUID)
+    Me.Controls.Add(Me.Label4)
+    Me.Controls.Add(Me.txtCodigo4)
+    Me.Controls.Add(Me.Label1)
+    Me.Controls.Add(Me.txtCodigo3)
+    Me.Controls.Add(Me.Label3)
+    Me.Controls.Add(Me.txtCodigo2)
+    Me.Controls.Add(Me.Label2)
+    Me.Controls.Add(Me.txtCodigo1)
+    Me.Controls.Add(Me.lblNombre)
+    Me.Controls.Add(Me.txtNombre)
+    Me.Controls.Add(Me.btnLoadTipoPagos)
+    Me.Controls.Add(Me.cmbModosPagos)
     Me.Controls.Add(Me.lstGrupo)
     Me.Controls.Add(Me.txtInCategoria)
     Me.Controls.Add(Me.txtInGrupo)
@@ -166,4 +360,23 @@ Partial Class frmConfig
   Friend WithEvents txtInCategoria As System.Windows.Forms.TextBox
   Friend WithEvents bsGrupos As System.Windows.Forms.BindingSource
   Friend WithEvents lstGrupo As System.Windows.Forms.ListBox
+  Friend WithEvents cmbModosPagos As System.Windows.Forms.ComboBox
+  Friend WithEvents btnLoadTipoPagos As System.Windows.Forms.Button
+  Friend WithEvents txtNombre As System.Windows.Forms.TextBox
+  Friend WithEvents lblNombre As System.Windows.Forms.Label
+  Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents txtCodigo1 As System.Windows.Forms.TextBox
+  Friend WithEvents Label3 As System.Windows.Forms.Label
+  Friend WithEvents txtCodigo2 As System.Windows.Forms.TextBox
+  Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents txtCodigo3 As System.Windows.Forms.TextBox
+  Friend WithEvents Label4 As System.Windows.Forms.Label
+  Friend WithEvents txtCodigo4 As System.Windows.Forms.TextBox
+  Friend WithEvents Label5 As System.Windows.Forms.Label
+  Friend WithEvents txtGUID As System.Windows.Forms.TextBox
+  Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents rbtnSi As System.Windows.Forms.RadioButton
+  Friend WithEvents rbtnNo As System.Windows.Forms.RadioButton
+  Friend WithEvents btnGuardarCambios As System.Windows.Forms.Button
+  Friend WithEvents btnGuardarComoNuevo As System.Windows.Forms.Button
 End Class

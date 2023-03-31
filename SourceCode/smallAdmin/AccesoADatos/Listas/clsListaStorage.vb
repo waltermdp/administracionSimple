@@ -10,6 +10,7 @@
   Private m_GuidArticulo As Guid
   Private m_Cantidad As Integer
   Private m_Precio As Decimal
+  Private m_CodigoBarras As String
 
 
 
@@ -38,6 +39,15 @@
     End Get
     Set(value As String)
       m_Codigo = value
+    End Set
+  End Property
+
+  Public Property CodigoBarras As String
+    Get
+      Return m_CodigoBarras
+    End Get
+    Set(value As String)
+      m_CodigoBarras = value
     End Set
   End Property
 
@@ -94,6 +104,7 @@
     Responsable = "--"
     Cantidad = 0
     GuidResponsable = Nothing
+    CodigoBarras = "--"
     Precio = 0
   End Sub
 
