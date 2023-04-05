@@ -51,7 +51,11 @@ Public Class frmVenta
       txtPrecio.Text = 0
       m_hayCambios = False
 
-
+      ListView1.View = View.Details
+      ListView1.Columns(0).Width = CInt(0.5 * ListView1.Width)
+      ListView1.Columns(1).Width = CInt(0.25 * ListView1.Width)
+      ListView1.Columns(2).Width = CInt(ListView1.Width - ListView1.Columns(0).Width - ListView1.Columns(1).Width)
+      ListView1.ShowItemToolTips = True
 
 
 
@@ -98,6 +102,8 @@ Public Class frmVenta
         Exit Sub
       End If
       Call Print_msg("Incongruencia de cliente and vendedor, deben o no existir ambos ")
+
+     
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -605,7 +611,7 @@ Public Class frmVenta
   Private Sub btnSelectClient_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSelectClient.MouseClick
     Try
       Using objForm As New frmListaClientes
-        objForm.ShowDialog()
+        objForm.ShowDialog(Me)
         objForm.GetClienteSelected(m_CurrentPersona)
       End Using
       Call Refresh_infoClientVendedor()
@@ -617,7 +623,7 @@ Public Class frmVenta
   Private Sub btnSelectVendedor_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSelectVendedor.MouseClick
     Try
       Using objForm As New frmVendedores
-        objForm.ShowDialog()
+        objForm.ShowDialog(Me)
         objForm.GetVendedorSelected(m_CurrentVendedor)
       End Using
       Call Refresh_infoClientVendedor()
@@ -687,7 +693,7 @@ Public Class frmVenta
 
   Private Sub RefreshResumenProductosVendidos(ByVal lstArticulosVendidos As List(Of clsInfoArticuloVendido))
     Try
-      lvResumenArticulosVendidos.Items.Clear()
+      ListView1.Items.Clear()
       For Each articulo In lstArticulosVendidos
         Dim item As New ListViewItem
 
@@ -695,7 +701,7 @@ Public Class frmVenta
         item.SubItems.Add(articulo.CantidadArticulos.ToString)
         item.SubItems.Add(articulo.Entregados.ToString)
         item.SubItems.Add(articulo.GuidArticulo.ToString)
-        lvResumenArticulosVendidos.Items.Add(item)
+        ListView1.Items.Add(item)
       Next
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -829,4 +835,6 @@ Public Class frmVenta
       Print_msg(ex.Message)
     End Try
   End Sub
+
+
 End Class

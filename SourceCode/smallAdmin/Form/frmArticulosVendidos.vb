@@ -4,7 +4,7 @@ Imports libCommon.Comunes
 Public Class frmArticulosVendidos
 
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
-  Private m_lstArticulos As clsListArticulos
+  Private m_lstArticulos As New clsListArticulos
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
@@ -88,6 +88,16 @@ Public Class frmArticulosVendidos
         m_lstArticulosVendidos.RemoveAt(index)
       End If
       Call FillListArticulosVendidos(m_lstArticulosVendidos)
+      If m_lstArticulosVendidos.Exists(Function(c) c.GuidArticulo = sGuid) Then
+        For Each item As ListViewItem In ListView1.Items
+          Dim aGuid As Guid = New Guid(item.SubItems(3).Text)
+          If aGuid = sGuid Then
+            item.Selected = True
+            ListView1.Select()
+            Exit For
+          End If
+        Next
+      End If
 
 
     Catch ex As Exception
@@ -95,7 +105,7 @@ Public Class frmArticulosVendidos
     End Try
   End Sub
 
-  Private Sub txtBuscarArticulo_TextChanged(sender As Object, e As EventArgs) Handles txtBuscarArticulo.TextAlignChanged
+  Private Sub txtBuscarArticulo_TextChanged(sender As Object, e As EventArgs) Handles txtBuscarArticulo.TextChanged
     Try
       If txtBuscarArticulo.Text.Trim = "" Then
         m_lstArticulos.Cfg_Filtro = ""
@@ -107,6 +117,7 @@ Public Class frmArticulosVendidos
       End If
       m_lstArticulos.Items.Clear()
       Call m_lstArticulos.RefreshData()
+      lstArticulos.DataSource = bsArticulos
       bsArticulos.ResetBindings(False)
 
     Catch ex As Exception
@@ -173,6 +184,7 @@ Public Class frmArticulosVendidos
           m_lstArticulosVendidos(indice).Entregados = 0
         End If
         Call FillListArticulosVendidos(m_lstArticulosVendidos)
+
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)

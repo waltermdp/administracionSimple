@@ -211,7 +211,7 @@ Public Class frmListaClientes
     Try
 
       Dim objDialog As New frmCliente(Nothing)
-      objDialog.ShowDialog()
+      objDialog.ShowDialog(Me)
       objDialog.Dispose()
 
       Call MostrarClientes()

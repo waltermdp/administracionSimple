@@ -55,7 +55,7 @@ Partial Class frmArticulosVendidos
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(12, 463)
+    Me.btnCancel.Location = New System.Drawing.Point(12, 641)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 9
@@ -230,7 +230,7 @@ Partial Class frmArticulosVendidos
     'frmArticulosVendidos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-    Me.ClientSize = New System.Drawing.Size(1187, 536)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.lblTitulo)
     Me.Controls.Add(Me.pnlCtrlEntregados)
     Me.Controls.Add(Me.Label18)
@@ -246,6 +246,7 @@ Partial Class frmArticulosVendidos
     Me.Controls.Add(Me.btnCancel)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmArticulosVendidos"
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "Articulos Vendidos"
     Me.pnlCtrlEntregados.ResumeLayout(False)
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
