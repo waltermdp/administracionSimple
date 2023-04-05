@@ -25,12 +25,6 @@ Partial Class frmArticulo
     Me.gbProducto = New System.Windows.Forms.GroupBox()
     Me.btnCopi2Code = New System.Windows.Forms.Button()
     Me.btnCopi2Bar = New System.Windows.Forms.Button()
-    Me.gbAvanzadas = New System.Windows.Forms.GroupBox()
-    Me.nCantidad = New System.Windows.Forms.NumericUpDown()
-    Me.lblCantidad = New System.Windows.Forms.Label()
-    Me.cmbResponsable = New System.Windows.Forms.ComboBox()
-    Me.lblResponsable = New System.Windows.Forms.Label()
-    Me.chkAvanzadas = New System.Windows.Forms.CheckBox()
     Me.Label4 = New System.Windows.Forms.Label()
     Me.txtCodigoBarras = New System.Windows.Forms.TextBox()
     Me.Label10 = New System.Windows.Forms.Label()
@@ -46,8 +40,6 @@ Partial Class frmArticulo
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.btnLimpiarCampos = New System.Windows.Forms.Button()
     Me.gbProducto.SuspendLayout()
-    Me.gbAvanzadas.SuspendLayout()
-    CType(Me.nCantidad, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'gbProducto
@@ -55,8 +47,6 @@ Partial Class frmArticulo
     Me.gbProducto.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.gbProducto.Controls.Add(Me.btnCopi2Code)
     Me.gbProducto.Controls.Add(Me.btnCopi2Bar)
-    Me.gbProducto.Controls.Add(Me.gbAvanzadas)
-    Me.gbProducto.Controls.Add(Me.chkAvanzadas)
     Me.gbProducto.Controls.Add(Me.Label4)
     Me.gbProducto.Controls.Add(Me.txtCodigoBarras)
     Me.gbProducto.Controls.Add(Me.Label10)
@@ -94,60 +84,6 @@ Partial Class frmArticulo
     Me.btnCopi2Bar.TabIndex = 15
     Me.btnCopi2Bar.Text = "Copiar a Codigo de Barras"
     Me.btnCopi2Bar.UseVisualStyleBackColor = True
-    '
-    'gbAvanzadas
-    '
-    Me.gbAvanzadas.Controls.Add(Me.nCantidad)
-    Me.gbAvanzadas.Controls.Add(Me.lblCantidad)
-    Me.gbAvanzadas.Controls.Add(Me.cmbResponsable)
-    Me.gbAvanzadas.Controls.Add(Me.lblResponsable)
-    Me.gbAvanzadas.Location = New System.Drawing.Point(30, 390)
-    Me.gbAvanzadas.Name = "gbAvanzadas"
-    Me.gbAvanzadas.Size = New System.Drawing.Size(846, 98)
-    Me.gbAvanzadas.TabIndex = 14
-    Me.gbAvanzadas.TabStop = False
-    '
-    'nCantidad
-    '
-    Me.nCantidad.Location = New System.Drawing.Point(570, 18)
-    Me.nCantidad.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-    Me.nCantidad.Name = "nCantidad"
-    Me.nCantidad.Size = New System.Drawing.Size(54, 24)
-    Me.nCantidad.TabIndex = 3
-    '
-    'lblCantidad
-    '
-    Me.lblCantidad.Location = New System.Drawing.Point(453, 20)
-    Me.lblCantidad.Name = "lblCantidad"
-    Me.lblCantidad.Size = New System.Drawing.Size(111, 23)
-    Me.lblCantidad.TabIndex = 2
-    Me.lblCantidad.Text = "Cantidad:"
-    '
-    'cmbResponsable
-    '
-    Me.cmbResponsable.FormattingEnabled = True
-    Me.cmbResponsable.Location = New System.Drawing.Point(120, 17)
-    Me.cmbResponsable.Name = "cmbResponsable"
-    Me.cmbResponsable.Size = New System.Drawing.Size(317, 26)
-    Me.cmbResponsable.TabIndex = 1
-    '
-    'lblResponsable
-    '
-    Me.lblResponsable.Location = New System.Drawing.Point(6, 20)
-    Me.lblResponsable.Name = "lblResponsable"
-    Me.lblResponsable.Size = New System.Drawing.Size(121, 20)
-    Me.lblResponsable.TabIndex = 0
-    Me.lblResponsable.Text = "Responsable"
-    '
-    'chkAvanzadas
-    '
-    Me.chkAvanzadas.AutoSize = True
-    Me.chkAvanzadas.Location = New System.Drawing.Point(30, 362)
-    Me.chkAvanzadas.Name = "chkAvanzadas"
-    Me.chkAvanzadas.Size = New System.Drawing.Size(99, 22)
-    Me.chkAvanzadas.TabIndex = 13
-    Me.chkAvanzadas.Text = "Avanzadas"
-    Me.chkAvanzadas.UseVisualStyleBackColor = True
     '
     'Label4
     '
@@ -316,8 +252,6 @@ Partial Class frmArticulo
     Me.Text = "frmArticulo"
     Me.gbProducto.ResumeLayout(False)
     Me.gbProducto.PerformLayout()
-    Me.gbAvanzadas.ResumeLayout(False)
-    CType(Me.nCantidad, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -336,12 +270,6 @@ Partial Class frmArticulo
   Friend WithEvents Label5 As System.Windows.Forms.Label
   Friend WithEvents btnCancelar As System.Windows.Forms.Button
   Friend WithEvents btnGuardar As System.Windows.Forms.Button
-  Friend WithEvents gbAvanzadas As System.Windows.Forms.GroupBox
-  Friend WithEvents nCantidad As System.Windows.Forms.NumericUpDown
-  Friend WithEvents lblCantidad As System.Windows.Forms.Label
-  Friend WithEvents cmbResponsable As System.Windows.Forms.ComboBox
-  Friend WithEvents lblResponsable As System.Windows.Forms.Label
-  Friend WithEvents chkAvanzadas As System.Windows.Forms.CheckBox
   Friend WithEvents btnCopi2Code As System.Windows.Forms.Button
   Friend WithEvents btnCopi2Bar As System.Windows.Forms.Button
   Friend WithEvents btnLimpiarCampos As System.Windows.Forms.Button

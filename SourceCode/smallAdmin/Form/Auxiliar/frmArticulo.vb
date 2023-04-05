@@ -44,7 +44,7 @@ Public Class frmArticulo
         txtCodigoBarras.Text = ""
         txtDescripcion.Text = "--"
         txtPrecio.Text = "0.0"
-        FillResponsables()
+        'FillResponsables()
         'responsable por defecto= DEPOSITO
         m_IsNuevo = True
 
@@ -127,7 +127,12 @@ Public Class frmArticulo
         MsgBox("No se puede guardar el articulo en la base de datos")
         Exit Sub
       End If
-      MsgBox("Articulo Agregado correctamente")
+      If m_IsNuevo Then
+        MsgBox("Articulo Agregado correctamente")
+      Else
+        MsgBox("Articulo editado correctamente")
+      End If
+
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -160,29 +165,10 @@ Public Class frmArticulo
     End Try
   End Function
 
-  Private Sub FillResponsables()
-    Try
+ 
 
 
-      cmbResponsable.DataSource = m_listResponsables
-      'cmbResponsable.SelectedItem = m_listResponsables.First(Function(c) c.GuidResponsable = m_Grupos.Items.First(Function(d) d.Nombre.ToUpper = "DEPOSITO").GuidGrupo)
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-
-  Private Sub chkAvanzadas_CheckedChanged(sender As Object, e As EventArgs) Handles chkAvanzadas.CheckedChanged
-    Try
-
-      gbAvanzadas.Enabled = chkAvanzadas.Checked
-
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
+ 
 
   Private Sub btnCopi2Bar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnCopi2Bar.MouseClick
     Try
@@ -213,8 +199,6 @@ Public Class frmArticulo
       txtCodigoBarras.Text = ""
       txtDescripcion.Text = "--"
       txtPrecio.Text = "0.0"
-      chkAvanzadas.Checked = False
-      nCantidad.Value = 0
       'responsble deposito
     Catch ex As Exception
       Print_msg(ex.Message)

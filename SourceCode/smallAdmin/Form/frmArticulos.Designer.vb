@@ -42,10 +42,6 @@ Partial Class frmArticulos
     Me.Label10 = New System.Windows.Forms.Label()
     Me.txtPrecio = New System.Windows.Forms.TextBox()
     Me.Label4 = New System.Windows.Forms.Label()
-    Me.rbtnResponsables = New System.Windows.Forms.RadioButton()
-    Me.rbtnByStock = New System.Windows.Forms.RadioButton()
-    Me.txtFiltro = New System.Windows.Forms.TextBox()
-    Me.Label5 = New System.Windows.Forms.Label()
     Me.dgvStock = New System.Windows.Forms.DataGridView()
     Me.GuidArticuloDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -56,59 +52,42 @@ Partial Class frmArticulos
     Me.DescripcionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidResponsableDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnAddDeposito = New System.Windows.Forms.Button()
-    Me.btnRemDeposito = New System.Windows.Forms.Button()
-    Me.btnVendido = New System.Windows.Forms.Button()
     Me.cmbResponsables = New System.Windows.Forms.ComboBox()
-    Me.Label6 = New System.Windows.Forms.Label()
-    Me.Label7 = New System.Windows.Forms.Label()
-    Me.Label8 = New System.Windows.Forms.Label()
-    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-    Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-    Me.txtDecrementar = New System.Windows.Forms.TextBox()
-    Me.txtIncrementar = New System.Windows.Forms.TextBox()
-    Me.Label9 = New System.Windows.Forms.Label()
-    Me.lblDetalle = New System.Windows.Forms.Label()
     Me.btnGrupos = New System.Windows.Forms.Button()
-    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.GroupBox3 = New System.Windows.Forms.GroupBox()
     Me.rbtnBuscarResponsables = New System.Windows.Forms.RadioButton()
     Me.rbnBuscarPalabra = New System.Windows.Forms.RadioButton()
-    Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-    Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-    Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-    Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+    Me.chkDescripcion = New System.Windows.Forms.CheckBox()
+    Me.chkCodigoBarras = New System.Windows.Forms.CheckBox()
+    Me.chkCodigo = New System.Windows.Forms.CheckBox()
+    Me.chkNombre = New System.Windows.Forms.CheckBox()
     Me.btnBuscar = New System.Windows.Forms.Button()
     Me.txtPalabraBuscar = New System.Windows.Forms.TextBox()
-    Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-    Me.btnMover = New System.Windows.Forms.Button()
-    Me.Label15 = New System.Windows.Forms.Label()
-    Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-    Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-    Me.Label14 = New System.Windows.Forms.Label()
-    Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
-    Me.Label12 = New System.Windows.Forms.Label()
-    Me.Button2 = New System.Windows.Forms.Button()
-    Me.cmbResponsablesEliminar = New System.Windows.Forms.ComboBox()
-    Me.lblEliminar = New System.Windows.Forms.Label()
-    Me.nEliminar = New System.Windows.Forms.NumericUpDown()
-    Me.Label13 = New System.Windows.Forms.Label()
-    Me.btnIngresar = New System.Windows.Forms.Button()
-    Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-    Me.lblNombre = New System.Windows.Forms.Label()
-    Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+    Me.gbAcciones = New System.Windows.Forms.GroupBox()
+    Me.gbAccionDeposito = New System.Windows.Forms.GroupBox()
     Me.Label11 = New System.Windows.Forms.Label()
+    Me.nIncrementar = New System.Windows.Forms.NumericUpDown()
+    Me.btnIngresarArticulos = New System.Windows.Forms.Button()
+    Me.Label13 = New System.Windows.Forms.Label()
+    Me.nDescontar = New System.Windows.Forms.NumericUpDown()
+    Me.btnDescontarArticulo = New System.Windows.Forms.Button()
+    Me.btnMoverArticulo = New System.Windows.Forms.Button()
+    Me.Label15 = New System.Windows.Forms.Label()
+    Me.cmbDestinoResp = New System.Windows.Forms.ComboBox()
+    Me.lblResponsableFuente = New System.Windows.Forms.Label()
+    Me.nMover = New System.Windows.Forms.NumericUpDown()
+    Me.Label12 = New System.Windows.Forms.Label()
+    Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
     Me.gbProducto.SuspendLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-    Me.GroupBox1.SuspendLayout()
-    Me.GroupBox2.SuspendLayout()
-    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.GroupBox3.SuspendLayout()
-    Me.GroupBox4.SuspendLayout()
-    CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.nEliminar, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.gbAcciones.SuspendLayout()
+    Me.gbAccionDeposito.SuspendLayout()
+    CType(Me.nIncrementar, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.nDescontar, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.nMover, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtNombre
@@ -295,45 +274,6 @@ Partial Class frmArticulos
     Me.Label4.TabIndex = 28
     Me.Label4.Text = "LISTA DE ARTICULOS"
     '
-    'rbtnResponsables
-    '
-    Me.rbtnResponsables.AutoSize = True
-    Me.rbtnResponsables.Location = New System.Drawing.Point(6, 45)
-    Me.rbtnResponsables.Name = "rbtnResponsables"
-    Me.rbtnResponsables.Size = New System.Drawing.Size(137, 19)
-    Me.rbtnResponsables.TabIndex = 29
-    Me.rbtnResponsables.Text = "Articulos distribuidos"
-    Me.rbtnResponsables.UseVisualStyleBackColor = True
-    '
-    'rbtnByStock
-    '
-    Me.rbtnByStock.AutoSize = True
-    Me.rbtnByStock.Checked = True
-    Me.rbtnByStock.Location = New System.Drawing.Point(6, 20)
-    Me.rbtnByStock.Name = "rbtnByStock"
-    Me.rbtnByStock.Size = New System.Drawing.Size(119, 19)
-    Me.rbtnByStock.TabIndex = 30
-    Me.rbtnByStock.TabStop = True
-    Me.rbtnByStock.Text = "Articulos en stock"
-    Me.rbtnByStock.UseVisualStyleBackColor = True
-    '
-    'txtFiltro
-    '
-    Me.txtFiltro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.txtFiltro.Location = New System.Drawing.Point(165, 78)
-    Me.txtFiltro.Name = "txtFiltro"
-    Me.txtFiltro.Size = New System.Drawing.Size(187, 21)
-    Me.txtFiltro.TabIndex = 31
-    '
-    'Label5
-    '
-    Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(29, 80)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(130, 15)
-    Me.Label5.TabIndex = 32
-    Me.Label5.Text = "Filtrar por responsable"
-    '
     'dgvStock
     '
     Me.dgvStock.AllowUserToAddRows = False
@@ -447,33 +387,6 @@ Partial Class frmArticulos
     '
     Me.BindingSource1.DataSource = GetType(main.clsListaStorage)
     '
-    'btnAddDeposito
-    '
-    Me.btnAddDeposito.Location = New System.Drawing.Point(165, 58)
-    Me.btnAddDeposito.Name = "btnAddDeposito"
-    Me.btnAddDeposito.Size = New System.Drawing.Size(26, 23)
-    Me.btnAddDeposito.TabIndex = 34
-    Me.btnAddDeposito.Text = "+"
-    Me.btnAddDeposito.UseVisualStyleBackColor = True
-    '
-    'btnRemDeposito
-    '
-    Me.btnRemDeposito.Location = New System.Drawing.Point(165, 87)
-    Me.btnRemDeposito.Name = "btnRemDeposito"
-    Me.btnRemDeposito.Size = New System.Drawing.Size(26, 23)
-    Me.btnRemDeposito.TabIndex = 35
-    Me.btnRemDeposito.Text = "-"
-    Me.btnRemDeposito.UseVisualStyleBackColor = True
-    '
-    'btnVendido
-    '
-    Me.btnVendido.Location = New System.Drawing.Point(21, 139)
-    Me.btnVendido.Name = "btnVendido"
-    Me.btnVendido.Size = New System.Drawing.Size(75, 32)
-    Me.btnVendido.TabIndex = 37
-    Me.btnVendido.Text = "Vendido"
-    Me.btnVendido.UseVisualStyleBackColor = True
-    '
     'cmbResponsables
     '
     Me.cmbResponsables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -482,106 +395,6 @@ Partial Class frmArticulos
     Me.cmbResponsables.Name = "cmbResponsables"
     Me.cmbResponsables.Size = New System.Drawing.Size(210, 24)
     Me.cmbResponsables.TabIndex = 38
-    '
-    'Label6
-    '
-    Me.Label6.AutoSize = True
-    Me.Label6.BackColor = System.Drawing.Color.White
-    Me.Label6.Location = New System.Drawing.Point(18, 39)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(69, 13)
-    Me.Label6.TabIndex = 39
-    Me.Label6.Text = "Responsable"
-    '
-    'Label7
-    '
-    Me.Label7.AutoSize = True
-    Me.Label7.BackColor = System.Drawing.Color.White
-    Me.Label7.Location = New System.Drawing.Point(18, 63)
-    Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(81, 13)
-    Me.Label7.TabIndex = 40
-    Me.Label7.Text = "Incrementar en:"
-    '
-    'Label8
-    '
-    Me.Label8.AutoSize = True
-    Me.Label8.BackColor = System.Drawing.Color.White
-    Me.Label8.Location = New System.Drawing.Point(18, 93)
-    Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(74, 13)
-    Me.Label8.TabIndex = 41
-    Me.Label8.Text = "Descontar en:"
-    '
-    'GroupBox1
-    '
-    Me.GroupBox1.BackColor = System.Drawing.Color.White
-    Me.GroupBox1.Controls.Add(Me.rbtnByStock)
-    Me.GroupBox1.Controls.Add(Me.rbtnResponsables)
-    Me.GroupBox1.Controls.Add(Me.Label5)
-    Me.GroupBox1.Controls.Add(Me.txtFiltro)
-    Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox1.Location = New System.Drawing.Point(285, 588)
-    Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(428, 120)
-    Me.GroupBox1.TabIndex = 42
-    Me.GroupBox1.TabStop = False
-    Me.GroupBox1.Text = "Vistas"
-    '
-    'GroupBox2
-    '
-    Me.GroupBox2.BackColor = System.Drawing.Color.White
-    Me.GroupBox2.Controls.Add(Me.txtDecrementar)
-    Me.GroupBox2.Controls.Add(Me.txtIncrementar)
-    Me.GroupBox2.Controls.Add(Me.Label9)
-    Me.GroupBox2.Controls.Add(Me.btnAddDeposito)
-    Me.GroupBox2.Controls.Add(Me.btnRemDeposito)
-    Me.GroupBox2.Controls.Add(Me.Label8)
-    Me.GroupBox2.Controls.Add(Me.btnVendido)
-    Me.GroupBox2.Controls.Add(Me.Label7)
-    Me.GroupBox2.Controls.Add(Me.Label6)
-    Me.GroupBox2.Location = New System.Drawing.Point(792, 588)
-    Me.GroupBox2.Name = "GroupBox2"
-    Me.GroupBox2.Size = New System.Drawing.Size(428, 190)
-    Me.GroupBox2.TabIndex = 43
-    Me.GroupBox2.TabStop = False
-    Me.GroupBox2.Text = "Acciones"
-    '
-    'txtDecrementar
-    '
-    Me.txtDecrementar.Location = New System.Drawing.Point(105, 90)
-    Me.txtDecrementar.Name = "txtDecrementar"
-    Me.txtDecrementar.Size = New System.Drawing.Size(54, 20)
-    Me.txtDecrementar.TabIndex = 44
-    Me.txtDecrementar.Text = "1"
-    Me.txtDecrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'txtIncrementar
-    '
-    Me.txtIncrementar.Location = New System.Drawing.Point(105, 60)
-    Me.txtIncrementar.Name = "txtIncrementar"
-    Me.txtIncrementar.Size = New System.Drawing.Size(54, 20)
-    Me.txtIncrementar.TabIndex = 43
-    Me.txtIncrementar.Text = "1"
-    Me.txtIncrementar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'Label9
-    '
-    Me.Label9.AutoSize = True
-    Me.Label9.Location = New System.Drawing.Point(102, 139)
-    Me.Label9.Name = "Label9"
-    Me.Label9.Size = New System.Drawing.Size(100, 13)
-    Me.Label9.TabIndex = 42
-    Me.Label9.Text = "Descontar 1 unidad"
-    '
-    'lblDetalle
-    '
-    Me.lblDetalle.BackColor = System.Drawing.Color.White
-    Me.lblDetalle.Location = New System.Drawing.Point(736, 640)
-    Me.lblDetalle.Name = "lblDetalle"
-    Me.lblDetalle.Size = New System.Drawing.Size(269, 94)
-    Me.lblDetalle.TabIndex = 44
-    Me.lblDetalle.Text = "Acciones: "
     '
     'btnGrupos
     '
@@ -597,19 +410,15 @@ Partial Class frmArticulos
     Me.btnGrupos.Text = "Grupos"
     Me.btnGrupos.UseVisualStyleBackColor = False
     '
-    'bsArticulos
-    '
-    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
-    '
     'GroupBox3
     '
     Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.GroupBox3.Controls.Add(Me.rbtnBuscarResponsables)
     Me.GroupBox3.Controls.Add(Me.rbnBuscarPalabra)
-    Me.GroupBox3.Controls.Add(Me.CheckBox4)
-    Me.GroupBox3.Controls.Add(Me.CheckBox3)
-    Me.GroupBox3.Controls.Add(Me.CheckBox2)
-    Me.GroupBox3.Controls.Add(Me.CheckBox1)
+    Me.GroupBox3.Controls.Add(Me.chkDescripcion)
+    Me.GroupBox3.Controls.Add(Me.chkCodigoBarras)
+    Me.GroupBox3.Controls.Add(Me.chkCodigo)
+    Me.GroupBox3.Controls.Add(Me.chkNombre)
     Me.GroupBox3.Controls.Add(Me.btnBuscar)
     Me.GroupBox3.Controls.Add(Me.txtPalabraBuscar)
     Me.GroupBox3.Controls.Add(Me.cmbResponsables)
@@ -643,45 +452,45 @@ Partial Class frmArticulos
     Me.rbnBuscarPalabra.Text = "Por Palabra clave"
     Me.rbnBuscarPalabra.UseVisualStyleBackColor = True
     '
-    'CheckBox4
+    'chkDescripcion
     '
-    Me.CheckBox4.AutoSize = True
-    Me.CheckBox4.Location = New System.Drawing.Point(673, 51)
-    Me.CheckBox4.Name = "CheckBox4"
-    Me.CheckBox4.Size = New System.Drawing.Size(95, 20)
-    Me.CheckBox4.TabIndex = 34
-    Me.CheckBox4.Text = "Descripcion"
-    Me.CheckBox4.UseVisualStyleBackColor = True
+    Me.chkDescripcion.AutoSize = True
+    Me.chkDescripcion.Location = New System.Drawing.Point(673, 51)
+    Me.chkDescripcion.Name = "chkDescripcion"
+    Me.chkDescripcion.Size = New System.Drawing.Size(95, 20)
+    Me.chkDescripcion.TabIndex = 34
+    Me.chkDescripcion.Text = "Descripcion"
+    Me.chkDescripcion.UseVisualStyleBackColor = True
     '
-    'CheckBox3
+    'chkCodigoBarras
     '
-    Me.CheckBox3.AutoSize = True
-    Me.CheckBox3.Location = New System.Drawing.Point(673, 27)
-    Me.CheckBox3.Name = "CheckBox3"
-    Me.CheckBox3.Size = New System.Drawing.Size(127, 20)
-    Me.CheckBox3.TabIndex = 33
-    Me.CheckBox3.Text = "Codigo de Barras"
-    Me.CheckBox3.UseVisualStyleBackColor = True
+    Me.chkCodigoBarras.AutoSize = True
+    Me.chkCodigoBarras.Location = New System.Drawing.Point(673, 27)
+    Me.chkCodigoBarras.Name = "chkCodigoBarras"
+    Me.chkCodigoBarras.Size = New System.Drawing.Size(127, 20)
+    Me.chkCodigoBarras.TabIndex = 33
+    Me.chkCodigoBarras.Text = "Codigo de Barras"
+    Me.chkCodigoBarras.UseVisualStyleBackColor = True
     '
-    'CheckBox2
+    'chkCodigo
     '
-    Me.CheckBox2.AutoSize = True
-    Me.CheckBox2.Location = New System.Drawing.Point(571, 51)
-    Me.CheckBox2.Name = "CheckBox2"
-    Me.CheckBox2.Size = New System.Drawing.Size(67, 20)
-    Me.CheckBox2.TabIndex = 32
-    Me.CheckBox2.Text = "Codigo"
-    Me.CheckBox2.UseVisualStyleBackColor = True
+    Me.chkCodigo.AutoSize = True
+    Me.chkCodigo.Location = New System.Drawing.Point(571, 51)
+    Me.chkCodigo.Name = "chkCodigo"
+    Me.chkCodigo.Size = New System.Drawing.Size(67, 20)
+    Me.chkCodigo.TabIndex = 32
+    Me.chkCodigo.Text = "Codigo"
+    Me.chkCodigo.UseVisualStyleBackColor = True
     '
-    'CheckBox1
+    'chkNombre
     '
-    Me.CheckBox1.AutoSize = True
-    Me.CheckBox1.Location = New System.Drawing.Point(571, 27)
-    Me.CheckBox1.Name = "CheckBox1"
-    Me.CheckBox1.Size = New System.Drawing.Size(72, 20)
-    Me.CheckBox1.TabIndex = 31
-    Me.CheckBox1.Text = "Nombre"
-    Me.CheckBox1.UseVisualStyleBackColor = True
+    Me.chkNombre.AutoSize = True
+    Me.chkNombre.Location = New System.Drawing.Point(571, 27)
+    Me.chkNombre.Name = "chkNombre"
+    Me.chkNombre.Size = New System.Drawing.Size(72, 20)
+    Me.chkNombre.TabIndex = 31
+    Me.chkNombre.Text = "Nombre"
+    Me.chkNombre.UseVisualStyleBackColor = True
     '
     'btnBuscar
     '
@@ -699,180 +508,153 @@ Partial Class frmArticulos
     Me.txtPalabraBuscar.Size = New System.Drawing.Size(265, 22)
     Me.txtPalabraBuscar.TabIndex = 28
     '
-    'GroupBox4
+    'gbAcciones
     '
-    Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.GroupBox4.Controls.Add(Me.btnMover)
-    Me.GroupBox4.Controls.Add(Me.Label15)
-    Me.GroupBox4.Controls.Add(Me.ComboBox3)
-    Me.GroupBox4.Controls.Add(Me.ComboBox2)
-    Me.GroupBox4.Controls.Add(Me.Label14)
-    Me.GroupBox4.Controls.Add(Me.NumericUpDown2)
-    Me.GroupBox4.Controls.Add(Me.Label12)
-    Me.GroupBox4.Controls.Add(Me.Button2)
-    Me.GroupBox4.Controls.Add(Me.cmbResponsablesEliminar)
-    Me.GroupBox4.Controls.Add(Me.lblEliminar)
-    Me.GroupBox4.Controls.Add(Me.nEliminar)
-    Me.GroupBox4.Controls.Add(Me.Label13)
-    Me.GroupBox4.Controls.Add(Me.btnIngresar)
-    Me.GroupBox4.Controls.Add(Me.ComboBox1)
-    Me.GroupBox4.Controls.Add(Me.lblNombre)
-    Me.GroupBox4.Controls.Add(Me.NumericUpDown1)
-    Me.GroupBox4.Controls.Add(Me.Label11)
-    Me.GroupBox4.Location = New System.Drawing.Point(177, 504)
-    Me.GroupBox4.Name = "GroupBox4"
-    Me.GroupBox4.Size = New System.Drawing.Size(1091, 156)
-    Me.GroupBox4.TabIndex = 47
-    Me.GroupBox4.TabStop = False
-    Me.GroupBox4.Text = "Acciones"
+    Me.gbAcciones.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.gbAcciones.Controls.Add(Me.gbAccionDeposito)
+    Me.gbAcciones.Controls.Add(Me.btnMoverArticulo)
+    Me.gbAcciones.Controls.Add(Me.Label15)
+    Me.gbAcciones.Controls.Add(Me.cmbDestinoResp)
+    Me.gbAcciones.Controls.Add(Me.lblResponsableFuente)
+    Me.gbAcciones.Controls.Add(Me.nMover)
+    Me.gbAcciones.Controls.Add(Me.Label12)
+    Me.gbAcciones.Location = New System.Drawing.Point(177, 504)
+    Me.gbAcciones.Name = "gbAcciones"
+    Me.gbAcciones.Size = New System.Drawing.Size(1091, 193)
+    Me.gbAcciones.TabIndex = 47
+    Me.gbAcciones.TabStop = False
+    Me.gbAcciones.Text = "Acciones"
     '
-    'btnMover
+    'gbAccionDeposito
     '
-    Me.btnMover.Location = New System.Drawing.Point(708, 128)
-    Me.btnMover.Name = "btnMover"
-    Me.btnMover.Size = New System.Drawing.Size(145, 23)
-    Me.btnMover.TabIndex = 16
-    Me.btnMover.Text = "Mover"
-    Me.btnMover.UseVisualStyleBackColor = True
+    Me.gbAccionDeposito.Controls.Add(Me.Label11)
+    Me.gbAccionDeposito.Controls.Add(Me.nIncrementar)
+    Me.gbAccionDeposito.Controls.Add(Me.btnIngresarArticulos)
+    Me.gbAccionDeposito.Controls.Add(Me.Label13)
+    Me.gbAccionDeposito.Controls.Add(Me.nDescontar)
+    Me.gbAccionDeposito.Controls.Add(Me.btnDescontarArticulo)
+    Me.gbAccionDeposito.Location = New System.Drawing.Point(23, 19)
+    Me.gbAccionDeposito.Name = "gbAccionDeposito"
+    Me.gbAccionDeposito.Size = New System.Drawing.Size(446, 79)
+    Me.gbAccionDeposito.TabIndex = 17
+    Me.gbAccionDeposito.TabStop = False
+    Me.gbAccionDeposito.Text = "Deposito"
     '
-    'Label15
+    'Label11
     '
-    Me.Label15.Location = New System.Drawing.Point(768, 98)
-    Me.Label15.Name = "Label15"
-    Me.Label15.Size = New System.Drawing.Size(32, 23)
-    Me.Label15.TabIndex = 15
-    Me.Label15.Text = "-->"
+    Me.Label11.Location = New System.Drawing.Point(14, 16)
+    Me.Label11.Name = "Label11"
+    Me.Label11.Size = New System.Drawing.Size(170, 15)
+    Me.Label11.TabIndex = 0
+    Me.Label11.Text = "INGRESAR:"
     '
-    'ComboBox3
+    'nIncrementar
     '
-    Me.ComboBox3.FormattingEnabled = True
-    Me.ComboBox3.Location = New System.Drawing.Point(806, 95)
-    Me.ComboBox3.Name = "ComboBox3"
-    Me.ComboBox3.Size = New System.Drawing.Size(226, 21)
-    Me.ComboBox3.TabIndex = 14
+    Me.nIncrementar.Location = New System.Drawing.Point(190, 14)
+    Me.nIncrementar.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+    Me.nIncrementar.Name = "nIncrementar"
+    Me.nIncrementar.ReadOnly = True
+    Me.nIncrementar.Size = New System.Drawing.Size(55, 20)
+    Me.nIncrementar.TabIndex = 1
     '
-    'ComboBox2
+    'btnIngresarArticulos
     '
-    Me.ComboBox2.FormattingEnabled = True
-    Me.ComboBox2.Location = New System.Drawing.Point(522, 98)
-    Me.ComboBox2.Name = "ComboBox2"
-    Me.ComboBox2.Size = New System.Drawing.Size(226, 21)
-    Me.ComboBox2.TabIndex = 13
-    '
-    'Label14
-    '
-    Me.Label14.Location = New System.Drawing.Point(270, 101)
-    Me.Label14.Name = "Label14"
-    Me.Label14.Size = New System.Drawing.Size(243, 18)
-    Me.Label14.TabIndex = 12
-    Me.Label14.Text = "Label12"
-    '
-    'NumericUpDown2
-    '
-    Me.NumericUpDown2.Location = New System.Drawing.Point(196, 99)
-    Me.NumericUpDown2.Name = "NumericUpDown2"
-    Me.NumericUpDown2.Size = New System.Drawing.Size(55, 20)
-    Me.NumericUpDown2.TabIndex = 11
-    '
-    'Label12
-    '
-    Me.Label12.Location = New System.Drawing.Point(20, 101)
-    Me.Label12.Name = "Label12"
-    Me.Label12.Size = New System.Drawing.Size(170, 15)
-    Me.Label12.TabIndex = 10
-    Me.Label12.Text = "MOVER:"
-    '
-    'Button2
-    '
-    Me.Button2.Location = New System.Drawing.Point(783, 61)
-    Me.Button2.Name = "Button2"
-    Me.Button2.Size = New System.Drawing.Size(145, 23)
-    Me.Button2.TabIndex = 9
-    Me.Button2.Text = "Eliminar"
-    Me.Button2.UseVisualStyleBackColor = True
-    '
-    'cmbResponsablesEliminar
-    '
-    Me.cmbResponsablesEliminar.FormattingEnabled = True
-    Me.cmbResponsablesEliminar.Location = New System.Drawing.Point(522, 64)
-    Me.cmbResponsablesEliminar.Name = "cmbResponsablesEliminar"
-    Me.cmbResponsablesEliminar.Size = New System.Drawing.Size(226, 21)
-    Me.cmbResponsablesEliminar.TabIndex = 8
-    '
-    'lblEliminar
-    '
-    Me.lblEliminar.Location = New System.Drawing.Point(270, 66)
-    Me.lblEliminar.Name = "lblEliminar"
-    Me.lblEliminar.Size = New System.Drawing.Size(243, 18)
-    Me.lblEliminar.TabIndex = 7
-    Me.lblEliminar.Text = "Label12"
-    '
-    'nEliminar
-    '
-    Me.nEliminar.Location = New System.Drawing.Point(196, 64)
-    Me.nEliminar.Name = "nEliminar"
-    Me.nEliminar.Size = New System.Drawing.Size(55, 20)
-    Me.nEliminar.TabIndex = 6
+    Me.btnIngresarArticulos.Location = New System.Drawing.Point(251, 11)
+    Me.btnIngresarArticulos.Name = "btnIngresarArticulos"
+    Me.btnIngresarArticulos.Size = New System.Drawing.Size(145, 23)
+    Me.btnIngresarArticulos.TabIndex = 4
+    Me.btnIngresarArticulos.Text = "Ingresar"
+    Me.btnIngresarArticulos.UseVisualStyleBackColor = True
     '
     'Label13
     '
-    Me.Label13.Location = New System.Drawing.Point(20, 66)
+    Me.Label13.Location = New System.Drawing.Point(14, 53)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(170, 15)
     Me.Label13.TabIndex = 5
     Me.Label13.Text = "ELIMINAR:"
     '
-    'btnIngresar
+    'nDescontar
     '
-    Me.btnIngresar.Location = New System.Drawing.Point(783, 24)
-    Me.btnIngresar.Name = "btnIngresar"
-    Me.btnIngresar.Size = New System.Drawing.Size(145, 23)
-    Me.btnIngresar.TabIndex = 4
-    Me.btnIngresar.Text = "Ingresar"
-    Me.btnIngresar.UseVisualStyleBackColor = True
+    Me.nDescontar.Location = New System.Drawing.Point(190, 51)
+    Me.nDescontar.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+    Me.nDescontar.Name = "nDescontar"
+    Me.nDescontar.ReadOnly = True
+    Me.nDescontar.Size = New System.Drawing.Size(55, 20)
+    Me.nDescontar.TabIndex = 6
     '
-    'ComboBox1
+    'btnDescontarArticulo
     '
-    Me.ComboBox1.FormattingEnabled = True
-    Me.ComboBox1.Location = New System.Drawing.Point(522, 27)
-    Me.ComboBox1.Name = "ComboBox1"
-    Me.ComboBox1.Size = New System.Drawing.Size(226, 21)
-    Me.ComboBox1.TabIndex = 3
+    Me.btnDescontarArticulo.Location = New System.Drawing.Point(251, 48)
+    Me.btnDescontarArticulo.Name = "btnDescontarArticulo"
+    Me.btnDescontarArticulo.Size = New System.Drawing.Size(145, 23)
+    Me.btnDescontarArticulo.TabIndex = 9
+    Me.btnDescontarArticulo.Text = "Eliminar"
+    Me.btnDescontarArticulo.UseVisualStyleBackColor = True
     '
-    'lblNombre
+    'btnMoverArticulo
     '
-    Me.lblNombre.Location = New System.Drawing.Point(270, 29)
-    Me.lblNombre.Name = "lblNombre"
-    Me.lblNombre.Size = New System.Drawing.Size(243, 18)
-    Me.lblNombre.TabIndex = 2
-    Me.lblNombre.Text = "Label12"
+    Me.btnMoverArticulo.Location = New System.Drawing.Point(789, 129)
+    Me.btnMoverArticulo.Name = "btnMoverArticulo"
+    Me.btnMoverArticulo.Size = New System.Drawing.Size(145, 23)
+    Me.btnMoverArticulo.TabIndex = 16
+    Me.btnMoverArticulo.Text = "Mover"
+    Me.btnMoverArticulo.UseVisualStyleBackColor = True
     '
-    'NumericUpDown1
+    'Label15
     '
-    Me.NumericUpDown1.Location = New System.Drawing.Point(196, 27)
-    Me.NumericUpDown1.Name = "NumericUpDown1"
-    Me.NumericUpDown1.Size = New System.Drawing.Size(55, 20)
-    Me.NumericUpDown1.TabIndex = 1
+    Me.Label15.Location = New System.Drawing.Point(519, 134)
+    Me.Label15.Name = "Label15"
+    Me.Label15.Size = New System.Drawing.Size(32, 23)
+    Me.Label15.TabIndex = 15
+    Me.Label15.Text = "-->"
     '
-    'Label11
+    'cmbDestinoResp
     '
-    Me.Label11.Location = New System.Drawing.Point(20, 29)
-    Me.Label11.Name = "Label11"
-    Me.Label11.Size = New System.Drawing.Size(170, 15)
-    Me.Label11.TabIndex = 0
-    Me.Label11.Text = "INGRESAR:"
+    Me.cmbDestinoResp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.cmbDestinoResp.FormattingEnabled = True
+    Me.cmbDestinoResp.Location = New System.Drawing.Point(557, 131)
+    Me.cmbDestinoResp.Name = "cmbDestinoResp"
+    Me.cmbDestinoResp.Size = New System.Drawing.Size(226, 21)
+    Me.cmbDestinoResp.TabIndex = 14
+    '
+    'lblResponsableFuente
+    '
+    Me.lblResponsableFuente.Location = New System.Drawing.Point(271, 131)
+    Me.lblResponsableFuente.Name = "lblResponsableFuente"
+    Me.lblResponsableFuente.Size = New System.Drawing.Size(243, 18)
+    Me.lblResponsableFuente.TabIndex = 12
+    Me.lblResponsableFuente.Text = "Label12"
+    Me.lblResponsableFuente.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+    '
+    'nMover
+    '
+    Me.nMover.Location = New System.Drawing.Point(196, 132)
+    Me.nMover.Name = "nMover"
+    Me.nMover.ReadOnly = True
+    Me.nMover.Size = New System.Drawing.Size(55, 20)
+    Me.nMover.TabIndex = 11
+    '
+    'Label12
+    '
+    Me.Label12.Location = New System.Drawing.Point(37, 134)
+    Me.Label12.Name = "Label12"
+    Me.Label12.Size = New System.Drawing.Size(140, 17)
+    Me.Label12.TabIndex = 10
+    Me.Label12.Text = "MOVER:"
+    '
+    'bsArticulos
+    '
+    Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
     '
     'frmArticulos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
-    Me.Controls.Add(Me.GroupBox4)
+    Me.Controls.Add(Me.gbAcciones)
     Me.Controls.Add(Me.GroupBox3)
     Me.Controls.Add(Me.btnGrupos)
-    Me.Controls.Add(Me.lblDetalle)
-    Me.Controls.Add(Me.GroupBox2)
-    Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.dgvStock)
     Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.gbProducto)
@@ -888,17 +670,14 @@ Partial Class frmArticulos
     Me.gbProducto.PerformLayout()
     CType(Me.dgvStock, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-    Me.GroupBox1.ResumeLayout(False)
-    Me.GroupBox1.PerformLayout()
-    Me.GroupBox2.ResumeLayout(False)
-    Me.GroupBox2.PerformLayout()
-    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.GroupBox3.ResumeLayout(False)
     Me.GroupBox3.PerformLayout()
-    Me.GroupBox4.ResumeLayout(False)
-    CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.nEliminar, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.gbAcciones.ResumeLayout(False)
+    Me.gbAccionDeposito.ResumeLayout(False)
+    CType(Me.nIncrementar, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.nDescontar, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.nMover, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -916,25 +695,9 @@ Partial Class frmArticulos
   Friend WithEvents bsArticulos As System.Windows.Forms.BindingSource
   Friend WithEvents gbProducto As System.Windows.Forms.GroupBox
   Friend WithEvents Label4 As System.Windows.Forms.Label
-  Friend WithEvents rbtnResponsables As System.Windows.Forms.RadioButton
-  Friend WithEvents rbtnByStock As System.Windows.Forms.RadioButton
-  Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
-  Friend WithEvents Label5 As System.Windows.Forms.Label
   Public WithEvents dgvStock As System.Windows.Forms.DataGridView
   Friend WithEvents BindingSource1 As System.Windows.Forms.BindingSource
-  Friend WithEvents btnAddDeposito As System.Windows.Forms.Button
-  Friend WithEvents btnRemDeposito As System.Windows.Forms.Button
-  Friend WithEvents btnVendido As System.Windows.Forms.Button
   Friend WithEvents cmbResponsables As System.Windows.Forms.ComboBox
-  Friend WithEvents Label6 As System.Windows.Forms.Label
-  Friend WithEvents Label7 As System.Windows.Forms.Label
-  Friend WithEvents Label8 As System.Windows.Forms.Label
-  Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-  Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-  Friend WithEvents Label9 As System.Windows.Forms.Label
-  Friend WithEvents lblDetalle As System.Windows.Forms.Label
-  Friend WithEvents txtDecrementar As System.Windows.Forms.TextBox
-  Friend WithEvents txtIncrementar As System.Windows.Forms.TextBox
   Friend WithEvents btnGrupos As System.Windows.Forms.Button
   Friend WithEvents Label10 As System.Windows.Forms.Label
   Friend WithEvents txtPrecio As System.Windows.Forms.TextBox
@@ -948,31 +711,27 @@ Partial Class frmArticulos
   Friend WithEvents GuidResponsableDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
   Friend WithEvents txtPalabraBuscar As System.Windows.Forms.TextBox
-  Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
-  Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
-  Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-  Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+  Friend WithEvents chkDescripcion As System.Windows.Forms.CheckBox
+  Friend WithEvents chkCodigoBarras As System.Windows.Forms.CheckBox
+  Friend WithEvents chkCodigo As System.Windows.Forms.CheckBox
+  Friend WithEvents chkNombre As System.Windows.Forms.CheckBox
   Friend WithEvents btnBuscar As System.Windows.Forms.Button
   Friend WithEvents rbtnBuscarResponsables As System.Windows.Forms.RadioButton
   Friend WithEvents rbnBuscarPalabra As System.Windows.Forms.RadioButton
-  Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-  Friend WithEvents btnIngresar As System.Windows.Forms.Button
-  Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-  Friend WithEvents lblNombre As System.Windows.Forms.Label
-  Friend WithEvents NumericUpDown1 As System.Windows.Forms.NumericUpDown
+  Friend WithEvents gbAcciones As System.Windows.Forms.GroupBox
+  Friend WithEvents btnIngresarArticulos As System.Windows.Forms.Button
+  Friend WithEvents nIncrementar As System.Windows.Forms.NumericUpDown
   Friend WithEvents Label11 As System.Windows.Forms.Label
-  Friend WithEvents btnMover As System.Windows.Forms.Button
+  Friend WithEvents btnMoverArticulo As System.Windows.Forms.Button
   Friend WithEvents Label15 As System.Windows.Forms.Label
-  Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-  Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-  Friend WithEvents Label14 As System.Windows.Forms.Label
-  Friend WithEvents NumericUpDown2 As System.Windows.Forms.NumericUpDown
+  Friend WithEvents cmbDestinoResp As System.Windows.Forms.ComboBox
+  Friend WithEvents lblResponsableFuente As System.Windows.Forms.Label
+  Friend WithEvents nMover As System.Windows.Forms.NumericUpDown
   Friend WithEvents Label12 As System.Windows.Forms.Label
-  Friend WithEvents Button2 As System.Windows.Forms.Button
-  Friend WithEvents cmbResponsablesEliminar As System.Windows.Forms.ComboBox
-  Friend WithEvents lblEliminar As System.Windows.Forms.Label
-  Friend WithEvents nEliminar As System.Windows.Forms.NumericUpDown
+  Friend WithEvents btnDescontarArticulo As System.Windows.Forms.Button
+  Friend WithEvents nDescontar As System.Windows.Forms.NumericUpDown
   Friend WithEvents Label13 As System.Windows.Forms.Label
   Friend WithEvents txtCodigoBarras As System.Windows.Forms.TextBox
   Friend WithEvents Label16 As System.Windows.Forms.Label
+  Friend WithEvents gbAccionDeposito As System.Windows.Forms.GroupBox
 End Class

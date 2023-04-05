@@ -38,7 +38,7 @@ Public Class frmListaClientes
 
   Private Sub main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      MostrarClientes()
+      'MostrarClientes()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

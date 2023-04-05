@@ -27,7 +27,7 @@ Public Class frmDeben
       If vResult <> Result.OK Then
         MsgBox("No continua application, error init")
       End If
-
+      lblFechaHoy.Text = "Fecha: " & Today.ToString("dd/MM/yyyy")
       dateInicio.Value = New Date(GetHoy.Year, GetHoy.Month, 1)
       dateFin.Value = New Date(GetHoy.Year, GetHoy.Month, Date.DaysInMonth(GetHoy.Year, GetHoy.Month))
       rbtnVendidos.Checked = True

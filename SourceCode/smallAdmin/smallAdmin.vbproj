@@ -168,6 +168,12 @@
     <Compile Include="Form\frmArticulos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmArticulosVendidos.Designer.vb">
+      <DependentUpon>frmArticulosVendidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmArticulosVendidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmCliente.Designer.vb">
       <DependentUpon>frmCliente.vb</DependentUpon>
     </Compile>
@@ -283,6 +289,9 @@
     <EmbeddedResource Include="Form\frmArticulos.resx">
       <DependentUpon>frmArticulos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmArticulosVendidos.resx">
+      <DependentUpon>frmArticulosVendidos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmCliente.resx">
       <DependentUpon>frmCliente.vb</DependentUpon>
     </EmbeddedResource>
@@ -365,6 +374,9 @@
       <Project>{c2f8778f-a149-45a3-964d-f1b0bc904baa}</Project>
       <Name>manDB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Form\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
