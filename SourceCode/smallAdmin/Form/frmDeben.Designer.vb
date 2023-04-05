@@ -109,6 +109,7 @@ Partial Class frmDeben
     Me.cmbNumCuotasCancelar = New System.Windows.Forms.ComboBox()
     Me.Button3 = New System.Windows.Forms.Button()
     Me.Button1 = New System.Windows.Forms.Button()
+    Me.lblFechaHoy = New System.Windows.Forms.Label()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -499,7 +500,7 @@ Partial Class frmDeben
     Me.btnConfiguracion.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.btnConfiguracion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnConfiguracion.Location = New System.Drawing.Point(157, 24)
+    Me.btnConfiguracion.Location = New System.Drawing.Point(223, 22)
     Me.btnConfiguracion.Name = "btnConfiguracion"
     Me.btnConfiguracion.Size = New System.Drawing.Size(92, 25)
     Me.btnConfiguracion.TabIndex = 46
@@ -990,13 +991,22 @@ Partial Class frmDeben
     '
     'Button1
     '
-    Me.Button1.Location = New System.Drawing.Point(321, 24)
+    Me.Button1.Location = New System.Drawing.Point(367, 23)
     Me.Button1.Name = "Button1"
     Me.Button1.Size = New System.Drawing.Size(75, 23)
     Me.Button1.TabIndex = 65
     Me.Button1.Text = "Service"
     Me.Button1.UseVisualStyleBackColor = True
     Me.Button1.Visible = False
+    '
+    'lblFechaHoy
+    '
+    Me.lblFechaHoy.BackColor = System.Drawing.Color.Transparent
+    Me.lblFechaHoy.Location = New System.Drawing.Point(21, 23)
+    Me.lblFechaHoy.Name = "lblFechaHoy"
+    Me.lblFechaHoy.Size = New System.Drawing.Size(113, 23)
+    Me.lblFechaHoy.TabIndex = 66
+    Me.lblFechaHoy.Text = "Label5"
     '
     'frmDeben
     '
@@ -1006,6 +1016,7 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.lblFechaHoy)
     Me.Controls.Add(Me.Button1)
     Me.Controls.Add(Me.lblTitulo)
     Me.Controls.Add(Me.btnLstVendedores)
@@ -1138,4 +1149,5 @@ Partial Class frmDeben
   Friend WithEvents Label8 As System.Windows.Forms.Label
   Friend WithEvents dtpFechaPago As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnAnular As System.Windows.Forms.Button
+  Friend WithEvents lblFechaHoy As System.Windows.Forms.Label
 End Class

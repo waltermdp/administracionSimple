@@ -1,10 +1,13 @@
-﻿Public Class clsInfoArticulos
+﻿Imports libCommon.Comunes
+
+Public Class clsInfoArticulos
   Implements ICloneable
   'Tabla Articulos
   Private m_IdArticulo As Integer
   Private m_GuidArticulo As Guid
   Private m_Nombre As String
   Private m_Codigo As String
+  Private m_CodigoBarras As String
   Private m_Descripcion As String
   Private m_Precio As Decimal
 
@@ -53,6 +56,15 @@
     End Set
   End Property
 
+  Public Property CodigoBarras As String
+    Get
+      Return m_codigoBarras
+    End Get
+    Set(value As String)
+      m_codigoBarras = value
+    End Set
+  End Property
+
   Public Property Descripcion As String
     Get
       Return m_Descripcion
@@ -63,12 +75,20 @@
   End Property
   Public Sub New()
     MyBase.New()
-    IdArticulo = -1
-    GuidArticulo = Nothing
-    Nombre = "--"
-    Codigo = "--"
-    Descripcion = "--"
-    Precio = 0
+    Try
+      IdArticulo = -1
+      GuidArticulo = Nothing
+      Nombre = "--"
+      Codigo = "--"
+      CodigoBarras = "--"
+      Descripcion = "--"
+      Precio = 0
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+
+
   End Sub
 
 #Region "Overrides"

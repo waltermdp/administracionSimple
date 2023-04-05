@@ -27,7 +27,7 @@ Public Class frmDeben
       If vResult <> Result.OK Then
         MsgBox("No continua application, error init")
       End If
-
+      lblFechaHoy.Text = "Fecha: " & Today.ToString("dd/MM/yyyy")
       dateInicio.Value = New Date(GetHoy.Year, GetHoy.Month, 1)
       dateFin.Value = New Date(GetHoy.Year, GetHoy.Month, Date.DaysInMonth(GetHoy.Year, GetHoy.Month))
       rbtnVendidos.Checked = True
@@ -1161,7 +1161,9 @@ Public Class frmDeben
 
   Private Sub lblTitulo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblTitulo.MouseDown
     Try
-      m_currentLocationMain = e.Location
+      If Not (e.Button = Windows.Forms.MouseButtons.Left) Then Exit Sub
+
+      m_currentLocationMain = New Point(-e.X, -e.Y)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -1171,13 +1173,13 @@ Public Class frmDeben
 
   Private Sub lblTitulo_MouseMove(sender As Object, e As MouseEventArgs) Handles lblTitulo.MouseMove
     Try
-      'If m_currentLocationMain.IsEmpty Then Exit Sub
-      'If m_MovingMain Then Exit Sub
-      'm_MovingMain = True
-      'Dim dx As Integer = m_currentLocationMain.X - e.Location.X
-      'Dim dy As Integer = m_currentLocationMain.Y - e.Location.Y
-      'm_currentLocationMain = New Point(m_currentLocationMain.X + dx, m_currentLocationMain.Y + dy)
-      'Me.Location = New Point(Me.Location.X + dx, Me.Location.Y + dy)
+      If m_currentLocationMain.IsEmpty Then Exit Sub
+      If m_MovingMain Then Exit Sub
+      m_MovingMain = True
+      Dim posicion As Point = Control.MousePosition
+      posicion.Offset(m_currentLocationMain.X, m_currentLocationMain.Y)
+      Location = posicion
+
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -1195,4 +1197,6 @@ Public Class frmDeben
       Print_msg(ex.Message)
     End Try
   End Sub
+
+
 End Class

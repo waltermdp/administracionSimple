@@ -136,4 +136,80 @@ Public Class frmConfig
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+
+  Private m_ModosPagos As New List(Of manDB.clsTipoPago)
+
+  Private Sub btnTipoPagos_Click(sender As Object, e As EventArgs) Handles btnLoadTipoPagos.Click
+    Try
+      m_ModosPagos.Clear()
+      CargarTipoPago(m_ModosPagos)
+      cmbModosPagos.DataSource = m_ModosPagos
+
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub cmbModosPagos_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbModosPagos.SelectedIndexChanged
+    Try
+
+      Dim objSeleccionado As manDB.clsTipoPago = TryCast(cmbModosPagos.SelectedItem, manDB.clsTipoPago)
+      If objSeleccionado Is Nothing Then Exit Sub
+      txtNombre.Text = objSeleccionado.Nombre
+      txtCodigo1.Text = objSeleccionado.NombreCodigo1
+      txtCodigo2.Text = objSeleccionado.NombreCodigo2
+      txtCodigo3.Text = objSeleccionado.NombreCodigo3
+      txtCodigo4.Text = objSeleccionado.NombreCodigo4
+      If objSeleccionado.PermiteCuotas Then
+        rbtnSi.Checked = True
+      Else
+        rbtnNo.Checked = True
+      End If
+      txtGUID.Text = objSeleccionado.GuidTipo.ToString
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  
+  Private Sub btnGuardarCambios_Click(sender As Object, e As EventArgs) Handles btnGuardarCambios.Click
+    Try
+      m_ModosPagos(cmbModosPagos.SelectedIndex).Nombre = txtNombre.Text
+      m_ModosPagos(cmbModosPagos.SelectedIndex).NombreCodigo1 = txtCodigo1.Text
+      m_ModosPagos(cmbModosPagos.SelectedIndex).NombreCodigo2 = txtCodigo2.Text
+      m_ModosPagos(cmbModosPagos.SelectedIndex).NombreCodigo3 = txtCodigo3.Text
+      m_ModosPagos(cmbModosPagos.SelectedIndex).NombreCodigo4 = txtCodigo4.Text
+      m_ModosPagos(cmbModosPagos.SelectedIndex).GuidTipo = New Guid(txtGUID.Text)
+      m_ModosPagos(cmbModosPagos.SelectedIndex).PermiteCuotas = rbtnSi.Checked
+      GuardarTipoPago(m_ModosPagos)
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnGuardarComoNuevo_Click(sender As Object, e As EventArgs) Handles btnGuardarComoNuevo.Click
+    Try
+      Dim NewModo As New manDB.clsTipoPago
+
+      NewModo.Nombre = txtNombre.Text
+      NewModo.NombreCodigo1 = txtCodigo1.Text
+      NewModo.NombreCodigo2 = txtCodigo2.Text
+      NewModo.NombreCodigo3 = txtCodigo3.Text
+      NewModo.NombreCodigo4 = txtCodigo4.Text
+      NewModo.GuidTipo = Guid.NewGuid
+      NewModo.PermiteCuotas = rbtnSi.Checked
+      m_ModosPagos.Add(NewModo)
+      If GuardarTipoPago(m_ModosPagos) = Result.OK Then
+        MsgBox("Realizado OK")
+      Else
+        MsgBox("Fallo al guardar")
+      End If
+      btnLoadTipoPagos.PerformClick()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

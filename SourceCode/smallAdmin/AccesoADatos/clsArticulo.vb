@@ -98,11 +98,22 @@ Public Class clsArticulo
       Return objResult
 
     Catch ex As Exception
-      Call Print_msg(ex.Message)
+      Print_msg(ex.Message)
       Return Result.ErrorEx
     End Try
 
   End Function
+
+  Public Function FindArticulos(ByVal vParametro As String, ByRef rListArticulos As List(Of clsInfoArticulos)) As Result
+    Try
+
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
 
   Private Shared Function Init(ByRef rInfoArticulo As manDB.clsInfoArticulos, ByVal GuidArticulo As Guid) As Result
     Try
@@ -208,15 +219,17 @@ Public Class clsArticulo
             strSQL.Append("[Nombre],")
             strSQL.Append("[Codigo],")
             strSQL.Append("[Descripcion],")
-            strSQL.Append("[Precio]")
-            
+            strSQL.Append("[Precio],")
+            strSQL.Append("[CodigoBarras]")
+
             strSQL.Append(") VALUES (")
 
             strSQL.Append("""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Precio) & """")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Precio) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.CodigoBarras) & """")
 
             strSQL.Append(")")
 
@@ -239,7 +252,8 @@ Public Class clsArticulo
             strSQL.Append("[Nombre]=""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("[Codigo]=""" & libDB.clsAcceso.Field_Correcting(.Codigo) & """,")
             strSQL.Append("[Descripcion]=""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """,")
-            strSQL.Append("[Precio]=""" & libDB.clsAcceso.Field_Correcting(.Precio) & """")
+            strSQL.Append("[Precio]=""" & libDB.clsAcceso.Field_Correcting(.Precio) & """,")
+            strSQL.Append("[CodigoBarras]=""" & libDB.clsAcceso.Field_Correcting(.CodigoBarras) & """")
 
             strSQL.Append(" WHERE [IdArticulo]=" & .IdArticulo)
 
@@ -391,6 +405,13 @@ Public Class clsArticulo
           vInfoArticulo.Precio = CDec(IIf(IsDBNull(.Item("Precio")), 0, .Item("Precio")))
         Catch ex As Exception
           vInfoArticulo.Precio = 0
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoArticulo.CodigoBarras = CStr(IIf(IsDBNull(.Item("CodigoBarras")), "", .Item("CodigoBarras")))
+        Catch ex As Exception
+          vInfoArticulo.CodigoBarras = ""
           Call Print_msg(ex.Message)
         End Try
 

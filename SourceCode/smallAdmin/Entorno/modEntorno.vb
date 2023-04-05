@@ -32,7 +32,7 @@ Module Entorno
 
   Public g_Today As Date 'TODO: crear fecha para saber si se cambia la fecha de la pc con respecto al ultimo uso
 
-  Public g_debug As Boolean = False
+  Public g_debug As Boolean = True
 
 
   'Public Enum GRUPOS As Integer
@@ -179,7 +179,7 @@ Module Entorno
   Public Function GuardarTipoPago(ByRef rListTipoListaPago As List(Of manDB.clsTipoPago)) As Result
 
     Try
-      MsgBox("FALTA CARGAR PARAMETROS!")
+
       Return Result.NOK
       Dim Fila As Integer
       Dim objResult As Result
@@ -200,6 +200,14 @@ Module Entorno
           auxstr = rListTipoListaPago(i).Nombre
           WriteLine(Fila, auxstr)
           auxstr = CInt(rListTipoListaPago(i).PermiteCuotas).ToString
+          WriteLine(Fila, auxstr)
+          auxstr = CStr(rListTipoListaPago(i).NombreCodigo1)
+          WriteLine(Fila, auxstr)
+          auxstr = CStr(rListTipoListaPago(i).NombreCodigo2)
+          WriteLine(Fila, auxstr)
+          auxstr = CStr(rListTipoListaPago(i).NombreCodigo3)
+          WriteLine(Fila, auxstr)
+          auxstr = CStr(rListTipoListaPago(i).NombreCodigo4)
           WriteLine(Fila, auxstr)
           auxstr = CStr(rListTipoListaPago(i).GuidTipo.ToString)
           WriteLine(Fila, auxstr)
