@@ -198,6 +198,12 @@
     <Compile Include="Form\frmDeben.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmEstablecerPagos.Designer.vb">
+      <DependentUpon>frmEstablecerPagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmEstablecerPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmLiquidacionVendedores.Designer.vb">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </Compile>
@@ -303,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmDeben.resx">
       <DependentUpon>frmDeben.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmEstablecerPagos.resx">
+      <DependentUpon>frmEstablecerPagos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLiquidacionVendedores.resx">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>

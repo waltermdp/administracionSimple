@@ -8,12 +8,12 @@ Public Class frmVenta
 
   Private m_CurrentPersona As ClsInfoPersona
   Private m_CurrentVendedor As clsInfoVendedor
-
   Private m_CurrentCuenta As clsInfoCuenta
-  Private m_lstPagos As New List(Of clsInfoPagos)
+
+  'Private m_lstPagos As New List(Of clsInfoPagos)
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
 
-  Private m_NumOperacion As Integer
+  'Private m_NumOperacion As Integer
 
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
@@ -42,13 +42,10 @@ Public Class frmVenta
     Try
       m_skip = True
       Dim vResult As Result = Result.NOK
-      DateVenta.Value = GetHoy()
-      cmbCuotas.DataSource = g_Cuotas
 
-      chkEditarCuotas.Checked = False
-      txtValorCuota.Enabled = False
 
-      txtPrecio.Text = 0
+
+      
       m_hayCambios = False
 
       ListView1.View = View.Details
@@ -58,13 +55,8 @@ Public Class frmVenta
       ListView1.ShowItemToolTips = True
 
 
+      lblNumeroVenta.Text = GetUltimoComprobante()
 
-      Dim lstpagos As New clsListPagos
-      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
-      lstpagos.RefreshData()
-      m_NumOperacion = 1
-      lblNumComprobante.Text = m_NumOperacion.ToString
-      If lstpagos.Items.Count > 0 Then m_NumOperacion = lstpagos.Items.First.NumComprobante + 1
 
       If m_CurrentPersona Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub
       If m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing Then
@@ -80,10 +72,6 @@ Public Class frmVenta
         If vResult <> Result.OK Then
           Call Print_msg("Fallo carga de Pagos")
         End If
-        m_lstPagos = m_Producto.ListaPagos.ToList
-        m_NumOperacion = m_lstPagos.Last.NumComprobante
-        lblNumComprobante.Text = m_NumOperacion.ToString
-        If TerminoDePagar(m_Producto) Then btnSave.Enabled = False
 
         vResult = clsRelArtProd.Load(m_Producto.ListaArticulos, m_Producto.GuidProducto)
         If vResult <> Result.OK Then
@@ -95,10 +83,9 @@ Public Class frmVenta
           Call Print_msg("Fallo carga de cuenta")
         End If
 
+        FillVentaData()
+        If TerminoDePagar(m_Producto) Then btnSave.Enabled = False
 
-
-        DateVenta.Value = m_Producto.FechaVenta
-        dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
         Exit Sub
       End If
       Call Print_msg("Incongruencia de cliente and vendedor, deben o no existir ambos ")
@@ -113,6 +100,24 @@ Public Class frmVenta
       m_skip = False
     End Try
   End Sub
+
+  Private Function GetUltimoComprobante() As Integer
+    Try
+      Dim lstpagos As New clsListPagos
+      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
+      lstpagos.RefreshData()
+
+      If lstpagos.Items.Count > 0 Then
+        Return lstpagos.Items.First.NumComprobante + 1
+      Else
+        Return -1
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return -1
+    End Try
+  End Function
 
   Private Sub frmVenta_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
@@ -165,28 +170,39 @@ Public Class frmVenta
 
   Private Sub FillVentaData()
     Try
+      'm_lstPagos = m_Producto.ListaPagos.ToList
+      'm_NumOperacion = m_lstPagos.Last.NumComprobante
+      'lblNumComprobante.Text = m_NumOperacion.ToString
+
+
+
+      'DateVenta.Value = m_Producto.FechaVenta
+      'dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
+
       With m_Producto
-        txtPrecio.Text = .Precio
-        DateVenta.Value = .FechaVenta
-        If .FechaPrimerPago.Day > 30 Then
-          dtDiaVencimiento.Value = dtDiaVencimiento.Maximum
-        Else
-          dtDiaVencimiento.Value = .FechaPrimerPago.Day
-        End If
 
+        lblFechaVenta.Text = .FechaVenta.ToString("dd/MM/yyyy")
+        'If .FechaPrimerPago.Day > 30 Then
+        '  dtDiaVencimiento.Value = dtDiaVencimiento.Maximum
+        'Else
+        '  dtDiaVencimiento.Value = .FechaPrimerPago.Day
+        'End If
+        lblTotalCuotas.Text = .TotalCuotas
+        lblTotal.Text = .Precio.ToString
+        lblCuota.Text = .ValorCuotaFija.ToString
+        lblNumeroVenta.Text = .NumComprobante.ToString
+        'For Each cuota In g_Cuotas
+        '  If cuota.Cantidad = .TotalCuotas Then
+        '    cmbCuotas.SelectedItem = cuota
+        '    Exit For
+        '  End If
+        'Next
+        'If .ListaPagos.Count > 0 Then
+        '  txtValorCuota.Text = .ValorCuotaFija.ToString  ' .ListaPagos.Last.ValorCuota.ToString
+        'Else
+        '  txtValorCuota.Text = .Precio.ToString
+        'End If
 
-        For Each cuota In g_Cuotas
-          If cuota.Cantidad = .TotalCuotas Then
-            cmbCuotas.SelectedItem = cuota
-            Exit For
-          End If
-        Next
-        If .ListaPagos.Count > 0 Then
-          txtValorCuota.Text = .ValorCuotaFija.ToString  ' .ListaPagos.Last.ValorCuota.ToString
-        Else
-          txtValorCuota.Text = .Precio.ToString
-        End If
-        txtNumVenta.Text = .NumComprobante.ToString
 
       End With
       Call FillMedioDePagoDescripcion()
@@ -198,9 +214,9 @@ Public Class frmVenta
   Private Sub FillMedioDePagoDescripcion()
     Try
       If m_CurrentCuenta Is Nothing Then
-        txtMedioPagoDescripcion.Text = "--"
+        lblMedioDePago.Text = "--"
       Else
-        txtMedioPagoDescripcion.Text = GetNameOfTipoPago(m_CurrentCuenta.TipoDeCuenta) & " -- " & m_CurrentCuenta.Codigo1.ToString
+        lblMedioDePago.Text = GetNameOfTipoPago(m_CurrentCuenta.TipoDeCuenta) & " -- " & m_CurrentCuenta.Codigo1.ToString
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -236,134 +252,16 @@ Public Class frmVenta
     End Try
   End Sub
 
-  Private Sub txtPrecio_TextChanged(sender As Object, e As EventArgs) Handles txtPrecio.TextChanged
-    Try
-      If m_skip Then Exit Sub
-      m_skip = True
-      Try
-        Dim auxValue As String = CType(sender, TextBox).Text
-        Dim Precio As Decimal
-        If ConvStr2Dec(auxValue, Precio) Then
-          'El valor ingresado es valido
-          Dim NCuotas As Integer
-          If cmbCuotas.SelectedIndex >= 0 Then
-            NCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
-          Else
-            'TODO: seleccionar por defecto cuotas 0
-            For Each item As clsCuota In cmbCuotas.Items
-              If item.Cantidad = 0 Then
-                cmbCuotas.SelectedItem = item
-                Exit For
-              End If
-            Next
-            NCuotas = 0
-          End If
 
-          If chkEditarCuotas.Checked = False Then
-            txtValorCuota.Text = CuotasIguales(Precio, NCuotas).ToString
-          Else
-            'Dejo el valor que figura en el txt precio cuota
-          End If
-
-          Call GenerarPlanCuotas()
-        End If
-      Finally
-        m_skip = False
-      End Try
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-
-  Private Sub cmbCuotas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCuotas.SelectedIndexChanged
-    Try
-      If m_skip Then Exit Sub
-      Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
-      If chkEditarCuotas.Checked = False Then
-        Dim precio As Decimal
-        ConvStr2Dec(txtPrecio.Text, precio)
-
-        txtValorCuota.Text = CuotasIguales(Precio, Cuota.Cantidad).tostring
-      Else
-        'Dejo el valor que figura en el txt precio cuota
-      End If
-
-      Call GenerarPlanCuotas()
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-
-
-
-  
-
-  Private Sub GenerarPlanCuotas()
-    Try
-      If m_Producto Is Nothing Then Exit Sub
-      m_lstPagos.Clear()
-      For Each pago In m_Producto.ListaPagos
-        m_lstPagos.Add(pago.Clone)
-      Next
-
-
-      Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
-      Dim Precio As Decimal
-      ConvStr2Dec(txtPrecio.Text, Precio)
-      Dim ValorCuota As Decimal
-      ConvStr2Dec(txtValorCuota.Text, ValorCuota)
-      Dim auxPago As New clsInfoPagos
-
-      Dim numProxCouta As Integer = 1
-      If m_lstPagos.Count > 0 Then
-        If m_lstPagos.Last.EstadoPago = E_EstadoPago.Debe Then
-          numProxCouta = m_lstPagos.Last.NumCuota
-          m_lstPagos.Last.EstadoPago = E_EstadoPago.Anulo_Editado
-
-        ElseIf m_lstPagos.Last.EstadoPago = E_EstadoPago.Pago Then
-          Exit Sub
-        End If
-      End If
-      m_Producto.FechaPrimerPago = New Date(DateVenta.Value.Year, DateVenta.Value.Month, dtDiaVencimiento.Value)
-
-      auxPago = GetProximoPago(m_Producto.GuidProducto, CInt(txtNumVenta.Text.Trim), ValorCuota, numProxCouta, m_Producto.FechaVenta, modCommon.Vencimiento(m_Producto.FechaPrimerPago))
-      
-      'lblNumComprobante.Text = auxPago.NumComprobante.ToString
-      m_lstPagos.Add(auxPago)
-
-      Call ReloadListPagos()
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub ReloadListPagos()
-    Try
-      If m_Producto Is Nothing Then Exit Sub
-      bsCuotas.DataSource = m_lstPagos ' m_Producto.ListaPagos
-      bsCuotas.ResetBindings(False)
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  Private Function CuotasIguales(ByVal vPrecio As Decimal, ByVal cuotas As Integer) As Decimal
-    Try
-      Dim valorCuota As Decimal
-      If cuotas = 0 Then cuotas = 1
-      ConvStr2Dec(CDec(vPrecio / cuotas).ToString, valorCuota)
-      Return valorCuota
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return 0
-    End Try
-  End Function
-
- 
+  'Private Sub ReloadListPagos()
+  '  Try
+  '    If m_Producto Is Nothing Then Exit Sub
+  '    bsCuotas.DataSource = m_lstPagos ' m_Producto.ListaPagos
+  '    bsCuotas.ResetBindings(False)
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
@@ -377,84 +275,84 @@ Public Class frmVenta
   Private Sub btnSave_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSave.MouseClick
     Try
 
-      Dim vResult As Result
-      Dim auxID As Integer
-      Dim isNewProducto As Boolean = Not clsProducto.FindGuid(m_Producto.GuidProducto, auxID)
+      'Dim vResult As Result
+      'Dim auxID As Integer
+      'Dim isNewProducto As Boolean = Not clsProducto.FindGuid(m_Producto.GuidProducto, auxID)
 
-      With m_Producto
-        .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
-        .Precio = CDec(txtPrecio.Text)
-        If m_CurrentCuenta Is Nothing Then
-          MsgBox("No hay ningun Medio de pago seleccionado")
-          Exit Sub
-        End If
-        .GuidTipoPago = m_CurrentCuenta.TipoDeCuenta
-        .GuidCuenta = m_CurrentCuenta.GuidCuenta
-        .Cuenta = m_CurrentCuenta.Clone
-        .FechaVenta = DateVenta.Value
-        .ListaArticulos = m_lstArticulosVendidos.ToList
-        .GuidVendedor = m_CurrentVendedor.GuidVendedor
-        .GuidCliente = m_CurrentPersona.GuidCliente
-        .ValorCuotaFija = CDec(txtValorCuota.Text)
-        If isNewProducto Then
-          .CuotasDebe = .TotalCuotas
-        End If
-        .ListaPagos.Clear()
-        .ListaPagos = m_lstPagos.ToList
-        .NumComprobante = CInt(txtNumVenta.Text)
-      End With
+      'With m_Producto
+      '  .TotalCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
+      '  .Precio = CDec(txtPrecio.Text)
+      '  If m_CurrentCuenta Is Nothing Then
+      '    MsgBox("No hay ningun Medio de pago seleccionado")
+      '    Exit Sub
+      '  End If
+      '  .GuidTipoPago = m_CurrentCuenta.TipoDeCuenta
+      '  .GuidCuenta = m_CurrentCuenta.GuidCuenta
+      '  .Cuenta = m_CurrentCuenta.Clone
+      '  .FechaVenta = DateVenta.Value
+      '  .ListaArticulos = m_lstArticulosVendidos.ToList
+      '  .GuidVendedor = m_CurrentVendedor.GuidVendedor
+      '  .GuidCliente = m_CurrentPersona.GuidCliente
+      '  .ValorCuotaFija = CDec(txtValorCuota.Text)
+      '  If isNewProducto Then
+      '    .CuotasDebe = .TotalCuotas
+      '  End If
+      '  .ListaPagos.Clear()
+      '  .ListaPagos = m_lstPagos.ToList
+      '  .NumComprobante = CInt(txtNumVenta.Text)
+      'End With
 
-      Dim lstpagos As New clsListPagos()
-      lstpagos.Cfg_Filtro = "where NumComprobante=" & m_Producto.NumComprobante.ToString
-      lstpagos.RefreshData()
+      'Dim lstpagos As New clsListPagos()
+      'lstpagos.Cfg_Filtro = "where NumComprobante=" & m_Producto.NumComprobante.ToString
+      'lstpagos.RefreshData()
 
-      'Verificamos campos
-      If m_CurrentPersona Is Nothing Then
-        MsgBox("No hay ningun Cliente seleccionado")
-        Exit Sub
-      ElseIf m_CurrentVendedor Is Nothing Then
-        MsgBox("No hay ningun Vendedor seleccionado")
-        Exit Sub
-      ElseIf m_lstArticulosVendidos.Count <= 0 Then
-        MsgBox("No hay ningun Articulo Vendido")
-        Exit Sub
-      ElseIf m_CurrentCuenta Is Nothing Then
-        MsgBox("No hay ninguna Cuenta seleccionada")
-        Exit Sub
-      ElseIf m_Producto.Precio <= 0 Then
-        MsgBox("No hay ningun Precio")
-        Exit Sub
-      ElseIf m_Producto.TotalCuotas < 0 Then
-        MsgBox("No hay ninguna Cuota seleccionada")
-        Exit Sub
-      ElseIf CDec(txtValorCuota.Text) < 0 OrElse CDec(txtValorCuota.Text) > CDec(m_Producto.Precio) Then
-        MsgBox("El valor de la cuota debe ser mayor a cero y menor o igual que el precio")
-        Exit Sub
-      ElseIf CInt(txtNumVenta.Text.Trim) <= 0 Then
-        MsgBox("El numero de comprobante es invalido")
-        Exit Sub
-      ElseIf lstpagos.Items.Count > 0 Then
-        MsgBox(String.Format("Ya existe el numero de comprobante {0}", m_Producto.NumComprobante))
-        Exit Sub
-      ElseIf CDec(txtAdelanto.Text) < 0 OrElse CDec(txtAdelanto.Text) > CDec(m_Producto.Precio) Then
-        MsgBox("El valor de adelanto debe ser mayor o igual a cero y menor o igual al precio de venta")
-        Exit Sub
-      ElseIf CDec(txtAdelantoVendedor.Text) > CDec(txtAdelanto.Text) Then
-        MsgBox("El valor de adelantovendendor debe ser menor o igual que el adelanto del cliente")
-        Exit Sub
-      End If
-      m_hayCambios = True
+      ''Verificamos campos
+      'If m_CurrentPersona Is Nothing Then
+      '  MsgBox("No hay ningun Cliente seleccionado")
+      '  Exit Sub
+      'ElseIf m_CurrentVendedor Is Nothing Then
+      '  MsgBox("No hay ningun Vendedor seleccionado")
+      '  Exit Sub
+      'ElseIf m_lstArticulosVendidos.Count <= 0 Then
+      '  MsgBox("No hay ningun Articulo Vendido")
+      '  Exit Sub
+      'ElseIf m_CurrentCuenta Is Nothing Then
+      '  MsgBox("No hay ninguna Cuenta seleccionada")
+      '  Exit Sub
+      'ElseIf m_Producto.Precio <= 0 Then
+      '  MsgBox("No hay ningun Precio")
+      '  Exit Sub
+      'ElseIf m_Producto.TotalCuotas < 0 Then
+      '  MsgBox("No hay ninguna Cuota seleccionada")
+      '  Exit Sub
+      'ElseIf CDec(txtValorCuota.Text) < 0 OrElse CDec(txtValorCuota.Text) > CDec(m_Producto.Precio) Then
+      '  MsgBox("El valor de la cuota debe ser mayor a cero y menor o igual que el precio")
+      '  Exit Sub
+      'ElseIf CInt(txtNumVenta.Text.Trim) <= 0 Then
+      '  MsgBox("El numero de comprobante es invalido")
+      '  Exit Sub
+      'ElseIf lstpagos.Items.Count > 0 Then
+      '  MsgBox(String.Format("Ya existe el numero de comprobante {0}", m_Producto.NumComprobante))
+      '  Exit Sub
+      'ElseIf CDec(txtAdelanto.Text) < 0 OrElse CDec(txtAdelanto.Text) > CDec(m_Producto.Precio) Then
+      '  MsgBox("El valor de adelanto debe ser mayor o igual a cero y menor o igual al precio de venta")
+      '  Exit Sub
+      'ElseIf CDec(txtAdelantoVendedor.Text) > CDec(txtAdelanto.Text) Then
+      '  MsgBox("El valor de adelantovendendor debe ser menor o igual que el adelanto del cliente")
+      '  Exit Sub
+      'End If
+      'm_hayCambios = True
 
 
-      vResult = clsProducto.Save(m_Producto)
-      If vResult <> Result.OK Then
-        MsgBox("Fallo save producto")
-        Exit Sub
-      End If
+      'vResult = clsProducto.Save(m_Producto)
+      'If vResult <> Result.OK Then
+      '  MsgBox("Fallo save producto")
+      '  Exit Sub
+      'End If
 
-      'Descontar los libros del vendedor y luego los del grupo, el resto marcar como debe, en esta venta.
-      DescontarArticulos(m_lstArticulosVendidos)
-      Call AplicarPagoAdelantado()
+      ''Descontar los libros del vendedor y luego los del grupo, el resto marcar como debe, en esta venta.
+      'DescontarArticulos(m_lstArticulosVendidos)
+      'Call AplicarPagoAdelantado()
 
 
       Me.Close()
@@ -511,91 +409,7 @@ Public Class frmVenta
     End Try
   End Sub
 
-  Private Sub AplicarPagoAdelantado()
-    Try
-      If IsNumeric(txtAdelanto.Text.Trim) Then
-        If CDec(txtAdelanto.Text) <= 0 Then Exit Sub
-        Dim AdelantoCuota As Decimal
-        Dim AdelantoVendedor As Decimal
-        ConvStr2Dec(txtAdelanto.Text, AdelantoCuota)
-        ConvStr2Dec(txtAdelantoVendedor.Text, AdelantoVendedor)
-        Dim Vencimiento As Date
-       
-
-
-
-        While AdelantoCuota > 0
-          Dim aux As New clsListPagos
-          aux.Cfg_Filtro = "where GuidProducto={" & m_Producto.GuidProducto.ToString & "} and EstadoPago= " & E_EstadoPago.Debe '(Pagos.VencimientoCuota < #" & Format(Today, strFormatoAnsiStdFecha) & "#) and Pagos.EstadoPago=0"
-          aux.RefreshData()
-          Dim newPago As clsInfoPagos
-          newPago = aux.Items.First.Clone
-
-          If AdelantoCuota < newPago.ValorCuota Then
-            Dim ProximoPago As Decimal = newPago.ValorCuota - AdelantoCuota
-            newPago.EstadoPago = E_EstadoPago.PagoParcial
-            newPago.ValorCuota = AdelantoCuota
-            newPago.FechaPago = GetAhora()
-            Vencimiento = newPago.VencimientoCuota
-            clsPago.Save(newPago)
-            AdelantoCuota = 0
-            'proximo pago
-            newPago = New clsInfoPagos
-            newPago = aux.Items.First.Clone
-            newPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.NumComprobante, ProximoPago, newPago.NumCuota, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
-            newPago.VencimientoCuota = Vencimiento 'uso la misma fecha de vencimiento
-            clsPago.Save(newPago)
-          Else
-            newPago.EstadoPago = E_EstadoPago.Pago
-            newPago.ValorCuota = newPago.ValorCuota
-            newPago.FechaPago = GetAhora()
-            Vencimiento = newPago.VencimientoCuota
-            clsPago.Save(newPago)
-            AdelantoCuota = AdelantoCuota - newPago.ValorCuota
-            'proximo Pago
-            newPago = New clsInfoPagos
-            newPago = aux.Items.First.Clone
-            newPago = GetProximoPago(m_Producto.GuidProducto, m_Producto.NumComprobante, m_Producto.ValorCuotaFija, newPago.NumCuota + 1, m_Producto.FechaVenta, m_Producto.FechaPrimerPago)
-            newPago.VencimientoCuota = Vencimiento.AddMonths(1)
-            clsPago.Save(newPago)
-            'If (AdelantoCuota = newPago.ValorCuota) Then
-            '  'marcarla como pagada
-            'Else
-            '  'es mayor al valor de parte de la cuota a pagar
-            '  Dim n As Integer = Math.Ceiling(AdelantoCuota / m_Producto.ValorCuotaFija)
-            '  If n = 0 Then
-            '  Else
-            '  End If
-            'End If
-          End If
-
-        End While
-        'If AdelantoCuota < m_Producto.ValorCuotaFija Then
-        '  newPago.ValorCuota = m_Producto.ValorCuotaFija - AdelantoCuota
-        '  newPago.VencimientoCuota = Vencimiento
-        'Else
-        '  Dim n As Integer = Math.Ceiling(AdelantoCuota / m_Producto.ValorCuotaFija)
-        '  newPago.ValorCuota = m_Producto.ValorCuotaFija * n - AdelantoCuota
-        '  newPago.VencimientoCuota = Vencimiento.AddMonths(n - 1)
-        'End If
-        'clsPago.Save(newPago)
-        If AdelantoVendedor > 0 Then
-          Dim objAdelanto As New clsInfoAdelanto
-          objAdelanto.GuidVendedor = m_Producto.GuidVendedor
-          objAdelanto.Valor = AdelantoVendedor
-          objAdelanto.Fecha = GetAhora()
-          clsAdelantos.Save(objAdelanto)
-        End If
-       
-
-      End If
-
-
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
-
+ 
   Private Sub btnNewClient_MouseClick(sender As Object, e As MouseEventArgs) Handles btnNewClient.MouseClick
     Try
       Using objForm As New frmCliente(Nothing)
@@ -648,7 +462,7 @@ Public Class frmVenta
 
       Call LoadArticulosVendidos()
       Call FillMedioDePagoDescripcion()
-      Call ReloadListPagos()
+      'Call ReloadListPagos()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -709,79 +523,9 @@ Public Class frmVenta
   End Sub
 
 
-  Private Sub btnSeleccionarCuenta_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSeleccionarCuenta.MouseClick
-    Try
-      Using objForm As New frmCuenta(m_CurrentPersona.GuidCliente)
-        objForm.ShowDialog(Me)
-        objForm.GetCuentaSeleccionada(m_CurrentCuenta)
-        Call GenerarPlanCuotas()
-        Call FillMedioDePagoDescripcion()
-      End Using
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
 
-  Private Sub btnAddCuenta_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAddCuenta.MouseClick
-    Try
-      Using objForm As New frmCuenta(m_CurrentPersona.GuidCliente)
-        objForm.ShowDialog(Me)
-        objForm.GetCuentaSeleccionada(m_CurrentCuenta)
-        Call GenerarPlanCuotas()
-        Call FillMedioDePagoDescripcion()
-      End Using
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
 
-  Private Sub chkEditarCuotas_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditarCuotas.CheckedChanged
-    Try
-      txtValorCuota.Enabled = chkEditarCuotas.Checked
-      If chkEditarCuotas.Checked = False Then
-        Dim precio As Decimal
-        ConvStr2Dec(txtPrecio.Text, precio)
-        txtValorCuota.Text = CuotasIguales(precio, CType(cmbCuotas.SelectedItem, clsCuota).Cantidad).ToString
-        Call GenerarPlanCuotas()
-      End If
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
 
-  Private Sub txtValorCuota_TextChanged(sender As Object, e As EventArgs) Handles txtValorCuota.TextChanged
-    Try
-      If chkEditarCuotas.Checked = True Then
-        Dim auxValue As String = CType(sender, TextBox).Text
-        Dim dec As Decimal
-        If ConvStr2Dec(auxValue, dec) Then
-          Call GenerarPlanCuotas()
-        End If
-      End If
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub dtDiaVencimiento_ValueChanged(sender As Object, e As EventArgs) Handles dtDiaVencimiento.ValueChanged
-    Try
-      If m_skip Then Exit Sub
-      If dtDiaVencimiento.Value = 0 Then Exit Sub
-      Call GenerarPlanCuotas()
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub DateVenta_ValueChanged(sender As Object, e As EventArgs) Handles DateVenta.ValueChanged
-    Try
-      If m_skip Then Exit Sub
-      m_Producto.FechaVenta = DateVenta.Value
-      Call GenerarPlanCuotas()
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
 
   
 
@@ -811,17 +555,6 @@ Public Class frmVenta
 
   
 
-  Private Sub txtNumVenta_TextChanged(sender As Object, e As EventArgs) Handles txtNumVenta.TextChanged
-    Try
-      If Not IsNumeric(txtNumVenta.Text.Trim) Then
-        MsgBox("Solo ingresar numeros menores a " + Integer.MaxValue.ToString)
-      ElseIf CDbl(txtNumVenta.Text.Trim) >= Integer.MaxValue Then
-        MsgBox("Solo ingresar numeros menores a " + Integer.MaxValue.ToString)
-      End If
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
 
   Private Sub btnEditarArticulosVendidos_Click(sender As Object, e As EventArgs) Handles btnEditarArticulosVendidos.Click
     Try
@@ -837,4 +570,13 @@ Public Class frmVenta
   End Sub
 
 
+  Private Sub btnPagos_MouseClick(sender As Object, e As MouseEventArgs) Handles btnPagos.MouseClick
+    Try
+      Using objForm As New frmEstablecerPagos(m_Producto, m_CurrentPersona, m_CurrentVendedor)
+        objForm.ShowDialog(Me)
+      End Using
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class
