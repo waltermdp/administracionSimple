@@ -139,6 +139,8 @@ Public Class frmEstablecerPagos
       Dim ValorCuota As Decimal
       ConvStr2Dec(txtValorCuota.Text, ValorCuota)
       Dim adelantoCuota As Decimal = 0
+      If Precio <= 0 Then Exit Sub
+
 
       If m_lstPagos.Count <= 0 Then
         'aun no existen proximos pagos a debitar
@@ -146,14 +148,32 @@ Public Class frmEstablecerPagos
           MsgBox("El valor de adelanto de cuota no es valido, se considera 0")
           adelantoCuota = 0
         End If
-
+        lvPlanPagos.Items.Clear()
+        Dim Diferencia As Integer = 0
         For i As Integer = 1 To Cuota.Cantidad
           Dim item As New ListViewItem
+          Dim auxFechaDebitoCuota As Date
           item.Text = i
-          item.SubItems.Add(dtProximoPago.Value.ToString("dd/MM/yyyy"))
-          item.SubItems.Add(ValorCuota)
-          item.SubItems.Add("") 'fecha de pago
-          item.SubItems.Add(E_EstadoPago.Debe) 'fecha de pago
+          If FechaProximoDebito(DateVenta.Value, dtProximoPago.Value, i, auxFechaDebitoCuota) <> Result.OK Then
+            MsgBox("No se puede estimar el valor de las proximas cuotas")
+            Exit Sub
+          End If
+          item.SubItems.Add(auxFechaDebitoCuota.ToString("dd/MM/yyyy"))
+
+          If (ValorCuota * i - adelantoCuota) <= 0 Then
+            item.SubItems.Add(ValorCuota)
+            item.SubItems.Add(DateVenta.Value.ToString("dd/MM/yyyy")) 'fecha de pago
+            item.SubItems.Add(E_EstadoPago.Pago) 'fecha de pago
+          Else
+            If (ValorCuota * i - adelantoCuota) < ValorCuota Then
+              item.SubItems.Add(ValorCuota * i - adelantoCuota)
+            Else
+              item.SubItems.Add(ValorCuota)
+            End If
+            item.SubItems.Add("") 'fecha de pago
+            item.SubItems.Add(E_EstadoPago.Debe) 'fecha de pago
+          End If
+          
           lvPlanPagos.Items.Add(item)
         Next
       End If
@@ -182,6 +202,21 @@ Public Class frmEstablecerPagos
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Function FechaProximoDebito(ByVal vFVenta As Date, ByVal vFPrimerPago As Date, ByVal nCuota As Integer, ByRef rFecha As Date) As Result
+    Try
+      If nCuota < 1 Then Return Result.NOK
+      If nCuota = 1 Then
+        rFecha = vFPrimerPago
+      Else
+        rFecha = DateAdd(DateInterval.Month, nCuota, vFPrimerPago)
+      End If
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
   Private Function GetAdelanto(ByRef rValor As Decimal) As Result
     Try
@@ -413,6 +448,9 @@ Public Class frmEstablecerPagos
         Dim dec As Decimal
         If ConvStr2Dec(auxValue, dec) Then
           Call GenerarPlanCuotas()
+        Else
+          txtValorCuota.Text = ""
+          GenerarPlanCuotas()
         End If
       End If
     Catch ex As Exception
@@ -420,6 +458,18 @@ Public Class frmEstablecerPagos
     End Try
   End Sub
 
+  Private Sub txtAdelanto_TextChanged(sender As Object, e As EventArgs) Handles txtAdelanto.TextChanged
+    Try
+      Dim dec As Decimal
+      If ConvStr2Dec(txtAdelanto.Text, dec) Then
+        GenerarPlanCuotas()
+      Else
+        txtAdelanto.Text = ""
+      End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
  
 
   Private Sub DateVenta_ValueChanged(sender As Object, e As EventArgs) Handles DateVenta.ValueChanged
@@ -434,7 +484,9 @@ Public Class frmEstablecerPagos
 
   Private Sub txtNumVenta_TextChanged(sender As Object, e As EventArgs) Handles txtNumVenta.TextChanged
     Try
+      If String.IsNullOrEmpty(txtNumVenta.Text.Trim) Then Exit Sub
       If Not IsNumeric(txtNumVenta.Text.Trim) Then
+
         MsgBox("Solo ingresar numeros menores a " + Integer.MaxValue.ToString)
       ElseIf CDbl(txtNumVenta.Text.Trim) >= Integer.MaxValue Then
         MsgBox("Solo ingresar numeros menores a " + Integer.MaxValue.ToString)
@@ -460,4 +512,6 @@ Public Class frmEstablecerPagos
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  
 End Class

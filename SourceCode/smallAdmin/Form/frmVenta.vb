@@ -42,10 +42,6 @@ Public Class frmVenta
     Try
       m_skip = True
       Dim vResult As Result = Result.NOK
-
-
-
-      
       m_hayCambios = False
 
       ListView1.View = View.Details
@@ -54,8 +50,8 @@ Public Class frmVenta
       ListView1.Columns(2).Width = CInt(ListView1.Width - ListView1.Columns(0).Width - ListView1.Columns(1).Width)
       ListView1.ShowItemToolTips = True
 
-
       lblNumeroVenta.Text = GetUltimoComprobante()
+      lblFechaVenta.Text = GetAhora.ToString("dd/MM/yyyy")
 
 
       If m_CurrentPersona Is Nothing AndAlso m_CurrentVendedor Is Nothing Then Exit Sub

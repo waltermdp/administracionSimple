@@ -146,3 +146,4 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulo.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulosVendidos.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmEstablecerPagos.resources
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmEstablecerPagos.resources

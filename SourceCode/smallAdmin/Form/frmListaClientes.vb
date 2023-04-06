@@ -18,7 +18,7 @@ Public Class frmListaClientes
 
       m_CurrentSortColumnName = "Nombre"
       m_CurrentSortDirection = "DESC"
-
+      txtFiltro.Select()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -36,9 +36,16 @@ Public Class frmListaClientes
     End Try
   End Sub
 
-  Private Sub main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+  Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
     Try
-      'MostrarClientes()
+      If String.IsNullOrEmpty(txtFiltro.Text) Then
+        m_objPersona_Current = Nothing
+        bsInfoCliente.DataSource = Nothing
+        bsInfoCliente.ResetBindings(False)
+        Exit Sub
+      End If
+      MostrarClientes()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -53,9 +60,6 @@ Public Class frmListaClientes
 
 
       m_objDatabaseList = New clsListDatabase()
-      'm_CurrentSortDirection = "DESC"
-      'm_CurrentSortColumnName = "Nombre" 'Nothing
-      'm_objDatabaseList.Cfg_Orden = "ORDER BY " & m_CurrentSortColumnName & " " & m_CurrentSortDirection
       m_objDatabaseList.Cfg_Filtro = GetFiltro()
       bsInfoCliente.DataSource = m_objDatabaseList.Binding
 
@@ -72,6 +76,9 @@ Public Class frmListaClientes
 
   Private Function GetFiltro() As String
     Try
+      If txtFiltro.Text = "*" Then
+        Return String.Empty
+      End If
       Dim Command As String = "where Nombre Like '%" & txtFiltro.Text.Trim & _
                               "%' OR Apellido Like '%" & txtFiltro.Text.Trim & _
                               "%' OR ID Like '%" & txtFiltro.Text.Trim & _
@@ -297,4 +304,6 @@ Public Class frmListaClientes
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+ 
 End Class

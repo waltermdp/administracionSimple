@@ -346,7 +346,7 @@ Partial Class frmListaClientes
     Me.btnBuscar.Location = New System.Drawing.Point(497, 75)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
-    Me.btnBuscar.TabIndex = 37
+    Me.btnBuscar.TabIndex = 2
     Me.btnBuscar.Text = "Buscar"
     Me.btnBuscar.UseVisualStyleBackColor = False
     '
@@ -355,7 +355,7 @@ Partial Class frmListaClientes
     Me.txtFiltro.Location = New System.Drawing.Point(183, 94)
     Me.txtFiltro.Name = "txtFiltro"
     Me.txtFiltro.Size = New System.Drawing.Size(292, 20)
-    Me.txtFiltro.TabIndex = 36
+    Me.txtFiltro.TabIndex = 1
     '
     'Label2
     '

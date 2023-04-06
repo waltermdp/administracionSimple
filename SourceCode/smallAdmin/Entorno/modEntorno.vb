@@ -75,7 +75,7 @@ Module Entorno
       DB_SLocal_ConnectionString = GetAccessConectionStringDBS(DB_path)
 
       If g_debug Then
-        g_Today = New Date(2020, 12, 31)
+        g_Today = Today ' New Date(2020, 12, 31)
       Else
         g_Today = Today
       End If
