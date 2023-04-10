@@ -41,6 +41,15 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.lblCuota = New System.Windows.Forms.Label()
+    Me.lblTotalCuotas = New System.Windows.Forms.Label()
+    Me.lblTotal = New System.Windows.Forms.Label()
+    Me.lblMedioDePago = New System.Windows.Forms.Label()
+    Me.lblNumeroVenta = New System.Windows.Forms.Label()
+    Me.lblFechaVenta = New System.Windows.Forms.Label()
+    Me.Label6 = New System.Windows.Forms.Label()
     Me.btnPagos = New System.Windows.Forms.Button()
     Me.ListView1 = New System.Windows.Forms.ListView()
     Me.cArticulos = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -57,16 +66,12 @@ Partial Class frmVenta
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
     Me.tTip = New System.Windows.Forms.ToolTip(Me.components)
     Me.lblTitulo = New System.Windows.Forms.Label()
-    Me.Label6 = New System.Windows.Forms.Label()
-    Me.lblFechaVenta = New System.Windows.Forms.Label()
-    Me.lblNumeroVenta = New System.Windows.Forms.Label()
-    Me.lblMedioDePago = New System.Windows.Forms.Label()
-    Me.lblTotal = New System.Windows.Forms.Label()
-    Me.lblTotalCuotas = New System.Windows.Forms.Label()
-    Me.lblCuota = New System.Windows.Forms.Label()
-    Me.Label3 = New System.Windows.Forms.Label()
     Me.lvPlanPagos = New System.Windows.Forms.ListView()
-    Me.Label5 = New System.Windows.Forms.Label()
+    Me.cNCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cFechaCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cValorCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cFechaPago = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cEstado = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.gpVenta.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
     Me.GroupBox2.SuspendLayout()
@@ -255,8 +260,8 @@ Partial Class frmVenta
     'gpVenta
     '
     Me.gpVenta.BackColor = System.Drawing.Color.White
-    Me.gpVenta.Controls.Add(Me.Label5)
     Me.gpVenta.Controls.Add(Me.lvPlanPagos)
+    Me.gpVenta.Controls.Add(Me.Label5)
     Me.gpVenta.Controls.Add(Me.Label3)
     Me.gpVenta.Controls.Add(Me.lblCuota)
     Me.gpVenta.Controls.Add(Me.lblTotalCuotas)
@@ -283,6 +288,87 @@ Partial Class frmVenta
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "3- Venta"
+    '
+    'Label5
+    '
+    Me.Label5.AutoSize = True
+    Me.Label5.Location = New System.Drawing.Point(523, 244)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(100, 15)
+    Me.Label5.TabIndex = 66
+    Me.Label5.Text = "Plan de Pagos"
+    '
+    'Label3
+    '
+    Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label3.Location = New System.Drawing.Point(704, 214)
+    Me.Label3.Name = "Label3"
+    Me.Label3.Size = New System.Drawing.Size(240, 19)
+    Me.Label3.TabIndex = 64
+    '
+    'lblCuota
+    '
+    Me.lblCuota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.lblCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCuota.Location = New System.Drawing.Point(837, 185)
+    Me.lblCuota.Name = "lblCuota"
+    Me.lblCuota.Size = New System.Drawing.Size(107, 19)
+    Me.lblCuota.TabIndex = 63
+    '
+    'lblTotalCuotas
+    '
+    Me.lblTotalCuotas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.lblTotalCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblTotalCuotas.Location = New System.Drawing.Point(650, 184)
+    Me.lblTotalCuotas.Name = "lblTotalCuotas"
+    Me.lblTotalCuotas.Size = New System.Drawing.Size(58, 19)
+    Me.lblTotalCuotas.TabIndex = 62
+    '
+    'lblTotal
+    '
+    Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblTotal.Location = New System.Drawing.Point(650, 154)
+    Me.lblTotal.Name = "lblTotal"
+    Me.lblTotal.Size = New System.Drawing.Size(294, 19)
+    Me.lblTotal.TabIndex = 61
+    '
+    'lblMedioDePago
+    '
+    Me.lblMedioDePago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.lblMedioDePago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblMedioDePago.Location = New System.Drawing.Point(650, 126)
+    Me.lblMedioDePago.Name = "lblMedioDePago"
+    Me.lblMedioDePago.Size = New System.Drawing.Size(294, 19)
+    Me.lblMedioDePago.TabIndex = 60
+    '
+    'lblNumeroVenta
+    '
+    Me.lblNumeroVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.lblNumeroVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblNumeroVenta.Location = New System.Drawing.Point(650, 96)
+    Me.lblNumeroVenta.Name = "lblNumeroVenta"
+    Me.lblNumeroVenta.Size = New System.Drawing.Size(294, 19)
+    Me.lblNumeroVenta.TabIndex = 59
+    '
+    'lblFechaVenta
+    '
+    Me.lblFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.lblFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblFechaVenta.Location = New System.Drawing.Point(650, 67)
+    Me.lblFechaVenta.Name = "lblFechaVenta"
+    Me.lblFechaVenta.Size = New System.Drawing.Size(294, 19)
+    Me.lblFechaVenta.TabIndex = 58
+    '
+    'Label6
+    '
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.Location = New System.Drawing.Point(528, 27)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(136, 23)
+    Me.Label6.TabIndex = 57
+    Me.Label6.Text = "Forma de Pago"
     '
     'btnPagos
     '
@@ -436,94 +522,39 @@ Partial Class frmVenta
     Me.lblTitulo.Text = "Venta"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
-    'Label6
-    '
-    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.Location = New System.Drawing.Point(528, 27)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(136, 23)
-    Me.Label6.TabIndex = 57
-    Me.Label6.Text = "Forma de Pago"
-    '
-    'lblFechaVenta
-    '
-    Me.lblFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.lblFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblFechaVenta.Location = New System.Drawing.Point(650, 67)
-    Me.lblFechaVenta.Name = "lblFechaVenta"
-    Me.lblFechaVenta.Size = New System.Drawing.Size(294, 19)
-    Me.lblFechaVenta.TabIndex = 58
-    '
-    'lblNumeroVenta
-    '
-    Me.lblNumeroVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.lblNumeroVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblNumeroVenta.Location = New System.Drawing.Point(650, 96)
-    Me.lblNumeroVenta.Name = "lblNumeroVenta"
-    Me.lblNumeroVenta.Size = New System.Drawing.Size(294, 19)
-    Me.lblNumeroVenta.TabIndex = 59
-    '
-    'lblMedioDePago
-    '
-    Me.lblMedioDePago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.lblMedioDePago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblMedioDePago.Location = New System.Drawing.Point(650, 126)
-    Me.lblMedioDePago.Name = "lblMedioDePago"
-    Me.lblMedioDePago.Size = New System.Drawing.Size(294, 19)
-    Me.lblMedioDePago.TabIndex = 60
-    '
-    'lblTotal
-    '
-    Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotal.Location = New System.Drawing.Point(650, 154)
-    Me.lblTotal.Name = "lblTotal"
-    Me.lblTotal.Size = New System.Drawing.Size(294, 19)
-    Me.lblTotal.TabIndex = 61
-    '
-    'lblTotalCuotas
-    '
-    Me.lblTotalCuotas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.lblTotalCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotalCuotas.Location = New System.Drawing.Point(650, 184)
-    Me.lblTotalCuotas.Name = "lblTotalCuotas"
-    Me.lblTotalCuotas.Size = New System.Drawing.Size(58, 19)
-    Me.lblTotalCuotas.TabIndex = 62
-    '
-    'lblCuota
-    '
-    Me.lblCuota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.lblCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCuota.Location = New System.Drawing.Point(837, 185)
-    Me.lblCuota.Name = "lblCuota"
-    Me.lblCuota.Size = New System.Drawing.Size(107, 19)
-    Me.lblCuota.TabIndex = 63
-    '
-    'Label3
-    '
-    Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label3.Location = New System.Drawing.Point(704, 214)
-    Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(240, 19)
-    Me.Label3.TabIndex = 64
-    '
     'lvPlanPagos
     '
+    Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
     Me.lvPlanPagos.Location = New System.Drawing.Point(526, 262)
     Me.lvPlanPagos.Name = "lvPlanPagos"
     Me.lvPlanPagos.Size = New System.Drawing.Size(418, 244)
-    Me.lvPlanPagos.TabIndex = 65
+    Me.lvPlanPagos.TabIndex = 68
     Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
+    Me.lvPlanPagos.View = System.Windows.Forms.View.Details
     '
-    'Label5
+    'cNCuota
     '
-    Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(523, 244)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(100, 15)
-    Me.Label5.TabIndex = 66
-    Me.Label5.Text = "Plan de Pagos"
+    Me.cNCuota.Text = "Cuota"
+    '
+    'cFechaCuota
+    '
+    Me.cFechaCuota.Text = "Debitar"
+    Me.cFechaCuota.Width = 80
+    '
+    'cValorCuota
+    '
+    Me.cValorCuota.Text = "Valor cuota"
+    Me.cValorCuota.Width = 92
+    '
+    'cFechaPago
+    '
+    Me.cFechaPago.Text = "Pagado"
+    Me.cFechaPago.Width = 80
+    '
+    'cEstado
+    '
+    Me.cEstado.Text = "Estado"
+    Me.cEstado.Width = 72
     '
     'frmVenta
     '
@@ -590,7 +621,6 @@ Partial Class frmVenta
   Friend WithEvents lblTitulo As System.Windows.Forms.Label
   Friend WithEvents btnPagos As System.Windows.Forms.Button
   Friend WithEvents Label5 As System.Windows.Forms.Label
-  Friend WithEvents lvPlanPagos As System.Windows.Forms.ListView
   Friend WithEvents Label3 As System.Windows.Forms.Label
   Friend WithEvents lblCuota As System.Windows.Forms.Label
   Friend WithEvents lblTotalCuotas As System.Windows.Forms.Label
@@ -599,4 +629,10 @@ Partial Class frmVenta
   Friend WithEvents lblNumeroVenta As System.Windows.Forms.Label
   Friend WithEvents lblFechaVenta As System.Windows.Forms.Label
   Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents lvPlanPagos As System.Windows.Forms.ListView
+  Friend WithEvents cNCuota As System.Windows.Forms.ColumnHeader
+  Friend WithEvents cFechaCuota As System.Windows.Forms.ColumnHeader
+  Friend WithEvents cValorCuota As System.Windows.Forms.ColumnHeader
+  Friend WithEvents cFechaPago As System.Windows.Forms.ColumnHeader
+  Friend WithEvents cEstado As System.Windows.Forms.ColumnHeader
 End Class

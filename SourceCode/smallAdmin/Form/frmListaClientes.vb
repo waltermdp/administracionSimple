@@ -306,4 +306,17 @@ Public Class frmListaClientes
   End Sub
 
  
+  Private Sub dgvData1_DoubleClick(sender As Object, e As EventArgs) Handles dgvData1.DoubleClick
+    Try
+
+      Dim vResult As Result = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
+      If vResult <> Result.OK Then
+        Exit Sub
+      End If
+      btnVolver.PerformClick()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

@@ -22,7 +22,7 @@ Public Class frmVenta
     Try
       If vProducto Is Nothing Then
         m_Producto = New clsInfoProducto
-        m_Producto.GuidProducto = Guid.NewGuid
+        m_Producto.GuidProducto = Guid.Empty  'Solo se genera cuando se guarda la venta' Guid.NewGuid
         m_CurrentPersona = Nothing
         m_CurrentVendedor = Nothing
       Else
@@ -79,7 +79,11 @@ Public Class frmVenta
           Call Print_msg("Fallo carga de cuenta")
         End If
 
+        FillClientData()
+        FillVendedorData()
+        LoadArticulosVendidos()
         FillVentaData()
+        FillVenta()
         If TerminoDePagar(m_Producto) Then btnSave.Enabled = False
 
         Exit Sub
@@ -548,8 +552,49 @@ Public Class frmVenta
 
 
 
+  Private Sub FillVenta()
+    Try
+      If m_Producto Is Nothing Then Exit Sub
+      'm_lstPagos.Clear()
+      'For Each pago In m_Producto.ListaPagos
+      '  m_lstPagos.Add(pago.Clone)
+      'Next
 
-  
+      'No se puede editar lo que ya esta pagado, se puede modificar en adelante, considerando lo ya pagado
+      Dim Precio As Decimal
+      Dim ValorCuota As Decimal
+      lblFechaVenta.Text = m_Producto.FechaVenta.ToString("dd/MM/yyyy")
+      lblNumeroVenta.Text = m_Producto.NumComprobante
+      lblMedioDePago.Text = GetNameOfTipoPago(m_CurrentCuenta.TipoDeCuenta) & " -- " & m_CurrentCuenta.Codigo1.ToString
+      lblTotal.Text = m_Producto.Precio
+      lblTotalCuotas.Text = m_Producto.ValorCuotaFija
+      lblCuota.Text = m_Producto.TotalCuotas
+
+      ConvStr2Dec(m_Producto.Precio, Precio)
+      ConvStr2Dec(m_Producto.ValorCuotaFija, ValorCuota)
+
+
+
+
+      lvPlanPagos.Items.Clear()
+      For Each pago As clsInfoPagos In m_Producto.ListaPagos
+        Dim item As New ListViewItem
+        item.Text = pago.NumCuota
+        item.SubItems.Add(pago.VencimientoCuota.ToString("dd/MM/yyyy"))
+        item.SubItems.Add(pago.ValorCuota)
+        item.SubItems.Add(pago.FechaPago.ToString("dd/MM/yyyy")) 'fecha de pago
+        item.SubItems.Add(pago.EstadoPago) 'fecha de pago
+      Next
+
+
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+
+
+  End Sub
+
 
 
   Private Sub btnEditarArticulosVendidos_Click(sender As Object, e As EventArgs) Handles btnEditarArticulosVendidos.Click
@@ -570,7 +615,9 @@ Public Class frmVenta
     Try
       Using objForm As New frmEstablecerPagos(m_Producto, m_CurrentPersona, m_CurrentVendedor)
         objForm.ShowDialog(Me)
+        'objForm.GetProducto(m_Producto)
       End Using
+      'FillVenta()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

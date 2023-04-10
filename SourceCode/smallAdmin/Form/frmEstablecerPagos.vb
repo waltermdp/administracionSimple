@@ -7,8 +7,10 @@ Public Class frmEstablecerPagos
   Private m_Cliente As ClsInfoPersona
   Private m_Vendedor As clsInfoVendedor
   Private m_CurrentCuenta As clsInfoCuenta
-
+  Private m_lstPagos As New List(Of clsInfoPagos)
   Private m_skip As Boolean
+
+  Private m_Result As Result = Result.CANCEL
 
   Public Sub New(ByVal vProducto As clsInfoProducto, ByVal vCliente As ClsInfoPersona, ByVal vVendedor As clsInfoVendedor)
 
@@ -37,69 +39,72 @@ Public Class frmEstablecerPagos
       cmbCuotas.DataSource = g_Cuotas
       chkEditarCuotas.Checked = False
       txtValorCuota.Enabled = False
+    
 
       vResult = clsCuenta.Load(m_Producto.GuidCuenta, m_CurrentCuenta)
       If vResult <> Result.OK Then
         Call Print_msg("Fallo carga de cuenta")
       End If
+      DateVenta.Value = g_Today
+      dtProximoPago.Value = New Date(g_Today.Year, g_Today.AddMonths(1).Month, 1)
 
+    
       FillInformacion()
+    
       m_skip = False
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
-  Private Function GetUltimoComprobante() As Integer
-    Try
-      Dim lstpagos As New clsListPagos
-      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
-      lstpagos.RefreshData()
 
-      If lstpagos.Items.Count > 0 Then
-        Return lstpagos.Items.First.NumComprobante + 1
-      Else
-        Return -1
-      End If
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return -1
-    End Try
-  End Function
 
   Public Sub FillInformacion()
     Try
-      'm_lstPagos = m_Producto.ListaPagos.ToList
-      'm_NumOperacion = m_lstPagos.Last.NumComprobante
-      'lblNumComprobante.Text = m_NumOperacion.ToString
-
-
-
-      'DateVenta.Value = m_Producto.FechaVenta
-      'dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
-
+     
       With m_Producto
-        DateVenta.Value = .FechaVenta
-        'If .FechaPrimerPago.Day > 30 Then
-        '  dtDiaVencimiento.Value = dtDiaVencimiento.Maximum
-        'Else
-        '  dtDiaVencimiento.Value = .FechaPrimerPago.Day
-        'End If
-        txtPrecio.Text = .Precio 'precio total
-        txtNumVenta.Text = .NumComprobante.ToString
-        For Each cuota In g_Cuotas
-          If cuota.Cantidad = .TotalCuotas Then
-            cmbCuotas.SelectedItem = cuota
-            Exit For
-          End If
-        Next
-        If .ListaPagos.Count > 0 Then
-          txtValorCuota.Text = .ValorCuotaFija.ToString  ' .ListaPagos.Last.ValorCuota.ToString
-        Else
-          txtValorCuota.Text = .Precio.ToString
-        End If
+        If m_Producto.GuidProducto = Guid.Empty Then
+          'valores iniciales
+          DateVenta.Value = g_Today
+          dtProximoPago.Value = New Date(g_Today.Year, g_Today.AddMonths(1).Month, 1)
+          txtPrecio.Text = 0
+          txtNumVenta.Text = -1
+          cmbCuotas.SelectedItem = 0
+          txtValorCuota.Text = 0
+          m_lstPagos.Clear()
+          lvPlanPagos.Items.Clear()
+          
 
+        Else
+          DateVenta.Value = .FechaVenta
+          dtProximoPago.Value = .FechaPrimerPago
+          txtPrecio.Text = .Precio 'precio total
+          txtNumVenta.Text = .NumComprobante.ToString
+          For Each cuota In g_Cuotas
+            If cuota.Cantidad = .TotalCuotas Then
+              cmbCuotas.SelectedItem = cuota
+              Exit For
+            End If
+          Next
+          If .ListaPagos.Count > 0 Then
+            txtValorCuota.Text = .ValorCuotaFija.ToString
+          Else
+            txtValorCuota.Text = .Precio.ToString
+          End If
+
+          lvPlanPagos.Items.Clear()
+          For Each pago As clsInfoPagos In m_Producto.ListaPagos
+            Dim item As New ListViewItem
+            item.Text = pago.NumCuota
+            item.SubItems.Add(pago.VencimientoCuota.ToString("dd/MM/yyyy"))
+            item.SubItems.Add(pago.ValorCuota)
+            item.SubItems.Add(pago.FechaPago.ToString("dd/MM/yyyy")) 'fecha de pago
+            item.SubItems.Add(pago.EstadoPago) 'fecha de pago
+            lvPlanPagos.Items.Add(item)
+          Next
+
+        End If
 
       End With
       Call FillMedioDePagoDescripcion()
@@ -121,7 +126,41 @@ Public Class frmEstablecerPagos
 
   End Sub
 
-  Private m_lstPagos As New List(Of clsInfoPagos)
+
+
+
+  Private Sub btnGuardar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnGuardar.MouseClick
+    Try
+      With m_Producto
+        Dim adelantoCuota As Decimal = 0
+        GetAdelanto(adelantoCuota)
+        m_Producto.Adelanto = adelantoCuota
+        m_Producto.Cuenta = m_CurrentCuenta
+        'm_Producto.CuotasDebe =
+        m_Producto.FechaPrimerPago = dtProximoPago.Value
+        m_Producto.FechaVenta = DateVenta.Value
+
+        Dim ValorCuota As Decimal
+        ConvStr2Dec(txtValorCuota.Text, ValorCuota)
+        .ValorCuotaFija = ValorCuota
+        Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
+        .TotalCuotas = Cuota.Cantidad
+        Dim Precio As Decimal
+        ConvStr2Dec(txtPrecio.Text, Precio)
+        .Precio = Precio
+        .NumComprobante = txtNumVenta.Text
+        .ListaPagos.Clear()
+        .ListaPagos.AddRange(m_lstPagos.ToList)
+      End With
+      m_Producto.GuidProducto = Guid.NewGuid
+      m_Result = Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_Result = Result.CANCEL
+    Finally
+      Me.Close()
+    End Try
+  End Sub
 
   Private Sub GenerarPlanCuotas()
     Try
@@ -197,7 +236,7 @@ Public Class frmEstablecerPagos
       'm_lstPagos.Add(auxPago)
 
       'Call ReloadListPagos()
-
+      Dim j As Integer = 0
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -240,6 +279,8 @@ Public Class frmEstablecerPagos
       Return Result.ErrorEx
     End Try
   End Function
+
+
   Private Sub AplicarPagoAdelantado()
     Try
       If IsNumeric(txtAdelanto.Text.Trim) Then
@@ -505,13 +546,43 @@ Public Class frmEstablecerPagos
     End Try
   End Sub
 
+  Public Function GetProducto(ByRef rProducto As clsInfoProducto) As Result
+    Try
+      If m_Result = Result.OK Then
+        rProducto = m_Producto.Clone
+      End If
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
   Private Sub btnCancel_MouseClick(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseClick
     Try
+      m_Result = Result.CANCEL
       Me.Close()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
-  
+  Private Function GetUltimoComprobante() As Integer
+    Try
+      Dim lstpagos As New clsListPagos
+      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
+      lstpagos.RefreshData()
+
+      If lstpagos.Items.Count > 0 Then
+        Return lstpagos.Items.First.NumComprobante + 1
+      Else
+        Return -1
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return -1
+    End Try
+  End Function
+ 
 End Class
