@@ -10,7 +10,7 @@ Public Class frmListaClientes
   Private m_objPersona_Current As ClsInfoPersona = Nothing
 
   Private m_SelectedClient As clsInfoCliente
-
+  Private m_Result As Result = Result.CANCEL
 
   Private Sub main_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
@@ -231,16 +231,7 @@ Public Class frmListaClientes
   Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
     Try
 
-      Dim vResult As Result
-      If m_objPersona_Current Is Nothing Then
-        m_SelectedClient = Nothing
-      Else
-        vResult = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
-        If vResult <> Result.OK Then
-          m_SelectedClient = Nothing
-        End If
-
-      End If
+      m_Result = Result.CANCEL
       Me.Close()
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -313,10 +304,47 @@ Public Class frmListaClientes
       If vResult <> Result.OK Then
         Exit Sub
       End If
-      btnVolver.PerformClick()
+      btnSeleccionar.PerformClick()
 
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Public Function GetResult() As Result
+    Try
+      Return m_Result
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub btnSeleccionar_Click(sender As Object, e As EventArgs) Handles btnSeleccionar.Click
+    Try
+      Dim vResult As Result = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
+      If vResult <> Result.OK Then
+        Exit Sub
+      End If
+
+      If m_objPersona_Current Is Nothing Then
+        m_SelectedClient = Nothing
+      Else
+        vResult = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
+        If vResult <> Result.OK Then
+          m_SelectedClient = Nothing
+        End If
+      End If
+      If m_SelectedClient Is Nothing Then
+        MsgBox("Debe elegir un cliente de la lista")
+        Exit Sub
+      End If
+      m_Result = Result.OK
+      Me.Close()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
 End Class

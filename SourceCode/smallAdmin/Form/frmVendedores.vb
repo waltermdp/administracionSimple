@@ -5,7 +5,7 @@ Public Class frmVendedores
 
   Private m_Modo As Boolean = False
   Private m_Grupos As New clsListGrupos
-
+  Private m_result As Result = Result.CANCEL
 
   Public Sub New(Optional ByVal vModo As Boolean = False)
 
@@ -27,10 +27,7 @@ Public Class frmVendedores
       End If
       m_Grupos.RefreshData()
       cmbGrupo.DataSource = m_Grupos.Items ' [Enum].GetNames(GetType(GRUPOS))
-
-
-      Call MostrarListaVendedores()
-      Call Refresh_Selection(-1)
+      txtFiltro.Select()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -107,6 +104,17 @@ Public Class frmVendedores
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub dgvListVendedores_DoubleClick(sender As Object, e As EventArgs) Handles dgvListVendedores.DoubleClick
+    Try
+      btnSeleccionar.PerformClick()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+   
+  End Sub
+
+
 
   Private Sub dgvListVendedores_SelectionChanged(sender As Object, e As EventArgs) Handles dgvListVendedores.SelectionChanged
     Try
@@ -200,8 +208,18 @@ Public Class frmVendedores
     End Try
   End Sub
 
+  Public Function GetResult() As Result
+    Try
+      Return m_result
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
   Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
     Try
+      m_result = Result.CANCEL
       Me.Close()
       Exit Sub
     Catch ex As Exception
@@ -241,10 +259,35 @@ Public Class frmVendedores
       If vResult <> Result.OK Then
         MsgBox("No se puedo guardar el grupo seleccionado")
       End If
-      'Call Refresh_Selection(dgvListVendedores.SelectedRows(0).Index)
+
       dgvListVendedores.Refresh()
     Catch ex As Exception
       Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
+  Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
+    Try
+      If String.IsNullOrEmpty(txtFiltro.Text) Then
+        m_objVendedorCurrent = Nothing
+        bsVendedores.DataSource = Nothing
+        bsVendedores.ResetBindings(False)
+        Exit Sub
+      End If
+      MostrarListaVendedores()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSeleccionar_Click(sender As Object, e As EventArgs) Handles btnSeleccionar.Click
+    Try
+      m_result = Result.OK
+      Me.Close()
+    Catch ex As Exception
+      Print_msg(ex.Message)
     End Try
   End Sub
 End Class

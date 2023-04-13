@@ -96,7 +96,18 @@
     TipoDeCuenta = Nothing
   End Sub
 
- 
+  Public Function IsValid() As Boolean
+    Try
+      If IdCuenta < 0 Then Return False
+      If GuidCliente = Guid.Empty Then Return False
+      If GuidCuenta = Guid.Empty Then Return False
+      If TipoDeCuenta = Guid.Empty Then Return False
+      Return True
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
 
   Public Sub SetDelegadoCustomString(ByRef vSub As delToString)
     Try

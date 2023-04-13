@@ -54,6 +54,7 @@ Partial Class frmVendedores
     Me.btnBuscar = New System.Windows.Forms.Button()
     Me.txtFiltro = New System.Windows.Forms.TextBox()
     Me.cmbGrupo = New System.Windows.Forms.ComboBox()
+    Me.btnSeleccionar = New System.Windows.Forms.Button()
     CType(Me.dgvListVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -234,7 +235,7 @@ Partial Class frmVendedores
     Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(24, 51)
+    Me.btnNuevo.Location = New System.Drawing.Point(24, 158)
     Me.btnNuevo.Name = "btnNuevo"
     Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
     Me.btnNuevo.TabIndex = 26
@@ -248,7 +249,7 @@ Partial Class frmVendedores
     Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEditar.ForeColor = System.Drawing.Color.White
-    Me.btnEditar.Location = New System.Drawing.Point(24, 127)
+    Me.btnEditar.Location = New System.Drawing.Point(24, 234)
     Me.btnEditar.Name = "btnEditar"
     Me.btnEditar.Size = New System.Drawing.Size(110, 61)
     Me.btnEditar.TabIndex = 27
@@ -262,7 +263,7 @@ Partial Class frmVendedores
     Me.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnBorrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnBorrar.ForeColor = System.Drawing.Color.White
-    Me.btnBorrar.Location = New System.Drawing.Point(24, 203)
+    Me.btnBorrar.Location = New System.Drawing.Point(24, 310)
     Me.btnBorrar.Name = "btnBorrar"
     Me.btnBorrar.Size = New System.Drawing.Size(110, 61)
     Me.btnBorrar.TabIndex = 28
@@ -302,7 +303,7 @@ Partial Class frmVendedores
     Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnLiquidar.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidar.Location = New System.Drawing.Point(24, 49)
+    Me.btnLiquidar.Location = New System.Drawing.Point(24, 158)
     Me.btnLiquidar.Name = "btnLiquidar"
     Me.btnLiquidar.Size = New System.Drawing.Size(110, 61)
     Me.btnLiquidar.TabIndex = 31
@@ -350,12 +351,27 @@ Partial Class frmVendedores
     Me.cmbGrupo.Size = New System.Drawing.Size(206, 21)
     Me.cmbGrupo.TabIndex = 35
     '
+    'btnSeleccionar
+    '
+    Me.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSeleccionar.FlatAppearance.BorderSize = 0
+    Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
+    Me.btnSeleccionar.Location = New System.Drawing.Point(24, 49)
+    Me.btnSeleccionar.Name = "btnSeleccionar"
+    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 61)
+    Me.btnSeleccionar.TabIndex = 36
+    Me.btnSeleccionar.Text = "Seleccionar"
+    Me.btnSeleccionar.UseVisualStyleBackColor = False
+    '
     'frmVendedores
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnSeleccionar)
     Me.Controls.Add(Me.cmbGrupo)
     Me.Controls.Add(Me.btnBuscar)
     Me.Controls.Add(Me.txtFiltro)
@@ -404,4 +420,5 @@ Partial Class frmVendedores
   Friend WithEvents CategoriaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentarioDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents cmbGrupo As System.Windows.Forms.ComboBox
+  Friend WithEvents btnSeleccionar As System.Windows.Forms.Button
 End Class

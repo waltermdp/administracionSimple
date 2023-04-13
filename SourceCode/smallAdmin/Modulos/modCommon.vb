@@ -371,6 +371,35 @@ Module modCommon
     End Try
   End Sub
 
+  'puede retornar string vacio
+  Public Function Date2String(ByVal vFecha As Date) As String
+    Try
+      If vFecha <= Date.MinValue Then
+        Return String.Empty
+      Else
+        Return vFecha.ToString("dd/MM/yyyy")
+      End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return String.Empty
+    End Try
+  End Function
 
+ 
+  Public Function EstadoPagos2String(ByVal vEstado As E_EstadoPago) As String
+    Try
+      If vEstado = E_EstadoPago.Debe Then Return "Debe"
+      If vEstado = E_EstadoPago.Pago Then Return "Pago"
+      If vEstado = E_EstadoPago.Anulo_Editado Then Return "Anulo_Editado"
+      If vEstado = E_EstadoPago.Vencido Then Return "Vencido"
+      If vEstado = E_EstadoPago.Observado Then Return "Observado"
+      If vEstado = E_EstadoPago.PagoParcial Then Return "PagoParcial"
+      If vEstado = E_EstadoPago.Eliminado Then Return "Eliminado"
+      Return "NA"
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return String.Empty
+    End Try
+  End Function
 
 End Module

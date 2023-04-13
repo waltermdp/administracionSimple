@@ -5,14 +5,34 @@ Public Class frmArticulosVendidos
 
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
   Private m_lstArticulos As New clsListArticulos
+  Private m_result As Result = Result.CANCEL
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
+      m_result = Result.CANCEL
       Me.Close()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Try
+      m_result = Result.OK
+      Me.Close()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Public Function GetResult() As Result
+    Try
+      Return m_result
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
   Public Sub New(ByVal vListaArtVendidos As List(Of clsInfoArticuloVendido))
     ' This call is required by the designer.
@@ -45,7 +65,7 @@ Public Class frmArticulosVendidos
       bsArticulos.DataSource = m_lstArticulos.Binding
       m_lstArticulos.RefreshData()
       bsArticulos.ResetBindings(False)
-
+      txtBuscarArticulo.Select()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -275,6 +295,7 @@ Public Class frmArticulosVendidos
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
 
 
 End Class

@@ -308,7 +308,7 @@ Partial Class frmEstablecerPagos
     Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
     Me.lvPlanPagos.Location = New System.Drawing.Point(265, 331)
     Me.lvPlanPagos.Name = "lvPlanPagos"
-    Me.lvPlanPagos.Size = New System.Drawing.Size(418, 364)
+    Me.lvPlanPagos.Size = New System.Drawing.Size(439, 364)
     Me.lvPlanPagos.TabIndex = 67
     Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
     Me.lvPlanPagos.View = System.Windows.Forms.View.Details
@@ -320,21 +320,22 @@ Partial Class frmEstablecerPagos
     'cFechaCuota
     '
     Me.cFechaCuota.Text = "Debitar"
-    Me.cFechaCuota.Width = 80
+    Me.cFechaCuota.Width = 109
     '
     'cValorCuota
     '
     Me.cValorCuota.Text = "Valor cuota"
-    Me.cValorCuota.Width = 70
+    Me.cValorCuota.Width = 79
     '
     'cFechaPago
     '
     Me.cFechaPago.Text = "Pagado"
-    Me.cFechaPago.Width = 80
+    Me.cFechaPago.Width = 110
     '
     'cEstado
     '
     Me.cEstado.Text = "Estado"
+    Me.cEstado.Width = 74
     '
     'btnGuardar
     '

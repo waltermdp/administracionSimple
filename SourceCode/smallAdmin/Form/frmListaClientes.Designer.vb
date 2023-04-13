@@ -60,6 +60,7 @@ Partial Class frmListaClientes
     Me.btnMostrarErrores = New System.Windows.Forms.Button()
     Me.btnMostrarDuplicados = New System.Windows.Forms.Button()
     Me.lblInfo = New System.Windows.Forms.Label()
+    Me.btnSeleccionar = New System.Windows.Forms.Button()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -71,7 +72,7 @@ Partial Class frmListaClientes
     Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEdit.ForeColor = System.Drawing.Color.White
-    Me.btnEdit.Location = New System.Drawing.Point(24, 127)
+    Me.btnEdit.Location = New System.Drawing.Point(24, 221)
     Me.btnEdit.Name = "btnEdit"
     Me.btnEdit.Size = New System.Drawing.Size(110, 61)
     Me.btnEdit.TabIndex = 0
@@ -290,7 +291,7 @@ Partial Class frmListaClientes
     Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(24, 51)
+    Me.btnNuevo.Location = New System.Drawing.Point(24, 145)
     Me.btnNuevo.Name = "btnNuevo"
     Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
     Me.btnNuevo.TabIndex = 25
@@ -304,7 +305,7 @@ Partial Class frmListaClientes
     Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEliminar.ForeColor = System.Drawing.Color.White
-    Me.btnEliminar.Location = New System.Drawing.Point(24, 203)
+    Me.btnEliminar.Location = New System.Drawing.Point(24, 297)
     Me.btnEliminar.Name = "btnEliminar"
     Me.btnEliminar.Size = New System.Drawing.Size(110, 61)
     Me.btnEliminar.TabIndex = 26
@@ -408,12 +409,27 @@ Partial Class frmListaClientes
     Me.lblInfo.TabIndex = 40
     Me.lblInfo.Text = " "
     '
+    'btnSeleccionar
+    '
+    Me.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSeleccionar.FlatAppearance.BorderSize = 0
+    Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
+    Me.btnSeleccionar.Location = New System.Drawing.Point(24, 73)
+    Me.btnSeleccionar.Name = "btnSeleccionar"
+    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 61)
+    Me.btnSeleccionar.TabIndex = 41
+    Me.btnSeleccionar.Text = "Seleccionar"
+    Me.btnSeleccionar.UseVisualStyleBackColor = False
+    '
     'frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnSeleccionar)
     Me.Controls.Add(Me.lblInfo)
     Me.Controls.Add(Me.btnMostrarDuplicados)
     Me.Controls.Add(Me.btnMostrarErrores)
@@ -469,5 +485,6 @@ Partial Class frmListaClientes
   Friend WithEvents btnMostrarErrores As System.Windows.Forms.Button
   Friend WithEvents btnMostrarDuplicados As System.Windows.Forms.Button
   Friend WithEvents lblInfo As System.Windows.Forms.Label
+  Friend WithEvents btnSeleccionar As System.Windows.Forms.Button
 
 End Class

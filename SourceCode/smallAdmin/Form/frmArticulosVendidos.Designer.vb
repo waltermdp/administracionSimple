@@ -44,6 +44,7 @@ Partial Class frmArticulosVendidos
     Me.lblTitulo = New System.Windows.Forms.Label()
     Me.tTip = New System.Windows.Forms.ToolTip(Me.components)
     Me.bsArticulos = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnGuardar = New System.Windows.Forms.Button()
     Me.pnlCtrlEntregados.SuspendLayout()
     CType(Me.bsArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -227,10 +228,25 @@ Partial Class frmArticulosVendidos
     '
     Me.bsArticulos.DataSource = GetType(manDB.clsInfoArticulos)
     '
+    'btnGuardar
+    '
+    Me.btnGuardar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnGuardar.FlatAppearance.BorderSize = 0
+    Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnGuardar.ForeColor = System.Drawing.Color.White
+    Me.btnGuardar.Location = New System.Drawing.Point(12, 111)
+    Me.btnGuardar.Name = "btnGuardar"
+    Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
+    Me.btnGuardar.TabIndex = 61
+    Me.btnGuardar.Text = "Guardar"
+    Me.btnGuardar.UseVisualStyleBackColor = False
+    '
     'frmArticulosVendidos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.btnGuardar)
     Me.Controls.Add(Me.lblTitulo)
     Me.Controls.Add(Me.pnlCtrlEntregados)
     Me.Controls.Add(Me.Label18)
@@ -275,4 +291,5 @@ Partial Class frmArticulosVendidos
   Friend WithEvents lblTitulo As System.Windows.Forms.Label
   Friend WithEvents tTip As System.Windows.Forms.ToolTip
   Friend WithEvents bsArticulos As System.Windows.Forms.BindingSource
+  Friend WithEvents btnGuardar As System.Windows.Forms.Button
 End Class

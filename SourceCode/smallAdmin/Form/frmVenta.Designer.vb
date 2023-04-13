@@ -41,6 +41,12 @@ Partial Class frmVenta
     Me.txtDNIVendedor = New System.Windows.Forms.TextBox()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.gpVenta = New System.Windows.Forms.GroupBox()
+    Me.lvPlanPagos = New System.Windows.Forms.ListView()
+    Me.cNCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cFechaCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cValorCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cFechaPago = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+    Me.cEstado = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.Label5 = New System.Windows.Forms.Label()
     Me.Label3 = New System.Windows.Forms.Label()
     Me.lblCuota = New System.Windows.Forms.Label()
@@ -66,12 +72,6 @@ Partial Class frmVenta
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
     Me.tTip = New System.Windows.Forms.ToolTip(Me.components)
     Me.lblTitulo = New System.Windows.Forms.Label()
-    Me.lvPlanPagos = New System.Windows.Forms.ListView()
-    Me.cNCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-    Me.cFechaCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-    Me.cValorCuota = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-    Me.cFechaPago = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-    Me.cEstado = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.gpVenta.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
     Me.GroupBox2.SuspendLayout()
@@ -288,6 +288,40 @@ Partial Class frmVenta
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "3- Venta"
+    '
+    'lvPlanPagos
+    '
+    Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
+    Me.lvPlanPagos.Location = New System.Drawing.Point(526, 262)
+    Me.lvPlanPagos.Name = "lvPlanPagos"
+    Me.lvPlanPagos.Size = New System.Drawing.Size(418, 244)
+    Me.lvPlanPagos.TabIndex = 68
+    Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
+    Me.lvPlanPagos.View = System.Windows.Forms.View.Details
+    '
+    'cNCuota
+    '
+    Me.cNCuota.Text = "Cuota"
+    '
+    'cFechaCuota
+    '
+    Me.cFechaCuota.Text = "Debitar"
+    Me.cFechaCuota.Width = 80
+    '
+    'cValorCuota
+    '
+    Me.cValorCuota.Text = "Valor cuota"
+    Me.cValorCuota.Width = 92
+    '
+    'cFechaPago
+    '
+    Me.cFechaPago.Text = "Pagado"
+    Me.cFechaPago.Width = 80
+    '
+    'cEstado
+    '
+    Me.cEstado.Text = "Estado"
+    Me.cEstado.Width = 72
     '
     'Label5
     '
@@ -521,40 +555,6 @@ Partial Class frmVenta
     Me.lblTitulo.TabIndex = 61
     Me.lblTitulo.Text = "Venta"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-    '
-    'lvPlanPagos
-    '
-    Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
-    Me.lvPlanPagos.Location = New System.Drawing.Point(526, 262)
-    Me.lvPlanPagos.Name = "lvPlanPagos"
-    Me.lvPlanPagos.Size = New System.Drawing.Size(418, 244)
-    Me.lvPlanPagos.TabIndex = 68
-    Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
-    Me.lvPlanPagos.View = System.Windows.Forms.View.Details
-    '
-    'cNCuota
-    '
-    Me.cNCuota.Text = "Cuota"
-    '
-    'cFechaCuota
-    '
-    Me.cFechaCuota.Text = "Debitar"
-    Me.cFechaCuota.Width = 80
-    '
-    'cValorCuota
-    '
-    Me.cValorCuota.Text = "Valor cuota"
-    Me.cValorCuota.Width = 92
-    '
-    'cFechaPago
-    '
-    Me.cFechaPago.Text = "Pagado"
-    Me.cFechaPago.Width = 80
-    '
-    'cEstado
-    '
-    Me.cEstado.Text = "Estado"
-    Me.cEstado.Width = 72
     '
     'frmVenta
     '
