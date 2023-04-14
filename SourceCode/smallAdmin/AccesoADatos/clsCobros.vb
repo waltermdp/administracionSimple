@@ -59,8 +59,15 @@ Public Class clsCobros
       rMovimientos = New List(Of clsInfoMovimiento)
       Dim movimiento As New clsInfoMovimiento
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & "and "
       lstPago.RefreshData()
+
+      'filtrar, quedarme con la cuota mas baja dentro de cada grupo
+      Dim auxList As New List(Of clsListPagos)
+      lstPago.Items.GroupBy(
+      For Each pago In lstPago.Items
+
+      Next
 
       For Each item In lstPago.Items
         movimiento = New clsInfoMovimiento

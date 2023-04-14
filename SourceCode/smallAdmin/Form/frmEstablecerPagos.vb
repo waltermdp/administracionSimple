@@ -7,12 +7,13 @@ Public Class frmEstablecerPagos
   Private m_Cliente As ClsInfoPersona
   Private m_Vendedor As clsInfoVendedor
   Private m_CurrentCuenta As clsInfoCuenta
+  Private m_Adelanto As clsInfoAdelanto
   Private m_lstPagos As New List(Of clsInfoPagos)
   Private m_skip As Boolean
 
   Private m_Result As Result = Result.CANCEL
 
-  Public Sub New(ByVal vProducto As clsInfoProducto, ByVal vCliente As ClsInfoPersona, ByVal vVendedor As clsInfoVendedor)
+  Public Sub New(ByVal vProducto As clsInfoProducto, ByVal vCliente As ClsInfoPersona, ByVal vVendedor As clsInfoVendedor, ByVal vAdelantoVendedor As clsInfoAdelanto)
 
     ' This call is required by the designer.
     InitializeComponent()
@@ -25,6 +26,10 @@ Public Class frmEstablecerPagos
       End If
       If Not (vVendedor Is Nothing) Then
         m_Vendedor = vVendedor.Clone
+      End If
+
+      If Not (vAdelantoVendedor Is Nothing) Then
+        m_Adelanto = vAdelantoVendedor.Clone
       End If
 
     Catch ex As Exception
@@ -77,6 +82,7 @@ Public Class frmEstablecerPagos
           lvPlanPagos.Items.Clear()
           txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
           txtAdelanto.Text = 0
+          txtAdelantoVendedor.Text = 0
         Else
           DateVenta.Value = .FechaVenta
           dtProximoPago.Value = .FechaPrimerPago
@@ -96,6 +102,12 @@ Public Class frmEstablecerPagos
           txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
           lvPlanPagos.Items.Clear()
           txtAdelanto.Text = .Adelanto
+          If m_Adelanto IsNot Nothing Then
+            txtAdelantoVendedor.Text = m_Adelanto.Valor
+          Else
+            txtAdelantoVendedor.Text = 0
+          End If
+
           For Each pago As clsInfoPagos In .ListaPagos
             Dim item As New ListViewItem
             item.Text = pago.NumCuota
@@ -158,8 +170,6 @@ Public Class frmEstablecerPagos
         If GetAdelanto(adelantoCuota) <> Result.OK Then
           MsgBox("El valor del adelanto es invalido")
           Exit Sub
-
-
         End If
         m_Producto.Adelanto = adelantoCuota
 
@@ -167,6 +177,8 @@ Public Class frmEstablecerPagos
           MsgBox("El valor del modo de pago es invalido")
           Exit Sub
         End If
+
+
         m_Producto.Cuenta = m_CurrentCuenta
 
         m_Producto.FechaPrimerPago = dtProximoPago.Value
@@ -200,6 +212,18 @@ Public Class frmEstablecerPagos
           item.GuidProducto = .GuidProducto
           .ListaPagos.Add(item)
         Next
+
+        'Adelanto para el vendedor
+        Dim AdelantoVendedor As Decimal
+        If Not ConvStr2Dec(txtAdelantoVendedor.Text, AdelantoVendedor) Then
+          MsgBox("El valor de la cuota es invalido")
+          Exit Sub
+        End If
+        If m_Adelanto Is Nothing Then m_Adelanto = New clsInfoAdelanto
+        m_Adelanto.Valor = AdelantoVendedor
+        m_Adelanto.Fecha = m_Producto.FechaVenta
+        m_Adelanto.GuidVendedor = m_Producto.GuidVendedor
+        m_Adelanto.GuidProducto = m_Producto.GuidProducto
 
 
       End With
@@ -615,11 +639,11 @@ Public Class frmEstablecerPagos
     End Try
   End Function
 
-  Public Function GetProducto(ByRef rProducto As clsInfoProducto) As Result
+  Public Function GetProducto(ByRef rProducto As clsInfoProducto, ByRef rAdelantoVendedor As clsInfoAdelanto) As Result
     Try
 
       rProducto = m_Producto.Clone
-
+      rAdelantoVendedor = m_Adelanto.Clone
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)

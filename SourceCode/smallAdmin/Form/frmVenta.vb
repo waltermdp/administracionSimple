@@ -3,12 +3,13 @@ Imports libCommon.Comunes
 Public Class frmVenta
 
   Private m_Producto As clsInfoProducto
-  Private m_skip As Boolean
-  Private m_hayCambios As Boolean
   Private m_CurrentPersona As ClsInfoPersona
   Private m_CurrentVendedor As clsInfoVendedor
+  Private m_AdelantoVendedor As clsInfoAdelanto
   Private m_lstArticulosVendidos As New List(Of clsInfoArticuloVendido)
 
+  Private m_skip As Boolean
+  Private m_hayCambios As Boolean
 
   Public Sub New(Optional ByVal vProducto As clsInfoProducto = Nothing)
 
@@ -20,11 +21,13 @@ Public Class frmVenta
         m_Producto.GuidProducto = Guid.Empty  'Solo se genera cuando se guarda la venta' Guid.NewGuid
         m_CurrentPersona = Nothing
         m_CurrentVendedor = Nothing
+        m_AdelantoVendedor = Nothing
       Else
         m_Producto = vProducto.Clone
         m_CurrentPersona = New ClsInfoPersona
         m_CurrentVendedor = New clsInfoVendedor
-        'm_CurrentCuenta = New clsInfoCuenta
+        m_AdelantoVendedor = New clsInfoAdelanto
+
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -69,6 +72,11 @@ Public Class frmVenta
           Call Print_msg("Fallo carga de Articulos Vendidos")
         End If
 
+        vResult = clsAdelantos.Load(m_Producto.GuidVendedor, m_Producto.GuidProducto, m_AdelantoVendedor)
+        If vResult <> Result.OK Then
+          Call Print_msg("Fallo cargar el dinero adelantado al vendedor por esta venta")
+        End If
+
        
 
         FillClientData()
@@ -87,8 +95,6 @@ Public Class frmVenta
     Catch ex As Exception
       Print_msg(ex.Message)
     Finally
-      gpVenta.Enabled = False
-      btnSave.Enabled = False
       m_skip = False
     End Try
   End Sub
@@ -229,7 +235,7 @@ Public Class frmVenta
       If m_CurrentPersona IsNot Nothing Then Call FillClientData()
       If m_CurrentVendedor IsNot Nothing Then Call FillVendedorData()
       Call FillVentaData()
-      Call PermitirVenta()
+      'Call PermitirVenta()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -280,6 +286,10 @@ Public Class frmVenta
       'validar la lista de productos
       'validar la relacion de los pagos, cliente, vendedor
       'guardar en DB
+      If (m_CurrentPersona Is Nothing) OrElse (m_CurrentVendedor Is Nothing) Then
+        MsgBox("No hay cliente ni vendedor seleccionado")
+        Exit Sub
+      End If
 
       If m_CurrentPersona.GuidCliente = Guid.Empty Then
         MsgBox("Debe elegir o crear un cliente")
@@ -304,6 +314,14 @@ Public Class frmVenta
         Exit Sub
       End If
 
+      If Not (m_Producto.GuidVendedor = m_AdelantoVendedor.GuidVendedor) Then
+        MsgBox("Valores de adelanto mal asignados")
+        Exit Sub
+      End If
+      If Not (m_Producto.GuidProducto = m_AdelantoVendedor.GuidProducto) Then
+        MsgBox("Valores de adelanto mal asignados")
+        Exit Sub
+      End If
 
 
 
@@ -327,6 +345,12 @@ Public Class frmVenta
         m_Producto.ListaArticulos.Add(item)
       Next
 
+      If m_AdelantoVendedor.Valor > 0 AndAlso m_AdelantoVendedor.Valor < 10000 Then
+        If clsAdelantos.Save(m_AdelantoVendedor) <> Result.OK Then
+          MsgBox("Fallo al guardar la venta en la base de datos")
+          Exit Sub
+        End If
+      End If
 
       If clsProducto.Save(m_Producto) <> Result.OK Then
         MsgBox("Fallo al guardar la venta en la base de datos")
@@ -431,27 +455,27 @@ Public Class frmVenta
     End Try
   End Sub
 
-  Private Sub PermitirVenta()
-    Try
-      If Not (m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing) Then
-        gpVenta.Enabled = False
-        btnEditarArticulosVendidos.Enabled = False
-        btnSave.Enabled = False
-        Exit Sub
-      End If
-      gpVenta.Enabled = True
-      btnEditarArticulosVendidos.Enabled = True
-      btnSave.Enabled = Not TerminoDePagar(m_Producto)
+  'Private Sub PermitirVenta()
+  '  Try
+  '    If Not (m_CurrentPersona IsNot Nothing AndAlso m_CurrentVendedor IsNot Nothing) Then
+  '      gpVenta.Enabled = False
+  '      btnEditarArticulosVendidos.Enabled = False
+  '      btnSave.Enabled = False
+  '      Exit Sub
+  '    End If
+  '    gpVenta.Enabled = True
+  '    btnEditarArticulosVendidos.Enabled = True
+  '    btnSave.Enabled = Not TerminoDePagar(m_Producto)
 
 
 
-      Call LoadArticulosVendidos()
-      lblMedioDePago.Text = FillMedioDePagoDescripcion()
+  '    Call LoadArticulosVendidos()
+  '    lblMedioDePago.Text = FillMedioDePagoDescripcion()
 
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
   'Private Sub FillResponsables()
   '  Try
@@ -569,6 +593,9 @@ Public Class frmVenta
         lvPlanPagos.Items.Add(item)
       Next
 
+      If m_AdelantoVendedor IsNot Nothing Then
+        Label3.Text = m_AdelantoVendedor.Valor
+      End If
 
 
     Catch ex As Exception
@@ -607,10 +634,10 @@ Public Class frmVenta
         MsgBox("Primero debe elegir o crear un vendedor")
         Exit Sub
       End If
-      Using objForm As New frmEstablecerPagos(m_Producto, m_CurrentPersona, m_CurrentVendedor)
+      Using objForm As New frmEstablecerPagos(m_Producto, m_CurrentPersona, m_CurrentVendedor, m_AdelantoVendedor)
         objForm.ShowDialog(Me)
         If objForm.GetResult = Result.OK Then
-          objForm.GetProducto(m_Producto)
+          objForm.GetProducto(m_Producto, m_AdelantoVendedor)
         End If
 
       End Using

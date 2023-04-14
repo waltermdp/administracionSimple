@@ -488,7 +488,7 @@ Partial Class frmDeben
     Me.btnLiquidVendedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnLiquidVendedores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnLiquidVendedores.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidVendedores.Location = New System.Drawing.Point(24, 201)
+    Me.btnLiquidVendedores.Location = New System.Drawing.Point(24, 561)
     Me.btnLiquidVendedores.Name = "btnLiquidVendedores"
     Me.btnLiquidVendedores.Size = New System.Drawing.Size(110, 61)
     Me.btnLiquidVendedores.TabIndex = 45
@@ -532,7 +532,7 @@ Partial Class frmDeben
     Me.gpxBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.gpxBuscar.Location = New System.Drawing.Point(6, 6)
     Me.gpxBuscar.Name = "gpxBuscar"
-    Me.gpxBuscar.Size = New System.Drawing.Size(665, 252)
+    Me.gpxBuscar.Size = New System.Drawing.Size(707, 252)
     Me.gpxBuscar.TabIndex = 48
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Buscar Producto"

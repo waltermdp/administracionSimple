@@ -7,6 +7,9 @@ Public Class clsInfoAdelanto
   Private m_GuidVendedor As Guid
   Private m_Valor As Decimal
   Private m_Fecha As Date
+  Private m_Estado As Integer
+  Private m_Observacion As String
+  Private m_GuidProducto As Guid
 
   Public Property IdAdelanto As Integer
     Get
@@ -44,12 +47,44 @@ Public Class clsInfoAdelanto
     End Set
   End Property
 
+  Public Property Estado As Integer
+    Get
+      Return m_Estado
+    End Get
+    Set(value As Integer)
+      m_Estado = value
+    End Set
+  End Property
+
+  Public Property Observacion As String
+    Get
+      Return m_Observacion
+    End Get
+    Set(value As String)
+      m_Observacion = value
+    End Set
+  End Property
+
+  Public Property GuidProducto As Guid
+    Get
+      Return m_GuidProducto
+    End Get
+    Set(value As Guid)
+      m_GuidProducto = value
+    End Set
+  End Property
+
+
   Public Sub New()
     MyBase.New()
     IdAdelanto = -1
     GuidVendedor = Nothing
     Valor = 0
-    Fecha = gethoy
+    Fecha = GetHoy()
+    Estado = 0
+    Observacion = String.Empty
+    GuidProducto = Nothing
+
   End Sub
 
   Public Function Clone() As clsInfoAdelanto

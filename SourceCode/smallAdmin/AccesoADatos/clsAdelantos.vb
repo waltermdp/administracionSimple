@@ -5,21 +5,21 @@ Public Class clsAdelantos
 
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
 
-  Public Shared Function Load(ByVal vGuidVendedor As Guid, ByVal vInicial As Date, ByVal vFinal As Date, ByRef rlistAdelanto As List(Of clsInfoAdelanto)) As Result
+  Public Shared Function Load(ByVal vGuidVendedor As Guid, ByVal vGuidProducto As Guid, ByRef rAdelanto As clsInfoAdelanto) As Result
     Try
 
       Dim objDB As libDB.clsAcceso = Nothing
       Dim objResult As Result = Result.OK
 
       Try
-        rlistAdelanto = New List(Of clsInfoAdelanto)
+
 
         objDB = New libDB.clsAcceso
 
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
         If objResult <> Result.OK Then Exit Try
 
-        objResult = Init(objDB, vGuidVendedor, vInicial, vFinal, rlistAdelanto)
+        objResult = Init(objDB, vGuidVendedor, vGuidProducto, rAdelanto)
         If objResult <> Result.OK Then Exit Try
 
       Catch ex As Exception
@@ -43,6 +43,8 @@ Public Class clsAdelantos
       Return Result.ErrorEx
     End Try
   End Function
+
+
 
   Public Shared Function Save(ByRef rAdelanto As manDB.clsInfoAdelanto) As libCommon.Comunes.Result
     Try
@@ -79,7 +81,7 @@ Public Class clsAdelantos
     End Try
   End Function
 
-  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByVal vGuidVendedor As Guid, ByVal vInicial As Date, ByVal vFinal As Date, ByRef rlistAdelanto As List(Of clsInfoAdelanto), Optional ByRef rCodeError As Integer = -1) As Result
+  Private Shared Function Init(ByVal vObjDB As libDB.clsAcceso, ByVal vGuidVendedor As Guid, ByVal vGuidProducto As Guid, ByRef rAdelanto As clsInfoAdelanto, Optional ByRef rCodeError As Integer = -1) As Result
     Try
 
       Dim objResult As Result
@@ -89,7 +91,8 @@ Public Class clsAdelantos
       Dim strCommand As String
 
       strCommand = "SELECT * FROM [Adelantos] WHERE [GuidVendedor]={" & vGuidVendedor.ToString & "}" & _
-                   " and [Fecha] BETWEEN #" & Format(vInicial, strFormatoAnsiStdFecha) & "# and #" & Format(vFinal, strFormatoAnsiStdFecha) & "#"
+                   " and [GuidProducto]={" & vGuidProducto.ToString & "}"  '   BETWEEN #" & Format(vInicial, strFormatoAnsiStdFecha) & "# and #" & Format(vFinal, strFormatoAnsiStdFecha) & "#"
+      '" and [Fecha] BETWEEN #" & Format(vInicial, strFormatoAnsiStdFecha) & "# and #" & Format(vFinal, strFormatoAnsiStdFecha) & "#"
 
 
       objResult = vObjDB.GetDato(strCommand, dt)
@@ -101,13 +104,17 @@ Public Class clsAdelantos
 
       '<-- Comando en DB ---
 
-      Dim auxInfoAdelanto As clsInfoAdelanto = Nothing
-      For Each dr As DataRow In dt.Rows
-        auxInfoAdelanto = New clsInfoAdelanto
-        objResult = AdelantoIgualDataRow(auxInfoAdelanto, dr)
-        If objResult <> Result.OK Then Exit For
-        rlistAdelanto.Add(auxInfoAdelanto)
-      Next
+
+      If dt.Rows.Count > 1 Then Return Result.NOK
+      If dt.Rows.Count <= 0 Then Return Result.NOK
+      Dim auxInfoAdelanto As New clsInfoAdelanto
+      objResult = AdelantoIgualDataRow(auxInfoAdelanto, dt.Rows(0))
+      If objResult <> Result.OK Then
+        MsgBox("No se pudo cargar el dinero adelantado al vendedor para esta venta")
+        Return Result.NOK
+      End If
+      rAdelanto = auxInfoAdelanto.Clone
+      
 
       Return objResult
 
@@ -128,7 +135,7 @@ Public Class clsAdelantos
 
         '--- Comando en DB -->
 
-        objResult = vObjDB.EjecutarConsulta("SELECT [IdAdelanto] FROM [Adelantos] WHERE [GuidVendedor]={" & rInfoAdelanto.GuidVendedor.ToString & "} and [Fecha] = #" & Format(rInfoAdelanto.Fecha, strFormatoAnsiStdFecha) & "#", rInfoAdelanto.IdAdelanto) ' AND [Valor]=" & rInfoAdelanto.Valor
+        objResult = vObjDB.EjecutarConsulta("SELECT [IdAdelanto] FROM [Adelantos] WHERE [GuidVendedor]={" & rInfoAdelanto.GuidVendedor.ToString & "} and [GuidProducto] ={" & rInfoAdelanto.GuidProducto.ToString & "}", rInfoAdelanto.IdAdelanto) ' & Format(rInfoAdelanto.Fecha, strFormatoAnsiStdFecha) & "#", rInfoAdelanto.IdAdelanto) ' AND [Valor]=" & rInfoAdelanto.Valor
         If objResult <> Result.OK Then Return objResult
 
         Dim strSQL As New System.Text.StringBuilder("")
@@ -142,13 +149,19 @@ Public Class clsAdelantos
             strSQL.Append("(")
             strSQL.Append("[GuidVendedor],")
             strSQL.Append("[Valor],")
-            strSQL.Append("[Fecha]")
+            strSQL.Append("[Fecha],")
+            strSQL.Append("[Estado],")
+            strSQL.Append("[Observacion],")
+            strSQL.Append("[GuidProducto]")
 
             strSQL.Append(") VALUES (")
 
             strSQL.Append("""{" & .GuidVendedor.ToString & "}"",")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Valor) & """,")
-            strSQL.Append("""" & .Fecha & """")
+            strSQL.Append("""" & .Fecha & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Estado) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Observacion) & """,")
+            strSQL.Append("""{" & .GuidProducto.ToString & "}""")
 
             strSQL.Append(")")
 
@@ -169,7 +182,10 @@ Public Class clsAdelantos
             strSQL.Append("UPDATE [Adelantos] SET ")
             strSQL.Append("[GuidVendedor]=""{" & .GuidVendedor.ToString & "}"",")
             strSQL.Append("[Valor]=""" & libDB.clsAcceso.Field_Correcting(.Valor) & """,")
-            strSQL.Append("[Fecha]=""" & .Fecha & """")
+            strSQL.Append("[Fecha]=""" & .Fecha & """,")
+            strSQL.Append("[Estado]=""" & libDB.clsAcceso.Field_Correcting(.estado) & """,")
+            strSQL.Append("[Observacion]=""" & libDB.clsAcceso.Field_Correcting(.observacion) & """,")
+            strSQL.Append("[GuidProducto]=""{" & .GuidProducto.ToString & "}""")
 
             strSQL.Append(" WHERE [IdAdelanto]=" & .IdAdelanto)
 
@@ -228,6 +244,28 @@ Public Class clsAdelantos
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfo.Estado = CInt(IIf(IsDBNull(.Item("Estado")), 0, .Item("Estado")))
+        Catch ex As Exception
+          vInfo.estado = 0
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfo.Observacion = CStr(IIf(IsDBNull(.Item("Observacion")), "", .Item("Observacion")))
+        Catch ex As Exception
+          vInfo.Observacion = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+
+        Try
+          vInfo.GuidProducto = CType(IIf(IsDBNull(.Item("GuidProducto")), Nothing, .Item("GuidProducto")), Guid)
+        Catch ex As Exception
+          vInfo.GuidProducto = Nothing
+          Call Print_msg(ex.Message)
+
+        End Try
 
       End With
 
