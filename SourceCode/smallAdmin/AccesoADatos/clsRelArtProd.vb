@@ -245,4 +245,66 @@ Public Class clsRelArtProd
     End Try
   End Function
 
+  Private Shared Function Delete(ByVal vObjDB As libDB.clsAcceso, ByVal vGuidProducto As Guid, ByVal vGuidArticulo As Guid) As Result
+    Try
+
+      Dim objResult As Result
+
+      '--- Comando en DB -->
+      Dim strCommand As String = "DELETE * FROM [RelArtProd] WHERE [GuidProducto]={" & vGuidProducto.ToString & "} and [GuidArticulo]={" & vGuidArticulo.ToString & "}"
+
+
+      objResult = vObjDB.ExecuteNonQuery(strCommand)
+      If objResult <> Result.OK Then Return objResult
+      '<-- Comando en DB ---
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+
+    End Try
+
+  End Function
+
+  Public Shared Function Delete(ByVal GuidProduto As Guid, ByVal vGuidArticulo As Guid) As Result
+    Try
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+      Try
+        objDB = New libDB.clsAcceso
+
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Delete(objDB, GuidProduto, vGuidArticulo)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+
+        If objDB IsNot Nothing Then
+
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+
+        End If
+
+      End Try
+
+      Return objResult
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
 End Class

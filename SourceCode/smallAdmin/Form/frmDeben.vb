@@ -48,6 +48,7 @@ Public Class frmDeben
   Private Sub frmDeben_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
       'Call MostrarDeben()
+
       Call FillResumen()
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -267,6 +268,7 @@ Public Class frmDeben
 
   Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
     Try
+    
 
       Using objVenta As New frmVenta()
         objVenta.ShowDialog()
@@ -274,6 +276,7 @@ Public Class frmDeben
 
         End If
       End Using
+      clsCobros.ActualizarEstadosDePagos(g_Today)
       Call MostrarDeben()
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -630,6 +633,8 @@ Public Class frmDeben
 
   Private Sub btnExportar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnExportar.MouseClick
     Try
+      Call clsCobros.ActualizarEstadosDePagos(g_Today)
+
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Exportar)
         If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
           Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
@@ -639,7 +644,7 @@ Public Class frmDeben
           Exit Sub
         End If
       End Using
-     
+
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

@@ -38,7 +38,7 @@ Public Class frmArticulosVendidos
     ' This call is required by the designer.
     InitializeComponent()
     Try
-      If Not (vListaArtVendidos Is Nothing) Then
+      If vListaArtVendidos IsNot Nothing Then
         If vListaArtVendidos.Count > 0 Then
           m_lstArticulosVendidos.Clear()
           m_lstArticulosVendidos.AddRange(vListaArtVendidos.ToList)

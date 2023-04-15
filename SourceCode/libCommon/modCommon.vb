@@ -6,14 +6,15 @@
     Private g_Today As Date
 
     Public Enum E_EstadoPago As Integer
-      Debe = 0
+      Debe = 0 'actualmente esta debiendo este pago
       Pago = 1
       Anulo_Editado = 2  'Se anula el pago para generar uno nuevo
       Vencido = 3  'se anula el debe porque no pago dentro del plazo
       Observado = 4 ' el pago tiene algun defecto no se considera pagado ni debe 'MOSTRARLO SIEMPRE EN LA LISTA PRINCIPAL HASTA SACARLO DE ESTA SITUACION
       PagoParcial = 5
       Eliminado = 6
-
+      DebeProximo = 7 'corresponde al proximo pago a ser debitado
+      DebePendiente = 8 'corresponde al debito, posterior al proximo
       NA = -1 'No Asignado, valor inicial
     End Enum
 

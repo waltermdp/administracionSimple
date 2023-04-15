@@ -66,6 +66,10 @@ Public Class frmVenta
         If vResult <> Result.OK Then
           Call Print_msg("Fallo carga de Pagos")
         End If
+        vResult = clsCuenta.Load(m_Producto.GuidCuenta, m_Producto.Cuenta)
+        If vResult <> Result.OK Then
+          Call Print_msg("Fallo cargar cuenta asociadas")
+        End If
 
         vResult = clsRelArtProd.Load(m_Producto.ListaArticulos, m_Producto.GuidProducto)
         If vResult <> Result.OK Then
@@ -314,14 +318,7 @@ Public Class frmVenta
         Exit Sub
       End If
 
-      If Not (m_Producto.GuidVendedor = m_AdelantoVendedor.GuidVendedor) Then
-        MsgBox("Valores de adelanto mal asignados")
-        Exit Sub
-      End If
-      If Not (m_Producto.GuidProducto = m_AdelantoVendedor.GuidProducto) Then
-        MsgBox("Valores de adelanto mal asignados")
-        Exit Sub
-      End If
+     
 
 
 
@@ -340,17 +337,51 @@ Public Class frmVenta
         MsgBox("Los datos de la cuenta son incongruentes")
         Exit Sub
       End If
-      m_Producto.ListaArticulos.Clear()
-      For Each item In m_lstArticulosVendidos
-        m_Producto.ListaArticulos.Add(item)
-      Next
 
-      If m_AdelantoVendedor.Valor > 0 AndAlso m_AdelantoVendedor.Valor < 10000 Then
+      'ACTUALIZAR LISTA DE ARTICULOS
+      Dim auxArtInDB As New List(Of clsInfoArticuloVendido)
+      clsRelArtProd.Load(auxArtInDB, m_Producto.GuidProducto)
+      If auxArtInDB.Count > 0 Then
+        'hay porductos en la DB
+        'borrar los que ya no estan asociados
+        For Each art In auxArtInDB
+          If m_lstArticulosVendidos.Exists(Function(c) c.GuidArticulo = art.GuidArticulo) Then Continue For
+          If clsRelArtProd.Delete(m_Producto.GuidProducto, art.GuidArticulo) <> Result.OK Then
+            MsgBox("No se puede actualizar la lista de articulos")
+            Exit Sub
+          End If
+        Next
+        'guardar nuevo o update
+        m_Producto.ListaArticulos.Clear()
+        m_Producto.ListaArticulos.AddRange(m_lstArticulosVendidos.ToList)
+      End If
+      
+
+
+
+      If Not (m_AdelantoVendedor.GuidProducto = Guid.Empty) Then
+        If Not (m_Producto.GuidVendedor = m_AdelantoVendedor.GuidVendedor) Then
+          MsgBox("Valores de adelanto mal asignados")
+          Exit Sub
+        End If
+
+        'If m_AdelantoVendedor.Valor > 0 AndAlso m_AdelantoVendedor.Valor < 10000 Then
         If clsAdelantos.Save(m_AdelantoVendedor) <> Result.OK Then
           MsgBox("Fallo al guardar la venta en la base de datos")
           Exit Sub
         End If
+        'End If
       End If
+
+
+      If m_Producto.ListaPagos.Exists(Function(c) c.IdPago = -1) Then
+        'borrar todos los pagos y agregar nuevos
+        If clsPago.Delete(m_Producto.GuidProducto) <> Result.OK Then
+          MsgBox("No se pueden modificar las cuotas de pagos")
+          Exit Sub
+        End If
+      End If
+
 
       If clsProducto.Save(m_Producto) <> Result.OK Then
         MsgBox("Fallo al guardar la venta en la base de datos")

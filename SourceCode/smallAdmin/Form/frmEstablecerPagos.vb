@@ -116,6 +116,7 @@ Public Class frmEstablecerPagos
             item.SubItems.Add(Date2String(pago.FechaPago)) 'fecha de pago
             item.SubItems.Add(EstadoPagos2String(pago.EstadoPago)) 'fecha de pago
             lvPlanPagos.Items.Add(item)
+            m_lstPagos.Add(pago)
           Next
 
         End If
@@ -127,23 +128,17 @@ Public Class frmEstablecerPagos
   End Sub
 
   Private Function FillMedioDePagoDescripcion() As String
-      Try
-        Dim vResult As Result
-        Dim auxCuenta As clsInfoCuenta = Nothing
-        vResult = clsCuenta.Load(m_Producto.GuidCuenta, auxCuenta)
-        If vResult <> Result.OK Then
-          Call Print_msg("Fallo carga de cuenta")
-          Return "--"
-        End If
-        If auxCuenta Is Nothing Then
-          Return "--"
-        Else
-          Return GetNameOfTipoPago(auxCuenta.TipoDeCuenta) & " -- " & auxCuenta.Codigo1.ToString
-        End If
-      Catch ex As Exception
-        Print_msg(ex.Message)
+    Try
+
+      If m_CurrentCuenta Is Nothing Then
         Return "--"
-      End Try
+      End If
+      Return GetNameOfTipoPago(m_CurrentCuenta.TipoDeCuenta) & " -- " & m_CurrentCuenta.Codigo1.ToString
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return "--"
+    End Try
   End Function
 
 
@@ -186,11 +181,7 @@ Public Class frmEstablecerPagos
 
 
 
-        If Not EsValidoNumComprobante(txtNumVenta.Text) Then
-          MsgBox("El numero del comprobate es invalido")
-          Exit Sub
-        End If
-        .NumComprobante = CInt(txtNumVenta.Text)
+        
         If m_Cliente.GuidCliente = Guid.Empty Then
           MsgBox("El cliente es invalido")
           Exit Sub
@@ -205,6 +196,22 @@ Public Class frmEstablecerPagos
         .GuidTipoPago = m_CurrentCuenta.TipoDeCuenta
         If .GuidProducto = Guid.Empty Then
           .GuidProducto = Guid.NewGuid
+          If Not EsValidoNumComprobante(txtNumVenta.Text) Then
+            MsgBox("El numero del comprobate es invalido")
+            Exit Sub
+          End If
+          .NumComprobante = CInt(txtNumVenta.Text)
+        Else
+          'ya existe
+          If txtNumVenta.Text <> .NumComprobante Then
+            If Not EsValidoNumComprobante(txtNumVenta.Text) Then
+              MsgBox("El numero del comprobate es invalido")
+              Exit Sub
+            End If
+            .NumComprobante = CInt(txtNumVenta.Text) ' no cambia 
+          Else 'iguales
+            .NumComprobante = CInt(txtNumVenta.Text) ' no cambia 
+          End If
         End If
 
         .ListaPagos.Clear()
@@ -244,7 +251,6 @@ Public Class frmEstablecerPagos
       m_lstPagos.Clear()
 
 
-      'No se puede editar lo que ya esta pagado, se puede modificar en adelante, considerando lo ya pagado
 
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
       Dim Precio As Decimal
@@ -255,7 +261,8 @@ Public Class frmEstablecerPagos
       If Precio <= 0 Then Exit Sub
 
 
-      If m_lstPagos.Count <= 0 Then
+      If m_lstPagos.Count <= 0 Then ' m_Producto.GuidProducto = Guid.Empty Then
+        m_lstPagos.Clear()
         'aun no existen proximos pagos a debitar
         If GetAdelanto(adelantoCuota) <> Result.OK Then
           MsgBox("El valor de adelanto de cuota no es valido, se considera 0")
@@ -263,6 +270,7 @@ Public Class frmEstablecerPagos
         End If
         lvPlanPagos.Items.Clear()
         Dim Diferencia As Integer = 0
+        Dim SetPrimerPago As Boolean = True
         For i As Integer = 1 To Cuota.Cantidad
           Dim item As New ListViewItem
           Dim auxFechaDebitoCuota As Date
@@ -290,7 +298,14 @@ Public Class frmEstablecerPagos
               cuotaPagar.ValorCuota = ValorCuota
             End If
             cuotaPagar.FechaPago = Date.MinValue
-            cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.Debe
+            If SetPrimerPago Then
+              cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebeProximo
+              SetPrimerPago = False
+            Else
+              cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebePendiente
+            End If
+
+
           End If
 
           item.Text = cuotaPagar.NumCuota
@@ -298,10 +313,14 @@ Public Class frmEstablecerPagos
           item.SubItems.Add(cuotaPagar.ValorCuota)
           item.SubItems.Add(Date2String(cuotaPagar.FechaPago)) 'fecha de pago
           item.SubItems.Add(EstadoPagos2String(cuotaPagar.EstadoPago)) 'fecha de pago
-       
+
           m_lstPagos.Add(cuotaPagar)
           lvPlanPagos.Items.Add(item)
         Next
+      Else
+        'el producto venta ya esta generado, podria estar en la DB o solo en memoria
+
+
       End If
 
     Catch ex As Exception
@@ -446,6 +465,19 @@ Public Class frmEstablecerPagos
     End Try
   End Function
 
+
+  'PARA MAS ADELANTE automaticamente permite solo numero y preparar que para ingrese coma en pos correcta
+  'Private Sub txtPrecio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrecio.KeyPress
+  '  Try
+  '    If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+  '      e.Handled = True
+  '    End If
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
+
+  
   Private Sub txtPrecio_TextChanged(sender As Object, e As EventArgs) Handles txtPrecio.TextChanged
     Try
       If m_skip Then Exit Sub
@@ -669,7 +701,7 @@ Public Class frmEstablecerPagos
       If lstpagos.Items.Count > 0 Then
         Return lstpagos.Items.First.NumComprobante + 1
       Else
-        Return -1
+        Return 1
       End If
 
     Catch ex As Exception

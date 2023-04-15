@@ -51,23 +51,93 @@ Public Class clsCobros
     End Try
   End Function
 
+  Public Shared Function ActualizarEstadosDePagos(ByVal vFechaReferencia As Date) As Result
+    Try
+      'buscar en la tabla pagos si debe modificar algun estado con respecto a la fecha y al debe actual
+      Dim lstPago As New clsListPagos
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " or EstadoPago=" & E_EstadoPago.DebeProximo & " or EstadoPago=" & E_EstadoPago.DebePendiente
+      lstPago.RefreshData()
+
+      Dim pre As New Func(Of System.Linq.IGrouping(Of System.Guid, manDB.clsInfoPagos), Boolean)(AddressOf NoContieneDebeActual)
+      For Each item In lstPago.Items.GroupBy(Function(c) c.GuidProducto).Where(pre)
+        If item.Where(Function(c) (c.VencimientoCuota <= vFechaReferencia) AndAlso (c.EstadoPago = E_EstadoPago.DebeProximo)).Count > 0 Then
+          'actualizar EstadosPago
+          'debeproximo -> debe
+          'debePendiente (primero) ->debe proximo
+
+          Dim auxLista As New List(Of manDB.clsInfoPagos)
+          Dim auxPago As New manDB.clsInfoPagos
+          Dim indiceNewDebe As Integer = item.ToList.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.DebeProximo)
+          Dim indiceNewProximo As Integer = -1
+          If indiceNewDebe < 0 Then
+            MsgBox("Fallo busqueda")
+            Return Result.NOK
+          End If
+          auxPago = item.ToList(indiceNewDebe).Clone
+          auxPago.EstadoPago = E_EstadoPago.Debe
+          auxLista.Add(auxPago)
+          If item.ToList(indiceNewDebe).NumCuota = item.Count Then
+            'ultima cuota, no habra proximo pago
+            indiceNewProximo = -1
+          Else
+            Dim nextCuota As Integer = item.ToList(indiceNewDebe).NumCuota + 1
+            indiceNewProximo = item.ToList.FindIndex(Function(c) (c.EstadoPago = E_EstadoPago.DebePendiente) AndAlso (c.NumCuota = item.ToList(indiceNewDebe).NumCuota + 1))
+            auxPago = New manDB.clsInfoPagos
+            auxPago = item.ToList(indiceNewProximo).Clone
+            auxPago.EstadoPago = E_EstadoPago.DebeProximo
+            auxLista.Add(auxPago)
+          End If
+          'guardar cambios
+          For Each pagoModificado In auxLista
+            If clsPago.Save(pagoModificado) <> Result.OK Then
+              MsgBox("Fallo al guardar pago")
+              Return Result.NOK
+            End If
+
+          Next
+
+
+        End If
+      Next
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+
+
+  Private Shared Function NoContieneDebeActual(ByVal v As System.Linq.IGrouping(Of System.Guid, manDB.clsInfoPagos)) As Boolean
+    Try
+      Dim debitar As Boolean = True
+      For Each item In v
+        If item.EstadoPago = E_EstadoPago.Debe Then
+          debitar = False
+          Exit For
+        End If
+      Next
+      Return debitar
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
+
 
 
   Public Shared Function GenerateResumen(ByVal vTipoPago As manDB.clsTipoPago, ByRef rMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
+
       Dim lstPago As New clsListPagos
       rMovimientos = New List(Of clsInfoMovimiento)
       Dim movimiento As New clsInfoMovimiento
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & "and "
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
       lstPago.RefreshData()
 
-      'filtrar, quedarme con la cuota mas baja dentro de cada grupo
-      Dim auxList As New List(Of clsListPagos)
-      lstPago.Items.GroupBy(
-      For Each pago In lstPago.Items
-
-      Next
 
       For Each item In lstPago.Items
         movimiento = New clsInfoMovimiento
@@ -86,7 +156,7 @@ Public Class clsCobros
         lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
         lstCliente.RefreshData()
 
-        Dim auxPrimerPago As New clsListProductos
+
         'auxPrimerPago.Cfg_Filtro = "where (TotalCuotas-CuotasDebe)>=1 and GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
         'auxPrimerPago.RefreshData()
         Dim bCodigoAlta As Boolean
@@ -94,10 +164,10 @@ Public Class clsCobros
           bCodigoAlta = False
         Else
           'verificar si es la primer cuota, buscan si la cuenta se uso en algun pago de cuota
+          Dim auxPrimerPago As New clsListProductos
           Dim bAlta As Boolean = True
-          auxPrimerPago = New clsListProductos
-          auxPrimerPago.RefreshData()
           auxPrimerPago.Cfg_Filtro = "where GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+          auxPrimerPago.RefreshData()
           If auxPrimerPago.Items.Count > 1 Then
 
             For Each producto In auxPrimerPago.Items
@@ -115,15 +185,13 @@ Public Class clsCobros
           End If
           bCodigoAlta = bAlta
         End If
-        If item.NumComprobante = 6737 Then
-          Dim k As Integer = 1
-        End If
+      
         With movimiento
           .NumeroTarjeta = lstCuenta.Items.First.Codigo1
           .NumeroComprobante = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
           .IdentificadorDebito = lstCliente.Items.First.NumCliente
-          .Fecha = GetHoy()
+          .Fecha = g_Today
 
           If bCodigoAlta = False Then
             .CodigoDeAlta = "N"
@@ -148,7 +216,6 @@ Public Class clsCobros
       Next
       If rMovimientos.Count < 0 Then
         MsgBox("Nada que exportar")
-        Return Result.OK
       End If
 
 
@@ -174,6 +241,10 @@ Public Class clsCobros
           ExportarAVisaDebito(vMovimientos)
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
           ExportarACBU(vMovimientos)
+        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") 'CBU Hipotecario
+          ExportarADebitoHipotecario(vMovimientos)
+        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") 'CBU Patagonia
+          ExportarADebitoPatagonia(vMovimientos)
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
           ExportarAVisaCredito(vMovimientos)
         Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
@@ -374,6 +445,71 @@ Public Class clsCobros
   Private Shared Function ExportarACBU(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
     Try
       Dim lineas As New List(Of String)
+
+      lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
+      lineas.Add("CBU;NumComprobante;Fecha;Importe;Identificador")
+      Dim linea As String = String.Empty
+      For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+        linea = vMovimientos(i).NumeroTarjeta.ToString
+        linea += ";"
+        linea += vMovimientos(i).NumeroComprobante
+        linea += ";"
+        linea += GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+        linea += ";"
+        linea += vMovimientos(i).Importe 'acepta 1.23
+        linea += ";"
+        linea += vMovimientos(i).IdentificadorDebito
+        linea += ";"
+        lineas.Add(linea)
+      Next
+
+      'workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas)
+      MsgBox("Finalizo exportacion a txt")
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function ExportarADebitoHipotecario(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim lineas As New List(Of String)
+      Dim objHipotecario As New clsHipotecario
+
+      lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
+      lineas.Add("CBU;NumComprobante;Fecha;Importe;Identificador")
+      Dim linea As String = String.Empty
+      For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+        linea = vMovimientos(i).NumeroTarjeta.ToString
+        linea += ";"
+        linea += vMovimientos(i).NumeroComprobante
+        linea += ";"
+        linea += GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+        linea += ";"
+        linea += vMovimientos(i).Importe 'acepta 1.23
+        linea += ";"
+        linea += vMovimientos(i).IdentificadorDebito
+        linea += ";"
+        lineas.Add(linea)
+      Next
+
+      'workbook.SaveCopyAs(IO.Path.Combine(Entorno.App_path, Today.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
+      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas)
+      MsgBox("Finalizo exportacion a txt")
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Shared Function ExportarADebitoPatagonia(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+    Try
+      Dim lineas As New List(Of String)
       'Dim xls As New Excel.Application
       'Dim worksheet As Excel.Worksheet
       'Dim workbook As Excel.Workbook
@@ -456,5 +592,9 @@ Public Class clsCobros
       Return Result.ErrorEx
     End Try
   End Function
+
+
+
+
 
 End Class

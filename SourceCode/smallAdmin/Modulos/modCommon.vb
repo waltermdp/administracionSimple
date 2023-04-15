@@ -374,7 +374,8 @@ Module modCommon
   'puede retornar string vacio
   Public Function Date2String(ByVal vFecha As Date) As String
     Try
-      If vFecha <= Date.MinValue Then
+
+      If vFecha <= Date.MinValue OrElse vFecha.Year < 1950 Then
         Return String.Empty
       Else
         Return vFecha.ToString("dd/MM/yyyy")
@@ -395,6 +396,8 @@ Module modCommon
       If vEstado = E_EstadoPago.Observado Then Return "Observado"
       If vEstado = E_EstadoPago.PagoParcial Then Return "PagoParcial"
       If vEstado = E_EstadoPago.Eliminado Then Return "Eliminado"
+      If vEstado = E_EstadoPago.DebeProximo Then Return "Proximo Debito"
+      If vEstado = E_EstadoPago.DebePendiente Then Return "Proximo Debito Pendiente"
       Return "NA"
     Catch ex As Exception
       Print_msg(ex.Message)
