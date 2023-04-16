@@ -8,6 +8,8 @@ Public Class frmExportarHipotecario
   Private m_skip As Boolean
   Private m_TipoPago As clsTipoPago
 
+  Private m_Registros As New List(Of clsInfoHipotecario)
+
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
 
     ' This call is required by the designer.
@@ -26,34 +28,121 @@ Public Class frmExportarHipotecario
       Using objForm As New frmProgreso(AddressOf CargarInicio)
         objForm.ShowDialog(Me)
       End Using
+
+      ClsInfoHipotecarioBindingSource.DataSource = m_Registros
+      ClsInfoHipotecarioBindingSource.ResetBindings(False)
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
-  Private Sub CargarInicio()
+
+
+
+  Private Sub CargarInicio(ByVal vTipoPago As manDB.clsTipoPago, ByRef rMovimientos As List(Of clsInfoMovimiento))
     Try
-      clsCobros.GenerateResumen(m_TipoPago, m_Movimientos)
-      Select Case m_TipoPago.GuidTipo
-        Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
-          FillResumenViewVisaCredito(m_Movimientos)
-        Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito 
-          FillResumenViewVisaCredito(m_Movimientos)
-        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
-          FillResumenViewVisaCredito(m_Movimientos)
-        Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-          lstViewResumen.Invoke(Sub() FillResumenViewVisaCredito(m_Movimientos)) ' FillResumenViewVisaCredito(m_Movimientos)
-        Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
-          FillResumenViewVisaCredito(m_Movimientos)
-        Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
-          FillResumenViewVisaCredito(m_Movimientos)
-        Case Else
-          MsgBox("No se encuentra tipo de pago")
-      End Select
-      'FillResumenViewVisaCredito(m_Movimientos)
+
+      Dim lstPago As New clsListPagos
+      rMovimientos = New List(Of clsInfoMovimiento)
+      Dim movimiento As New clsInfoMovimiento
+
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.RefreshData()
+
+
+      For Each item In lstPago.Items
+        movimiento = New clsInfoMovimiento
+
+        Dim lstProducto As New clsListProductos
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & vTipoPago.GuidTipo.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
+        lstProducto.RefreshData()
+        If lstProducto.Items.Count <= 0 Then Continue For
+
+
+        Dim lstCuenta As New clsListaCuentas
+        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
+        lstCuenta.RefreshData()
+
+        Dim lstCliente As New clsListDatabase
+        lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
+        lstCliente.RefreshData()
+
+
+        'auxPrimerPago.Cfg_Filtro = "where (TotalCuotas-CuotasDebe)>=1 and GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+        'auxPrimerPago.RefreshData()
+        Dim bCodigoAlta As Boolean
+        If item.NumCuota > 1 Then
+          bCodigoAlta = False
+        Else
+          'verificar si es la primer cuota, buscan si la cuenta se uso en algun pago de cuota
+          Dim auxPrimerPago As New clsListProductos
+          Dim bAlta As Boolean = True
+          auxPrimerPago.Cfg_Filtro = "where GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+          auxPrimerPago.RefreshData()
+          If auxPrimerPago.Items.Count > 1 Then
+
+            For Each producto In auxPrimerPago.Items
+              Dim aux As New clsListPagos
+              aux.Cfg_Filtro = "where GuidProducto={" & producto.GuidProducto.ToString & "}"
+              aux.RefreshData()
+              For Each pago In aux.Items
+                If pago.EstadoPago = E_EstadoPago.Pago Then
+                  bAlta = False
+                  Exit For
+                End If
+              Next
+              If bAlta = False Then Exit For
+            Next
+          End If
+          bCodigoAlta = bAlta
+        End If
+
+        With movimiento
+          .NumeroTarjeta = lstCuenta.Items.First.Codigo1
+          .NumeroComprobante = lstProducto.Items.First.NumComprobante
+          .Importe = item.ValorCuota
+          .IdentificadorDebito = lstCliente.Items.First.NumCliente
+          .Fecha = g_Today
+
+          If bCodigoAlta = False Then
+            .CodigoDeAlta = "N"
+            Dim aux As New clsListPagos
+            aux.Cfg_Filtro = "where NumComprobante=" & lstProducto.Items.First.NumComprobante
+            aux.RefreshData()
+            For Each pago In aux.Items.OrderByDescending(Function(c) c.NumCuota)
+              If pago.EstadoPago <> E_EstadoPago.Pago Then Continue For
+              .CuotaActual = pago.NumCuota
+              .UltimaFechPago = pago.FechaPago.ToString("dd/MM/yy")
+              Exit For
+            Next
+
+          Else
+            .CodigoDeAlta = "E"
+          End If
+          .Param2 = lstProducto.Items.First.TotalCuotas  'NUMERO TOTAL DE CUOTAS
+          .Nombre = lstCliente.Items.First.ToString
+
+        End With
+        rMovimientos.Add(movimiento)
+      Next
+      If rMovimientos.Count < 0 Then
+        MsgBox("Nada que exportar")
+      End If
+
+
+
+
+
+
+
+
+      Return Result.OK
     Catch ex As Exception
-      Print_msg(ex.Message)
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
     End Try
+  End Sub
   End Sub
 
   Private Sub LlenarListviewSeguro(ByVal vMovimientos As List(Of clsInfoMovimiento))

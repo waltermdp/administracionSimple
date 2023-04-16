@@ -29,10 +29,7 @@ Partial Class frmExportarHipotecario
     Me.btnReload = New System.Windows.Forms.Button()
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.Label1 = New System.Windows.Forms.Label()
-    Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.TextBox1 = New System.Windows.Forms.TextBox()
+    Me.dgvResumen = New System.Windows.Forms.DataGridView()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IdentificadorDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -41,7 +38,16 @@ Partial Class frmExportarHipotecario
     Me.ImporteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.txtNumeroConvenio = New System.Windows.Forms.TextBox()
+    Me.txtImporteTotal = New System.Windows.Forms.TextBox()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.txtFechaActual = New System.Windows.Forms.TextBox()
+    Me.txtFechaVencimiento = New System.Windows.Forms.TextBox()
+    CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -114,37 +120,17 @@ Partial Class frmExportarHipotecario
     Me.Label1.TabIndex = 48
     Me.Label1.Text = "Registro a exportar"
     '
-    'DataGridView1
+    'dgvResumen
     '
-    Me.DataGridView1.AllowUserToAddRows = False
-    Me.DataGridView1.AutoGenerateColumns = False
-    Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.IdentificadorDebitoDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.NumeroComprobanteDataGridViewTextBoxColumn, Me.FechaVencimientoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CodigoBancoDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn})
-    Me.DataGridView1.DataSource = Me.ClsInfoHipotecarioBindingSource
-    Me.DataGridView1.Location = New System.Drawing.Point(177, 91)
-    Me.DataGridView1.Name = "DataGridView1"
-    Me.DataGridView1.Size = New System.Drawing.Size(1080, 299)
-    Me.DataGridView1.TabIndex = 49
-    '
-    'ClsInfoHipotecarioBindingSource
-    '
-    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
-    '
-    'Label2
-    '
-    Me.Label2.Location = New System.Drawing.Point(174, 45)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(72, 16)
-    Me.Label2.TabIndex = 50
-    Me.Label2.Text = "CONVENIO"
-    '
-    'TextBox1
-    '
-    Me.TextBox1.Location = New System.Drawing.Point(252, 41)
-    Me.TextBox1.Name = "TextBox1"
-    Me.TextBox1.ReadOnly = True
-    Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-    Me.TextBox1.TabIndex = 51
+    Me.dgvResumen.AllowUserToAddRows = False
+    Me.dgvResumen.AutoGenerateColumns = False
+    Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.IdentificadorDebitoDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.NumeroComprobanteDataGridViewTextBoxColumn, Me.FechaVencimientoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CodigoBancoDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn})
+    Me.dgvResumen.DataSource = Me.ClsInfoHipotecarioBindingSource
+    Me.dgvResumen.Location = New System.Drawing.Point(177, 91)
+    Me.dgvResumen.Name = "dgvResumen"
+    Me.dgvResumen.Size = New System.Drawing.Size(1080, 299)
+    Me.dgvResumen.TabIndex = 49
     '
     'NombreDataGridViewTextBoxColumn
     '
@@ -194,15 +180,89 @@ Partial Class frmExportarHipotecario
     Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
     Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
     '
+    'ClsInfoHipotecarioBindingSource
+    '
+    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
+    '
+    'Label2
+    '
+    Me.Label2.Location = New System.Drawing.Point(174, 45)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(72, 16)
+    Me.Label2.TabIndex = 50
+    Me.Label2.Text = "CONVENIO"
+    '
+    'txtNumeroConvenio
+    '
+    Me.txtNumeroConvenio.Location = New System.Drawing.Point(252, 41)
+    Me.txtNumeroConvenio.Name = "txtNumeroConvenio"
+    Me.txtNumeroConvenio.ReadOnly = True
+    Me.txtNumeroConvenio.Size = New System.Drawing.Size(100, 20)
+    Me.txtNumeroConvenio.TabIndex = 51
+    '
+    'txtImporteTotal
+    '
+    Me.txtImporteTotal.Location = New System.Drawing.Point(484, 41)
+    Me.txtImporteTotal.Name = "txtImporteTotal"
+    Me.txtImporteTotal.ReadOnly = True
+    Me.txtImporteTotal.Size = New System.Drawing.Size(133, 20)
+    Me.txtImporteTotal.TabIndex = 52
+    '
+    'Label3
+    '
+    Me.Label3.Location = New System.Drawing.Point(378, 41)
+    Me.Label3.Name = "Label3"
+    Me.Label3.Size = New System.Drawing.Size(100, 20)
+    Me.Label3.TabIndex = 53
+    Me.Label3.Text = "IMPORTE TOTAL"
+    '
+    'Label4
+    '
+    Me.Label4.Location = New System.Drawing.Point(634, 41)
+    Me.Label4.Name = "Label4"
+    Me.Label4.Size = New System.Drawing.Size(79, 23)
+    Me.Label4.TabIndex = 54
+    Me.Label4.Text = "Fecha Actual"
+    '
+    'Label5
+    '
+    Me.Label5.Location = New System.Drawing.Point(899, 41)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(100, 23)
+    Me.Label5.TabIndex = 55
+    Me.Label5.Text = "Fecha Vencimiento"
+    '
+    'txtFechaActual
+    '
+    Me.txtFechaActual.Location = New System.Drawing.Point(719, 38)
+    Me.txtFechaActual.Name = "txtFechaActual"
+    Me.txtFechaActual.ReadOnly = True
+    Me.txtFechaActual.Size = New System.Drawing.Size(133, 20)
+    Me.txtFechaActual.TabIndex = 56
+    '
+    'txtFechaVencimiento
+    '
+    Me.txtFechaVencimiento.Location = New System.Drawing.Point(1005, 38)
+    Me.txtFechaVencimiento.Name = "txtFechaVencimiento"
+    Me.txtFechaVencimiento.ReadOnly = True
+    Me.txtFechaVencimiento.Size = New System.Drawing.Size(133, 20)
+    Me.txtFechaVencimiento.TabIndex = 57
+    '
     'frmExportarHipotecario
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
-    Me.Controls.Add(Me.TextBox1)
+    Me.Controls.Add(Me.txtFechaVencimiento)
+    Me.Controls.Add(Me.txtFechaActual)
+    Me.Controls.Add(Me.Label5)
+    Me.Controls.Add(Me.Label4)
+    Me.Controls.Add(Me.Label3)
+    Me.Controls.Add(Me.txtImporteTotal)
+    Me.Controls.Add(Me.txtNumeroConvenio)
     Me.Controls.Add(Me.Label2)
-    Me.Controls.Add(Me.DataGridView1)
+    Me.Controls.Add(Me.dgvResumen)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.lblResumen)
     Me.Controls.Add(Me.btnReload)
@@ -213,7 +273,7 @@ Partial Class frmExportarHipotecario
     Me.Name = "frmExportarHipotecario"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmExportarResumen"
-    CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
@@ -225,7 +285,7 @@ Partial Class frmExportarHipotecario
   Friend WithEvents btnReload As System.Windows.Forms.Button
   Friend WithEvents lblResumen As System.Windows.Forms.Label
   Friend WithEvents Label1 As System.Windows.Forms.Label
-  Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+  Friend WithEvents dgvResumen As System.Windows.Forms.DataGridView
   Friend WithEvents ClsInfoHipotecarioBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents IdentificadorDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -236,5 +296,11 @@ Partial Class frmExportarHipotecario
   Friend WithEvents CodigoBancoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CuotaActualDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents Label2 As System.Windows.Forms.Label
-  Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+  Friend WithEvents txtNumeroConvenio As System.Windows.Forms.TextBox
+  Friend WithEvents txtImporteTotal As System.Windows.Forms.TextBox
+  Friend WithEvents Label3 As System.Windows.Forms.Label
+  Friend WithEvents Label4 As System.Windows.Forms.Label
+  Friend WithEvents Label5 As System.Windows.Forms.Label
+  Friend WithEvents txtFechaActual As System.Windows.Forms.TextBox
+  Friend WithEvents txtFechaVencimiento As System.Windows.Forms.TextBox
 End Class
