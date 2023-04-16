@@ -25,7 +25,8 @@ Public Class clsHipotecario
       lstResult.Add(auxLinea)
       For Each mov In vlstMovimientos
         auxLinea = String.Empty
-        If GenerarDetalle(auxLinea) <> Result.OK Then
+
+        If GenerarDetalle(mov, 0, g_Today.AddDays(2), auxLinea) <> Result.OK Then
           MsgBox("No se puede generar encabezado de debito Hipotecario")
           Return Result.NOK
         End If
@@ -71,7 +72,7 @@ Public Class clsHipotecario
     Try
       Dim sResult As String = String.Empty
       'Dim codBanco As Integer = 888 '!!!consultar
-      'Dim codsucCuenta As Integer = 4 'CBU
+      'Dim codsucCuenta As integer=4 'CBU
       'Dim cuentabanc As Integer = 5 'CBU 
       'Dim IDActualCliente As String = "14000"
       'Dim fechaVencimiento As Date = Today '!!!!sumar n dias a la fecha actual
@@ -82,9 +83,9 @@ Public Class clsHipotecario
       sResult += String.Format("{0,10}", " ")
       sResult += NROEMPRESA.ToString("D5")
       sResult += vCodBanco.ToString("D3")
-      sResult += codsucCuenta.ToString("D4")
+      sResult += vMov.NumeroTarjeta.Substring(0, 4) ' codsucCuenta.ToString("D4")
       sResult += String.Format("{0,1}", TIPOCUENTA)
-      sResult += cuentabanc.ToString("D15")
+      sResult += vMov.NumeroTarjeta.Substring(0, 15) 'cuentabanc.ToString("D15")
       sResult += String.Format("{0,-22}", vMov.IdentificadorDebito)
       sResult += String.Format("{0,-15}", IDDEBITO)
       sResult += String.Format("{0,2}", " ")

@@ -1,8 +1,7 @@
 ﻿Imports libCommon.Comunes
 Imports manDB
 
-Public Class frmExportarResumen
-
+Public Class frmExportarHipotecario
   Public m_Result As libCommon.Comunes.Result = Result.CANCEL
   Private m_Movimientos As New List(Of clsInfoMovimiento)
   Private m_MovimientosSeleccionados As New List(Of clsInfoMovimiento)
@@ -24,8 +23,6 @@ Public Class frmExportarResumen
 
   Private Sub frmExportarResumen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-
-
       Using objForm As New frmProgreso(AddressOf CargarInicio)
         objForm.ShowDialog(Me)
       End Using

@@ -637,9 +637,15 @@ Public Class frmDeben
 
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Exportar)
         If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
-          Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
-            objFormulario.ShowDialog(Me)
-          End Using
+          If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+            Using objFormulario As New frmExportarHipotecario(objForm.TipoPagoSeleccionado)
+              objFormulario.ShowDialog(Me)
+            End Using
+          Else
+            Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
+              objFormulario.ShowDialog(Me)
+            End Using
+          End If
         Else
           Exit Sub
         End If

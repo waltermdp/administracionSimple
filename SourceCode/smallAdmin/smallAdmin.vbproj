@@ -21,7 +21,9 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>smallAdmin.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,7 +33,9 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>smallAdmin.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -51,22 +55,26 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DocumentationFile>smallAdmin.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Release\</OutputPath>
     <DocumentationFile>smallAdmin.xml</DocumentationFile>
     <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -205,6 +213,12 @@
     <Compile Include="Form\frmEstablecerPagos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmExportarHipotecario.Designer.vb">
+      <DependentUpon>frmExportarHipotecario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmExportarHipotecario.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmLiquidacionVendedores.Designer.vb">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </Compile>
@@ -249,6 +263,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modulos\clsComparar.vb" />
+    <Compile Include="Modulos\clsInfoHipotecario.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
@@ -314,6 +329,9 @@
     <EmbeddedResource Include="Form\frmEstablecerPagos.resx">
       <DependentUpon>frmEstablecerPagos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmExportarHipotecario.resx">
+      <DependentUpon>frmExportarHipotecario.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLiquidacionVendedores.resx">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </EmbeddedResource>
@@ -351,6 +369,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\clsInfoHipotecario.datasource" />
     <None Include="My Project\DataSources\clsListaStorage.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />
