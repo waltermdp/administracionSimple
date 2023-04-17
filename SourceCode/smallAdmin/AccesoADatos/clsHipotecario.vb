@@ -12,22 +12,50 @@ Public Class clsHipotecario
   Private FECHATOPE As String = "00000000"
   Private DATOSRETORNO As String = "CUOTA"
 
+  Private m_FechaGeneracion As Date
+  Private m_Secuencial As Decimal
+
   Public ReadOnly Property Convenio As Integer
     Get
       Return NROCONVENIO
     End Get
   End Property
 
+  Public Property FechaGeneracion As Date
+    Get
+      Return m_FechaGeneracion
+    End Get
+    Set(value As Date)
+      m_FechaGeneracion = value
+    End Set
+  End Property
+
+  Public Property Secuencial As Decimal
+    Get
+      Return m_Secuencial
+    End Get
+    Set(value As Decimal)
+      m_Secuencial = value
+    End Set
+  End Property
+
+  Public Sub New()
+    Try
+      m_FechaGeneracion = g_Today
+      m_Secuencial = 2
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
 
-
-  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoHipotecario), ByRef rlineas As List(Of String), ByVal vSecuencial As Integer) As Result
+  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoHipotecario), ByRef rlineas As List(Of String)) As Result
     Try
       Dim auxLinea As String = String.Empty
       Dim lstResult As New List(Of String)
       Dim ImporteTotal As Decimal = 0
       ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
-      If GenerarHeaderDebito(auxLinea, ImporteTotal, g_Today, vSecuencial) <> Result.OK Then
+      If GenerarHeaderDebito(auxLinea, ImporteTotal, m_FechaGeneracion, m_Secuencial) <> Result.OK Then
         MsgBox("No se puede generar encabezado de debito Hipotecario")
         Return Result.NOK
       End If
@@ -35,13 +63,14 @@ Public Class clsHipotecario
       For Each mov In vlstRegistros
         auxLinea = String.Empty
 
-        If GenerarDetalle(mov, 0, g_Today.AddDays(2), auxLinea) <> Result.OK Then
+        If GenerarDetalle(mov, auxLinea) <> Result.OK Then
           MsgBox("No se puede generar encabezado de debito Hipotecario")
           Return Result.NOK
         End If
         lstResult.Add(auxLinea)
       Next
-
+      rlineas = New List(Of String)
+      rlineas.AddRange(lstResult.ToList)
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -77,7 +106,7 @@ Public Class clsHipotecario
 
 
 
-  Private Function GenerarDetalle(ByVal vMov As clsInfoHipotecario, ByVal vCodBanco As Integer, ByVal vFechaVencimiento As Date, ByRef rBody As String) As Result
+  Private Function GenerarDetalle(ByVal vMov As clsInfoHipotecario, ByRef rBody As String) As Result
     Try
       Dim sResult As String = String.Empty
       'Dim codBanco As Integer = 888 '!!!consultar
@@ -91,7 +120,7 @@ Public Class clsHipotecario
       sResult += NROCONVENIO.ToString("D5")
       sResult += String.Format("{0,10}", " ")
       sResult += NROEMPRESA.ToString("D5")
-      sResult += vCodBanco.ToString("D3")
+      sResult += vMov.CodigoBanco.ToString("D3")
       sResult += vMov.CBU.Substring(0, 4) ' codsucCuenta.ToString("D4")
       sResult += String.Format("{0,1}", TIPOCUENTA)
       sResult += vMov.CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
@@ -99,9 +128,9 @@ Public Class clsHipotecario
       sResult += String.Format("{0,-15}", IDDEBITO)
       sResult += String.Format("{0,2}", " ")
       sResult += String.Format("{0,4}", " ")
-      sResult += vFechaVencimiento.ToString("yyyyMMdd")
+      sResult += vMov.FechaVencimiento.ToString("yyyyMMdd")
       sResult += MONEDA.ToString("D3")
-      sResult += CDec(vMov.Importe).ToString("D13")
+      sResult += CInt(vMov.Importe * 100).ToString("D13")
       sResult += FECHATOPE 'fechatope.ToString("yyyyMMdd")
       sResult += New String("0"c, 13)
       sResult += New String("0"c, 4)

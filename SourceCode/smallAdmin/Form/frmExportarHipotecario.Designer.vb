@@ -34,10 +34,10 @@ Partial Class frmExportarHipotecario
     Me.Label3 = New System.Windows.Forms.Label()
     Me.Label4 = New System.Windows.Forms.Label()
     Me.Label5 = New System.Windows.Forms.Label()
-    Me.txtFechaActual = New System.Windows.Forms.TextBox()
-    Me.txtFechaVencimiento = New System.Windows.Forms.TextBox()
     Me.Label6 = New System.Windows.Forms.Label()
     Me.txtSecuencial = New System.Windows.Forms.TextBox()
+    Me.dtCurrent = New System.Windows.Forms.DateTimePicker()
+    Me.dtVencimiento = New System.Windows.Forms.DateTimePicker()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IdentificadorDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,8 +47,6 @@ Partial Class frmExportarHipotecario
     Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.dtCurrent = New System.Windows.Forms.DateTimePicker()
-    Me.dtVencimiento = New System.Windows.Forms.DateTimePicker()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -164,29 +162,14 @@ Partial Class frmExportarHipotecario
     Me.Label5.TabIndex = 55
     Me.Label5.Text = "Fecha Vencimiento"
     '
-    'txtFechaActual
-    '
-    Me.txtFechaActual.Location = New System.Drawing.Point(719, 38)
-    Me.txtFechaActual.Name = "txtFechaActual"
-    Me.txtFechaActual.ReadOnly = True
-    Me.txtFechaActual.Size = New System.Drawing.Size(133, 20)
-    Me.txtFechaActual.TabIndex = 56
-    '
-    'txtFechaVencimiento
-    '
-    Me.txtFechaVencimiento.Location = New System.Drawing.Point(1005, 38)
-    Me.txtFechaVencimiento.Name = "txtFechaVencimiento"
-    Me.txtFechaVencimiento.ReadOnly = True
-    Me.txtFechaVencimiento.Size = New System.Drawing.Size(133, 20)
-    Me.txtFechaVencimiento.TabIndex = 57
-    '
     'Label6
     '
-    Me.Label6.Location = New System.Drawing.Point(174, 65)
+    Me.Label6.Location = New System.Drawing.Point(174, 68)
     Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(72, 23)
+    Me.Label6.Size = New System.Drawing.Size(72, 20)
     Me.Label6.TabIndex = 58
     Me.Label6.Text = "Secuencial"
+    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
     '
     'txtSecuencial
     '
@@ -194,7 +177,22 @@ Partial Class frmExportarHipotecario
     Me.txtSecuencial.Name = "txtSecuencial"
     Me.txtSecuencial.Size = New System.Drawing.Size(100, 20)
     Me.txtSecuencial.TabIndex = 59
-    Me.txtSecuencial.Text = "000"
+    '
+    'dtCurrent
+    '
+    Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    Me.dtCurrent.Location = New System.Drawing.Point(719, 38)
+    Me.dtCurrent.Name = "dtCurrent"
+    Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
+    Me.dtCurrent.TabIndex = 60
+    '
+    'dtVencimiento
+    '
+    Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 39)
+    Me.dtVencimiento.Name = "dtVencimiento"
+    Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
+    Me.dtVencimiento.TabIndex = 61
     '
     'NombreDataGridViewTextBoxColumn
     '
@@ -248,22 +246,6 @@ Partial Class frmExportarHipotecario
     '
     Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
     '
-    'dtCurrent
-    '
-    Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtCurrent.Location = New System.Drawing.Point(722, 76)
-    Me.dtCurrent.Name = "dtCurrent"
-    Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
-    Me.dtCurrent.TabIndex = 60
-    '
-    'dtVencimiento
-    '
-    Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 76)
-    Me.dtVencimiento.Name = "dtVencimiento"
-    Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
-    Me.dtVencimiento.TabIndex = 61
-    '
     'frmExportarHipotecario
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -274,8 +256,6 @@ Partial Class frmExportarHipotecario
     Me.Controls.Add(Me.dtCurrent)
     Me.Controls.Add(Me.txtSecuencial)
     Me.Controls.Add(Me.Label6)
-    Me.Controls.Add(Me.txtFechaVencimiento)
-    Me.Controls.Add(Me.txtFechaActual)
     Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.Label3)
@@ -317,8 +297,6 @@ Partial Class frmExportarHipotecario
   Friend WithEvents Label3 As System.Windows.Forms.Label
   Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents Label5 As System.Windows.Forms.Label
-  Friend WithEvents txtFechaActual As System.Windows.Forms.TextBox
-  Friend WithEvents txtFechaVencimiento As System.Windows.Forms.TextBox
   Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents txtSecuencial As System.Windows.Forms.TextBox
   Friend WithEvents dtCurrent As System.Windows.Forms.DateTimePicker

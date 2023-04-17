@@ -6,8 +6,9 @@ Public Class frmExportarHipotecario
   Private m_TipoPago As clsTipoPago
 
   Private m_Registros As New List(Of clsInfoHipotecario)
-  Private m_Banco As New clsHipotecario
+  Private m_Banco As clsHipotecario
 
+  Private m_skip As Boolean = False
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
 
     ' This call is required by the designer.
@@ -23,9 +24,14 @@ Public Class frmExportarHipotecario
 
   Private Sub frmExportarResumen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      dtCurrent.Value = g_Today
+      m_Banco = New clsHipotecario
+      m_skip = True
+      dtCurrent.Value = m_Banco.FechaGeneracion
+      dtVencimiento.MinDate = dtCurrent.Value
       dtVencimiento.Value = Today.AddDays(2)
       txtNumeroConvenio.Text = m_Banco.Convenio
+      txtSecuencial.Text = m_Banco.Secuencial
+      m_skip = False
       RecargarValores()
 
     Catch ex As Exception
@@ -151,7 +157,7 @@ Public Class frmExportarHipotecario
     Try
 
       Dim lineas As New List(Of String)
-      If m_Banco.GetExportedFile(m_Registros, lineas, CInt(txtSecuencial.Text)) <> Result.OK Then
+      If m_Banco.GetExportedFile(m_Registros, lineas) <> Result.OK Then
         MsgBox("Fallo generar archivo")
         Exit Sub
       End If
@@ -187,5 +193,87 @@ Public Class frmExportarHipotecario
 
 
 
+
+  Private Sub dtCurrent_ValueChanged(sender As Object, e As EventArgs) Handles dtCurrent.ValueChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      Dim auxVen As Date = dtVencimiento.Value
+      dtVencimiento.MinDate = dtCurrent.Value
+      m_Banco.FechaGeneracion = dtCurrent.Value
+      If auxVen <> dtVencimiento.Value Then
+        For Each registro In m_Registros
+          registro.FechaVencimiento = dtVencimiento.Value
+        Next
+        RefeshGrilla()
+      End If
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub dtVencimiento_ValueChanged(sender As Object, e As EventArgs) Handles dtVencimiento.ValueChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      For Each registro In m_Registros
+        registro.FechaVencimiento = dtVencimiento.Value
+      Next
+      RefeshGrilla()
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+
+
+  Private Sub txtSecuencial_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSecuencial.KeyPress
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+        e.Handled = True
+      End If
+     
+
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+
+
+  Private Sub txtSecuencial_TextChanged(sender As Object, e As EventArgs) Handles txtSecuencial.TextChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      If Not IsNumeric(txtSecuencial.Text.Trim) Then
+        m_skip = False
+        Exit Sub
+      End If
+
+      If txtSecuencial.Text.Length <= 0 Then txtSecuencial.Text = 0
+      If txtSecuencial.Text.Length > 3 Then txtSecuencial.Text = txtSecuencial.Text.Substring(0, 3)
+      m_Banco.Secuencial = CDec(txtSecuencial.Text)
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub RefeshGrilla()
+    Try
+      ClsInfoHipotecarioBindingSource.ResetBindings(False)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
 End Class

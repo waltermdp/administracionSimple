@@ -5,7 +5,7 @@
   Private m_FechaVencimiento As Date
   Private m_IdentificadorDebito As String
   Private m_Importe As Decimal
-  Private m_CodigoBanco As Integer
+  Private m_CodigoBanco As Decimal
 
   Private m_Nombre As String
   Private m_CuotaActual As Integer
