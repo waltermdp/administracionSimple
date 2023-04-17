@@ -25,11 +25,19 @@ Partial Class frmExportarHipotecario
     Me.components = New System.ComponentModel.Container()
     Me.btnCancel = New System.Windows.Forms.Button()
     Me.btnProcesar = New System.Windows.Forms.Button()
-    Me.lstViewResumen = New System.Windows.Forms.ListView()
     Me.btnReload = New System.Windows.Forms.Button()
     Me.lblResumen = New System.Windows.Forms.Label()
-    Me.Label1 = New System.Windows.Forms.Label()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.txtNumeroConvenio = New System.Windows.Forms.TextBox()
+    Me.txtImporteTotal = New System.Windows.Forms.TextBox()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.txtFechaActual = New System.Windows.Forms.TextBox()
+    Me.txtFechaVencimiento = New System.Windows.Forms.TextBox()
+    Me.Label6 = New System.Windows.Forms.Label()
+    Me.txtSecuencial = New System.Windows.Forms.TextBox()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IdentificadorDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -39,14 +47,8 @@ Partial Class frmExportarHipotecario
     Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.txtNumeroConvenio = New System.Windows.Forms.TextBox()
-    Me.txtImporteTotal = New System.Windows.Forms.TextBox()
-    Me.Label3 = New System.Windows.Forms.Label()
-    Me.Label4 = New System.Windows.Forms.Label()
-    Me.Label5 = New System.Windows.Forms.Label()
-    Me.txtFechaActual = New System.Windows.Forms.TextBox()
-    Me.txtFechaVencimiento = New System.Windows.Forms.TextBox()
+    Me.dtCurrent = New System.Windows.Forms.DateTimePicker()
+    Me.dtVencimiento = New System.Windows.Forms.DateTimePicker()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -79,15 +81,6 @@ Partial Class frmExportarHipotecario
     Me.btnProcesar.Text = "Procesar"
     Me.btnProcesar.UseVisualStyleBackColor = False
     '
-    'lstViewResumen
-    '
-    Me.lstViewResumen.Location = New System.Drawing.Point(177, 463)
-    Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(1080, 92)
-    Me.lstViewResumen.TabIndex = 45
-    Me.lstViewResumen.UseCompatibleStateImageBehavior = False
-    Me.lstViewResumen.View = System.Windows.Forms.View.Details
-    '
     'btnReload
     '
     Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
@@ -105,20 +98,11 @@ Partial Class frmExportarHipotecario
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(174, 568)
+    Me.lblResumen.Location = New System.Drawing.Point(174, 615)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
     Me.lblResumen.TabIndex = 47
     Me.lblResumen.Text = "Resumen"
-    '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(48, 463)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(96, 13)
-    Me.Label1.TabIndex = 48
-    Me.Label1.Text = "Registro a exportar"
     '
     'dgvResumen
     '
@@ -127,62 +111,10 @@ Partial Class frmExportarHipotecario
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.IdentificadorDebitoDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.NumeroComprobanteDataGridViewTextBoxColumn, Me.FechaVencimientoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CodigoBancoDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoHipotecarioBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(177, 91)
+    Me.dgvResumen.Location = New System.Drawing.Point(177, 104)
     Me.dgvResumen.Name = "dgvResumen"
-    Me.dgvResumen.Size = New System.Drawing.Size(1080, 299)
+    Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 49
-    '
-    'NombreDataGridViewTextBoxColumn
-    '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-    '
-    'IdentificadorDebitoDataGridViewTextBoxColumn
-    '
-    Me.IdentificadorDebitoDataGridViewTextBoxColumn.DataPropertyName = "IdentificadorDebito"
-    Me.IdentificadorDebitoDataGridViewTextBoxColumn.HeaderText = "IdentificadorDebito"
-    Me.IdentificadorDebitoDataGridViewTextBoxColumn.Name = "IdentificadorDebitoDataGridViewTextBoxColumn"
-    '
-    'CBUDataGridViewTextBoxColumn
-    '
-    Me.CBUDataGridViewTextBoxColumn.DataPropertyName = "CBU"
-    Me.CBUDataGridViewTextBoxColumn.HeaderText = "CBU"
-    Me.CBUDataGridViewTextBoxColumn.Name = "CBUDataGridViewTextBoxColumn"
-    '
-    'NumeroComprobanteDataGridViewTextBoxColumn
-    '
-    Me.NumeroComprobanteDataGridViewTextBoxColumn.DataPropertyName = "NumeroComprobante"
-    Me.NumeroComprobanteDataGridViewTextBoxColumn.HeaderText = "NumeroComprobante"
-    Me.NumeroComprobanteDataGridViewTextBoxColumn.Name = "NumeroComprobanteDataGridViewTextBoxColumn"
-    '
-    'FechaVencimientoDataGridViewTextBoxColumn
-    '
-    Me.FechaVencimientoDataGridViewTextBoxColumn.DataPropertyName = "FechaVencimiento"
-    Me.FechaVencimientoDataGridViewTextBoxColumn.HeaderText = "FechaVencimiento"
-    Me.FechaVencimientoDataGridViewTextBoxColumn.Name = "FechaVencimientoDataGridViewTextBoxColumn"
-    '
-    'ImporteDataGridViewTextBoxColumn
-    '
-    Me.ImporteDataGridViewTextBoxColumn.DataPropertyName = "Importe"
-    Me.ImporteDataGridViewTextBoxColumn.HeaderText = "Importe"
-    Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
-    '
-    'CodigoBancoDataGridViewTextBoxColumn
-    '
-    Me.CodigoBancoDataGridViewTextBoxColumn.DataPropertyName = "CodigoBanco"
-    Me.CodigoBancoDataGridViewTextBoxColumn.HeaderText = "CodigoBanco"
-    Me.CodigoBancoDataGridViewTextBoxColumn.Name = "CodigoBancoDataGridViewTextBoxColumn"
-    '
-    'CuotaActualDataGridViewTextBoxColumn
-    '
-    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
-    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
-    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
-    '
-    'ClsInfoHipotecarioBindingSource
-    '
-    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
     '
     'Label2
     '
@@ -248,12 +180,100 @@ Partial Class frmExportarHipotecario
     Me.txtFechaVencimiento.Size = New System.Drawing.Size(133, 20)
     Me.txtFechaVencimiento.TabIndex = 57
     '
+    'Label6
+    '
+    Me.Label6.Location = New System.Drawing.Point(174, 65)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(72, 23)
+    Me.Label6.TabIndex = 58
+    Me.Label6.Text = "Secuencial"
+    '
+    'txtSecuencial
+    '
+    Me.txtSecuencial.Location = New System.Drawing.Point(252, 68)
+    Me.txtSecuencial.Name = "txtSecuencial"
+    Me.txtSecuencial.Size = New System.Drawing.Size(100, 20)
+    Me.txtSecuencial.TabIndex = 59
+    Me.txtSecuencial.Text = "000"
+    '
+    'NombreDataGridViewTextBoxColumn
+    '
+    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    '
+    'IdentificadorDebitoDataGridViewTextBoxColumn
+    '
+    Me.IdentificadorDebitoDataGridViewTextBoxColumn.DataPropertyName = "IdentificadorDebito"
+    Me.IdentificadorDebitoDataGridViewTextBoxColumn.HeaderText = "IdentificadorDebito"
+    Me.IdentificadorDebitoDataGridViewTextBoxColumn.Name = "IdentificadorDebitoDataGridViewTextBoxColumn"
+    '
+    'CBUDataGridViewTextBoxColumn
+    '
+    Me.CBUDataGridViewTextBoxColumn.DataPropertyName = "CBU"
+    Me.CBUDataGridViewTextBoxColumn.HeaderText = "CBU"
+    Me.CBUDataGridViewTextBoxColumn.Name = "CBUDataGridViewTextBoxColumn"
+    '
+    'NumeroComprobanteDataGridViewTextBoxColumn
+    '
+    Me.NumeroComprobanteDataGridViewTextBoxColumn.DataPropertyName = "NumeroComprobante"
+    Me.NumeroComprobanteDataGridViewTextBoxColumn.HeaderText = "NumeroComprobante"
+    Me.NumeroComprobanteDataGridViewTextBoxColumn.Name = "NumeroComprobanteDataGridViewTextBoxColumn"
+    '
+    'FechaVencimientoDataGridViewTextBoxColumn
+    '
+    Me.FechaVencimientoDataGridViewTextBoxColumn.DataPropertyName = "FechaVencimiento"
+    Me.FechaVencimientoDataGridViewTextBoxColumn.HeaderText = "FechaVencimiento"
+    Me.FechaVencimientoDataGridViewTextBoxColumn.Name = "FechaVencimientoDataGridViewTextBoxColumn"
+    '
+    'ImporteDataGridViewTextBoxColumn
+    '
+    Me.ImporteDataGridViewTextBoxColumn.DataPropertyName = "Importe"
+    Me.ImporteDataGridViewTextBoxColumn.HeaderText = "Importe"
+    Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
+    '
+    'CodigoBancoDataGridViewTextBoxColumn
+    '
+    Me.CodigoBancoDataGridViewTextBoxColumn.DataPropertyName = "CodigoBanco"
+    Me.CodigoBancoDataGridViewTextBoxColumn.HeaderText = "CodigoBanco"
+    Me.CodigoBancoDataGridViewTextBoxColumn.Name = "CodigoBancoDataGridViewTextBoxColumn"
+    '
+    'CuotaActualDataGridViewTextBoxColumn
+    '
+    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
+    '
+    'ClsInfoHipotecarioBindingSource
+    '
+    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
+    '
+    'dtCurrent
+    '
+    Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    Me.dtCurrent.Location = New System.Drawing.Point(722, 76)
+    Me.dtCurrent.Name = "dtCurrent"
+    Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
+    Me.dtCurrent.TabIndex = 60
+    '
+    'dtVencimiento
+    '
+    Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 76)
+    Me.dtVencimiento.Name = "dtVencimiento"
+    Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
+    Me.dtVencimiento.TabIndex = 61
+    '
     'frmExportarHipotecario
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.dtVencimiento)
+    Me.Controls.Add(Me.dtCurrent)
+    Me.Controls.Add(Me.txtSecuencial)
+    Me.Controls.Add(Me.Label6)
     Me.Controls.Add(Me.txtFechaVencimiento)
     Me.Controls.Add(Me.txtFechaActual)
     Me.Controls.Add(Me.Label5)
@@ -263,10 +283,8 @@ Partial Class frmExportarHipotecario
     Me.Controls.Add(Me.txtNumeroConvenio)
     Me.Controls.Add(Me.Label2)
     Me.Controls.Add(Me.dgvResumen)
-    Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.lblResumen)
     Me.Controls.Add(Me.btnReload)
-    Me.Controls.Add(Me.lstViewResumen)
     Me.Controls.Add(Me.btnProcesar)
     Me.Controls.Add(Me.btnCancel)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -281,10 +299,8 @@ Partial Class frmExportarHipotecario
   End Sub
   Friend WithEvents btnCancel As System.Windows.Forms.Button
   Friend WithEvents btnProcesar As System.Windows.Forms.Button
-  Friend WithEvents lstViewResumen As System.Windows.Forms.ListView
   Friend WithEvents btnReload As System.Windows.Forms.Button
   Friend WithEvents lblResumen As System.Windows.Forms.Label
-  Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents dgvResumen As System.Windows.Forms.DataGridView
   Friend WithEvents ClsInfoHipotecarioBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -303,4 +319,8 @@ Partial Class frmExportarHipotecario
   Friend WithEvents Label5 As System.Windows.Forms.Label
   Friend WithEvents txtFechaActual As System.Windows.Forms.TextBox
   Friend WithEvents txtFechaVencimiento As System.Windows.Forms.TextBox
+  Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents txtSecuencial As System.Windows.Forms.TextBox
+  Friend WithEvents dtCurrent As System.Windows.Forms.DateTimePicker
+  Friend WithEvents dtVencimiento As System.Windows.Forms.DateTimePicker
 End Class

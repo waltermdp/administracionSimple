@@ -1,15 +1,15 @@
 ﻿Public Class clsInfoHipotecario
 
   Private m_CBU As String
-  Private m_NumeroComprobante As String
-  Private m_FechaVencimiento As String
+  Private m_NumeroComprobante As Integer
+  Private m_FechaVencimiento As Date
   Private m_IdentificadorDebito As String
-  Private m_Importe As String
+  Private m_Importe As Decimal
   Private m_CodigoBanco As Integer
 
   Private m_Nombre As String
   Private m_CuotaActual As Integer
-  Private m_UltimaFechaPago As String
+  Private m_UltimaFechaPago As Date
 
 
 
@@ -22,29 +22,29 @@
     End Set
   End Property
 
-  Public Property NumeroComprobante As String
+  Public Property NumeroComprobante As Integer
     Get
       Return m_NumeroComprobante
     End Get
-    Set(value As String)
+    Set(value As Integer)
       m_NumeroComprobante = value
     End Set
   End Property
 
-  Public Property FechaVencimiento As String
+  Public Property FechaVencimiento As Date
     Get
       Return m_FechaVencimiento
     End Get
-    Set(value As String)
+    Set(value As Date)
       m_FechaVencimiento = value
     End Set
   End Property
 
-  Public Property Importe As String
+  Public Property Importe As Decimal
     Get
       Return m_Importe
     End Get
-    Set(value As String)
+    Set(value As Decimal)
       m_Importe = value
     End Set
   End Property
@@ -92,8 +92,8 @@
     MyBase.New()
     CBU = ""
     NumeroComprobante = "0"
-    FechaVencimiento = "00000000"
-    Importe = "0"
+    FechaVencimiento = Date.MinValue
+    Importe = 0
     IdentificadorDebito = "0"
     CodigoBanco = 0
    

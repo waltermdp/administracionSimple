@@ -3,12 +3,10 @@ Imports manDB
 
 Public Class frmExportarHipotecario
   Public m_Result As libCommon.Comunes.Result = Result.CANCEL
-  Private m_Movimientos As New List(Of clsInfoMovimiento)
-  Private m_MovimientosSeleccionados As New List(Of clsInfoMovimiento)
-  Private m_skip As Boolean
   Private m_TipoPago As clsTipoPago
 
   Private m_Registros As New List(Of clsInfoHipotecario)
+  Private m_Banco As New clsHipotecario
 
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
 
@@ -25,34 +23,53 @@ Public Class frmExportarHipotecario
 
   Private Sub frmExportarResumen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      Using objForm As New frmProgreso(AddressOf CargarInicio)
-        objForm.ShowDialog(Me)
-      End Using
-
-      ClsInfoHipotecarioBindingSource.DataSource = m_Registros
-      ClsInfoHipotecarioBindingSource.ResetBindings(False)
+      dtCurrent.Value = g_Today
+      dtVencimiento.Value = Today.AddDays(2)
+      txtNumeroConvenio.Text = m_Banco.Convenio
+      RecargarValores()
 
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
+  Private Sub RecargarValores()
+    Try
+      Using objForm As New frmProgreso(AddressOf CargarInicio)
+        objForm.ShowDialog(Me)
+      End Using
+      ClsInfoHipotecarioBindingSource.DataSource = m_Registros
+      ClsInfoHipotecarioBindingSource.ResetBindings(False)
+      lblResumen.Text = String.Format("Total de registros: {0}", m_Registros.Count)
+      txtImporteTotal.Text = m_Registros.Sum(Function(c) c.Importe).ToString
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
+  Private Sub CargarInicio()
+    Try
+      m_Registros = New List(Of clsInfoHipotecario)
+      GenerateResumen(m_TipoPago, dtVencimiento.Value, m_Registros)
 
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
-  Private Sub CargarInicio(ByVal vTipoPago As manDB.clsTipoPago, ByRef rMovimientos As List(Of clsInfoMovimiento))
+  Private Function GenerateResumen(ByVal vTipoPago As manDB.clsTipoPago, ByVal vFechaVencimiento As Date, ByRef rRegistros As List(Of clsInfoHipotecario)) As Result
     Try
 
       Dim lstPago As New clsListPagos
-      rMovimientos = New List(Of clsInfoMovimiento)
-      Dim movimiento As New clsInfoMovimiento
+      rRegistros = New List(Of clsInfoHipotecario)
+      Dim movimiento As clsInfoHipotecario
 
       lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
       lstPago.RefreshData()
 
 
       For Each item In lstPago.Items
-        movimiento = New clsInfoMovimiento
+        movimiento = New clsInfoHipotecario
 
         Dim lstProducto As New clsListProductos
         lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & vTipoPago.GuidTipo.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
@@ -68,9 +85,6 @@ Public Class frmExportarHipotecario
         lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
         lstCliente.RefreshData()
 
-
-        'auxPrimerPago.Cfg_Filtro = "where (TotalCuotas-CuotasDebe)>=1 and GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
-        'auxPrimerPago.RefreshData()
         Dim bCodigoAlta As Boolean
         If item.NumCuota > 1 Then
           bCodigoAlta = False
@@ -99,121 +113,18 @@ Public Class frmExportarHipotecario
         End If
 
         With movimiento
-          .NumeroTarjeta = lstCuenta.Items.First.Codigo1
+          .CBU = lstCuenta.Items.First.Codigo1
           .NumeroComprobante = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
           .IdentificadorDebito = lstCliente.Items.First.NumCliente
-          .Fecha = g_Today
-
-          If bCodigoAlta = False Then
-            .CodigoDeAlta = "N"
-            Dim aux As New clsListPagos
-            aux.Cfg_Filtro = "where NumComprobante=" & lstProducto.Items.First.NumComprobante
-            aux.RefreshData()
-            For Each pago In aux.Items.OrderByDescending(Function(c) c.NumCuota)
-              If pago.EstadoPago <> E_EstadoPago.Pago Then Continue For
-              .CuotaActual = pago.NumCuota
-              .UltimaFechPago = pago.FechaPago.ToString("dd/MM/yy")
-              Exit For
-            Next
-
-          Else
-            .CodigoDeAlta = "E"
-          End If
-          .Param2 = lstProducto.Items.First.TotalCuotas  'NUMERO TOTAL DE CUOTAS
+          .CodigoBanco = 0
+          .FechaVencimiento = vFechaVencimiento
+          .CuotaActual = item.NumCuota
           .Nombre = lstCliente.Items.First.ToString
 
         End With
-        rMovimientos.Add(movimiento)
+        rRegistros.Add(movimiento)
       Next
-      If rMovimientos.Count < 0 Then
-        MsgBox("Nada que exportar")
-      End If
-
-
-
-
-
-
-
-
-      Return Result.OK
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Sub
-  End Sub
-
-  Private Sub LlenarListviewSeguro(ByVal vMovimientos As List(Of clsInfoMovimiento))
-    Try
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-
-  Private Sub FillResumenViewVisaCredito(ByVal vMovimientos As List(Of clsInfoMovimiento))
-    Try
-      m_skip = True
-      lstViewResumen.Clear()
-      lstViewResumen.MultiSelect = False
-      lstViewResumen.FullRowSelect = True
-      lstViewResumen.CheckBoxes = True
-      lstViewResumen.Columns.Add("Exportar")
-      lstViewResumen.Columns.Add("Comprobante")
-      lstViewResumen.Columns.Add("Identificador (DNI)")
-      lstViewResumen.Columns.Add("Nombre")
-      lstViewResumen.Columns.Add("NumTarjeta")
-      lstViewResumen.Columns.Add("Importe")
-      lstViewResumen.Columns.Add("Codigo Alta")
-      lstViewResumen.Columns.Add("Total de Cuotas")
-      lstViewResumen.Columns.Add("Ultima Cuota Paga")
-      lstViewResumen.Columns.Add("Ultima fecha de pago")
-
-      lstViewResumen.Columns(0).DisplayIndex = 0 'ListView1.Columns.Count - 1 inidcar la posicion que tendra la columna
-      Dim item As ListViewItem
-
-
-
-
-      For Each movimiento In vMovimientos.OrderBy(Function(c) c.NumeroComprobante)
-        item = New ListViewItem()
-        item.SubItems.Add(movimiento.NumeroComprobante)
-        item.SubItems.Add(movimiento.IdentificadorDebito) 'USUALMENTE DNI
-        'Dim aux As New ClsInfoPersona
-        'IDExiste(movimiento.IdentificadorDebito, aux)
-        item.SubItems.Add(movimiento.Nombre) 'aux.ToString
-        item.SubItems.Add(movimiento.NumeroTarjeta)
-        item.SubItems.Add(movimiento.Importe)
-        item.SubItems.Add(movimiento.CodigoDeAlta)
-        item.SubItems.Add(movimiento.Param2)
-        item.SubItems.Add(movimiento.CuotaActual)
-        item.SubItems.Add(movimiento.UltimaFechPago)
-        item.Checked = True
-        item.Tag = movimiento
-        lstViewResumen.Items.Add(item)
-
-      Next
-      lstViewResumen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
-      lblResumen.Text = String.Format("Total de registros: {0}" & vbNewLine & "Seleccionados para procesar: {1}", vMovimientos.Count, vMovimientos.Count)
-
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    Finally
-      m_skip = False
-    End Try
-  End Sub
-
-  Private Function IDExiste(ByVal id As String, ByRef rInfoCliente As ClsInfoPersona) As libCommon.Comunes.Result
-    Try
-      Dim strFilterUser As String = ""
-      Dim lstClientes As New clsListDatabase()
-      lstClientes.Cfg_Filtro = "where NumCliente='" & CLng(id).ToString & "'"
-      lstClientes.RefreshData()
-      If lstClientes.Items.Count <> 1 Then Return Result.NOK
-      rInfoCliente = lstClientes.Items(0).Clone
 
       Return Result.OK
     Catch ex As Exception
@@ -222,17 +133,9 @@ Public Class frmExportarHipotecario
     End Try
   End Function
 
-  Private Sub lstViewResumen_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles lstViewResumen.ItemChecked
-    Try
-      If m_skip Then Exit Sub
-      Dim count As Integer = 0
-      lblResumen.Text = String.Format("Total de registros: {0}" & vbNewLine & "Seleccionados para procesar: {1}", lstViewResumen.Items.Count, lstViewResumen.CheckedItems.Count)
 
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
 
-  End Sub
+  
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
@@ -246,15 +149,20 @@ Public Class frmExportarHipotecario
 
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try
-      m_MovimientosSeleccionados.Clear()
-      For Each item As ListViewItem In lstViewResumen.Items
-        If item.Checked Then
-          m_MovimientosSeleccionados.Add(m_Movimientos.Find(Function(c) CInt(c.NumeroComprobante) = CInt(item.SubItems(1).Text)))
-        End If
-      Next
 
-      clsCobros.Exportar(m_MovimientosSeleccionados, m_TipoPago.GuidTipo)
-      m_Result = Result.OK
+      Dim lineas As New List(Of String)
+      If m_Banco.GetExportedFile(m_Registros, lineas, CInt(txtSecuencial.Text)) <> Result.OK Then
+        MsgBox("Fallo generar archivo")
+        Exit Sub
+      End If
+
+      If Save(IO.Path.Combine(EXPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas) <> Result.OK Then
+        MsgBox("Fallo guardando archivo")
+        Exit Sub
+      End If
+
+      MsgBox("La exportacion finalizo correctamente")
+
       Dim msgResult As MsgBoxResult = MsgBox("Desea abrir la carpeta del archivo exportado?", MsgBoxStyle.YesNo)
       If msgResult = MsgBoxResult.Yes Then
         Process.Start(Entorno.EXPORT_PATH)
@@ -270,8 +178,8 @@ Public Class frmExportarHipotecario
 
   Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
     Try
-      lstViewResumen.Items.Clear()
-      FillResumenViewVisaCredito(m_Movimientos)
+      RecargarValores()
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

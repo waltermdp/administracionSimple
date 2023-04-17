@@ -1,4 +1,6 @@
-﻿Imports Excel = Microsoft.Office.Interop.Excel
+﻿Option Strict Off
+
+Imports Excel = Microsoft.Office.Interop.Excel
 Imports libCommon.Comunes
 Public Class clsCobros
 

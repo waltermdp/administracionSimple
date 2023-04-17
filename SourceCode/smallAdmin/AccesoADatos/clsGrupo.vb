@@ -158,9 +158,9 @@ Public Class clsGrupo
       End Try
 
       If objResult = Result.OK Then
-        Return True
+        Return Result.OK
       Else
-        Return False
+        Return Result.NOK
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -329,9 +329,9 @@ Public Class clsGrupo
       End Try
 
       If objResult = Result.OK Then
-        Return True
+        Return Result.OK
       Else
-        Return False
+        Return Result.NOK
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
