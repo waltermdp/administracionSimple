@@ -354,6 +354,9 @@ Public Class frmVenta
         'guardar nuevo o update
         m_Producto.ListaArticulos.Clear()
         m_Producto.ListaArticulos.AddRange(m_lstArticulosVendidos.ToList)
+      Else
+        m_Producto.ListaArticulos.Clear()
+        m_Producto.ListaArticulos.AddRange(m_lstArticulosVendidos.ToList)
       End If
       
 

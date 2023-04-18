@@ -6,6 +6,9 @@
   Private m_IdentificadorDebito As String
   Private m_Importe As Decimal
   Private m_CodigoBanco As Decimal
+  Private m_CodigoSucCuenta As Integer
+  Private m_TipoCuenta As String
+  Private m_CuentaBanco As Decimal
 
   Private m_Nombre As String
   Private m_CuotaActual As Integer
@@ -67,6 +70,30 @@
     End Set
   End Property
 
+  Public Property CodigoSucCuenta As Integer
+    Get
+      Return m_CodigoSucCuenta
+    End Get
+    Set(value As Integer)
+      m_CodigoSucCuenta = value
+    End Set
+  End Property
+  Public Property TipoCuenta As String
+    Get
+      Return m_TipoCuenta
+    End Get
+    Set(value As String)
+      m_TipoCuenta = value
+    End Set
+  End Property
+  Public Property CuentaBanco As Decimal
+    Get
+      Return m_CuentaBanco
+    End Get
+    Set(value As Decimal)
+      m_CuentaBanco = value
+    End Set
+  End Property
 
   Public Property Nombre As String
     Get
@@ -96,7 +123,9 @@
     Importe = 0
     IdentificadorDebito = "0"
     CodigoBanco = 0
-   
+    CodigoSucCuenta = 0
+    TipoCuenta = " "
+    CuentaBanco = 0
     m_Nombre = String.Empty
     m_CuotaActual = 0
 

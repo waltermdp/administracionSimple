@@ -10,6 +10,8 @@ Public Class clsTipoPago
   Private m_NombreCodigo2 As String
   Private m_NombreCodigo3 As String
   Private m_NombreCodigo4 As String
+  Private m_NombreCodigo5 As String
+  Private m_NombreCodigo6 As String
 
   Public Property Nombre As String
     Get
@@ -72,6 +74,24 @@ Public Class clsTipoPago
     End Set
   End Property
 
+  Public Property NombreCodigo5 As String
+    Get
+      Return m_NombreCodigo5
+    End Get
+    Set(value As String)
+      m_NombreCodigo5 = value
+    End Set
+  End Property
+
+  Public Property NombreCodigo6 As String
+    Get
+      Return m_NombreCodigo6
+    End Get
+    Set(value As String)
+      m_NombreCodigo6 = value
+    End Set
+  End Property
+
   Public Sub New()
     Try
       m_Nombre = ""
@@ -81,6 +101,8 @@ Public Class clsTipoPago
       NombreCodigo2 = ""
       NombreCodigo3 = ""
       NombreCodigo4 = ""
+      NombreCodigo5 = ""
+      NombreCodigo6 = ""
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

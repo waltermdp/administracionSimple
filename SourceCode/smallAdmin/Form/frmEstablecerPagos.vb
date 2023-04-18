@@ -168,6 +168,10 @@ Public Class frmEstablecerPagos
         End If
         m_Producto.Adelanto = adelantoCuota
 
+        If m_CurrentCuenta Is Nothing Then
+          MsgBox("Debe seleccionar una cuenta")
+          Exit Sub
+        End If
         If Not m_CurrentCuenta.IsValid Then
           MsgBox("El valor del modo de pago es invalido")
           Exit Sub
@@ -466,12 +470,13 @@ Public Class frmEstablecerPagos
   End Function
 
 
-  'PARA MAS ADELANTE automaticamente permite solo numero y preparar que para ingrese coma en pos correcta
+  ''PARA MAS ADELANTE automaticamente permite solo numero y preparar que para ingrese coma en pos correcta
   'Private Sub txtPrecio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrecio.KeyPress
   '  Try
   '    If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
   '      e.Handled = True
   '    End If
+
   '  Catch ex As Exception
   '    Print_msg(ex.Message)
   '  End Try
@@ -483,6 +488,7 @@ Public Class frmEstablecerPagos
       If m_skip Then Exit Sub
       m_skip = True
       Try
+
         Dim auxValue As String = CType(sender, TextBox).Text
         Dim Precio As Decimal
         If ConvStr2Dec(auxValue, Precio) Then

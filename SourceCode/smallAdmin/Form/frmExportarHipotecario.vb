@@ -120,10 +120,14 @@ Public Class frmExportarHipotecario
 
         With movimiento
           .CBU = lstCuenta.Items.First.Codigo1
+          .CodigoBanco = lstCuenta.Items.First.Codigo2
+          .CodigoSucCuenta = lstCuenta.Items.First.Codigo3
+          .CuentaBanco = lstCuenta.Items.First.Codigo4
+          .TipoCuenta = lstCuenta.Items.First.Codigo5
           .NumeroComprobante = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
           .IdentificadorDebito = lstCliente.Items.First.NumCliente
-          .CodigoBanco = 0
+
           .FechaVencimiento = vFechaVencimiento
           .CuotaActual = item.NumCuota
           .Nombre = lstCliente.Items.First.ToString

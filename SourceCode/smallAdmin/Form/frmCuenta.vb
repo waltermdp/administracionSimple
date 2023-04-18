@@ -6,6 +6,7 @@ Public Class frmCuenta
   Private WithEvents m_objCuentaList As clsListaCuentas = Nothing
   Private m_GuidCliente As Guid
   Private m_skip As Boolean
+
   Public Sub New(ByVal vGuidClient As Guid, Optional ByVal vCancelar As Boolean = False)
     InitializeComponent()
     Try
@@ -51,10 +52,15 @@ Public Class frmCuenta
       btnGuardar.Visible = permitir
       btnCancelar.Visible = permitir
       cmbTipoDeCuenta.Enabled = permitir
+      btnAutocompletar.Enabled = permitir
+      btnAutocompletar.Visible = permitir
       txtCodigo1.ReadOnly = Not permitir
       txtCodigo2.ReadOnly = Not permitir
       txtCodigo3.ReadOnly = Not permitir
       txtCodigo4.ReadOnly = Not permitir
+      txtCodigo5.ReadOnly = Not permitir
+      txtcodigo6.ReadOnly = Not permitir
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -106,6 +112,8 @@ Public Class frmCuenta
         txtCodigo2.Text = .Codigo2
         txtCodigo3.Text = .Codigo3
         txtCodigo4.Text = .Codigo4
+        txtCodigo5.Text = .Codigo5
+        txtcodigo6.Text = .Codigo6
         cmbTipoDeCuenta.SelectedItem = g_TipoPago.First(Function(c) c.Equals(.TipoDeCuenta))
       End With
     Catch ex As Exception
@@ -121,6 +129,7 @@ Public Class frmCuenta
         MsgBox("Algunos campos son invalidos, no se puede guardar")
         Exit Sub
       End If
+     
 
       Call CargarData()
 
@@ -147,7 +156,11 @@ Public Class frmCuenta
 
   Private Function Validar() As Boolean
     Try
-
+      If CType(cmbTipoDeCuenta.SelectedItem, clsTipoPago).GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+        If String.IsNullOrEmpty(txtCodigo4.Text) Then
+          btnAutocompletar.PerformClick()
+        End If
+      End If
 
       'TODO: validar los campos
       Return True
@@ -171,6 +184,8 @@ Public Class frmCuenta
         txtCodigo2.Text = .Codigo2
         txtCodigo3.Text = .Codigo3
         txtCodigo4.Text = .Codigo4
+        txtCodigo5.Text = .Codigo5
+        txtcodigo6.Text = .Codigo6
       End With
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -185,6 +200,8 @@ Public Class frmCuenta
         .Codigo2 = txtCodigo2.Text
         .Codigo3 = txtCodigo3.Text
         .Codigo4 = txtCodigo4.Text
+        .Codigo5 = txtCodigo5.Text
+        .Codigo6 = txtcodigo6.Text
         .GuidCliente = m_GuidCliente
       End With
     Catch ex As Exception
@@ -265,6 +282,11 @@ Public Class frmCuenta
         txtCodigo3.Visible = False
         lblCodigo4.Visible = False
         txtCodigo4.Visible = False
+        lblCodigo5.Visible = False
+        txtCodigo5.Visible = False
+        lblCodigo6.Visible = False
+        txtcodigo6.Visible = False
+        btnAutocompletar.Visible = False
         Exit Sub
       End If
       lblCodigo1.Text = vTipoDeCuenta.NombreCodigo1
@@ -282,6 +304,14 @@ Public Class frmCuenta
       lblCodigo4.Text = vTipoDeCuenta.NombreCodigo4
       lblCodigo4.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo4)
       txtCodigo4.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo4)
+
+      lblCodigo5.Text = vTipoDeCuenta.NombreCodigo5
+      lblCodigo5.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo5)
+      txtCodigo5.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo5)
+
+      lblCodigo6.Text = vTipoDeCuenta.NombreCodigo6
+      lblCodigo6.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo6)
+      txtcodigo6.Visible = Not String.IsNullOrEmpty(vTipoDeCuenta.NombreCodigo6)
       
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -296,8 +326,16 @@ Public Class frmCuenta
         Call NombrarCampos(Nothing)
       Else
         Call NombrarCampos(CType(objCMB.SelectedItem, clsTipoPago))
+        If CType(objCMB.SelectedItem, clsTipoPago).GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+          btnAutocompletar.Visible = True
+          btnAutocompletar.Enabled = cmbTipoDeCuenta.Enabled
+        Else
+          btnAutocompletar.Visible = False
+        End If
       End If
+
       
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -317,6 +355,24 @@ Public Class frmCuenta
     Try
       Call FillCuentaData()
       Call AllowEditNew(True)
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnAutocompletar_Click(sender As Object, e As EventArgs) Handles btnAutocompletar.Click
+    Try
+      If CType(cmbTipoDeCuenta.SelectedItem, clsTipoPago).GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+        'hipotecario
+        If txtCodigo1.Text.Length = 22 Then
+          txtCodigo2.Text = "000" '"Codigo Banco"
+          txtCodigo3.Text = txtCodigo1.Text.Substring(3, 4) '"Numero Sucursal"
+          txtCodigo4.Text = txtCodigo1.Text.Substring(8, 13) '"Numero de cuenta"
+          txtCodigo5.Text = " " '"Tipo Cuenta"
+        End If
+        
+
+      End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

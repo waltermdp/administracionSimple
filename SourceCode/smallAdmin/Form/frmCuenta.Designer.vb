@@ -42,6 +42,11 @@ Partial Class frmCuenta
     Me.btnCancelar = New System.Windows.Forms.Button()
     Me.btnSalirSinCambios = New System.Windows.Forms.Button()
     Me.btnEditar = New System.Windows.Forms.Button()
+    Me.txtCodigo5 = New System.Windows.Forms.TextBox()
+    Me.lblCodigo5 = New System.Windows.Forms.Label()
+    Me.txtcodigo6 = New System.Windows.Forms.TextBox()
+    Me.lblCodigo6 = New System.Windows.Forms.Label()
+    Me.btnAutocompletar = New System.Windows.Forms.Button()
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -235,12 +240,58 @@ Partial Class frmCuenta
     Me.btnEditar.Text = "Editar"
     Me.btnEditar.UseVisualStyleBackColor = False
     '
+    'txtCodigo5
+    '
+    Me.txtCodigo5.Location = New System.Drawing.Point(413, 237)
+    Me.txtCodigo5.Name = "txtCodigo5"
+    Me.txtCodigo5.Size = New System.Drawing.Size(366, 20)
+    Me.txtCodigo5.TabIndex = 19
+    '
+    'lblCodigo5
+    '
+    Me.lblCodigo5.AutoSize = True
+    Me.lblCodigo5.Location = New System.Drawing.Point(410, 220)
+    Me.lblCodigo5.Name = "lblCodigo5"
+    Me.lblCodigo5.Size = New System.Drawing.Size(39, 13)
+    Me.lblCodigo5.TabIndex = 18
+    Me.lblCodigo5.Text = "Label5"
+    '
+    'txtcodigo6
+    '
+    Me.txtcodigo6.Location = New System.Drawing.Point(413, 278)
+    Me.txtcodigo6.Name = "txtcodigo6"
+    Me.txtcodigo6.Size = New System.Drawing.Size(366, 20)
+    Me.txtcodigo6.TabIndex = 21
+    '
+    'lblCodigo6
+    '
+    Me.lblCodigo6.AutoSize = True
+    Me.lblCodigo6.Location = New System.Drawing.Point(410, 261)
+    Me.lblCodigo6.Name = "lblCodigo6"
+    Me.lblCodigo6.Size = New System.Drawing.Size(39, 13)
+    Me.lblCodigo6.TabIndex = 20
+    Me.lblCodigo6.Text = "Label5"
+    '
+    'btnAutocompletar
+    '
+    Me.btnAutocompletar.Location = New System.Drawing.Point(646, 36)
+    Me.btnAutocompletar.Name = "btnAutocompletar"
+    Me.btnAutocompletar.Size = New System.Drawing.Size(107, 23)
+    Me.btnAutocompletar.TabIndex = 22
+    Me.btnAutocompletar.Text = "autocompletar"
+    Me.btnAutocompletar.UseVisualStyleBackColor = True
+    '
     'frmCuenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.ClientSize = New System.Drawing.Size(810, 310)
+    Me.Controls.Add(Me.btnAutocompletar)
+    Me.Controls.Add(Me.txtcodigo6)
+    Me.Controls.Add(Me.lblCodigo6)
+    Me.Controls.Add(Me.txtCodigo5)
+    Me.Controls.Add(Me.lblCodigo5)
     Me.Controls.Add(Me.btnEditar)
     Me.Controls.Add(Me.btnSalirSinCambios)
     Me.Controls.Add(Me.btnCancelar)
@@ -287,4 +338,9 @@ Partial Class frmCuenta
   Friend WithEvents bsCuenta As System.Windows.Forms.BindingSource
   Friend WithEvents btnSalirSinCambios As System.Windows.Forms.Button
   Friend WithEvents btnEditar As System.Windows.Forms.Button
+  Friend WithEvents txtCodigo5 As System.Windows.Forms.TextBox
+  Friend WithEvents lblCodigo5 As System.Windows.Forms.Label
+  Friend WithEvents txtcodigo6 As System.Windows.Forms.TextBox
+  Friend WithEvents lblCodigo6 As System.Windows.Forms.Label
+  Friend WithEvents btnAutocompletar As System.Windows.Forms.Button
 End Class

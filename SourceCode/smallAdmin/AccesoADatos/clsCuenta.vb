@@ -286,6 +286,8 @@ Public Class clsCuenta
             strSQL.Append("[Codigo2],")
             strSQL.Append("[Codigo3],")
             strSQL.Append("[Codigo4],")
+            strSQL.Append("[Codigo5],")
+            strSQL.Append("[Codigo6],")
             strSQL.Append("[TipoDeCuenta]")
 
             strSQL.Append(") VALUES (")
@@ -296,6 +298,8 @@ Public Class clsCuenta
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo2) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo3) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo4) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo5) & """,")
+            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo6) & """,")
             strSQL.Append("""{" & .TipoDeCuenta.ToString & "}""")
 
             strSQL.Append(")")
@@ -321,6 +325,8 @@ Public Class clsCuenta
             strSQL.Append("[Codigo2]=""" & libDB.clsAcceso.Field_Correcting(.Codigo2) & """,")
             strSQL.Append("[Codigo3]=""" & libDB.clsAcceso.Field_Correcting(.Codigo3) & """,")
             strSQL.Append("[Codigo4]=""" & libDB.clsAcceso.Field_Correcting(.Codigo4) & """,")
+            strSQL.Append("[Codigo5]=""" & libDB.clsAcceso.Field_Correcting(.Codigo5) & """,")
+            strSQL.Append("[Codigo6]=""" & libDB.clsAcceso.Field_Correcting(.Codigo6) & """,")
             strSQL.Append("[TipoDeCuenta]=""{" & .TipoDeCuenta.ToString & "}""")
 
             strSQL.Append(" WHERE [IdCuenta]=" & .IdCuenta)
@@ -483,6 +489,19 @@ Public Class clsCuenta
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfoCuenta.Codigo5 = CStr(IIf(IsDBNull(.Item("Codigo5")), "", .Item("Codigo5")))
+        Catch ex As Exception
+          vInfoCuenta.Codigo5 = ""
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
+          vInfoCuenta.Codigo6 = CStr(IIf(IsDBNull(.Item("Codigo6")), "", .Item("Codigo6")))
+        Catch ex As Exception
+          vInfoCuenta.Codigo6 = ""
+          Call Print_msg(ex.Message)
+        End Try
         Try
           vInfoCuenta.TipoDeCuenta = CType(IIf(IsDBNull(.Item("TipoDeCuenta")), Nothing, .Item("TipoDeCuenta")), Guid)
         Catch ex As Exception

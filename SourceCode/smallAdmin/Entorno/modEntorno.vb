@@ -209,6 +209,10 @@ Module Entorno
           WriteLine(Fila, auxstr)
           auxstr = CStr(rListTipoListaPago(i).NombreCodigo4)
           WriteLine(Fila, auxstr)
+          auxstr = CStr(rListTipoListaPago(i).NombreCodigo5)
+          WriteLine(Fila, auxstr)
+          auxstr = CStr(rListTipoListaPago(i).NombreCodigo6)
+          WriteLine(Fila, auxstr)
           auxstr = CStr(rListTipoListaPago(i).GuidTipo.ToString)
           WriteLine(Fila, auxstr)
         Next
@@ -273,6 +277,10 @@ Module Entorno
             auxTipoPago.NombreCodigo3 = auxstr
             Input(Fila, auxstr)
             auxTipoPago.NombreCodigo4 = auxstr
+            Input(Fila, auxstr)
+            auxTipoPago.NombreCodigo5 = auxstr
+            Input(Fila, auxstr)
+            auxTipoPago.NombreCodigo6 = auxstr
             Input(Fila, auxstr)
             auxTipoPago.GuidTipo = New Guid(auxstr)
             rListTipoPago.Add(auxTipoPago)

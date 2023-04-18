@@ -8,6 +8,8 @@
   Private m_Codigo2 As String
   Private m_Codigo3 As String
   Private m_Codigo4 As String
+  Private m_Codigo5 As String
+  Private m_Codigo6 As String
   Private m_TipoDeCuenta As Guid
 
   Public Delegate Function delToString(ByVal vGuidTipoCuenta As Guid) As String
@@ -74,6 +76,22 @@
     End Set
   End Property
 
+  Public Property Codigo5 As String
+    Get
+      Return m_Codigo5
+    End Get
+    Set(value As String)
+      m_Codigo5 = value
+    End Set
+  End Property
+  Public Property Codigo6 As String
+    Get
+      Return m_Codigo6
+    End Get
+    Set(value As String)
+      m_Codigo6 = value
+    End Set
+  End Property
 
   Public Property TipoDeCuenta As Guid
     Get
@@ -93,6 +111,8 @@
     Codigo2 = "--"
     Codigo3 = "--"
     Codigo4 = "--"
+    Codigo5 = "--"
+    Codigo6 = "--"
     TipoDeCuenta = Nothing
   End Sub
 
