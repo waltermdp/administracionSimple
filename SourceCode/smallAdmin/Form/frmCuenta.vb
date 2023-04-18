@@ -365,9 +365,9 @@ Public Class frmCuenta
       If CType(cmbTipoDeCuenta.SelectedItem, clsTipoPago).GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
         'hipotecario
         If txtCodigo1.Text.Length = 22 Then
-          txtCodigo2.Text = "000" '"Codigo Banco"
+          txtCodigo2.Text = txtCodigo1.Text.Substring(0, 3) '"Codigo Banco"
           txtCodigo3.Text = txtCodigo1.Text.Substring(3, 4) '"Numero Sucursal"
-          txtCodigo4.Text = txtCodigo1.Text.Substring(8, 13) '"Numero de cuenta"
+          txtCodigo4.Text = txtCodigo1.Text.Substring(8, 14) '"Numero de cuenta"
           txtCodigo5.Text = " " '"Tipo Cuenta"
         End If
         

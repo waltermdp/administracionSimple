@@ -636,7 +636,7 @@ Public Class frmDeben
       Call clsCobros.ActualizarEstadosDePagos(g_Today)
 
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Exportar)
-        If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
+        If objForm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
           If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
             Using objFormulario As New frmExportarHipotecario(objForm.TipoPagoSeleccionado)
               objFormulario.ShowDialog(Me)
@@ -664,7 +664,14 @@ Public Class frmDeben
       Dim vMovimientos As New List(Of clsInfoMovimiento)
       Dim vTipoPagoSeleccionado As clsTipoPago = Nothing
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Importar)
-        If objForm.ShowDialog = Windows.Forms.DialogResult.OK Then
+        If objForm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+          If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+            Using objFormImportar As New frmImportarHipotecario
+              objForm.ShowDialog(Me)
+            End Using
+
+            Exit Sub
+          End If
           vMovimientos = objForm.Movimientos.ToList
           vTipoPagoSeleccionado = objForm.TipoPagoSeleccionado
         Else

@@ -219,6 +219,12 @@
     <Compile Include="Form\frmExportarHipotecario.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmImportarHipotecario.Designer.vb">
+      <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmImportarHipotecario.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmLiquidacionVendedores.Designer.vb">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </Compile>
@@ -264,6 +270,7 @@
     </Compile>
     <Compile Include="Modulos\clsComparar.vb" />
     <Compile Include="Modulos\clsInfoHipotecario.vb" />
+    <Compile Include="Modulos\clsInfoImportarHipotecario.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
@@ -332,6 +339,9 @@
     <EmbeddedResource Include="Form\frmExportarHipotecario.resx">
       <DependentUpon>frmExportarHipotecario.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportarHipotecario.resx">
+      <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLiquidacionVendedores.resx">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </EmbeddedResource>
@@ -370,6 +380,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\clsInfoHipotecario.datasource" />
+    <None Include="My Project\DataSources\clsInfoImportarHipotecario.datasource" />
     <None Include="My Project\DataSources\clsListaStorage.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />

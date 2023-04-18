@@ -78,6 +78,11 @@ Public Class frmTipoDeArchivo
         DialogResult = Windows.Forms.DialogResult.OK
         Close()
       ElseIf m_ExportImport = E_TIPO_INTERCAMBIO.Importar Then
+        If m_TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+          DialogResult = Windows.Forms.DialogResult.OK
+          Close()
+          Exit Sub
+        End If
         Dim archivo As New List(Of String)
         Dim AbrirArchivo As New OpenFileDialog
         If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then
