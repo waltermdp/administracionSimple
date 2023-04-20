@@ -1,3 +1,15 @@
+Bco Hipotecario
+valor de Secuencia
+cuenta COBIS, lo completan?
+Id debito=cobrocuota siempre?
+servicio= vacio siempre?
+concepto = cuota siempre?
+ID cliente, es el numero del comprobante asociada a la venta o e numero de indetificacion del cliente por ejemplo el dni?
+
+
+
+
+
 Efectivo
 CBU  		leer	escribir
 visa debito 	leer	escribir

@@ -3,7 +3,7 @@
 Public Class clsInfoImportarHipotecario
 
   Private m_NroAbonado As Integer
-  Private m_NroCuenta As Decimal
+  Private m_NroCuenta As String
   Private m_cuota As Integer
   Private m_FechaDebito As Date
   Private m_ImporteADebitar As Decimal
@@ -11,6 +11,10 @@ Public Class clsInfoImportarHipotecario
   Private m_ImporteBH As Decimal
   Private m_MotivoRechazo As String
   Private m_Importar As Boolean
+  Private m_GuidProducto As Guid
+  Private m_GuidPago As Guid
+  Private m_GuidCuenta As Guid
+  Private m_Nombre As String
 
   Public Property NroAbonado As Integer
     Get
@@ -20,11 +24,11 @@ Public Class clsInfoImportarHipotecario
       m_NroAbonado = value
     End Set
   End Property
-  Public Property NroCuenta As Decimal
+  Public Property NroCuenta As String
     Get
       Return m_NroCuenta
     End Get
-    Set(value As Decimal)
+    Set(value As String)
       m_NroCuenta = value
     End Set
   End Property
@@ -86,11 +90,46 @@ Public Class clsInfoImportarHipotecario
     End Set
   End Property
 
+  Public Property GuidProducto As Guid
+    Get
+      Return m_GuidProducto
+    End Get
+    Set(value As Guid)
+      m_GuidProducto = value
+    End Set
+  End Property
+
+  Public Property GuidPago As Guid
+    Get
+      Return m_GuidPago
+    End Get
+    Set(value As Guid)
+      m_GuidPago = value
+    End Set
+  End Property
+
+  Public Property GuidCuenta As Guid
+    Get
+      Return m_GuidCuenta
+    End Get
+    Set(value As Guid)
+      m_GuidCuenta = value
+    End Set
+  End Property
+
+  Public Property Nombre As String
+    Get
+      Return m_Nombre
+    End Get
+    Set(value As String)
+      m_Nombre = value
+    End Set
+  End Property
 
   Public Sub New()
     Try
       m_NroAbonado = 0
-      m_NroCuenta = 0
+      m_NroCuenta = "0000000000000000000000"
       m_cuota = 0
       m_FechaDebito = g_Today
       m_ImporteADebitar = 0
@@ -98,6 +137,10 @@ Public Class clsInfoImportarHipotecario
       m_ImporteBH = 0
       m_MotivoRechazo = ""
       m_Importar = False
+      m_GuidCuenta = Guid.Empty
+      m_GuidPago = Guid.Empty
+      m_GuidProducto = Guid.Empty
+      m_Nombre = String.Empty
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

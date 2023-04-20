@@ -85,6 +85,7 @@ Public Class frmEstablecerPagos
           txtAdelantoVendedor.Text = 0
         Else
           DateVenta.Value = .FechaVenta
+          dtProximoPago.MinDate = DateVenta.Value
           dtProximoPago.Value = .FechaPrimerPago
           txtPrecio.Text = .Precio 'precio total
           txtNumVenta.Text = .NumComprobante.ToString
@@ -221,6 +222,7 @@ Public Class frmEstablecerPagos
         .ListaPagos.Clear()
         For Each item In m_lstPagos
           item.GuidProducto = .GuidProducto
+          item.NumComprobante = .NumComprobante
           .ListaPagos.Add(item)
         Next
 

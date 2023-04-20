@@ -369,6 +369,8 @@ Public Class frmCuenta
           txtCodigo3.Text = txtCodigo1.Text.Substring(3, 4) '"Numero Sucursal"
           txtCodigo4.Text = txtCodigo1.Text.Substring(8, 14) '"Numero de cuenta"
           txtCodigo5.Text = " " '"Tipo Cuenta"
+        Else
+          MsgBox("EL CBU esta inconpleto, debe ser de 22 digitos")
         End If
         
 

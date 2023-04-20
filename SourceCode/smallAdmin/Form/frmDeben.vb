@@ -660,6 +660,7 @@ Public Class frmDeben
 
   Private Sub btnImportar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnImportar.MouseClick
     Try
+      Call clsCobros.ActualizarEstadosDePagos(g_Today)
 
       Dim vMovimientos As New List(Of clsInfoMovimiento)
       Dim vTipoPagoSeleccionado As clsTipoPago = Nothing
@@ -667,7 +668,7 @@ Public Class frmDeben
         If objForm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
           If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
             Using objFormImportar As New frmImportarHipotecario
-              objForm.ShowDialog(Me)
+              objFormImportar.ShowDialog(Me)
             End Using
 
             Exit Sub

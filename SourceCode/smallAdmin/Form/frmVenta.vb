@@ -384,7 +384,10 @@ Public Class frmVenta
           Exit Sub
         End If
       End If
+      'La lista de pagos ya esta en el objeto producto
 
+      'actualizar valor de debe
+      m_Producto.CuotasDebe = m_Producto.ListaPagos.Count - m_Producto.ListaPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
 
       If clsProducto.Save(m_Producto) <> Result.OK Then
         MsgBox("Fallo al guardar la venta en la base de datos")
