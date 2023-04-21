@@ -353,6 +353,10 @@ Public Class frmCuenta
 
   Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
     Try
+      If m_objCuentaCurrent Is Nothing Then
+        MsgBox("Debe seleccionar una cuenta")
+        Exit Sub
+      End If
       Call FillCuentaData()
       Call AllowEditNew(True)
     Catch ex As Exception

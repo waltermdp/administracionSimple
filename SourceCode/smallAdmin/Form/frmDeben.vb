@@ -83,7 +83,7 @@ Public Class frmDeben
 
       m_objPrincipal = New clsListaPrincipal()
       Call Filtro("")
-      'm_objPrincipal.SetOrder(m_ColumnName, m_Order)
+
       bsInfoPrincipal.DataSource = m_objPrincipal.Binding
       Call ProductList_RefreshData()
 
@@ -685,6 +685,8 @@ Public Class frmDeben
         objFormResumen.TipoDePago = vTipoPagoSeleccionado
         objFormResumen.ShowDialog(Me)
       End Using
+
+      Call MostrarDeben()
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

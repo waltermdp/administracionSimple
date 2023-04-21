@@ -124,7 +124,7 @@ Public Class clsHipotecario
       sResult += vMov.CodigoSucCuenta.ToString("D4") 'vMov.CBU.Substring(0, 4) ' codsucCuenta.ToString("D4")
       sResult += String.Format("{0,1}", vMov.TipoCuenta)
       sResult += vMov.CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
-      sResult += String.Format("{0,-22}", vMov.IdentificadorDebito)
+      sResult += String.Format("{0,-22}", vMov.NumeroComprobante)
       sResult += String.Format("{0,-15}", IDDEBITO)
       sResult += String.Format("{0,2}", " ")
       sResult += String.Format("{0,4}", " ")

@@ -663,6 +663,15 @@ Public Class frmVenta
 
   Private Sub btnPagos_MouseClick(sender As Object, e As MouseEventArgs) Handles btnPagos.MouseClick
     Try
+      If m_CurrentPersona Is Nothing Then
+        MsgBox("Primero debe elegir o crear un cliente")
+        Exit Sub
+      End If
+      If m_CurrentVendedor Is Nothing Then
+        MsgBox("Primero debe elegir o crear un vendedor")
+        Exit Sub
+      End If
+
       If m_CurrentPersona.GuidCliente = Guid.Empty Then
         MsgBox("Primero debe elegir o crear un cliente")
         Exit Sub

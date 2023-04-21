@@ -34,7 +34,7 @@ Partial Class frmImportarHipotecario
     Me.Label3 = New System.Windows.Forms.Label()
     Me.txtImporteTotal = New System.Windows.Forms.TextBox()
     Me.txtFechaEjecucion = New System.Windows.Forms.TextBox()
-    Me.ClsInfoImportarHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.lblRechazados = New System.Windows.Forms.Label()
     Me.ImportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NroAbonadoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,7 +48,7 @@ Partial Class frmImportarHipotecario
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.lblRechazados = New System.Windows.Forms.Label()
+    Me.ClsInfoImportarHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoImportarHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -62,6 +62,7 @@ Partial Class frmImportarHipotecario
     Me.dgvResumen.DataSource = Me.ClsInfoImportarHipotecarioBindingSource
     Me.dgvResumen.Location = New System.Drawing.Point(169, 80)
     Me.dgvResumen.Name = "dgvResumen"
+    Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 54
@@ -168,93 +169,6 @@ Partial Class frmImportarHipotecario
     Me.txtFechaEjecucion.Size = New System.Drawing.Size(146, 20)
     Me.txtFechaEjecucion.TabIndex = 60
     '
-    'ClsInfoImportarHipotecarioBindingSource
-    '
-    Me.ClsInfoImportarHipotecarioBindingSource.DataSource = GetType(main.clsInfoImportarHipotecario)
-    '
-    'ImportarDataGridViewCheckBoxColumn
-    '
-    Me.ImportarDataGridViewCheckBoxColumn.DataPropertyName = "Importar"
-    Me.ImportarDataGridViewCheckBoxColumn.HeaderText = "Importar"
-    Me.ImportarDataGridViewCheckBoxColumn.Name = "ImportarDataGridViewCheckBoxColumn"
-    '
-    'NombreDataGridViewTextBoxColumn
-    '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-    '
-    'NroAbonadoDataGridViewTextBoxColumn
-    '
-    Me.NroAbonadoDataGridViewTextBoxColumn.DataPropertyName = "NroAbonado"
-    Me.NroAbonadoDataGridViewTextBoxColumn.HeaderText = "NroAbonado"
-    Me.NroAbonadoDataGridViewTextBoxColumn.Name = "NroAbonadoDataGridViewTextBoxColumn"
-    '
-    'NroCuentaDataGridViewTextBoxColumn
-    '
-    Me.NroCuentaDataGridViewTextBoxColumn.DataPropertyName = "NroCuenta"
-    Me.NroCuentaDataGridViewTextBoxColumn.HeaderText = "NroCuenta"
-    Me.NroCuentaDataGridViewTextBoxColumn.Name = "NroCuentaDataGridViewTextBoxColumn"
-    '
-    'CuotaDataGridViewTextBoxColumn
-    '
-    Me.CuotaDataGridViewTextBoxColumn.DataPropertyName = "cuota"
-    Me.CuotaDataGridViewTextBoxColumn.HeaderText = "cuota"
-    Me.CuotaDataGridViewTextBoxColumn.Name = "CuotaDataGridViewTextBoxColumn"
-    Me.CuotaDataGridViewTextBoxColumn.Visible = False
-    '
-    'FechaDebitoDataGridViewTextBoxColumn
-    '
-    Me.FechaDebitoDataGridViewTextBoxColumn.DataPropertyName = "FechaDebito"
-    Me.FechaDebitoDataGridViewTextBoxColumn.HeaderText = "FechaDebito"
-    Me.FechaDebitoDataGridViewTextBoxColumn.Name = "FechaDebitoDataGridViewTextBoxColumn"
-    '
-    'ImporteADebitarDataGridViewTextBoxColumn
-    '
-    Me.ImporteADebitarDataGridViewTextBoxColumn.DataPropertyName = "ImporteADebitar"
-    Me.ImporteADebitarDataGridViewTextBoxColumn.HeaderText = "ImporteADebitar"
-    Me.ImporteADebitarDataGridViewTextBoxColumn.Name = "ImporteADebitarDataGridViewTextBoxColumn"
-    '
-    'ImporteDebitadoDataGridViewTextBoxColumn
-    '
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.DataPropertyName = "importeDebitado"
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.HeaderText = "importeDebitado"
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.Name = "ImporteDebitadoDataGridViewTextBoxColumn"
-    '
-    'ImporteBHDataGridViewTextBoxColumn
-    '
-    Me.ImporteBHDataGridViewTextBoxColumn.DataPropertyName = "ImporteBH"
-    Me.ImporteBHDataGridViewTextBoxColumn.HeaderText = "ImporteBH"
-    Me.ImporteBHDataGridViewTextBoxColumn.Name = "ImporteBHDataGridViewTextBoxColumn"
-    Me.ImporteBHDataGridViewTextBoxColumn.Visible = False
-    '
-    'MotivoRechazoDataGridViewTextBoxColumn
-    '
-    Me.MotivoRechazoDataGridViewTextBoxColumn.DataPropertyName = "MotivoRechazo"
-    Me.MotivoRechazoDataGridViewTextBoxColumn.HeaderText = "MotivoRechazo"
-    Me.MotivoRechazoDataGridViewTextBoxColumn.Name = "MotivoRechazoDataGridViewTextBoxColumn"
-    '
-    'GuidProductoDataGridViewTextBoxColumn
-    '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidPagoDataGridViewTextBoxColumn
-    '
-    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
-    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidCuentaDataGridViewTextBoxColumn
-    '
-    Me.GuidCuentaDataGridViewTextBoxColumn.DataPropertyName = "GuidCuenta"
-    Me.GuidCuentaDataGridViewTextBoxColumn.HeaderText = "GuidCuenta"
-    Me.GuidCuentaDataGridViewTextBoxColumn.Name = "GuidCuentaDataGridViewTextBoxColumn"
-    Me.GuidCuentaDataGridViewTextBoxColumn.Visible = False
-    '
     'lblRechazados
     '
     Me.lblRechazados.AutoSize = True
@@ -263,6 +177,106 @@ Partial Class frmImportarHipotecario
     Me.lblRechazados.Size = New System.Drawing.Size(67, 13)
     Me.lblRechazados.TabIndex = 61
     Me.lblRechazados.Text = "Rechazados"
+    '
+    'ImportarDataGridViewCheckBoxColumn
+    '
+    Me.ImportarDataGridViewCheckBoxColumn.DataPropertyName = "Importar"
+    Me.ImportarDataGridViewCheckBoxColumn.HeaderText = "Importar"
+    Me.ImportarDataGridViewCheckBoxColumn.Name = "ImportarDataGridViewCheckBoxColumn"
+    Me.ImportarDataGridViewCheckBoxColumn.ReadOnly = True
+    '
+    'NombreDataGridViewTextBoxColumn
+    '
+    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NroAbonadoDataGridViewTextBoxColumn
+    '
+    Me.NroAbonadoDataGridViewTextBoxColumn.DataPropertyName = "NroAbonado"
+    Me.NroAbonadoDataGridViewTextBoxColumn.HeaderText = "NroAbonado"
+    Me.NroAbonadoDataGridViewTextBoxColumn.Name = "NroAbonadoDataGridViewTextBoxColumn"
+    Me.NroAbonadoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NroCuentaDataGridViewTextBoxColumn
+    '
+    Me.NroCuentaDataGridViewTextBoxColumn.DataPropertyName = "NroCuenta"
+    Me.NroCuentaDataGridViewTextBoxColumn.HeaderText = "NroCuenta"
+    Me.NroCuentaDataGridViewTextBoxColumn.Name = "NroCuentaDataGridViewTextBoxColumn"
+    Me.NroCuentaDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotaDataGridViewTextBoxColumn
+    '
+    Me.CuotaDataGridViewTextBoxColumn.DataPropertyName = "cuota"
+    Me.CuotaDataGridViewTextBoxColumn.HeaderText = "cuota"
+    Me.CuotaDataGridViewTextBoxColumn.Name = "CuotaDataGridViewTextBoxColumn"
+    Me.CuotaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CuotaDataGridViewTextBoxColumn.Visible = False
+    '
+    'FechaDebitoDataGridViewTextBoxColumn
+    '
+    Me.FechaDebitoDataGridViewTextBoxColumn.DataPropertyName = "FechaDebito"
+    Me.FechaDebitoDataGridViewTextBoxColumn.HeaderText = "FechaDebito"
+    Me.FechaDebitoDataGridViewTextBoxColumn.Name = "FechaDebitoDataGridViewTextBoxColumn"
+    Me.FechaDebitoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ImporteADebitarDataGridViewTextBoxColumn
+    '
+    Me.ImporteADebitarDataGridViewTextBoxColumn.DataPropertyName = "ImporteADebitar"
+    Me.ImporteADebitarDataGridViewTextBoxColumn.HeaderText = "ImporteADebitar"
+    Me.ImporteADebitarDataGridViewTextBoxColumn.Name = "ImporteADebitarDataGridViewTextBoxColumn"
+    Me.ImporteADebitarDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ImporteDebitadoDataGridViewTextBoxColumn
+    '
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.DataPropertyName = "importeDebitado"
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.HeaderText = "importeDebitado"
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.Name = "ImporteDebitadoDataGridViewTextBoxColumn"
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ImporteBHDataGridViewTextBoxColumn
+    '
+    Me.ImporteBHDataGridViewTextBoxColumn.DataPropertyName = "ImporteBH"
+    Me.ImporteBHDataGridViewTextBoxColumn.HeaderText = "ImporteBH"
+    Me.ImporteBHDataGridViewTextBoxColumn.Name = "ImporteBHDataGridViewTextBoxColumn"
+    Me.ImporteBHDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ImporteBHDataGridViewTextBoxColumn.Visible = False
+    '
+    'MotivoRechazoDataGridViewTextBoxColumn
+    '
+    Me.MotivoRechazoDataGridViewTextBoxColumn.DataPropertyName = "MotivoRechazo"
+    Me.MotivoRechazoDataGridViewTextBoxColumn.HeaderText = "MotivoRechazo"
+    Me.MotivoRechazoDataGridViewTextBoxColumn.Name = "MotivoRechazoDataGridViewTextBoxColumn"
+    Me.MotivoRechazoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidPagoDataGridViewTextBoxColumn
+    '
+    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
+    Me.GuidPagoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidCuentaDataGridViewTextBoxColumn
+    '
+    Me.GuidCuentaDataGridViewTextBoxColumn.DataPropertyName = "GuidCuenta"
+    Me.GuidCuentaDataGridViewTextBoxColumn.HeaderText = "GuidCuenta"
+    Me.GuidCuentaDataGridViewTextBoxColumn.Name = "GuidCuentaDataGridViewTextBoxColumn"
+    Me.GuidCuentaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidCuentaDataGridViewTextBoxColumn.Visible = False
+    '
+    'ClsInfoImportarHipotecarioBindingSource
+    '
+    Me.ClsInfoImportarHipotecarioBindingSource.DataSource = GetType(main.clsInfoImportarHipotecario)
     '
     'frmImportarHipotecario
     '
