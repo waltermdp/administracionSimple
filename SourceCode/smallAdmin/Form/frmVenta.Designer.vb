@@ -472,9 +472,9 @@ Partial Class frmVenta
     Me.Label16.AutoSize = True
     Me.Label16.Location = New System.Drawing.Point(523, 96)
     Me.Label16.Name = "Label16"
-    Me.Label16.Size = New System.Drawing.Size(118, 15)
+    Me.Label16.Size = New System.Drawing.Size(95, 15)
     Me.Label16.TabIndex = 39
-    Me.Label16.Text = "Numero de Venta"
+    Me.Label16.Text = "Num Contrato"
     '
     'Label15
     '

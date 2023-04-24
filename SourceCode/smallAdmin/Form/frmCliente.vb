@@ -175,7 +175,7 @@ Public Class frmCliente
 
       End If
 
-      Return vResult
+      Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
       Return Result.ErrorEx

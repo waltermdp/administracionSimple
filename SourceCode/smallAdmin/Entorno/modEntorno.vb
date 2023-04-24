@@ -2,8 +2,6 @@
 Module Entorno
 
   Public Const NameSoftware As String = "NA"
-
-
   Private Const NAMEDB As String = "bdcli.mdb"
 
 
@@ -22,6 +20,8 @@ Module Entorno
   Public EXPORT_PATH As String = String.Empty
   Public IMPORT_PATH As String = String.Empty
   Public MODEL_PATH As String = String.Empty
+
+  '
 
   Private dbpw As String = String.Empty
   Public DB_SLocal_ConnectionString As String = String.Empty

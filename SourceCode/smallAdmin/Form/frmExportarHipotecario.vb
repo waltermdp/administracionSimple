@@ -31,6 +31,8 @@ Public Class frmExportarHipotecario
       dtVencimiento.Value = Today.AddDays(2)
       txtNumeroConvenio.Text = m_Banco.Convenio
       txtSecuencial.Text = m_Banco.Secuencial
+      txtIdDebito.Text = m_Banco.ID_Debito
+      txtConcepto.Text = m_Banco.Concepto
       m_skip = False
       RecargarValores()
 
@@ -159,14 +161,28 @@ Public Class frmExportarHipotecario
 
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try
+      With m_Banco
+        .Concepto = txtConcepto.Text
+        .Convenio = txtNumeroConvenio.Text
+        .ID_Debito = txtIdDebito.Text
+        .Secuencial = txtSecuencial.Text
+        .FechaGeneracion = dtCurrent.Value
+        .FechaVencimiento = dtVencimiento.Value
+      End With
+
 
       Dim lineas As New List(Of String)
       If m_Banco.GetExportedFile(m_Registros, lineas) <> Result.OK Then
         MsgBox("Fallo generar archivo")
         Exit Sub
       End If
+      Dim FileName As String = String.Empty
+      If m_Banco.GetFileNameExport(FileName) <> Result.OK Then
+        MsgBox("Fallo generar nombre")
+        Exit Sub
+      End If
 
-      If Save(IO.Path.Combine(EXPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_CBU.txt"), lineas) <> Result.OK Then
+      If Save(IO.Path.Combine(m_Banco.GetFolderExportacion, FileName), lineas) <> Result.OK Then
         MsgBox("Fallo guardando archivo")
         Exit Sub
       End If
@@ -175,9 +191,9 @@ Public Class frmExportarHipotecario
 
       Dim msgResult As MsgBoxResult = MsgBox("Desea abrir la carpeta del archivo exportado?", MsgBoxStyle.YesNo)
       If msgResult = MsgBoxResult.Yes Then
-        Process.Start(Entorno.EXPORT_PATH)
+        Process.Start(m_Banco.GetFolderExportacion)
       End If
-      'Me.Close()
+
     Catch ex As Exception
       Print_msg(ex.Message)
       m_Result = Result.ErrorEx
@@ -206,6 +222,7 @@ Public Class frmExportarHipotecario
       dtVencimiento.MinDate = dtCurrent.Value
       m_Banco.FechaGeneracion = dtCurrent.Value
       If auxVen <> dtVencimiento.Value Then
+        m_Banco.FechaVencimiento = dtVencimiento.Value
         For Each registro In m_Registros
           registro.FechaVencimiento = dtVencimiento.Value
         Next
@@ -222,6 +239,7 @@ Public Class frmExportarHipotecario
     Try
       If m_skip Then Exit Sub
       m_skip = True
+      m_Banco.FechaVencimiento = dtVencimiento.Value
       For Each registro In m_Registros
         registro.FechaVencimiento = dtVencimiento.Value
       Next
@@ -233,7 +251,106 @@ Public Class frmExportarHipotecario
     End Try
   End Sub
 
+  Private Sub txtConcepto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtConcepto.KeyPress
+    Try
+      'maximo 40
+      If m_skip Then Exit Sub
+      m_skip = True
+      If txtConcepto.Text.Length >= 40 Then
+        If Not Char.IsControl(e.KeyChar) Then
+          e.Handled = True
+        End If
+      End If
 
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtConcepto_TextChanged(sender As Object, e As EventArgs) Handles txtConcepto.TextChanged
+    Try
+      'maximo 40
+      If m_skip Then Exit Sub
+      m_skip = True
+      m_Banco.Concepto = txtConcepto.Text
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtIdDebito_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtIdDebito.KeyPress
+    Try
+      'maximo 15
+      If m_skip Then Exit Sub
+      m_skip = True
+      If txtIdDebito.Text.Length >= 15 Then
+        If Not Char.IsControl(e.KeyChar) Then
+          e.Handled = True
+        End If
+      End If
+
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtIdDebito_TextChanged(sender As Object, e As EventArgs) Handles txtIdDebito.TextChanged
+    Try
+      'maximo 15
+      If m_skip Then Exit Sub
+      m_skip = True
+      m_Banco.ID_Debito = txtIdDebito.Text
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtNumeroConvenio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumeroConvenio.KeyPress
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+        e.Handled = True
+      End If
+      If txtNumeroConvenio.Text.Length >= 5 Then
+        If Not Char.IsControl(e.KeyChar) Then
+          e.Handled = True
+        End If
+      End If
+
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtNumeroConvenio_TextChanged(sender As Object, e As EventArgs) Handles txtNumeroConvenio.TextChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      If Not IsNumeric(txtNumeroConvenio.Text.Trim) Then
+        m_skip = False
+        Exit Sub
+      End If
+
+      'If txtNumeroConvenio.Text.Length <= 0 Then txtNumeroConvenio.Text = 0
+      'If txtNumeroConvenio.Text.Length > 5 Then txtNumeroConvenio.Text = txtNumeroConvenio.Text.Substring(0, 5)
+      m_Banco.Convenio = CInt(txtNumeroConvenio.Text)
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
 
   Private Sub txtSecuencial_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSecuencial.KeyPress
     Try
@@ -242,7 +359,11 @@ Public Class frmExportarHipotecario
       If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
         e.Handled = True
       End If
-     
+      If txtSecuencial.Text.Length >= 3 Then
+        If Not Char.IsControl(e.KeyChar) Then
+          e.Handled = True
+        End If
+      End If
 
       m_skip = False
     Catch ex As Exception
@@ -262,8 +383,8 @@ Public Class frmExportarHipotecario
         Exit Sub
       End If
 
-      If txtSecuencial.Text.Length <= 0 Then txtSecuencial.Text = 0
-      If txtSecuencial.Text.Length > 3 Then txtSecuencial.Text = txtSecuencial.Text.Substring(0, 3)
+      'If txtSecuencial.Text.Length <= 0 Then txtSecuencial.Text = 0
+      'If txtSecuencial.Text.Length > 3 Then txtSecuencial.Text = txtSecuencial.Text.Substring(0, 3)
       m_Banco.Secuencial = CDec(txtSecuencial.Text)
       m_skip = False
     Catch ex As Exception
@@ -272,6 +393,8 @@ Public Class frmExportarHipotecario
     End Try
   End Sub
 
+
+
   Private Sub RefeshGrilla()
     Try
       ClsInfoHipotecarioBindingSource.ResetBindings(False)
@@ -279,5 +402,8 @@ Public Class frmExportarHipotecario
       Print_msg(ex.Message)
     End Try
   End Sub
+
+ 
+
 
 End Class

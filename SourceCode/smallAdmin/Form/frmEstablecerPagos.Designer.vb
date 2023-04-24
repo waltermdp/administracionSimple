@@ -95,15 +95,15 @@ Partial Class frmEstablecerPagos
     Me.Label16.AutoSize = True
     Me.Label16.Location = New System.Drawing.Point(492, 72)
     Me.Label16.Name = "Label16"
-    Me.Label16.Size = New System.Drawing.Size(90, 13)
+    Me.Label16.Size = New System.Drawing.Size(102, 13)
     Me.Label16.TabIndex = 62
-    Me.Label16.Text = "Numero de Venta"
+    Me.Label16.Text = "Numero de Contrato"
     '
     'txtAdelantoVendedor
     '
     Me.txtAdelantoVendedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtAdelantoVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(431, 273)
+    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(590, 272)
     Me.txtAdelantoVendedor.Name = "txtAdelantoVendedor"
     Me.txtAdelantoVendedor.Size = New System.Drawing.Size(99, 21)
     Me.txtAdelantoVendedor.TabIndex = 60
@@ -113,7 +113,7 @@ Partial Class frmEstablecerPagos
     'Label15
     '
     Me.Label15.AutoSize = True
-    Me.Label15.Location = New System.Drawing.Point(428, 251)
+    Me.Label15.Location = New System.Drawing.Point(587, 251)
     Me.Label15.Name = "Label15"
     Me.Label15.Size = New System.Drawing.Size(132, 13)
     Me.Label15.TabIndex = 59
@@ -135,9 +135,9 @@ Partial Class frmEstablecerPagos
     Me.Label14.AutoSize = True
     Me.Label14.Location = New System.Drawing.Point(260, 251)
     Me.Label14.Name = "Label14"
-    Me.Label14.Size = New System.Drawing.Size(94, 13)
+    Me.Label14.Size = New System.Drawing.Size(238, 13)
     Me.Label14.TabIndex = 57
-    Me.Label14.Text = "Adelanto de cuota"
+    Me.Label14.Text = "Adelanto de cuota, se aplica el valor en efectivo."
     '
     'lblValorCuota
     '

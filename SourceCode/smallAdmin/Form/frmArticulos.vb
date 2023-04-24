@@ -21,7 +21,10 @@ Public Class frmArticulos
       chkCodigoBarras.Checked = True
       chkCodigo.Checked = True
       chkNombre.Checked = True
-      m_Deposito = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO")
+      If m_Grupos.Items.Count > 0 Then
+        m_Deposito = m_Grupos.Items.First(Function(c) c.Nombre.ToUpper = "DEPOSITO")
+      End If
+
       LoadTodoslosResponsables()
       cmbResponsables.Enabled = False
     Catch ex As Exception
@@ -41,8 +44,8 @@ Public Class frmArticulos
         BuscarArtPorResponsable(CType(cmbResponsables.SelectedItem, clsInfoResponsable))
       ElseIf rbnBuscarPalabra.Checked Then
         If String.IsNullOrEmpty(txtPalabraBuscar.Text.Trim) Then
-          MsgBox("No se pueden buscar palabras vacias")
-          Exit Sub
+          'MsgBox("No se pueden buscar palabras vacias")
+          'Exit Sub
         End If
         If chkCodigo.Checked = False AndAlso chkCodigoBarras.Checked = False AndAlso chkDescripcion.Checked = False AndAlso chkNombre.Checked = False Then
           MsgBox("Al menos debe seleccionar un parametro de busqueda por palabra")
@@ -62,26 +65,29 @@ Public Class frmArticulos
       m_objArticulosList = New clsListArticulos()
       m_ObjListaStock = New clsListStock
       bsArticulos.DataSource = m_objArticulosList.Binding
+      If vPalabra <> String.Empty Then
 
-      m_objArticulosList.Cfg_Orden = "ORDER BY Codigo ASC"
-      Dim sAux As String = "WHERE "
-      If chkCodigo.Checked Then
-        sAux += "Codigo Like '%" & vPalabra & "%'"
-      End If
-      If chkCodigoBarras.Checked Then
-        If chkCodigo.Checked Then sAux += " OR "
-        sAux += "CodigoBarras Like '%" & vPalabra & "%'"
-      End If
-      If chkNombre.Checked Then
-        If chkCodigo.Checked OrElse chkCodigoBarras.Checked Then sAux += " OR "
-        sAux += "Nombre Like '%" & vPalabra & "%'"
-      End If
-      If chkDescripcion.Checked Then
-        If chkCodigo.Checked OrElse chkCodigoBarras.Checked OrElse chkNombre.Checked Then sAux += " OR "
-        sAux += "Descripcion Like '%" & vPalabra & "%'"
-      End If
 
-      m_objArticulosList.Cfg_Filtro = sAux  ' "WHERE Codigo Like '%" & vPalabra & "%' OR CodigoBarras Like '%" & vPalabra & "%' OR Nombre Like '%" & vPalabra & "%' OR Descripcion Like '%" & vPalabra & "%'"
+        m_objArticulosList.Cfg_Orden = "ORDER BY Codigo ASC"
+        Dim sAux As String = "WHERE "
+        If chkCodigo.Checked Then
+          sAux += "Codigo Like '%" & vPalabra & "%'"
+        End If
+        If chkCodigoBarras.Checked Then
+          If chkCodigo.Checked Then sAux += " OR "
+          sAux += "CodigoBarras Like '%" & vPalabra & "%'"
+        End If
+        If chkNombre.Checked Then
+          If chkCodigo.Checked OrElse chkCodigoBarras.Checked Then sAux += " OR "
+          sAux += "Nombre Like '%" & vPalabra & "%'"
+        End If
+        If chkDescripcion.Checked Then
+          If chkCodigo.Checked OrElse chkCodigoBarras.Checked OrElse chkNombre.Checked Then sAux += " OR "
+          sAux += "Descripcion Like '%" & vPalabra & "%'"
+        End If
+
+        m_objArticulosList.Cfg_Filtro = sAux  ' "WHERE Codigo Like '%" & vPalabra & "%' OR CodigoBarras Like '%" & vPalabra & "%' OR Nombre Like '%" & vPalabra & "%' OR Descripcion Like '%" & vPalabra & "%'"
+      End If
       Call ArticulosList_RefreshData()
       If m_objArticulosList.Items.Count <= 0 Then
         MsgBox(String.Format("No se encontraron articulos que contengan la palabra ""{0}"".", vPalabra))
@@ -134,7 +140,7 @@ Public Class frmArticulos
           End If
         Next
       Next
-      
+
       BindingSource1.ResetBindings(False)
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -365,7 +371,7 @@ Public Class frmArticulos
         m_listResponsablesDestino.RemoveAt(indice)
         cmbDestinoResp.DataSource = Nothing
         cmbDestinoResp.DataSource = m_listResponsablesDestino
-        cmbDestinoResp.SelectedIndex = 0
+        If cmbDestinoResp.Items.Count > 0 Then cmbDestinoResp.SelectedIndex = 0
         If nMover.Maximum > 0 Then
           btnMoverArticulo.Enabled = True
           cmbDestinoResp.Enabled = True

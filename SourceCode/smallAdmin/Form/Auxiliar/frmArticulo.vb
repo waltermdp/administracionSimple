@@ -43,7 +43,7 @@ Public Class frmArticulo
         txtCodigo.Text = ""
         txtCodigoBarras.Text = ""
         txtDescripcion.Text = "--"
-        txtPrecio.Text = "0.0"
+        txtPrecio.Text = "0,0"
         'FillResponsables()
         'responsable por defecto= DEPOSITO
         m_IsNuevo = True
