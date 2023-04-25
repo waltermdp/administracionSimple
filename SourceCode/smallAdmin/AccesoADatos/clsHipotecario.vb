@@ -148,7 +148,7 @@ Public Class clsHipotecario
       sResult += String.Format("{0,10}", " ")
       sResult += New String("0"c, 5) ' String.Format("D5", "0")
       sResult += vFechaGen.ToString("yyyyMMdd")
-      sResult += vImporteTotal.ToString("D18")
+      sResult += (vImporteTotal * 100).ToString("D18")
       sResult += MONEDA.ToString("D3")
       sResult += TIPOMOV.ToString("D2")
       sResult += vSecuencial.ToString("D3")
@@ -167,7 +167,7 @@ Public Class clsHipotecario
   Public Function GetFileNameExport(ByRef rName As String) As Result
     Try
       Dim aux As String = Secuencial.ToString("000")
-      rName = "ent" & m_Convenio.ToString & "_" & FechaGeneracion.ToString("yyMMdd") & "_" & Secuencial.ToString("000") & ".txt"
+      rName = "ent" & m_Convenio.ToString & "_" & FechaGeneracion.ToString("yyMMdd") & "_sec_" & Secuencial.ToString("000") & ".txt"
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -209,7 +209,7 @@ Public Class clsHipotecario
       sResult += vMov.CodigoSucCuenta.ToString("D4") 'vMov.CBU.Substring(0, 4) ' codsucCuenta.ToString("D4")
       sResult += String.Format("{0,1}", vMov.TipoCuenta)
       sResult += vMov.CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
-      sResult += String.Format("{0,-22}", vMov.NumeroComprobante)
+      sResult += String.Format("{0,-22}", vMov.NumeroContrato)
       sResult += String.Format("{0,-15}", m_IdDebito)
       sResult += String.Format("{0,2}", " ")
       sResult += String.Format("{0,4}", " ")

@@ -126,9 +126,9 @@ Public Class frmExportarHipotecario
           .CodigoSucCuenta = lstCuenta.Items.First.Codigo3
           .CuentaBanco = lstCuenta.Items.First.Codigo4
           .TipoCuenta = lstCuenta.Items.First.Codigo5
-          .NumeroComprobante = lstProducto.Items.First.NumComprobante
+          .NumeroContrato = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
-          .IdentificadorDebito = lstCliente.Items.First.NumCliente
+          .idCliente = lstCliente.Items.First.NumCliente
 
           .FechaVencimiento = vFechaVencimiento
           .CuotaActual = item.NumCuota
@@ -181,7 +181,17 @@ Public Class frmExportarHipotecario
         MsgBox("Fallo generar nombre")
         Exit Sub
       End If
+      Dim FullFileName As String = IO.Path.Combine(m_Banco.GetFolderExportacion, FileName)
+      If IO.File.Exists(FullFileName) Then
+        If MsgBox(String.Format("El archivo ""{0}"" ya existe, si continua se renombra el archivo anterior. Desea continuar?", FileName), MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
+          Exit Sub
+        End If
+        Dim chFilename As String = String.Empty
 
+        chFilename = FileName.Insert(FileName.IndexOf("."), "_" & Date.Now.ToString("yyyyMMddhhmmss"))
+
+        FileSystem.Rename(FullFileName, IO.Path.Combine(m_Banco.GetFolderExportacion, chFilename))
+      End If
       If Save(IO.Path.Combine(m_Banco.GetFolderExportacion, FileName), lineas) <> Result.OK Then
         MsgBox("Fallo guardando archivo")
         Exit Sub

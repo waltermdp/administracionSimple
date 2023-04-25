@@ -3,7 +3,7 @@
   Private m_CBU As String
   Private m_NumeroComprobante As Integer
   Private m_FechaVencimiento As Date
-  Private m_IdentificadorDebito As String
+  Private m_IdCliente As String
   Private m_Importe As Decimal
   Private m_CodigoBanco As Decimal
   Private m_CodigoSucCuenta As Integer
@@ -25,7 +25,7 @@
     End Set
   End Property
 
-  Public Property NumeroComprobante As Integer
+  Public Property NumeroContrato As Integer
     Get
       Return m_NumeroComprobante
     End Get
@@ -52,12 +52,12 @@
     End Set
   End Property
 
-  Public Property IdentificadorDebito As String
+  Public Property idCliente As String
     Get
-      Return m_IdentificadorDebito
+      Return m_IdCliente
     End Get
     Set(value As String)
-      m_IdentificadorDebito = value
+      m_IdCliente = value
     End Set
   End Property
 
@@ -118,10 +118,10 @@
   Public Sub New()
     MyBase.New()
     CBU = ""
-    NumeroComprobante = "0"
+    NumeroContrato = "0"
     FechaVencimiento = Date.MinValue
     Importe = 0
-    IdentificadorDebito = "0"
+    idCliente = "0"
     CodigoBanco = 0
     CodigoSucCuenta = 0
     TipoCuenta = " "
