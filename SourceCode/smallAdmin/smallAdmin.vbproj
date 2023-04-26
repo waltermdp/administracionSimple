@@ -219,6 +219,12 @@
     <Compile Include="Form\frmExportarHipotecario.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmExportarPatagonia.Designer.vb">
+      <DependentUpon>frmExportarPatagonia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmExportarPatagonia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmImportarHipotecario.Designer.vb">
       <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
     </Compile>
@@ -271,9 +277,11 @@
     <Compile Include="Modulos\clsComparar.vb" />
     <Compile Include="Modulos\clsInfoHipotecario.vb" />
     <Compile Include="Modulos\clsInfoImportarHipotecario.vb" />
+    <Compile Include="Modulos\clsInfoPatagonia.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
+    <Compile Include="Modulos\clsPatagonia.vb" />
     <Compile Include="Modulos\modCommon.vb" />
     <Compile Include="Modulos\modFile.vb" />
     <Compile Include="Modulos\modInOut.vb" />
@@ -338,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmExportarHipotecario.resx">
       <DependentUpon>frmExportarHipotecario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmExportarPatagonia.resx">
+      <DependentUpon>frmExportarPatagonia.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmImportarHipotecario.resx">
       <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
