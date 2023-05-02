@@ -18,6 +18,27 @@ Public Class clsInfoPatagonia
   Private m_ReferenciaDebito As String = "EDIT EL FARO"
   Private m_NroCuitEmpresa As Decimal
 
+  Private m_Nombre As String
+  Private m_CuotaActual As Decimal
+
+  Public Property Nombre As String
+    Get
+      Return m_Nombre
+    End Get
+    Set(value As String)
+      m_Nombre = value
+    End Set
+  End Property
+
+  Public Property CuotaActual As Decimal
+    Get
+      Return m_CuotaActual
+    End Get
+    Set(value As Decimal)
+      m_CuotaActual = value
+    End Set
+  End Property
+
   Public Property TipoNovedad As String
     Get
       Return m_TipoNovedad
@@ -117,13 +138,15 @@ Public Class clsInfoPatagonia
       CBU = 0
       ID_Cliente_Empresa = " "
       FechaVto = g_Today
-      Producto = "CUOTA"
+      Producto = ""
 
       TipoMoneda = "P"
       Importe = 0
       ReferenciaDebito = "EDIT EL FARO"
       NroCuitEmpresa = 0
 
+      m_Nombre = ""
+      m_CuotaActual = 0
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

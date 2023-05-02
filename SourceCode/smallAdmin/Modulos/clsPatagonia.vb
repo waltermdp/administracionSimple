@@ -9,7 +9,9 @@ Public Class clsPatagonia
 
   Private m_OrigenComercial As Decimal
   Private m_RazonSocial As String
+
   'body
+  Private m_FechaVto As Date
 
   'tail
   'T
@@ -43,6 +45,15 @@ Public Class clsPatagonia
     End Set
   End Property
 
+  Public Property FechaVencimiento As Date
+    Get
+      Return m_FechaPresentacion
+    End Get
+    Set(value As Date)
+      m_FechaPresentacion = value
+    End Set
+  End Property
+
   Public Property NroCuitEmpresa As Decimal
     Get
       Return m_NroCuitEmpresa
@@ -52,43 +63,45 @@ Public Class clsPatagonia
     End Set
   End Property
 
-  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoHipotecario), ByRef rlineas As List(Of String)) As Result
+
+
+  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoPatagonia), ByRef rlineas As List(Of String)) As Result
     Try
       Dim auxLinea As String = String.Empty
       Dim lstResult As New List(Of String)
       Dim ImporteTotal As Decimal = 0
-      If m_Concepto.Length > 40 Then
-        MsgBox("La longitud del campo CONCEPTO debe ser menor o igual a 40 caracteres")
+      If m_Producto.Length > 10 Then
+        MsgBox("La longitud del campo PRODUCTO debe ser menor o igual a 10 caracteres")
         Return Result.NOK
       End If
-      If m_IdDebito.Length > 15 Then
-        MsgBox("La longitud del campo ID_DEBITO debe ser menor o igual a 15 caracteres")
+      If m_RazonSocial.Length > 35 Then
+        MsgBox("La longitud del campo RAZON SOCIAL debe ser menor o igual a 35 caracteres")
         Return Result.NOK
       End If
-      If m_Convenio <= 0 OrElse m_Convenio > 99999 Then
-        MsgBox("El valor del campo CONVENIO debe estar entre 1 y 99999")
-        Return Result.NOK
-      End If
-      If m_Secuencial < 0 OrElse m_Secuencial > 999 Then
-        MsgBox("El valor del campo SECUENCIAL debe estar entre 0 y 999")
-        Return Result.NOK
-      End If
-      If m_FechaVencimiento < m_FechaGeneracion Then
-        MsgBox("La Fecha de vencimiento es menor que la fecha actual")
-        Return Result.NOK
-      End If
+      'If m_Convenio <= 0 OrElse m_Convenio > 99999 Then
+      '  MsgBox("El valor del campo CONVENIO debe estar entre 1 y 99999")
+      '  Return Result.NOK
+      'End If
+      'If m_Secuencial < 0 OrElse m_Secuencial > 999 Then
+      '  MsgBox("El valor del campo SECUENCIAL debe estar entre 0 y 999")
+      '  Return Result.NOK
+      'End If
+      'If m_FechaVto < m_FechaPresentacion Then
+      '  MsgBox("La Fecha de vencimiento es menor que la fecha de presentacion")
+      '  Return Result.NOK
+      'End If
 
 
       ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
-      If GenerarHeaderDebito(auxLinea, ImporteTotal, m_FechaGeneracion, m_Secuencial) <> Result.OK Then
-        MsgBox("No se puede generar encabezado de debito Hipotecario")
+      If GenerateHeader(auxLinea) <> Result.OK Then
+        MsgBox("No se puede generar encabezado del debito")
         Return Result.NOK
       End If
       lstResult.Add(auxLinea)
       For Each mov In vlstRegistros
         auxLinea = String.Empty
 
-        If GenerarDetalle(mov, auxLinea) <> Result.OK Then
+        If GenerateRegistros(mov, auxLinea) <> Result.OK Then
           MsgBox("No se puede generar el registro de debito Hipotecario")
           Return Result.NOK
         End If
@@ -156,6 +169,7 @@ Public Class clsPatagonia
     Try
       Dim sResult As String = String.Empty
 
+
       sResult += vRegistro.TipoNovedad.ToString                         '1
       sResult += vRegistro.Cuit_DNI.ToString("00000000000")             '11
       sResult += vRegistro.CBU.ToString("0000000000000000000000")       '22
@@ -200,7 +214,8 @@ Public Class clsPatagonia
       m_NroCuitEmpresa = 0
       m_OrigenComercial = 100
       m_FechaPresentacion = g_Today
-      m_Reserva = "ORI21040.100"
+      m_FechaVto = g_Today.AddDays(2)
+      m_Reserva = "ORIddMMs.100"  's=secuencia
       m_RazonSocial = "EDIT EL FARO"
     Catch ex As Exception
       Print_msg(ex.Message)

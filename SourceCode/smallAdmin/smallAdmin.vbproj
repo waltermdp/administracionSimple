@@ -385,6 +385,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -392,6 +393,7 @@
     </None>
     <None Include="My Project\DataSources\clsInfoHipotecario.datasource" />
     <None Include="My Project\DataSources\clsInfoImportarHipotecario.datasource" />
+    <None Include="My Project\DataSources\clsInfoPatagonia.datasource" />
     <None Include="My Project\DataSources\clsListaStorage.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoCuenta.datasource" />
