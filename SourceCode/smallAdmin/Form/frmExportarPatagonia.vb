@@ -29,10 +29,12 @@ Public Class frmExportarPatagonia
       dtCurrent.Value = m_Banco.FechaPresentacion
       dtVencimiento.MinDate = dtCurrent.Value
       dtVencimiento.Value = Today.AddDays(2)
-      'txtNumeroConvenio.Text = m_Banco.Convenio
-      'txtSecuencial.Text = m_Banco.Secuencial
+      m_Banco.FechaVencimiento = dtVencimiento.Value
+      m_Banco.FechaPresentacion = dtCurrent.Value
       txtProducto.Text = m_Banco.Producto
       txtRazonSocial.Text = m_Banco.RazonSocial
+      txtNroCUIT.Text = m_Banco.NroCuitEmpresa
+      txtReferencia.Text = m_Banco.ReferenciaDebito
       m_skip = False
       RecargarValores()
 
@@ -50,6 +52,11 @@ Public Class frmExportarPatagonia
       ClsInfoPatagoniaBindingSource.ResetBindings(False)
       lblResumen.Text = String.Format("Total de registros: {0}", m_Registros.Count)
       txtImporteTotal.Text = m_Registros.Sum(Function(c) c.Importe).ToString
+      txtProducto.Text = m_Banco.Producto
+      txtRazonSocial.Text = m_Banco.RazonSocial
+      txtNroCUIT.Text = m_Banco.NroCuitEmpresa
+      txtReferencia.Text = m_Banco.ReferenciaDebito
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -124,17 +131,13 @@ Public Class frmExportarPatagonia
           .CBU = lstCuenta.Items.First.Codigo1
           .Cuit_DNI = lstCliente.Items.First.DNI ' lstCuenta.Items.First.Codigo2
           .Nombre = lstCliente.Items.First.ToString
-          .ID_Cliente_Empresa = lstProducto.Items.First.NumComprobante
+          .Contrato = lstProducto.Items.First.NumComprobante
           .Producto = m_Banco.Producto
           .FechaVto = m_Banco.FechaVencimiento ' lstCuenta.Items.First.Codigo3
           .Importe = item.ValorCuota
-
+          .CuotaActual = item.NumCuota
           .NroCuitEmpresa = m_Banco.NroCuitEmpresa
-
-          .ReferenciaDebito = txtReferencia.Text
-
-          '.TipoMoneda = vFechaVencimiento
-          '.TipoNovedad = item.NumCuota
+          .ReferenciaDebito = m_Banco.ReferenciaDebito
 
 
         End With
@@ -289,6 +292,10 @@ Public Class frmExportarPatagonia
       'If txtNumeroConvenio.Text.Length <= 0 Then txtNumeroConvenio.Text = 0
       'If txtNumeroConvenio.Text.Length > 5 Then txtNumeroConvenio.Text = txtNumeroConvenio.Text.Substring(0, 5)
       m_Banco.NroCuitEmpresa = CDec(txtNroCUIT.Text)
+      For Each registro In m_Registros
+        registro.NroCuitEmpresa = m_Banco.NroCuitEmpresa
+      Next
+      RefeshGrilla()
       m_skip = False
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -298,10 +305,10 @@ Public Class frmExportarPatagonia
 
   Private Sub txtReferencia_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtReferencia.KeyPress
     Try
-      'maximo 40
+      'maximo 15
       If m_skip Then Exit Sub
       m_skip = True
-      If txtReferencia.Text.Length >= 40 Then
+      If txtReferencia.Text.Length >= 15 Then
         If Not Char.IsControl(e.KeyChar) Then
           e.Handled = True
         End If
@@ -316,10 +323,14 @@ Public Class frmExportarPatagonia
 
   Private Sub txtReferencia_TextChanged(sender As Object, e As EventArgs) Handles txtReferencia.TextChanged
     Try
-      'maximo 40
+      'maximo 15
       If m_skip Then Exit Sub
       m_skip = True
-      'm_Banco.Concep = txtReferencia.Text
+      m_Banco.ReferenciaDebito = txtReferencia.Text
+      For Each registro In m_Registros
+        registro.ReferenciaDebito = m_Banco.ReferenciaDebito
+      Next
+      RefeshGrilla()
       m_skip = False
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -336,5 +347,65 @@ Public Class frmExportarPatagonia
     End Try
   End Sub
 
+  Private Sub txtProducto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProducto.KeyPress
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      If txtProducto.Text.Length >= 10 Then
+        If Not Char.IsControl(e.KeyChar) Then
+          e.Handled = True
+        End If
+      End If
 
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtProducto_TextChanged(sender As Object, e As EventArgs) Handles txtProducto.TextChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      m_Banco.Producto = txtProducto.Text
+      For Each registro In m_Registros
+        registro.Producto = m_Banco.Producto
+      Next
+      RefeshGrilla()
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtRazonSocial_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRazonSocial.KeyPress
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      If txtRazonSocial.Text.Length >= 35 Then
+        If Not Char.IsControl(e.KeyChar) Then
+          e.Handled = True
+        End If
+      End If
+
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  Private Sub txtRazonSocial_TextChanged(sender As Object, e As EventArgs) Handles txtRazonSocial.TextChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      m_Banco.RazonSocial = txtRazonSocial.Text
+      RefeshGrilla()
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class
