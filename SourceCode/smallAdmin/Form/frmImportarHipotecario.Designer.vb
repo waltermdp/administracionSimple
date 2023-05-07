@@ -49,6 +49,7 @@ Partial Class frmImportarHipotecario
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoImportarHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label5 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoImportarHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -57,10 +58,11 @@ Partial Class frmImportarHipotecario
     '
     Me.dgvResumen.AllowUserToAddRows = False
     Me.dgvResumen.AutoGenerateColumns = False
+    Me.dgvResumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ImportarDataGridViewCheckBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.NroAbonadoDataGridViewTextBoxColumn, Me.NroCuentaDataGridViewTextBoxColumn, Me.CuotaDataGridViewTextBoxColumn, Me.FechaDebitoDataGridViewTextBoxColumn, Me.ImporteADebitarDataGridViewTextBoxColumn, Me.ImporteDebitadoDataGridViewTextBoxColumn, Me.ImporteBHDataGridViewTextBoxColumn, Me.MotivoRechazoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoImportarHipotecarioBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(169, 80)
+    Me.dgvResumen.Location = New System.Drawing.Point(169, 113)
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
@@ -70,7 +72,7 @@ Partial Class frmImportarHipotecario
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(166, 55)
+    Me.lblResumen.Location = New System.Drawing.Point(166, 88)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
     Me.lblResumen.TabIndex = 53
@@ -83,7 +85,7 @@ Partial Class frmImportarHipotecario
     Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(26, 115)
+    Me.btnReload.Location = New System.Drawing.Point(26, 148)
     Me.btnReload.Name = "btnReload"
     Me.btnReload.Size = New System.Drawing.Size(110, 61)
     Me.btnReload.TabIndex = 52
@@ -97,7 +99,7 @@ Partial Class frmImportarHipotecario
     Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(26, 21)
+    Me.btnProcesar.Location = New System.Drawing.Point(26, 54)
     Me.btnProcesar.Name = "btnProcesar"
     Me.btnProcesar.Size = New System.Drawing.Size(110, 61)
     Me.btnProcesar.TabIndex = 51
@@ -111,7 +113,7 @@ Partial Class frmImportarHipotecario
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(26, 591)
+    Me.btnCancel.Location = New System.Drawing.Point(26, 624)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 50
@@ -121,7 +123,7 @@ Partial Class frmImportarHipotecario
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(166, 21)
+    Me.Label1.Location = New System.Drawing.Point(166, 54)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(52, 13)
     Me.Label1.TabIndex = 55
@@ -129,7 +131,7 @@ Partial Class frmImportarHipotecario
     '
     'txtConvenio
     '
-    Me.txtConvenio.Location = New System.Drawing.Point(224, 18)
+    Me.txtConvenio.Location = New System.Drawing.Point(224, 51)
     Me.txtConvenio.Name = "txtConvenio"
     Me.txtConvenio.ReadOnly = True
     Me.txtConvenio.Size = New System.Drawing.Size(131, 20)
@@ -138,7 +140,7 @@ Partial Class frmImportarHipotecario
     'Label2
     '
     Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(361, 21)
+    Me.Label2.Location = New System.Drawing.Point(361, 54)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(115, 13)
     Me.Label2.TabIndex = 57
@@ -147,7 +149,7 @@ Partial Class frmImportarHipotecario
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(670, 21)
+    Me.Label3.Location = New System.Drawing.Point(670, 54)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(87, 13)
     Me.Label3.TabIndex = 58
@@ -155,7 +157,7 @@ Partial Class frmImportarHipotecario
     '
     'txtImporteTotal
     '
-    Me.txtImporteTotal.Location = New System.Drawing.Point(482, 18)
+    Me.txtImporteTotal.Location = New System.Drawing.Point(482, 51)
     Me.txtImporteTotal.Name = "txtImporteTotal"
     Me.txtImporteTotal.ReadOnly = True
     Me.txtImporteTotal.Size = New System.Drawing.Size(182, 20)
@@ -163,7 +165,7 @@ Partial Class frmImportarHipotecario
     '
     'txtFechaEjecucion
     '
-    Me.txtFechaEjecucion.Location = New System.Drawing.Point(763, 18)
+    Me.txtFechaEjecucion.Location = New System.Drawing.Point(763, 51)
     Me.txtFechaEjecucion.Name = "txtFechaEjecucion"
     Me.txtFechaEjecucion.ReadOnly = True
     Me.txtFechaEjecucion.Size = New System.Drawing.Size(146, 20)
@@ -172,7 +174,7 @@ Partial Class frmImportarHipotecario
     'lblRechazados
     '
     Me.lblRechazados.AutoSize = True
-    Me.lblRechazados.Location = New System.Drawing.Point(361, 55)
+    Me.lblRechazados.Location = New System.Drawing.Point(361, 88)
     Me.lblRechazados.Name = "lblRechazados"
     Me.lblRechazados.Size = New System.Drawing.Size(67, 13)
     Me.lblRechazados.TabIndex = 61
@@ -278,12 +280,23 @@ Partial Class frmImportarHipotecario
     '
     Me.ClsInfoImportarHipotecarioBindingSource.DataSource = GetType(main.clsInfoImportarHipotecario)
     '
+    'Label5
+    '
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.Location = New System.Drawing.Point(455, 9)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(371, 24)
+    Me.Label5.TabIndex = 77
+    Me.Label5.Text = "Hipotecario: Importar Debitos Directos"
+    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
     'frmImportarHipotecario
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(1275, 672)
+    Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.Label5)
     Me.Controls.Add(Me.lblRechazados)
     Me.Controls.Add(Me.txtFechaEjecucion)
     Me.Controls.Add(Me.txtImporteTotal)
@@ -336,4 +349,5 @@ Partial Class frmImportarHipotecario
   Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidCuentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents lblRechazados As System.Windows.Forms.Label
+  Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

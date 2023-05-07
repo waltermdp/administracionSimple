@@ -31,23 +31,26 @@ Partial Class frmImportarPatagonia
     Me.txtCUITEmpresa = New System.Windows.Forms.TextBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.ImportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DNIIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ImporteDebitadoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.MotivoRechazoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ImporteADebitarDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoImportarPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.btnReload = New System.Windows.Forms.Button()
     Me.btnProcesar = New System.Windows.Forms.Button()
     Me.btnCancel = New System.Windows.Forms.Button()
-    Me.txtTotalRegistros = New System.Windows.Forms.TextBox()
+    Me.txtTotalRegistrosDebitar = New System.Windows.Forms.TextBox()
     Me.Label4 = New System.Windows.Forms.Label()
-    Me.CuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ImporteADebitarDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ImporteDebitadoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.MotivoRechazoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ImportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-    Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoImportarPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label5 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoImportarPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,7 +59,7 @@ Partial Class frmImportarPatagonia
     'lblRechazados
     '
     Me.lblRechazados.AutoSize = True
-    Me.lblRechazados.Location = New System.Drawing.Point(364, 80)
+    Me.lblRechazados.Location = New System.Drawing.Point(654, 80)
     Me.lblRechazados.Name = "lblRechazados"
     Me.lblRechazados.Size = New System.Drawing.Size(67, 13)
     Me.lblRechazados.TabIndex = 73
@@ -117,8 +120,9 @@ Partial Class frmImportarPatagonia
     '
     Me.dgvResumen.AllowUserToAddRows = False
     Me.dgvResumen.AutoGenerateColumns = False
+    Me.dgvResumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CuotaDataGridViewTextBoxColumn, Me.FechaDebitoDataGridViewTextBoxColumn, Me.ImporteADebitarDataGridViewTextBoxColumn, Me.ImporteDebitadoDataGridViewTextBoxColumn, Me.MotivoRechazoDataGridViewTextBoxColumn, Me.ImportarDataGridViewCheckBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn})
+    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ImportarDataGridViewCheckBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.DNIIDDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.CuotaDataGridViewTextBoxColumn, Me.ImporteDebitadoDataGridViewTextBoxColumn, Me.FechaDebitoDataGridViewTextBoxColumn, Me.MotivoRechazoDataGridViewTextBoxColumn, Me.ImporteADebitarDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoImportarPatagoniaBindingSource
     Me.dgvResumen.Location = New System.Drawing.Point(172, 105)
     Me.dgvResumen.Name = "dgvResumen"
@@ -127,10 +131,109 @@ Partial Class frmImportarPatagonia
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 66
     '
+    'ImportarDataGridViewCheckBoxColumn
+    '
+    Me.ImportarDataGridViewCheckBoxColumn.DataPropertyName = "Importar"
+    Me.ImportarDataGridViewCheckBoxColumn.HeaderText = "Importar"
+    Me.ImportarDataGridViewCheckBoxColumn.Name = "ImportarDataGridViewCheckBoxColumn"
+    Me.ImportarDataGridViewCheckBoxColumn.ReadOnly = True
+    '
+    'NombreDataGridViewTextBoxColumn
+    '
+    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'DNIIDDataGridViewTextBoxColumn
+    '
+    Me.DNIIDDataGridViewTextBoxColumn.DataPropertyName = "DNI_ID"
+    Me.DNIIDDataGridViewTextBoxColumn.HeaderText = "DNI_ID"
+    Me.DNIIDDataGridViewTextBoxColumn.Name = "DNIIDDataGridViewTextBoxColumn"
+    Me.DNIIDDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CBUDataGridViewTextBoxColumn
+    '
+    Me.CBUDataGridViewTextBoxColumn.DataPropertyName = "CBU"
+    Me.CBUDataGridViewTextBoxColumn.HeaderText = "CBU"
+    Me.CBUDataGridViewTextBoxColumn.Name = "CBUDataGridViewTextBoxColumn"
+    Me.CBUDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ContratoDataGridViewTextBoxColumn
+    '
+    Me.ContratoDataGridViewTextBoxColumn.DataPropertyName = "Contrato"
+    Me.ContratoDataGridViewTextBoxColumn.HeaderText = "Contrato"
+    Me.ContratoDataGridViewTextBoxColumn.Name = "ContratoDataGridViewTextBoxColumn"
+    Me.ContratoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotaDataGridViewTextBoxColumn
+    '
+    Me.CuotaDataGridViewTextBoxColumn.DataPropertyName = "cuota"
+    Me.CuotaDataGridViewTextBoxColumn.HeaderText = "cuota"
+    Me.CuotaDataGridViewTextBoxColumn.Name = "CuotaDataGridViewTextBoxColumn"
+    Me.CuotaDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ImporteDebitadoDataGridViewTextBoxColumn
+    '
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.DataPropertyName = "importeDebitado"
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.HeaderText = "importeDebitado"
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.Name = "ImporteDebitadoDataGridViewTextBoxColumn"
+    Me.ImporteDebitadoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaDebitoDataGridViewTextBoxColumn
+    '
+    Me.FechaDebitoDataGridViewTextBoxColumn.DataPropertyName = "FechaDebito"
+    Me.FechaDebitoDataGridViewTextBoxColumn.HeaderText = "FechaDebito"
+    Me.FechaDebitoDataGridViewTextBoxColumn.Name = "FechaDebitoDataGridViewTextBoxColumn"
+    Me.FechaDebitoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'MotivoRechazoDataGridViewTextBoxColumn
+    '
+    Me.MotivoRechazoDataGridViewTextBoxColumn.DataPropertyName = "MotivoRechazo"
+    Me.MotivoRechazoDataGridViewTextBoxColumn.HeaderText = "MotivoRechazo"
+    Me.MotivoRechazoDataGridViewTextBoxColumn.Name = "MotivoRechazoDataGridViewTextBoxColumn"
+    Me.MotivoRechazoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ImporteADebitarDataGridViewTextBoxColumn
+    '
+    Me.ImporteADebitarDataGridViewTextBoxColumn.DataPropertyName = "ImporteADebitar"
+    Me.ImporteADebitarDataGridViewTextBoxColumn.HeaderText = "ImporteADebitar"
+    Me.ImporteADebitarDataGridViewTextBoxColumn.Name = "ImporteADebitarDataGridViewTextBoxColumn"
+    Me.ImporteADebitarDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ImporteADebitarDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidPagoDataGridViewTextBoxColumn
+    '
+    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
+    Me.GuidPagoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidCuentaDataGridViewTextBoxColumn
+    '
+    Me.GuidCuentaDataGridViewTextBoxColumn.DataPropertyName = "GuidCuenta"
+    Me.GuidCuentaDataGridViewTextBoxColumn.HeaderText = "GuidCuenta"
+    Me.GuidCuentaDataGridViewTextBoxColumn.Name = "GuidCuentaDataGridViewTextBoxColumn"
+    Me.GuidCuentaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidCuentaDataGridViewTextBoxColumn.Visible = False
+    '
+    'ClsInfoImportarPatagoniaBindingSource
+    '
+    Me.ClsInfoImportarPatagoniaBindingSource.DataSource = GetType(main.clsInfoImportarPatagonia)
+    '
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(169, 80)
+    Me.lblResumen.Location = New System.Drawing.Point(427, 80)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
     Me.lblResumen.TabIndex = 65
@@ -178,106 +281,32 @@ Partial Class frmImportarPatagonia
     Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = False
     '
-    'txtTotalRegistros
+    'txtTotalRegistrosDebitar
     '
-    Me.txtTotalRegistros.Location = New System.Drawing.Point(994, 43)
-    Me.txtTotalRegistros.Name = "txtTotalRegistros"
-    Me.txtTotalRegistros.ReadOnly = True
-    Me.txtTotalRegistros.Size = New System.Drawing.Size(182, 20)
-    Me.txtTotalRegistros.TabIndex = 75
+    Me.txtTotalRegistrosDebitar.Location = New System.Drawing.Point(271, 77)
+    Me.txtTotalRegistrosDebitar.Name = "txtTotalRegistrosDebitar"
+    Me.txtTotalRegistrosDebitar.ReadOnly = True
+    Me.txtTotalRegistrosDebitar.Size = New System.Drawing.Size(131, 20)
+    Me.txtTotalRegistrosDebitar.TabIndex = 75
     '
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(927, 46)
+    Me.Label4.Location = New System.Drawing.Point(170, 80)
     Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(51, 13)
+    Me.Label4.Size = New System.Drawing.Size(95, 13)
     Me.Label4.TabIndex = 74
-    Me.Label4.Text = "Registros"
-    '
-    'CuotaDataGridViewTextBoxColumn
-    '
-    Me.CuotaDataGridViewTextBoxColumn.DataPropertyName = "cuota"
-    Me.CuotaDataGridViewTextBoxColumn.HeaderText = "cuota"
-    Me.CuotaDataGridViewTextBoxColumn.Name = "CuotaDataGridViewTextBoxColumn"
-    Me.CuotaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaDebitoDataGridViewTextBoxColumn
-    '
-    Me.FechaDebitoDataGridViewTextBoxColumn.DataPropertyName = "FechaDebito"
-    Me.FechaDebitoDataGridViewTextBoxColumn.HeaderText = "FechaDebito"
-    Me.FechaDebitoDataGridViewTextBoxColumn.Name = "FechaDebitoDataGridViewTextBoxColumn"
-    Me.FechaDebitoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ImporteADebitarDataGridViewTextBoxColumn
-    '
-    Me.ImporteADebitarDataGridViewTextBoxColumn.DataPropertyName = "ImporteADebitar"
-    Me.ImporteADebitarDataGridViewTextBoxColumn.HeaderText = "ImporteADebitar"
-    Me.ImporteADebitarDataGridViewTextBoxColumn.Name = "ImporteADebitarDataGridViewTextBoxColumn"
-    Me.ImporteADebitarDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ImporteDebitadoDataGridViewTextBoxColumn
-    '
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.DataPropertyName = "importeDebitado"
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.HeaderText = "importeDebitado"
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.Name = "ImporteDebitadoDataGridViewTextBoxColumn"
-    Me.ImporteDebitadoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'MotivoRechazoDataGridViewTextBoxColumn
-    '
-    Me.MotivoRechazoDataGridViewTextBoxColumn.DataPropertyName = "MotivoRechazo"
-    Me.MotivoRechazoDataGridViewTextBoxColumn.HeaderText = "MotivoRechazo"
-    Me.MotivoRechazoDataGridViewTextBoxColumn.Name = "MotivoRechazoDataGridViewTextBoxColumn"
-    Me.MotivoRechazoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ImportarDataGridViewCheckBoxColumn
-    '
-    Me.ImportarDataGridViewCheckBoxColumn.DataPropertyName = "Importar"
-    Me.ImportarDataGridViewCheckBoxColumn.HeaderText = "Importar"
-    Me.ImportarDataGridViewCheckBoxColumn.Name = "ImportarDataGridViewCheckBoxColumn"
-    Me.ImportarDataGridViewCheckBoxColumn.ReadOnly = True
-    '
-    'GuidProductoDataGridViewTextBoxColumn
-    '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'GuidPagoDataGridViewTextBoxColumn
-    '
-    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
-    Me.GuidPagoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'GuidCuentaDataGridViewTextBoxColumn
-    '
-    Me.GuidCuentaDataGridViewTextBoxColumn.DataPropertyName = "GuidCuenta"
-    Me.GuidCuentaDataGridViewTextBoxColumn.HeaderText = "GuidCuenta"
-    Me.GuidCuentaDataGridViewTextBoxColumn.Name = "GuidCuentaDataGridViewTextBoxColumn"
-    Me.GuidCuentaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'NombreDataGridViewTextBoxColumn
-    '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ClsInfoImportarPatagoniaBindingSource
-    '
-    Me.ClsInfoImportarPatagoniaBindingSource.DataSource = GetType(main.clsInfoImportarPatagonia)
+    Me.Label4.Text = "Registros a debitar"
     '
     'Label5
     '
-    Me.Label5.AutoSize = True
     Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label5.Location = New System.Drawing.Point(508, 9)
+    Me.Label5.Location = New System.Drawing.Point(485, 9)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(348, 24)
+    Me.Label5.Size = New System.Drawing.Size(371, 24)
     Me.Label5.TabIndex = 76
     Me.Label5.Text = "Patagonia: Importar Debitos Directos"
+    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'frmImportarPatagonia
     '
@@ -286,7 +315,7 @@ Partial Class frmImportarPatagonia
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
     Me.Controls.Add(Me.Label5)
-    Me.Controls.Add(Me.txtTotalRegistros)
+    Me.Controls.Add(Me.txtTotalRegistrosDebitar)
     Me.Controls.Add(Me.Label4)
     Me.Controls.Add(Me.lblRechazados)
     Me.Controls.Add(Me.txtFechaEjecucion)
@@ -328,18 +357,21 @@ Partial Class frmImportarPatagonia
   Friend WithEvents btnCancel As System.Windows.Forms.Button
   Friend WithEvents NroAbonadoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NroCuentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ImporteADebitarDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ImporteDebitadoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents MotivoRechazoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ClsInfoImportarPatagoniaBindingSource As System.Windows.Forms.BindingSource
+  Friend WithEvents txtTotalRegistrosDebitar As System.Windows.Forms.TextBox
+  Friend WithEvents Label4 As System.Windows.Forms.Label
+  Friend WithEvents Label5 As System.Windows.Forms.Label
   Friend WithEvents ImportarDataGridViewCheckBoxColumn As System.Windows.Forms.DataGridViewCheckBoxColumn
+  Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DNIIDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CBUDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ContratoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ImporteDebitadoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents MotivoRechazoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ImporteADebitarDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidCuentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ClsInfoImportarPatagoniaBindingSource As System.Windows.Forms.BindingSource
-  Friend WithEvents txtTotalRegistros As System.Windows.Forms.TextBox
-  Friend WithEvents Label4 As System.Windows.Forms.Label
-  Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

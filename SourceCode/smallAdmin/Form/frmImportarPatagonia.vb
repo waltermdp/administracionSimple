@@ -12,8 +12,29 @@ Public Class frmImportarPatagonia
   Private m_CUITEmpresa As Decimal
   Private m_TotalImporte As Decimal
   Private m_totalRegistros As Integer
+  Private m_totalRegistosADebitar As Integer
 
   Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+    Try
+      Init()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+ 
+
+  Private Sub frmImportarPatagonia_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Try
+      Init()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Init()
     Try
       m_LineasArchivo = New List(Of String)
       Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
@@ -26,10 +47,14 @@ Public Class frmImportarPatagonia
       ClsInfoImportarPatagoniaBindingSource.DataSource = m_Registros
       ClsInfoImportarPatagoniaBindingSource.ResetBindings(False)
       lblResumen.Text = String.Format("Total de registros: {0}", m_totalRegistros)
-      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Where(Function(c) (Not String.IsNullOrWhiteSpace(c.MotivoRechazo)) OrElse (c.importeDebitado = 0)).Count.ToString)
+      m_totalRegistosADebitar = m_Registros.Where(Function(c) c.Importar = True).Count
+      txtTotalRegistrosDebitar.Text = m_totalRegistosADebitar.ToString
+      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_totalRegistros - m_totalRegistosADebitar) '  m_Registros.Where(Function(c) (Not String.IsNullOrWhiteSpace(c.MotivoRechazo)) OrElse (c.importeDebitado = 0)).Count.ToString)
+
       txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
       txtCUITEmpresa.Text = m_CUITEmpresa
-      txtImporteTotal.Text = m_TotalImporte
+      txtImporteTotal.Text = m_TotalImporte.ToString
+
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -57,29 +82,6 @@ Public Class frmImportarPatagonia
       Return Result.ErrorEx
     End Try
   End Function
-
-  Private Sub frmImportarPatagonia_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-    Try
-      m_LineasArchivo = New List(Of String)
-      Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
-      If vResult = Result.OK Then
-        Using objForm As New frmProgreso(AddressOf CargarInicio)
-          objForm.ShowDialog(Me)
-        End Using
-
-      End If
-      ClsInfoImportarPatagoniaBindingSource.DataSource = m_Registros
-      ClsInfoImportarPatagoniaBindingSource.ResetBindings(False)
-      lblResumen.Text = String.Format("Total de registros: {0}", m_totalRegistros)
-      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Where(Function(c) (Not String.IsNullOrWhiteSpace(c.MotivoRechazo)) OrElse (c.importeDebitado = 0)).Count.ToString)
-      txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
-      txtCUITEmpresa.Text = m_CUITEmpresa
-      txtImporteTotal.Text = m_TotalImporte.ToString
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
 
   Private Sub FillEncabezado(ByVal vLineaEncabezado As String, ByRef rFechaEjecucion As Date, ByRef rCUITEmpresa As Decimal)
     Try
@@ -266,4 +268,6 @@ Public Class frmImportarPatagonia
       Print_msg(ex.Message)
     End Try
   End Sub
+
+
 End Class

@@ -42,7 +42,6 @@ Partial Class frmExportarHipotecario
     Me.Label1 = New System.Windows.Forms.Label()
     Me.txtConcepto = New System.Windows.Forms.TextBox()
     Me.Label7 = New System.Windows.Forms.Label()
-    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.IdClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,6 +53,8 @@ Partial Class frmExportarHipotecario
     Me.CodigoSucCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.TipoCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuentaBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label8 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -65,7 +66,7 @@ Partial Class frmExportarHipotecario
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(34, 615)
+    Me.btnCancel.Location = New System.Drawing.Point(34, 627)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 43
@@ -79,7 +80,7 @@ Partial Class frmExportarHipotecario
     Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(34, 45)
+    Me.btnProcesar.Location = New System.Drawing.Point(34, 57)
     Me.btnProcesar.Name = "btnProcesar"
     Me.btnProcesar.Size = New System.Drawing.Size(110, 61)
     Me.btnProcesar.TabIndex = 44
@@ -93,7 +94,7 @@ Partial Class frmExportarHipotecario
     Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(34, 139)
+    Me.btnReload.Location = New System.Drawing.Point(34, 151)
     Me.btnReload.Name = "btnReload"
     Me.btnReload.Size = New System.Drawing.Size(110, 61)
     Me.btnReload.TabIndex = 46
@@ -103,7 +104,7 @@ Partial Class frmExportarHipotecario
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(174, 615)
+    Me.lblResumen.Location = New System.Drawing.Point(174, 627)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
     Me.lblResumen.TabIndex = 47
@@ -117,7 +118,7 @@ Partial Class frmExportarHipotecario
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdClienteDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.NumeroContratoDataGridViewTextBoxColumn, Me.FechaVencimientoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.CodigoBancoDataGridViewTextBoxColumn, Me.CodigoSucCuentaDataGridViewTextBoxColumn, Me.TipoCuentaDataGridViewTextBoxColumn, Me.CuentaBancoDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoHipotecarioBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(177, 104)
+    Me.dgvResumen.Location = New System.Drawing.Point(177, 116)
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
@@ -126,7 +127,7 @@ Partial Class frmExportarHipotecario
     '
     'Label2
     '
-    Me.Label2.Location = New System.Drawing.Point(174, 45)
+    Me.Label2.Location = New System.Drawing.Point(174, 57)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(72, 16)
     Me.Label2.TabIndex = 50
@@ -134,14 +135,14 @@ Partial Class frmExportarHipotecario
     '
     'txtNumeroConvenio
     '
-    Me.txtNumeroConvenio.Location = New System.Drawing.Point(252, 41)
+    Me.txtNumeroConvenio.Location = New System.Drawing.Point(252, 53)
     Me.txtNumeroConvenio.Name = "txtNumeroConvenio"
     Me.txtNumeroConvenio.Size = New System.Drawing.Size(100, 20)
     Me.txtNumeroConvenio.TabIndex = 51
     '
     'txtImporteTotal
     '
-    Me.txtImporteTotal.Location = New System.Drawing.Point(484, 41)
+    Me.txtImporteTotal.Location = New System.Drawing.Point(484, 53)
     Me.txtImporteTotal.Name = "txtImporteTotal"
     Me.txtImporteTotal.ReadOnly = True
     Me.txtImporteTotal.Size = New System.Drawing.Size(133, 20)
@@ -149,7 +150,7 @@ Partial Class frmExportarHipotecario
     '
     'Label3
     '
-    Me.Label3.Location = New System.Drawing.Point(378, 41)
+    Me.Label3.Location = New System.Drawing.Point(378, 53)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(100, 20)
     Me.Label3.TabIndex = 53
@@ -157,7 +158,7 @@ Partial Class frmExportarHipotecario
     '
     'Label4
     '
-    Me.Label4.Location = New System.Drawing.Point(634, 41)
+    Me.Label4.Location = New System.Drawing.Point(634, 53)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
     Me.Label4.TabIndex = 54
@@ -165,7 +166,7 @@ Partial Class frmExportarHipotecario
     '
     'Label5
     '
-    Me.Label5.Location = New System.Drawing.Point(899, 41)
+    Me.Label5.Location = New System.Drawing.Point(899, 53)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
     Me.Label5.TabIndex = 55
@@ -173,7 +174,7 @@ Partial Class frmExportarHipotecario
     '
     'Label6
     '
-    Me.Label6.Location = New System.Drawing.Point(174, 68)
+    Me.Label6.Location = New System.Drawing.Point(174, 80)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(72, 20)
     Me.Label6.TabIndex = 58
@@ -182,7 +183,7 @@ Partial Class frmExportarHipotecario
     '
     'txtSecuencial
     '
-    Me.txtSecuencial.Location = New System.Drawing.Point(252, 68)
+    Me.txtSecuencial.Location = New System.Drawing.Point(252, 80)
     Me.txtSecuencial.Name = "txtSecuencial"
     Me.txtSecuencial.Size = New System.Drawing.Size(100, 20)
     Me.txtSecuencial.TabIndex = 59
@@ -190,7 +191,7 @@ Partial Class frmExportarHipotecario
     'dtCurrent
     '
     Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtCurrent.Location = New System.Drawing.Point(719, 38)
+    Me.dtCurrent.Location = New System.Drawing.Point(719, 50)
     Me.dtCurrent.Name = "dtCurrent"
     Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
     Me.dtCurrent.TabIndex = 60
@@ -198,21 +199,21 @@ Partial Class frmExportarHipotecario
     'dtVencimiento
     '
     Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 39)
+    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 51)
     Me.dtVencimiento.Name = "dtVencimiento"
     Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
     Me.dtVencimiento.TabIndex = 61
     '
     'txtIdDebito
     '
-    Me.txtIdDebito.Location = New System.Drawing.Point(456, 68)
+    Me.txtIdDebito.Location = New System.Drawing.Point(456, 80)
     Me.txtIdDebito.Name = "txtIdDebito"
     Me.txtIdDebito.Size = New System.Drawing.Size(191, 20)
     Me.txtIdDebito.TabIndex = 63
     '
     'Label1
     '
-    Me.Label1.Location = New System.Drawing.Point(378, 68)
+    Me.Label1.Location = New System.Drawing.Point(378, 80)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(72, 20)
     Me.Label1.TabIndex = 62
@@ -221,23 +222,19 @@ Partial Class frmExportarHipotecario
     '
     'txtConcepto
     '
-    Me.txtConcepto.Location = New System.Drawing.Point(763, 69)
+    Me.txtConcepto.Location = New System.Drawing.Point(763, 81)
     Me.txtConcepto.Name = "txtConcepto"
     Me.txtConcepto.Size = New System.Drawing.Size(372, 20)
     Me.txtConcepto.TabIndex = 65
     '
     'Label7
     '
-    Me.Label7.Location = New System.Drawing.Point(685, 68)
+    Me.Label7.Location = New System.Drawing.Point(685, 80)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(72, 20)
     Me.Label7.TabIndex = 64
     Me.Label7.Text = "Concepto"
     Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'ClsInfoHipotecarioBindingSource
-    '
-    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
     '
     'IdClienteDataGridViewTextBoxColumn
     '
@@ -320,12 +317,27 @@ Partial Class frmExportarHipotecario
     Me.CuentaBancoDataGridViewTextBoxColumn.ReadOnly = True
     Me.CuentaBancoDataGridViewTextBoxColumn.Visible = False
     '
+    'ClsInfoHipotecarioBindingSource
+    '
+    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
+    '
+    'Label8
+    '
+    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label8.Location = New System.Drawing.Point(455, 9)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(371, 24)
+    Me.Label8.TabIndex = 78
+    Me.Label8.Text = "Hipotecario: Exportar Debitos Directos"
+    Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
     'frmExportarHipotecario
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.Label8)
     Me.Controls.Add(Me.txtConcepto)
     Me.Controls.Add(Me.Label7)
     Me.Controls.Add(Me.txtIdDebito)
@@ -347,7 +359,8 @@ Partial Class frmExportarHipotecario
     Me.Controls.Add(Me.btnCancel)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmExportarHipotecario"
-    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+    Me.ShowInTaskbar = False
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmExportarResumen"
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -386,4 +399,5 @@ Partial Class frmExportarHipotecario
   Friend WithEvents CodigoSucCuentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents TipoCuentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CuentaBancoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class

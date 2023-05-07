@@ -42,7 +42,6 @@ Partial Class frmExportarPatagonia
     Me.Label8 = New System.Windows.Forms.Label()
     Me.txtNroCUIT = New System.Windows.Forms.TextBox()
     Me.Label2 = New System.Windows.Forms.Label()
-    Me.ClsInfoPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuitDNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,20 +54,22 @@ Partial Class frmExportarPatagonia
     Me.ReferenciaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NroCuitEmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.TipoNovedadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.Label6 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtRazonSocial
     '
-    Me.txtRazonSocial.Location = New System.Drawing.Point(433, 34)
+    Me.txtRazonSocial.Location = New System.Drawing.Point(433, 42)
     Me.txtRazonSocial.Name = "txtRazonSocial"
     Me.txtRazonSocial.Size = New System.Drawing.Size(306, 20)
     Me.txtRazonSocial.TabIndex = 84
     '
     'Label7
     '
-    Me.Label7.Location = New System.Drawing.Point(355, 33)
+    Me.Label7.Location = New System.Drawing.Point(355, 41)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(72, 20)
     Me.Label7.TabIndex = 83
@@ -77,14 +78,14 @@ Partial Class frmExportarPatagonia
     '
     'txtProducto
     '
-    Me.txtProducto.Location = New System.Drawing.Point(838, 33)
+    Me.txtProducto.Location = New System.Drawing.Point(838, 41)
     Me.txtProducto.Name = "txtProducto"
     Me.txtProducto.Size = New System.Drawing.Size(133, 20)
     Me.txtProducto.TabIndex = 82
     '
     'Label1
     '
-    Me.Label1.Location = New System.Drawing.Point(760, 33)
+    Me.Label1.Location = New System.Drawing.Point(760, 41)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(72, 20)
     Me.Label1.TabIndex = 81
@@ -94,7 +95,7 @@ Partial Class frmExportarPatagonia
     'dtVencimiento
     '
     Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtVencimiento.Location = New System.Drawing.Point(1124, 67)
+    Me.dtVencimiento.Location = New System.Drawing.Point(1124, 75)
     Me.dtVencimiento.Name = "dtVencimiento"
     Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
     Me.dtVencimiento.TabIndex = 80
@@ -102,14 +103,14 @@ Partial Class frmExportarPatagonia
     'dtCurrent
     '
     Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtCurrent.Location = New System.Drawing.Point(838, 66)
+    Me.dtCurrent.Location = New System.Drawing.Point(838, 74)
     Me.dtCurrent.Name = "dtCurrent"
     Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
     Me.dtCurrent.TabIndex = 79
     '
     'Label5
     '
-    Me.Label5.Location = New System.Drawing.Point(1018, 69)
+    Me.Label5.Location = New System.Drawing.Point(1018, 77)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
     Me.Label5.TabIndex = 76
@@ -117,7 +118,7 @@ Partial Class frmExportarPatagonia
     '
     'Label4
     '
-    Me.Label4.Location = New System.Drawing.Point(753, 69)
+    Me.Label4.Location = New System.Drawing.Point(753, 77)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
     Me.Label4.TabIndex = 75
@@ -125,7 +126,7 @@ Partial Class frmExportarPatagonia
     '
     'Label3
     '
-    Me.Label3.Location = New System.Drawing.Point(169, 69)
+    Me.Label3.Location = New System.Drawing.Point(169, 77)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(100, 20)
     Me.Label3.TabIndex = 74
@@ -133,7 +134,7 @@ Partial Class frmExportarPatagonia
     '
     'txtImporteTotal
     '
-    Me.txtImporteTotal.Location = New System.Drawing.Point(275, 66)
+    Me.txtImporteTotal.Location = New System.Drawing.Point(275, 74)
     Me.txtImporteTotal.Name = "txtImporteTotal"
     Me.txtImporteTotal.ReadOnly = True
     Me.txtImporteTotal.Size = New System.Drawing.Size(133, 20)
@@ -147,7 +148,7 @@ Partial Class frmExportarPatagonia
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.CuitDNIDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.FechaVtoDataGridViewTextBoxColumn, Me.ProductoDataGridViewTextBoxColumn, Me.TipoMonedaDataGridViewTextBoxColumn, Me.ReferenciaDebitoDataGridViewTextBoxColumn, Me.NroCuitEmpresaDataGridViewTextBoxColumn, Me.TipoNovedadDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoPatagoniaBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(172, 107)
+    Me.dgvResumen.Location = New System.Drawing.Point(172, 115)
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
@@ -157,7 +158,7 @@ Partial Class frmExportarPatagonia
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(169, 618)
+    Me.lblResumen.Location = New System.Drawing.Point(169, 626)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
     Me.lblResumen.TabIndex = 69
@@ -170,7 +171,7 @@ Partial Class frmExportarPatagonia
     Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(29, 142)
+    Me.btnReload.Location = New System.Drawing.Point(29, 150)
     Me.btnReload.Name = "btnReload"
     Me.btnReload.Size = New System.Drawing.Size(110, 61)
     Me.btnReload.TabIndex = 68
@@ -184,7 +185,7 @@ Partial Class frmExportarPatagonia
     Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(29, 48)
+    Me.btnProcesar.Location = New System.Drawing.Point(29, 56)
     Me.btnProcesar.Name = "btnProcesar"
     Me.btnProcesar.Size = New System.Drawing.Size(110, 61)
     Me.btnProcesar.TabIndex = 67
@@ -198,7 +199,7 @@ Partial Class frmExportarPatagonia
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(29, 618)
+    Me.btnCancel.Location = New System.Drawing.Point(29, 626)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 61)
     Me.btnCancel.TabIndex = 66
@@ -207,14 +208,14 @@ Partial Class frmExportarPatagonia
     '
     'txtReferencia
     '
-    Me.txtReferencia.Location = New System.Drawing.Point(539, 66)
+    Me.txtReferencia.Location = New System.Drawing.Point(539, 74)
     Me.txtReferencia.Name = "txtReferencia"
     Me.txtReferencia.Size = New System.Drawing.Size(191, 20)
     Me.txtReferencia.TabIndex = 86
     '
     'Label8
     '
-    Me.Label8.Location = New System.Drawing.Point(432, 66)
+    Me.Label8.Location = New System.Drawing.Point(432, 74)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(101, 20)
     Me.Label8.TabIndex = 85
@@ -223,22 +224,18 @@ Partial Class frmExportarPatagonia
     '
     'txtNroCUIT
     '
-    Me.txtNroCUIT.Location = New System.Drawing.Point(247, 34)
+    Me.txtNroCUIT.Location = New System.Drawing.Point(247, 42)
     Me.txtNroCUIT.Name = "txtNroCUIT"
     Me.txtNroCUIT.Size = New System.Drawing.Size(100, 20)
     Me.txtNroCUIT.TabIndex = 88
     '
     'Label2
     '
-    Me.Label2.Location = New System.Drawing.Point(169, 38)
+    Me.Label2.Location = New System.Drawing.Point(169, 46)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(72, 16)
     Me.Label2.TabIndex = 87
     Me.Label2.Text = "Nro CUIT"
-    '
-    'ClsInfoPatagoniaBindingSource
-    '
-    Me.ClsInfoPatagoniaBindingSource.DataSource = GetType(main.clsInfoPatagonia)
     '
     'NombreDataGridViewTextBoxColumn
     '
@@ -328,11 +325,26 @@ Partial Class frmExportarPatagonia
     Me.TipoNovedadDataGridViewTextBoxColumn.ReadOnly = True
     Me.TipoNovedadDataGridViewTextBoxColumn.Visible = False
     '
+    'ClsInfoPatagoniaBindingSource
+    '
+    Me.ClsInfoPatagoniaBindingSource.DataSource = GetType(main.clsInfoPatagonia)
+    '
+    'Label6
+    '
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.Location = New System.Drawing.Point(455, 9)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(371, 24)
+    Me.Label6.TabIndex = 89
+    Me.Label6.Text = "Patagonia: Exportar Debitos Directos"
+    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
     'frmExportarPatagonia
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.Label6)
     Me.Controls.Add(Me.txtNroCUIT)
     Me.Controls.Add(Me.Label2)
     Me.Controls.Add(Me.txtReferencia)
@@ -354,6 +366,9 @@ Partial Class frmExportarPatagonia
     Me.Controls.Add(Me.btnCancel)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmExportarPatagonia"
+    Me.ShowIcon = False
+    Me.ShowInTaskbar = False
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmExportarPatagonia"
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.ClsInfoPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -394,4 +409,5 @@ Partial Class frmExportarPatagonia
   Friend WithEvents ReferenciaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NroCuitEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents TipoNovedadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class
