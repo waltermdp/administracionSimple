@@ -152,3 +152,5 @@ c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\De
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarHipotecario.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarPatagonia.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarHipotecario.resources
+e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarPatagonia.resources
+e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarPatagonia.resources

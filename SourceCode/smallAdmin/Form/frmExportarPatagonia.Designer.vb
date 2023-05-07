@@ -46,15 +46,15 @@ Partial Class frmExportarPatagonia
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuitDNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.IDClienteEmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotaActual = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaVtoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ImporteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaVtoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ReferenciaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.TipoNovedadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.TipoMonedaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ReferenciaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NroCuitEmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.TipoNovedadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -145,7 +145,7 @@ Partial Class frmExportarPatagonia
     Me.dgvResumen.AutoGenerateColumns = False
     Me.dgvResumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.CuitDNIDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.IDClienteEmpresaDataGridViewTextBoxColumn, Me.CuotaActual, Me.FechaVtoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.ProductoDataGridViewTextBoxColumn, Me.ReferenciaDebitoDataGridViewTextBoxColumn, Me.TipoNovedadDataGridViewTextBoxColumn, Me.TipoMonedaDataGridViewTextBoxColumn, Me.NroCuitEmpresaDataGridViewTextBoxColumn})
+    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.CuitDNIDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.FechaVtoDataGridViewTextBoxColumn, Me.ProductoDataGridViewTextBoxColumn, Me.TipoMonedaDataGridViewTextBoxColumn, Me.ReferenciaDebitoDataGridViewTextBoxColumn, Me.NroCuitEmpresaDataGridViewTextBoxColumn, Me.TipoNovedadDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoPatagoniaBindingSource
     Me.dgvResumen.Location = New System.Drawing.Point(172, 107)
     Me.dgvResumen.Name = "dgvResumen"
@@ -261,26 +261,12 @@ Partial Class frmExportarPatagonia
     Me.CBUDataGridViewTextBoxColumn.Name = "CBUDataGridViewTextBoxColumn"
     Me.CBUDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'IDClienteEmpresaDataGridViewTextBoxColumn
+    'ContratoDataGridViewTextBoxColumn
     '
-    Me.IDClienteEmpresaDataGridViewTextBoxColumn.DataPropertyName = "ID_Cliente_Empresa"
-    Me.IDClienteEmpresaDataGridViewTextBoxColumn.HeaderText = "ID_Cliente_Empresa"
-    Me.IDClienteEmpresaDataGridViewTextBoxColumn.Name = "IDClienteEmpresaDataGridViewTextBoxColumn"
-    Me.IDClienteEmpresaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CuotaActual
-    '
-    Me.CuotaActual.DataPropertyName = "CuotaActual"
-    Me.CuotaActual.HeaderText = "CuotaActual"
-    Me.CuotaActual.Name = "CuotaActual"
-    Me.CuotaActual.ReadOnly = True
-    '
-    'FechaVtoDataGridViewTextBoxColumn
-    '
-    Me.FechaVtoDataGridViewTextBoxColumn.DataPropertyName = "FechaVto"
-    Me.FechaVtoDataGridViewTextBoxColumn.HeaderText = "FechaVto"
-    Me.FechaVtoDataGridViewTextBoxColumn.Name = "FechaVtoDataGridViewTextBoxColumn"
-    Me.FechaVtoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ContratoDataGridViewTextBoxColumn.DataPropertyName = "Contrato"
+    Me.ContratoDataGridViewTextBoxColumn.HeaderText = "Contrato"
+    Me.ContratoDataGridViewTextBoxColumn.Name = "ContratoDataGridViewTextBoxColumn"
+    Me.ContratoDataGridViewTextBoxColumn.ReadOnly = True
     '
     'ImporteDataGridViewTextBoxColumn
     '
@@ -289,27 +275,26 @@ Partial Class frmExportarPatagonia
     Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
     Me.ImporteDataGridViewTextBoxColumn.ReadOnly = True
     '
+    'CuotaActualDataGridViewTextBoxColumn
+    '
+    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
+    Me.CuotaActualDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaVtoDataGridViewTextBoxColumn
+    '
+    Me.FechaVtoDataGridViewTextBoxColumn.DataPropertyName = "FechaVto"
+    Me.FechaVtoDataGridViewTextBoxColumn.HeaderText = "FechaVto"
+    Me.FechaVtoDataGridViewTextBoxColumn.Name = "FechaVtoDataGridViewTextBoxColumn"
+    Me.FechaVtoDataGridViewTextBoxColumn.ReadOnly = True
+    '
     'ProductoDataGridViewTextBoxColumn
     '
     Me.ProductoDataGridViewTextBoxColumn.DataPropertyName = "Producto"
     Me.ProductoDataGridViewTextBoxColumn.HeaderText = "Producto"
     Me.ProductoDataGridViewTextBoxColumn.Name = "ProductoDataGridViewTextBoxColumn"
     Me.ProductoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ReferenciaDebitoDataGridViewTextBoxColumn
-    '
-    Me.ReferenciaDebitoDataGridViewTextBoxColumn.DataPropertyName = "ReferenciaDebito"
-    Me.ReferenciaDebitoDataGridViewTextBoxColumn.HeaderText = "ReferenciaDebito"
-    Me.ReferenciaDebitoDataGridViewTextBoxColumn.Name = "ReferenciaDebitoDataGridViewTextBoxColumn"
-    Me.ReferenciaDebitoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'TipoNovedadDataGridViewTextBoxColumn
-    '
-    Me.TipoNovedadDataGridViewTextBoxColumn.DataPropertyName = "TipoNovedad"
-    Me.TipoNovedadDataGridViewTextBoxColumn.HeaderText = "TipoNovedad"
-    Me.TipoNovedadDataGridViewTextBoxColumn.Name = "TipoNovedadDataGridViewTextBoxColumn"
-    Me.TipoNovedadDataGridViewTextBoxColumn.ReadOnly = True
-    Me.TipoNovedadDataGridViewTextBoxColumn.Visible = False
     '
     'TipoMonedaDataGridViewTextBoxColumn
     '
@@ -319,6 +304,14 @@ Partial Class frmExportarPatagonia
     Me.TipoMonedaDataGridViewTextBoxColumn.ReadOnly = True
     Me.TipoMonedaDataGridViewTextBoxColumn.Visible = False
     '
+    'ReferenciaDebitoDataGridViewTextBoxColumn
+    '
+    Me.ReferenciaDebitoDataGridViewTextBoxColumn.DataPropertyName = "ReferenciaDebito"
+    Me.ReferenciaDebitoDataGridViewTextBoxColumn.HeaderText = "ReferenciaDebito"
+    Me.ReferenciaDebitoDataGridViewTextBoxColumn.Name = "ReferenciaDebitoDataGridViewTextBoxColumn"
+    Me.ReferenciaDebitoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ReferenciaDebitoDataGridViewTextBoxColumn.Visible = False
+    '
     'NroCuitEmpresaDataGridViewTextBoxColumn
     '
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.DataPropertyName = "NroCuitEmpresa"
@@ -326,6 +319,14 @@ Partial Class frmExportarPatagonia
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.Name = "NroCuitEmpresaDataGridViewTextBoxColumn"
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.ReadOnly = True
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.Visible = False
+    '
+    'TipoNovedadDataGridViewTextBoxColumn
+    '
+    Me.TipoNovedadDataGridViewTextBoxColumn.DataPropertyName = "TipoNovedad"
+    Me.TipoNovedadDataGridViewTextBoxColumn.HeaderText = "TipoNovedad"
+    Me.TipoNovedadDataGridViewTextBoxColumn.Name = "TipoNovedadDataGridViewTextBoxColumn"
+    Me.TipoNovedadDataGridViewTextBoxColumn.ReadOnly = True
+    Me.TipoNovedadDataGridViewTextBoxColumn.Visible = False
     '
     'frmExportarPatagonia
     '
@@ -375,21 +376,22 @@ Partial Class frmExportarPatagonia
   Friend WithEvents btnReload As System.Windows.Forms.Button
   Friend WithEvents btnProcesar As System.Windows.Forms.Button
   Friend WithEvents btnCancel As System.Windows.Forms.Button
-  Friend WithEvents ClsInfoPatagoniaBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents txtReferencia As System.Windows.Forms.TextBox
   Friend WithEvents Label8 As System.Windows.Forms.Label
   Friend WithEvents txtNroCUIT As System.Windows.Forms.TextBox
   Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents IDClienteEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ClsInfoPatagoniaBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CuitDNIDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CBUDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents IDClienteEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CuotaActual As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaVtoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ContratoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ImporteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CuotaActualDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaVtoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ReferenciaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents TipoNovedadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents TipoMonedaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ReferenciaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NroCuitEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents TipoNovedadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

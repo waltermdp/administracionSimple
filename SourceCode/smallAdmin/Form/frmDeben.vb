@@ -641,7 +641,12 @@ Public Class frmDeben
             Using objFormulario As New frmExportarHipotecario(objForm.TipoPagoSeleccionado)
               objFormulario.ShowDialog(Me)
             End Using
+          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") Then
+            Using objFormulario As New frmExportarPatagonia(objForm.TipoPagoSeleccionado)
+              objFormulario.ShowDialog(Me)
+            End Using
           Else
+
             Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
               objFormulario.ShowDialog(Me)
             End Using
@@ -670,7 +675,11 @@ Public Class frmDeben
             Using objFormImportar As New frmImportarHipotecario
               objFormImportar.ShowDialog(Me)
             End Using
-
+            Exit Sub
+          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") Then
+            Using objFormImportar As New frmImportarPatagonia
+              objFormImportar.ShowDialog(Me)
+            End Using
             Exit Sub
           End If
           vMovimientos = objForm.Movimientos.ToList

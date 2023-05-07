@@ -12,6 +12,7 @@ Public Class clsPatagonia
 
   'body
   Private m_FechaVto As Date
+  Private m_ReferenciaDebito As String
 
   'tail
   'T
@@ -24,6 +25,15 @@ Public Class clsPatagonia
     End Get
     Set(value As String)
       m_Producto = value
+    End Set
+  End Property
+
+  Public Property ReferenciaDebito As String
+    Get
+      Return m_ReferenciaDebito
+    End Get
+    Set(value As String)
+      m_ReferenciaDebito = value
     End Set
   End Property
 
@@ -47,10 +57,10 @@ Public Class clsPatagonia
 
   Public Property FechaVencimiento As Date
     Get
-      Return m_FechaPresentacion
+      Return m_FechaVto
     End Get
     Set(value As Date)
-      m_FechaPresentacion = value
+      m_FechaVto = value
     End Set
   End Property
 
@@ -100,13 +110,20 @@ Public Class clsPatagonia
       lstResult.Add(auxLinea)
       For Each mov In vlstRegistros
         auxLinea = String.Empty
-
+        mov.ReferenciaDebito = m_ReferenciaDebito
+        mov.FechaVto = m_FechaVto
         If GenerateRegistros(mov, auxLinea) <> Result.OK Then
           MsgBox("No se puede generar el registro de debito Hipotecario")
           Return Result.NOK
         End If
         lstResult.Add(auxLinea)
       Next
+
+      If GenerateTail(vlstRegistros.Count, ImporteTotal, auxLinea) <> Result.OK Then
+        MsgBox("No se puede generar final del archivo de debito")
+        Return Result.NOK
+      End If
+      lstResult.Add(auxLinea)
       rlineas = New List(Of String)
       rlineas.AddRange(lstResult.ToList)
 
@@ -147,7 +164,7 @@ Public Class clsPatagonia
   Private Function GenerateHeader(ByRef rLinea As String) As Result
     Try
       Dim sResult As String = String.Empty
-
+      m_Reserva = GetReserva()
       sResult += "H"
       sResult += m_NroCuitEmpresa.ToString("00000000000")
       sResult += String.Format("{0,-10}", m_Producto)       'longitud=10
@@ -169,17 +186,27 @@ Public Class clsPatagonia
     Try
       Dim sResult As String = String.Empty
 
-
       sResult += vRegistro.TipoNovedad.ToString                         '1
       sResult += vRegistro.Cuit_DNI.ToString("00000000000")             '11
       sResult += vRegistro.CBU.ToString("0000000000000000000000")       '22
-      sResult += String.Format("{0,-22}", vRegistro.ID_Cliente_Empresa) '22
+      sResult += String.Format("{0,-22}", vRegistro.Contrato.ToString.PadLeft(11, "0")) '22
       sResult += vRegistro.FechaVto.ToString("ddMMyyyy")                '8
       sResult += String.Format("{0,-10}", vRegistro.Producto)           '10 
+      sResult += String.Format("{0,15}", " ")
       sResult += String.Format("{0,-15}", vRegistro.ReferenciaDebito)   '15
-      sResult += CDec(vRegistro.Importe * 100).ToString("0000000000")   '11
+      sResult += CDec(vRegistro.Importe * 100).ToString("0000000000")   '10
       sResult += vRegistro.TipoMoneda.ToString                          '1
-      sResult += String.Format("{0,25}", " ")                           '25
+      sResult += String.Format("{0,22}", " ")                           '22
+      sResult += String.Format("{0,2}", " ")
+      sResult += String.Format("{0,11}", " ")
+      sResult += String.Format("{0,1}", " ")
+      sResult += String.Format("{0,3}", " ")
+      sResult += String.Format("{0,3}", " ")
+      '74
+      sResult += String.Format("{0,7}", " ")
+      sResult += String.Format("{0,8}", " ")
+      sResult += String.Format("{0,8}", " ")
+      sResult += String.Format("{0,9}", " ")
       sResult += vRegistro.NroCuitEmpresa.ToString("00000000000")       '11
       'sResult += String.Format("{0,177}", " ")
 
@@ -208,15 +235,25 @@ Public Class clsPatagonia
     End Try
   End Function
 
+  Private Function GetReserva() As String
+    Try
+      Return String.Format("ORI{0}{1}.100", m_FechaPresentacion.ToString("ddMM"), "0")
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return String.Format("ORI{0}{1}.100", Today.ToString("ddMM"), "0")
+    End Try
+  End Function
+
   Public Sub New()
     Try
       m_Producto = "CUOTA"
-      m_NroCuitEmpresa = 0
+      m_NroCuitEmpresa = 30716028956
       m_OrigenComercial = 100
       m_FechaPresentacion = g_Today
       m_FechaVto = g_Today.AddDays(2)
-      m_Reserva = "ORIddMMs.100"  's=secuencia
+      m_Reserva = GetReserva()
       m_RazonSocial = "EDIT EL FARO"
+      m_ReferenciaDebito = "EDIT EL FARO"
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

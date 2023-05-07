@@ -8,7 +8,8 @@ Public Class clsInfoPatagonia
   Private m_TipoNovedad As String = "D"
   Private m_Cuit_DNI As Decimal
   Private m_CBU As Decimal
-  Private m_ID_Cliente_Empresa As String
+
+  Private m_Contrato As Integer
   Private m_FechaVto As Date
   Private m_Producto As String
 
@@ -19,7 +20,7 @@ Public Class clsInfoPatagonia
   Private m_NroCuitEmpresa As Decimal
 
   Private m_Nombre As String
-  Private m_CuotaActual As Decimal
+  Private m_CuotaActual As Integer
 
   Public Property Nombre As String
     Get
@@ -30,11 +31,11 @@ Public Class clsInfoPatagonia
     End Set
   End Property
 
-  Public Property CuotaActual As Decimal
+  Public Property CuotaActual As Integer
     Get
       Return m_CuotaActual
     End Get
-    Set(value As Decimal)
+    Set(value As Integer)
       m_CuotaActual = value
     End Set
   End Property
@@ -66,12 +67,12 @@ Public Class clsInfoPatagonia
     End Set
   End Property
 
-  Public Property ID_Cliente_Empresa As String
+  Public Property Contrato As Integer
     Get
-      Return m_ID_Cliente_Empresa
+      Return m_Contrato
     End Get
-    Set(value As String)
-      m_ID_Cliente_Empresa = value
+    Set(value As Integer)
+      m_Contrato = value
     End Set
   End Property
 
@@ -136,7 +137,7 @@ Public Class clsInfoPatagonia
       TipoNovedad = "D"
       Cuit_DNI = 0
       CBU = 0
-      ID_Cliente_Empresa = " "
+      m_Contrato = 0
       FechaVto = g_Today
       Producto = ""
 

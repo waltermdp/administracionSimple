@@ -117,6 +117,12 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="Form\frmImportarPatagonia.Designer.vb">
+      <DependentUpon>frmImportarPatagonia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmImportarPatagonia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modulos\clsHipotecario.vb" />
     <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
     <Compile Include="AccesoADatos\clsInfoResumen.vb" />
@@ -277,6 +283,7 @@
     <Compile Include="Modulos\clsComparar.vb" />
     <Compile Include="Modulos\clsInfoHipotecario.vb" />
     <Compile Include="Modulos\clsInfoImportarHipotecario.vb" />
+    <Compile Include="Modulos\clsInfoImportarPatagonia.vb" />
     <Compile Include="Modulos\clsInfoPatagonia.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
@@ -353,6 +360,9 @@
     <EmbeddedResource Include="Form\frmImportarHipotecario.resx">
       <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmImportarPatagonia.resx">
+      <DependentUpon>frmImportarPatagonia.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLiquidacionVendedores.resx">
       <DependentUpon>frmLiquidacionVendedores.vb</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +403,7 @@
     </None>
     <None Include="My Project\DataSources\clsInfoHipotecario.datasource" />
     <None Include="My Project\DataSources\clsInfoImportarHipotecario.datasource" />
+    <None Include="My Project\DataSources\clsInfoImportarPatagonia.datasource" />
     <None Include="My Project\DataSources\clsInfoPatagonia.datasource" />
     <None Include="My Project\DataSources\clsListaStorage.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />
