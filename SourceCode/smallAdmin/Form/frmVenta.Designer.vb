@@ -80,7 +80,7 @@ Partial Class frmVenta
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(523, 154)
+    Me.Label1.Location = New System.Drawing.Point(538, 154)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(48, 15)
     Me.Label1.TabIndex = 2
@@ -117,7 +117,7 @@ Partial Class frmVenta
     'Label4
     '
     Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(523, 185)
+    Me.Label4.Location = New System.Drawing.Point(538, 185)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(126, 15)
     Me.Label4.TabIndex = 10
@@ -125,7 +125,7 @@ Partial Class frmVenta
     '
     'Label2
     '
-    Me.Label2.Location = New System.Drawing.Point(521, 67)
+    Me.Label2.Location = New System.Drawing.Point(536, 67)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(120, 19)
     Me.Label2.TabIndex = 12
@@ -152,9 +152,9 @@ Partial Class frmVenta
     Me.btnNewClient.FlatAppearance.BorderSize = 2
     Me.btnNewClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnNewClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnNewClient.Location = New System.Drawing.Point(23, 63)
+    Me.btnNewClient.Location = New System.Drawing.Point(23, 69)
     Me.btnNewClient.Name = "btnNewClient"
-    Me.btnNewClient.Size = New System.Drawing.Size(96, 37)
+    Me.btnNewClient.Size = New System.Drawing.Size(96, 31)
     Me.btnNewClient.TabIndex = 22
     Me.btnNewClient.Text = "Nuevo"
     Me.btnNewClient.UseVisualStyleBackColor = False
@@ -292,9 +292,9 @@ Partial Class frmVenta
     'lvPlanPagos
     '
     Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
-    Me.lvPlanPagos.Location = New System.Drawing.Point(526, 262)
+    Me.lvPlanPagos.Location = New System.Drawing.Point(541, 262)
     Me.lvPlanPagos.Name = "lvPlanPagos"
-    Me.lvPlanPagos.Size = New System.Drawing.Size(418, 244)
+    Me.lvPlanPagos.Size = New System.Drawing.Size(529, 244)
     Me.lvPlanPagos.TabIndex = 68
     Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
     Me.lvPlanPagos.View = System.Windows.Forms.View.Details
@@ -306,7 +306,7 @@ Partial Class frmVenta
     'cFechaCuota
     '
     Me.cFechaCuota.Text = "Debitar"
-    Me.cFechaCuota.Width = 80
+    Me.cFechaCuota.Width = 100
     '
     'cValorCuota
     '
@@ -316,17 +316,17 @@ Partial Class frmVenta
     'cFechaPago
     '
     Me.cFechaPago.Text = "Pagado"
-    Me.cFechaPago.Width = 80
+    Me.cFechaPago.Width = 100
     '
     'cEstado
     '
     Me.cEstado.Text = "Estado"
-    Me.cEstado.Width = 72
+    Me.cEstado.Width = 160
     '
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(523, 244)
+    Me.Label5.Location = New System.Drawing.Point(538, 244)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 15)
     Me.Label5.TabIndex = 66
@@ -336,69 +336,69 @@ Partial Class frmVenta
     '
     Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label3.Location = New System.Drawing.Point(704, 214)
+    Me.Label3.Location = New System.Drawing.Point(719, 214)
     Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(240, 19)
+    Me.Label3.Size = New System.Drawing.Size(351, 19)
     Me.Label3.TabIndex = 64
     '
     'lblCuota
     '
     Me.lblCuota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCuota.Location = New System.Drawing.Point(837, 185)
+    Me.lblCuota.Location = New System.Drawing.Point(928, 185)
     Me.lblCuota.Name = "lblCuota"
-    Me.lblCuota.Size = New System.Drawing.Size(107, 19)
+    Me.lblCuota.Size = New System.Drawing.Size(142, 19)
     Me.lblCuota.TabIndex = 63
     '
     'lblTotalCuotas
     '
     Me.lblTotalCuotas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblTotalCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotalCuotas.Location = New System.Drawing.Point(650, 184)
+    Me.lblTotalCuotas.Location = New System.Drawing.Point(665, 184)
     Me.lblTotalCuotas.Name = "lblTotalCuotas"
-    Me.lblTotalCuotas.Size = New System.Drawing.Size(58, 19)
+    Me.lblTotalCuotas.Size = New System.Drawing.Size(121, 19)
     Me.lblTotalCuotas.TabIndex = 62
     '
     'lblTotal
     '
     Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotal.Location = New System.Drawing.Point(650, 154)
+    Me.lblTotal.Location = New System.Drawing.Point(665, 154)
     Me.lblTotal.Name = "lblTotal"
-    Me.lblTotal.Size = New System.Drawing.Size(294, 19)
+    Me.lblTotal.Size = New System.Drawing.Size(405, 19)
     Me.lblTotal.TabIndex = 61
     '
     'lblMedioDePago
     '
     Me.lblMedioDePago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblMedioDePago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblMedioDePago.Location = New System.Drawing.Point(650, 126)
+    Me.lblMedioDePago.Location = New System.Drawing.Point(665, 126)
     Me.lblMedioDePago.Name = "lblMedioDePago"
-    Me.lblMedioDePago.Size = New System.Drawing.Size(294, 19)
+    Me.lblMedioDePago.Size = New System.Drawing.Size(405, 19)
     Me.lblMedioDePago.TabIndex = 60
     '
     'lblNumeroVenta
     '
     Me.lblNumeroVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblNumeroVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblNumeroVenta.Location = New System.Drawing.Point(650, 96)
+    Me.lblNumeroVenta.Location = New System.Drawing.Point(665, 96)
     Me.lblNumeroVenta.Name = "lblNumeroVenta"
-    Me.lblNumeroVenta.Size = New System.Drawing.Size(294, 19)
+    Me.lblNumeroVenta.Size = New System.Drawing.Size(405, 19)
     Me.lblNumeroVenta.TabIndex = 59
     '
     'lblFechaVenta
     '
     Me.lblFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblFechaVenta.Location = New System.Drawing.Point(650, 67)
+    Me.lblFechaVenta.Location = New System.Drawing.Point(665, 67)
     Me.lblFechaVenta.Name = "lblFechaVenta"
-    Me.lblFechaVenta.Size = New System.Drawing.Size(294, 19)
+    Me.lblFechaVenta.Size = New System.Drawing.Size(405, 19)
     Me.lblFechaVenta.TabIndex = 58
     '
     'Label6
     '
     Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.Location = New System.Drawing.Point(528, 27)
+    Me.Label6.Location = New System.Drawing.Point(555, 27)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(136, 23)
     Me.Label6.TabIndex = 57
@@ -411,7 +411,7 @@ Partial Class frmVenta
     Me.btnPagos.FlatAppearance.BorderSize = 2
     Me.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnPagos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnPagos.Location = New System.Drawing.Point(679, 20)
+    Me.btnPagos.Location = New System.Drawing.Point(719, 19)
     Me.btnPagos.Name = "btnPagos"
     Me.btnPagos.Size = New System.Drawing.Size(96, 31)
     Me.btnPagos.TabIndex = 56
@@ -428,7 +428,7 @@ Partial Class frmVenta
     Me.ListView1.Location = New System.Drawing.Point(23, 57)
     Me.ListView1.MultiSelect = False
     Me.ListView1.Name = "ListView1"
-    Me.ListView1.Size = New System.Drawing.Size(440, 449)
+    Me.ListView1.Size = New System.Drawing.Size(477, 449)
     Me.ListView1.TabIndex = 55
     Me.ListView1.UseCompatibleStateImageBehavior = False
     Me.ListView1.View = System.Windows.Forms.View.Details
@@ -460,7 +460,7 @@ Partial Class frmVenta
     Me.btnEditarArticulosVendidos.FlatAppearance.BorderSize = 2
     Me.btnEditarArticulosVendidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEditarArticulosVendidos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnEditarArticulosVendidos.Location = New System.Drawing.Point(204, 20)
+    Me.btnEditarArticulosVendidos.Location = New System.Drawing.Point(204, 19)
     Me.btnEditarArticulosVendidos.Name = "btnEditarArticulosVendidos"
     Me.btnEditarArticulosVendidos.Size = New System.Drawing.Size(96, 31)
     Me.btnEditarArticulosVendidos.TabIndex = 41
@@ -470,7 +470,7 @@ Partial Class frmVenta
     'Label16
     '
     Me.Label16.AutoSize = True
-    Me.Label16.Location = New System.Drawing.Point(523, 96)
+    Me.Label16.Location = New System.Drawing.Point(538, 96)
     Me.Label16.Name = "Label16"
     Me.Label16.Size = New System.Drawing.Size(95, 15)
     Me.Label16.TabIndex = 39
@@ -479,7 +479,7 @@ Partial Class frmVenta
     'Label15
     '
     Me.Label15.AutoSize = True
-    Me.Label15.Location = New System.Drawing.Point(523, 214)
+    Me.Label15.Location = New System.Drawing.Point(538, 214)
     Me.Label15.Name = "Label15"
     Me.Label15.Size = New System.Drawing.Size(175, 15)
     Me.Label15.TabIndex = 36
@@ -488,7 +488,7 @@ Partial Class frmVenta
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
-    Me.lblValorCuota.Location = New System.Drawing.Point(714, 185)
+    Me.lblValorCuota.Location = New System.Drawing.Point(805, 185)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(117, 15)
     Me.lblValorCuota.TabIndex = 31
@@ -497,7 +497,7 @@ Partial Class frmVenta
     'Label13
     '
     Me.Label13.AutoSize = True
-    Me.Label13.Location = New System.Drawing.Point(523, 126)
+    Me.Label13.Location = New System.Drawing.Point(538, 126)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(106, 15)
     Me.Label13.TabIndex = 29
@@ -547,7 +547,7 @@ Partial Class frmVenta
     '
     'lblTitulo
     '
-    Me.lblTitulo.BackColor = System.Drawing.SystemColors.ButtonShadow
+    Me.lblTitulo.BackColor = System.Drawing.Color.Transparent
     Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.lblTitulo.Location = New System.Drawing.Point(222, 9)
     Me.lblTitulo.Name = "lblTitulo"

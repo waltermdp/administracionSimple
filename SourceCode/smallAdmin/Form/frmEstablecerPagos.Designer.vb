@@ -75,9 +75,9 @@ Partial Class frmEstablecerPagos
     Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label1.Location = New System.Drawing.Point(30, 10)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(1194, 23)
+    Me.Label1.Size = New System.Drawing.Size(1194, 34)
     Me.Label1.TabIndex = 11
-    Me.Label1.Text = "Forma de Realizar Pagos"
+    Me.Label1.Text = "FORMA de Realizar Pagos"
     Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'txtNumVenta
@@ -308,7 +308,7 @@ Partial Class frmEstablecerPagos
     Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
     Me.lvPlanPagos.Location = New System.Drawing.Point(265, 331)
     Me.lvPlanPagos.Name = "lvPlanPagos"
-    Me.lvPlanPagos.Size = New System.Drawing.Size(439, 364)
+    Me.lvPlanPagos.Size = New System.Drawing.Size(597, 364)
     Me.lvPlanPagos.TabIndex = 67
     Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
     Me.lvPlanPagos.View = System.Windows.Forms.View.Details
@@ -320,12 +320,12 @@ Partial Class frmEstablecerPagos
     'cFechaCuota
     '
     Me.cFechaCuota.Text = "Debitar"
-    Me.cFechaCuota.Width = 109
+    Me.cFechaCuota.Width = 120
     '
     'cValorCuota
     '
     Me.cValorCuota.Text = "Valor cuota"
-    Me.cValorCuota.Width = 79
+    Me.cValorCuota.Width = 120
     '
     'cFechaPago
     '
@@ -335,7 +335,7 @@ Partial Class frmEstablecerPagos
     'cEstado
     '
     Me.cEstado.Text = "Estado"
-    Me.cEstado.Width = 74
+    Me.cEstado.Width = 180
     '
     'btnGuardar
     '

@@ -13,6 +13,7 @@ Public Class frmImportarHipotecario
   Private m_Convenio As Integer
   Private m_FechaEjecucion As Date
   Private m_TotalImporte As Decimal
+  Private m_totalRegistosADebitar As Integer
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
@@ -31,7 +32,7 @@ Public Class frmImportarHipotecario
       For Each item In m_Registros ' tmpRegistros
         ' If item.ImporteADebitar <> item.importeDebitado OrElse item.MotivoRechazo <> String.Empty Then Continue For
         Dim objVenta As New clsListProductos
-        objVenta.Cfg_Filtro = "WHERE NumComprobante=" & item.NroAbonado.ToString & " and ValorCuotaFija=" & item.importeDebitado & " and GuidTipoPago={c3daf694-fdef-4e67-b02b-b7b3a9117926}"
+        objVenta.Cfg_Filtro = "WHERE NumComprobante=" & item.NroAbonado.ToString '& " and ValorCuotaFija=" & item.importeDebitado & " and GuidTipoPago={c3daf694-fdef-4e67-b02b-b7b3a9117926}"
         objVenta.RefreshData()
         If objVenta.Items.Count = 1 Then
           item.GuidProducto = objVenta.Items.First.GuidProducto
@@ -56,7 +57,10 @@ Public Class frmImportarHipotecario
               objPagos.RefreshData()
               If objPagos.Items.Count = 1 Then
                 item.GuidPago = objPagos.Items.First.GuidPago
-                item.Importar = True
+                If (item.ImporteADebitar = item.importeDebitado) AndAlso String.IsNullOrWhiteSpace(item.MotivoRechazo) Then
+                  item.Importar = True
+                End If
+
               End If
             End If
           End If
@@ -66,7 +70,7 @@ Public Class frmImportarHipotecario
         End If
 
       Next
-
+      Dim k As Integer = 0
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -74,21 +78,7 @@ Public Class frmImportarHipotecario
 
   Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
     Try
-      m_LineasArchivo = New List(Of String)
-      Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
-      If vResult = Result.OK Then
-        Using objForm As New frmProgreso(AddressOf CargarInicio)
-          objForm.ShowDialog(Me)
-        End Using
-
-      End If
-      ClsInfoImportarHipotecarioBindingSource.DataSource = m_Registros
-      ClsInfoImportarHipotecarioBindingSource.ResetBindings(False)
-      lblResumen.Text = String.Format("Total de registros: {0}", m_Registros.Count)
-      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Where(Function(c) (c.MotivoRechazo <> String.Empty) OrElse (c.importeDebitado = 0)))
-      txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
-      txtConvenio.Text = m_Convenio.ToString
-      txtImporteTotal.Text = m_TotalImporte
+      Init()
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -119,6 +109,15 @@ Public Class frmImportarHipotecario
 
   Private Sub frmImportarHipotecario_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
+      Init()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Init()
+    Try
       m_LineasArchivo = New List(Of String)
       Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
       If vResult = Result.OK Then
@@ -130,11 +129,11 @@ Public Class frmImportarHipotecario
       ClsInfoImportarHipotecarioBindingSource.DataSource = m_Registros
       ClsInfoImportarHipotecarioBindingSource.ResetBindings(False)
       lblResumen.Text = String.Format("Total de registros: {0}", m_Registros.Count)
-      'txtImporteTotal.Text = m_Registros.Sum(Function(c) c.Importe).ToString
+      m_totalRegistosADebitar = m_Registros.Where(Function(c) c.Importar = True).Count
+      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Count - m_totalRegistosADebitar)
       txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
       txtConvenio.Text = m_Convenio.ToString
       txtImporteTotal.Text = m_TotalImporte
-
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

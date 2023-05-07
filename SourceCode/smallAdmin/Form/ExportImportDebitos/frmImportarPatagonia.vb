@@ -190,7 +190,10 @@ Public Class frmImportarPatagonia
               objPagos.RefreshData()
               If objPagos.Items.Count = 1 Then
                 item.GuidPago = objPagos.Items.First.GuidPago
-                item.Importar = True
+                If (item.importeDebitado > 0) AndAlso String.IsNullOrWhiteSpace(item.MotivoRechazo) Then
+                  item.Importar = True
+                End If
+
                 item.cuota = objPagos.Items.First.NumCuota
               End If
             End If

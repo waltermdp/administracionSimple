@@ -117,10 +117,10 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
-    <Compile Include="Form\frmImportarPatagonia.Designer.vb">
+    <Compile Include="Form\ExportImportDebitos\frmImportarPatagonia.Designer.vb">
       <DependentUpon>frmImportarPatagonia.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmImportarPatagonia.vb">
+    <Compile Include="Form\ExportImportDebitos\frmImportarPatagonia.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modulos\clsHipotecario.vb" />
@@ -219,22 +219,22 @@
     <Compile Include="Form\frmEstablecerPagos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frmExportarHipotecario.Designer.vb">
+    <Compile Include="Form\ExportImportDebitos\frmExportarHipotecario.Designer.vb">
       <DependentUpon>frmExportarHipotecario.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmExportarHipotecario.vb">
+    <Compile Include="Form\ExportImportDebitos\frmExportarHipotecario.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frmExportarPatagonia.Designer.vb">
+    <Compile Include="Form\ExportImportDebitos\frmExportarPatagonia.Designer.vb">
       <DependentUpon>frmExportarPatagonia.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmExportarPatagonia.vb">
+    <Compile Include="Form\ExportImportDebitos\frmExportarPatagonia.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frmImportarHipotecario.Designer.vb">
+    <Compile Include="Form\ExportImportDebitos\frmImportarHipotecario.Designer.vb">
       <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmImportarHipotecario.vb">
+    <Compile Include="Form\ExportImportDebitos\frmImportarHipotecario.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmLiquidacionVendedores.Designer.vb">
@@ -351,16 +351,16 @@
     <EmbeddedResource Include="Form\frmEstablecerPagos.resx">
       <DependentUpon>frmEstablecerPagos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmExportarHipotecario.resx">
+    <EmbeddedResource Include="Form\ExportImportDebitos\frmExportarHipotecario.resx">
       <DependentUpon>frmExportarHipotecario.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmExportarPatagonia.resx">
+    <EmbeddedResource Include="Form\ExportImportDebitos\frmExportarPatagonia.resx">
       <DependentUpon>frmExportarPatagonia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmImportarHipotecario.resx">
+    <EmbeddedResource Include="Form\ExportImportDebitos\frmImportarHipotecario.resx">
       <DependentUpon>frmImportarHipotecario.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmImportarPatagonia.resx">
+    <EmbeddedResource Include="Form\ExportImportDebitos\frmImportarPatagonia.resx">
       <DependentUpon>frmImportarPatagonia.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLiquidacionVendedores.resx">
@@ -439,9 +439,7 @@
       <Name>manDB</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Form\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
