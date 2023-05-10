@@ -42,8 +42,8 @@ Public Class frmEstablecerPagos
       Dim vResult As Result
       m_skip = True
       cmbCuotas.DataSource = g_Cuotas
-      chkEditarCuotas.Checked = False
-      txtValorCuota.Enabled = False
+      chkEditarCuotas.Checked = True
+      txtValorCuota.Enabled = True
     
 
       vResult = clsCuenta.Load(m_Producto.GuidCuenta, m_CurrentCuenta)
@@ -74,20 +74,20 @@ Public Class frmEstablecerPagos
           'valores iniciales
           DateVenta.Value = g_Today
           dtProximoPago.Value = New Date(g_Today.Year, g_Today.AddMonths(1).Month, 1)
-          txtPrecio.Text = 0
-          txtNumVenta.Text = GetProximoComprobanteDisponible()
+          txtPrecio.Text = "0"
+          txtNumVenta.Text = GetProximoComprobanteDisponible().ToString
           cmbCuotas.SelectedItem = 0
-          txtValorCuota.Text = 0
+          txtValorCuota.Text = "0"
           m_lstPagos.Clear()
           lvPlanPagos.Items.Clear()
           txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
-          txtAdelanto.Text = 0
-          txtAdelantoVendedor.Text = 0
+          txtAdelanto.Text = "0"
+          txtAdelantoVendedor.Text = "0"
         Else
           DateVenta.Value = .FechaVenta
           dtProximoPago.MinDate = DateVenta.Value
           dtProximoPago.Value = .FechaPrimerPago
-          txtPrecio.Text = .Precio 'precio total
+          txtPrecio.Text = .Precio.ToString  'precio total
           txtNumVenta.Text = .NumComprobante.ToString
           For Each cuota In g_Cuotas
             If cuota.Cantidad = .TotalCuotas Then
@@ -102,18 +102,18 @@ Public Class frmEstablecerPagos
           End If
           txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
           lvPlanPagos.Items.Clear()
-          txtAdelanto.Text = .Adelanto
+          txtAdelanto.Text = .Adelanto.ToString
           If m_Adelanto IsNot Nothing Then
-            txtAdelantoVendedor.Text = m_Adelanto.Valor
+            txtAdelantoVendedor.Text = m_Adelanto.Valor.ToString
           Else
-            txtAdelantoVendedor.Text = 0
+            txtAdelantoVendedor.Text = "0"
           End If
 
           For Each pago As clsInfoPagos In .ListaPagos
             Dim item As New ListViewItem
-            item.Text = pago.NumCuota
+            item.Text = pago.NumCuota.ToString
             item.SubItems.Add(pago.VencimientoCuota.ToString("dd/MM/yyyy"))
-            item.SubItems.Add(pago.ValorCuota)
+            item.SubItems.Add(pago.ValorCuota.ToString)
             item.SubItems.Add(Date2String(pago.FechaPago)) 'fecha de pago
             item.SubItems.Add(EstadoPagos2String(pago.EstadoPago)) 'fecha de pago
             lvPlanPagos.Items.Add(item)
@@ -201,15 +201,15 @@ Public Class frmEstablecerPagos
         .GuidTipoPago = m_CurrentCuenta.TipoDeCuenta
         If .GuidProducto = Guid.Empty Then
           .GuidProducto = Guid.NewGuid
-          If Not EsValidoNumComprobante(txtNumVenta.Text) Then
+          If Not EsValidoNumComprobante(CInt(txtNumVenta.Text)) Then
             MsgBox("El numero del comprobate es invalido")
             Exit Sub
           End If
           .NumComprobante = CInt(txtNumVenta.Text)
         Else
           'ya existe
-          If txtNumVenta.Text <> .NumComprobante Then
-            If Not EsValidoNumComprobante(txtNumVenta.Text) Then
+          If CInt(txtNumVenta.Text) <> .NumComprobante Then
+            If Not EsValidoNumComprobante(CInt(txtNumVenta.Text)) Then
               MsgBox("El numero del comprobate es invalido")
               Exit Sub
             End If
@@ -314,9 +314,9 @@ Public Class frmEstablecerPagos
 
           End If
 
-          item.Text = cuotaPagar.NumCuota
+          item.Text = cuotaPagar.NumCuota.ToString
           item.SubItems.Add(Date2String(auxFechaDebitoCuota))
-          item.SubItems.Add(cuotaPagar.ValorCuota)
+          item.SubItems.Add(cuotaPagar.ValorCuota.ToString)
           item.SubItems.Add(Date2String(cuotaPagar.FechaPago)) 'fecha de pago
           item.SubItems.Add(EstadoPagos2String(cuotaPagar.EstadoPago)) 'fecha de pago
 
@@ -491,32 +491,32 @@ Public Class frmEstablecerPagos
       m_skip = True
       Try
 
-        Dim auxValue As String = CType(sender, TextBox).Text
-        Dim Precio As Decimal
-        If ConvStr2Dec(auxValue, Precio) Then
-          'El valor ingresado es valido
-          Dim NCuotas As Integer
-          If cmbCuotas.SelectedIndex >= 0 Then
-            NCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
-          Else
-            'TODO: seleccionar por defecto cuotas 0
-            For Each item As clsCuota In cmbCuotas.Items
-              If item.Cantidad = 0 Then
-                cmbCuotas.SelectedItem = item
-                Exit For
-              End If
-            Next
-            NCuotas = 0
-          End If
+        'Dim auxValue As String = CType(sender, TextBox).Text
+        'Dim Precio As Decimal
+        'If ConvStr2Dec(auxValue, Precio) Then
+        '  'El valor ingresado es valido
+        '  Dim NCuotas As Integer
+        '  If cmbCuotas.SelectedIndex >= 0 Then
+        '    NCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
+        '  Else
+        '    'TODO: seleccionar por defecto cuotas 0
+        '    For Each item As clsCuota In cmbCuotas.Items
+        '      If item.Cantidad = 0 Then
+        '        cmbCuotas.SelectedItem = item
+        '        Exit For
+        '      End If
+        '    Next
+        '    NCuotas = 0
+        '  End If
 
-          If chkEditarCuotas.Checked = False Then
-            txtValorCuota.Text = CuotasIguales(Precio, NCuotas).ToString
-          Else
-            'Dejo el valor que figura en el txt precio cuota
-          End If
+        '  If chkEditarCuotas.Checked = False Then
+        '    txtValorCuota.Text = CuotasIguales(Precio, NCuotas).ToString
+        '  Else
+        '    'Dejo el valor que figura en el txt precio cuota
+        '  End If
 
-          Call GenerarPlanCuotas()
-        End If
+        '  Call GenerarPlanCuotas()
+        'End If
       Finally
         m_skip = False
       End Try
@@ -531,14 +531,15 @@ Public Class frmEstablecerPagos
     Try
       If m_skip Then Exit Sub
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
-      If chkEditarCuotas.Checked = False Then
-        Dim precio As Decimal
-        ConvStr2Dec(txtPrecio.Text, precio)
-
-        txtValorCuota.Text = CuotasIguales(precio, Cuota.Cantidad).ToString
-      Else
-        'Dejo el valor que figura en el txt precio cuota
-      End If
+      'If chkEditarCuotas.Checked = False Then
+      Dim precio As Decimal
+      'ConvStr2Dec(txtPrecio.Text, precio)
+      'txtValorCuota.Text = CuotasIguales(precio, Cuota.Cantidad).ToString
+      ConvStr2Dec(txtValorCuota.Text, precio)
+      txtPrecio.Text = CDec(precio * Cuota.Cantidad).ToString
+      'Else
+      ''Dejo el valor que figura en el txt precio cuota
+      'End If
 
       Call GenerarPlanCuotas()
     Catch ex As Exception
@@ -577,13 +578,13 @@ Public Class frmEstablecerPagos
 
   Private Sub chkEditarCuotas_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditarCuotas.CheckedChanged
     Try
-      txtValorCuota.Enabled = chkEditarCuotas.Checked
-      If chkEditarCuotas.Checked = False Then
-        Dim precio As Decimal
-        ConvStr2Dec(txtPrecio.Text, precio)
-        txtValorCuota.Text = CuotasIguales(precio, CType(cmbCuotas.SelectedItem, clsCuota).Cantidad).ToString
-        Call GenerarPlanCuotas()
-      End If
+      'txtValorCuota.Enabled = chkEditarCuotas.Checked
+      'If chkEditarCuotas.Checked = False Then
+      '  Dim precio As Decimal
+      '  ConvStr2Dec(txtPrecio.Text, precio)
+      '  txtValorCuota.Text = CuotasIguales(precio, CType(cmbCuotas.SelectedItem, clsCuota).Cantidad).ToString
+      '  Call GenerarPlanCuotas()
+      'End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -591,16 +592,18 @@ Public Class frmEstablecerPagos
 
   Private Sub txtValorCuota_TextChanged(sender As Object, e As EventArgs) Handles txtValorCuota.TextChanged
     Try
-      If chkEditarCuotas.Checked = True Then
-        Dim auxValue As String = CType(sender, TextBox).Text
-        Dim dec As Decimal
-        If ConvStr2Dec(auxValue, dec) Then
-          Call GenerarPlanCuotas()
-        Else
-          txtValorCuota.Text = ""
-          GenerarPlanCuotas()
-        End If
+      'If chkEditarCuotas.Checked = True Then
+      Dim auxValue As String = CType(sender, TextBox).Text
+      Dim dec As Decimal
+      If ConvStr2Dec(auxValue, dec) Then
+        txtPrecio.Text = CDec(dec * CType(cmbCuotas.SelectedItem, clsCuota).Cantidad).ToString
+        Call GenerarPlanCuotas()
+      Else
+        txtValorCuota.Text = "0"
+        txtPrecio.Text = "0"
+        GenerarPlanCuotas()
       End If
+      'End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

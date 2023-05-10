@@ -76,7 +76,7 @@
       Return m_Periodo
     End Get
     Set(value As String)
-      m_Cuotas = value
+      m_Periodo = value
     End Set
   End Property
 

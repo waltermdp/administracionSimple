@@ -48,7 +48,7 @@ Public Class frmVenta
       ListView1.Columns(2).Width = CInt(ListView1.Width - ListView1.Columns(0).Width - ListView1.Columns(1).Width)
       ListView1.ShowItemToolTips = True
 
-      lblNumeroVenta.Text = GetUltimoComprobante()
+      lblNumeroVenta.Text = GetUltimoComprobante().ToString
       lblFechaVenta.Text = GetAhora.ToString("dd/MM/yyyy")
 
 
@@ -189,7 +189,7 @@ Public Class frmVenta
         'Else
         '  dtDiaVencimiento.Value = .FechaPrimerPago.Day
         'End If
-        lblTotalCuotas.Text = .TotalCuotas
+        lblTotalCuotas.Text = .TotalCuotas.ToString
         lblTotal.Text = .Precio.ToString
         lblCuota.Text = .ValorCuotaFija.ToString
         lblNumeroVenta.Text = .NumComprobante.ToString
@@ -606,14 +606,14 @@ Public Class frmVenta
       Dim Precio As Decimal
       Dim ValorCuota As Decimal
       lblFechaVenta.Text = m_Producto.FechaVenta.ToString("dd/MM/yyyy")
-      lblNumeroVenta.Text = m_Producto.NumComprobante
+      lblNumeroVenta.Text = m_Producto.NumComprobante.ToString
       lblMedioDePago.Text = FillMedioDePagoDescripcion()
-      lblTotal.Text = m_Producto.Precio
-      lblTotalCuotas.Text = m_Producto.TotalCuotas
-      lblCuota.Text = m_Producto.ValorCuotaFija
+      lblTotal.Text = m_Producto.Precio.ToString
+      lblTotalCuotas.Text = m_Producto.TotalCuotas.ToString
+      lblCuota.Text = m_Producto.ValorCuotaFija.ToString
 
-      ConvStr2Dec(m_Producto.Precio, Precio)
-      ConvStr2Dec(m_Producto.ValorCuotaFija, ValorCuota)
+      ConvStr2Dec(m_Producto.Precio.ToString, Precio)
+      ConvStr2Dec(m_Producto.ValorCuotaFija.ToString, ValorCuota)
 
 
 
@@ -621,9 +621,9 @@ Public Class frmVenta
       lvPlanPagos.Items.Clear()
       For Each pago As clsInfoPagos In m_Producto.ListaPagos
         Dim item As New ListViewItem
-        item.Text = pago.NumCuota
+        item.Text = pago.NumCuota.ToString
         item.SubItems.Add(pago.VencimientoCuota.ToString("dd/MM/yyyy"))
-        item.SubItems.Add(pago.ValorCuota)
+        item.SubItems.Add(pago.ValorCuota.ToString)
         item.SubItems.Add(Date2String(pago.FechaPago)) 'fecha de pago
 
         item.SubItems.Add(EstadoPagos2String(pago.EstadoPago)) 'fecha de pago
@@ -631,7 +631,7 @@ Public Class frmVenta
       Next
 
       If m_AdelantoVendedor IsNot Nothing Then
-        Label3.Text = m_AdelantoVendedor.Valor
+        Label3.Text = m_AdelantoVendedor.Valor.ToString
       End If
 
 

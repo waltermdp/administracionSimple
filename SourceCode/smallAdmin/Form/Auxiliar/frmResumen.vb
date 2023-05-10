@@ -108,7 +108,7 @@ Public Class frmResumen
           movimiento.Estado = E_EstadoPago.Pago
           item.SubItems.Add(E_EstadoPago.Pago.ToString)
         End If
-        item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
+        item.SubItems.Add(String.Format("{0:N2}", CDec(CInt(movimiento.Importe) / 100)))
         item.SubItems.Add(movimiento.Detalle)
 
         lstViewResumen.Items.Add(item)
@@ -294,7 +294,7 @@ Public Class frmResumen
       rResultado.UltimaCuotapaga = "--/--"
       Dim aux As String = String.Empty
       Dim GuidProducto As Guid = Guid.Empty
-      vResult = ComprobanteExiste(vEntrada.NumeroComprobante, PagoPendiente, auxDate, auxCuota, aux, GuidProducto)
+      vResult = ComprobanteExiste(CInt(vEntrada.NumeroComprobante), PagoPendiente, auxDate, auxCuota, aux, GuidProducto)
       If vResult <> Result.OK Then
         ContieneErrores = True
         rResultado.Descripcion &= aux + " "
@@ -305,14 +305,14 @@ Public Class frmResumen
       Else
         rResultado.FechaUltimoPago = auxDate.ToString("dd/MM/yyyy")
         rResultado.UltimaCuotapaga = auxCuota & "/"
-        If CDec(vEntrada.Importe / 100) <> PagoPendiente.ValorCuota Then
+        If CDec(CInt(vEntrada.Importe) / 100) <> PagoPendiente.ValorCuota Then
           ContieneErrores = True
           rResultado.Descripcion &= "El valor a pagar es distinto." + " "
         End If
       End If
       
       rResultado.Comprobante = CInt(vEntrada.NumeroComprobante).ToString
-      rResultado.Importe = String.Format("{0:N2}", CDec(vEntrada.Importe / 100))
+      rResultado.Importe = String.Format("{0:N2}", CDec(CInt(vEntrada.Importe) / 100))
 
       Dim producto As New clsInfoProducto
       vResult = clsProducto.Load(GuidProducto, producto)
@@ -450,7 +450,7 @@ Public Class frmResumen
           movimiento.Estado = E_EstadoPago.Pago
           item.SubItems.Add(E_EstadoPago.Pago.ToString)
         End If
-        item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
+        item.SubItems.Add(String.Format("{0:N2}", CDec(CInt(movimiento.Importe) / 100)))
         item.SubItems.Add(movimiento.Detalle)
         lstViewResumen.Items.Add(item)
       Next
@@ -482,11 +482,11 @@ Public Class frmResumen
         If Not IsNumeric(movimiento.Importe) Then
           movimiento.Estado = E_EstadoPago.Debe
           item.SubItems.Add(E_EstadoPago.Debe.ToString)
-          item.SubItems.Add(CDec(0.0))
+          item.SubItems.Add(CDec(0.0).ToString)
         Else
           movimiento.Estado = E_EstadoPago.Pago
           item.SubItems.Add(E_EstadoPago.Pago.ToString)
-          item.SubItems.Add(String.Format("{0:N2}", CDec(movimiento.Importe / 100)))
+          item.SubItems.Add(String.Format("{0:N2}", CDec(CInt(movimiento.Importe) / 100)))
         End If
 
         item.SubItems.Add(movimiento.Detalle)

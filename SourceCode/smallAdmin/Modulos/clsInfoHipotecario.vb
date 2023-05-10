@@ -61,11 +61,11 @@
     End Set
   End Property
 
-  Public Property CodigoBanco As Integer
+  Public Property CodigoBanco As Decimal
     Get
       Return m_CodigoBanco
     End Get
-    Set(value As Integer)
+    Set(value As Decimal)
       m_CodigoBanco = value
     End Set
   End Property
@@ -118,7 +118,7 @@
   Public Sub New()
     MyBase.New()
     CBU = ""
-    NumeroContrato = "0"
+    NumeroContrato = 0
     FechaVencimiento = Date.MinValue
     Importe = 0
     idCliente = "0"

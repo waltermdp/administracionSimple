@@ -33,7 +33,7 @@ Public Class frmConfig
           MsgBox("Fallo load producto")
           Exit Sub
         End If
-        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, objProducto.Adelanto, objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
+        Dim newpago As manDB.clsInfoPagos = GetProximoPago(item.GuidProducto, CInt(objProducto.Adelanto), objProducto.ValorCuotaFija, item.NumCuota, objProducto.FechaVenta, objProducto.FechaPrimerPago)
         If newpago IsNot Nothing Then
           vResult = clsPago.Save(newpago)
         Else
@@ -114,7 +114,7 @@ Public Class frmConfig
     Try
       If lstGrupo.SelectedIndex < 0 Then Exit Sub
       Dim aux As manDB.clsInfoGrupo = CType(lstGrupo.SelectedItem, manDB.clsInfoGrupo)
-      If clsGrupo.Utilizado(aux) Then
+      If clsGrupo.Utilizado(aux) = Result.OK Then
         MsgBox("El grupo esta en uso, debe desasociar a los vendedores del grupo antes de eliminarlo")
         Exit Sub
       End If

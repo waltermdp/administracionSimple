@@ -157,9 +157,9 @@ Public Class clsAdelantos
             strSQL.Append(") VALUES (")
 
             strSQL.Append("""{" & .GuidVendedor.ToString & "}"",")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Valor) & """,")
+            strSQL.Append("""" & .Valor.ToString & """,")
             strSQL.Append("""" & .Fecha & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Estado) & """,")
+            strSQL.Append("""" & .Estado.ToString & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Observacion) & """,")
             strSQL.Append("""{" & .GuidProducto.ToString & "}""")
 
@@ -181,9 +181,9 @@ Public Class clsAdelantos
             'Update
             strSQL.Append("UPDATE [Adelantos] SET ")
             strSQL.Append("[GuidVendedor]=""{" & .GuidVendedor.ToString & "}"",")
-            strSQL.Append("[Valor]=""" & libDB.clsAcceso.Field_Correcting(.Valor) & """,")
+            strSQL.Append("[Valor]=""" & .Valor.ToString & """,")
             strSQL.Append("[Fecha]=""" & .Fecha & """,")
-            strSQL.Append("[Estado]=""" & libDB.clsAcceso.Field_Correcting(.estado) & """,")
+            strSQL.Append("[Estado]=""" & .Estado.ToString & """,")
             strSQL.Append("[Observacion]=""" & libDB.clsAcceso.Field_Correcting(.observacion) & """,")
             strSQL.Append("[GuidProducto]=""{" & .GuidProducto.ToString & "}""")
 
@@ -231,9 +231,9 @@ Public Class clsAdelantos
         End Try
 
         Try
-          vInfo.Valor = CDec(IIf(IsDBNull(.Item("Valor")), "", .Item("Valor")))
+          vInfo.Valor = CDec(IIf(IsDBNull(.Item("Valor")), "0", .Item("Valor")))
         Catch ex As Exception
-          vInfo.Valor = ""
+          vInfo.Valor = 0
           Call Print_msg(ex.Message)
         End Try
 

@@ -228,7 +228,7 @@ Public Class clsArticulo
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Codigo) & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Precio) & """,")
+            strSQL.Append("""" & .Precio.ToString & """,")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.CodigoBarras) & """")
 
             strSQL.Append(")")
@@ -252,7 +252,7 @@ Public Class clsArticulo
             strSQL.Append("[Nombre]=""" & libDB.clsAcceso.Field_Correcting(.Nombre) & """,")
             strSQL.Append("[Codigo]=""" & libDB.clsAcceso.Field_Correcting(.Codigo) & """,")
             strSQL.Append("[Descripcion]=""" & libDB.clsAcceso.Field_Correcting(.Descripcion) & """,")
-            strSQL.Append("[Precio]=""" & libDB.clsAcceso.Field_Correcting(.Precio) & """,")
+            strSQL.Append("[Precio]=""" & .Precio.ToString & """,")
             strSQL.Append("[CodigoBarras]=""" & libDB.clsAcceso.Field_Correcting(.CodigoBarras) & """")
 
             strSQL.Append(" WHERE [IdArticulo]=" & .IdArticulo)

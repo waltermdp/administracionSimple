@@ -133,7 +133,7 @@ Public Class frmImportarHipotecario
       lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Count - m_totalRegistosADebitar)
       txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
       txtConvenio.Text = m_Convenio.ToString
-      txtImporteTotal.Text = m_TotalImporte
+      txtImporteTotal.Text = m_TotalImporte.ToString
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -201,7 +201,7 @@ Public Class frmImportarHipotecario
       Dim Suma1 As Integer = CInt(vBanco.Substring(0, 1)) * 7 + CInt(vBanco.Substring(1, 1)) * 1 + CInt(vBanco.Substring(2, 1)) * 3 + CInt(vSucursal.Substring(0, 1)) * 9 + CInt(vSucursal.Substring(1, 1)) * 7 + CInt(vSucursal.Substring(2, 1)) * 1 + CInt(vSucursal.Substring(2, 1)) * 3
       Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
       If diferencial = 10 Then
-        rValidacion1 = 0
+        rValidacion1 = "0"
         Return Result.OK
       End If
       If diferencial >= 0 AndAlso diferencial <= 9 Then

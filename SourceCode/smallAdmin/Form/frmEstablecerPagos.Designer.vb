@@ -22,6 +22,7 @@ Partial Class frmEstablecerPagos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEstablecerPagos))
     Me.btnCancel = New System.Windows.Forms.Button()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.txtNumVenta = New System.Windows.Forms.TextBox()
@@ -63,21 +64,22 @@ Partial Class frmEstablecerPagos
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(12, 624)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 635)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 10
     Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = False
     '
     'Label1
     '
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
     Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(30, 10)
+    Me.Label1.Location = New System.Drawing.Point(0, 0)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(1194, 34)
+    Me.Label1.Size = New System.Drawing.Size(1280, 25)
     Me.Label1.TabIndex = 11
-    Me.Label1.Text = "FORMA de Realizar Pagos"
+    Me.Label1.Text = "CONTRATOS: Edicion"
     Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'txtNumVenta
@@ -142,7 +144,7 @@ Partial Class frmEstablecerPagos
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
-    Me.lblValorCuota.Location = New System.Drawing.Point(500, 198)
+    Me.lblValorCuota.Location = New System.Drawing.Point(269, 199)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
     Me.lblValorCuota.TabIndex = 55
@@ -152,7 +154,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtValorCuota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtValorCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtValorCuota.Location = New System.Drawing.Point(495, 213)
+    Me.txtValorCuota.Location = New System.Drawing.Point(264, 214)
     Me.txtValorCuota.Name = "txtValorCuota"
     Me.txtValorCuota.Size = New System.Drawing.Size(122, 21)
     Me.txtValorCuota.TabIndex = 54
@@ -215,7 +217,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtPrecio.Location = New System.Drawing.Point(262, 214)
+    Me.txtPrecio.Location = New System.Drawing.Point(519, 213)
     Me.txtPrecio.Name = "txtPrecio"
     Me.txtPrecio.Size = New System.Drawing.Size(100, 21)
     Me.txtPrecio.TabIndex = 41
@@ -224,7 +226,7 @@ Partial Class frmEstablecerPagos
     'Label3
     '
     Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(263, 195)
+    Me.Label3.Location = New System.Drawing.Point(520, 194)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(37, 13)
     Me.Label3.TabIndex = 42
@@ -252,7 +254,7 @@ Partial Class frmEstablecerPagos
     Me.cmbCuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.cmbCuotas.FormattingEnabled = True
-    Me.cmbCuotas.Location = New System.Drawing.Point(368, 213)
+    Me.cmbCuotas.Location = New System.Drawing.Point(392, 212)
     Me.cmbCuotas.Name = "cmbCuotas"
     Me.cmbCuotas.Size = New System.Drawing.Size(121, 23)
     Me.cmbCuotas.TabIndex = 45
@@ -260,7 +262,7 @@ Partial Class frmEstablecerPagos
     'Label5
     '
     Me.Label5.AutoSize = True
-    Me.Label5.Location = New System.Drawing.Point(365, 195)
+    Me.Label5.Location = New System.Drawing.Point(389, 194)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(95, 13)
     Me.Label5.TabIndex = 46
@@ -344,9 +346,9 @@ Partial Class frmEstablecerPagos
     Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnGuardar.ForeColor = System.Drawing.Color.White
-    Me.btnGuardar.Location = New System.Drawing.Point(12, 70)
+    Me.btnGuardar.Location = New System.Drawing.Point(10, 35)
     Me.btnGuardar.Name = "btnGuardar"
-    Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
+    Me.btnGuardar.Size = New System.Drawing.Size(110, 60)
     Me.btnGuardar.TabIndex = 69
     Me.btnGuardar.Text = "Guardar"
     Me.btnGuardar.UseVisualStyleBackColor = False
@@ -354,6 +356,7 @@ Partial Class frmEstablecerPagos
     'frmEstablecerPagos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
     Me.Controls.Add(Me.btnGuardar)

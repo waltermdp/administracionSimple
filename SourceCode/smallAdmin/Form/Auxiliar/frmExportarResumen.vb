@@ -103,7 +103,7 @@ Public Class frmExportarResumen
         item.SubItems.Add(movimiento.Importe)
         item.SubItems.Add(movimiento.CodigoDeAlta)
         item.SubItems.Add(movimiento.Param2)
-        item.SubItems.Add(movimiento.CuotaActual)
+        item.SubItems.Add(movimiento.CuotaActual.ToString)
         item.SubItems.Add(movimiento.UltimaFechPago)
         item.Checked = True
         item.Tag = movimiento

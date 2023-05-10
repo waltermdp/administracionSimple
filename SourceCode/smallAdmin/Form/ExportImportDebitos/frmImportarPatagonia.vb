@@ -50,7 +50,7 @@ Public Class frmImportarPatagonia
       lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_totalRegistros - m_totalRegistosADebitar) '  m_Registros.Where(Function(c) (Not String.IsNullOrWhiteSpace(c.MotivoRechazo)) OrElse (c.importeDebitado = 0)).Count.ToString)
 
       txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
-      txtCUITEmpresa.Text = m_CUITEmpresa
+      txtCUITEmpresa.Text = m_CUITEmpresa.ToString
       txtImporteTotal.Text = m_TotalImporte.ToString
 
 
@@ -180,7 +180,7 @@ Public Class frmImportarPatagonia
           If objCuentas.Items.Count = 1 Then
             'comparo CBU con codigo1
             item.GuidCuenta = objCuentas.Items.First.GuidCuenta
-            If item.CBU = objCuentas.Items.First.Codigo1 Then
+            If item.CBU = CDec(objCuentas.Items.First.Codigo1) Then
               'confirmado
               'aplicar pago cuota actual a debitar
               Dim objPagos As New clsListPagos
@@ -216,7 +216,7 @@ Public Class frmImportarPatagonia
       Dim Suma1 As Integer = CInt(vBanco.Substring(0, 1)) * 7 + CInt(vBanco.Substring(1, 1)) * 1 + CInt(vBanco.Substring(2, 1)) * 3 + CInt(vSucursal.Substring(0, 1)) * 9 + CInt(vSucursal.Substring(1, 1)) * 7 + CInt(vSucursal.Substring(2, 1)) * 1 + CInt(vSucursal.Substring(2, 1)) * 3
       Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
       If diferencial = 10 Then
-        rValidacion1 = 0
+        rValidacion1 = "0"
         Return Result.OK
       End If
       If diferencial >= 0 AndAlso diferencial <= 9 Then

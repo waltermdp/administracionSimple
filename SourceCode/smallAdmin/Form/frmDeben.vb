@@ -166,7 +166,7 @@ Public Class frmDeben
         For Each col As DataGridViewColumn In dgvData.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        bsInfoPrincipal.DataSource = m_objPrincipal.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+        bsInfoPrincipal.DataSource = m_objPrincipal.Items.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
         bsInfoPrincipal.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
@@ -175,7 +175,7 @@ Public Class frmDeben
         For Each col As DataGridViewColumn In dgvData.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        bsInfoPrincipal.DataSource = m_objPrincipal.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+        bsInfoPrincipal.DataSource = m_objPrincipal.Items.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
         bsInfoPrincipal.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
@@ -814,7 +814,7 @@ Public Class frmDeben
             MsgBox("Fallo cargar pagos")
             Exit Sub
           End If
-          If item.Comprobante = 3838 Then
+          If CInt(item.Comprobante) = 3838 Then
             Continue For
           End If
           Dim issue As Boolean = False

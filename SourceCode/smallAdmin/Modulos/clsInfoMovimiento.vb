@@ -146,16 +146,16 @@
 
   Public Sub New()
     MyBase.New()
-    NumeroTarjeta = 0
-    NumeroComprobante = 0
-    Fecha = 0
-    Importe = 0
-    IdentificadorDebito = 0
-    Param1 = 0
-    Param2 = 0
-    Codigo = 0
-    Detalle = 0
-    CodigoDeAlta = 0
+    NumeroTarjeta = "0"
+    NumeroComprobante = "0"
+    Fecha = "0"
+    Importe = "0"
+    IdentificadorDebito = "0"
+    Param1 = "0"
+    Param2 = "0"
+    Codigo = "0"
+    Detalle = "0"
+    CodigoDeAlta = "0"
     Estado = libCommon.Comunes.E_EstadoPago.Debe
     m_Nombre = String.Empty
     m_CuotaActual = 0

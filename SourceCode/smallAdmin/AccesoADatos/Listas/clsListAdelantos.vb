@@ -27,7 +27,7 @@ Public Class clsListAdelantos
         Dim objDatos As libDB.clsTabla
         objDatos = New libDB.clsTabla(strCommand)
         objDatos.Filter = m_Cfg_Filtro
-        Dim auxResult As Result = objDatos.GetData(objDB)
+        Dim auxResult As Integer = objDatos.GetData(objDB)
 
         If auxResult > 0 Then
           For Each fila As DataRow In objDatos.Table.Rows

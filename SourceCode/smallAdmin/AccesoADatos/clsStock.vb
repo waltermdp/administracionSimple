@@ -165,7 +165,7 @@ Public Class clsStock
 
             strSQL.Append("""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Responsable) & """,")
-            strSQL.Append("""" & libDB.clsAcceso.Field_Correcting(.Cantidad) & """,")
+            strSQL.Append("""" & .Cantidad.ToString & """,")
             strSQL.Append("""{" & .GuidResponsable.ToString & "}""")
 
             strSQL.Append(")")
@@ -187,7 +187,7 @@ Public Class clsStock
             strSQL.Append("UPDATE [Stock] SET ")
             strSQL.Append("[GuidArticulo]=""{" & .GuidArticulo.ToString & "}"",")
             strSQL.Append("[Responsable]=""" & libDB.clsAcceso.Field_Correcting(.Responsable) & """,")
-            strSQL.Append("[Cantidad]=""" & libDB.clsAcceso.Field_Correcting(.Cantidad) & """,")
+            strSQL.Append("[Cantidad]=""" & .Cantidad.ToString & """,")
             strSQL.Append("[GuidResponsable]=""{" & .GuidResponsable.ToString & "}""")
 
             strSQL.Append(" WHERE [Idstock]=" & .IdStock)
@@ -241,9 +241,9 @@ Public Class clsStock
         End Try
 
         Try
-          vInfoStock.Cantidad = CStr(IIf(IsDBNull(.Item("Cantidad")), "", .Item("Cantidad")))
+          vInfoStock.Cantidad = CInt(IIf(IsDBNull(.Item("Cantidad")), 0, .Item("Cantidad")))
         Catch ex As Exception
-          vInfoStock.Cantidad = ""
+          vInfoStock.Cantidad = 0
           Call Print_msg(ex.Message)
         End Try
 

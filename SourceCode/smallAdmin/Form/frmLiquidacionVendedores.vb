@@ -209,14 +209,14 @@ Public Class frmLiquidacionVendedores
           MsgBox("Plan de cuotas fuera de lo establecido")
           Exit Sub
         End If
-        venta.Comision = (venta.Importe * pVenta / 100)
+        venta.Comision = CDec(venta.Importe * pVenta / 100)
       Next
 
       For i As Integer = 0 To 3
         m_Liq.TotalesIntervalos(i)(2) = m_lstResumenVentas.Where(Function(c) c.Cuotas >= m_Liq.TotalesIntervalos(i)(0) AndAlso c.Cuotas <= m_Liq.TotalesIntervalos(i)(1)).Sum(Function(c) c.CantItems)
         m_Liq.TotalesIntervalos(i)(3) = m_lstResumenVentas.Where(Function(c) c.Cuotas >= m_Liq.TotalesIntervalos(i)(0) AndAlso c.Cuotas <= m_Liq.TotalesIntervalos(i)(1)).Sum(Function(c) c.Importe)
         m_Liq.TotalesIntervalos(i)(4) = m_lstResumenVentas.Where(Function(c) c.Cuotas >= m_Liq.TotalesIntervalos(i)(0) AndAlso c.Cuotas <= m_Liq.TotalesIntervalos(i)(1)).Sum(Function(c) c.Comision)
-        m_Liq.CantidadLibros += m_Liq.TotalesIntervalos(i)(2)
+        m_Liq.CantidadLibros += CInt(m_Liq.TotalesIntervalos(i)(2))
         m_Liq.ImporteTotal += m_Liq.TotalesIntervalos(i)(3)
         m_Liq.ComisionTotal += m_Liq.TotalesIntervalos(i)(4)
       Next
@@ -224,7 +224,7 @@ Public Class frmLiquidacionVendedores
       Dim esCorrecto As Boolean = Decimal.TryParse(txtVale.Text, Vales)
       If Not esCorrecto Then Vales = 0
       'Dim auxString As String = String.Format(Globalization.CultureInfo.InvariantCulture, "{0:N2}", rValor)
-      Vales = FormatNumber(Vales, 2)
+      Vales = CDec(FormatNumber(Vales, 2))
 
       With m_Liq
         If chkZona.Checked Then .Zona = Zona * m_Liq.ImporteTotal / 100
@@ -285,8 +285,8 @@ Public Class frmLiquidacionVendedores
       Dim c0 As GraphicsContainer = e.Graphics.BeginContainer
       e.Graphics.ScaleTransform(0.8, 0.8)
 
-      e.Graphics.TranslateTransform(40, -20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas)) 'desplazar n renglones con cada hoja extra
-      e.Graphics.Clip = New Region(New Rectangle(0, 20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas), pbxResumen.Width, 20 * MAX_RENGLONES))
+      e.Graphics.TranslateTransform(40, CSng(-20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas))) 'desplazar n renglones con cada hoja extra
+      e.Graphics.Clip = New Region(New Rectangle(0, CInt(20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas)), pbxResumen.Width, 20 * MAX_RENGLONES))
       e.Graphics.Clear(Color.White)
 
       Call Preview(e.Graphics)
@@ -343,18 +343,18 @@ Public Class frmLiquidacionVendedores
           g.DrawString(item.Cliente, fuente, Brushes.Black, New Rectangle(100, RenAltura * renglon, 250, RenAltura))
           g.DrawString(item.DNI, fuente, Brushes.Black, 350, RenAltura * renglon)
           sf.Alignment = StringAlignment.Center
-          g.DrawString(item.CantItems, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, sf)
-          g.DrawString(item.Importe, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
-          g.DrawString(item.Comision, fuente, Brushes.Black, Columna * 5, RenAltura * renglon)
+          g.DrawString(item.CantItems.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, sf)
+          g.DrawString(item.Importe.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
+          g.DrawString(item.Comision.ToString, fuente, Brushes.Black, Columna * 5, RenAltura * renglon)
           CantidadItems += item.CantItems
           SumImporte += item.Importe
           SumComision += item.Comision
         Next
         renglon += 1
         g.DrawString("TOTAL", fuente, Brushes.Black, 0, RenAltura * renglon)
-        g.DrawString(CantidadItems, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
-        g.DrawString(SumImporte, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
-        g.DrawString(SumComision, fuente, Brushes.Black, Columna * 5, RenAltura * renglon)
+        g.DrawString(CantidadItems.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+        g.DrawString(SumImporte.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
+        g.DrawString(SumComision.ToString, fuente, Brushes.Black, Columna * 5, RenAltura * renglon)
         g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
         renglon += 1
       Next
@@ -366,10 +366,10 @@ Public Class frmLiquidacionVendedores
       g.DrawString("COMISIONES VENTA", fuente, Brushes.Black, 0, RenAltura * renglon)
       renglon += 2
       g.DrawString("TOTAL DE LIBROS", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_Liq.CantidadLibros, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
+      g.DrawString(m_Liq.CantidadLibros.ToString, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
       renglon += 1
       g.DrawString("TOTAL VENDIDO", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
       renglon += 2
       g.DrawString("VENTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString("%", fuente, Brushes.Black, aux1, RenAltura * renglon)
@@ -381,85 +381,85 @@ Public Class frmLiquidacionVendedores
       sf.Alignment = StringAlignment.Center
       g.DrawString(Comision(0), fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(pVenta1 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(0)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(0)(4), fuente, Brushes.Black, New Rectangle(Columna * 3, RenAltura * renglon, Columna, RenAltura), sf)
+      g.DrawString(m_Liq.TotalesIntervalos(0)(3).ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(0)(4).ToString, fuente, Brushes.Black, New Rectangle(Columna * 3, RenAltura * renglon, Columna, RenAltura), sf)
       renglon += 1
       g.DrawString(Comision(1), fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(pVenta2 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(1)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(1)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(1)(3).ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(1)(4).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString(Comision(2), fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(pVenta3 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(2)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(2)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(2)(3).ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(2)(4).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString(Comision(3), fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(pVenta4 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(3)(3), fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(3)(4), fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(3)(3).ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.TotalesIntervalos(3)(4).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
 
       g.DrawString("ZONA", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(Zona & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.Zona, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.Zona.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 50", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(VLiquidadas50 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.VLiquidadas50, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.VLiquidadas50.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 70", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(VLiquidadas70 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.VLiquidadas70, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.VLiquidadas70.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 90", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(VLiquidadas90 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.VLiquidadas90, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.VLiquidadas90.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("V. LIQUIDADAS 110", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(VLiquidadas110 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.VLiquidadas110, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.VLiquidadas110.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("PREMIO MENSUAL 80 VTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(PremMen80Vent & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.PremMen80Vent, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.PremMen80Vent.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("CARPETA DE PROBLEMAS + DE 5", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(CarpetaDeProb & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.CarpetaDeProb, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.CarpetaDeProb.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("AUTO", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(Auto & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.Auto, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.Auto.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("VENDEDORES", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(Vendedores & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.Vendedores, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.Vendedores.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("PARCIAL", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(ImporteParcial, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(ImporteParcial.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
       g.DrawString("VALES", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_Liq.Vales, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.Vales.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawString("TOTAL", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_Liq.Total, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.Total.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
       renglon += 1
       g.DrawLine(New Pen(Brushes.Black, 3), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
       g.DrawString("AGUINALDO", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(Aguinaldo & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
-      g.DrawString(m_Liq.Aguinaldo, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 2, RenAltura * renglon)
+      g.DrawString(m_Liq.Aguinaldo.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon)
 
       renglon += 4
       g.DrawString("FIRMA", fuente, Brushes.Black, 0, RenAltura * renglon)
@@ -486,7 +486,7 @@ Public Class frmLiquidacionVendedores
 
         m_PrintDoc.PrinterSettings = obj.PrinterSettings
        
-        TotalPaginas = Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES)
+        TotalPaginas = CInt(Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES))
 
         m_PrintDoc.Print()
       End If

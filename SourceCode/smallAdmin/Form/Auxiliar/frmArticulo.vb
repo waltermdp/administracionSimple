@@ -53,7 +53,7 @@ Public Class frmArticulo
         txtNombre.Text = m_Articulo.Nombre
         txtCodigo.Text = m_Articulo.Codigo
         txtDescripcion.Text = m_Articulo.Descripcion
-        txtPrecio.Text = m_Articulo.Precio
+        txtPrecio.Text = m_Articulo.Precio.ToString
         txtCodigoBarras.Text = m_Articulo.CodigoBarras
         'mantiene el guid
         'mantiene el responsable

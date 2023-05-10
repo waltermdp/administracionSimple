@@ -93,9 +93,11 @@ Partial Class frmVenta
     Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSave.ForeColor = System.Drawing.Color.White
-    Me.btnSave.Location = New System.Drawing.Point(12, 49)
+    Me.btnSave.Location = New System.Drawing.Point(10, 39)
+    Me.btnSave.Margin = New System.Windows.Forms.Padding(10, 3, 3, 3)
     Me.btnSave.Name = "btnSave"
-    Me.btnSave.Size = New System.Drawing.Size(110, 61)
+    Me.btnSave.Padding = New System.Windows.Forms.Padding(10)
+    Me.btnSave.Size = New System.Drawing.Size(110, 60)
     Me.btnSave.TabIndex = 7
     Me.btnSave.Text = "Guardar"
     Me.btnSave.UseVisualStyleBackColor = False
@@ -107,9 +109,10 @@ Partial Class frmVenta
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(12, 641)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 635)
+    Me.btnCancel.Margin = New System.Windows.Forms.Padding(3, 3, 3, 25)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 8
     Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = False
@@ -284,7 +287,7 @@ Partial Class frmVenta
     Me.gpVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.gpVenta.Location = New System.Drawing.Point(170, 196)
     Me.gpVenta.Name = "gpVenta"
-    Me.gpVenta.Size = New System.Drawing.Size(1098, 512)
+    Me.gpVenta.Size = New System.Drawing.Size(1098, 499)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "3- Venta"
@@ -294,7 +297,7 @@ Partial Class frmVenta
     Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
     Me.lvPlanPagos.Location = New System.Drawing.Point(541, 262)
     Me.lvPlanPagos.Name = "lvPlanPagos"
-    Me.lvPlanPagos.Size = New System.Drawing.Size(529, 244)
+    Me.lvPlanPagos.Size = New System.Drawing.Size(529, 231)
     Me.lvPlanPagos.TabIndex = 68
     Me.lvPlanPagos.UseCompatibleStateImageBehavior = False
     Me.lvPlanPagos.View = System.Windows.Forms.View.Details
@@ -428,7 +431,7 @@ Partial Class frmVenta
     Me.ListView1.Location = New System.Drawing.Point(23, 57)
     Me.ListView1.MultiSelect = False
     Me.ListView1.Name = "ListView1"
-    Me.ListView1.Size = New System.Drawing.Size(477, 449)
+    Me.ListView1.Size = New System.Drawing.Size(477, 436)
     Me.ListView1.TabIndex = 55
     Me.ListView1.UseCompatibleStateImageBehavior = False
     Me.ListView1.View = System.Windows.Forms.View.Details
@@ -549,11 +552,11 @@ Partial Class frmVenta
     '
     Me.lblTitulo.BackColor = System.Drawing.Color.Transparent
     Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTitulo.Location = New System.Drawing.Point(222, 9)
+    Me.lblTitulo.Location = New System.Drawing.Point(0, 0)
     Me.lblTitulo.Name = "lblTitulo"
-    Me.lblTitulo.Size = New System.Drawing.Size(853, 23)
+    Me.lblTitulo.Size = New System.Drawing.Size(1280, 25)
     Me.lblTitulo.TabIndex = 61
-    Me.lblTitulo.Text = "Venta"
+    Me.lblTitulo.Text = "VENTA"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'frmVenta

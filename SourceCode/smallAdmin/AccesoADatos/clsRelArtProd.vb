@@ -136,7 +136,7 @@ Public Class clsRelArtProd
 
       If Not (vGuidProducto = Nothing) AndAlso Not (vGuidArticulo = Nothing) Then
         '--- Comando en DB -->
-        Dim IdRel As String = -1
+        Dim IdRel As Integer = -1
         objResult = vObjDB.EjecutarConsulta("SELECT [IdRel] FROM [RelArtProd] WHERE ([GuidArticulo]={" & vGuidArticulo.ToString & "} AND [GuidProducto]={" & vGuidProducto.ToString & "})", IdRel)
         If objResult <> Result.OK Then Return objResult
 
@@ -179,8 +179,8 @@ Public Class clsRelArtProd
           strSQL.Append("UPDATE [RelArtProd] SET ")
           strSQL.Append("[GuidArticulo]=""{" & vGuidArticulo.ToString & "}"",")
           strSQL.Append("[GuidProducto]=""{" & vGuidProducto.ToString & "}"",")
-          strSQL.Append("[CantidadArticulos]=""" & libDB.clsAcceso.Field_Correcting(vCantidadArticulos) & """,")
-          strSQL.Append("[Entregados]=""" & libDB.clsAcceso.Field_Correcting(vEntregados) & """")
+          strSQL.Append("[CantidadArticulos]=""" & vCantidadArticulos.ToString & """,")
+          strSQL.Append("[Entregados]=""" & vEntregados.ToString & """")
           strSQL.Append(" WHERE [IdRel]=" & IdRel)
 
           objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)

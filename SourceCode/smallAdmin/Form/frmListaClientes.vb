@@ -103,13 +103,14 @@ Public Class frmListaClientes
 
   Private Sub dgvData1_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData1.ColumnHeaderMouseClick
     Try
+      If m_objDatabaseList Is Nothing Then Exit Sub
       Dim m_CurrentSortColumn As DataGridViewColumn = dgvData1.Columns(e.ColumnIndex)
       If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
         For Each col As DataGridViewColumn In dgvData1.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
 
-        bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+        bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
         bsInfoCliente.ResetBindings(False)
@@ -119,7 +120,7 @@ Public Class frmListaClientes
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
 
-        bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+        bsInfoCliente.DataSource = m_objDatabaseList.Items.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
         bsInfoCliente.ResetBindings(False)
@@ -299,6 +300,8 @@ Public Class frmListaClientes
  
   Private Sub dgvData1_DoubleClick(sender As Object, e As EventArgs) Handles dgvData1.DoubleClick
     Try
+
+      If m_objPersona_Current Is Nothing Then Exit Sub
 
       Dim vResult As Result = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
       If vResult <> Result.OK Then

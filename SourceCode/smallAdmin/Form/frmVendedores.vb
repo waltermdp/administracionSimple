@@ -70,13 +70,14 @@ Public Class frmVendedores
 
   Private Sub dgvListVendedores_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvListVendedores.ColumnHeaderMouseClick
     Try
+      If m_objVendedoresList Is Nothing Then Exit Sub
       Dim m_CurrentSortColumn As DataGridViewColumn = dgvListVendedores.Columns(e.ColumnIndex)
       If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
         For Each col As DataGridViewColumn In dgvListVendedores.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
 
-        bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+        bsVendedores.DataSource = m_objVendedoresList.Items.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
         bsVendedores.ResetBindings(False)
@@ -86,7 +87,7 @@ Public Class frmVendedores
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
 
-        bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+        bsVendedores.DataSource = m_objVendedoresList.Items.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
         bsVendedores.ResetBindings(False)
@@ -284,6 +285,7 @@ Public Class frmVendedores
 
   Private Sub btnSeleccionar_Click(sender As Object, e As EventArgs) Handles btnSeleccionar.Click
     Try
+      If m_objVendedorCurrent Is Nothing Then Exit Sub
       m_result = Result.OK
       Me.Close()
     Catch ex As Exception

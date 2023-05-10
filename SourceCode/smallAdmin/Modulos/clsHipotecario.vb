@@ -115,7 +115,7 @@ Public Class clsHipotecario
 
 
       ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
-      If GenerarHeaderDebito(auxLinea, ImporteTotal, m_FechaGeneracion, m_Secuencial) <> Result.OK Then
+      If GenerarHeaderDebito(auxLinea, CInt(ImporteTotal), m_FechaGeneracion, CInt(m_Secuencial)) <> Result.OK Then
         MsgBox("No se puede generar encabezado de debito Hipotecario")
         Return Result.NOK
       End If

@@ -33,7 +33,7 @@ Public Class frmExportarPatagonia
       m_Banco.FechaPresentacion = dtCurrent.Value
       txtProducto.Text = m_Banco.Producto
       txtRazonSocial.Text = m_Banco.RazonSocial
-      txtNroCUIT.Text = m_Banco.NroCuitEmpresa
+      txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
       txtReferencia.Text = m_Banco.ReferenciaDebito
       m_skip = False
       RecargarValores()
@@ -54,7 +54,7 @@ Public Class frmExportarPatagonia
       txtImporteTotal.Text = m_Registros.Sum(Function(c) c.Importe).ToString
       txtProducto.Text = m_Banco.Producto
       txtRazonSocial.Text = m_Banco.RazonSocial
-      txtNroCUIT.Text = m_Banco.NroCuitEmpresa
+      txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
       txtReferencia.Text = m_Banco.ReferenciaDebito
 
     Catch ex As Exception
@@ -128,8 +128,8 @@ Public Class frmExportarPatagonia
         End If
 
         With movimiento
-          .CBU = lstCuenta.Items.First.Codigo1
-          .Cuit_DNI = lstCliente.Items.First.DNI ' lstCuenta.Items.First.Codigo2
+          .CBU = CDec(lstCuenta.Items.First.Codigo1)
+          .Cuit_DNI = CDec(lstCliente.Items.First.DNI) ' lstCuenta.Items.First.Codigo2)
           .Nombre = lstCliente.Items.First.ToString
           .Contrato = lstProducto.Items.First.NumComprobante
           .Producto = m_Banco.Producto
@@ -168,7 +168,7 @@ Public Class frmExportarPatagonia
       With m_Banco
         .RazonSocial = txtRazonSocial.Text
         .Producto = txtProducto.Text
-        .NroCuitEmpresa = txtNroCUIT.Text
+        .NroCuitEmpresa = CDec(txtNroCUIT.Text)
         .FechaPresentacion = dtCurrent.Value
         .FechaVencimiento = dtVencimiento.Value
       End With

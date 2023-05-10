@@ -103,7 +103,7 @@ Public Class frmVendedorData
         If .Tel2 = "" Then .Tel2 = "--"
         .Email = txtEmail.Text.Trim
         If .Email = "" Then .Email = "--"
-        .Categoria = cmbCategoria.SelectedItem
+        .Categoria = cmbCategoria.SelectedItem.ToString
 
         .Comentario = txtComentarios.Text.Trim
         If .Comentario = "" Then .Comentario = "--"

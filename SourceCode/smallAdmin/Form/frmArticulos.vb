@@ -405,7 +405,7 @@ Public Class frmArticulos
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        BindingSource1.DataSource = m_objStock.OrderBy(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+          BindingSource1.DataSource = m_objStock.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
@@ -414,7 +414,7 @@ Public Class frmArticulos
         For Each col As DataGridViewColumn In dgvStock.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c), New clsComparar).ToList()
+          BindingSource1.DataSource = m_objStock.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
         BindingSource1.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
@@ -528,7 +528,7 @@ Public Class frmArticulos
         txtNombre.Text = .Nombre
         txtCodigo.Text = .Codigo
         txtDescripcion.Text = .Descripcion
-        txtPrecio.Text = .Precio
+        txtPrecio.Text = .Precio.ToString
       End With
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -824,7 +824,7 @@ Public Class frmArticulos
         Exit Sub
       End If
 
-      UpdateStock(m_ObjCurrent.GuidArticulo, m_ObjCurrent.Cantidad + nIncrementar.Value)
+      UpdateStock(m_ObjCurrent.GuidArticulo, CInt(m_ObjCurrent.Cantidad + nIncrementar.Value))
       nIncrementar.Value = 0
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -844,7 +844,7 @@ Public Class frmArticulos
         Exit Sub
       End If
 
-      Dim Cantidad As Integer = m_ObjCurrent.Cantidad - nDescontar.Value
+      Dim Cantidad As Integer = CInt(m_ObjCurrent.Cantidad - nDescontar.Value)
       If Cantidad < 0 Then
         MsgBox("Esta intentando descontar mas productos de los que hay es Deposito")
         Exit Sub
@@ -869,7 +869,7 @@ Public Class frmArticulos
         MsgBox("Esta intentando descontar mas productos de los que hay es Deposito")
         Exit Sub
       End If
-      Dim Cantidad As Integer = nMover.Value
+      Dim Cantidad As Integer = CInt(nMover.Value)
       MoverArticulo(m_ObjCurrent.GuidArticulo, m_ObjCurrent.GuidResponsable, CType(cmbDestinoResp.SelectedItem, clsInfoResponsable).GuidResponsable, CType(cmbDestinoResp.SelectedItem, clsInfoResponsable).Nombre, Cantidad)
       nMover.Value = 0
     Catch ex As Exception

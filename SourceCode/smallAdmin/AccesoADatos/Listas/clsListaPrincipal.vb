@@ -62,7 +62,7 @@ Public Class clsListaPrincipal
         objDatos = New libDB.clsTabla(strCommand)
         objDatos.Filter = m_Cfg_Filtro
         objDatos.Order = m_Cfg_Orden
-        Dim auxResult As Result = objDatos.GetData(objDB)
+        Dim auxResult As Integer = objDatos.GetData(objDB)
         Dim auxList As New List(Of clsInfoPrincipal)
         If auxResult > 0 Then
 
@@ -78,7 +78,7 @@ Public Class clsListaPrincipal
             objInfoPrincipal.Precio = objListProdInfo.Precio
             objInfoPrincipal.Adelanto = objListProdInfo.Adelanto
             objInfoPrincipal.ValorCuotaFija = objListProdInfo.ValorCuotaFija
-            objInfoPrincipal.Comprobante = objListProdInfo.NumComprobante
+            objInfoPrincipal.Comprobante = objListProdInfo.NumComprobante.ToString
 
             Dim objPersona As New ClsInfoPersona
             objResult = clsPersona.Load(objListProdInfo.GuidCliente, objPersona)

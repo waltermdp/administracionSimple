@@ -3,6 +3,7 @@
 Public Class clsTipoPago
   Implements ICloneable
 
+
   Private m_GuidTipoPago As Guid
   Private m_Nombre As String
   Private m_PermiteCuotas As Boolean

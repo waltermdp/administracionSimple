@@ -29,8 +29,8 @@ Public Class frmExportarHipotecario
       dtCurrent.Value = m_Banco.FechaGeneracion
       dtVencimiento.MinDate = dtCurrent.Value
       dtVencimiento.Value = Today.AddDays(2)
-      txtNumeroConvenio.Text = m_Banco.Convenio
-      txtSecuencial.Text = m_Banco.Secuencial
+      txtNumeroConvenio.Text = m_Banco.Convenio.ToString
+      txtSecuencial.Text = m_Banco.Secuencial.ToString
       txtIdDebito.Text = m_Banco.ID_Debito
       txtConcepto.Text = m_Banco.Concepto
       m_skip = False
@@ -122,9 +122,9 @@ Public Class frmExportarHipotecario
 
         With movimiento
           .CBU = lstCuenta.Items.First.Codigo1
-          .CodigoBanco = lstCuenta.Items.First.Codigo2
-          .CodigoSucCuenta = lstCuenta.Items.First.Codigo3
-          .CuentaBanco = lstCuenta.Items.First.Codigo4
+          .CodigoBanco = CDec(lstCuenta.Items.First.Codigo2)
+          .CodigoSucCuenta = CInt(lstCuenta.Items.First.Codigo3)
+          .CuentaBanco = CDec(lstCuenta.Items.First.Codigo4)
           .TipoCuenta = lstCuenta.Items.First.Codigo5
           .NumeroContrato = lstProducto.Items.First.NumComprobante
           .Importe = item.ValorCuota
@@ -163,9 +163,9 @@ Public Class frmExportarHipotecario
     Try
       With m_Banco
         .Concepto = txtConcepto.Text
-        .Convenio = txtNumeroConvenio.Text
+        .Convenio = CInt(txtNumeroConvenio.Text)
         .ID_Debito = txtIdDebito.Text
-        .Secuencial = txtSecuencial.Text
+        .Secuencial = CDec(txtSecuencial.Text)
         .FechaGeneracion = dtCurrent.Value
         .FechaVencimiento = dtVencimiento.Value
       End With

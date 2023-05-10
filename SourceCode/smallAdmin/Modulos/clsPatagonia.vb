@@ -189,7 +189,7 @@ Public Class clsPatagonia
       sResult += vRegistro.TipoNovedad.ToString                         '1
       sResult += vRegistro.Cuit_DNI.ToString("00000000000")             '11
       sResult += vRegistro.CBU.ToString("0000000000000000000000")       '22
-      sResult += String.Format("{0,-22}", vRegistro.Contrato.ToString.PadLeft(11, "0")) '22
+      sResult += String.Format("{0,-22}", vRegistro.Contrato.ToString.PadLeft(11, "0"c)) '22
       sResult += vRegistro.FechaVto.ToString("ddMMyyyy")                '8
       sResult += String.Format("{0,-10}", vRegistro.Producto)           '10 
       sResult += String.Format("{0,15}", " ")
