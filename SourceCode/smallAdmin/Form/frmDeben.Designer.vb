@@ -143,7 +143,7 @@ Partial Class frmDeben
     Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnBack.ForeColor = System.Drawing.Color.White
-    Me.btnBack.Location = New System.Drawing.Point(10, 635)
+    Me.btnBack.Location = New System.Drawing.Point(10, 637)
     Me.btnBack.Margin = New System.Windows.Forms.Padding(10, 10, 3, 25)
     Me.btnBack.Name = "btnBack"
     Me.btnBack.Size = New System.Drawing.Size(110, 60)
@@ -269,7 +269,7 @@ Partial Class frmDeben
     Me.btnNuevo.Location = New System.Drawing.Point(10, 35)
     Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 10, 3, 3)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
     Me.btnNuevo.TabIndex = 40
     Me.btnNuevo.Text = "Venta Nueva"
     Me.btnNuevo.UseVisualStyleBackColor = False
@@ -354,7 +354,7 @@ Partial Class frmDeben
     Me.dgvData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData.EnableHeadersVisualStyles = False
     Me.dgvData.GridColor = System.Drawing.Color.White
-    Me.dgvData.Location = New System.Drawing.Point(148, 53)
+    Me.dgvData.Location = New System.Drawing.Point(148, 56)
     Me.dgvData.Margin = New System.Windows.Forms.Padding(0)
     Me.dgvData.MultiSelect = False
     Me.dgvData.Name = "dgvData"
@@ -370,7 +370,7 @@ Partial Class frmDeben
     Me.dgvData.RowHeadersVisible = False
     Me.dgvData.RowTemplate.Height = 24
     Me.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvData.Size = New System.Drawing.Size(1107, 339)
+    Me.dgvData.Size = New System.Drawing.Size(1107, 336)
     Me.dgvData.TabIndex = 44
     Me.dgvData.TabStop = False
     '
@@ -795,7 +795,7 @@ Partial Class frmDeben
     Me.tbResumen.Location = New System.Drawing.Point(4, 22)
     Me.tbResumen.Name = "tbResumen"
     Me.tbResumen.Padding = New System.Windows.Forms.Padding(3)
-    Me.tbResumen.Size = New System.Drawing.Size(1061, 264)
+    Me.tbResumen.Size = New System.Drawing.Size(1099, 264)
     Me.tbResumen.TabIndex = 1
     Me.tbResumen.Text = "Resumen"
     Me.tbResumen.UseVisualStyleBackColor = True
@@ -805,7 +805,7 @@ Partial Class frmDeben
     Me.tbPagos.Controls.Add(Me.GroupBox1)
     Me.tbPagos.Location = New System.Drawing.Point(4, 22)
     Me.tbPagos.Name = "tbPagos"
-    Me.tbPagos.Size = New System.Drawing.Size(1061, 264)
+    Me.tbPagos.Size = New System.Drawing.Size(1099, 264)
     Me.tbPagos.TabIndex = 2
     Me.tbPagos.Text = "Pagos - Cobros"
     Me.tbPagos.UseVisualStyleBackColor = True
@@ -824,7 +824,7 @@ Partial Class frmDeben
     Me.tbOperaciones.Location = New System.Drawing.Point(4, 22)
     Me.tbOperaciones.Name = "tbOperaciones"
     Me.tbOperaciones.Padding = New System.Windows.Forms.Padding(3)
-    Me.tbOperaciones.Size = New System.Drawing.Size(1061, 264)
+    Me.tbOperaciones.Size = New System.Drawing.Size(1099, 264)
     Me.tbOperaciones.TabIndex = 3
     Me.tbOperaciones.Text = "Operaciones"
     Me.tbOperaciones.UseVisualStyleBackColor = True
