@@ -75,6 +75,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label1.BackColor = System.Drawing.Color.Transparent
     Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.ForeColor = System.Drawing.Color.White
     Me.Label1.Location = New System.Drawing.Point(0, 0)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(1280, 25)
@@ -95,6 +96,7 @@ Partial Class frmEstablecerPagos
     'Label16
     '
     Me.Label16.AutoSize = True
+    Me.Label16.BackColor = System.Drawing.Color.Transparent
     Me.Label16.Location = New System.Drawing.Point(492, 72)
     Me.Label16.Name = "Label16"
     Me.Label16.Size = New System.Drawing.Size(102, 13)
@@ -163,6 +165,7 @@ Partial Class frmEstablecerPagos
     'Label13
     '
     Me.Label13.AutoSize = True
+    Me.Label13.BackColor = System.Drawing.Color.Transparent
     Me.Label13.Location = New System.Drawing.Point(504, 133)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(81, 13)
@@ -207,6 +210,7 @@ Partial Class frmEstablecerPagos
     'Label2
     '
     Me.Label2.AutoSize = True
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
     Me.Label2.Location = New System.Drawing.Point(261, 72)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(65, 13)
@@ -243,6 +247,7 @@ Partial Class frmEstablecerPagos
     'Label4
     '
     Me.Label4.AutoSize = True
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
     Me.Label4.Location = New System.Drawing.Point(260, 118)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(70, 13)

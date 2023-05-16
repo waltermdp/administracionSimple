@@ -1238,4 +1238,11 @@ Public Class frmDeben
   End Sub
 
 
+  Private Sub UcTextBoxNumerico1_TextChanged(sender As Object, e As EventArgs) Handles UcTextBoxNumerico1.TextChanged
+    Try
+      MsgBox("code")
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

@@ -117,6 +117,12 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="Controles\ucTextBoxNumerico.Designer.vb">
+      <DependentUpon>ucTextBoxNumerico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ucTextBoxNumerico.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form\ExportImportDebitos\frmImportarPatagonia.Designer.vb">
       <DependentUpon>frmImportarPatagonia.vb</DependentUpon>
     </Compile>
