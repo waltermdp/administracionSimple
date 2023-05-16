@@ -160,6 +160,10 @@ Public Class frmCuenta
         If String.IsNullOrEmpty(txtCodigo4.Text) Then
           btnAutocompletar.PerformClick()
         End If
+      ElseIf CType(cmbTipoDeCuenta.SelectedItem, clsTipoPago).GuidTipo = New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+        If String.IsNullOrEmpty(txtCodigo4.Text) Then
+          btnAutocompletar.PerformClick()
+        End If
       End If
 
       'TODO: validar los campos
@@ -329,7 +333,11 @@ Public Class frmCuenta
         If CType(objCMB.SelectedItem, clsTipoPago).GuidTipo = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
           btnAutocompletar.Visible = True
           btnAutocompletar.Enabled = cmbTipoDeCuenta.Enabled
+        ElseIf CType(objCMB.SelectedItem, clsTipoPago).GuidTipo = New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+          btnAutocompletar.Visible = True
+          btnAutocompletar.Enabled = cmbTipoDeCuenta.Enabled
         Else
+
           btnAutocompletar.Visible = False
         End If
       End If
@@ -377,6 +385,19 @@ Public Class frmCuenta
           MsgBox("EL CBU esta inconpleto, debe ser de 22 digitos")
         End If
         
+
+      End If
+      If CType(cmbTipoDeCuenta.SelectedItem, clsTipoPago).GuidTipo = New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+        'hipotecario
+        If txtCodigo1.Text.Length = 22 Then
+          txtCodigo2.Text = txtCodigo1.Text.Substring(0, 3) '"Codigo Banco"
+          txtCodigo3.Text = txtCodigo1.Text.Substring(3, 4) '"Numero Sucursal"
+          txtCodigo4.Text = txtCodigo1.Text.Substring(8, 14) '"Numero de cuenta"
+          txtCodigo5.Text = " " '"Tipo Cuenta"
+        Else
+          MsgBox("EL CBU esta inconpleto, debe ser de 22 digitos")
+        End If
+
 
       End If
     Catch ex As Exception

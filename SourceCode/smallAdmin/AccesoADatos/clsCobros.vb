@@ -244,7 +244,9 @@ Public Class clsCobros
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
           ExportarACBU(vMovimientos)
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") 'CBU Hipotecario
-          ExportarADebitoHipotecario(vMovimientos)
+          ExportarADebitoHipotecario(vMovimientos, New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926"))
+        Case Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") 'CBU Hipotecario
+          ExportarADebitoHipotecario(vMovimientos, New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7"))
         Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") 'CBU Patagonia
           ExportarADebitoPatagonia(vMovimientos)
         Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
@@ -476,10 +478,10 @@ Public Class clsCobros
     End Try
   End Function
 
-  Private Shared Function ExportarADebitoHipotecario(ByVal vMovimientos As List(Of clsInfoMovimiento)) As Result
+  Private Shared Function ExportarADebitoHipotecario(ByVal vMovimientos As List(Of clsInfoMovimiento), ByVal vGuidPago As Guid) As Result
     Try
       Dim lineas As New List(Of String)
-      Dim objHipotecario As New clsHipotecario
+      Dim objHipotecario As New clsHipotecario(vGuidPago)
 
       lineas.Add("Cantidad: " & vMovimientos.Count.ToString)
       lineas.Add("CBU;NumComprobante;Fecha;Importe;Identificador")

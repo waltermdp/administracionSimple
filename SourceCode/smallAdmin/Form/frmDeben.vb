@@ -645,6 +645,10 @@ Public Class frmDeben
             Using objFormulario As New frmExportarPatagonia(objForm.TipoPagoSeleccionado)
               objFormulario.ShowDialog(Me)
             End Using
+          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+            Using objFormulario As New frmExportarHipotecario(objForm.TipoPagoSeleccionado)
+              objFormulario.ShowDialog(Me)
+            End Using
           Else
 
             Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
@@ -672,12 +676,17 @@ Public Class frmDeben
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Importar)
         If objForm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
           If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
-            Using objFormImportar As New frmImportarHipotecario
+            Using objFormImportar As New frmImportarHipotecario(objForm.TipoPagoSeleccionado)
               objFormImportar.ShowDialog(Me)
             End Using
             Exit Sub
           ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") Then
             Using objFormImportar As New frmImportarPatagonia
+              objFormImportar.ShowDialog(Me)
+            End Using
+            Exit Sub
+          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+            Using objFormImportar As New frmImportarHipotecario(objForm.TipoPagoSeleccionado)
               objFormImportar.ShowDialog(Me)
             End Using
             Exit Sub

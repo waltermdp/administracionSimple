@@ -1,7 +1,7 @@
 ﻿Imports libCommon.Comunes
 Public Class clsHipotecario
 
-  'Private Const NROCONVENIO As Integer = 6248
+
   Private Const MONEDA As Integer = 80
   Private Const TIPOMOV As Integer = 1 '01 debitos 05 revisiones debito
 
@@ -73,12 +73,20 @@ Public Class clsHipotecario
     End Set
   End Property
 
-  Public Sub New()
+  Public Sub New(ByVal vGuidConvenio As Guid)
     Try
       m_FechaGeneracion = g_Today
       m_FechaVencimiento = g_Today.AddDays(2)
       m_Secuencial = 0
-      m_Convenio = 6248
+      If vGuidConvenio = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+        m_Convenio = 6248
+      ElseIf vGuidConvenio = New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+        m_Convenio = 7465
+      Else
+        m_Convenio = 0
+        MsgBox("Convenio no disponible")
+      End If
+
       m_IdDebito = "COBROCUOTA"
       m_Concepto = "CUOTA"
     Catch ex As Exception

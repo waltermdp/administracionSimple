@@ -15,6 +15,8 @@ Public Class frmImportarHipotecario
   Private m_TotalImporte As Decimal
   Private m_totalRegistosADebitar As Integer
 
+  Private m_TipoPago As clsTipoPago
+
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
       Me.Close()
@@ -32,7 +34,7 @@ Public Class frmImportarHipotecario
       For Each item In m_Registros ' tmpRegistros
         ' If item.ImporteADebitar <> item.importeDebitado OrElse item.MotivoRechazo <> String.Empty Then Continue For
         Dim objVenta As New clsListProductos
-        objVenta.Cfg_Filtro = "WHERE NumComprobante=" & item.NroAbonado.ToString '& " and ValorCuotaFija=" & item.importeDebitado & " and GuidTipoPago={c3daf694-fdef-4e67-b02b-b7b3a9117926}"
+        objVenta.Cfg_Filtro = "WHERE NumComprobante=" & item.NroAbonado.ToString
         objVenta.RefreshData()
         If objVenta.Items.Count = 1 Then
           item.GuidProducto = objVenta.Items.First.GuidProducto
@@ -44,7 +46,7 @@ Public Class frmImportarHipotecario
             item.Nombre = objCliente.Items.First.ToString
           End If
           Dim objCuentas As New clsListaCuentas
-          objCuentas.Cfg_Filtro = "WHERE GuidCuenta={" & objVenta.Items.First.GuidCuenta.ToString & "} and TipoDeCuenta={c3daf694-fdef-4e67-b02b-b7b3a9117926}"
+          objCuentas.Cfg_Filtro = "WHERE GuidCuenta={" & objVenta.Items.First.GuidCuenta.ToString & "} and TipoDeCuenta={" & m_TipoPago.GuidTipo.ToString & "}" '
           objCuentas.RefreshData()
           If objCuentas.Items.Count = 1 Then
             'comparo CBU con codigo1
@@ -238,6 +240,22 @@ Public Class frmImportarHipotecario
       Next
       MsgBox("Finalizados correctamente")
       Me.Close()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
+
+    ' This call is required by the designer.
+    InitializeComponent()
+
+    ' Add any initialization after the InitializeComponent() call.
+    Try
+
+      m_TipoPago = vTipoPago.Clone
+
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

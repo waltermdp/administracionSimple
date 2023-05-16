@@ -88,6 +88,11 @@ Public Class frmTipoDeArchivo
           Close()
           Exit Sub
         End If
+        If m_TipoPagoSeleccionado.GuidTipo = Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+          DialogResult = Windows.Forms.DialogResult.OK
+          Close()
+          Exit Sub
+        End If
 
         Dim archivo As New List(Of String)
         Dim AbrirArchivo As New OpenFileDialog

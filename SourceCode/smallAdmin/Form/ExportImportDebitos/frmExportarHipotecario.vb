@@ -24,7 +24,7 @@ Public Class frmExportarHipotecario
 
   Private Sub frmExportarResumen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      m_Banco = New clsHipotecario
+      m_Banco = New clsHipotecario(m_TipoPago.GuidTipo)
       m_skip = True
       dtCurrent.Value = m_Banco.FechaGeneracion
       dtVencimiento.MinDate = dtCurrent.Value
