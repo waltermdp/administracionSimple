@@ -245,7 +245,7 @@ Public Class clsPago
             strSQL.Append("""" & .ValorCuota & """,")
             strSQL.Append("""" & .VencimientoCuota & """,")
             strSQL.Append("""" & .FechaPago & """,")
-            strSQL.Append("""" & .EstadoPago.ToString & """,")
+            strSQL.Append("""" & .EstadoPago & """,")
             strSQL.Append("""" & .NumComprobante & """")
 
             strSQL.Append(")")
@@ -271,7 +271,7 @@ Public Class clsPago
             strSQL.Append("[ValorCuota]=""" & .ValorCuota.ToString & """,")
             strSQL.Append("[VencimientoCuota]=""" & .VencimientoCuota & """,")
             strSQL.Append("[FechaPago]=""" & .FechaPago & """,")
-            strSQL.Append("[EstadoPago]=""" & .EstadoPago.ToString & """,")
+            strSQL.Append("[EstadoPago]=""" & .EstadoPago & """,")
             strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """")
 
             strSQL.Append(" WHERE [IdPago]=" & .IdPago)
