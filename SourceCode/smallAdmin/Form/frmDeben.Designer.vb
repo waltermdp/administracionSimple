@@ -1028,10 +1028,12 @@ Partial Class frmDeben
     '
     'UcTextBoxNumerico1
     '
-    Me.UcTextBoxNumerico1.Location = New System.Drawing.Point(353, 37)
+    Me.UcTextBoxNumerico1.Location = New System.Drawing.Point(346, 33)
     Me.UcTextBoxNumerico1.Name = "UcTextBoxNumerico1"
-    Me.UcTextBoxNumerico1.Size = New System.Drawing.Size(100, 20)
+    Me.UcTextBoxNumerico1.Size = New System.Drawing.Size(199, 20)
     Me.UcTextBoxNumerico1.TabIndex = 67
+    Me.UcTextBoxNumerico1.Text = "$0,00"
+    Me.UcTextBoxNumerico1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'frmDeben
     '
