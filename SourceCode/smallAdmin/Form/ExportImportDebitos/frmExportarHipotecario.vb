@@ -9,6 +9,7 @@ Public Class frmExportarHipotecario
   Private m_Banco As clsHipotecario
 
   Private m_skip As Boolean = False
+
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
 
     ' This call is required by the designer.
@@ -210,8 +211,6 @@ Public Class frmExportarHipotecario
     End Try
   End Sub
 
-
-
   Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
     Try
       RecargarValores()
@@ -220,9 +219,6 @@ Public Class frmExportarHipotecario
       Print_msg(ex.Message)
     End Try
   End Sub
-
-
-
 
   Private Sub dtCurrent_ValueChanged(sender As Object, e As EventArgs) Handles dtCurrent.ValueChanged
     Try
@@ -352,8 +348,6 @@ Public Class frmExportarHipotecario
         Exit Sub
       End If
 
-      'If txtNumeroConvenio.Text.Length <= 0 Then txtNumeroConvenio.Text = 0
-      'If txtNumeroConvenio.Text.Length > 5 Then txtNumeroConvenio.Text = txtNumeroConvenio.Text.Substring(0, 5)
       m_Banco.Convenio = CInt(txtNumeroConvenio.Text)
       m_skip = False
     Catch ex As Exception
@@ -393,8 +387,6 @@ Public Class frmExportarHipotecario
         Exit Sub
       End If
 
-      'If txtSecuencial.Text.Length <= 0 Then txtSecuencial.Text = 0
-      'If txtSecuencial.Text.Length > 3 Then txtSecuencial.Text = txtSecuencial.Text.Substring(0, 3)
       m_Banco.Secuencial = CDec(txtSecuencial.Text)
       m_skip = False
     Catch ex As Exception

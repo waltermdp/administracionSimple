@@ -105,6 +105,7 @@ Partial Class frmExportarHipotecario
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
+    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
     Me.lblResumen.Location = New System.Drawing.Point(174, 627)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
@@ -213,6 +214,7 @@ Partial Class frmExportarHipotecario
     '
     'Label2
     '
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
     Me.Label2.Location = New System.Drawing.Point(174, 57)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(72, 16)
@@ -236,6 +238,7 @@ Partial Class frmExportarHipotecario
     '
     'Label3
     '
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
     Me.Label3.Location = New System.Drawing.Point(378, 53)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(100, 20)
@@ -244,6 +247,7 @@ Partial Class frmExportarHipotecario
     '
     'Label4
     '
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
     Me.Label4.Location = New System.Drawing.Point(634, 53)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
@@ -252,6 +256,7 @@ Partial Class frmExportarHipotecario
     '
     'Label5
     '
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
     Me.Label5.Location = New System.Drawing.Point(899, 53)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
@@ -260,6 +265,7 @@ Partial Class frmExportarHipotecario
     '
     'Label6
     '
+    Me.Label6.BackColor = System.Drawing.Color.Transparent
     Me.Label6.Location = New System.Drawing.Point(174, 80)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(72, 20)
@@ -299,6 +305,7 @@ Partial Class frmExportarHipotecario
     '
     'Label1
     '
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
     Me.Label1.Location = New System.Drawing.Point(378, 80)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(72, 20)
@@ -315,6 +322,7 @@ Partial Class frmExportarHipotecario
     '
     'Label7
     '
+    Me.Label7.BackColor = System.Drawing.Color.Transparent
     Me.Label7.Location = New System.Drawing.Point(685, 80)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(72, 20)
@@ -326,11 +334,12 @@ Partial Class frmExportarHipotecario
     '
     Me.Label8.BackColor = System.Drawing.Color.Transparent
     Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label8.ForeColor = System.Drawing.Color.White
     Me.Label8.Location = New System.Drawing.Point(0, 0)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(1280, 25)
     Me.Label8.TabIndex = 78
-    Me.Label8.Text = "Hipotecario: Exportar Debitos Directos"
+    Me.Label8.Text = "HIPOTECARIO: EXPORTAR DEBITOS DIRECTOS"
     Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'frmExportarHipotecario
@@ -360,6 +369,7 @@ Partial Class frmExportarHipotecario
     Me.Controls.Add(Me.btnReload)
     Me.Controls.Add(Me.btnProcesar)
     Me.Controls.Add(Me.btnCancel)
+    Me.DoubleBuffered = True
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmExportarHipotecario"
     Me.ShowInTaskbar = False

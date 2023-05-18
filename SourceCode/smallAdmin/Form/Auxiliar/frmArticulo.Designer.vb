@@ -60,7 +60,7 @@ Partial Class frmArticulo
     Me.gbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.gbProducto.Location = New System.Drawing.Point(135, 32)
     Me.gbProducto.Name = "gbProducto"
-    Me.gbProducto.Size = New System.Drawing.Size(898, 494)
+    Me.gbProducto.Size = New System.Drawing.Size(813, 494)
     Me.gbProducto.TabIndex = 28
     Me.gbProducto.TabStop = False
     Me.gbProducto.Text = "Informacion del Articulo"
@@ -178,19 +178,21 @@ Partial Class frmArticulo
     Me.txtDescripcion.Location = New System.Drawing.Point(30, 236)
     Me.txtDescripcion.Multiline = True
     Me.txtDescripcion.Name = "txtDescripcion"
-    Me.txtDescripcion.Size = New System.Drawing.Size(846, 120)
+    Me.txtDescripcion.Size = New System.Drawing.Size(777, 120)
     Me.txtDescripcion.TabIndex = 5
     '
     'Label5
     '
-    Me.Label5.AutoSize = True
     Me.Label5.BackColor = System.Drawing.Color.Transparent
+    Me.Label5.Dock = System.Windows.Forms.DockStyle.Top
     Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label5.Location = New System.Drawing.Point(471, 9)
+    Me.Label5.ForeColor = System.Drawing.Color.White
+    Me.Label5.Location = New System.Drawing.Point(0, 0)
     Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(98, 20)
+    Me.Label5.Size = New System.Drawing.Size(960, 25)
     Me.Label5.TabIndex = 29
     Me.Label5.Text = "ARTICULO"
+    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'btnCancelar
     '
@@ -199,9 +201,9 @@ Partial Class frmArticulo
     Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancelar.ForeColor = System.Drawing.Color.White
-    Me.btnCancelar.Location = New System.Drawing.Point(12, 459)
+    Me.btnCancelar.Location = New System.Drawing.Point(10, 470)
     Me.btnCancelar.Name = "btnCancelar"
-    Me.btnCancelar.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancelar.Size = New System.Drawing.Size(110, 60)
     Me.btnCancelar.TabIndex = 31
     Me.btnCancelar.Text = "Salir"
     Me.btnCancelar.UseVisualStyleBackColor = False
@@ -213,9 +215,10 @@ Partial Class frmArticulo
     Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnGuardar.ForeColor = System.Drawing.Color.White
-    Me.btnGuardar.Location = New System.Drawing.Point(12, 32)
+    Me.btnGuardar.Location = New System.Drawing.Point(10, 35)
+    Me.btnGuardar.Margin = New System.Windows.Forms.Padding(10)
     Me.btnGuardar.Name = "btnGuardar"
-    Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
+    Me.btnGuardar.Size = New System.Drawing.Size(110, 60)
     Me.btnGuardar.TabIndex = 30
     Me.btnGuardar.Text = "Guardar"
     Me.btnGuardar.UseVisualStyleBackColor = False
@@ -227,7 +230,8 @@ Partial Class frmArticulo
     Me.btnLimpiarCampos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnLimpiarCampos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnLimpiarCampos.ForeColor = System.Drawing.Color.White
-    Me.btnLimpiarCampos.Location = New System.Drawing.Point(12, 100)
+    Me.btnLimpiarCampos.Location = New System.Drawing.Point(10, 105)
+    Me.btnLimpiarCampos.Margin = New System.Windows.Forms.Padding(10)
     Me.btnLimpiarCampos.Name = "btnLimpiarCampos"
     Me.btnLimpiarCampos.Size = New System.Drawing.Size(110, 61)
     Me.btnLimpiarCampos.TabIndex = 32
@@ -239,7 +243,9 @@ Partial Class frmArticulo
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.Silver
-    Me.ClientSize = New System.Drawing.Size(1051, 538)
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
+    Me.ClientSize = New System.Drawing.Size(960, 540)
+    Me.ControlBox = False
     Me.Controls.Add(Me.btnLimpiarCampos)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnGuardar)
@@ -247,13 +253,16 @@ Partial Class frmArticulo
     Me.Controls.Add(Me.gbProducto)
     Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+    Me.MaximizeBox = False
+    Me.MinimizeBox = False
     Me.Name = "frmArticulo"
+    Me.ShowIcon = False
+    Me.ShowInTaskbar = False
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmArticulo"
     Me.gbProducto.ResumeLayout(False)
     Me.gbProducto.PerformLayout()
     Me.ResumeLayout(False)
-    Me.PerformLayout()
 
   End Sub
   Friend WithEvents gbProducto As System.Windows.Forms.GroupBox

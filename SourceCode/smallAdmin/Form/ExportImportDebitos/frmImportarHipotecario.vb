@@ -17,6 +17,64 @@ Public Class frmImportarHipotecario
 
   Private m_TipoPago As clsTipoPago
 
+  Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
+
+    ' This call is required by the designer.
+    InitializeComponent()
+
+    ' Add any initialization after the InitializeComponent() call.
+    Try
+
+      m_TipoPago = vTipoPago.Clone
+      m_Banco = New clsHipotecario(vTipoPago.GuidTipo)
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+    Try
+      Init()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub frmImportarHipotecario_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Try
+      Init()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Init()
+    Try
+      m_LineasArchivo = New List(Of String)
+      Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
+      If vResult = Result.OK Then
+        Using objForm As New frmProgreso(AddressOf CargarInicio)
+          objForm.ShowDialog(Me)
+        End Using
+
+      End If
+      ClsInfoImportarHipotecarioBindingSource.DataSource = m_Registros
+      ClsInfoImportarHipotecarioBindingSource.ResetBindings(False)
+      lblResumen.Text = String.Format("Total de registros: {0}", m_Registros.Count)
+      m_totalRegistosADebitar = m_Registros.Where(Function(c) c.Importar = True).Count
+      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Count - m_totalRegistosADebitar)
+      txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
+      txtConvenio.Text = m_Convenio.ToString
+      txtImporteTotal.Text = m_TotalImporte.ToString
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
       Me.Close()
@@ -24,6 +82,53 @@ Public Class frmImportarHipotecario
       Print_msg(ex.Message)
     Finally
       m_Result = Result.CANCEL
+    End Try
+  End Sub
+
+
+  Private Sub CargarInicio()
+    Try
+      m_Registros = New List(Of clsInfoImportarHipotecario)
+      Dim length As Integer = m_LineasArchivo.Count
+      Dim vResult As Result
+      Dim validacionBloque1 As String = String.Empty
+
+      If length > 1 Then
+        FillEncabezado(m_LineasArchivo(0), m_Convenio, m_FechaEjecucion)
+        'Verifica convenio
+        If m_Convenio <> m_Banco.Convenio Then
+          MsgBox("El convenio del archivo no se corresponde al seleccionado en la importacion")
+          Exit Sub
+        End If
+        For Each linea In m_LineasArchivo.GetRange(1, length - 1)
+          Dim registro As New clsInfoImportarHipotecario
+          With registro
+            vResult = GenerateValidacionBloque1(linea.Substring(21, 3), linea.Substring(24, 4), validacionBloque1)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo la validacion de uno de los bloques de la cuenta, se cancela el proceso")
+              Exit Sub
+            End If
+            .NroCuenta = linea.Substring(21, 3) & linea.Substring(24, 4) & validacionBloque1 & linea.Substring(30, 14) 'linea.Substring(29, 15)
+            .NroAbonado = CInt(linea.Substring(44, 22))
+            .MotivoRechazo = linea.Substring(83, 4)
+            .FechaDebito = New Date(CInt(linea.Substring(111, 4)), CInt(linea.Substring(111 + 4, 2)), CInt(linea.Substring(111 + 6, 2))) ' 
+            'moneda 3 posiciones
+            .ImporteADebitar = CDec(CDec(linea.Substring(98, 13)) / 100)
+            .importeDebitado = CDec(CDec(linea.Substring(119, 13)) / 100)
+            .ImporteBH = 0
+            .Importar = False
+            .cuota = 0
+          End With
+          m_Registros.Add(registro)
+        Next
+
+      End If
+
+      Procesar()
+      m_TotalImporte = m_Registros.Where(Function(c) c.Importar = True).Sum(Function(c) c.ImporteADebitar)
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
     End Try
   End Sub
 
@@ -78,14 +183,8 @@ Public Class frmImportarHipotecario
     End Try
   End Sub
 
-  Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
-    Try
-      Init()
+ 
 
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
 
   Private Function GetLinesFromFile(ByRef rLineas As List(Of String)) As Result
     Try
@@ -109,38 +208,6 @@ Public Class frmImportarHipotecario
     End Try
   End Function
 
-  Private Sub frmImportarHipotecario_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-    Try
-      Init()
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub Init()
-    Try
-      m_LineasArchivo = New List(Of String)
-      Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
-      If vResult = Result.OK Then
-        Using objForm As New frmProgreso(AddressOf CargarInicio)
-          objForm.ShowDialog(Me)
-        End Using
-
-      End If
-      ClsInfoImportarHipotecarioBindingSource.DataSource = m_Registros
-      ClsInfoImportarHipotecarioBindingSource.ResetBindings(False)
-      lblResumen.Text = String.Format("Total de registros: {0}", m_Registros.Count)
-      m_totalRegistosADebitar = m_Registros.Where(Function(c) c.Importar = True).Count
-      lblRechazados.Text = String.Format("Registros Rechazados: {0}", m_Registros.Count - m_totalRegistosADebitar)
-      txtFechaEjecucion.Text = m_FechaEjecucion.ToString("yyyy/MM/dd")
-      txtConvenio.Text = m_Convenio.ToString
-      txtImporteTotal.Text = m_TotalImporte.ToString
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
   Private Sub FillEncabezado(ByVal vLineaEncabezado As String, ByRef rConvenio As Integer, ByRef rFechaEjecucion As Date)
     Try
       'validar encabezado
@@ -157,46 +224,6 @@ Public Class frmImportarHipotecario
 
 
 
-  Private Sub CargarInicio()
-    Try
-      m_Registros = New List(Of clsInfoImportarHipotecario)
-      Dim length As Integer = m_LineasArchivo.Count
-      Dim vResult As Result
-      Dim validacionBloque1 As String = String.Empty
-
-      If length > 1 Then
-        FillEncabezado(m_LineasArchivo(0), m_Convenio, m_FechaEjecucion)
-        For Each linea In m_LineasArchivo.GetRange(1, length - 1)
-          Dim registro As New clsInfoImportarHipotecario
-          With registro
-            vResult = GenerateValidacionBloque1(linea.Substring(21, 3), linea.Substring(24, 4), validacionBloque1)
-            If vResult <> Result.OK Then
-              MsgBox("Fallo la validacion de uno de los bloques de la cuenta, se cancela el proceso")
-              Exit Sub
-            End If
-            .NroCuenta = linea.Substring(21, 3) & linea.Substring(24, 4) & validacionBloque1 & linea.Substring(30, 14) 'linea.Substring(29, 15)
-            .NroAbonado = CInt(linea.Substring(44, 22))
-            .MotivoRechazo = linea.Substring(83, 4)
-            .FechaDebito = New Date(CInt(linea.Substring(111, 4)), CInt(linea.Substring(111 + 4, 2)), CInt(linea.Substring(111 + 6, 2))) ' 
-            'moneda 3 posiciones
-            .ImporteADebitar = CDec(CDec(linea.Substring(98, 13)) / 100)
-            .importeDebitado = CDec(CDec(linea.Substring(119, 13)) / 100)
-            .ImporteBH = 0
-            .Importar = False
-            .cuota = 0
-          End With
-          m_Registros.Add(registro)
-        Next
-
-      End If
-
-      Procesar()
-      m_TotalImporte = m_Registros.Where(Function(c) c.Importar = True).Sum(Function(c) c.ImporteADebitar)
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
 
   Private Function GenerateValidacionBloque1(ByVal vBanco As String, ByVal vSucursal As String, ByRef rValidacion1 As String) As Result
     Try
@@ -245,19 +272,5 @@ Public Class frmImportarHipotecario
     End Try
   End Sub
 
-  Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
-
-    ' This call is required by the designer.
-    InitializeComponent()
-
-    ' Add any initialization after the InitializeComponent() call.
-    Try
-
-      m_TipoPago = vTipoPago.Clone
-
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
+  
 End Class

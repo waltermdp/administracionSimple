@@ -165,10 +165,10 @@
     <Compile Include="Form\Auxiliar\frmDetalle.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Auxiliar\frmExportarResumen.Designer.vb">
+    <Compile Include="Form\ExportImportDebitos\frmExportarResumen.Designer.vb">
       <DependentUpon>frmExportarResumen.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Auxiliar\frmExportarResumen.vb">
+    <Compile Include="Form\ExportImportDebitos\frmExportarResumen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Auxiliar\frmResumen.Designer.vb">
@@ -298,6 +298,7 @@
     <Compile Include="Modulos\modCommon.vb" />
     <Compile Include="Modulos\modFile.vb" />
     <Compile Include="Modulos\modInOut.vb" />
+    <Compile Include="Modulos\ModoDebito\clsDDPatagonia.vb" />
     <Compile Include="Modulos\ModoDebito\clsModoDebito.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -328,7 +329,7 @@
     <EmbeddedResource Include="Form\Auxiliar\frmDetalle.resx">
       <DependentUpon>frmDetalle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Auxiliar\frmExportarResumen.resx">
+    <EmbeddedResource Include="Form\ExportImportDebitos\frmExportarResumen.resx">
       <DependentUpon>frmExportarResumen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmResumen.resx">
@@ -447,7 +448,9 @@
       <Name>manDB</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modulos\Entidades\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

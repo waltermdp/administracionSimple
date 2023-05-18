@@ -8,15 +8,15 @@ Public Class clsHipotecario
   Private NROSERVICIO As String = " "
   Private NROEMPRESA As Integer = 0
   Private TIPOCUENTA As String = " "
-  'Private IDDEBITO As String = "COBROCUOTA"
   Private FECHATOPE As String = "00000000"
-  'Private DATOSRETORNO As String = "CUOTA"
+
   Private m_Convenio As Integer
   Private m_IdDebito As String
   Private m_Concepto As String
 
   Private m_FechaGeneracion As Date
   Private m_FechaVencimiento As Date
+
   Private m_Secuencial As Decimal
 
   Public Property Convenio As Integer

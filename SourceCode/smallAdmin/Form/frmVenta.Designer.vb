@@ -130,9 +130,9 @@ Partial Class frmVenta
     '
     Me.Label2.Location = New System.Drawing.Point(536, 67)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(120, 19)
+    Me.Label2.Size = New System.Drawing.Size(146, 19)
     Me.Label2.TabIndex = 12
-    Me.Label2.Text = "FechaVenta"
+    Me.Label2.Text = "Fecha de Contrato"
     '
     'btnSelectClient
     '
@@ -141,9 +141,9 @@ Partial Class frmVenta
     Me.btnSelectClient.FlatAppearance.BorderSize = 2
     Me.btnSelectClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSelectClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnSelectClient.Location = New System.Drawing.Point(23, 26)
+    Me.btnSelectClient.Location = New System.Drawing.Point(23, 20)
     Me.btnSelectClient.Name = "btnSelectClient"
-    Me.btnSelectClient.Size = New System.Drawing.Size(96, 31)
+    Me.btnSelectClient.Size = New System.Drawing.Size(110, 35)
     Me.btnSelectClient.TabIndex = 21
     Me.btnSelectClient.Text = "Seleccionar"
     Me.btnSelectClient.UseVisualStyleBackColor = False
@@ -155,9 +155,9 @@ Partial Class frmVenta
     Me.btnNewClient.FlatAppearance.BorderSize = 2
     Me.btnNewClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnNewClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnNewClient.Location = New System.Drawing.Point(23, 69)
+    Me.btnNewClient.Location = New System.Drawing.Point(23, 79)
     Me.btnNewClient.Name = "btnNewClient"
-    Me.btnNewClient.Size = New System.Drawing.Size(96, 31)
+    Me.btnNewClient.Size = New System.Drawing.Size(110, 35)
     Me.btnNewClient.TabIndex = 22
     Me.btnNewClient.Text = "Nuevo"
     Me.btnNewClient.UseVisualStyleBackColor = False
@@ -171,7 +171,7 @@ Partial Class frmVenta
     Me.btnSelectVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSelectVendedor.Location = New System.Drawing.Point(17, 26)
     Me.btnSelectVendedor.Name = "btnSelectVendedor"
-    Me.btnSelectVendedor.Size = New System.Drawing.Size(108, 31)
+    Me.btnSelectVendedor.Size = New System.Drawing.Size(110, 35)
     Me.btnSelectVendedor.TabIndex = 23
     Me.btnSelectVendedor.Text = "Seleccionar"
     Me.btnSelectVendedor.UseVisualStyleBackColor = False
@@ -290,7 +290,7 @@ Partial Class frmVenta
     Me.gpVenta.Size = New System.Drawing.Size(1098, 499)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
-    Me.gpVenta.Text = "3- Venta"
+    Me.gpVenta.Text = "3- CONTRATO"
     '
     'lvPlanPagos
     '
@@ -348,16 +348,16 @@ Partial Class frmVenta
     '
     Me.lblCuota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCuota.Location = New System.Drawing.Point(928, 185)
+    Me.lblCuota.Location = New System.Drawing.Point(938, 185)
     Me.lblCuota.Name = "lblCuota"
-    Me.lblCuota.Size = New System.Drawing.Size(142, 19)
+    Me.lblCuota.Size = New System.Drawing.Size(132, 19)
     Me.lblCuota.TabIndex = 63
     '
     'lblTotalCuotas
     '
     Me.lblTotalCuotas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblTotalCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotalCuotas.Location = New System.Drawing.Point(665, 184)
+    Me.lblTotalCuotas.Location = New System.Drawing.Point(688, 184)
     Me.lblTotalCuotas.Name = "lblTotalCuotas"
     Me.lblTotalCuotas.Size = New System.Drawing.Size(121, 19)
     Me.lblTotalCuotas.TabIndex = 62
@@ -366,42 +366,42 @@ Partial Class frmVenta
     '
     Me.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTotal.Location = New System.Drawing.Point(665, 154)
+    Me.lblTotal.Location = New System.Drawing.Point(688, 154)
     Me.lblTotal.Name = "lblTotal"
-    Me.lblTotal.Size = New System.Drawing.Size(405, 19)
+    Me.lblTotal.Size = New System.Drawing.Size(382, 19)
     Me.lblTotal.TabIndex = 61
     '
     'lblMedioDePago
     '
     Me.lblMedioDePago.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblMedioDePago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblMedioDePago.Location = New System.Drawing.Point(665, 126)
+    Me.lblMedioDePago.Location = New System.Drawing.Point(688, 126)
     Me.lblMedioDePago.Name = "lblMedioDePago"
-    Me.lblMedioDePago.Size = New System.Drawing.Size(405, 19)
+    Me.lblMedioDePago.Size = New System.Drawing.Size(382, 19)
     Me.lblMedioDePago.TabIndex = 60
     '
     'lblNumeroVenta
     '
     Me.lblNumeroVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblNumeroVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblNumeroVenta.Location = New System.Drawing.Point(665, 96)
+    Me.lblNumeroVenta.Location = New System.Drawing.Point(688, 96)
     Me.lblNumeroVenta.Name = "lblNumeroVenta"
-    Me.lblNumeroVenta.Size = New System.Drawing.Size(405, 19)
+    Me.lblNumeroVenta.Size = New System.Drawing.Size(382, 19)
     Me.lblNumeroVenta.TabIndex = 59
     '
     'lblFechaVenta
     '
     Me.lblFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.lblFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblFechaVenta.Location = New System.Drawing.Point(665, 67)
+    Me.lblFechaVenta.Location = New System.Drawing.Point(688, 67)
     Me.lblFechaVenta.Name = "lblFechaVenta"
-    Me.lblFechaVenta.Size = New System.Drawing.Size(405, 19)
+    Me.lblFechaVenta.Size = New System.Drawing.Size(382, 19)
     Me.lblFechaVenta.TabIndex = 58
     '
     'Label6
     '
     Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.Location = New System.Drawing.Point(555, 27)
+    Me.Label6.Location = New System.Drawing.Point(538, 27)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(136, 23)
     Me.Label6.TabIndex = 57
@@ -414,9 +414,9 @@ Partial Class frmVenta
     Me.btnPagos.FlatAppearance.BorderSize = 2
     Me.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnPagos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnPagos.Location = New System.Drawing.Point(719, 19)
+    Me.btnPagos.Location = New System.Drawing.Point(697, 17)
     Me.btnPagos.Name = "btnPagos"
-    Me.btnPagos.Size = New System.Drawing.Size(96, 31)
+    Me.btnPagos.Size = New System.Drawing.Size(110, 35)
     Me.btnPagos.TabIndex = 56
     Me.btnPagos.Text = "Editar"
     Me.btnPagos.UseVisualStyleBackColor = False
@@ -463,9 +463,9 @@ Partial Class frmVenta
     Me.btnEditarArticulosVendidos.FlatAppearance.BorderSize = 2
     Me.btnEditarArticulosVendidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEditarArticulosVendidos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnEditarArticulosVendidos.Location = New System.Drawing.Point(204, 19)
+    Me.btnEditarArticulosVendidos.Location = New System.Drawing.Point(182, 17)
     Me.btnEditarArticulosVendidos.Name = "btnEditarArticulosVendidos"
-    Me.btnEditarArticulosVendidos.Size = New System.Drawing.Size(96, 31)
+    Me.btnEditarArticulosVendidos.Size = New System.Drawing.Size(110, 35)
     Me.btnEditarArticulosVendidos.TabIndex = 41
     Me.btnEditarArticulosVendidos.Text = "Editar"
     Me.btnEditarArticulosVendidos.UseVisualStyleBackColor = False
@@ -491,7 +491,7 @@ Partial Class frmVenta
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
-    Me.lblValorCuota.Location = New System.Drawing.Point(805, 185)
+    Me.lblValorCuota.Location = New System.Drawing.Point(815, 184)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(117, 15)
     Me.lblValorCuota.TabIndex = 31
@@ -509,9 +509,9 @@ Partial Class frmVenta
     'Label12
     '
     Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label12.Location = New System.Drawing.Point(12, 27)
+    Me.Label12.Location = New System.Drawing.Point(20, 27)
     Me.Label12.Name = "Label12"
-    Me.Label12.Size = New System.Drawing.Size(186, 23)
+    Me.Label12.Size = New System.Drawing.Size(156, 23)
     Me.Label12.TabIndex = 19
     Me.Label12.Text = "Articulos Vendidos"
     '
@@ -525,12 +525,12 @@ Partial Class frmVenta
     Me.GroupBox1.Controls.Add(Me.btnSelectClient)
     Me.GroupBox1.Controls.Add(Me.btnNewClient)
     Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox1.Location = New System.Drawing.Point(170, 78)
+    Me.GroupBox1.Location = New System.Drawing.Point(170, 39)
     Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(535, 112)
+    Me.GroupBox1.Size = New System.Drawing.Size(535, 151)
     Me.GroupBox1.TabIndex = 34
     Me.GroupBox1.TabStop = False
-    Me.GroupBox1.Text = "1- Informacion Del Cliente"
+    Me.GroupBox1.Text = "1- INFORMACION DEL CLIENTE"
     '
     'GroupBox2
     '
@@ -541,17 +541,18 @@ Partial Class frmVenta
     Me.GroupBox2.Controls.Add(Me.btnSelectVendedor)
     Me.GroupBox2.Controls.Add(Me.txtDNIVendedor)
     Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox2.Location = New System.Drawing.Point(711, 78)
+    Me.GroupBox2.Location = New System.Drawing.Point(711, 39)
     Me.GroupBox2.Name = "GroupBox2"
-    Me.GroupBox2.Size = New System.Drawing.Size(557, 112)
+    Me.GroupBox2.Size = New System.Drawing.Size(557, 151)
     Me.GroupBox2.TabIndex = 35
     Me.GroupBox2.TabStop = False
-    Me.GroupBox2.Text = "2- Informacion del Vendedor"
+    Me.GroupBox2.Text = "2- INFORMACION DEL VENDEDOR"
     '
     'lblTitulo
     '
     Me.lblTitulo.BackColor = System.Drawing.Color.Transparent
-    Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblTitulo.ForeColor = System.Drawing.Color.White
     Me.lblTitulo.Location = New System.Drawing.Point(0, 0)
     Me.lblTitulo.Name = "lblTitulo"
     Me.lblTitulo.Size = New System.Drawing.Size(1280, 25)

@@ -4,8 +4,17 @@ Public Class ucTextBoxNumerico
 
   Private m_Cultura As New System.Globalization.CultureInfo("es-AR")
 
+  Private m_skip As Boolean
+  Private m_moneda As Boolean
 
-
+  Public Property Moneda As Boolean
+    Get
+      Return m_moneda
+    End Get
+    Set(value As Boolean)
+      m_moneda = value
+    End Set
+  End Property
 
   Public Sub New()
 
@@ -18,7 +27,7 @@ Public Class ucTextBoxNumerico
       m_Cultura.NumberFormat.CurrencyDecimalSeparator = ","
       m_Cultura.NumberFormat.CurrencyGroupSeparator = "."
       TextAlign = HorizontalAlignment.Right
-      Text = "$0,00" ' String.Format(m_Cultura, "{0:C}", CDec(0))
+      Text = String.Format(m_Cultura, "{0:C}", Text)
       
 
 
@@ -29,7 +38,6 @@ Public Class ucTextBoxNumerico
     End Try
   End Sub
 
-  Private m_cursorPos As Integer = 0
 
   Protected Overrides Sub OnKeyPress(e As KeyPressEventArgs)
     Try
@@ -64,20 +72,38 @@ Public Class ucTextBoxNumerico
     End Try
   End Function
 
-
-  Private m_skip As Boolean
+  Public Function GetDecimalValue() As Decimal
+    Try
+      Return Filter(Text)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return 0
+    End Try
+  End Function
+  Protected Overrides Sub OnGotFocus(e As EventArgs)
+    Try
+      MyBase.OnGotFocus(e)
+      SelectionStart = Text.Length
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
   Protected Overrides Sub OnTextChanged(e As EventArgs)
     Try
       If m_skip = True Then Exit Sub
       m_skip = True
-
+      Dim posicion As Integer
       MyBase.OnTextChanged(e)
-      m_cursorPos = Text.Length - SelectionStart
+      posicion = Text.Length - SelectionStart
+
+      If m_moneda Then
+        Text = String.Format(m_Cultura, "{0:C}", CDec(Filter(Me.Text) / 100))
+      Else
+        Text = Filter(Me.Text).ToString
+      End If
 
 
-      Text = String.Format(m_Cultura, "{0:C}", CDec(Filter(Me.Text) / 100))
-
-      Dim index As Integer = Text.Length - m_cursorPos
+      Dim index As Integer = Text.Length - posicion
       If index <= 0 Then index = 0
       SelectionStart = index
 

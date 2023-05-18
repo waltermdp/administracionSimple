@@ -48,7 +48,7 @@ Partial Class frmTipoDeArchivo
     Me.lblInfoImpExp.ForeColor = System.Drawing.Color.Black
     Me.lblInfoImpExp.Location = New System.Drawing.Point(13, 13)
     Me.lblInfoImpExp.Name = "lblInfoImpExp"
-    Me.lblInfoImpExp.Size = New System.Drawing.Size(298, 59)
+    Me.lblInfoImpExp.Size = New System.Drawing.Size(298, 45)
     Me.lblInfoImpExp.TabIndex = 4
     Me.lblInfoImpExp.Text = "Label1"
     '
@@ -59,9 +59,9 @@ Partial Class frmTipoDeArchivo
     Me.btnCancelImpExp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancelImpExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancelImpExp.ForeColor = System.Drawing.Color.White
-    Me.btnCancelImpExp.Location = New System.Drawing.Point(227, 126)
+    Me.btnCancelImpExp.Location = New System.Drawing.Point(201, 126)
     Me.btnCancelImpExp.Name = "btnCancelImpExp"
-    Me.btnCancelImpExp.Size = New System.Drawing.Size(84, 37)
+    Me.btnCancelImpExp.Size = New System.Drawing.Size(110, 35)
     Me.btnCancelImpExp.TabIndex = 3
     Me.btnCancelImpExp.Text = "Cancelar"
     Me.btnCancelImpExp.UseVisualStyleBackColor = False
@@ -75,7 +75,7 @@ Partial Class frmTipoDeArchivo
     Me.btnContinuarImpExp.ForeColor = System.Drawing.Color.White
     Me.btnContinuarImpExp.Location = New System.Drawing.Point(13, 126)
     Me.btnContinuarImpExp.Name = "btnContinuarImpExp"
-    Me.btnContinuarImpExp.Size = New System.Drawing.Size(90, 37)
+    Me.btnContinuarImpExp.Size = New System.Drawing.Size(110, 35)
     Me.btnContinuarImpExp.TabIndex = 2
     Me.btnContinuarImpExp.Text = "Continuar"
     Me.btnContinuarImpExp.UseVisualStyleBackColor = False
@@ -84,7 +84,7 @@ Partial Class frmTipoDeArchivo
     '
     Me.cmbTipoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbTipoPago.FormattingEnabled = True
-    Me.cmbTipoPago.Location = New System.Drawing.Point(70, 81)
+    Me.cmbTipoPago.Location = New System.Drawing.Point(69, 70)
     Me.cmbTipoPago.Name = "cmbTipoPago"
     Me.cmbTipoPago.Size = New System.Drawing.Size(188, 23)
     Me.cmbTipoPago.TabIndex = 0
@@ -96,10 +96,15 @@ Partial Class frmTipoDeArchivo
     Me.BackColor = System.Drawing.Color.White
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(349, 196)
+    Me.ControlBox = False
     Me.Controls.Add(Me.pnlSeleccionarPago)
     Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+    Me.MaximizeBox = False
+    Me.MinimizeBox = False
     Me.Name = "frmTipoDeArchivo"
+    Me.ShowIcon = False
+    Me.ShowInTaskbar = False
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmTipoDeArchivo"
     Me.pnlSeleccionarPago.ResumeLayout(False)

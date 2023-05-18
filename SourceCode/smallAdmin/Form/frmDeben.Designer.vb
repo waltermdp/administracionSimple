@@ -111,7 +111,6 @@ Partial Class frmDeben
     Me.AdelantoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ValorCuotaFijaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
-    Me.UcTextBoxNumerico1 = New main.ucTextBoxNumerico()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.Panel1.SuspendLayout()
@@ -1026,15 +1025,6 @@ Partial Class frmDeben
     '
     Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
     '
-    'UcTextBoxNumerico1
-    '
-    Me.UcTextBoxNumerico1.Location = New System.Drawing.Point(346, 33)
-    Me.UcTextBoxNumerico1.Name = "UcTextBoxNumerico1"
-    Me.UcTextBoxNumerico1.Size = New System.Drawing.Size(199, 20)
-    Me.UcTextBoxNumerico1.TabIndex = 67
-    Me.UcTextBoxNumerico1.Text = "$0,00"
-    Me.UcTextBoxNumerico1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1043,7 +1033,6 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
-    Me.Controls.Add(Me.UcTextBoxNumerico1)
     Me.Controls.Add(Me.btnMinimize)
     Me.Controls.Add(Me.lblFechaHoy)
     Me.Controls.Add(Me.Button1)
@@ -1087,7 +1076,6 @@ Partial Class frmDeben
     Me.gpPagarCuota.PerformLayout()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
-    Me.PerformLayout()
 
   End Sub
   Friend WithEvents dateInicio As System.Windows.Forms.DateTimePicker
@@ -1180,5 +1168,4 @@ Partial Class frmDeben
   Friend WithEvents btnAnular As System.Windows.Forms.Button
   Friend WithEvents lblFechaHoy As System.Windows.Forms.Label
   Friend WithEvents Panel2 As System.Windows.Forms.Panel
-  Friend WithEvents UcTextBoxNumerico1 As main.ucTextBoxNumerico
 End Class
