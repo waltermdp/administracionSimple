@@ -173,7 +173,7 @@ Public Class frmExportarResumen
       If msgResult = MsgBoxResult.Yes Then
         Process.Start(Entorno.EXPORT_PATH)
       End If
-      'Me.Close()
+
     Catch ex As Exception
       Print_msg(ex.Message)
       m_Result = Result.ErrorEx

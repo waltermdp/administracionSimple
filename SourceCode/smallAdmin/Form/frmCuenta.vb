@@ -12,9 +12,12 @@ Public Class frmCuenta
     Try
       m_GuidCliente = vGuidClient
       m_skip = True
-      cmbTipoDeCuenta.DataSource = g_TipoPago
-      m_skip = False
-   
+      Try
+        cmbTipoDeCuenta.DataSource = g_TipoPago
+      Finally
+        m_skip = False
+      End Try
+
       btnSalirSinCambios.Visible = vCancelar
 
     Catch ex As Exception
@@ -382,7 +385,7 @@ Public Class frmCuenta
           txtCodigo4.Text = txtCodigo1.Text.Substring(8, 14) '"Numero de cuenta"
           txtCodigo5.Text = " " '"Tipo Cuenta"
         Else
-          MsgBox("EL CBU esta inconpleto, debe ser de 22 digitos")
+          MsgBox("EL CBU esta incompleto, debe ser de 22 digitos")
         End If
         
 
@@ -395,7 +398,7 @@ Public Class frmCuenta
           txtCodigo4.Text = txtCodigo1.Text.Substring(8, 14) '"Numero de cuenta"
           txtCodigo5.Text = " " '"Tipo Cuenta"
         Else
-          MsgBox("EL CBU esta inconpleto, debe ser de 22 digitos")
+          MsgBox("EL CBU esta incompleto, debe ser de 22 digitos")
         End If
 
 

@@ -6,6 +6,7 @@ Public Class ucTextBoxNumerico
 
   Private m_skip As Boolean
   Private m_moneda As Boolean
+  Private m_limite As Integer = 22
 
   Public Property Moneda As Boolean
     Get
@@ -13,6 +14,15 @@ Public Class ucTextBoxNumerico
     End Get
     Set(value As Boolean)
       m_moneda = value
+    End Set
+  End Property
+
+  Public Property Limite As Integer
+    Get
+      Return m_limite
+    End Get
+    Set(value As Integer)
+      m_limite = value
     End Set
   End Property
 
@@ -28,7 +38,7 @@ Public Class ucTextBoxNumerico
       m_Cultura.NumberFormat.CurrencyGroupSeparator = "."
       TextAlign = HorizontalAlignment.Right
       Text = String.Format(m_Cultura, "{0:C}", Text)
-      
+      SelectionStart = Text.Length
 
 
     Catch ex As Exception
@@ -47,6 +57,11 @@ Public Class ucTextBoxNumerico
         Exit Sub
       End If
 
+      If Char.IsNumber(e.KeyChar) AndAlso Text.Length >= m_limite Then
+        e.Handled = True
+        Exit Sub
+      End If
+
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -59,6 +74,10 @@ Public Class ucTextBoxNumerico
       Dim lstChar As IEnumerable(Of Char) = vTexto.ToList.Where(Function(c) Char.IsDigit(c))
      
       If lstChar.Count <= 0 Then
+        Return 0
+      End If
+      If lstChar.Count >= 27 Then
+        MsgBox("Excedio la cantidad de 27 digitos, el valor se anula.")
         Return 0
       End If
       Dim textFiltrado As String = New String(lstChar.ToArray)
@@ -88,6 +107,8 @@ Public Class ucTextBoxNumerico
       Print_msg(ex.Message)
     End Try
   End Sub
+
+
   Protected Overrides Sub OnTextChanged(e As EventArgs)
     Try
       If m_skip = True Then Exit Sub

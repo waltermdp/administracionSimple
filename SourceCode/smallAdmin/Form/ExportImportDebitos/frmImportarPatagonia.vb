@@ -6,13 +6,26 @@ Public Class frmImportarPatagonia
   Private m_Registros As New List(Of clsInfoImportarPatagonia)
   Private m_Banco As clsPatagonia
   Private m_LineasArchivo As New List(Of String)
-
+  Private m_TipoPago As clsTipoPago
 
   Private m_FechaEjecucion As Date
   Private m_CUITEmpresa As Decimal
   Private m_TotalImporte As Decimal
   Private m_totalRegistros As Integer
   Private m_totalRegistosADebitar As Integer
+
+  Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
+
+    ' This call is required by the designer.
+    InitializeComponent()
+    Try
+      m_TipoPago = vTipoPago.Clone
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+
+  End Sub
 
   Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
     Try

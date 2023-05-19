@@ -93,6 +93,7 @@ Public Class clsTipoPago
     End Set
   End Property
 
+
   Public Sub New()
     Try
       m_Nombre = ""
@@ -108,6 +109,17 @@ Public Class clsTipoPago
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Public Function Es(ByVal vGuid As Guid) As Boolean
+    Try
+      If vGuid = m_GuidTipoPago Then Return True
+      Return False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
 
   Public Overrides Function ToString() As String
     Return m_Nombre

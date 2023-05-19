@@ -635,32 +635,34 @@ Public Class frmDeben
     Try
       Call clsCobros.ActualizarEstadosDePagos(g_Today)
 
+      Dim vTipoPagoSeleccionado As clsTipoPago = Nothing
+
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Exportar)
         If objForm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-          If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
-            Using objFormulario As New frmExportarHipotecario(objForm.TipoPagoSeleccionado)
-              objFormulario.ShowDialog(Me)
-            End Using
-          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") Then
-            Using objFormulario As New frmExportarPatagonia(objForm.TipoPagoSeleccionado)
-              objFormulario.ShowDialog(Me)
-            End Using
-          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
-            Using objFormulario As New frmExportarHipotecario(objForm.TipoPagoSeleccionado)
-              objFormulario.ShowDialog(Me)
-            End Using
-          Else
-
-            Using objFormulario As New frmExportarResumen(objForm.TipoPagoSeleccionado)
-              objFormulario.ShowDialog(Me)
-            End Using
-          End If
+          vTipoPagoSeleccionado = objForm.TipoPagoSeleccionado.Clone
         Else
           Exit Sub
         End If
       End Using
+      'Procesar
+      If vTipoPagoSeleccionado.Es(clsModoDebito.GUID_HIPOTECARIO) Then
+        Using objFormulario As New frmExportarHipotecario(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_PATAGONIA) Then
+        Using objFormulario As New frmExportarPatagonia(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_HIPOTECARIO_7464) Then
+        Using objFormulario As New frmExportarHipotecario(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      Else
 
-
+        Using objFormulario As New frmExportarResumen(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -671,40 +673,39 @@ Public Class frmDeben
     Try
       Call clsCobros.ActualizarEstadosDePagos(g_Today)
 
-      Dim vMovimientos As New List(Of clsInfoMovimiento)
+
       Dim vTipoPagoSeleccionado As clsTipoPago = Nothing
+
       Using objForm As New frmTipoDeArchivo(frmTipoDeArchivo.E_TIPO_INTERCAMBIO.Importar)
         If objForm.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-          If objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
-            Using objFormImportar As New frmImportarHipotecario(objForm.TipoPagoSeleccionado)
-              objFormImportar.ShowDialog(Me)
-            End Using
-            Exit Sub
-          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") Then
-            Using objFormImportar As New frmImportarPatagonia
-              objFormImportar.ShowDialog(Me)
-            End Using
-            Exit Sub
-          ElseIf objForm.TipoPagoSeleccionado.GuidTipo = Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
-            Using objFormImportar As New frmImportarHipotecario(objForm.TipoPagoSeleccionado)
-              objFormImportar.ShowDialog(Me)
-            End Using
-            Exit Sub
-          End If
-          vMovimientos = objForm.Movimientos.ToList
-          vTipoPagoSeleccionado = objForm.TipoPagoSeleccionado
+          vTipoPagoSeleccionado = objForm.TipoPagoSeleccionado.Clone
         Else
           Exit Sub
         End If
       End Using
-      'Procesar los movimientos entrantes
-      Using objFormResumen As New frmResumen
-        objFormResumen.Movimientos = vMovimientos.ToList
-        objFormResumen.TipoDePago = vTipoPagoSeleccionado
-        objFormResumen.ShowDialog(Me)
-      End Using
 
-      Call MostrarDeben()
+      'Procesar los movimientos entrantes
+      If vTipoPagoSeleccionado.Es(clsModoDebito.GUID_HIPOTECARIO) Then
+        Using objFormImportar As New frmImportarHipotecario(vTipoPagoSeleccionado)
+          objFormImportar.ShowDialog(Me)
+        End Using
+
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_PATAGONIA) Then
+        Using objFormImportar As New frmImportarPatagonia(vTipoPagoSeleccionado)
+          objFormImportar.ShowDialog(Me)
+        End Using
+
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_HIPOTECARIO_7464) Then
+        Using objFormImportar As New frmImportarHipotecario(vTipoPagoSeleccionado)
+          objFormImportar.ShowDialog(Me)
+        End Using
+      Else
+        Using objFormResumen As New frmResumen(vTipoPagoSeleccionado)
+          objFormResumen.ShowDialog(Me)
+        End Using
+
+        Call MostrarDeben()
+      End If
 
     Catch ex As Exception
       Call Print_msg(ex.Message)

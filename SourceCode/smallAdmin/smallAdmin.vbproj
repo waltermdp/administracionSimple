@@ -117,6 +117,12 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="Controles\ucDDHipotecario.Designer.vb">
+      <DependentUpon>ucDDHipotecario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ucDDHipotecario.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controles\ucTextBoxNumerico.Designer.vb">
       <DependentUpon>ucTextBoxNumerico.vb</DependentUpon>
     </Compile>
@@ -129,7 +135,7 @@
     <Compile Include="Form\ExportImportDebitos\frmImportarPatagonia.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modulos\clsHipotecario.vb" />
+    <Compile Include="Modulos\Entidades\clsHipotecario.vb" />
     <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
     <Compile Include="AccesoADatos\clsInfoResumen.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
@@ -287,14 +293,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modulos\clsComparar.vb" />
-    <Compile Include="Modulos\clsInfoHipotecario.vb" />
-    <Compile Include="Modulos\clsInfoImportarHipotecario.vb" />
-    <Compile Include="Modulos\clsInfoImportarPatagonia.vb" />
-    <Compile Include="Modulos\clsInfoPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\clsInfoHipotecario.vb" />
+    <Compile Include="Modulos\Entidades\clsInfoImportarHipotecario.vb" />
+    <Compile Include="Modulos\Entidades\clsInfoImportarPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\clsInfoPatagonia.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
-    <Compile Include="Modulos\clsPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\clsPatagonia.vb" />
     <Compile Include="Modulos\modCommon.vb" />
     <Compile Include="Modulos\modFile.vb" />
     <Compile Include="Modulos\modInOut.vb" />
@@ -323,6 +329,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controles\ucDDHipotecario.resx">
+      <DependentUpon>ucDDHipotecario.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmArticulo.resx">
       <DependentUpon>frmArticulo.vb</DependentUpon>
     </EmbeddedResource>
@@ -448,9 +457,7 @@
       <Name>manDB</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modulos\Entidades\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

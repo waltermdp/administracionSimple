@@ -6,23 +6,18 @@ Public Class frmResumen
   Private m_TipoPagoSeleccionado As clsTipoPago = Nothing
   Private m_skip As Boolean = False
 
-  Public Property Movimientos As List(Of clsInfoMovimiento)
-    Get
-      Return m_Movimientos
-    End Get
-    Set(value As List(Of clsInfoMovimiento))
-      m_Movimientos = value.ToList
-    End Set
-  End Property
+  Public Sub New(ByVal vTipoPagoSeleccionado As clsTipoPago)
 
-  Public Property TipoDePago As clsTipoPago
-    Get
-      Return m_TipoPagoSeleccionado
-    End Get
-    Set(value As clsTipoPago)
-      m_TipoPagoSeleccionado = value
-    End Set
-  End Property
+    ' This call is required by the designer.
+    InitializeComponent()
+
+    ' Add any initialization after the InitializeComponent() call.
+    Try
+      m_TipoPagoSeleccionado = vTipoPagoSeleccionado.Clone
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
 
   Private Sub btnOK_MouseClick(sender As Object, e As MouseEventArgs) Handles btnOK.MouseClick
@@ -502,11 +497,6 @@ Public Class frmResumen
 
   Private Sub frmResumen_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      If m_Movimientos Is Nothing Then
-        MsgBox("movimientos vacios")
-        Me.Close()
-
-      End If
 
       Using obj As New frmProgreso(AddressOf fillLista)
         obj.ShowDialog(Me)
@@ -517,8 +507,59 @@ Public Class frmResumen
     End Try
   End Sub
 
+  Private Function LeerArchivoEntrada(ByVal vModo As clsTipoPago) As libCommon.Comunes.Result
+    Try
+
+      Dim archivo As New List(Of String)
+      Dim AbrirArchivo As New OpenFileDialog
+      If AbrirArchivo.ShowDialog <> Windows.Forms.DialogResult.OK Then
+        Return Result.CANCEL
+      End If
+
+      If modFile.Load(AbrirArchivo.FileName, archivo) <> Result.OK Then
+        MsgBox("Error al abrir archivo")
+        Return Result.CANCEL
+      End If
+      Dim s As String = IO.Path.Combine(IMPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
+
+      IO.File.Copy(AbrirArchivo.FileName, s)
+      Dim mov As New List(Of clsInfoMovimiento)
+      If vModo.Es(clsModoDebito.GUID_EFECTIVO) Then
+        MsgBox("No implementado")
+        Return Result.CANCEL
+      ElseIf vModo.Es(clsModoDebito.GUID_VISA_DEBITO) Then
+        GetCuerpoVISADebito(archivo, mov)
+      ElseIf vModo.Es(clsModoDebito.GUID_VISA_CREDITO) Then
+        GetCuerpoVISACredito(archivo, mov)
+      ElseIf vModo.Es(clsModoDebito.GUID_CBU) Then
+        GetCuerpoCBU(archivo, mov)
+      ElseIf vModo.Es(clsModoDebito.GUID_MASTER_DEBITO) Then
+        GetCuerpoFirstData(archivo, mov)
+      ElseIf vModo.Es(clsModoDebito.GUID_MERCADO_PAGO) Then
+        MsgBox("No implementado")
+        Return Result.CANCEL
+      Else
+        MsgBox("No implementado")
+        Return Result.CANCEL
+      End If
+      m_Movimientos = New List(Of clsInfoMovimiento)
+      m_Movimientos.AddRange(mov.ToList)
+      Return Result.OK
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
   Private Sub fillLista()
     Try
+
+      If LeerArchivoEntrada(m_TipoPagoSeleccionado) <> Result.OK Then
+        Exit Sub
+      End If
+
+
       Select Case m_TipoPagoSeleccionado.GuidTipo
 
         Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito
