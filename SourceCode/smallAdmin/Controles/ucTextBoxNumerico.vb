@@ -120,7 +120,7 @@ Public Class ucTextBoxNumerico
       If m_moneda Then
         Text = String.Format(m_Cultura, "{0:C}", CDec(Filter(Me.Text) / 100))
       Else
-        Text = Filter(Me.Text).ToString
+        Text = Filter(Me.Text).ToString(New String("0"c, m_limite))
       End If
 
 

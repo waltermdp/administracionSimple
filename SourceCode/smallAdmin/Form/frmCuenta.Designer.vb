@@ -25,14 +25,6 @@ Partial Class frmCuenta
     Me.components = New System.ComponentModel.Container()
     Me.cmbTipoDeCuenta = New System.Windows.Forms.ComboBox()
     Me.Label1 = New System.Windows.Forms.Label()
-    Me.lblCodigo1 = New System.Windows.Forms.Label()
-    Me.txtCodigo1 = New System.Windows.Forms.TextBox()
-    Me.txtCodigo2 = New System.Windows.Forms.TextBox()
-    Me.lblCodigo2 = New System.Windows.Forms.Label()
-    Me.txtCodigo3 = New System.Windows.Forms.TextBox()
-    Me.lblCodigo3 = New System.Windows.Forms.Label()
-    Me.txtCodigo4 = New System.Windows.Forms.TextBox()
-    Me.lblCodigo4 = New System.Windows.Forms.Label()
     Me.btnVolver = New System.Windows.Forms.Button()
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.lblCliente = New System.Windows.Forms.Label()
@@ -42,95 +34,31 @@ Partial Class frmCuenta
     Me.btnCancelar = New System.Windows.Forms.Button()
     Me.btnSalirSinCambios = New System.Windows.Forms.Button()
     Me.btnEditar = New System.Windows.Forms.Button()
-    Me.txtCodigo5 = New System.Windows.Forms.TextBox()
-    Me.lblCodigo5 = New System.Windows.Forms.Label()
-    Me.txtcodigo6 = New System.Windows.Forms.TextBox()
-    Me.lblCodigo6 = New System.Windows.Forms.Label()
-    Me.btnAutocompletar = New System.Windows.Forms.Button()
+    Me.UcDDHipotecario1 = New main.ucDDHipotecario()
+    Me.UcCBU1 = New main.ucCBU()
+    Me.UcTarjeta1 = New main.ucTarjeta()
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'cmbTipoDeCuenta
     '
     Me.cmbTipoDeCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.cmbTipoDeCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.cmbTipoDeCuenta.FormattingEnabled = True
-    Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(413, 38)
+    Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(516, 26)
     Me.cmbTipoDeCuenta.Name = "cmbTipoDeCuenta"
-    Me.cmbTipoDeCuenta.Size = New System.Drawing.Size(174, 21)
+    Me.cmbTipoDeCuenta.Size = New System.Drawing.Size(174, 24)
     Me.cmbTipoDeCuenta.TabIndex = 0
     '
     'Label1
     '
     Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(410, 22)
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.Location = New System.Drawing.Point(410, 27)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(78, 13)
+    Me.Label1.Size = New System.Drawing.Size(100, 16)
     Me.Label1.TabIndex = 1
     Me.Label1.Text = "Medio de pago"
-    '
-    'lblCodigo1
-    '
-    Me.lblCodigo1.AutoSize = True
-    Me.lblCodigo1.Location = New System.Drawing.Point(410, 62)
-    Me.lblCodigo1.Name = "lblCodigo1"
-    Me.lblCodigo1.Size = New System.Drawing.Size(39, 13)
-    Me.lblCodigo1.TabIndex = 2
-    Me.lblCodigo1.Text = "Label2"
-    '
-    'txtCodigo1
-    '
-    Me.txtCodigo1.Location = New System.Drawing.Point(413, 79)
-    Me.txtCodigo1.Name = "txtCodigo1"
-    Me.txtCodigo1.Size = New System.Drawing.Size(366, 20)
-    Me.txtCodigo1.TabIndex = 3
-    '
-    'txtCodigo2
-    '
-    Me.txtCodigo2.Location = New System.Drawing.Point(413, 119)
-    Me.txtCodigo2.Name = "txtCodigo2"
-    Me.txtCodigo2.Size = New System.Drawing.Size(366, 20)
-    Me.txtCodigo2.TabIndex = 5
-    '
-    'lblCodigo2
-    '
-    Me.lblCodigo2.AutoSize = True
-    Me.lblCodigo2.Location = New System.Drawing.Point(410, 102)
-    Me.lblCodigo2.Name = "lblCodigo2"
-    Me.lblCodigo2.Size = New System.Drawing.Size(39, 13)
-    Me.lblCodigo2.TabIndex = 4
-    Me.lblCodigo2.Text = "Label3"
-    '
-    'txtCodigo3
-    '
-    Me.txtCodigo3.Location = New System.Drawing.Point(413, 159)
-    Me.txtCodigo3.Name = "txtCodigo3"
-    Me.txtCodigo3.Size = New System.Drawing.Size(366, 20)
-    Me.txtCodigo3.TabIndex = 7
-    '
-    'lblCodigo3
-    '
-    Me.lblCodigo3.AutoSize = True
-    Me.lblCodigo3.Location = New System.Drawing.Point(410, 142)
-    Me.lblCodigo3.Name = "lblCodigo3"
-    Me.lblCodigo3.Size = New System.Drawing.Size(39, 13)
-    Me.lblCodigo3.TabIndex = 6
-    Me.lblCodigo3.Text = "Label4"
-    '
-    'txtCodigo4
-    '
-    Me.txtCodigo4.Location = New System.Drawing.Point(413, 199)
-    Me.txtCodigo4.Name = "txtCodigo4"
-    Me.txtCodigo4.Size = New System.Drawing.Size(366, 20)
-    Me.txtCodigo4.TabIndex = 9
-    '
-    'lblCodigo4
-    '
-    Me.lblCodigo4.AutoSize = True
-    Me.lblCodigo4.Location = New System.Drawing.Point(410, 182)
-    Me.lblCodigo4.Name = "lblCodigo4"
-    Me.lblCodigo4.Size = New System.Drawing.Size(39, 13)
-    Me.lblCodigo4.TabIndex = 8
-    Me.lblCodigo4.Text = "Label5"
     '
     'btnVolver
     '
@@ -163,10 +91,10 @@ Partial Class frmCuenta
     'lblCliente
     '
     Me.lblCliente.AutoSize = True
-    Me.lblCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCliente.Location = New System.Drawing.Point(141, 54)
+    Me.lblCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCliente.Location = New System.Drawing.Point(141, 53)
     Me.lblCliente.Name = "lblCliente"
-    Me.lblCliente.Size = New System.Drawing.Size(215, 15)
+    Me.lblCliente.Size = New System.Drawing.Size(239, 16)
     Me.lblCliente.TabIndex = 12
     Me.lblCliente.Text = "Medios de pagos asociados al Cliente" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
     '
@@ -240,46 +168,26 @@ Partial Class frmCuenta
     Me.btnEditar.Text = "Editar"
     Me.btnEditar.UseVisualStyleBackColor = False
     '
-    'txtCodigo5
+    'UcDDHipotecario1
     '
-    Me.txtCodigo5.Location = New System.Drawing.Point(413, 237)
-    Me.txtCodigo5.Name = "txtCodigo5"
-    Me.txtCodigo5.Size = New System.Drawing.Size(366, 20)
-    Me.txtCodigo5.TabIndex = 19
+    Me.UcDDHipotecario1.Location = New System.Drawing.Point(413, 65)
+    Me.UcDDHipotecario1.Name = "UcDDHipotecario1"
+    Me.UcDDHipotecario1.Size = New System.Drawing.Size(375, 219)
+    Me.UcDDHipotecario1.TabIndex = 18
     '
-    'lblCodigo5
+    'UcCBU1
     '
-    Me.lblCodigo5.AutoSize = True
-    Me.lblCodigo5.Location = New System.Drawing.Point(410, 220)
-    Me.lblCodigo5.Name = "lblCodigo5"
-    Me.lblCodigo5.Size = New System.Drawing.Size(39, 13)
-    Me.lblCodigo5.TabIndex = 18
-    Me.lblCodigo5.Text = "Label5"
+    Me.UcCBU1.Location = New System.Drawing.Point(413, 65)
+    Me.UcCBU1.Name = "UcCBU1"
+    Me.UcCBU1.Size = New System.Drawing.Size(375, 219)
+    Me.UcCBU1.TabIndex = 19
     '
-    'txtcodigo6
+    'UcTarjeta1
     '
-    Me.txtcodigo6.Location = New System.Drawing.Point(413, 278)
-    Me.txtcodigo6.Name = "txtcodigo6"
-    Me.txtcodigo6.Size = New System.Drawing.Size(366, 20)
-    Me.txtcodigo6.TabIndex = 21
-    '
-    'lblCodigo6
-    '
-    Me.lblCodigo6.AutoSize = True
-    Me.lblCodigo6.Location = New System.Drawing.Point(410, 261)
-    Me.lblCodigo6.Name = "lblCodigo6"
-    Me.lblCodigo6.Size = New System.Drawing.Size(39, 13)
-    Me.lblCodigo6.TabIndex = 20
-    Me.lblCodigo6.Text = "Label5"
-    '
-    'btnAutocompletar
-    '
-    Me.btnAutocompletar.Location = New System.Drawing.Point(646, 36)
-    Me.btnAutocompletar.Name = "btnAutocompletar"
-    Me.btnAutocompletar.Size = New System.Drawing.Size(107, 23)
-    Me.btnAutocompletar.TabIndex = 22
-    Me.btnAutocompletar.Text = "autocompletar"
-    Me.btnAutocompletar.UseVisualStyleBackColor = True
+    Me.UcTarjeta1.Location = New System.Drawing.Point(413, 65)
+    Me.UcTarjeta1.Name = "UcTarjeta1"
+    Me.UcTarjeta1.Size = New System.Drawing.Size(375, 219)
+    Me.UcTarjeta1.TabIndex = 20
     '
     'frmCuenta
     '
@@ -287,11 +195,9 @@ Partial Class frmCuenta
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.ClientSize = New System.Drawing.Size(810, 310)
-    Me.Controls.Add(Me.btnAutocompletar)
-    Me.Controls.Add(Me.txtcodigo6)
-    Me.Controls.Add(Me.lblCodigo6)
-    Me.Controls.Add(Me.txtCodigo5)
-    Me.Controls.Add(Me.lblCodigo5)
+    Me.Controls.Add(Me.UcTarjeta1)
+    Me.Controls.Add(Me.UcCBU1)
+    Me.Controls.Add(Me.UcDDHipotecario1)
     Me.Controls.Add(Me.btnEditar)
     Me.Controls.Add(Me.btnSalirSinCambios)
     Me.Controls.Add(Me.btnCancelar)
@@ -300,14 +206,6 @@ Partial Class frmCuenta
     Me.Controls.Add(Me.lblCliente)
     Me.Controls.Add(Me.btnGuardar)
     Me.Controls.Add(Me.btnVolver)
-    Me.Controls.Add(Me.txtCodigo4)
-    Me.Controls.Add(Me.lblCodigo4)
-    Me.Controls.Add(Me.txtCodigo3)
-    Me.Controls.Add(Me.lblCodigo3)
-    Me.Controls.Add(Me.txtCodigo2)
-    Me.Controls.Add(Me.lblCodigo2)
-    Me.Controls.Add(Me.txtCodigo1)
-    Me.Controls.Add(Me.lblCodigo1)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.cmbTipoDeCuenta)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -321,14 +219,6 @@ Partial Class frmCuenta
   End Sub
   Friend WithEvents cmbTipoDeCuenta As System.Windows.Forms.ComboBox
   Friend WithEvents Label1 As System.Windows.Forms.Label
-  Friend WithEvents lblCodigo1 As System.Windows.Forms.Label
-  Friend WithEvents txtCodigo1 As System.Windows.Forms.TextBox
-  Friend WithEvents txtCodigo2 As System.Windows.Forms.TextBox
-  Friend WithEvents lblCodigo2 As System.Windows.Forms.Label
-  Friend WithEvents txtCodigo3 As System.Windows.Forms.TextBox
-  Friend WithEvents lblCodigo3 As System.Windows.Forms.Label
-  Friend WithEvents txtCodigo4 As System.Windows.Forms.TextBox
-  Friend WithEvents lblCodigo4 As System.Windows.Forms.Label
   Friend WithEvents btnVolver As System.Windows.Forms.Button
   Friend WithEvents btnGuardar As System.Windows.Forms.Button
   Friend WithEvents lblCliente As System.Windows.Forms.Label
@@ -338,9 +228,7 @@ Partial Class frmCuenta
   Friend WithEvents bsCuenta As System.Windows.Forms.BindingSource
   Friend WithEvents btnSalirSinCambios As System.Windows.Forms.Button
   Friend WithEvents btnEditar As System.Windows.Forms.Button
-  Friend WithEvents txtCodigo5 As System.Windows.Forms.TextBox
-  Friend WithEvents lblCodigo5 As System.Windows.Forms.Label
-  Friend WithEvents txtcodigo6 As System.Windows.Forms.TextBox
-  Friend WithEvents lblCodigo6 As System.Windows.Forms.Label
-  Friend WithEvents btnAutocompletar As System.Windows.Forms.Button
+  Friend WithEvents UcDDHipotecario1 As main.ucDDHipotecario
+  Friend WithEvents UcCBU1 As main.ucCBU
+  Friend WithEvents UcTarjeta1 As main.ucTarjeta
 End Class

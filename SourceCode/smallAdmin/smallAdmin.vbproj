@@ -117,6 +117,18 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="Controles\ucTarjeta.Designer.vb">
+      <DependentUpon>ucTarjeta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ucTarjeta.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ucCBU.Designer.vb">
+      <DependentUpon>ucCBU.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ucCBU.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controles\ucDDHipotecario.Designer.vb">
       <DependentUpon>ucDDHipotecario.vb</DependentUpon>
     </Compile>
@@ -329,6 +341,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controles\ucTarjeta.resx">
+      <DependentUpon>ucTarjeta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ucCBU.resx">
+      <DependentUpon>ucCBU.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controles\ucDDHipotecario.resx">
       <DependentUpon>ucDDHipotecario.vb</DependentUpon>
     </EmbeddedResource>

@@ -156,3 +156,6 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarPatagonia.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarPatagonia.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucDDHipotecario.resources
+c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucTarjeta.resources
+c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucCBU.resources
+c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucDDHipotecario.resources
