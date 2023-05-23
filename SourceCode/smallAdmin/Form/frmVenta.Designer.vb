@@ -23,7 +23,6 @@ Partial Class frmVenta
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmVenta))
     Me.Label1 = New System.Windows.Forms.Label()
     Me.btnSave = New System.Windows.Forms.Button()
     Me.btnCancel = New System.Windows.Forms.Button()
@@ -93,7 +92,7 @@ Partial Class frmVenta
     Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSave.ForeColor = System.Drawing.Color.White
-    Me.btnSave.Location = New System.Drawing.Point(10, 39)
+    Me.btnSave.Location = New System.Drawing.Point(10, 35)
     Me.btnSave.Margin = New System.Windows.Forms.Padding(10, 3, 3, 3)
     Me.btnSave.Name = "btnSave"
     Me.btnSave.Padding = New System.Windows.Forms.Padding(10)
@@ -109,7 +108,7 @@ Partial Class frmVenta
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(10, 635)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
     Me.btnCancel.Margin = New System.Windows.Forms.Padding(3, 3, 3, 25)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 60)
@@ -136,11 +135,12 @@ Partial Class frmVenta
     '
     'btnSelectClient
     '
-    Me.btnSelectClient.BackColor = System.Drawing.Color.White
+    Me.btnSelectClient.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnSelectClient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnSelectClient.FlatAppearance.BorderSize = 2
     Me.btnSelectClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnSelectClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSelectClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSelectClient.ForeColor = System.Drawing.Color.White
     Me.btnSelectClient.Location = New System.Drawing.Point(23, 20)
     Me.btnSelectClient.Name = "btnSelectClient"
     Me.btnSelectClient.Size = New System.Drawing.Size(110, 35)
@@ -150,11 +150,12 @@ Partial Class frmVenta
     '
     'btnNewClient
     '
-    Me.btnNewClient.BackColor = System.Drawing.Color.White
+    Me.btnNewClient.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnNewClient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnNewClient.FlatAppearance.BorderSize = 2
     Me.btnNewClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnNewClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNewClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNewClient.ForeColor = System.Drawing.Color.White
     Me.btnNewClient.Location = New System.Drawing.Point(23, 79)
     Me.btnNewClient.Name = "btnNewClient"
     Me.btnNewClient.Size = New System.Drawing.Size(110, 35)
@@ -164,11 +165,12 @@ Partial Class frmVenta
     '
     'btnSelectVendedor
     '
-    Me.btnSelectVendedor.BackColor = System.Drawing.Color.White
+    Me.btnSelectVendedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnSelectVendedor.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnSelectVendedor.FlatAppearance.BorderSize = 2
     Me.btnSelectVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnSelectVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSelectVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSelectVendedor.ForeColor = System.Drawing.Color.White
     Me.btnSelectVendedor.Location = New System.Drawing.Point(17, 26)
     Me.btnSelectVendedor.Name = "btnSelectVendedor"
     Me.btnSelectVendedor.Size = New System.Drawing.Size(110, 35)
@@ -189,7 +191,7 @@ Partial Class frmVenta
     'Label8
     '
     Me.Label8.AutoSize = True
-    Me.Label8.BackColor = System.Drawing.Color.White
+    Me.Label8.BackColor = System.Drawing.Color.Transparent
     Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label8.Location = New System.Drawing.Point(224, 17)
     Me.Label8.Name = "Label8"
@@ -210,7 +212,7 @@ Partial Class frmVenta
     'Label9
     '
     Me.Label9.AutoSize = True
-    Me.Label9.BackColor = System.Drawing.Color.White
+    Me.Label9.BackColor = System.Drawing.Color.Transparent
     Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label9.Location = New System.Drawing.Point(224, 60)
     Me.Label9.Name = "Label9"
@@ -231,7 +233,7 @@ Partial Class frmVenta
     'Label10
     '
     Me.Label10.AutoSize = True
-    Me.Label10.BackColor = System.Drawing.Color.White
+    Me.Label10.BackColor = System.Drawing.Color.Transparent
     Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label10.Location = New System.Drawing.Point(182, 18)
     Me.Label10.Name = "Label10"
@@ -252,7 +254,7 @@ Partial Class frmVenta
     'Label11
     '
     Me.Label11.AutoSize = True
-    Me.Label11.BackColor = System.Drawing.Color.White
+    Me.Label11.BackColor = System.Drawing.Color.Transparent
     Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label11.Location = New System.Drawing.Point(182, 60)
     Me.Label11.Name = "Label11"
@@ -262,7 +264,7 @@ Partial Class frmVenta
     '
     'gpVenta
     '
-    Me.gpVenta.BackColor = System.Drawing.Color.White
+    Me.gpVenta.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.gpVenta.Controls.Add(Me.lvPlanPagos)
     Me.gpVenta.Controls.Add(Me.Label5)
     Me.gpVenta.Controls.Add(Me.Label3)
@@ -287,13 +289,14 @@ Partial Class frmVenta
     Me.gpVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.gpVenta.Location = New System.Drawing.Point(170, 196)
     Me.gpVenta.Name = "gpVenta"
-    Me.gpVenta.Size = New System.Drawing.Size(1098, 499)
+    Me.gpVenta.Size = New System.Drawing.Size(1098, 501)
     Me.gpVenta.TabIndex = 33
     Me.gpVenta.TabStop = False
     Me.gpVenta.Text = "3- CONTRATO"
     '
     'lvPlanPagos
     '
+    Me.lvPlanPagos.BackColor = System.Drawing.Color.Gainsboro
     Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
     Me.lvPlanPagos.Location = New System.Drawing.Point(541, 262)
     Me.lvPlanPagos.Name = "lvPlanPagos"
@@ -409,11 +412,12 @@ Partial Class frmVenta
     '
     'btnPagos
     '
-    Me.btnPagos.BackColor = System.Drawing.Color.White
+    Me.btnPagos.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnPagos.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnPagos.FlatAppearance.BorderSize = 2
     Me.btnPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnPagos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnPagos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnPagos.ForeColor = System.Drawing.Color.White
     Me.btnPagos.Location = New System.Drawing.Point(697, 17)
     Me.btnPagos.Name = "btnPagos"
     Me.btnPagos.Size = New System.Drawing.Size(110, 35)
@@ -423,6 +427,7 @@ Partial Class frmVenta
     '
     'ListView1
     '
+    Me.ListView1.BackColor = System.Drawing.Color.Gainsboro
     Me.ListView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cArticulos, Me.cCantidad, Me.cEntregados, Me.cGuid})
     Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -458,11 +463,12 @@ Partial Class frmVenta
     '
     'btnEditarArticulosVendidos
     '
-    Me.btnEditarArticulosVendidos.BackColor = System.Drawing.Color.White
+    Me.btnEditarArticulosVendidos.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnEditarArticulosVendidos.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnEditarArticulosVendidos.FlatAppearance.BorderSize = 2
     Me.btnEditarArticulosVendidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnEditarArticulosVendidos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEditarArticulosVendidos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEditarArticulosVendidos.ForeColor = System.Drawing.Color.White
     Me.btnEditarArticulosVendidos.Location = New System.Drawing.Point(182, 17)
     Me.btnEditarArticulosVendidos.Name = "btnEditarArticulosVendidos"
     Me.btnEditarArticulosVendidos.Size = New System.Drawing.Size(110, 35)
@@ -517,7 +523,7 @@ Partial Class frmVenta
     '
     'GroupBox1
     '
-    Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.GroupBox1.Controls.Add(Me.Label8)
     Me.GroupBox1.Controls.Add(Me.txtNombreCliente)
     Me.GroupBox1.Controls.Add(Me.Label9)
@@ -534,7 +540,7 @@ Partial Class frmVenta
     '
     'GroupBox2
     '
-    Me.GroupBox2.BackColor = System.Drawing.Color.White
+    Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.GroupBox2.Controls.Add(Me.Label10)
     Me.GroupBox2.Controls.Add(Me.txtNombreVendedor)
     Me.GroupBox2.Controls.Add(Me.Label11)
@@ -551,20 +557,20 @@ Partial Class frmVenta
     'lblTitulo
     '
     Me.lblTitulo.BackColor = System.Drawing.Color.Transparent
-    Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.lblTitulo.ForeColor = System.Drawing.Color.White
     Me.lblTitulo.Location = New System.Drawing.Point(0, 0)
     Me.lblTitulo.Name = "lblTitulo"
     Me.lblTitulo.Size = New System.Drawing.Size(1280, 25)
     Me.lblTitulo.TabIndex = 61
-    Me.lblTitulo.Text = "VENTA"
+    Me.lblTitulo.Text = "CONTRATO"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
     Me.Controls.Add(Me.lblTitulo)

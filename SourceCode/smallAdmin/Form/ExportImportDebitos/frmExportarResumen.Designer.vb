@@ -37,9 +37,9 @@ Partial Class frmExportarResumen
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(34, 615)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 43
     Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = False
@@ -51,9 +51,9 @@ Partial Class frmExportarResumen
     Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(34, 45)
+    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
     Me.btnProcesar.Name = "btnProcesar"
-    Me.btnProcesar.Size = New System.Drawing.Size(110, 61)
+    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
     Me.btnProcesar.TabIndex = 44
     Me.btnProcesar.Text = "Procesar"
     Me.btnProcesar.UseVisualStyleBackColor = False
@@ -74,28 +74,28 @@ Partial Class frmExportarResumen
     Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(34, 139)
+    Me.btnReload.Location = New System.Drawing.Point(10, 105)
     Me.btnReload.Name = "btnReload"
-    Me.btnReload.Size = New System.Drawing.Size(110, 61)
+    Me.btnReload.Size = New System.Drawing.Size(110, 60)
     Me.btnReload.TabIndex = 46
     Me.btnReload.Text = "Volver a Cargar"
     Me.btnReload.UseVisualStyleBackColor = False
     '
     'lblResumen
     '
-    Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(174, 568)
+    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
+    Me.lblResumen.Location = New System.Drawing.Point(177, 558)
     Me.lblResumen.Name = "lblResumen"
-    Me.lblResumen.Size = New System.Drawing.Size(52, 13)
+    Me.lblResumen.Size = New System.Drawing.Size(1080, 139)
     Me.lblResumen.TabIndex = 47
     Me.lblResumen.Text = "Resumen"
     '
     'Label1
     '
-    Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(174, 45)
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
+    Me.Label1.Location = New System.Drawing.Point(174, 35)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(96, 13)
+    Me.Label1.Size = New System.Drawing.Size(1083, 23)
     Me.Label1.TabIndex = 48
     Me.Label1.Text = "Registro a exportar"
     '
@@ -103,6 +103,7 @@ Partial Class frmExportarResumen
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.Label1)
@@ -111,12 +112,12 @@ Partial Class frmExportarResumen
     Me.Controls.Add(Me.lstViewResumen)
     Me.Controls.Add(Me.btnProcesar)
     Me.Controls.Add(Me.btnCancel)
+    Me.DoubleBuffered = True
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmExportarResumen"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmExportarResumen"
     Me.ResumeLayout(False)
-    Me.PerformLayout()
 
   End Sub
   Friend WithEvents btnCancel As System.Windows.Forms.Button

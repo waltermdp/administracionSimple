@@ -27,17 +27,6 @@ Partial Class frmVendedores
     Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.dgvListVendedores = New System.Windows.Forms.DataGridView()
-    Me.btnNuevo = New System.Windows.Forms.Button()
-    Me.btnEditar = New System.Windows.Forms.Button()
-    Me.btnBorrar = New System.Windows.Forms.Button()
-    Me.btnVolver = New System.Windows.Forms.Button()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.btnLiquidar = New System.Windows.Forms.Button()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.btnBuscar = New System.Windows.Forms.Button()
-    Me.txtFiltro = New System.Windows.Forms.TextBox()
-    Me.cmbGrupo = New System.Windows.Forms.ComboBox()
-    Me.btnSeleccionar = New System.Windows.Forms.Button()
     Me.IdVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,6 +43,17 @@ Partial Class frmVendedores
     Me.CategoriaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComentarioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnEditar = New System.Windows.Forms.Button()
+    Me.btnBorrar = New System.Windows.Forms.Button()
+    Me.btnVolver = New System.Windows.Forms.Button()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.btnLiquidar = New System.Windows.Forms.Button()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.btnBuscar = New System.Windows.Forms.Button()
+    Me.txtFiltro = New System.Windows.Forms.TextBox()
+    Me.cmbGrupo = New System.Windows.Forms.ComboBox()
+    Me.btnSeleccionar = New System.Windows.Forms.Button()
     CType(Me.dgvListVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -111,143 +111,6 @@ Partial Class frmVendedores
     Me.dgvListVendedores.Size = New System.Drawing.Size(1071, 523)
     Me.dgvListVendedores.TabIndex = 25
     Me.dgvListVendedores.TabStop = False
-    '
-    'btnNuevo
-    '
-    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnNuevo.FlatAppearance.BorderSize = 0
-    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(24, 158)
-    Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
-    Me.btnNuevo.TabIndex = 26
-    Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = False
-    '
-    'btnEditar
-    '
-    Me.btnEditar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnEditar.FlatAppearance.BorderSize = 0
-    Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnEditar.ForeColor = System.Drawing.Color.White
-    Me.btnEditar.Location = New System.Drawing.Point(24, 234)
-    Me.btnEditar.Name = "btnEditar"
-    Me.btnEditar.Size = New System.Drawing.Size(110, 61)
-    Me.btnEditar.TabIndex = 27
-    Me.btnEditar.Text = "Editar"
-    Me.btnEditar.UseVisualStyleBackColor = False
-    '
-    'btnBorrar
-    '
-    Me.btnBorrar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnBorrar.FlatAppearance.BorderSize = 0
-    Me.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnBorrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnBorrar.ForeColor = System.Drawing.Color.White
-    Me.btnBorrar.Location = New System.Drawing.Point(24, 310)
-    Me.btnBorrar.Name = "btnBorrar"
-    Me.btnBorrar.Size = New System.Drawing.Size(110, 61)
-    Me.btnBorrar.TabIndex = 28
-    Me.btnBorrar.Text = "Eliminar"
-    Me.btnBorrar.UseVisualStyleBackColor = False
-    '
-    'btnVolver
-    '
-    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnVolver.FlatAppearance.BorderSize = 0
-    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(24, 636)
-    Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(110, 61)
-    Me.btnVolver.TabIndex = 29
-    Me.btnVolver.Text = "Volver"
-    Me.btnVolver.UseVisualStyleBackColor = False
-    '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(593, 9)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(218, 20)
-    Me.Label1.TabIndex = 30
-    Me.Label1.Text = "LISTA DE VENDEDORES"
-    '
-    'btnLiquidar
-    '
-    Me.btnLiquidar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnLiquidar.FlatAppearance.BorderSize = 0
-    Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnLiquidar.ForeColor = System.Drawing.Color.White
-    Me.btnLiquidar.Location = New System.Drawing.Point(24, 158)
-    Me.btnLiquidar.Name = "btnLiquidar"
-    Me.btnLiquidar.Size = New System.Drawing.Size(110, 61)
-    Me.btnLiquidar.TabIndex = 31
-    Me.btnLiquidar.Text = "Liquidar"
-    Me.btnLiquidar.UseVisualStyleBackColor = False
-    Me.btnLiquidar.Visible = False
-    '
-    'Label2
-    '
-    Me.Label2.AutoSize = True
-    Me.Label2.BackColor = System.Drawing.Color.White
-    Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label2.Location = New System.Drawing.Point(180, 75)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(322, 15)
-    Me.Label2.TabIndex = 32
-    Me.Label2.Text = "Filtro por Apellido, Nombre, Numero de vendedor o Grupo"
-    '
-    'btnBuscar
-    '
-    Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnBuscar.FlatAppearance.BorderSize = 0
-    Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnBuscar.ForeColor = System.Drawing.Color.White
-    Me.btnBuscar.Location = New System.Drawing.Point(520, 75)
-    Me.btnBuscar.Name = "btnBuscar"
-    Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
-    Me.btnBuscar.TabIndex = 34
-    Me.btnBuscar.Text = "Buscar"
-    Me.btnBuscar.UseVisualStyleBackColor = False
-    '
-    'txtFiltro
-    '
-    Me.txtFiltro.Location = New System.Drawing.Point(183, 93)
-    Me.txtFiltro.Name = "txtFiltro"
-    Me.txtFiltro.Size = New System.Drawing.Size(319, 20)
-    Me.txtFiltro.TabIndex = 33
-    '
-    'cmbGrupo
-    '
-    Me.cmbGrupo.FormattingEnabled = True
-    Me.cmbGrupo.Location = New System.Drawing.Point(753, 96)
-    Me.cmbGrupo.Name = "cmbGrupo"
-    Me.cmbGrupo.Size = New System.Drawing.Size(206, 21)
-    Me.cmbGrupo.TabIndex = 35
-    '
-    'btnSeleccionar
-    '
-    Me.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnSeleccionar.FlatAppearance.BorderSize = 0
-    Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
-    Me.btnSeleccionar.Location = New System.Drawing.Point(24, 49)
-    Me.btnSeleccionar.Name = "btnSeleccionar"
-    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 61)
-    Me.btnSeleccionar.TabIndex = 36
-    Me.btnSeleccionar.Text = "Seleccionar"
-    Me.btnSeleccionar.UseVisualStyleBackColor = False
     '
     'IdVendedorDataGridViewTextBoxColumn
     '
@@ -363,6 +226,143 @@ Partial Class frmVendedores
     'bsVendedores
     '
     Me.bsVendedores.DataSource = GetType(manDB.clsInfoVendedor)
+    '
+    'btnNuevo
+    '
+    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnNuevo.FlatAppearance.BorderSize = 0
+    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNuevo.ForeColor = System.Drawing.Color.White
+    Me.btnNuevo.Location = New System.Drawing.Point(10, 105)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
+    Me.btnNuevo.TabIndex = 26
+    Me.btnNuevo.Text = "Nuevo"
+    Me.btnNuevo.UseVisualStyleBackColor = False
+    '
+    'btnEditar
+    '
+    Me.btnEditar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnEditar.FlatAppearance.BorderSize = 0
+    Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEditar.ForeColor = System.Drawing.Color.White
+    Me.btnEditar.Location = New System.Drawing.Point(10, 245)
+    Me.btnEditar.Name = "btnEditar"
+    Me.btnEditar.Size = New System.Drawing.Size(110, 60)
+    Me.btnEditar.TabIndex = 27
+    Me.btnEditar.Text = "Editar"
+    Me.btnEditar.UseVisualStyleBackColor = False
+    '
+    'btnBorrar
+    '
+    Me.btnBorrar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnBorrar.FlatAppearance.BorderSize = 0
+    Me.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnBorrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnBorrar.ForeColor = System.Drawing.Color.White
+    Me.btnBorrar.Location = New System.Drawing.Point(10, 315)
+    Me.btnBorrar.Name = "btnBorrar"
+    Me.btnBorrar.Size = New System.Drawing.Size(110, 60)
+    Me.btnBorrar.TabIndex = 28
+    Me.btnBorrar.Text = "Eliminar"
+    Me.btnBorrar.UseVisualStyleBackColor = False
+    '
+    'btnVolver
+    '
+    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnVolver.FlatAppearance.BorderSize = 0
+    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnVolver.ForeColor = System.Drawing.Color.White
+    Me.btnVolver.Location = New System.Drawing.Point(10, 637)
+    Me.btnVolver.Name = "btnVolver"
+    Me.btnVolver.Size = New System.Drawing.Size(110, 60)
+    Me.btnVolver.TabIndex = 29
+    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.UseVisualStyleBackColor = False
+    '
+    'Label1
+    '
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.ForeColor = System.Drawing.Color.White
+    Me.Label1.Location = New System.Drawing.Point(0, 0)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(1280, 25)
+    Me.Label1.TabIndex = 30
+    Me.Label1.Text = "LISTA DE VENDEDORES"
+    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
+    'btnLiquidar
+    '
+    Me.btnLiquidar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnLiquidar.FlatAppearance.BorderSize = 0
+    Me.btnLiquidar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnLiquidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnLiquidar.ForeColor = System.Drawing.Color.White
+    Me.btnLiquidar.Location = New System.Drawing.Point(10, 175)
+    Me.btnLiquidar.Name = "btnLiquidar"
+    Me.btnLiquidar.Size = New System.Drawing.Size(110, 60)
+    Me.btnLiquidar.TabIndex = 31
+    Me.btnLiquidar.Text = "Liquidar"
+    Me.btnLiquidar.UseVisualStyleBackColor = False
+    Me.btnLiquidar.Visible = False
+    '
+    'Label2
+    '
+    Me.Label2.AutoSize = True
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
+    Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label2.Location = New System.Drawing.Point(180, 75)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(322, 15)
+    Me.Label2.TabIndex = 32
+    Me.Label2.Text = "Filtro por Apellido, Nombre, Numero de vendedor o Grupo"
+    '
+    'btnBuscar
+    '
+    Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnBuscar.FlatAppearance.BorderSize = 0
+    Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnBuscar.ForeColor = System.Drawing.Color.White
+    Me.btnBuscar.Location = New System.Drawing.Point(520, 75)
+    Me.btnBuscar.Name = "btnBuscar"
+    Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
+    Me.btnBuscar.TabIndex = 34
+    Me.btnBuscar.Text = "Buscar"
+    Me.btnBuscar.UseVisualStyleBackColor = False
+    '
+    'txtFiltro
+    '
+    Me.txtFiltro.Location = New System.Drawing.Point(183, 93)
+    Me.txtFiltro.Name = "txtFiltro"
+    Me.txtFiltro.Size = New System.Drawing.Size(319, 20)
+    Me.txtFiltro.TabIndex = 33
+    '
+    'cmbGrupo
+    '
+    Me.cmbGrupo.FormattingEnabled = True
+    Me.cmbGrupo.Location = New System.Drawing.Point(753, 96)
+    Me.cmbGrupo.Name = "cmbGrupo"
+    Me.cmbGrupo.Size = New System.Drawing.Size(206, 21)
+    Me.cmbGrupo.TabIndex = 35
+    '
+    'btnSeleccionar
+    '
+    Me.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSeleccionar.FlatAppearance.BorderSize = 0
+    Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
+    Me.btnSeleccionar.Location = New System.Drawing.Point(10, 35)
+    Me.btnSeleccionar.Name = "btnSeleccionar"
+    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 60)
+    Me.btnSeleccionar.TabIndex = 36
+    Me.btnSeleccionar.Text = "Seleccionar"
+    Me.btnSeleccionar.UseVisualStyleBackColor = False
     '
     'frmVendedores
     '

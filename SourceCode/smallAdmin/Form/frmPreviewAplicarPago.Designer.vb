@@ -47,26 +47,37 @@ Partial Class frmPreviewAplicarPago
     '
     'btnAplicar
     '
-    Me.btnAplicar.Location = New System.Drawing.Point(25, 27)
+    Me.btnAplicar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnAplicar.FlatAppearance.BorderSize = 0
+    Me.btnAplicar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnAplicar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnAplicar.ForeColor = System.Drawing.Color.White
+    Me.btnAplicar.Location = New System.Drawing.Point(10, 35)
     Me.btnAplicar.Name = "btnAplicar"
-    Me.btnAplicar.Size = New System.Drawing.Size(92, 52)
+    Me.btnAplicar.Size = New System.Drawing.Size(110, 60)
     Me.btnAplicar.TabIndex = 2
     Me.btnAplicar.Text = "Aplicar y salir"
-    Me.btnAplicar.UseVisualStyleBackColor = True
+    Me.btnAplicar.UseVisualStyleBackColor = False
     '
     'btnCancelar
     '
-    Me.btnCancelar.Location = New System.Drawing.Point(25, 356)
+    Me.btnCancelar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancelar.FlatAppearance.BorderSize = 0
+    Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancelar.ForeColor = System.Drawing.Color.White
+    Me.btnCancelar.Location = New System.Drawing.Point(10, 346)
     Me.btnCancelar.Name = "btnCancelar"
-    Me.btnCancelar.Size = New System.Drawing.Size(92, 52)
+    Me.btnCancelar.Size = New System.Drawing.Size(110, 60)
     Me.btnCancelar.TabIndex = 3
     Me.btnCancelar.Text = "Cancelar"
-    Me.btnCancelar.UseVisualStyleBackColor = True
+    Me.btnCancelar.UseVisualStyleBackColor = False
     '
     'frmPreviewAplicarPago
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(816, 415)
     Me.Controls.Add(Me.btnCancelar)
     Me.Controls.Add(Me.btnAplicar)

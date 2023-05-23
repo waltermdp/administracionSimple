@@ -24,6 +24,18 @@ Partial Class frmImportarHipotecario
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.lblResumen = New System.Windows.Forms.Label()
+    Me.btnReload = New System.Windows.Forms.Button()
+    Me.btnProcesar = New System.Windows.Forms.Button()
+    Me.btnCancel = New System.Windows.Forms.Button()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.txtConvenio = New System.Windows.Forms.TextBox()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.txtImporteTotal = New System.Windows.Forms.TextBox()
+    Me.txtFechaEjecucion = New System.Windows.Forms.TextBox()
+    Me.lblRechazados = New System.Windows.Forms.Label()
+    Me.Label5 = New System.Windows.Forms.Label()
     Me.ImportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NroAbonadoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,18 +50,6 @@ Partial Class frmImportarHipotecario
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoImportarHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.lblResumen = New System.Windows.Forms.Label()
-    Me.btnReload = New System.Windows.Forms.Button()
-    Me.btnProcesar = New System.Windows.Forms.Button()
-    Me.btnCancel = New System.Windows.Forms.Button()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.txtConvenio = New System.Windows.Forms.TextBox()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.Label3 = New System.Windows.Forms.Label()
-    Me.txtImporteTotal = New System.Windows.Forms.TextBox()
-    Me.txtFechaEjecucion = New System.Windows.Forms.TextBox()
-    Me.lblRechazados = New System.Windows.Forms.Label()
-    Me.Label5 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoImportarHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -68,6 +68,134 @@ Partial Class frmImportarHipotecario
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 54
+    '
+    'lblResumen
+    '
+    Me.lblResumen.AutoSize = True
+    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
+    Me.lblResumen.Location = New System.Drawing.Point(166, 88)
+    Me.lblResumen.Name = "lblResumen"
+    Me.lblResumen.Size = New System.Drawing.Size(52, 13)
+    Me.lblResumen.TabIndex = 53
+    Me.lblResumen.Text = "Resumen"
+    '
+    'btnReload
+    '
+    Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnReload.FlatAppearance.BorderSize = 0
+    Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnReload.ForeColor = System.Drawing.Color.White
+    Me.btnReload.Location = New System.Drawing.Point(10, 105)
+    Me.btnReload.Name = "btnReload"
+    Me.btnReload.Size = New System.Drawing.Size(110, 60)
+    Me.btnReload.TabIndex = 52
+    Me.btnReload.Text = "Volver a Cargar"
+    Me.btnReload.UseVisualStyleBackColor = False
+    '
+    'btnProcesar
+    '
+    Me.btnProcesar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnProcesar.FlatAppearance.BorderSize = 0
+    Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnProcesar.ForeColor = System.Drawing.Color.White
+    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
+    Me.btnProcesar.Name = "btnProcesar"
+    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
+    Me.btnProcesar.TabIndex = 51
+    Me.btnProcesar.Text = "Procesar"
+    Me.btnProcesar.UseVisualStyleBackColor = False
+    '
+    'btnCancel
+    '
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
+    Me.btnCancel.Name = "btnCancel"
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
+    Me.btnCancel.TabIndex = 50
+    Me.btnCancel.Text = "Cancelar"
+    Me.btnCancel.UseVisualStyleBackColor = False
+    '
+    'Label1
+    '
+    Me.Label1.AutoSize = True
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
+    Me.Label1.Location = New System.Drawing.Point(166, 54)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(52, 13)
+    Me.Label1.TabIndex = 55
+    Me.Label1.Text = "Convenio"
+    '
+    'txtConvenio
+    '
+    Me.txtConvenio.Location = New System.Drawing.Point(224, 51)
+    Me.txtConvenio.Name = "txtConvenio"
+    Me.txtConvenio.ReadOnly = True
+    Me.txtConvenio.Size = New System.Drawing.Size(131, 20)
+    Me.txtConvenio.TabIndex = 56
+    '
+    'Label2
+    '
+    Me.Label2.AutoSize = True
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
+    Me.Label2.Location = New System.Drawing.Point(361, 54)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(115, 13)
+    Me.Label2.TabIndex = 57
+    Me.Label2.Text = "Importe Debitado Total"
+    '
+    'Label3
+    '
+    Me.Label3.AutoSize = True
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
+    Me.Label3.Location = New System.Drawing.Point(670, 54)
+    Me.Label3.Name = "Label3"
+    Me.Label3.Size = New System.Drawing.Size(87, 13)
+    Me.Label3.TabIndex = 58
+    Me.Label3.Text = "Fecha Ejecucion"
+    '
+    'txtImporteTotal
+    '
+    Me.txtImporteTotal.Location = New System.Drawing.Point(482, 51)
+    Me.txtImporteTotal.Name = "txtImporteTotal"
+    Me.txtImporteTotal.ReadOnly = True
+    Me.txtImporteTotal.Size = New System.Drawing.Size(182, 20)
+    Me.txtImporteTotal.TabIndex = 59
+    '
+    'txtFechaEjecucion
+    '
+    Me.txtFechaEjecucion.Location = New System.Drawing.Point(763, 51)
+    Me.txtFechaEjecucion.Name = "txtFechaEjecucion"
+    Me.txtFechaEjecucion.ReadOnly = True
+    Me.txtFechaEjecucion.Size = New System.Drawing.Size(146, 20)
+    Me.txtFechaEjecucion.TabIndex = 60
+    '
+    'lblRechazados
+    '
+    Me.lblRechazados.AutoSize = True
+    Me.lblRechazados.BackColor = System.Drawing.Color.Transparent
+    Me.lblRechazados.Location = New System.Drawing.Point(361, 88)
+    Me.lblRechazados.Name = "lblRechazados"
+    Me.lblRechazados.Size = New System.Drawing.Size(67, 13)
+    Me.lblRechazados.TabIndex = 61
+    Me.lblRechazados.Text = "Rechazados"
+    '
+    'Label5
+    '
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.ForeColor = System.Drawing.Color.White
+    Me.Label5.Location = New System.Drawing.Point(0, 0)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(1280, 25)
+    Me.Label5.TabIndex = 77
+    Me.Label5.Text = "Hipotecario: Importar Debitos Directos"
+    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'ImportarDataGridViewCheckBoxColumn
     '
@@ -168,128 +296,6 @@ Partial Class frmImportarHipotecario
     'ClsInfoImportarHipotecarioBindingSource
     '
     Me.ClsInfoImportarHipotecarioBindingSource.DataSource = GetType(main.clsInfoImportarHipotecario)
-    '
-    'lblResumen
-    '
-    Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(166, 88)
-    Me.lblResumen.Name = "lblResumen"
-    Me.lblResumen.Size = New System.Drawing.Size(52, 13)
-    Me.lblResumen.TabIndex = 53
-    Me.lblResumen.Text = "Resumen"
-    '
-    'btnReload
-    '
-    Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnReload.FlatAppearance.BorderSize = 0
-    Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(10, 148)
-    Me.btnReload.Name = "btnReload"
-    Me.btnReload.Size = New System.Drawing.Size(110, 60)
-    Me.btnReload.TabIndex = 52
-    Me.btnReload.Text = "Volver a Cargar"
-    Me.btnReload.UseVisualStyleBackColor = False
-    '
-    'btnProcesar
-    '
-    Me.btnProcesar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnProcesar.FlatAppearance.BorderSize = 0
-    Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
-    Me.btnProcesar.Name = "btnProcesar"
-    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
-    Me.btnProcesar.TabIndex = 51
-    Me.btnProcesar.Text = "Procesar"
-    Me.btnProcesar.UseVisualStyleBackColor = False
-    '
-    'btnCancel
-    '
-    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnCancel.FlatAppearance.BorderSize = 0
-    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(10, 635)
-    Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
-    Me.btnCancel.TabIndex = 50
-    Me.btnCancel.Text = "Cancelar"
-    Me.btnCancel.UseVisualStyleBackColor = False
-    '
-    'Label1
-    '
-    Me.Label1.AutoSize = True
-    Me.Label1.Location = New System.Drawing.Point(166, 54)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(52, 13)
-    Me.Label1.TabIndex = 55
-    Me.Label1.Text = "Convenio"
-    '
-    'txtConvenio
-    '
-    Me.txtConvenio.Location = New System.Drawing.Point(224, 51)
-    Me.txtConvenio.Name = "txtConvenio"
-    Me.txtConvenio.ReadOnly = True
-    Me.txtConvenio.Size = New System.Drawing.Size(131, 20)
-    Me.txtConvenio.TabIndex = 56
-    '
-    'Label2
-    '
-    Me.Label2.AutoSize = True
-    Me.Label2.Location = New System.Drawing.Point(361, 54)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(115, 13)
-    Me.Label2.TabIndex = 57
-    Me.Label2.Text = "Importe Debitado Total"
-    '
-    'Label3
-    '
-    Me.Label3.AutoSize = True
-    Me.Label3.Location = New System.Drawing.Point(670, 54)
-    Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(87, 13)
-    Me.Label3.TabIndex = 58
-    Me.Label3.Text = "Fecha Ejecucion"
-    '
-    'txtImporteTotal
-    '
-    Me.txtImporteTotal.Location = New System.Drawing.Point(482, 51)
-    Me.txtImporteTotal.Name = "txtImporteTotal"
-    Me.txtImporteTotal.ReadOnly = True
-    Me.txtImporteTotal.Size = New System.Drawing.Size(182, 20)
-    Me.txtImporteTotal.TabIndex = 59
-    '
-    'txtFechaEjecucion
-    '
-    Me.txtFechaEjecucion.Location = New System.Drawing.Point(763, 51)
-    Me.txtFechaEjecucion.Name = "txtFechaEjecucion"
-    Me.txtFechaEjecucion.ReadOnly = True
-    Me.txtFechaEjecucion.Size = New System.Drawing.Size(146, 20)
-    Me.txtFechaEjecucion.TabIndex = 60
-    '
-    'lblRechazados
-    '
-    Me.lblRechazados.AutoSize = True
-    Me.lblRechazados.Location = New System.Drawing.Point(361, 88)
-    Me.lblRechazados.Name = "lblRechazados"
-    Me.lblRechazados.Size = New System.Drawing.Size(67, 13)
-    Me.lblRechazados.TabIndex = 61
-    Me.lblRechazados.Text = "Rechazados"
-    '
-    'Label5
-    '
-    Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label5.Location = New System.Drawing.Point(0, 0)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(1280, 25)
-    Me.Label5.TabIndex = 77
-    Me.Label5.Text = "Hipotecario: Importar Debitos Directos"
-    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'frmImportarHipotecario
     '

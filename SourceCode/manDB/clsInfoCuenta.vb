@@ -105,15 +105,15 @@
   Public Sub New()
     MyBase.New()
     IdCuenta = -1
-    GuidCliente = Nothing
-    GuidCuenta = Nothing
+    GuidCliente = Guid.Empty
+    GuidCuenta = Guid.Empty
     Codigo1 = "--"
     Codigo2 = "--"
     Codigo3 = "--"
     Codigo4 = "--"
     Codigo5 = "--"
     Codigo6 = "--"
-    TipoDeCuenta = Nothing
+    TipoDeCuenta = Guid.Empty
   End Sub
 
   Public Function IsValid() As Boolean

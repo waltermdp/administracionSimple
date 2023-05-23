@@ -99,6 +99,16 @@ Public Class ucTextBoxNumerico
       Return 0
     End Try
   End Function
+
+  Public Function GetStringNumericValue() As String
+    Try
+      Return Text.ToString()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return String.Empty
+    End Try
+  End Function
+
   Protected Overrides Sub OnGotFocus(e As EventArgs)
     Try
       MyBase.OnGotFocus(e)
@@ -120,7 +130,7 @@ Public Class ucTextBoxNumerico
       If m_moneda Then
         Text = String.Format(m_Cultura, "{0:C}", CDec(Filter(Me.Text) / 100))
       Else
-        Text = Filter(Me.Text).ToString(New String("0"c, m_limite))
+        'Text = Filter(Me.Text).ToString(New String("0"c, m_limite))
       End If
 
 

@@ -22,7 +22,6 @@ Partial Class frmEstablecerPagos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEstablecerPagos))
     Me.btnCancel = New System.Windows.Forms.Button()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.txtNumVenta = New System.Windows.Forms.TextBox()
@@ -64,7 +63,7 @@ Partial Class frmEstablecerPagos
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(10, 635)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 10
@@ -80,7 +79,7 @@ Partial Class frmEstablecerPagos
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(1280, 25)
     Me.Label1.TabIndex = 11
-    Me.Label1.Text = "CONTRATOS: Edicion"
+    Me.Label1.Text = "CONTRATOS: EDICION"
     Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'txtNumVenta
@@ -117,6 +116,7 @@ Partial Class frmEstablecerPagos
     'Label15
     '
     Me.Label15.AutoSize = True
+    Me.Label15.BackColor = System.Drawing.Color.Transparent
     Me.Label15.Location = New System.Drawing.Point(587, 251)
     Me.Label15.Name = "Label15"
     Me.Label15.Size = New System.Drawing.Size(132, 13)
@@ -127,7 +127,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtAdelanto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtAdelanto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtAdelanto.Location = New System.Drawing.Point(259, 272)
+    Me.txtAdelanto.Location = New System.Drawing.Point(265, 272)
     Me.txtAdelanto.Name = "txtAdelanto"
     Me.txtAdelanto.Size = New System.Drawing.Size(123, 21)
     Me.txtAdelanto.TabIndex = 58
@@ -137,6 +137,7 @@ Partial Class frmEstablecerPagos
     'Label14
     '
     Me.Label14.AutoSize = True
+    Me.Label14.BackColor = System.Drawing.Color.Transparent
     Me.Label14.Location = New System.Drawing.Point(260, 251)
     Me.Label14.Name = "Label14"
     Me.Label14.Size = New System.Drawing.Size(238, 13)
@@ -146,6 +147,7 @@ Partial Class frmEstablecerPagos
     'lblValorCuota
     '
     Me.lblValorCuota.AutoSize = True
+    Me.lblValorCuota.BackColor = System.Drawing.Color.Transparent
     Me.lblValorCuota.Location = New System.Drawing.Point(269, 199)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
@@ -183,29 +185,33 @@ Partial Class frmEstablecerPagos
     '
     'btnSeleccionarCuenta
     '
+    Me.btnSeleccionarCuenta.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnSeleccionarCuenta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnSeleccionarCuenta.FlatAppearance.BorderSize = 2
     Me.btnSeleccionarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSeleccionarCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSeleccionarCuenta.ForeColor = System.Drawing.Color.White
     Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(385, 136)
     Me.btnSeleccionarCuenta.Name = "btnSeleccionarCuenta"
     Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnSeleccionarCuenta.TabIndex = 51
     Me.btnSeleccionarCuenta.Text = "Seleccionar"
-    Me.btnSeleccionarCuenta.UseVisualStyleBackColor = True
+    Me.btnSeleccionarCuenta.UseVisualStyleBackColor = False
     '
     'btnAddCuenta
     '
+    Me.btnAddCuenta.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnAddCuenta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnAddCuenta.FlatAppearance.BorderSize = 2
     Me.btnAddCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnAddCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnAddCuenta.ForeColor = System.Drawing.Color.White
     Me.btnAddCuenta.Location = New System.Drawing.Point(265, 136)
     Me.btnAddCuenta.Name = "btnAddCuenta"
     Me.btnAddCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnAddCuenta.TabIndex = 50
     Me.btnAddCuenta.Text = "Nuevo"
-    Me.btnAddCuenta.UseVisualStyleBackColor = True
+    Me.btnAddCuenta.UseVisualStyleBackColor = False
     '
     'Label2
     '
@@ -230,6 +236,7 @@ Partial Class frmEstablecerPagos
     'Label3
     '
     Me.Label3.AutoSize = True
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
     Me.Label3.Location = New System.Drawing.Point(520, 194)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(37, 13)
@@ -267,6 +274,7 @@ Partial Class frmEstablecerPagos
     'Label5
     '
     Me.Label5.AutoSize = True
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
     Me.Label5.Location = New System.Drawing.Point(389, 194)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(95, 13)
@@ -276,6 +284,7 @@ Partial Class frmEstablecerPagos
     'Label6
     '
     Me.Label6.AutoSize = True
+    Me.Label6.BackColor = System.Drawing.Color.Transparent
     Me.Label6.Location = New System.Drawing.Point(736, 218)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(105, 13)
@@ -285,13 +294,14 @@ Partial Class frmEstablecerPagos
     'chkEditarCuotas
     '
     Me.chkEditarCuotas.AutoSize = True
+    Me.chkEditarCuotas.BackColor = System.Drawing.Color.Transparent
     Me.chkEditarCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.chkEditarCuotas.Location = New System.Drawing.Point(623, 213)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
     Me.chkEditarCuotas.Size = New System.Drawing.Size(96, 19)
     Me.chkEditarCuotas.TabIndex = 49
     Me.chkEditarCuotas.Text = "EditarCuotas"
-    Me.chkEditarCuotas.UseVisualStyleBackColor = True
+    Me.chkEditarCuotas.UseVisualStyleBackColor = False
     '
     'dtProximoPago
     '
@@ -304,6 +314,7 @@ Partial Class frmEstablecerPagos
     'Label7
     '
     Me.Label7.AutoSize = True
+    Me.Label7.BackColor = System.Drawing.Color.Transparent
     Me.Label7.Location = New System.Drawing.Point(262, 313)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(76, 13)
@@ -361,7 +372,7 @@ Partial Class frmEstablecerPagos
     'frmEstablecerPagos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
     Me.Controls.Add(Me.btnGuardar)

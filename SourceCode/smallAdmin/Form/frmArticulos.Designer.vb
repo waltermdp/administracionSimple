@@ -155,11 +155,11 @@ Partial Class frmArticulos
     Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEditar.ForeColor = System.Drawing.Color.White
-    Me.btnEditar.Location = New System.Drawing.Point(10, 134)
-    Me.btnEditar.Margin = New System.Windows.Forms.Padding(10)
+    Me.btnEditar.Location = New System.Drawing.Point(10, 105)
+    Me.btnEditar.Margin = New System.Windows.Forms.Padding(0)
     Me.btnEditar.Name = "btnEditar"
     Me.btnEditar.Padding = New System.Windows.Forms.Padding(10)
-    Me.btnEditar.Size = New System.Drawing.Size(110, 61)
+    Me.btnEditar.Size = New System.Drawing.Size(110, 60)
     Me.btnEditar.TabIndex = 7
     Me.btnEditar.Text = "Editar"
     Me.btnEditar.UseVisualStyleBackColor = False
@@ -171,9 +171,10 @@ Partial Class frmArticulos
     Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEliminar.ForeColor = System.Drawing.Color.White
-    Me.btnEliminar.Location = New System.Drawing.Point(10, 224)
+    Me.btnEliminar.Location = New System.Drawing.Point(10, 175)
+    Me.btnEliminar.Margin = New System.Windows.Forms.Padding(10)
     Me.btnEliminar.Name = "btnEliminar"
-    Me.btnEliminar.Size = New System.Drawing.Size(110, 61)
+    Me.btnEliminar.Size = New System.Drawing.Size(110, 60)
     Me.btnEliminar.TabIndex = 8
     Me.btnEliminar.Text = "Eliminar"
     Me.btnEliminar.UseVisualStyleBackColor = False
@@ -185,7 +186,7 @@ Partial Class frmArticulos
     Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(10, 633)
+    Me.btnVolver.Location = New System.Drawing.Point(10, 637)
     Me.btnVolver.Name = "btnVolver"
     Me.btnVolver.Size = New System.Drawing.Size(110, 60)
     Me.btnVolver.TabIndex = 9
@@ -199,11 +200,11 @@ Partial Class frmArticulos
     Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(10, 53)
+    Me.btnNuevo.Location = New System.Drawing.Point(10, 35)
     Me.btnNuevo.Margin = New System.Windows.Forms.Padding(10)
     Me.btnNuevo.Name = "btnNuevo"
     Me.btnNuevo.Padding = New System.Windows.Forms.Padding(10)
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
     Me.btnNuevo.TabIndex = 11
     Me.btnNuevo.Text = "Nuevo"
     Me.btnNuevo.UseVisualStyleBackColor = False
@@ -271,6 +272,7 @@ Partial Class frmArticulos
     '
     Me.Label4.BackColor = System.Drawing.Color.Transparent
     Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label4.ForeColor = System.Drawing.Color.White
     Me.Label4.Location = New System.Drawing.Point(0, 0)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(1280, 25)
@@ -407,9 +409,9 @@ Partial Class frmArticulos
     Me.btnGrupos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnGrupos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnGrupos.ForeColor = System.Drawing.Color.White
-    Me.btnGrupos.Location = New System.Drawing.Point(10, 301)
+    Me.btnGrupos.Location = New System.Drawing.Point(10, 245)
     Me.btnGrupos.Name = "btnGrupos"
-    Me.btnGrupos.Size = New System.Drawing.Size(110, 61)
+    Me.btnGrupos.Size = New System.Drawing.Size(110, 60)
     Me.btnGrupos.TabIndex = 45
     Me.btnGrupos.Text = "Grupos"
     Me.btnGrupos.UseVisualStyleBackColor = False

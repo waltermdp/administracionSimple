@@ -46,11 +46,11 @@ Public Class ucDDHipotecario
     Try
       If UctxtCBU.Text.Length <> 22 Then Return False
       With rData
-        .Codigo1 = UctxtCBU.GetDecimalValue.ToString
-        .Codigo2 = uctxtCodigoBanco.GetDecimalValue.ToString
-        .Codigo3 = uctxtSucursal.GetDecimalValue.ToString
-        .Codigo4 = uctxtCuenta.GetDecimalValue.ToString
-        .Codigo5 = uctxtTipoCuenta.GetDecimalValue.ToString
+        .Codigo1 = UctxtCBU.Text.ToString
+        .Codigo2 = uctxtCodigoBanco.Text.ToString
+        .Codigo3 = uctxtSucursal.Text.ToString
+        .Codigo4 = uctxtCuenta.Text.ToString
+        .Codigo5 = uctxtTipoCuenta.Text.ToString
         .TipoDeCuenta = m_TipodeCuenta
         .GuidCliente = m_GuidCliente
       End With
@@ -60,6 +60,20 @@ Public Class ucDDHipotecario
       Return False
     End Try
   End Function
+
+  Public Sub Clear()
+    Try
+      UctxtCBU.Text = String.Empty
+      uctxtCodigoBanco.Text = String.Empty
+      uctxtSucursal.Text = String.Empty
+      uctxtCuenta.Text = String.Empty
+      uctxtTipoCuenta.Text = String.Empty
+      m_GuidCliente = Guid.Empty
+      m_TipodeCuenta = Guid.Empty
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
   Private Sub UctxtCBU_TextChanged(sender As Object, e As EventArgs) Handles UctxtCBU.TextChanged
     Try

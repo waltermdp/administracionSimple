@@ -28,18 +28,6 @@ Partial Class frmExportarHipotecario
     Me.btnReload = New System.Windows.Forms.Button()
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
-    Me.IdClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NumeroContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ImporteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.TipoCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuentaBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label2 = New System.Windows.Forms.Label()
     Me.txtNumeroConvenio = New System.Windows.Forms.TextBox()
     Me.txtImporteTotal = New System.Windows.Forms.TextBox()
@@ -55,6 +43,18 @@ Partial Class frmExportarHipotecario
     Me.txtConcepto = New System.Windows.Forms.TextBox()
     Me.Label7 = New System.Windows.Forms.Label()
     Me.Label8 = New System.Windows.Forms.Label()
+    Me.IdClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumeroContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ImporteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.TipoCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuentaBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -66,7 +66,7 @@ Partial Class frmExportarHipotecario
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(10, 635)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
     Me.btnCancel.Name = "btnCancel"
     Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 43
@@ -94,7 +94,7 @@ Partial Class frmExportarHipotecario
     Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(10, 108)
+    Me.btnReload.Location = New System.Drawing.Point(10, 105)
     Me.btnReload.Margin = New System.Windows.Forms.Padding(10)
     Me.btnReload.Name = "btnReload"
     Me.btnReload.Size = New System.Drawing.Size(110, 60)
@@ -126,6 +126,137 @@ Partial Class frmExportarHipotecario
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 49
+    '
+    'Label2
+    '
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
+    Me.Label2.Location = New System.Drawing.Point(174, 57)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(72, 16)
+    Me.Label2.TabIndex = 50
+    Me.Label2.Text = "CONVENIO"
+    '
+    'txtNumeroConvenio
+    '
+    Me.txtNumeroConvenio.Location = New System.Drawing.Point(252, 53)
+    Me.txtNumeroConvenio.Name = "txtNumeroConvenio"
+    Me.txtNumeroConvenio.Size = New System.Drawing.Size(100, 20)
+    Me.txtNumeroConvenio.TabIndex = 51
+    '
+    'txtImporteTotal
+    '
+    Me.txtImporteTotal.Location = New System.Drawing.Point(484, 53)
+    Me.txtImporteTotal.Name = "txtImporteTotal"
+    Me.txtImporteTotal.ReadOnly = True
+    Me.txtImporteTotal.Size = New System.Drawing.Size(133, 20)
+    Me.txtImporteTotal.TabIndex = 52
+    '
+    'Label3
+    '
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
+    Me.Label3.Location = New System.Drawing.Point(378, 53)
+    Me.Label3.Name = "Label3"
+    Me.Label3.Size = New System.Drawing.Size(100, 20)
+    Me.Label3.TabIndex = 53
+    Me.Label3.Text = "IMPORTE TOTAL"
+    '
+    'Label4
+    '
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
+    Me.Label4.Location = New System.Drawing.Point(634, 53)
+    Me.Label4.Name = "Label4"
+    Me.Label4.Size = New System.Drawing.Size(79, 23)
+    Me.Label4.TabIndex = 54
+    Me.Label4.Text = "Fecha Actual"
+    '
+    'Label5
+    '
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
+    Me.Label5.Location = New System.Drawing.Point(899, 53)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(100, 23)
+    Me.Label5.TabIndex = 55
+    Me.Label5.Text = "Fecha Vencimiento"
+    '
+    'Label6
+    '
+    Me.Label6.BackColor = System.Drawing.Color.Transparent
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.Location = New System.Drawing.Point(174, 80)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(72, 20)
+    Me.Label6.TabIndex = 58
+    Me.Label6.Text = "Secuencial"
+    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtSecuencial
+    '
+    Me.txtSecuencial.Location = New System.Drawing.Point(252, 80)
+    Me.txtSecuencial.Name = "txtSecuencial"
+    Me.txtSecuencial.Size = New System.Drawing.Size(100, 20)
+    Me.txtSecuencial.TabIndex = 59
+    '
+    'dtCurrent
+    '
+    Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    Me.dtCurrent.Location = New System.Drawing.Point(719, 50)
+    Me.dtCurrent.Name = "dtCurrent"
+    Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
+    Me.dtCurrent.TabIndex = 60
+    '
+    'dtVencimiento
+    '
+    Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 51)
+    Me.dtVencimiento.Name = "dtVencimiento"
+    Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
+    Me.dtVencimiento.TabIndex = 61
+    '
+    'txtIdDebito
+    '
+    Me.txtIdDebito.Location = New System.Drawing.Point(456, 80)
+    Me.txtIdDebito.Name = "txtIdDebito"
+    Me.txtIdDebito.Size = New System.Drawing.Size(191, 20)
+    Me.txtIdDebito.TabIndex = 63
+    '
+    'Label1
+    '
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
+    Me.Label1.Location = New System.Drawing.Point(378, 80)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(72, 20)
+    Me.Label1.TabIndex = 62
+    Me.Label1.Text = "Id. Debito"
+    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtConcepto
+    '
+    Me.txtConcepto.Location = New System.Drawing.Point(763, 81)
+    Me.txtConcepto.Name = "txtConcepto"
+    Me.txtConcepto.Size = New System.Drawing.Size(494, 20)
+    Me.txtConcepto.TabIndex = 65
+    '
+    'Label7
+    '
+    Me.Label7.BackColor = System.Drawing.Color.Transparent
+    Me.Label7.Location = New System.Drawing.Point(685, 80)
+    Me.Label7.Name = "Label7"
+    Me.Label7.Size = New System.Drawing.Size(72, 20)
+    Me.Label7.TabIndex = 64
+    Me.Label7.Text = "Concepto"
+    Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'Label8
+    '
+    Me.Label8.BackColor = System.Drawing.Color.Transparent
+    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label8.ForeColor = System.Drawing.Color.White
+    Me.Label8.Location = New System.Drawing.Point(0, 0)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(1280, 25)
+    Me.Label8.TabIndex = 78
+    Me.Label8.Text = "HIPOTECARIO: EXPORTAR DEBITOS DIRECTOS"
+    Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'IdClienteDataGridViewTextBoxColumn
     '
@@ -211,136 +342,6 @@ Partial Class frmExportarHipotecario
     'ClsInfoHipotecarioBindingSource
     '
     Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
-    '
-    'Label2
-    '
-    Me.Label2.BackColor = System.Drawing.Color.Transparent
-    Me.Label2.Location = New System.Drawing.Point(174, 57)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(72, 16)
-    Me.Label2.TabIndex = 50
-    Me.Label2.Text = "CONVENIO"
-    '
-    'txtNumeroConvenio
-    '
-    Me.txtNumeroConvenio.Location = New System.Drawing.Point(252, 53)
-    Me.txtNumeroConvenio.Name = "txtNumeroConvenio"
-    Me.txtNumeroConvenio.Size = New System.Drawing.Size(100, 20)
-    Me.txtNumeroConvenio.TabIndex = 51
-    '
-    'txtImporteTotal
-    '
-    Me.txtImporteTotal.Location = New System.Drawing.Point(484, 53)
-    Me.txtImporteTotal.Name = "txtImporteTotal"
-    Me.txtImporteTotal.ReadOnly = True
-    Me.txtImporteTotal.Size = New System.Drawing.Size(133, 20)
-    Me.txtImporteTotal.TabIndex = 52
-    '
-    'Label3
-    '
-    Me.Label3.BackColor = System.Drawing.Color.Transparent
-    Me.Label3.Location = New System.Drawing.Point(378, 53)
-    Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(100, 20)
-    Me.Label3.TabIndex = 53
-    Me.Label3.Text = "IMPORTE TOTAL"
-    '
-    'Label4
-    '
-    Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(634, 53)
-    Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(79, 23)
-    Me.Label4.TabIndex = 54
-    Me.Label4.Text = "Fecha Actual"
-    '
-    'Label5
-    '
-    Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Location = New System.Drawing.Point(899, 53)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(100, 23)
-    Me.Label5.TabIndex = 55
-    Me.Label5.Text = "Fecha Vencimiento"
-    '
-    'Label6
-    '
-    Me.Label6.BackColor = System.Drawing.Color.Transparent
-    Me.Label6.Location = New System.Drawing.Point(174, 80)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(72, 20)
-    Me.Label6.TabIndex = 58
-    Me.Label6.Text = "Secuencial"
-    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'txtSecuencial
-    '
-    Me.txtSecuencial.Location = New System.Drawing.Point(252, 80)
-    Me.txtSecuencial.Name = "txtSecuencial"
-    Me.txtSecuencial.Size = New System.Drawing.Size(100, 20)
-    Me.txtSecuencial.TabIndex = 59
-    '
-    'dtCurrent
-    '
-    Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtCurrent.Location = New System.Drawing.Point(719, 50)
-    Me.dtCurrent.Name = "dtCurrent"
-    Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
-    Me.dtCurrent.TabIndex = 60
-    '
-    'dtVencimiento
-    '
-    Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtVencimiento.Location = New System.Drawing.Point(1005, 51)
-    Me.dtVencimiento.Name = "dtVencimiento"
-    Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
-    Me.dtVencimiento.TabIndex = 61
-    '
-    'txtIdDebito
-    '
-    Me.txtIdDebito.Location = New System.Drawing.Point(456, 80)
-    Me.txtIdDebito.Name = "txtIdDebito"
-    Me.txtIdDebito.Size = New System.Drawing.Size(191, 20)
-    Me.txtIdDebito.TabIndex = 63
-    '
-    'Label1
-    '
-    Me.Label1.BackColor = System.Drawing.Color.Transparent
-    Me.Label1.Location = New System.Drawing.Point(378, 80)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(72, 20)
-    Me.Label1.TabIndex = 62
-    Me.Label1.Text = "Id. Debito"
-    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'txtConcepto
-    '
-    Me.txtConcepto.Location = New System.Drawing.Point(763, 81)
-    Me.txtConcepto.Name = "txtConcepto"
-    Me.txtConcepto.Size = New System.Drawing.Size(494, 20)
-    Me.txtConcepto.TabIndex = 65
-    '
-    'Label7
-    '
-    Me.Label7.BackColor = System.Drawing.Color.Transparent
-    Me.Label7.Location = New System.Drawing.Point(685, 80)
-    Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(72, 20)
-    Me.Label7.TabIndex = 64
-    Me.Label7.Text = "Concepto"
-    Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'Label8
-    '
-    Me.Label8.BackColor = System.Drawing.Color.Transparent
-    Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label8.ForeColor = System.Drawing.Color.White
-    Me.Label8.Location = New System.Drawing.Point(0, 0)
-    Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(1280, 25)
-    Me.Label8.TabIndex = 78
-    Me.Label8.Text = "HIPOTECARIO: EXPORTAR DEBITOS DIRECTOS"
-    Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'frmExportarHipotecario
     '

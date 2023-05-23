@@ -56,9 +56,9 @@ Partial Class frmArticulosVendidos
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(12, 641)
+    Me.btnCancel.Location = New System.Drawing.Point(12, 637)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 9
     Me.btnCancel.Text = "Volver"
     Me.btnCancel.UseVisualStyleBackColor = False
@@ -93,40 +93,41 @@ Partial Class frmArticulosVendidos
     '
     'Label18
     '
-    Me.Label18.AutoSize = True
+    Me.Label18.BackColor = System.Drawing.Color.Transparent
     Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label18.Location = New System.Drawing.Point(855, 111)
+    Me.Label18.Location = New System.Drawing.Point(958, 111)
     Me.Label18.Name = "Label18"
-    Me.Label18.Size = New System.Drawing.Size(70, 15)
+    Me.Label18.Size = New System.Drawing.Size(139, 15)
     Me.Label18.TabIndex = 58
     Me.Label18.Text = "Entregados"
     '
     'Label17
     '
+    Me.Label17.BackColor = System.Drawing.Color.Transparent
     Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label17.Location = New System.Drawing.Point(190, 111)
     Me.Label17.Name = "Label17"
-    Me.Label17.Size = New System.Drawing.Size(220, 24)
+    Me.Label17.Size = New System.Drawing.Size(455, 24)
     Me.Label17.TabIndex = 57
     Me.Label17.Text = "Articulo (codigo)"
     '
     'Label7
     '
-    Me.Label7.AutoSize = True
+    Me.Label7.BackColor = System.Drawing.Color.Transparent
     Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label7.Location = New System.Drawing.Point(699, 111)
     Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(95, 15)
+    Me.Label7.Size = New System.Drawing.Size(124, 15)
     Me.Label7.TabIndex = 56
     Me.Label7.Text = "Articulo (codigo)"
     '
     'Label6
     '
-    Me.Label6.AutoSize = True
+    Me.Label6.BackColor = System.Drawing.Color.Transparent
     Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.Location = New System.Drawing.Point(793, 111)
+    Me.Label6.Location = New System.Drawing.Point(829, 111)
     Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(56, 15)
+    Me.Label6.Size = New System.Drawing.Size(123, 15)
     Me.Label6.TabIndex = 55
     Me.Label6.Text = "Cantidad"
     '
@@ -186,7 +187,7 @@ Partial Class frmArticulosVendidos
     '
     Me.txtBuscarArticulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtBuscarArticulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtBuscarArticulo.Location = New System.Drawing.Point(260, 76)
+    Me.txtBuscarArticulo.Location = New System.Drawing.Point(300, 76)
     Me.txtBuscarArticulo.Name = "txtBuscarArticulo"
     Me.txtBuscarArticulo.Size = New System.Drawing.Size(223, 21)
     Me.txtBuscarArticulo.TabIndex = 51
@@ -206,20 +207,22 @@ Partial Class frmArticulosVendidos
     '
     'Label12
     '
-    Me.Label12.AutoSize = True
+    Me.Label12.BackColor = System.Drawing.Color.Transparent
     Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label12.Location = New System.Drawing.Point(192, 78)
     Me.Label12.Name = "Label12"
-    Me.Label12.Size = New System.Drawing.Size(62, 15)
+    Me.Label12.Size = New System.Drawing.Size(102, 19)
     Me.Label12.TabIndex = 49
     Me.Label12.Text = "Articulos"
     '
     'lblTitulo
     '
-    Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblTitulo.Location = New System.Drawing.Point(214, 12)
+    Me.lblTitulo.BackColor = System.Drawing.Color.Transparent
+    Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblTitulo.ForeColor = System.Drawing.Color.White
+    Me.lblTitulo.Location = New System.Drawing.Point(0, 0)
     Me.lblTitulo.Name = "lblTitulo"
-    Me.lblTitulo.Size = New System.Drawing.Size(853, 23)
+    Me.lblTitulo.Size = New System.Drawing.Size(1280, 25)
     Me.lblTitulo.TabIndex = 60
     Me.lblTitulo.Text = "ARTICULOS VENDIDOS"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -235,9 +238,9 @@ Partial Class frmArticulosVendidos
     Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnGuardar.ForeColor = System.Drawing.Color.White
-    Me.btnGuardar.Location = New System.Drawing.Point(12, 111)
+    Me.btnGuardar.Location = New System.Drawing.Point(10, 35)
     Me.btnGuardar.Name = "btnGuardar"
-    Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
+    Me.btnGuardar.Size = New System.Drawing.Size(110, 60)
     Me.btnGuardar.TabIndex = 61
     Me.btnGuardar.Text = "Guardar"
     Me.btnGuardar.UseVisualStyleBackColor = False
@@ -245,6 +248,7 @@ Partial Class frmArticulosVendidos
     'frmArticulosVendidos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.btnGuardar)
     Me.Controls.Add(Me.lblTitulo)

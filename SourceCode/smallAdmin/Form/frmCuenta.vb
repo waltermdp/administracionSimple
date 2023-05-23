@@ -172,11 +172,16 @@ Public Class frmCuenta
   Private Sub FillCuentaData()
     Try
       With m_objCuentaCurrent
-        If g_TipoPago.Exists(Function(c) c.GuidTipo = m_objCuentaCurrent.TipoDeCuenta) Then
-          cmbTipoDeCuenta.SelectedItem = g_TipoPago.Find(Function(c) c.GuidTipo = m_objCuentaCurrent.TipoDeCuenta)
+        If m_objCuentaCurrent IsNot Nothing Then
+          If g_TipoPago.Exists(Function(c) c.GuidTipo = m_objCuentaCurrent.TipoDeCuenta) Then
+            cmbTipoDeCuenta.SelectedItem = g_TipoPago.Find(Function(c) c.GuidTipo = m_objCuentaCurrent.TipoDeCuenta)
+          Else
+            cmbTipoDeCuenta.SelectedIndex = -1
+          End If
         Else
           cmbTipoDeCuenta.SelectedIndex = -1
         End If
+        
         If UcCBU1.Visible Then
           UcCBU1.SetData(m_objCuentaCurrent)
         ElseIf UcDDHipotecario1.Visible Then
@@ -184,7 +189,7 @@ Public Class frmCuenta
         ElseIf UcTarjeta1.Visible Then
           UcTarjeta1.SetData(m_objCuentaCurrent)
         End If
-        
+
       End With
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -214,6 +219,7 @@ Public Class frmCuenta
     Try
       If indice < 0 Then
         lstCuentas.ClearSelected()
+        FillCuentaData()
         Exit Sub
       End If
       If (indice >= 0) Then
@@ -240,7 +246,10 @@ Public Class frmCuenta
     Try
       m_objCuentaCurrent = New clsInfoCuenta
       m_objCuentaCurrent.GuidCuenta = Guid.NewGuid
-      'Call FillCuentaData()
+      UcCBU1.Clear()
+      UcDDHipotecario1.Clear()
+      UcTarjeta1.Clear()
+      Call FillCuentaData()
       Call AllowEditNew(True)
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -285,13 +294,15 @@ Public Class frmCuenta
       If objCMB.SelectedIndex >= 0 Then
         Dim TipodePago = CType(objCMB.SelectedItem, clsTipoPago)
         If TipodePago.Es(clsModoDebito.GUID_HIPOTECARIO) OrElse TipodePago.Es(clsModoDebito.GUID_HIPOTECARIO_7464) Then
+
           UcDDHipotecario1.Visible = True
         ElseIf TipodePago.Es(clsModoDebito.GUID_PATAGONIA) OrElse TipodePago.Es(clsModoDebito.GUID_CBU) Then
           UcCBU1.Visible = True
         ElseIf TipodePago.Es(clsModoDebito.GUID_MASTER_DEBITO) OrElse TipodePago.Es(clsModoDebito.GUID_VISA_CREDITO) OrElse TipodePago.Es(clsModoDebito.GUID_VISA_DEBITO) Then
           UcTarjeta1.Visible = True
         End If
-
+      Else
+        Dim j As Integer = 9
       End If
 
 

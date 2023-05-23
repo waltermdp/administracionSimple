@@ -58,6 +58,18 @@ Public Class ucTarjeta
     End Try
   End Function
 
+  Public Sub Clear()
+    Try
+      UctxtNumTarjeta.Text = String.Empty
+      uctxtCodSeguridad.Text = String.Empty
+      uctxtFechaVto.Text = String.Empty
+      m_GuidCliente = Guid.Empty
+      m_TipodeCuenta = Guid.Empty
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub UctxtCBU_TextChanged(sender As Object, e As EventArgs) Handles UctxtNumTarjeta.TextChanged
     Try
       If UctxtNumTarjeta.Text.Length <> 22 Then

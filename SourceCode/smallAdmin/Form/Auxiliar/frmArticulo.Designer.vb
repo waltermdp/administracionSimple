@@ -185,7 +185,7 @@ Partial Class frmArticulo
     '
     Me.Label5.BackColor = System.Drawing.Color.Transparent
     Me.Label5.Dock = System.Windows.Forms.DockStyle.Top
-    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Label5.ForeColor = System.Drawing.Color.White
     Me.Label5.Location = New System.Drawing.Point(0, 0)
     Me.Label5.Name = "Label5"
@@ -233,7 +233,7 @@ Partial Class frmArticulo
     Me.btnLimpiarCampos.Location = New System.Drawing.Point(10, 105)
     Me.btnLimpiarCampos.Margin = New System.Windows.Forms.Padding(10)
     Me.btnLimpiarCampos.Name = "btnLimpiarCampos"
-    Me.btnLimpiarCampos.Size = New System.Drawing.Size(110, 61)
+    Me.btnLimpiarCampos.Size = New System.Drawing.Size(110, 60)
     Me.btnLimpiarCampos.TabIndex = 32
     Me.btnLimpiarCampos.Text = "Limpiar Campos"
     Me.btnLimpiarCampos.UseVisualStyleBackColor = False

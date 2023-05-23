@@ -45,18 +45,17 @@ Partial Class frmCuenta
     Me.cmbTipoDeCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbTipoDeCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.cmbTipoDeCuenta.FormattingEnabled = True
-    Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(516, 26)
+    Me.cmbTipoDeCuenta.Location = New System.Drawing.Point(614, 36)
     Me.cmbTipoDeCuenta.Name = "cmbTipoDeCuenta"
     Me.cmbTipoDeCuenta.Size = New System.Drawing.Size(174, 24)
     Me.cmbTipoDeCuenta.TabIndex = 0
     '
     'Label1
     '
-    Me.Label1.AutoSize = True
     Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(410, 27)
+    Me.Label1.Location = New System.Drawing.Point(410, 36)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(100, 16)
+    Me.Label1.Size = New System.Drawing.Size(170, 19)
     Me.Label1.TabIndex = 1
     Me.Label1.Text = "Medio de pago"
     '
@@ -67,9 +66,9 @@ Partial Class frmCuenta
     Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(11, 237)
+    Me.btnVolver.Location = New System.Drawing.Point(10, 300)
     Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(110, 61)
+    Me.btnVolver.Size = New System.Drawing.Size(110, 60)
     Me.btnVolver.TabIndex = 10
     Me.btnVolver.Text = "OK"
     Me.btnVolver.UseVisualStyleBackColor = False
@@ -81,7 +80,7 @@ Partial Class frmCuenta
     Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnGuardar.ForeColor = System.Drawing.Color.White
-    Me.btnGuardar.Location = New System.Drawing.Point(11, 22)
+    Me.btnGuardar.Location = New System.Drawing.Point(10, 35)
     Me.btnGuardar.Name = "btnGuardar"
     Me.btnGuardar.Size = New System.Drawing.Size(110, 61)
     Me.btnGuardar.TabIndex = 11
@@ -90,11 +89,10 @@ Partial Class frmCuenta
     '
     'lblCliente
     '
-    Me.lblCliente.AutoSize = True
     Me.lblCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCliente.Location = New System.Drawing.Point(141, 53)
+    Me.lblCliente.Location = New System.Drawing.Point(141, 51)
     Me.lblCliente.Name = "lblCliente"
-    Me.lblCliente.Size = New System.Drawing.Size(239, 16)
+    Me.lblCliente.Size = New System.Drawing.Size(250, 18)
     Me.lblCliente.TabIndex = 12
     Me.lblCliente.Text = "Medios de pagos asociados al Cliente" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
     '
@@ -104,7 +102,7 @@ Partial Class frmCuenta
     Me.lstCuentas.FormattingEnabled = True
     Me.lstCuentas.Location = New System.Drawing.Point(144, 72)
     Me.lstCuentas.Name = "lstCuentas"
-    Me.lstCuentas.Size = New System.Drawing.Size(247, 147)
+    Me.lstCuentas.Size = New System.Drawing.Size(247, 212)
     Me.lstCuentas.TabIndex = 13
     '
     'bsCuenta
@@ -116,11 +114,11 @@ Partial Class frmCuenta
     Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
     Me.btnNuevo.FlatAppearance.BorderSize = 0
     Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(11, 22)
+    Me.btnNuevo.Location = New System.Drawing.Point(10, 36)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
     Me.btnNuevo.TabIndex = 14
     Me.btnNuevo.Text = "Nuevo"
     Me.btnNuevo.UseVisualStyleBackColor = False
@@ -132,9 +130,9 @@ Partial Class frmCuenta
     Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancelar.ForeColor = System.Drawing.Color.White
-    Me.btnCancelar.Location = New System.Drawing.Point(11, 94)
+    Me.btnCancelar.Location = New System.Drawing.Point(10, 105)
     Me.btnCancelar.Name = "btnCancelar"
-    Me.btnCancelar.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancelar.Size = New System.Drawing.Size(110, 60)
     Me.btnCancelar.TabIndex = 15
     Me.btnCancelar.Text = "Cancelar"
     Me.btnCancelar.UseVisualStyleBackColor = False
@@ -146,9 +144,9 @@ Partial Class frmCuenta
     Me.btnSalirSinCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSalirSinCambios.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSalirSinCambios.ForeColor = System.Drawing.Color.White
-    Me.btnSalirSinCambios.Location = New System.Drawing.Point(281, 237)
+    Me.btnSalirSinCambios.Location = New System.Drawing.Point(281, 300)
     Me.btnSalirSinCambios.Name = "btnSalirSinCambios"
-    Me.btnSalirSinCambios.Size = New System.Drawing.Size(110, 61)
+    Me.btnSalirSinCambios.Size = New System.Drawing.Size(110, 60)
     Me.btnSalirSinCambios.TabIndex = 16
     Me.btnSalirSinCambios.Text = "Cancelar"
     Me.btnSalirSinCambios.UseVisualStyleBackColor = False
@@ -161,9 +159,9 @@ Partial Class frmCuenta
     Me.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEditar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEditar.ForeColor = System.Drawing.Color.White
-    Me.btnEditar.Location = New System.Drawing.Point(11, 161)
+    Me.btnEditar.Location = New System.Drawing.Point(10, 175)
     Me.btnEditar.Name = "btnEditar"
-    Me.btnEditar.Size = New System.Drawing.Size(110, 61)
+    Me.btnEditar.Size = New System.Drawing.Size(110, 60)
     Me.btnEditar.TabIndex = 17
     Me.btnEditar.Text = "Editar"
     Me.btnEditar.UseVisualStyleBackColor = False
@@ -194,7 +192,8 @@ Partial Class frmCuenta
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.ClientSize = New System.Drawing.Size(810, 310)
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
+    Me.ClientSize = New System.Drawing.Size(810, 370)
     Me.Controls.Add(Me.UcTarjeta1)
     Me.Controls.Add(Me.UcCBU1)
     Me.Controls.Add(Me.UcDDHipotecario1)
@@ -214,7 +213,6 @@ Partial Class frmCuenta
     Me.Text = "frmCuenta"
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
-    Me.PerformLayout()
 
   End Sub
   Friend WithEvents cmbTipoDeCuenta As System.Windows.Forms.ComboBox

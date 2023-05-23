@@ -23,10 +23,9 @@ Partial Class frmListaClientes
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
-    Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmListaClientes))
+    Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+    Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnEdit = New System.Windows.Forms.Button()
     Me.dgvData1 = New System.Windows.Forms.DataGridView()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,9 +71,9 @@ Partial Class frmListaClientes
     Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEdit.ForeColor = System.Drawing.Color.White
-    Me.btnEdit.Location = New System.Drawing.Point(24, 221)
+    Me.btnEdit.Location = New System.Drawing.Point(10, 175)
     Me.btnEdit.Name = "btnEdit"
-    Me.btnEdit.Size = New System.Drawing.Size(110, 61)
+    Me.btnEdit.Size = New System.Drawing.Size(110, 60)
     Me.btnEdit.TabIndex = 0
     Me.btnEdit.Text = "Editar"
     Me.btnEdit.UseVisualStyleBackColor = False
@@ -88,26 +87,26 @@ Partial Class frmListaClientes
     Me.dgvData1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
     Me.dgvData1.BorderStyle = System.Windows.Forms.BorderStyle.None
     Me.dgvData1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-    DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+    DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
     Me.dgvData1.ColumnHeadersHeight = 24
     Me.dgvData1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
     Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn})
     Me.dgvData1.DataSource = Me.bsInfoCliente
-    DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
-    DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-    DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-    DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-    Me.dgvData1.DefaultCellStyle = DataGridViewCellStyle2
+    DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
+    DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+    DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black
+    DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+    Me.dgvData1.DefaultCellStyle = DataGridViewCellStyle8
     Me.dgvData1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
     Me.dgvData1.EnableHeadersVisualStyles = False
     Me.dgvData1.GridColor = System.Drawing.Color.White
@@ -116,14 +115,14 @@ Partial Class frmListaClientes
     Me.dgvData1.MultiSelect = False
     Me.dgvData1.Name = "dgvData1"
     Me.dgvData1.ReadOnly = True
-    DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-    DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-    DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-    DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-    DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-    DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-    Me.dgvData1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+    DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+    DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+    DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+    DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+    DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+    DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+    Me.dgvData1.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
     Me.dgvData1.RowHeadersVisible = False
     Me.dgvData1.RowTemplate.Height = 24
     Me.dgvData1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -291,9 +290,9 @@ Partial Class frmListaClientes
     Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(24, 145)
+    Me.btnNuevo.Location = New System.Drawing.Point(10, 105)
     Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 61)
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
     Me.btnNuevo.TabIndex = 25
     Me.btnNuevo.Text = "Nuevo"
     Me.btnNuevo.UseVisualStyleBackColor = False
@@ -305,9 +304,9 @@ Partial Class frmListaClientes
     Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnEliminar.ForeColor = System.Drawing.Color.White
-    Me.btnEliminar.Location = New System.Drawing.Point(24, 297)
+    Me.btnEliminar.Location = New System.Drawing.Point(10, 245)
     Me.btnEliminar.Name = "btnEliminar"
-    Me.btnEliminar.Size = New System.Drawing.Size(110, 61)
+    Me.btnEliminar.Size = New System.Drawing.Size(110, 60)
     Me.btnEliminar.TabIndex = 26
     Me.btnEliminar.Text = "Eliminar"
     Me.btnEliminar.UseVisualStyleBackColor = False
@@ -319,23 +318,24 @@ Partial Class frmListaClientes
     Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(24, 636)
+    Me.btnVolver.Location = New System.Drawing.Point(10, 637)
     Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(110, 61)
+    Me.btnVolver.Size = New System.Drawing.Size(110, 60)
     Me.btnVolver.TabIndex = 28
     Me.btnVolver.Text = "Volver"
     Me.btnVolver.UseVisualStyleBackColor = False
     '
     'Label1
     '
-    Me.Label1.AutoSize = True
-    Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(551, 9)
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.ForeColor = System.Drawing.Color.White
+    Me.Label1.Location = New System.Drawing.Point(0, 0)
     Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(180, 20)
+    Me.Label1.Size = New System.Drawing.Size(1280, 25)
     Me.Label1.TabIndex = 29
     Me.Label1.Text = "LISTA DE CLIENTES"
+    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'btnBuscar
     '
@@ -344,7 +344,7 @@ Partial Class frmListaClientes
     Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnBuscar.ForeColor = System.Drawing.Color.White
-    Me.btnBuscar.Location = New System.Drawing.Point(497, 75)
+    Me.btnBuscar.Location = New System.Drawing.Point(497, 66)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
     Me.btnBuscar.TabIndex = 2
@@ -353,19 +353,18 @@ Partial Class frmListaClientes
     '
     'txtFiltro
     '
-    Me.txtFiltro.Location = New System.Drawing.Point(183, 94)
+    Me.txtFiltro.Location = New System.Drawing.Point(183, 107)
     Me.txtFiltro.Name = "txtFiltro"
     Me.txtFiltro.Size = New System.Drawing.Size(292, 20)
     Me.txtFiltro.TabIndex = 1
     '
     'Label2
     '
-    Me.Label2.AutoSize = True
-    Me.Label2.BackColor = System.Drawing.Color.White
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
     Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label2.Location = New System.Drawing.Point(180, 75)
+    Me.Label2.Location = New System.Drawing.Point(180, 66)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(299, 15)
+    Me.Label2.Size = New System.Drawing.Size(311, 24)
     Me.Label2.TabIndex = 35
     Me.Label2.Text = "Filtro por DNI, Apellido, Nombre  o Numero de Cliente"
     '
@@ -376,9 +375,9 @@ Partial Class frmListaClientes
     Me.btnMostrarErrores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnMostrarErrores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnMostrarErrores.ForeColor = System.Drawing.Color.White
-    Me.btnMostrarErrores.Location = New System.Drawing.Point(926, 75)
+    Me.btnMostrarErrores.Location = New System.Drawing.Point(660, 66)
     Me.btnMostrarErrores.Name = "btnMostrarErrores"
-    Me.btnMostrarErrores.Size = New System.Drawing.Size(224, 26)
+    Me.btnMostrarErrores.Size = New System.Drawing.Size(110, 61)
     Me.btnMostrarErrores.TabIndex = 38
     Me.btnMostrarErrores.Text = "MostrarSinDNI o numCliente"
     Me.btnMostrarErrores.UseVisualStyleBackColor = False
@@ -391,9 +390,9 @@ Partial Class frmListaClientes
     Me.btnMostrarDuplicados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnMostrarDuplicados.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnMostrarDuplicados.ForeColor = System.Drawing.Color.White
-    Me.btnMostrarDuplicados.Location = New System.Drawing.Point(926, 110)
+    Me.btnMostrarDuplicados.Location = New System.Drawing.Point(806, 66)
     Me.btnMostrarDuplicados.Name = "btnMostrarDuplicados"
-    Me.btnMostrarDuplicados.Size = New System.Drawing.Size(224, 26)
+    Me.btnMostrarDuplicados.Size = New System.Drawing.Size(110, 61)
     Me.btnMostrarDuplicados.TabIndex = 39
     Me.btnMostrarDuplicados.Text = "Mostrar duplicados"
     Me.btnMostrarDuplicados.UseVisualStyleBackColor = False
@@ -416,9 +415,9 @@ Partial Class frmListaClientes
     Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
-    Me.btnSeleccionar.Location = New System.Drawing.Point(24, 73)
+    Me.btnSeleccionar.Location = New System.Drawing.Point(10, 35)
     Me.btnSeleccionar.Name = "btnSeleccionar"
-    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 61)
+    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 60)
     Me.btnSeleccionar.TabIndex = 41
     Me.btnSeleccionar.Text = "Seleccionar"
     Me.btnSeleccionar.UseVisualStyleBackColor = False
@@ -427,7 +426,7 @@ Partial Class frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.btnSeleccionar)
     Me.Controls.Add(Me.lblInfo)

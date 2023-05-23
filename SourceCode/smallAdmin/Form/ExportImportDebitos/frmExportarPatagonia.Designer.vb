@@ -42,6 +42,7 @@ Partial Class frmExportarPatagonia
     Me.Label8 = New System.Windows.Forms.Label()
     Me.txtNroCUIT = New System.Windows.Forms.TextBox()
     Me.Label2 = New System.Windows.Forms.Label()
+    Me.Label6 = New System.Windows.Forms.Label()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuitDNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,7 +56,6 @@ Partial Class frmExportarPatagonia
     Me.NroCuitEmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.TipoNovedadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.Label6 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -69,6 +69,7 @@ Partial Class frmExportarPatagonia
     '
     'Label7
     '
+    Me.Label7.BackColor = System.Drawing.Color.Transparent
     Me.Label7.Location = New System.Drawing.Point(355, 41)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(72, 20)
@@ -85,6 +86,7 @@ Partial Class frmExportarPatagonia
     '
     'Label1
     '
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
     Me.Label1.Location = New System.Drawing.Point(760, 41)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(72, 20)
@@ -110,6 +112,7 @@ Partial Class frmExportarPatagonia
     '
     'Label5
     '
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
     Me.Label5.Location = New System.Drawing.Point(1018, 77)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
@@ -118,6 +121,7 @@ Partial Class frmExportarPatagonia
     '
     'Label4
     '
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
     Me.Label4.Location = New System.Drawing.Point(753, 77)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
@@ -126,6 +130,7 @@ Partial Class frmExportarPatagonia
     '
     'Label3
     '
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
     Me.Label3.Location = New System.Drawing.Point(169, 77)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(100, 20)
@@ -158,6 +163,7 @@ Partial Class frmExportarPatagonia
     'lblResumen
     '
     Me.lblResumen.AutoSize = True
+    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
     Me.lblResumen.Location = New System.Drawing.Point(169, 626)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(52, 13)
@@ -171,9 +177,9 @@ Partial Class frmExportarPatagonia
     Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(29, 150)
+    Me.btnReload.Location = New System.Drawing.Point(10, 105)
     Me.btnReload.Name = "btnReload"
-    Me.btnReload.Size = New System.Drawing.Size(110, 61)
+    Me.btnReload.Size = New System.Drawing.Size(110, 60)
     Me.btnReload.TabIndex = 68
     Me.btnReload.Text = "Volver a Cargar"
     Me.btnReload.UseVisualStyleBackColor = False
@@ -185,9 +191,9 @@ Partial Class frmExportarPatagonia
     Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(29, 56)
+    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
     Me.btnProcesar.Name = "btnProcesar"
-    Me.btnProcesar.Size = New System.Drawing.Size(110, 61)
+    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
     Me.btnProcesar.TabIndex = 67
     Me.btnProcesar.Text = "Procesar"
     Me.btnProcesar.UseVisualStyleBackColor = False
@@ -199,9 +205,9 @@ Partial Class frmExportarPatagonia
     Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(29, 626)
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
     Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
     Me.btnCancel.TabIndex = 66
     Me.btnCancel.Text = "Cancelar"
     Me.btnCancel.UseVisualStyleBackColor = False
@@ -215,6 +221,7 @@ Partial Class frmExportarPatagonia
     '
     'Label8
     '
+    Me.Label8.BackColor = System.Drawing.Color.Transparent
     Me.Label8.Location = New System.Drawing.Point(432, 74)
     Me.Label8.Name = "Label8"
     Me.Label8.Size = New System.Drawing.Size(101, 20)
@@ -231,11 +238,24 @@ Partial Class frmExportarPatagonia
     '
     'Label2
     '
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
     Me.Label2.Location = New System.Drawing.Point(169, 46)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(72, 16)
     Me.Label2.TabIndex = 87
     Me.Label2.Text = "Nro CUIT"
+    '
+    'Label6
+    '
+    Me.Label6.BackColor = System.Drawing.Color.Transparent
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.ForeColor = System.Drawing.Color.White
+    Me.Label6.Location = New System.Drawing.Point(0, 0)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(1280, 25)
+    Me.Label6.TabIndex = 89
+    Me.Label6.Text = "Patagonia: Exportar Debitos Directos"
+    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'NombreDataGridViewTextBoxColumn
     '
@@ -329,20 +349,11 @@ Partial Class frmExportarPatagonia
     '
     Me.ClsInfoPatagoniaBindingSource.DataSource = GetType(main.clsInfoPatagonia)
     '
-    'Label6
-    '
-    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.Location = New System.Drawing.Point(455, 9)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(371, 24)
-    Me.Label6.TabIndex = 89
-    Me.Label6.Text = "Patagonia: Exportar Debitos Directos"
-    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-    '
     'frmExportarPatagonia
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.Controls.Add(Me.Label6)
     Me.Controls.Add(Me.txtNroCUIT)

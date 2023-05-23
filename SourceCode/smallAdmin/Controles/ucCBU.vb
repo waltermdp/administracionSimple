@@ -36,11 +36,22 @@ Public Class ucCBU
     End Try
   End Sub
 
+  Public Sub Clear()
+    Try
+      UctxtCBU.Text = String.Empty
+    
+      m_GuidCliente = Guid.Empty
+      m_TipodeCuenta = Guid.Empty
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Public Function GetData(ByRef rData As clsInfoCuenta) As Boolean
     Try
       If UctxtCBU.Text.Length <> 22 Then Return False
       With rData
-        .Codigo1 = UctxtCBU.GetDecimalValue.ToString
+        .Codigo1 = UctxtCBU.Text.ToString
 
         .TipoDeCuenta = m_TipodeCuenta
         .GuidCliente = m_GuidCliente

@@ -31,6 +31,13 @@ Partial Class frmImportarPatagonia
     Me.txtCUITEmpresa = New System.Windows.Forms.TextBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.lblResumen = New System.Windows.Forms.Label()
+    Me.btnReload = New System.Windows.Forms.Button()
+    Me.btnProcesar = New System.Windows.Forms.Button()
+    Me.btnCancel = New System.Windows.Forms.Button()
+    Me.txtTotalRegistrosDebitar = New System.Windows.Forms.TextBox()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.Label5 = New System.Windows.Forms.Label()
     Me.ImportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DNIIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,13 +52,6 @@ Partial Class frmImportarPatagonia
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoImportarPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.lblResumen = New System.Windows.Forms.Label()
-    Me.btnReload = New System.Windows.Forms.Button()
-    Me.btnProcesar = New System.Windows.Forms.Button()
-    Me.btnCancel = New System.Windows.Forms.Button()
-    Me.txtTotalRegistrosDebitar = New System.Windows.Forms.TextBox()
-    Me.Label4 = New System.Windows.Forms.Label()
-    Me.Label5 = New System.Windows.Forms.Label()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoImportarPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -59,6 +59,7 @@ Partial Class frmImportarPatagonia
     'lblRechazados
     '
     Me.lblRechazados.AutoSize = True
+    Me.lblRechazados.BackColor = System.Drawing.Color.Transparent
     Me.lblRechazados.Location = New System.Drawing.Point(654, 80)
     Me.lblRechazados.Name = "lblRechazados"
     Me.lblRechazados.Size = New System.Drawing.Size(67, 13)
@@ -84,6 +85,7 @@ Partial Class frmImportarPatagonia
     'Label3
     '
     Me.Label3.AutoSize = True
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
     Me.Label3.Location = New System.Drawing.Point(673, 46)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(87, 13)
@@ -93,6 +95,7 @@ Partial Class frmImportarPatagonia
     'Label2
     '
     Me.Label2.AutoSize = True
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
     Me.Label2.Location = New System.Drawing.Point(364, 46)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(115, 13)
@@ -110,6 +113,7 @@ Partial Class frmImportarPatagonia
     'Label1
     '
     Me.Label1.AutoSize = True
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
     Me.Label1.Location = New System.Drawing.Point(169, 46)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(32, 13)
@@ -130,6 +134,88 @@ Partial Class frmImportarPatagonia
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 66
+    '
+    'lblResumen
+    '
+    Me.lblResumen.AutoSize = True
+    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
+    Me.lblResumen.Location = New System.Drawing.Point(427, 80)
+    Me.lblResumen.Name = "lblResumen"
+    Me.lblResumen.Size = New System.Drawing.Size(52, 13)
+    Me.lblResumen.TabIndex = 65
+    Me.lblResumen.Text = "Resumen"
+    '
+    'btnReload
+    '
+    Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnReload.FlatAppearance.BorderSize = 0
+    Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnReload.ForeColor = System.Drawing.Color.White
+    Me.btnReload.Location = New System.Drawing.Point(10, 105)
+    Me.btnReload.Name = "btnReload"
+    Me.btnReload.Size = New System.Drawing.Size(110, 60)
+    Me.btnReload.TabIndex = 64
+    Me.btnReload.Text = "Volver a Cargar"
+    Me.btnReload.UseVisualStyleBackColor = False
+    '
+    'btnProcesar
+    '
+    Me.btnProcesar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnProcesar.FlatAppearance.BorderSize = 0
+    Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnProcesar.ForeColor = System.Drawing.Color.White
+    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
+    Me.btnProcesar.Name = "btnProcesar"
+    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
+    Me.btnProcesar.TabIndex = 63
+    Me.btnProcesar.Text = "Procesar"
+    Me.btnProcesar.UseVisualStyleBackColor = False
+    '
+    'btnCancel
+    '
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
+    Me.btnCancel.Name = "btnCancel"
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
+    Me.btnCancel.TabIndex = 62
+    Me.btnCancel.Text = "Cancelar"
+    Me.btnCancel.UseVisualStyleBackColor = False
+    '
+    'txtTotalRegistrosDebitar
+    '
+    Me.txtTotalRegistrosDebitar.Location = New System.Drawing.Point(271, 77)
+    Me.txtTotalRegistrosDebitar.Name = "txtTotalRegistrosDebitar"
+    Me.txtTotalRegistrosDebitar.ReadOnly = True
+    Me.txtTotalRegistrosDebitar.Size = New System.Drawing.Size(131, 20)
+    Me.txtTotalRegistrosDebitar.TabIndex = 75
+    '
+    'Label4
+    '
+    Me.Label4.AutoSize = True
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
+    Me.Label4.Location = New System.Drawing.Point(170, 80)
+    Me.Label4.Name = "Label4"
+    Me.Label4.Size = New System.Drawing.Size(95, 13)
+    Me.Label4.TabIndex = 74
+    Me.Label4.Text = "Registros a debitar"
+    '
+    'Label5
+    '
+    Me.Label5.BackColor = System.Drawing.Color.Transparent
+    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label5.ForeColor = System.Drawing.Color.White
+    Me.Label5.Location = New System.Drawing.Point(0, 0)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(1280, 25)
+    Me.Label5.TabIndex = 76
+    Me.Label5.Text = "Patagonia: Importar Debitos Directos"
+    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'ImportarDataGridViewCheckBoxColumn
     '
@@ -230,88 +316,11 @@ Partial Class frmImportarPatagonia
     '
     Me.ClsInfoImportarPatagoniaBindingSource.DataSource = GetType(main.clsInfoImportarPatagonia)
     '
-    'lblResumen
-    '
-    Me.lblResumen.AutoSize = True
-    Me.lblResumen.Location = New System.Drawing.Point(427, 80)
-    Me.lblResumen.Name = "lblResumen"
-    Me.lblResumen.Size = New System.Drawing.Size(52, 13)
-    Me.lblResumen.TabIndex = 65
-    Me.lblResumen.Text = "Resumen"
-    '
-    'btnReload
-    '
-    Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnReload.FlatAppearance.BorderSize = 0
-    Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(29, 140)
-    Me.btnReload.Name = "btnReload"
-    Me.btnReload.Size = New System.Drawing.Size(110, 61)
-    Me.btnReload.TabIndex = 64
-    Me.btnReload.Text = "Volver a Cargar"
-    Me.btnReload.UseVisualStyleBackColor = False
-    '
-    'btnProcesar
-    '
-    Me.btnProcesar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnProcesar.FlatAppearance.BorderSize = 0
-    Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(29, 46)
-    Me.btnProcesar.Name = "btnProcesar"
-    Me.btnProcesar.Size = New System.Drawing.Size(110, 61)
-    Me.btnProcesar.TabIndex = 63
-    Me.btnProcesar.Text = "Procesar"
-    Me.btnProcesar.UseVisualStyleBackColor = False
-    '
-    'btnCancel
-    '
-    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnCancel.FlatAppearance.BorderSize = 0
-    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(29, 616)
-    Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 61)
-    Me.btnCancel.TabIndex = 62
-    Me.btnCancel.Text = "Cancelar"
-    Me.btnCancel.UseVisualStyleBackColor = False
-    '
-    'txtTotalRegistrosDebitar
-    '
-    Me.txtTotalRegistrosDebitar.Location = New System.Drawing.Point(271, 77)
-    Me.txtTotalRegistrosDebitar.Name = "txtTotalRegistrosDebitar"
-    Me.txtTotalRegistrosDebitar.ReadOnly = True
-    Me.txtTotalRegistrosDebitar.Size = New System.Drawing.Size(131, 20)
-    Me.txtTotalRegistrosDebitar.TabIndex = 75
-    '
-    'Label4
-    '
-    Me.Label4.AutoSize = True
-    Me.Label4.Location = New System.Drawing.Point(170, 80)
-    Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(95, 13)
-    Me.Label4.TabIndex = 74
-    Me.Label4.Text = "Registros a debitar"
-    '
-    'Label5
-    '
-    Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label5.Location = New System.Drawing.Point(485, 9)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(371, 24)
-    Me.Label5.TabIndex = 76
-    Me.Label5.Text = "Patagonia: Importar Debitos Directos"
-    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-    '
     'frmImportarPatagonia
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+    Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
     Me.Controls.Add(Me.Label5)
