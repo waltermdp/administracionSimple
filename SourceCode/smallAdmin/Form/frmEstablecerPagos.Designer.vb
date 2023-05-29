@@ -54,6 +54,8 @@ Partial Class frmEstablecerPagos
     Me.cFechaPago = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.cEstado = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.btnGuardar = New System.Windows.Forms.Button()
+    Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
     '
     'btnCancel
@@ -86,7 +88,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtNumVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtNumVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtNumVenta.Location = New System.Drawing.Point(495, 90)
+    Me.txtNumVenta.Location = New System.Drawing.Point(339, 42)
     Me.txtNumVenta.Name = "txtNumVenta"
     Me.txtNumVenta.Size = New System.Drawing.Size(273, 21)
     Me.txtNumVenta.TabIndex = 63
@@ -96,7 +98,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label16.AutoSize = True
     Me.Label16.BackColor = System.Drawing.Color.Transparent
-    Me.Label16.Location = New System.Drawing.Point(492, 72)
+    Me.Label16.Location = New System.Drawing.Point(336, 24)
     Me.Label16.Name = "Label16"
     Me.Label16.Size = New System.Drawing.Size(102, 13)
     Me.Label16.TabIndex = 62
@@ -106,7 +108,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtAdelantoVendedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtAdelantoVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(590, 272)
+    Me.txtAdelantoVendedor.Location = New System.Drawing.Point(434, 224)
     Me.txtAdelantoVendedor.Name = "txtAdelantoVendedor"
     Me.txtAdelantoVendedor.Size = New System.Drawing.Size(99, 21)
     Me.txtAdelantoVendedor.TabIndex = 60
@@ -117,7 +119,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label15.AutoSize = True
     Me.Label15.BackColor = System.Drawing.Color.Transparent
-    Me.Label15.Location = New System.Drawing.Point(587, 251)
+    Me.Label15.Location = New System.Drawing.Point(431, 203)
     Me.Label15.Name = "Label15"
     Me.Label15.Size = New System.Drawing.Size(132, 13)
     Me.Label15.TabIndex = 59
@@ -127,7 +129,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtAdelanto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtAdelanto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtAdelanto.Location = New System.Drawing.Point(265, 272)
+    Me.txtAdelanto.Location = New System.Drawing.Point(109, 224)
     Me.txtAdelanto.Name = "txtAdelanto"
     Me.txtAdelanto.Size = New System.Drawing.Size(123, 21)
     Me.txtAdelanto.TabIndex = 58
@@ -138,7 +140,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label14.AutoSize = True
     Me.Label14.BackColor = System.Drawing.Color.Transparent
-    Me.Label14.Location = New System.Drawing.Point(260, 251)
+    Me.Label14.Location = New System.Drawing.Point(104, 203)
     Me.Label14.Name = "Label14"
     Me.Label14.Size = New System.Drawing.Size(238, 13)
     Me.Label14.TabIndex = 57
@@ -148,7 +150,7 @@ Partial Class frmEstablecerPagos
     '
     Me.lblValorCuota.AutoSize = True
     Me.lblValorCuota.BackColor = System.Drawing.Color.Transparent
-    Me.lblValorCuota.Location = New System.Drawing.Point(269, 199)
+    Me.lblValorCuota.Location = New System.Drawing.Point(113, 151)
     Me.lblValorCuota.Name = "lblValorCuota"
     Me.lblValorCuota.Size = New System.Drawing.Size(88, 13)
     Me.lblValorCuota.TabIndex = 55
@@ -158,7 +160,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtValorCuota.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtValorCuota.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtValorCuota.Location = New System.Drawing.Point(264, 214)
+    Me.txtValorCuota.Location = New System.Drawing.Point(108, 166)
     Me.txtValorCuota.Name = "txtValorCuota"
     Me.txtValorCuota.Size = New System.Drawing.Size(122, 21)
     Me.txtValorCuota.TabIndex = 54
@@ -168,7 +170,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label13.AutoSize = True
     Me.Label13.BackColor = System.Drawing.Color.Transparent
-    Me.Label13.Location = New System.Drawing.Point(504, 133)
+    Me.Label13.Location = New System.Drawing.Point(348, 85)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(81, 13)
     Me.Label13.TabIndex = 53
@@ -177,7 +179,7 @@ Partial Class frmEstablecerPagos
     'txtMedioPagoDescripcion
     '
     Me.txtMedioPagoDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(507, 149)
+    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(351, 101)
     Me.txtMedioPagoDescripcion.Name = "txtMedioPagoDescripcion"
     Me.txtMedioPagoDescripcion.ReadOnly = True
     Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(273, 21)
@@ -191,7 +193,7 @@ Partial Class frmEstablecerPagos
     Me.btnSeleccionarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSeleccionarCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSeleccionarCuenta.ForeColor = System.Drawing.Color.White
-    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(385, 136)
+    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(229, 88)
     Me.btnSeleccionarCuenta.Name = "btnSeleccionarCuenta"
     Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnSeleccionarCuenta.TabIndex = 51
@@ -206,7 +208,7 @@ Partial Class frmEstablecerPagos
     Me.btnAddCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnAddCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnAddCuenta.ForeColor = System.Drawing.Color.White
-    Me.btnAddCuenta.Location = New System.Drawing.Point(265, 136)
+    Me.btnAddCuenta.Location = New System.Drawing.Point(109, 88)
     Me.btnAddCuenta.Name = "btnAddCuenta"
     Me.btnAddCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnAddCuenta.TabIndex = 50
@@ -217,7 +219,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label2.AutoSize = True
     Me.Label2.BackColor = System.Drawing.Color.Transparent
-    Me.Label2.Location = New System.Drawing.Point(261, 72)
+    Me.Label2.Location = New System.Drawing.Point(105, 24)
     Me.Label2.Name = "Label2"
     Me.Label2.Size = New System.Drawing.Size(65, 13)
     Me.Label2.TabIndex = 47
@@ -227,7 +229,7 @@ Partial Class frmEstablecerPagos
     '
     Me.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtPrecio.Location = New System.Drawing.Point(519, 213)
+    Me.txtPrecio.Location = New System.Drawing.Point(363, 165)
     Me.txtPrecio.Name = "txtPrecio"
     Me.txtPrecio.Size = New System.Drawing.Size(100, 21)
     Me.txtPrecio.TabIndex = 41
@@ -237,7 +239,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label3.AutoSize = True
     Me.Label3.BackColor = System.Drawing.Color.Transparent
-    Me.Label3.Location = New System.Drawing.Point(520, 194)
+    Me.Label3.Location = New System.Drawing.Point(364, 146)
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(37, 13)
     Me.Label3.TabIndex = 42
@@ -246,7 +248,7 @@ Partial Class frmEstablecerPagos
     'DateVenta
     '
     Me.DateVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.DateVenta.Location = New System.Drawing.Point(262, 90)
+    Me.DateVenta.Location = New System.Drawing.Point(106, 42)
     Me.DateVenta.Name = "DateVenta"
     Me.DateVenta.Size = New System.Drawing.Size(227, 21)
     Me.DateVenta.TabIndex = 43
@@ -255,7 +257,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label4.AutoSize = True
     Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(260, 118)
+    Me.Label4.Location = New System.Drawing.Point(104, 70)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(70, 13)
     Me.Label4.TabIndex = 44
@@ -266,7 +268,7 @@ Partial Class frmEstablecerPagos
     Me.cmbCuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.cmbCuotas.FormattingEnabled = True
-    Me.cmbCuotas.Location = New System.Drawing.Point(392, 212)
+    Me.cmbCuotas.Location = New System.Drawing.Point(236, 164)
     Me.cmbCuotas.Name = "cmbCuotas"
     Me.cmbCuotas.Size = New System.Drawing.Size(121, 23)
     Me.cmbCuotas.TabIndex = 45
@@ -275,7 +277,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label5.AutoSize = True
     Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Location = New System.Drawing.Point(389, 194)
+    Me.Label5.Location = New System.Drawing.Point(233, 146)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(95, 13)
     Me.Label5.TabIndex = 46
@@ -285,7 +287,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label6.AutoSize = True
     Me.Label6.BackColor = System.Drawing.Color.Transparent
-    Me.Label6.Location = New System.Drawing.Point(736, 218)
+    Me.Label6.Location = New System.Drawing.Point(580, 170)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(105, 13)
     Me.Label6.TabIndex = 48
@@ -296,7 +298,7 @@ Partial Class frmEstablecerPagos
     Me.chkEditarCuotas.AutoSize = True
     Me.chkEditarCuotas.BackColor = System.Drawing.Color.Transparent
     Me.chkEditarCuotas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkEditarCuotas.Location = New System.Drawing.Point(623, 213)
+    Me.chkEditarCuotas.Location = New System.Drawing.Point(467, 165)
     Me.chkEditarCuotas.Name = "chkEditarCuotas"
     Me.chkEditarCuotas.Size = New System.Drawing.Size(96, 19)
     Me.chkEditarCuotas.TabIndex = 49
@@ -306,7 +308,7 @@ Partial Class frmEstablecerPagos
     'dtProximoPago
     '
     Me.dtProximoPago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.dtProximoPago.Location = New System.Drawing.Point(851, 211)
+    Me.dtProximoPago.Location = New System.Drawing.Point(695, 163)
     Me.dtProximoPago.Name = "dtProximoPago"
     Me.dtProximoPago.Size = New System.Drawing.Size(227, 21)
     Me.dtProximoPago.TabIndex = 65
@@ -315,7 +317,7 @@ Partial Class frmEstablecerPagos
     '
     Me.Label7.AutoSize = True
     Me.Label7.BackColor = System.Drawing.Color.Transparent
-    Me.Label7.Location = New System.Drawing.Point(262, 313)
+    Me.Label7.Location = New System.Drawing.Point(106, 265)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(76, 13)
     Me.Label7.TabIndex = 68
@@ -324,7 +326,7 @@ Partial Class frmEstablecerPagos
     'lvPlanPagos
     '
     Me.lvPlanPagos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cNCuota, Me.cFechaCuota, Me.cValorCuota, Me.cFechaPago, Me.cEstado})
-    Me.lvPlanPagos.Location = New System.Drawing.Point(265, 331)
+    Me.lvPlanPagos.Location = New System.Drawing.Point(109, 283)
     Me.lvPlanPagos.Name = "lvPlanPagos"
     Me.lvPlanPagos.Size = New System.Drawing.Size(597, 364)
     Me.lvPlanPagos.TabIndex = 67
@@ -369,37 +371,46 @@ Partial Class frmEstablecerPagos
     Me.btnGuardar.Text = "Guardar"
     Me.btnGuardar.UseVisualStyleBackColor = False
     '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.Label2)
+    Me.Panel1.Controls.Add(Me.chkEditarCuotas)
+    Me.Panel1.Controls.Add(Me.Label7)
+    Me.Panel1.Controls.Add(Me.Label6)
+    Me.Panel1.Controls.Add(Me.lvPlanPagos)
+    Me.Panel1.Controls.Add(Me.Label5)
+    Me.Panel1.Controls.Add(Me.dtProximoPago)
+    Me.Panel1.Controls.Add(Me.cmbCuotas)
+    Me.Panel1.Controls.Add(Me.txtNumVenta)
+    Me.Panel1.Controls.Add(Me.Label4)
+    Me.Panel1.Controls.Add(Me.Label16)
+    Me.Panel1.Controls.Add(Me.DateVenta)
+    Me.Panel1.Controls.Add(Me.txtAdelantoVendedor)
+    Me.Panel1.Controls.Add(Me.Label3)
+    Me.Panel1.Controls.Add(Me.Label15)
+    Me.Panel1.Controls.Add(Me.txtPrecio)
+    Me.Panel1.Controls.Add(Me.txtAdelanto)
+    Me.Panel1.Controls.Add(Me.btnAddCuenta)
+    Me.Panel1.Controls.Add(Me.Label14)
+    Me.Panel1.Controls.Add(Me.btnSeleccionarCuenta)
+    Me.Panel1.Controls.Add(Me.lblValorCuota)
+    Me.Panel1.Controls.Add(Me.txtMedioPagoDescripcion)
+    Me.Panel1.Controls.Add(Me.txtValorCuota)
+    Me.Panel1.Controls.Add(Me.Label13)
+    Me.Panel1.Location = New System.Drawing.Point(148, 35)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(1120, 662)
+    Me.Panel1.TabIndex = 70
+    '
     'frmEstablecerPagos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.btnGuardar)
-    Me.Controls.Add(Me.Label7)
-    Me.Controls.Add(Me.lvPlanPagos)
-    Me.Controls.Add(Me.dtProximoPago)
-    Me.Controls.Add(Me.txtNumVenta)
-    Me.Controls.Add(Me.Label16)
-    Me.Controls.Add(Me.txtAdelantoVendedor)
-    Me.Controls.Add(Me.Label15)
-    Me.Controls.Add(Me.txtAdelanto)
-    Me.Controls.Add(Me.Label14)
-    Me.Controls.Add(Me.lblValorCuota)
-    Me.Controls.Add(Me.txtValorCuota)
-    Me.Controls.Add(Me.Label13)
-    Me.Controls.Add(Me.txtMedioPagoDescripcion)
-    Me.Controls.Add(Me.btnSeleccionarCuenta)
-    Me.Controls.Add(Me.btnAddCuenta)
-    Me.Controls.Add(Me.Label2)
-    Me.Controls.Add(Me.txtPrecio)
-    Me.Controls.Add(Me.Label3)
-    Me.Controls.Add(Me.DateVenta)
-    Me.Controls.Add(Me.Label4)
-    Me.Controls.Add(Me.cmbCuotas)
-    Me.Controls.Add(Me.Label5)
-    Me.Controls.Add(Me.Label6)
-    Me.Controls.Add(Me.chkEditarCuotas)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.btnCancel)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -410,8 +421,9 @@ Partial Class frmEstablecerPagos
     Me.ShowInTaskbar = False
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmEstablecerPagos"
+    Me.Panel1.ResumeLayout(False)
+    Me.Panel1.PerformLayout()
     Me.ResumeLayout(False)
-    Me.PerformLayout()
 
   End Sub
   Friend WithEvents btnCancel As System.Windows.Forms.Button
@@ -446,4 +458,5 @@ Partial Class frmEstablecerPagos
   Friend WithEvents cFechaPago As System.Windows.Forms.ColumnHeader
   Friend WithEvents cEstado As System.Windows.Forms.ColumnHeader
   Friend WithEvents btnGuardar As System.Windows.Forms.Button
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

@@ -71,9 +71,11 @@ Partial Class frmVenta
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
     Me.tTip = New System.Windows.Forms.ToolTip(Me.components)
     Me.lblTitulo = New System.Windows.Forms.Label()
+    Me.Panel1 = New System.Windows.Forms.Panel()
     Me.gpVenta.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
     Me.GroupBox2.SuspendLayout()
+    Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
     '
     'Label1
@@ -287,7 +289,7 @@ Partial Class frmVenta
     Me.gpVenta.Controls.Add(Me.Label1)
     Me.gpVenta.Controls.Add(Me.Label4)
     Me.gpVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.gpVenta.Location = New System.Drawing.Point(170, 196)
+    Me.gpVenta.Location = New System.Drawing.Point(12, 160)
     Me.gpVenta.Name = "gpVenta"
     Me.gpVenta.Size = New System.Drawing.Size(1098, 501)
     Me.gpVenta.TabIndex = 33
@@ -531,7 +533,7 @@ Partial Class frmVenta
     Me.GroupBox1.Controls.Add(Me.btnSelectClient)
     Me.GroupBox1.Controls.Add(Me.btnNewClient)
     Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox1.Location = New System.Drawing.Point(170, 39)
+    Me.GroupBox1.Location = New System.Drawing.Point(12, 3)
     Me.GroupBox1.Name = "GroupBox1"
     Me.GroupBox1.Size = New System.Drawing.Size(535, 151)
     Me.GroupBox1.TabIndex = 34
@@ -547,7 +549,7 @@ Partial Class frmVenta
     Me.GroupBox2.Controls.Add(Me.btnSelectVendedor)
     Me.GroupBox2.Controls.Add(Me.txtDNIVendedor)
     Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox2.Location = New System.Drawing.Point(711, 39)
+    Me.GroupBox2.Location = New System.Drawing.Point(553, 3)
     Me.GroupBox2.Name = "GroupBox2"
     Me.GroupBox2.Size = New System.Drawing.Size(557, 151)
     Me.GroupBox2.TabIndex = 35
@@ -566,6 +568,17 @@ Partial Class frmVenta
     Me.lblTitulo.Text = "CONTRATO"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.GroupBox1)
+    Me.Panel1.Controls.Add(Me.gpVenta)
+    Me.Panel1.Controls.Add(Me.GroupBox2)
+    Me.Panel1.Location = New System.Drawing.Point(137, 36)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(1120, 668)
+    Me.Panel1.TabIndex = 28
+    '
     'frmVenta
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -573,10 +586,8 @@ Partial Class frmVenta
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.lblTitulo)
-    Me.Controls.Add(Me.GroupBox2)
-    Me.Controls.Add(Me.GroupBox1)
-    Me.Controls.Add(Me.gpVenta)
     Me.Controls.Add(Me.btnCancel)
     Me.Controls.Add(Me.btnSave)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -593,6 +604,7 @@ Partial Class frmVenta
     Me.GroupBox1.PerformLayout()
     Me.GroupBox2.ResumeLayout(False)
     Me.GroupBox2.PerformLayout()
+    Me.Panel1.ResumeLayout(False)
     Me.ResumeLayout(False)
 
   End Sub
@@ -645,4 +657,5 @@ Partial Class frmVenta
   Friend WithEvents cValorCuota As System.Windows.Forms.ColumnHeader
   Friend WithEvents cFechaPago As System.Windows.Forms.ColumnHeader
   Friend WithEvents cEstado As System.Windows.Forms.ColumnHeader
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class
