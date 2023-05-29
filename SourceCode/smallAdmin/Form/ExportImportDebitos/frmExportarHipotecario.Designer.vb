@@ -28,6 +28,18 @@ Partial Class frmExportarHipotecario
     Me.btnReload = New System.Windows.Forms.Button()
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.IdClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumeroContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ImporteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.TipoCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuentaBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.Label2 = New System.Windows.Forms.Label()
     Me.txtNumeroConvenio = New System.Windows.Forms.TextBox()
     Me.txtImporteTotal = New System.Windows.Forms.TextBox()
@@ -43,18 +55,6 @@ Partial Class frmExportarHipotecario
     Me.txtConcepto = New System.Windows.Forms.TextBox()
     Me.Label7 = New System.Windows.Forms.Label()
     Me.Label8 = New System.Windows.Forms.Label()
-    Me.IdClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NumeroContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ImporteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotaActualDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.TipoCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuentaBancoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoHipotecarioBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -120,12 +120,97 @@ Partial Class frmExportarHipotecario
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdClienteDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.NumeroContratoDataGridViewTextBoxColumn, Me.FechaVencimientoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.CodigoBancoDataGridViewTextBoxColumn, Me.CodigoSucCuentaDataGridViewTextBoxColumn, Me.TipoCuentaDataGridViewTextBoxColumn, Me.CuentaBancoDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoHipotecarioBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(177, 116)
+    Me.dgvResumen.Location = New System.Drawing.Point(172, 115)
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 49
+    '
+    'IdClienteDataGridViewTextBoxColumn
+    '
+    Me.IdClienteDataGridViewTextBoxColumn.DataPropertyName = "idCliente"
+    Me.IdClienteDataGridViewTextBoxColumn.HeaderText = "idCliente"
+    Me.IdClienteDataGridViewTextBoxColumn.Name = "IdClienteDataGridViewTextBoxColumn"
+    Me.IdClienteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NombreDataGridViewTextBoxColumn
+    '
+    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CBUDataGridViewTextBoxColumn
+    '
+    Me.CBUDataGridViewTextBoxColumn.DataPropertyName = "CBU"
+    Me.CBUDataGridViewTextBoxColumn.HeaderText = "CBU"
+    Me.CBUDataGridViewTextBoxColumn.Name = "CBUDataGridViewTextBoxColumn"
+    Me.CBUDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NumeroContratoDataGridViewTextBoxColumn
+    '
+    Me.NumeroContratoDataGridViewTextBoxColumn.DataPropertyName = "NumeroContrato"
+    Me.NumeroContratoDataGridViewTextBoxColumn.HeaderText = "NumeroContrato"
+    Me.NumeroContratoDataGridViewTextBoxColumn.Name = "NumeroContratoDataGridViewTextBoxColumn"
+    Me.NumeroContratoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaVencimientoDataGridViewTextBoxColumn
+    '
+    Me.FechaVencimientoDataGridViewTextBoxColumn.DataPropertyName = "FechaVencimiento"
+    Me.FechaVencimientoDataGridViewTextBoxColumn.HeaderText = "FechaVencimiento"
+    Me.FechaVencimientoDataGridViewTextBoxColumn.Name = "FechaVencimientoDataGridViewTextBoxColumn"
+    Me.FechaVencimientoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ImporteDataGridViewTextBoxColumn
+    '
+    Me.ImporteDataGridViewTextBoxColumn.DataPropertyName = "Importe"
+    Me.ImporteDataGridViewTextBoxColumn.HeaderText = "Importe"
+    Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
+    Me.ImporteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotaActualDataGridViewTextBoxColumn
+    '
+    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
+    Me.CuotaActualDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CodigoBancoDataGridViewTextBoxColumn
+    '
+    Me.CodigoBancoDataGridViewTextBoxColumn.DataPropertyName = "CodigoBanco"
+    Me.CodigoBancoDataGridViewTextBoxColumn.HeaderText = "CodigoBanco"
+    Me.CodigoBancoDataGridViewTextBoxColumn.Name = "CodigoBancoDataGridViewTextBoxColumn"
+    Me.CodigoBancoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CodigoBancoDataGridViewTextBoxColumn.Visible = False
+    '
+    'CodigoSucCuentaDataGridViewTextBoxColumn
+    '
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn.DataPropertyName = "CodigoSucCuenta"
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn.HeaderText = "CodigoSucCuenta"
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn.Name = "CodigoSucCuentaDataGridViewTextBoxColumn"
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CodigoSucCuentaDataGridViewTextBoxColumn.Visible = False
+    '
+    'TipoCuentaDataGridViewTextBoxColumn
+    '
+    Me.TipoCuentaDataGridViewTextBoxColumn.DataPropertyName = "TipoCuenta"
+    Me.TipoCuentaDataGridViewTextBoxColumn.HeaderText = "TipoCuenta"
+    Me.TipoCuentaDataGridViewTextBoxColumn.Name = "TipoCuentaDataGridViewTextBoxColumn"
+    Me.TipoCuentaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.TipoCuentaDataGridViewTextBoxColumn.Visible = False
+    '
+    'CuentaBancoDataGridViewTextBoxColumn
+    '
+    Me.CuentaBancoDataGridViewTextBoxColumn.DataPropertyName = "CuentaBanco"
+    Me.CuentaBancoDataGridViewTextBoxColumn.HeaderText = "CuentaBanco"
+    Me.CuentaBancoDataGridViewTextBoxColumn.Name = "CuentaBancoDataGridViewTextBoxColumn"
+    Me.CuentaBancoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.CuentaBancoDataGridViewTextBoxColumn.Visible = False
+    '
+    'ClsInfoHipotecarioBindingSource
+    '
+    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
     '
     'Label2
     '
@@ -257,91 +342,6 @@ Partial Class frmExportarHipotecario
     Me.Label8.TabIndex = 78
     Me.Label8.Text = "HIPOTECARIO: EXPORTAR DEBITOS DIRECTOS"
     Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-    '
-    'IdClienteDataGridViewTextBoxColumn
-    '
-    Me.IdClienteDataGridViewTextBoxColumn.DataPropertyName = "idCliente"
-    Me.IdClienteDataGridViewTextBoxColumn.HeaderText = "idCliente"
-    Me.IdClienteDataGridViewTextBoxColumn.Name = "IdClienteDataGridViewTextBoxColumn"
-    Me.IdClienteDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'NombreDataGridViewTextBoxColumn
-    '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
-    Me.NombreDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CBUDataGridViewTextBoxColumn
-    '
-    Me.CBUDataGridViewTextBoxColumn.DataPropertyName = "CBU"
-    Me.CBUDataGridViewTextBoxColumn.HeaderText = "CBU"
-    Me.CBUDataGridViewTextBoxColumn.Name = "CBUDataGridViewTextBoxColumn"
-    Me.CBUDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'NumeroContratoDataGridViewTextBoxColumn
-    '
-    Me.NumeroContratoDataGridViewTextBoxColumn.DataPropertyName = "NumeroContrato"
-    Me.NumeroContratoDataGridViewTextBoxColumn.HeaderText = "NumeroContrato"
-    Me.NumeroContratoDataGridViewTextBoxColumn.Name = "NumeroContratoDataGridViewTextBoxColumn"
-    Me.NumeroContratoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaVencimientoDataGridViewTextBoxColumn
-    '
-    Me.FechaVencimientoDataGridViewTextBoxColumn.DataPropertyName = "FechaVencimiento"
-    Me.FechaVencimientoDataGridViewTextBoxColumn.HeaderText = "FechaVencimiento"
-    Me.FechaVencimientoDataGridViewTextBoxColumn.Name = "FechaVencimientoDataGridViewTextBoxColumn"
-    Me.FechaVencimientoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ImporteDataGridViewTextBoxColumn
-    '
-    Me.ImporteDataGridViewTextBoxColumn.DataPropertyName = "Importe"
-    Me.ImporteDataGridViewTextBoxColumn.HeaderText = "Importe"
-    Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
-    Me.ImporteDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CuotaActualDataGridViewTextBoxColumn
-    '
-    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
-    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
-    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
-    Me.CuotaActualDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CodigoBancoDataGridViewTextBoxColumn
-    '
-    Me.CodigoBancoDataGridViewTextBoxColumn.DataPropertyName = "CodigoBanco"
-    Me.CodigoBancoDataGridViewTextBoxColumn.HeaderText = "CodigoBanco"
-    Me.CodigoBancoDataGridViewTextBoxColumn.Name = "CodigoBancoDataGridViewTextBoxColumn"
-    Me.CodigoBancoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.CodigoBancoDataGridViewTextBoxColumn.Visible = False
-    '
-    'CodigoSucCuentaDataGridViewTextBoxColumn
-    '
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn.DataPropertyName = "CodigoSucCuenta"
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn.HeaderText = "CodigoSucCuenta"
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn.Name = "CodigoSucCuentaDataGridViewTextBoxColumn"
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn.ReadOnly = True
-    Me.CodigoSucCuentaDataGridViewTextBoxColumn.Visible = False
-    '
-    'TipoCuentaDataGridViewTextBoxColumn
-    '
-    Me.TipoCuentaDataGridViewTextBoxColumn.DataPropertyName = "TipoCuenta"
-    Me.TipoCuentaDataGridViewTextBoxColumn.HeaderText = "TipoCuenta"
-    Me.TipoCuentaDataGridViewTextBoxColumn.Name = "TipoCuentaDataGridViewTextBoxColumn"
-    Me.TipoCuentaDataGridViewTextBoxColumn.ReadOnly = True
-    Me.TipoCuentaDataGridViewTextBoxColumn.Visible = False
-    '
-    'CuentaBancoDataGridViewTextBoxColumn
-    '
-    Me.CuentaBancoDataGridViewTextBoxColumn.DataPropertyName = "CuentaBanco"
-    Me.CuentaBancoDataGridViewTextBoxColumn.HeaderText = "CuentaBanco"
-    Me.CuentaBancoDataGridViewTextBoxColumn.Name = "CuentaBancoDataGridViewTextBoxColumn"
-    Me.CuentaBancoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.CuentaBancoDataGridViewTextBoxColumn.Visible = False
-    '
-    'ClsInfoHipotecarioBindingSource
-    '
-    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
     '
     'frmExportarHipotecario
     '

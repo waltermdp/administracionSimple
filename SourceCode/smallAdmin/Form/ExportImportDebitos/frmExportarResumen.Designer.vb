@@ -28,6 +28,8 @@ Partial Class frmExportarResumen
     Me.btnReload = New System.Windows.Forms.Button()
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.Label1 = New System.Windows.Forms.Label()
+    Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
     '
     'btnCancel
@@ -60,9 +62,9 @@ Partial Class frmExportarResumen
     '
     'lstViewResumen
     '
-    Me.lstViewResumen.Location = New System.Drawing.Point(177, 66)
+    Me.lstViewResumen.Location = New System.Drawing.Point(20, 44)
     Me.lstViewResumen.Name = "lstViewResumen"
-    Me.lstViewResumen.Size = New System.Drawing.Size(1080, 489)
+    Me.lstViewResumen.Size = New System.Drawing.Size(1080, 468)
     Me.lstViewResumen.TabIndex = 45
     Me.lstViewResumen.UseCompatibleStateImageBehavior = False
     Me.lstViewResumen.View = System.Windows.Forms.View.Details
@@ -84,7 +86,7 @@ Partial Class frmExportarResumen
     'lblResumen
     '
     Me.lblResumen.BackColor = System.Drawing.Color.Transparent
-    Me.lblResumen.Location = New System.Drawing.Point(177, 558)
+    Me.lblResumen.Location = New System.Drawing.Point(20, 515)
     Me.lblResumen.Name = "lblResumen"
     Me.lblResumen.Size = New System.Drawing.Size(1080, 139)
     Me.lblResumen.TabIndex = 47
@@ -93,11 +95,22 @@ Partial Class frmExportarResumen
     'Label1
     '
     Me.Label1.BackColor = System.Drawing.Color.Transparent
-    Me.Label1.Location = New System.Drawing.Point(174, 35)
+    Me.Label1.Location = New System.Drawing.Point(20, 13)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(1083, 23)
     Me.Label1.TabIndex = 48
     Me.Label1.Text = "Registro a exportar"
+    '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.Label1)
+    Me.Panel1.Controls.Add(Me.lstViewResumen)
+    Me.Panel1.Controls.Add(Me.lblResumen)
+    Me.Panel1.Location = New System.Drawing.Point(143, 36)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(1120, 672)
+    Me.Panel1.TabIndex = 49
     '
     'frmExportarResumen
     '
@@ -106,10 +119,8 @@ Partial Class frmExportarResumen
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
-    Me.Controls.Add(Me.Label1)
-    Me.Controls.Add(Me.lblResumen)
+    Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.btnReload)
-    Me.Controls.Add(Me.lstViewResumen)
     Me.Controls.Add(Me.btnProcesar)
     Me.Controls.Add(Me.btnCancel)
     Me.DoubleBuffered = True
@@ -117,6 +128,7 @@ Partial Class frmExportarResumen
     Me.Name = "frmExportarResumen"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmExportarResumen"
+    Me.Panel1.ResumeLayout(False)
     Me.ResumeLayout(False)
 
   End Sub
@@ -126,4 +138,5 @@ Partial Class frmExportarResumen
   Friend WithEvents btnReload As System.Windows.Forms.Button
   Friend WithEvents lblResumen As System.Windows.Forms.Label
   Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class
