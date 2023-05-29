@@ -107,12 +107,12 @@
     IdCuenta = -1
     GuidCliente = Guid.Empty
     GuidCuenta = Guid.Empty
-    Codigo1 = "--"
-    Codigo2 = "--"
-    Codigo3 = "--"
-    Codigo4 = "--"
-    Codigo5 = "--"
-    Codigo6 = "--"
+    Codigo1 = "0"
+    Codigo2 = "0"
+    Codigo3 = "0"
+    Codigo4 = "0"
+    Codigo5 = "0"
+    Codigo6 = "0"
     TipoDeCuenta = Guid.Empty
   End Sub
 

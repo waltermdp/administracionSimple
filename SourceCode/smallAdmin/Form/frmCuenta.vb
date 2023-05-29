@@ -246,6 +246,7 @@ Public Class frmCuenta
     Try
       m_objCuentaCurrent = New clsInfoCuenta
       m_objCuentaCurrent.GuidCuenta = Guid.NewGuid
+      m_objCuentaCurrent.GuidCliente = m_GuidCliente
       UcCBU1.Clear()
       UcDDHipotecario1.Clear()
       UcTarjeta1.Clear()
@@ -294,11 +295,16 @@ Public Class frmCuenta
       If objCMB.SelectedIndex >= 0 Then
         Dim TipodePago = CType(objCMB.SelectedItem, clsTipoPago)
         If TipodePago.Es(clsModoDebito.GUID_HIPOTECARIO) OrElse TipodePago.Es(clsModoDebito.GUID_HIPOTECARIO_7464) Then
-
+          m_objCuentaCurrent.TipoDeCuenta = TipodePago.GuidTipo
+          UcDDHipotecario1.SetData(m_objCuentaCurrent)
           UcDDHipotecario1.Visible = True
         ElseIf TipodePago.Es(clsModoDebito.GUID_PATAGONIA) OrElse TipodePago.Es(clsModoDebito.GUID_CBU) Then
+          m_objCuentaCurrent.TipoDeCuenta = TipodePago.GuidTipo
+          UcCBU1.SetData(m_objCuentaCurrent)
           UcCBU1.Visible = True
         ElseIf TipodePago.Es(clsModoDebito.GUID_MASTER_DEBITO) OrElse TipodePago.Es(clsModoDebito.GUID_VISA_CREDITO) OrElse TipodePago.Es(clsModoDebito.GUID_VISA_DEBITO) Then
+          m_objCuentaCurrent.TipoDeCuenta = TipodePago.GuidTipo
+          UcTarjeta1.SetData(m_objCuentaCurrent)
           UcTarjeta1.Visible = True
         End If
       Else
@@ -330,6 +336,7 @@ Public Class frmCuenta
       End If
       'Call FillCuentaData()
       Call AllowEditNew(True)
+      cmbTipoDeCuenta.Enabled = False
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
