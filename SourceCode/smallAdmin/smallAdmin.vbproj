@@ -459,6 +459,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <None Include="Resources\Fondo810x370.png" />
     <None Include="Resources\FondoGral.png" />
   </ItemGroup>
   <ItemGroup>

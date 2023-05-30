@@ -172,40 +172,14 @@ Public Class frmVenta
 
   Private Sub FillVentaData()
     Try
-      'm_lstPagos = m_Producto.ListaPagos.ToList
-      'm_NumOperacion = m_lstPagos.Last.NumComprobante
-      'lblNumComprobante.Text = m_NumOperacion.ToString
-
-
-
-      'DateVenta.Value = m_Producto.FechaVenta
-      'dtDiaVencimiento.Value = m_Producto.FechaPrimerPago.Day
-
       With m_Producto
 
         lblFechaVenta.Text = .FechaVenta.ToString("dd/MM/yyyy")
-        'If .FechaPrimerPago.Day > 30 Then
-        '  dtDiaVencimiento.Value = dtDiaVencimiento.Maximum
-        'Else
-        '  dtDiaVencimiento.Value = .FechaPrimerPago.Day
-        'End If
+       
         lblTotalCuotas.Text = .TotalCuotas.ToString
-        lblTotal.Text = .Precio.ToString
-        lblCuota.Text = .ValorCuotaFija.ToString
+        lblTotal.Text = String.Format(g_Cultura, "{0:C}", .Precio)
+        lblCuota.Text = String.Format(g_Cultura, "{0:C}", .ValorCuotaFija)
         lblNumeroVenta.Text = .NumComprobante.ToString
-        'For Each cuota In g_Cuotas
-        '  If cuota.Cantidad = .TotalCuotas Then
-        '    cmbCuotas.SelectedItem = cuota
-        '    Exit For
-        '  End If
-        'Next
-        'If .ListaPagos.Count > 0 Then
-        '  txtValorCuota.Text = .ValorCuotaFija.ToString  ' .ListaPagos.Last.ValorCuota.ToString
-        'Else
-        '  txtValorCuota.Text = .Precio.ToString
-        'End If
-
-
       End With
       lblMedioDePago.Text = FillMedioDePagoDescripcion()
     Catch ex As Exception
@@ -608,9 +582,9 @@ Public Class frmVenta
       lblFechaVenta.Text = m_Producto.FechaVenta.ToString("dd/MM/yyyy")
       lblNumeroVenta.Text = m_Producto.NumComprobante.ToString
       lblMedioDePago.Text = FillMedioDePagoDescripcion()
-      lblTotal.Text = m_Producto.Precio.ToString
+      lblTotal.Text = String.Format(g_Cultura, "{0:C}", m_Producto.Precio)
       lblTotalCuotas.Text = m_Producto.TotalCuotas.ToString
-      lblCuota.Text = m_Producto.ValorCuotaFija.ToString
+      lblCuota.Text = String.Format(g_Cultura, "{0:C}", m_Producto.ValorCuotaFija)
 
       ConvStr2Dec(m_Producto.Precio.ToString, Precio)
       ConvStr2Dec(m_Producto.ValorCuotaFija.ToString, ValorCuota)
@@ -631,7 +605,7 @@ Public Class frmVenta
       Next
 
       If m_AdelantoVendedor IsNot Nothing Then
-        Label3.Text = m_AdelantoVendedor.Valor.ToString
+        Label3.Text = String.Format(g_Cultura, "{0:C}", m_AdelantoVendedor.Valor)
       End If
 
 

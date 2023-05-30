@@ -33,7 +33,7 @@ Module Entorno
   Public g_Today As Date 'TODO: crear fecha para saber si se cambia la fecha de la pc con respecto al ultimo uso
 
   Public g_debug As Boolean = True
-
+  Public g_Cultura As New System.Globalization.CultureInfo("es-AR")
 
   'Public Enum GRUPOS As Integer
   '  NA = 0
@@ -79,6 +79,10 @@ Module Entorno
       Else
         g_Today = Today
       End If
+
+      g_Cultura.NumberFormat.CurrencyDecimalDigits = 2
+      g_Cultura.NumberFormat.CurrencyDecimalSeparator = ","
+      g_Cultura.NumberFormat.CurrencyGroupSeparator = "."
 
       'LIB COMMON
       SetFecha(g_Today)

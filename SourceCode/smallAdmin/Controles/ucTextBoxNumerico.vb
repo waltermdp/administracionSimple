@@ -2,7 +2,7 @@
 Imports manDB
 Public Class ucTextBoxNumerico
 
-  Private m_Cultura As New System.Globalization.CultureInfo("es-AR")
+
 
   Private m_skip As Boolean
   Private m_moneda As Boolean
@@ -33,11 +33,9 @@ Public Class ucTextBoxNumerico
     InitializeComponent()
     ' Add any initialization after the InitializeComponent() call.
     Try
-      m_Cultura.NumberFormat.CurrencyDecimalDigits = 2
-      m_Cultura.NumberFormat.CurrencyDecimalSeparator = ","
-      m_Cultura.NumberFormat.CurrencyGroupSeparator = "."
+     
       TextAlign = HorizontalAlignment.Right
-      Text = String.Format(m_Cultura, "{0:C}", Text)
+      Text = String.Format(g_Cultura, "{0:C}", Text)
       SelectionStart = Text.Length
 
 
@@ -100,6 +98,27 @@ Public Class ucTextBoxNumerico
     End Try
   End Function
 
+  Public Function GetDecimalMonedaValue() As Decimal
+    Try
+      Return CDec(Filter(Text) / 100)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return 0
+    End Try
+  End Function
+
+  Public Sub SetDecimalMonedaValue(ByVal vValor As Decimal)
+    Try
+      If m_skip = True Then Exit Sub
+      m_skip = True
+      Text = String.Format(g_Cultura, "{0:C}", vValor)
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
   Public Function GetStringNumericValue() As String
     Try
       Return Text.ToString()
@@ -128,7 +147,7 @@ Public Class ucTextBoxNumerico
       posicion = Text.Length - SelectionStart
 
       If m_moneda Then
-        Text = String.Format(m_Cultura, "{0:C}", CDec(Filter(Me.Text) / 100))
+        Text = String.Format(g_Cultura, "{0:C}", CDec(Filter(Me.Text) / 100))
       Else
         'Text = Filter(Me.Text).ToString(New String("0"c, m_limite))
       End If

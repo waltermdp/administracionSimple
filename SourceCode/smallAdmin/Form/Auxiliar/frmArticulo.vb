@@ -129,10 +129,20 @@ Public Class frmArticulo
       End If
       If m_IsNuevo Then
         MsgBox("Articulo Agregado correctamente")
+        Dim auxStock As New manDB.clsInfoStock
+        auxStock.Cantidad = 0
+        auxStock.GuidArticulo = aux.GuidArticulo
+        auxStock.GuidResponsable = New Guid("B7B5BDDF-8EA5-406A-A5BC-A01723CFD25D")
+        auxStock.Responsable = "Deposito"
+        Dim vResult As libCommon.Comunes.Result = clsStock.Save(auxStock)
+        If vResult <> Result.OK Then
+
+        End If
       Else
         MsgBox("Articulo editado correctamente")
       End If
 
+     
 
     Catch ex As Exception
       Print_msg(ex.Message)

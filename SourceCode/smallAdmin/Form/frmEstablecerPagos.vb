@@ -16,8 +16,11 @@ Public Class frmEstablecerPagos
   Public Sub New(ByVal vProducto As clsInfoProducto, ByVal vCliente As ClsInfoPersona, ByVal vVendedor As clsInfoVendedor, ByVal vAdelantoVendedor As clsInfoAdelanto)
 
     ' This call is required by the designer.
-    InitializeComponent()
+
     Try
+      m_skip = True
+      InitializeComponent()
+      m_skip = False
       If Not (vProducto Is Nothing) Then
         m_Producto = vProducto.Clone
       End If
@@ -34,6 +37,8 @@ Public Class frmEstablecerPagos
 
     Catch ex As Exception
       Print_msg(ex.Message)
+    Finally
+      m_skip = False
     End Try
   End Sub
 
@@ -74,20 +79,20 @@ Public Class frmEstablecerPagos
           'valores iniciales
           DateVenta.Value = g_Today
           dtProximoPago.Value = New Date(g_Today.Year, g_Today.AddMonths(1).Month, 1)
-          txtPrecio.Text = "0"
+          txtPrecioTotal.SetDecimalMonedaValue(0)
           txtNumVenta.Text = GetProximoComprobanteDisponible().ToString
           cmbCuotas.SelectedItem = 0
-          txtValorCuota.Text = "0"
+          txtValorCuota.SetDecimalMonedaValue(0)
           m_lstPagos.Clear()
           lvPlanPagos.Items.Clear()
           txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
-          txtAdelanto.Text = "0"
-          txtAdelantoVendedor.Text = "0"
+          txtAdelanto.SetDecimalMonedaValue(0)
+          txtAdelantoVendedor.SetDecimalMonedaValue(0)
         Else
           DateVenta.Value = .FechaVenta
           dtProximoPago.MinDate = DateVenta.Value
           dtProximoPago.Value = .FechaPrimerPago
-          txtPrecio.Text = .Precio.ToString  'precio total
+          txtPrecioTotal.SetDecimalMonedaValue(.Precio) '.Text = .Precio.ToString  'precio total
           txtNumVenta.Text = .NumComprobante.ToString
           For Each cuota In g_Cuotas
             If cuota.Cantidad = .TotalCuotas Then
@@ -96,17 +101,17 @@ Public Class frmEstablecerPagos
             End If
           Next
           If .ListaPagos.Count > 0 Then
-            txtValorCuota.Text = .ValorCuotaFija.ToString
+            txtValorCuota.SetDecimalMonedaValue(.ValorCuotaFija) '.Text = .ValorCuotaFija.ToString
           Else
-            txtValorCuota.Text = .Precio.ToString
+            txtValorCuota.SetDecimalMonedaValue(.Precio) '.Text = .Precio.ToString
           End If
           txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
           lvPlanPagos.Items.Clear()
-          txtAdelanto.Text = .Adelanto.ToString
+          txtAdelanto.SetDecimalMonedaValue(.Adelanto)
           If m_Adelanto IsNot Nothing Then
-            txtAdelantoVendedor.Text = m_Adelanto.Valor.ToString
+            txtAdelantoVendedor.SetDecimalMonedaValue(m_Adelanto.Valor)
           Else
-            txtAdelantoVendedor.Text = "0"
+            txtAdelantoVendedor.SetDecimalMonedaValue(0)
           End If
 
           For Each pago As clsInfoPagos In .ListaPagos
@@ -149,16 +154,9 @@ Public Class frmEstablecerPagos
     Try
 
       With m_Producto
-        Dim Precio As Decimal
-        If Not ConvStr2Dec(txtPrecio.Text, Precio) Then
-          MsgBox("El valor del precio es invalido")
-        End If
-        .Precio = Precio
-        Dim ValorCuota As Decimal
-        If Not ConvStr2Dec(txtValorCuota.Text, ValorCuota) Then
-          MsgBox("El valor de la cuota es invalido")
-        End If
-        .ValorCuotaFija = ValorCuota
+        
+        .Precio = txtPrecioTotal.GetDecimalMonedaValue
+        .ValorCuotaFija = txtValorCuota.GetDecimalMonedaValue
         Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
         .TotalCuotas = Cuota.Cantidad
 
@@ -228,10 +226,11 @@ Public Class frmEstablecerPagos
 
         'Adelanto para el vendedor
         Dim AdelantoVendedor As Decimal
-        If Not ConvStr2Dec(txtAdelantoVendedor.Text, AdelantoVendedor) Then
-          MsgBox("El valor de la cuota es invalido")
-          Exit Sub
-        End If
+        AdelantoVendedor = txtAdelantoVendedor.GetDecimalMonedaValue
+        'If Not ConvStr2Dec(txtAdelantoVendedor.Text, AdelantoVendedor) Then
+        '  MsgBox("El valor de la cuota es invalido")
+        '  Exit Sub
+        'End If
         If m_Adelanto Is Nothing Then m_Adelanto = New clsInfoAdelanto
         m_Adelanto.Valor = AdelantoVendedor
         m_Adelanto.Fecha = m_Producto.FechaVenta
@@ -259,12 +258,12 @@ Public Class frmEstablecerPagos
 
 
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
-      Dim Precio As Decimal
-      ConvStr2Dec(txtPrecio.Text, Precio)
+      
       Dim ValorCuota As Decimal
-      ConvStr2Dec(txtValorCuota.Text, ValorCuota)
+      ValorCuota = txtValorCuota.GetDecimalMonedaValue
+
       Dim adelantoCuota As Decimal = 0
-      If Precio <= 0 Then Exit Sub
+      If txtPrecioTotal.GetDecimalMonedaValue <= 0 Then Exit Sub
 
 
       If m_lstPagos.Count <= 0 Then ' m_Producto.GuidProducto = Guid.Empty Then
@@ -351,21 +350,8 @@ Public Class frmEstablecerPagos
 
   Private Function GetAdelanto(ByRef rValor As Decimal) As Result
     Try
-      Dim value As Decimal = 0
-      If String.IsNullOrEmpty(txtAdelanto.Text.Trim) Then
-        rValor = 0
-        Return Result.OK
-      End If
-      If IsNumeric(txtAdelanto.Text.Trim) Then
-        If ConvStr2Dec(txtAdelanto.Text, value) Then
-          If value >= 0 Then
-            rValor = value
-            Return Result.OK
-          End If
-
-        End If
-      End If
-      Return Result.NOK
+      rValor = txtAdelanto.GetDecimalMonedaValue
+      Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
       Return Result.ErrorEx
@@ -485,38 +471,13 @@ Public Class frmEstablecerPagos
   'End Sub
 
   
-  Private Sub txtPrecio_TextChanged(sender As Object, e As EventArgs) Handles txtPrecio.TextChanged
+  Private Sub txtPrecio_TextChanged(sender As Object, e As EventArgs) Handles txtPrecioTotal.TextChanged
     Try
       If m_skip Then Exit Sub
       m_skip = True
       Try
 
-        'Dim auxValue As String = CType(sender, TextBox).Text
-        'Dim Precio As Decimal
-        'If ConvStr2Dec(auxValue, Precio) Then
-        '  'El valor ingresado es valido
-        '  Dim NCuotas As Integer
-        '  If cmbCuotas.SelectedIndex >= 0 Then
-        '    NCuotas = CType(cmbCuotas.SelectedItem, clsCuota).Cantidad
-        '  Else
-        '    'TODO: seleccionar por defecto cuotas 0
-        '    For Each item As clsCuota In cmbCuotas.Items
-        '      If item.Cantidad = 0 Then
-        '        cmbCuotas.SelectedItem = item
-        '        Exit For
-        '      End If
-        '    Next
-        '    NCuotas = 0
-        '  End If
 
-        '  If chkEditarCuotas.Checked = False Then
-        '    txtValorCuota.Text = CuotasIguales(Precio, NCuotas).ToString
-        '  Else
-        '    'Dejo el valor que figura en el txt precio cuota
-        '  End If
-
-        '  Call GenerarPlanCuotas()
-        'End If
       Finally
         m_skip = False
       End Try
@@ -531,15 +492,10 @@ Public Class frmEstablecerPagos
     Try
       If m_skip Then Exit Sub
       Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
-      'If chkEditarCuotas.Checked = False Then
       Dim precio As Decimal
-      'ConvStr2Dec(txtPrecio.Text, precio)
-      'txtValorCuota.Text = CuotasIguales(precio, Cuota.Cantidad).ToString
-      ConvStr2Dec(txtValorCuota.Text, precio)
-      txtPrecio.Text = CDec(precio * Cuota.Cantidad).ToString
-      'Else
-      ''Dejo el valor que figura en el txt precio cuota
-      'End If
+      precio = txtValorCuota.GetDecimalMonedaValue
+      txtPrecioTotal.SetDecimalMonedaValue(CDec(precio * Cuota.Cantidad))
+
 
       Call GenerarPlanCuotas()
     Catch ex As Exception
@@ -592,18 +548,23 @@ Public Class frmEstablecerPagos
 
   Private Sub txtValorCuota_TextChanged(sender As Object, e As EventArgs) Handles txtValorCuota.TextChanged
     Try
-      'If chkEditarCuotas.Checked = True Then
-      Dim auxValue As String = CType(sender, TextBox).Text
+
+      ' Dim auxValue As String = CType(sender, TextBox).Text
       Dim dec As Decimal
-      If ConvStr2Dec(auxValue, dec) Then
-        txtPrecio.Text = CDec(dec * CType(cmbCuotas.SelectedItem, clsCuota).Cantidad).ToString
-        Call GenerarPlanCuotas()
-      Else
-        txtValorCuota.Text = "0"
-        txtPrecio.Text = "0"
-        GenerarPlanCuotas()
+      dec = txtValorCuota.GetDecimalMonedaValue
+      'If ConvStr2Dec(auxValue, dec) Then
+      If cmbCuotas.Items.Count <= 0 Then
+        txtPrecioTotal.SetDecimalMonedaValue(0) '.Text = "0"
+        Exit Sub
       End If
+      txtPrecioTotal.SetDecimalMonedaValue(CDec(dec * CType(cmbCuotas.SelectedItem, clsCuota).Cantidad))
+      '  Call GenerarPlanCuotas()
+      'Else
+      '  txtValorCuota.Text = "0"
+      '  txtPrecio.Text = "0"
+
       'End If
+      GenerarPlanCuotas()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -611,12 +572,14 @@ Public Class frmEstablecerPagos
 
   Private Sub txtAdelanto_TextChanged(sender As Object, e As EventArgs) Handles txtAdelanto.TextChanged
     Try
-      Dim dec As Decimal
-      If ConvStr2Dec(txtAdelanto.Text, dec) Then
-        GenerarPlanCuotas()
-      Else
-        txtAdelanto.Text = ""
-      End If
+      'Dim dec As Decimal
+
+      'If ConvStr2Dec(txtAdelanto.Text, dec) Then
+      '  GenerarPlanCuotas()
+      'Else
+      '  txtAdelanto.Text = ""
+      'End If
+      GenerarPlanCuotas()
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
