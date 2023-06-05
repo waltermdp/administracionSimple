@@ -213,7 +213,7 @@ Public Class clsHipotecario
       sResult += m_Convenio.ToString("D5")
       sResult += String.Format("{0,10}", " ")
       sResult += NROEMPRESA.ToString("D5")
-      sResult += vMov.CodigoBanco.ToString("D3")
+      sResult += vMov.CodigoBanco.ToString("000") 'D3")
       sResult += vMov.CodigoSucCuenta.ToString("D4") 'vMov.CBU.Substring(0, 4) ' codsucCuenta.ToString("D4")
       sResult += String.Format("{0,1}", vMov.TipoCuenta)
       sResult += vMov.CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
