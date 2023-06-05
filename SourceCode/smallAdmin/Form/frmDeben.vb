@@ -22,7 +22,7 @@ Public Class frmDeben
   Private Sub frmDeben_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
       Dim vResult As libCommon.Comunes.Result
-
+      lblSoftwareInfo.Text = Entorno.GetSoftwareInfo
       vResult = Entorno.init
       If vResult <> Result.OK Then
         MsgBox("No continua application, error init")

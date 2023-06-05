@@ -136,11 +136,6 @@ Public Class clsListaPrincipal
             auxList.Add(objInfoPrincipal)
           Next
 
-          'If m_NameSort <> Nothing AndAlso m_Order <> Nothing Then
-
-          '  auxList = auxList.OrderBy(Function(c) c.GetType.GetProperty(m_NameSort).GetValue(c)).ToList()
-          '  If m_Order = "ASC" Then auxList.Reverse()
-          'End If
           If auxList.Count > 0 Then m_Items.AddRange(auxList.ToList)
 
         Else

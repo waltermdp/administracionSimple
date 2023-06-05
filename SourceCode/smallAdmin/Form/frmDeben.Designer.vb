@@ -111,6 +111,7 @@ Partial Class frmDeben
     Me.Button3 = New System.Windows.Forms.Button()
     Me.Button1 = New System.Windows.Forms.Button()
     Me.lblFechaHoy = New System.Windows.Forms.Label()
+    Me.lblSoftwareInfo = New System.Windows.Forms.Label()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
@@ -1025,6 +1026,17 @@ Partial Class frmDeben
     Me.lblFechaHoy.Text = "Label5"
     Me.lblFechaHoy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
     '
+    'lblSoftwareInfo
+    '
+    Me.lblSoftwareInfo.BackColor = System.Drawing.Color.Transparent
+    Me.lblSoftwareInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblSoftwareInfo.Location = New System.Drawing.Point(968, 696)
+    Me.lblSoftwareInfo.Name = "lblSoftwareInfo"
+    Me.lblSoftwareInfo.Size = New System.Drawing.Size(287, 23)
+    Me.lblSoftwareInfo.TabIndex = 67
+    Me.lblSoftwareInfo.Text = "AdminVentas"
+    Me.lblSoftwareInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1033,6 +1045,7 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.lblSoftwareInfo)
     Me.Controls.Add(Me.btnMinimize)
     Me.Controls.Add(Me.lblFechaHoy)
     Me.Controls.Add(Me.Button1)
@@ -1168,4 +1181,5 @@ Partial Class frmDeben
   Friend WithEvents btnAnular As System.Windows.Forms.Button
   Friend WithEvents lblFechaHoy As System.Windows.Forms.Label
   Friend WithEvents Panel2 As System.Windows.Forms.Panel
+  Friend WithEvents lblSoftwareInfo As System.Windows.Forms.Label
 End Class

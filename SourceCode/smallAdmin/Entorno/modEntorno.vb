@@ -160,12 +160,12 @@ Module Entorno
     End Try
   End Function
 
-  Public Function GetVersion() As String
+  Public Function GetSoftwareInfo() As String
     Try
-      Return String.Format("Version:{0}.{1}.{2}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build)
+      Return String.Format("AdminVentas:{0}.{1}.{2}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build)
     Catch ex As Exception
       Print_msg(ex.Message)
-      Return "Version:--"
+      Return "AdminVentas"
     End Try
   End Function
 
