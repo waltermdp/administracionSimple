@@ -261,9 +261,10 @@ Public Class frmImportarPatagonia
     Try
       'aplicar seleccionados
       If MsgBox("Los registros seleccionados seran aplicados como pagados. Desea continuar?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
-      Dim objDebitos As New clsListPagos
+
       For Each item In m_Registros
         If item.Importar <> True Then Continue For
+        Dim objDebitos As New clsListPagos
         objDebitos.Cfg_Filtro = "WHERE GuidPago={" & item.GuidPago.ToString & "}"
         objDebitos.RefreshData()
         If objDebitos.Items.Count = 1 Then
