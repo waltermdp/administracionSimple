@@ -103,7 +103,7 @@ Public Class frmImportarHipotecario
         For Each linea In m_LineasArchivo.GetRange(1, length - 1)
           Dim registro As New clsInfoImportarHipotecario
           With registro
-            vResult = GenerateValidacionBloque1(linea.Substring(21, 3), linea.Substring(24, 4), validacionBloque1)
+            vResult = modCommon.GetValidacionBloque1(linea.Substring(21, 3), linea.Substring(24, 4), validacionBloque1)
             If vResult <> Result.OK Then
               MsgBox("Fallo la validacion de uno de los bloques de la cuenta, se cancela el proceso")
               Exit Sub
@@ -222,29 +222,6 @@ Public Class frmImportarHipotecario
   End Sub
 
 
-
-
-
-  Private Function GenerateValidacionBloque1(ByVal vBanco As String, ByVal vSucursal As String, ByRef rValidacion1 As String) As Result
-    Try
-      Dim Suma1 As Integer = CInt(vBanco.Substring(0, 1)) * 7 + CInt(vBanco.Substring(1, 1)) * 1 + CInt(vBanco.Substring(2, 1)) * 3 + CInt(vSucursal.Substring(0, 1)) * 9 + CInt(vSucursal.Substring(1, 1)) * 7 + CInt(vSucursal.Substring(2, 1)) * 1 + CInt(vSucursal.Substring(2, 1)) * 3
-      Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
-      If diferencial = 10 Then
-        rValidacion1 = "0"
-        Return Result.OK
-      End If
-      If diferencial >= 0 AndAlso diferencial <= 9 Then
-        rValidacion1 = CStr(diferencial)
-        Return Result.OK
-      Else
-        Return Result.NOK
-      End If
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Function
 
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try

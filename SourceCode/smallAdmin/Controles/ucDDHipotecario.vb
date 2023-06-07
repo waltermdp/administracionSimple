@@ -85,11 +85,21 @@ Public Class ucDDHipotecario
       Else
         uctxtCodigoBanco.Text = UctxtCBU.Text.Substring(0, 3) '"Codigo Banco"
         uctxtSucursal.Text = UctxtCBU.Text.Substring(3, 4) '"Numero Sucursal"
-        uctxtCuenta.Text = UctxtCBU.Text.Substring(8, 14) '"Numero de cuenta"
+        uctxtCuenta.Text = UctxtCBU.Text.Substring(8, 13) '"Numero de cuenta"
         uctxtTipoCuenta.Text = " " '"Tipo Cuenta"
       End If
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Public Function EsValido() As Boolean
+    Try
+      Return modCommon.Validar_CBU(UctxtCBU.Text.ToString)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
 End Class

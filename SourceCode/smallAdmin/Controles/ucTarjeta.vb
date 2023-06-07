@@ -86,4 +86,14 @@ Public Class ucTarjeta
 
     End Try
   End Sub
+
+  Public Function EsValido() As Boolean
+    Try
+      Return False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
 End Class

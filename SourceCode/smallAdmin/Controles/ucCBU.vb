@@ -63,5 +63,13 @@ Public Class ucCBU
     End Try
   End Function
 
+  Public Function EsValido() As Boolean
+    Try
+      Return modCommon.Validar_CBU(UctxtCBU.Text.ToString)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
   
 End Class

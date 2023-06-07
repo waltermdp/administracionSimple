@@ -405,4 +405,70 @@ Module modCommon
     End Try
   End Function
 
+  Public Function Validar_CBU(ByVal vCBU As String) As Boolean
+    Try
+      If String.IsNullOrEmpty(vCBU) Then Return False
+      If vCBU.Trim.Length <> 22 Then Return False
+      If Not IsNumeric(vCBU) Then Return False
+      '3 digitos=entidad, banco
+      '4 digitos= sucursal
+      '1 digito verificador primer bloque
+      '13 digitos= cuenta
+      '1 digito verificador
+      '1er bloque
+
+      Dim Suma1 As Integer = CInt(vCBU.Substring(0, 1)) * 7 + CInt(vCBU.Substring(1, 1)) * 1 + CInt(vCBU.Substring(2, 1)) * 3 + CInt(vCBU.Substring(3, 1)) * 9 + CInt(vCBU.Substring(4, 1)) * 7 + CInt(vCBU.Substring(5, 1)) * 1 + CInt(vCBU.Substring(6, 1)) * 3
+      Dim DigitoVerificador As Integer = CInt(vCBU.Substring(7, 1))
+      Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
+
+      If DigitoVerificador <> 0 Then
+        'ok
+        If diferencial <> DigitoVerificador Then Return False
+      Else
+        'digitoverificador es 0
+        If diferencial <> 10 Then Return False
+      End If
+
+      '2do Bloque
+
+      Suma1 = CInt(vCBU.Substring(8, 1)) * 3 + CInt(vCBU.Substring(9, 1)) * 9 + CInt(vCBU.Substring(10, 1)) * 7 + CInt(vCBU.Substring(11, 1)) * 1 + CInt(vCBU.Substring(12, 1)) * 3 + CInt(vCBU.Substring(13, 1)) * 9 + CInt(vCBU.Substring(14, 1)) * 7 + CInt(vCBU.Substring(15, 1)) * 1 + CInt(vCBU.Substring(16, 1)) * 3 + CInt(vCBU.Substring(17, 1)) * 9 + CInt(vCBU.Substring(18, 1)) * 7 + CInt(vCBU.Substring(19, 1)) * 1 + CInt(vCBU.Substring(20, 1)) * 3
+      DigitoVerificador = CInt(vCBU.Substring(21, 1))
+      diferencial = 10 - CInt(Suma1 Mod 10)
+
+      If DigitoVerificador <> 0 Then
+        'ok
+        If diferencial <> DigitoVerificador Then Return False
+      Else
+        'digitoverificador es 0
+        If diferencial <> 10 Then Return False
+      End If
+
+      Return True
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
+  Public Function GetValidacionBloque1(ByVal vBanco As String, ByVal vSucursal As String, ByRef rValidacion1 As String) As Result
+    Try
+      Dim Suma1 As Integer = CInt(vBanco.Substring(0, 1)) * 7 + CInt(vBanco.Substring(1, 1)) * 1 + CInt(vBanco.Substring(2, 1)) * 3 + CInt(vSucursal.Substring(0, 1)) * 9 + CInt(vSucursal.Substring(1, 1)) * 7 + CInt(vSucursal.Substring(2, 1)) * 1 + CInt(vSucursal.Substring(3, 1)) * 3
+      Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
+      If diferencial = 10 Then
+        rValidacion1 = "0"
+        Return Result.OK
+      End If
+      If diferencial >= 0 AndAlso diferencial <= 9 Then
+        rValidacion1 = CStr(diferencial)
+        Return Result.OK
+      Else
+        Return Result.NOK
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
 End Module

@@ -158,10 +158,15 @@ Public Class frmCuenta
 
   Private Function Validar() As Boolean
     Try
-      
-
-      'TODO: validar los campos
-      Return True
+      Dim vResult As Boolean = False
+      If UcCBU1.Visible Then
+        vResult = UcCBU1.EsValido
+      ElseIf UcDDHipotecario1.Visible Then
+        vResult = UcDDHipotecario1.EsValido
+      ElseIf UcTarjeta1.Visible Then
+        vResult = UcTarjeta1.EsValido
+      End If
+      Return vResult
     Catch ex As Exception
       Print_msg(ex.Message)
       Return False

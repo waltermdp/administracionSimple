@@ -129,7 +129,7 @@ Public Class clsInfoImportarHipotecario
   Public Sub New()
     Try
       m_NroAbonado = 0
-      m_NroCuenta = "0000000000000000000000"
+      m_NroCuenta = "0000000000000000000000"  'CBU 22 digitos
       m_cuota = 0
       m_FechaDebito = g_Today
       m_ImporteADebitar = 0

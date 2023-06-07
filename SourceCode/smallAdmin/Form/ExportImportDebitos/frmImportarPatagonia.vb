@@ -224,26 +224,26 @@ Public Class frmImportarPatagonia
     End Try
   End Sub
 
-  Private Function GenerateValidacionBloque1(ByVal vBanco As String, ByVal vSucursal As String, ByRef rValidacion1 As String) As Result
-    Try
-      Dim Suma1 As Integer = CInt(vBanco.Substring(0, 1)) * 7 + CInt(vBanco.Substring(1, 1)) * 1 + CInt(vBanco.Substring(2, 1)) * 3 + CInt(vSucursal.Substring(0, 1)) * 9 + CInt(vSucursal.Substring(1, 1)) * 7 + CInt(vSucursal.Substring(2, 1)) * 1 + CInt(vSucursal.Substring(2, 1)) * 3
-      Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
-      If diferencial = 10 Then
-        rValidacion1 = "0"
-        Return Result.OK
-      End If
-      If diferencial >= 0 AndAlso diferencial <= 9 Then
-        rValidacion1 = CStr(diferencial)
-        Return Result.OK
-      Else
-        Return Result.NOK
-      End If
+  'Private Function GenerateValidacionBloque1(ByVal vBanco As String, ByVal vSucursal As String, ByRef rValidacion1 As String) As Result
+  '  Try
+  '    Dim Suma1 As Integer = CInt(vBanco.Substring(0, 1)) * 7 + CInt(vBanco.Substring(1, 1)) * 1 + CInt(vBanco.Substring(2, 1)) * 3 + CInt(vSucursal.Substring(0, 1)) * 9 + CInt(vSucursal.Substring(1, 1)) * 7 + CInt(vSucursal.Substring(2, 1)) * 1 + CInt(vSucursal.Substring(3, 1)) * 3
+  '    Dim diferencial As Integer = 10 - CInt(Suma1 Mod 10)
+  '    If diferencial = 10 Then
+  '      rValidacion1 = "0"
+  '      Return Result.OK
+  '    End If
+  '    If diferencial >= 0 AndAlso diferencial <= 9 Then
+  '      rValidacion1 = CStr(diferencial)
+  '      Return Result.OK
+  '    Else
+  '      Return Result.NOK
+  '    End If
 
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Function
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    Return Result.ErrorEx
+  '  End Try
+  'End Function
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
