@@ -19,6 +19,8 @@ Public Class clsHipotecario
 
   Private m_Secuencial As Decimal
 
+  Private m_GuidTipoPago As Guid
+
   Public Property Convenio As Integer
     Get
       Return m_Convenio
@@ -73,16 +75,21 @@ Public Class clsHipotecario
     End Set
   End Property
 
+
+
   Public Sub New(ByVal vGuidConvenio As Guid)
     Try
       m_FechaGeneracion = g_Today
       m_FechaVencimiento = g_Today.AddDays(2)
       m_Secuencial = 0
       If vGuidConvenio = New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926") Then
+        m_GuidTipoPago = vGuidConvenio
         m_Convenio = 6248
       ElseIf vGuidConvenio = New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7") Then
+        m_GuidTipoPago = vGuidConvenio
         m_Convenio = 7465
       Else
+        m_GuidTipoPago = Guid.Empty
         m_Convenio = 0
         MsgBox("Convenio no disponible")
       End If
@@ -93,6 +100,154 @@ Public Class clsHipotecario
       Print_msg(ex.Message)
     End Try
   End Sub
+
+#Region "Importacion"
+
+  Private m_LineasArchivo As New List(Of String)
+  Private m_Registros As New List(Of clsInfoImportarHipotecario)
+  Private m_FechaEjecucion As Date
+  Private m_TotalImporte As Decimal
+
+  Public Function LoadImportedFile(ByVal vOwn As IWin32Window) As libCommon.Comunes.Result
+    Try
+      Dim AbrirArchivo As New OpenFileDialog
+      If AbrirArchivo.ShowDialog(vOwn) <> Windows.Forms.DialogResult.OK Then
+        Return Result.CANCEL
+      End If
+
+      m_LineasArchivo = New List(Of String)
+      If modFile.Load(AbrirArchivo.FileName, m_LineasArchivo) <> Result.OK Then
+        MsgBox("Error al abrir archivo")
+        Return Result.NOK
+      End If
+      Dim s As String = IO.Path.Combine(IMPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
+
+      IO.File.Copy(AbrirArchivo.FileName, s)
+
+      Using objForm As New frmProgreso(AddressOf CargarInicio)
+        objForm.ShowDialog(vOwn)
+      End Using
+
+      Return Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub CargarInicio()
+    Try
+      m_Registros = New List(Of clsInfoImportarHipotecario)
+      Dim length As Integer = m_LineasArchivo.Count
+      Dim vResult As Result
+      Dim validacionBloque1 As String = String.Empty
+
+      If length > 1 Then
+        FillEncabezado(m_LineasArchivo(0), m_Convenio, m_FechaEjecucion)
+        'Verifica convenio
+        If m_Convenio <> m_Banco.Convenio Then
+          MsgBox("El convenio del archivo no se corresponde al seleccionado en la importacion")
+          Exit Sub
+        End If
+        For Each linea In m_LineasArchivo.GetRange(1, length - 1)
+          Dim registro As New clsInfoImportarHipotecario
+          With registro
+            vResult = modCommon.GetValidacionBloque1(linea.Substring(21, 3), linea.Substring(24, 4), validacionBloque1)
+            If vResult <> Result.OK Then
+              MsgBox("Fallo la validacion de uno de los bloques de la cuenta, se cancela el proceso")
+              Exit Sub
+            End If
+            .NroCuenta = linea.Substring(21, 3) & linea.Substring(24, 4) & validacionBloque1 & linea.Substring(30, 14) 'linea.Substring(29, 15)
+            .NroAbonado = CInt(linea.Substring(44, 22))
+            .MotivoRechazo = linea.Substring(83, 4)
+            .FechaDebito = New Date(CInt(linea.Substring(111, 4)), CInt(linea.Substring(111 + 4, 2)), CInt(linea.Substring(111 + 6, 2))) ' 
+            'moneda 3 posiciones
+            .ImporteADebitar = CDec(CDec(linea.Substring(98, 13)) / 100)
+            .importeDebitado = CDec(CDec(linea.Substring(119, 13)) / 100)
+            .ImporteBH = 0
+            .Importar = False
+            .cuota = 0
+          End With
+          m_Registros.Add(registro)
+        Next
+
+      End If
+
+      ProcesarImportados()
+      m_TotalImporte = m_Registros.Where(Function(c) c.Importar = True).Sum(Function(c) c.ImporteADebitar)
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub ProcesarImportados()
+    Try
+      'toma cada registro y aplica si se realizo el pago correspondiente
+      'validar cbu, id y valor debito contra db
+      For Each item In m_Registros ' tmpRegistros
+        ' If item.ImporteADebitar <> item.importeDebitado OrElse item.MotivoRechazo <> String.Empty Then Continue For
+        Dim objVenta As New clsListProductos
+        objVenta.Cfg_Filtro = "WHERE NumComprobante=" & item.NroAbonado.ToString
+        objVenta.RefreshData()
+        If objVenta.Items.Count = 1 Then
+          item.GuidProducto = objVenta.Items.First.GuidProducto
+          'asocio un nombre
+          Dim objCliente As New clsListDatabase
+          objCliente.Cfg_Filtro = "Where GuidCliente={" & objVenta.Items.First.GuidCliente.ToString.ToUpper & "}"
+          objCliente.RefreshData()
+          If objCliente.Items.Count = 1 Then
+            item.Nombre = objCliente.Items.First.ToString
+          End If
+          Dim objCuentas As New clsListaCuentas
+          objCuentas.Cfg_Filtro = "WHERE GuidCuenta={" & objVenta.Items.First.GuidCuenta.ToString & "} and TipoDeCuenta={" & m_GuidTipoPago.ToString & "}" '
+          objCuentas.RefreshData()
+          If objCuentas.Items.Count = 1 Then
+            'comparo CBU con codigo1
+            item.GuidCuenta = objCuentas.Items.First.GuidCuenta
+            If item.NroCuenta = objCuentas.Items.First.Codigo1 Then
+              'confirmado
+              'aplicar pago cuota actual a debitar
+              Dim objPagos As New clsListPagos
+              objPagos.Cfg_Filtro = "WHERE GuidProducto={" & objVenta.Items.First.GuidProducto.ToString & "} and EstadoPago=" & CInt(E_EstadoPago.Debe).ToString
+              objPagos.RefreshData()
+              If objPagos.Items.Count = 1 Then
+                item.GuidPago = objPagos.Items.First.GuidPago
+                If (item.ImporteADebitar = item.importeDebitado) AndAlso String.IsNullOrWhiteSpace(item.MotivoRechazo) Then
+                  item.Importar = True
+                End If
+
+              End If
+            End If
+          End If
+        Else
+          'Marcar como no encontrado
+          'MsgBox("no encontrado, marcar")
+        End If
+
+      Next
+      Dim k As Integer = 0
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub FillEncabezado(ByVal vLineaEncabezado As String, ByRef rConvenio As Integer, ByRef rFechaEjecucion As Date)
+    Try
+      'validar encabezado
+      'vLineaEncabezado.Length =xx
+      If vLineaEncabezado.Substring(0, 1) <> "1" Then Exit Sub
+      rConvenio = CInt(vLineaEncabezado.Substring(1, 5))
+      rFechaEjecucion = New Date(CInt(vLineaEncabezado.Substring(21, 4)), CInt(vLineaEncabezado.Substring(25, 2)), CInt(vLineaEncabezado.Substring(27, 2)))
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+#End Region
+
+
 
 
   Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoHipotecario), ByRef rlineas As List(Of String)) As Result
