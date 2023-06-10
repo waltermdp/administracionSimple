@@ -40,11 +40,15 @@ Public Class frmResumen
     End Try
   End Sub
 
-  Private Sub AplicarPagosSeleccionados()
+  Private Sub AplicarPagosSeleccionados(ByRef rResult As Result, ByRef rMessage As String)
     Try
       lstViewResumen.Invoke(Sub() AplicarPagos())
+      rMessage = "Finalizaed Ok"
+      rResult = Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
     End Try
   End Sub
 
@@ -552,14 +556,14 @@ Public Class frmResumen
     End Try
   End Function
 
-  Private Sub fillLista()
+  Private Sub fillLista(ByRef rResult As Result, ByRef rMessage As String)
     Try
 
       If LeerArchivoEntrada(m_TipoPagoSeleccionado) <> Result.OK Then
         Exit Sub
       End If
 
-
+      rResult = Result.OK
       Select Case m_TipoPagoSeleccionado.GuidTipo
 
         Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito
@@ -574,8 +578,10 @@ Public Class frmResumen
           MsgBox("No se encuentra tipo de pago")
           Me.Close()
       End Select
+      rResult = Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
+      rResult = Result.ErrorEx
     End Try
   End Sub
 
@@ -694,9 +700,6 @@ Public Class frmResumen
           Exit Sub
 
         End If
-
-
-
       End If
 
     Catch ex As Exception

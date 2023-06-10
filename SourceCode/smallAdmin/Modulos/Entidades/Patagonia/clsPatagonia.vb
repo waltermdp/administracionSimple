@@ -19,6 +19,9 @@ Public Class clsPatagonia
   Private m_CantidadRegistros As Decimal
   Private m_ImporteTotal As Decimal
 
+  Public m_RegistrosExportar As New List(Of clsInfoPatagonia)
+  Private m_GuidTipoPago As Guid
+
   Public Property Producto As String
     Get
       Return m_Producto
@@ -73,6 +76,224 @@ Public Class clsPatagonia
     End Set
   End Property
 
+  Public Sub New(ByVal vGuidConvenio As Guid)
+    Try
+      m_Producto = "CUOTA"
+      m_NroCuitEmpresa = 30716028956
+      m_OrigenComercial = 100
+      m_FechaPresentacion = g_Today
+      m_FechaVto = g_Today.AddDays(2)
+      m_Reserva = GetReserva()
+      m_RazonSocial = "EDIT EL FARO"
+      m_ReferenciaDebito = "EDIT EL FARO"
+      m_GuidTipoPago = vGuidConvenio
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+#Region "Exportacion"
+
+  Public ReadOnly Property countRegistrosAExportar As Integer
+    Get
+      Return m_RegistrosExportar.Count
+    End Get
+  End Property
+
+  Public ReadOnly Property ImporteTotalAExportar As String
+    Get
+      Return m_RegistrosExportar.Sum(Function(c) c.Importe).ToString
+    End Get
+  End Property
+
+  Public Function CargarContratosAExportar(ByVal win32 As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Using objForm As New frmProgreso(AddressOf CargarInicio)
+        objForm.ShowDialog(win32)
+        vResult = objForm.ResultProcess
+      End Using
+
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub CargarInicio(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+      m_RegistrosExportar = New List(Of clsInfoPatagonia)
+      rResult = GenerateResumen(m_GuidTipoPago, m_RegistrosExportar)
+      rMessage = "Finalizado OK"
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      rResult = Result.ErrorEx
+      rMessage = ex.Message
+    End Try
+  End Sub
+
+  Private Function GenerateResumen(ByVal vGuidPago As Guid, ByRef rRegistros As List(Of clsInfoPatagonia)) As Result
+    Try
+
+      Dim lstPago As New clsListPagos
+      rRegistros = New List(Of clsInfoPatagonia)
+      Dim movimiento As clsInfoPatagonia
+
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.RefreshData()
+
+
+      For Each item In lstPago.Items
+        movimiento = New clsInfoPatagonia
+
+        Dim lstProducto As New clsListProductos
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & vGuidPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
+        lstProducto.RefreshData()
+        If lstProducto.Items.Count <= 0 Then Continue For
+
+
+        Dim lstCuenta As New clsListaCuentas
+        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
+        lstCuenta.RefreshData()
+
+        Dim lstCliente As New clsListDatabase
+        lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
+        lstCliente.RefreshData()
+
+        Dim bCodigoAlta As Boolean
+        If item.NumCuota > 1 Then
+          bCodigoAlta = False
+        Else
+          'verificar si es la primer cuota, buscan si la cuenta se uso en algun pago de cuota
+          Dim auxPrimerPago As New clsListProductos
+          Dim bAlta As Boolean = True
+          auxPrimerPago.Cfg_Filtro = "where GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+          auxPrimerPago.RefreshData()
+          If auxPrimerPago.Items.Count > 1 Then
+
+            For Each vProducto In auxPrimerPago.Items
+              Dim aux As New clsListPagos
+              aux.Cfg_Filtro = "where GuidProducto={" & vProducto.GuidProducto.ToString & "}"
+              aux.RefreshData()
+              For Each pago In aux.Items
+                If pago.EstadoPago = E_EstadoPago.Pago Then
+                  bAlta = False
+                  Exit For
+                End If
+              Next
+              If bAlta = False Then Exit For
+            Next
+          End If
+          bCodigoAlta = bAlta
+        End If
+
+        With movimiento
+          .CBU = CDec(lstCuenta.Items.First.Codigo1)
+          .Cuit_DNI = CDec(lstCliente.Items.First.DNI) ' lstCuenta.Items.First.Codigo2)
+          .Nombre = lstCliente.Items.First.ToString
+          .Contrato = lstProducto.Items.First.NumComprobante
+          .Producto = Producto
+          .FechaVto = FechaVencimiento ' lstCuenta.Items.First.Codigo3
+          .Importe = item.ValorCuota
+          .CuotaActual = item.NumCuota
+          .NroCuitEmpresa = NroCuitEmpresa
+          .ReferenciaDebito = ReferenciaDebito
+        End With
+        rRegistros.Add(movimiento)
+      Next
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Public Function GenerarExportacion(ByVal win32 As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim msgResult As String
+      Using objForm As New frmProgreso(AddressOf taskGenerarExportacion)
+        objForm.ShowDialog(win32)
+        vResult = objForm.ResultProcess
+        msgResult = objForm.ResultMessage
+      End Using
+      If vResult <> Result.OK Then
+        MsgBox(msgResult)
+      End If
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub taskGenerarExportacion(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+      Dim lineas As New List(Of String)
+      If GetExportedFile(m_RegistrosExportar, lineas) <> Result.OK Then
+        rMessage = "Fallo generar archivo"
+        rResult = Result.NOK
+        Exit Sub
+      End If
+      Dim FileName As String = String.Empty
+      If GetFileNameExport(FileName) <> Result.OK Then
+        rMessage = "Fallo generar nombre"
+        rResult = Result.NOK
+        Exit Sub
+      End If
+      Dim FullFileName As String = IO.Path.Combine(GetFolderExportacion, FileName)
+      If IO.File.Exists(FullFileName) Then
+       
+        Dim chFilename As String = String.Empty
+
+        chFilename = FileName.Insert(FileName.IndexOf("."), "_" & Date.Now.ToString("yyyyMMddhhmmss"))
+
+        FileSystem.Rename(FullFileName, IO.Path.Combine(GetFolderExportacion, chFilename))
+      End If
+      If Save(IO.Path.Combine(GetFolderExportacion, FileName), lineas) <> Result.OK Then
+        rMessage = "Fallo guardando archivo"
+        rResult = Result.NOK
+        Exit Sub
+      End If
+
+      rMessage = "Finalizado OK"
+      rResult = Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
+    End Try
+  End Sub
+
+  Public Sub UpdateFechaVencimientoExportar(ByVal vDate As Date)
+    Try
+      m_FechaVto = vDate
+      For Each registro In m_RegistrosExportar
+        registro.FechaVto = vDate
+      Next
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+#End Region
+
+#Region "Importacion"
+
+  Public Function LoadImportedFile(ByVal vOwn As IWin32Window) As libCommon.Comunes.Result
+    Try
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+
+
+#End Region
 
 
   Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoPatagonia), ByRef rlineas As List(Of String)) As Result
@@ -244,19 +465,6 @@ Public Class clsPatagonia
     End Try
   End Function
 
-  Public Sub New()
-    Try
-      m_Producto = "CUOTA"
-      m_NroCuitEmpresa = 30716028956
-      m_OrigenComercial = 100
-      m_FechaPresentacion = g_Today
-      m_FechaVto = g_Today.AddDays(2)
-      m_Reserva = GetReserva()
-      m_RazonSocial = "EDIT EL FARO"
-      m_ReferenciaDebito = "EDIT EL FARO"
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
+
 
 End Class

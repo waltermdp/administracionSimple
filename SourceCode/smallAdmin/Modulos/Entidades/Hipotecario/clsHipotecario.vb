@@ -1,4 +1,5 @@
 ﻿Imports libCommon.Comunes
+
 Public Class clsHipotecario
 
 
@@ -77,6 +78,7 @@ Public Class clsHipotecario
 
 
 
+
   Public Sub New(ByVal vGuidConvenio As Guid)
     Try
       m_FechaGeneracion = g_Today
@@ -104,9 +106,39 @@ Public Class clsHipotecario
 #Region "Importacion"
 
   Private m_LineasArchivo As New List(Of String)
-  Private m_Registros As New List(Of clsInfoImportarHipotecario)
+  Public m_Registros As New List(Of clsInfoImportarHipotecario)
   Private m_FechaEjecucion As Date
   Private m_TotalImporte As Decimal
+
+  ReadOnly Property ImporteTotalImportado As Decimal
+    Get
+      Return m_TotalImporte
+    End Get
+  End Property
+
+  ReadOnly Property FechaEjecucion As Date
+    Get
+      Return m_FechaEjecucion
+    End Get
+  End Property
+
+  ReadOnly Property RegistrosCargados As Integer
+    Get
+      Return m_Registros.Count
+    End Get
+  End Property
+
+  ReadOnly Property RegistrosAceptados As Integer
+    Get
+      Return m_Registros.Where(Function(c) c.Importar = True).Count()
+    End Get
+  End Property
+
+  ReadOnly Property RegistrosRechazados As Integer
+    Get
+      Return RegistrosCargados - RegistrosAceptados
+    End Get
+  End Property
 
   Public Function LoadImportedFile(ByVal vOwn As IWin32Window) As libCommon.Comunes.Result
     Try
@@ -123,30 +155,37 @@ Public Class clsHipotecario
       Dim s As String = IO.Path.Combine(IMPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
 
       IO.File.Copy(AbrirArchivo.FileName, s)
-
+      Dim vResult As Result
+      Dim vMessge As String
       Using objForm As New frmProgreso(AddressOf CargarInicio)
         objForm.ShowDialog(vOwn)
+        vResult = objForm.ResultProcess
+        vMessge = objForm.ResultMessage
       End Using
+      If vResult <> Result.OK Then
+        MsgBox(vMessge)
+      End If
 
-      Return Result.OK
+      Return vResult
     Catch ex As Exception
       Print_msg(ex.Message)
       Return Result.ErrorEx
     End Try
   End Function
 
-  Private Sub CargarInicio()
+  Private Sub CargarInicio(ByRef rResult As Result, ByRef rMessage As String)
     Try
       m_Registros = New List(Of clsInfoImportarHipotecario)
       Dim length As Integer = m_LineasArchivo.Count
       Dim vResult As Result
       Dim validacionBloque1 As String = String.Empty
-
+      Dim convenio As Integer
       If length > 1 Then
-        FillEncabezado(m_LineasArchivo(0), m_Convenio, m_FechaEjecucion)
+        FillEncabezado(m_LineasArchivo(0), convenio, m_FechaEjecucion)
         'Verifica convenio
-        If m_Convenio <> m_Banco.Convenio Then
-          MsgBox("El convenio del archivo no se corresponde al seleccionado en la importacion")
+        If m_Convenio <> convenio Then
+          rMessage = "El convenio del archivo no se corresponde al seleccionado en la importacion"
+          rResult = Result.NOK
           Exit Sub
         End If
         For Each linea In m_LineasArchivo.GetRange(1, length - 1)
@@ -154,7 +193,8 @@ Public Class clsHipotecario
           With registro
             vResult = modCommon.GetValidacionBloque1(linea.Substring(21, 3), linea.Substring(24, 4), validacionBloque1)
             If vResult <> Result.OK Then
-              MsgBox("Fallo la validacion de uno de los bloques de la cuenta, se cancela el proceso")
+              rMessage = "Fallo la validacion de uno de los bloques de la cuenta, se cancela el proceso"
+              rResult = Result.NOK
               Exit Sub
             End If
             .NroCuenta = linea.Substring(21, 3) & linea.Substring(24, 4) & validacionBloque1 & linea.Substring(30, 14) 'linea.Substring(29, 15)
@@ -176,8 +216,13 @@ Public Class clsHipotecario
       ProcesarImportados()
       m_TotalImporte = m_Registros.Where(Function(c) c.Importar = True).Sum(Function(c) c.ImporteADebitar)
 
+      rMessage = "Finalizado OK"
+      rResult = Result.OK
+      Exit Sub
     Catch ex As Exception
       Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
     End Try
   End Sub
 
@@ -245,12 +290,243 @@ Public Class clsHipotecario
     End Try
   End Sub
 
+  Public Function ImportarSeleccionados(ByVal vHWND As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim vMessge As String
+      Using objForm As New frmProgreso(AddressOf taskImportarSeleccionados)
+        objForm.ShowDialog(vHWND)
+        vResult = objForm.ResultProcess
+        vMessge = objForm.ResultMessage
+      End Using
+
+      If vResult <> Result.OK Then
+        MsgBox(vMessge)
+      End If
+
+
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub taskImportarSeleccionados(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+      For Each item In m_Registros
+        If item.Importar <> True Then Continue For
+        Dim objDebitos As New clsListPagos
+        objDebitos.Cfg_Filtro = "WHERE GuidPago={" & item.GuidPago.ToString & "}"
+        objDebitos.RefreshData()
+        If objDebitos.Items.Count = 1 Then
+          Dim objDebitoActualizado As manDB.clsInfoPagos = objDebitos.Items.First.Clone
+          objDebitoActualizado.EstadoPago = E_EstadoPago.Pago
+          objDebitoActualizado.FechaPago = item.FechaDebito
+          If clsPago.Save(objDebitoActualizado) <> Result.OK Then
+            'TODO: take error
+            rMessage = "No pudo guardarse el proceso"
+            rResult = Result.NOK
+          End If
+        End If
+
+      Next
+      rMessage = "Finalizado OK"
+      rResult = Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
+    End Try
+  End Sub
+
 #End Region
 
+#Region "Exportacion"
+
+  Public m_RegistrosExportar As New List(Of clsInfoExportarHipotecario)
+
+  Public ReadOnly Property countRegistrosAExportar As Integer
+    Get
+      Return m_RegistrosExportar.Count
+    End Get
+  End Property
+
+  Public ReadOnly Property ImporteTotalAExportar As String
+    Get
+      Return m_RegistrosExportar.Sum(Function(c) c.Importe).ToString
+    End Get
+  End Property
+
+  Public Sub UpdateFechaVencimientoExportar(ByVal vDate As Date)
+    Try
+      m_FechaVencimiento = vDate
+      For Each registro In m_RegistrosExportar
+        registro.FechaVencimiento = vDate
+      Next
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Public Function CargarContratosAExportar(ByVal win32 As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim vMessge As String
+      Using objForm As New frmProgreso(AddressOf taskGenerateResumen)
+        objForm.ShowDialog(win32)
+        vResult = objForm.ResultProcess
+        vMessge = objForm.ResultMessage
+      End Using
+      If vResult <> Result.OK Then
+        MsgBox(vMessge)
+      End If
+
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub taskGenerateResumen(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+
+      Dim lstPago As New clsListPagos
+      m_RegistrosExportar = New List(Of clsInfoExportarHipotecario)
+      Dim movimiento As clsInfoExportarHipotecario
+
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.RefreshData()
 
 
+      For Each item In lstPago.Items
+        movimiento = New clsInfoExportarHipotecario
 
-  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoHipotecario), ByRef rlineas As List(Of String)) As Result
+        Dim lstProducto As New clsListProductos
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
+        lstProducto.RefreshData()
+        If lstProducto.Items.Count <= 0 Then Continue For
+
+
+        Dim lstCuenta As New clsListaCuentas
+        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
+        lstCuenta.RefreshData()
+
+        Dim lstCliente As New clsListDatabase
+        lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
+        lstCliente.RefreshData()
+
+        Dim bCodigoAlta As Boolean
+        If item.NumCuota > 1 Then
+          bCodigoAlta = False
+        Else
+          'verificar si es la primer cuota, buscan si la cuenta se uso en algun pago de cuota
+          Dim auxPrimerPago As New clsListProductos
+          Dim bAlta As Boolean = True
+          auxPrimerPago.Cfg_Filtro = "where GuidCuenta={" & lstCuenta.Items.First.GuidCuenta.ToString & "}"
+          auxPrimerPago.RefreshData()
+          If auxPrimerPago.Items.Count > 1 Then
+
+            For Each producto In auxPrimerPago.Items
+              Dim aux As New clsListPagos
+              aux.Cfg_Filtro = "where GuidProducto={" & producto.GuidProducto.ToString & "}"
+              aux.RefreshData()
+              For Each pago In aux.Items
+                If pago.EstadoPago = E_EstadoPago.Pago Then
+                  bAlta = False
+                  Exit For
+                End If
+              Next
+              If bAlta = False Then Exit For
+            Next
+          End If
+          bCodigoAlta = bAlta
+        End If
+
+        With movimiento
+          .CBU = lstCuenta.Items.First.Codigo1
+          .CodigoBanco = CDec(lstCuenta.Items.First.Codigo2)
+          .CodigoSucCuenta = CInt(lstCuenta.Items.First.Codigo3)
+          .CuentaBanco = CDec(lstCuenta.Items.First.Codigo4)
+          .TipoCuenta = lstCuenta.Items.First.Codigo5
+          .NumeroContrato = lstProducto.Items.First.NumComprobante
+          .Importe = item.ValorCuota
+          .idCliente = lstCliente.Items.First.NumCliente
+
+          .FechaVencimiento = m_FechaVencimiento
+          .CuotaActual = item.NumCuota
+          .Nombre = lstCliente.Items.First.ToString
+
+        End With
+        m_RegistrosExportar.Add(movimiento)
+      Next
+      rMessage = "Finalizado OK"
+      rResult = Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
+    End Try
+  End Sub
+
+  Public Function GenerarExportacion(ByVal win32 As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim msgResult As String
+      Using objForm As New frmProgreso(AddressOf taskGenerarExportacion)
+        objForm.ShowDialog(win32)
+        vResult = objForm.ResultProcess
+        msgResult = objForm.ResultMessage
+      End Using
+      If vResult <> Result.OK Then
+        MsgBox(msgResult)
+      End If
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub taskGenerarExportacion(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+      Dim lineas As New List(Of String)
+      If GetExportedFile(m_RegistrosExportar, lineas) <> Result.OK Then
+        rMessage = "Fallo generar archivo"
+        rResult = Result.NOK
+        Exit Sub
+      End If
+      Dim FileName As String = String.Empty
+      If GetFileNameExport(FileName) <> Result.OK Then
+        rMessage = "Fallo generar nombre"
+        rResult = Result.NOK
+        Exit Sub
+      End If
+      Dim FullFileName As String = IO.Path.Combine(GetFolderExportacion, FileName)
+      If IO.File.Exists(FullFileName) Then
+
+        Dim chFilename As String = String.Empty
+
+        chFilename = FileName.Insert(FileName.IndexOf("."), "_" & Date.Now.ToString("yyyyMMddhhmmss"))
+
+        FileSystem.Rename(FullFileName, IO.Path.Combine(GetFolderExportacion, chFilename))
+      End If
+      If Save(IO.Path.Combine(GetFolderExportacion, FileName), lineas) <> Result.OK Then
+        rMessage = "Fallo guardando archivo"
+        rResult = Result.NOK
+        Exit Sub
+      End If
+      rMessage = "Finalizado OK"
+      rResult = Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
+    End Try
+  End Sub
+
+  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoExportarHipotecario), ByRef rlineas As List(Of String)) As Result
     Try
       Dim auxLinea As String = String.Empty
       Dim lstResult As New List(Of String)
@@ -301,6 +577,11 @@ Public Class clsHipotecario
       Return Result.ErrorEx
     End Try
   End Function
+
+#End Region
+
+
+
 
 
   Private Function GenerarHeaderDebito(ByRef rHeader As String, ByVal vImporteTotal As Integer, ByVal vFechaGen As Date, ByVal vSecuencial As Integer) As Result
@@ -355,7 +636,7 @@ Public Class clsHipotecario
     End Try
   End Function
 
-  Private Function GenerarDetalle(ByVal vMov As clsInfoHipotecario, ByRef rBody As String) As Result
+  Private Function GenerarDetalle(ByVal vMov As clsInfoExportarHipotecario, ByRef rBody As String) As Result
     Try
       Dim sResult As String = String.Empty
       'Dim codBanco As Integer = 888 '!!!consultar

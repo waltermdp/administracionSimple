@@ -1,4 +1,4 @@
-﻿Public Class clsInfoHipotecario
+﻿Public Class clsInfoExportarHipotecario
 
   Private m_CBU As String
   Private m_NumeroComprobante As Integer

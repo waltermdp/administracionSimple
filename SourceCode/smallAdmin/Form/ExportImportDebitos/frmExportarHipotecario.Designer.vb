@@ -210,7 +210,7 @@ Partial Class frmExportarHipotecario
     '
     'ClsInfoHipotecarioBindingSource
     '
-    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoHipotecario)
+    Me.ClsInfoHipotecarioBindingSource.DataSource = GetType(main.clsInfoExportarHipotecario)
     '
     'Label2
     '

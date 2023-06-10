@@ -147,7 +147,7 @@
     <Compile Include="Form\ExportImportDebitos\frmImportarPatagonia.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modulos\Entidades\clsHipotecario.vb" />
+    <Compile Include="Modulos\Entidades\Hipotecario\clsHipotecario.vb" />
     <Compile Include="AccesoADatos\clsInfoResponsable.vb" />
     <Compile Include="AccesoADatos\clsInfoResumen.vb" />
     <Compile Include="AccesoADatos\clsPago.vb" />
@@ -305,14 +305,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modulos\clsComparar.vb" />
-    <Compile Include="Modulos\Entidades\clsInfoHipotecario.vb" />
-    <Compile Include="Modulos\Entidades\clsInfoImportarHipotecario.vb" />
-    <Compile Include="Modulos\Entidades\clsInfoImportarPatagonia.vb" />
-    <Compile Include="Modulos\Entidades\clsInfoPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\Hipotecario\clsInfoExportarHipotecario.vb" />
+    <Compile Include="Modulos\Entidades\Hipotecario\clsInfoImportarHipotecario.vb" />
+    <Compile Include="Modulos\Entidades\Patagonia\clsInfoImportarPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\Patagonia\clsInfoPatagonia.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />
-    <Compile Include="Modulos\Entidades\clsPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\Patagonia\clsPatagonia.vb" />
     <Compile Include="Modulos\modCommon.vb" />
     <Compile Include="Modulos\modFile.vb" />
     <Compile Include="Modulos\modInOut.vb" />

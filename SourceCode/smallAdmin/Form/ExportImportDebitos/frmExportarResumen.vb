@@ -34,9 +34,10 @@ Public Class frmExportarResumen
     End Try
   End Sub
 
-  Private Sub CargarInicio()
+  Private Sub CargarInicio(ByRef rResult As Result, ByRef rMessage As String)
     Try
       clsCobros.GenerateResumen(m_TipoPago, m_Movimientos)
+      rResult = Result.OK
       Select Case m_TipoPago.GuidTipo
         Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
           FillResumenViewVisaCredito(m_Movimientos)
@@ -51,11 +52,13 @@ Public Class frmExportarResumen
         Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
           FillResumenViewVisaCredito(m_Movimientos)
         Case Else
-          MsgBox("No se encuentra tipo de pago")
+          rMessage = "No se encuentra tipo de pago"
+          rResult = Result.NOK
       End Select
-      'FillResumenViewVisaCredito(m_Movimientos)
+
     Catch ex As Exception
       Print_msg(ex.Message)
+      rResult = Result.ErrorEx
     End Try
   End Sub
 

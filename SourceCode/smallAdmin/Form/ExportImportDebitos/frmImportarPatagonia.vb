@@ -3,16 +3,16 @@ Imports manDB
 
 Public Class frmImportarPatagonia
   Private m_Result As libCommon.Comunes.Result = Result.CANCEL
-  Private m_Registros As New List(Of clsInfoImportarPatagonia)
+  'Private m_Registros As New List(Of clsInfoImportarPatagonia)
   Private m_Banco As clsPatagonia
-  Private m_LineasArchivo As New List(Of String)
+  'Private m_LineasArchivo As New List(Of String)
   Private m_TipoPago As clsTipoPago
 
-  Private m_FechaEjecucion As Date
-  Private m_CUITEmpresa As Decimal
-  Private m_TotalImporte As Decimal
-  Private m_totalRegistros As Integer
-  Private m_totalRegistosADebitar As Integer
+  'Private m_FechaEjecucion As Date
+  'Private m_CUITEmpresa As Decimal
+  'Private m_TotalImporte As Decimal
+  'Private m_totalRegistros As Integer
+  'Private m_totalRegistosADebitar As Integer
 
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
 
@@ -20,7 +20,7 @@ Public Class frmImportarPatagonia
     InitializeComponent()
     Try
       m_TipoPago = vTipoPago.Clone
-
+      m_Banco = New clsPatagonia(vTipoPago.GuidTipo)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -47,6 +47,7 @@ Public Class frmImportarPatagonia
 
   Private Sub Init()
     Try
+      m_Banco.LoadImportedFile(Me)
       m_LineasArchivo = New List(Of String)
       Dim vResult As Result = GetLinesFromFile(m_LineasArchivo)
       If vResult = Result.OK Then
@@ -116,11 +117,11 @@ Public Class frmImportarPatagonia
     End Try
   End Sub
 
-  Private Sub CargarInicio()
+  Private Sub CargarInicio(ByRef rResult As Result, ByRef rMessage As String)
     Try
       m_Registros = New List(Of clsInfoImportarPatagonia)
       Dim length As Integer = m_LineasArchivo.Count
-      Dim vResult As Result
+
       Dim validacionBloque1 As String = String.Empty
 
       If length > 1 Then
@@ -163,9 +164,12 @@ Public Class frmImportarPatagonia
 
       Procesar()
       'm_TotalImporte = m_Registros.Where(Function(c) c.Importar = True).Sum(Function(c) c.ImporteADebitar)
-
+      rResult = Result.OK
+      rMessage = "Finalizado OK"
     Catch ex As Exception
       Print_msg(ex.Message)
+      rResult = Result.ErrorEx
+      rMessage = ex.Message
     End Try
   End Sub
 

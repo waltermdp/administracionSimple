@@ -4,8 +4,6 @@ Module modCommon
 
   Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
 
-
-
   Public Function GetNameOfTipoPago(ByVal vGuid As Guid) As String
     Try
       If g_TipoPago Is Nothing Then Return "--"
