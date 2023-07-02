@@ -45,8 +45,8 @@ Public Class frmExportarHipotecario
       m_Banco.CargarContratosAExportar(Me)
       ClsInfoHipotecarioBindingSource.DataSource = m_Banco.m_RegistrosExportar
       ClsInfoHipotecarioBindingSource.ResetBindings(False)
-      lblResumen.Text = String.Format("Total de registros: {0}", m_Banco.countRegistrosAExportar)
-      txtImporteTotal.Text = m_Banco.ImporteTotalAExportar
+      lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
+      txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -287,5 +287,46 @@ Public Class frmExportarHipotecario
 
  
 
+
+  Private Sub dgvResumen_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvResumen.ColumnHeaderMouseClick
+    Try
+      'If m_objDatabaseList Is Nothing Then Exit Sub
+      Dim m_CurrentSortColumn As DataGridViewColumn = dgvResumen.Columns(e.ColumnIndex)
+      If m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.Descending Or m_CurrentSortColumn.HeaderCell.SortGlyphDirection = SortOrder.None Then
+        For Each col As DataGridViewColumn In dgvResumen.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+        ClsInfoHipotecarioBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
+
+
+        ClsInfoHipotecarioBindingSource.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
+      Else
+        For Each col As DataGridViewColumn In dgvResumen.Columns
+          col.HeaderCell.SortGlyphDirection = SortOrder.None
+        Next
+
+        ClsInfoHipotecarioBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
+
+
+        ClsInfoHipotecarioBindingSource.ResetBindings(False)
+        m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub dgvResumen_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvResumen.CurrentCellDirtyStateChanged
+    Try
+      dgvResumen.EndEdit()
+      lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
+      txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
 End Class

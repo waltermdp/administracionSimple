@@ -110,31 +110,31 @@ Public Class clsHipotecario
   Private m_FechaEjecucion As Date
   Private m_TotalImporte As Decimal
 
-  ReadOnly Property ImporteTotalImportado As Decimal
+  Public ReadOnly Property ImporteTotalImportado As Decimal
     Get
       Return m_TotalImporte
     End Get
   End Property
 
-  ReadOnly Property FechaEjecucion As Date
+  Public ReadOnly Property FechaEjecucion As Date
     Get
       Return m_FechaEjecucion
     End Get
   End Property
 
-  ReadOnly Property RegistrosCargados As Integer
+  Public ReadOnly Property RegistrosCargados As Integer
     Get
       Return m_Registros.Count
     End Get
   End Property
 
-  ReadOnly Property RegistrosAceptados As Integer
+  Public ReadOnly Property RegistrosAceptados As Integer
     Get
       Return m_Registros.Where(Function(c) c.Importar = True).Count()
     End Get
   End Property
 
-  ReadOnly Property RegistrosRechazados As Integer
+  Public ReadOnly Property RegistrosRechazados As Integer
     Get
       Return RegistrosCargados - RegistrosAceptados
     End Get
@@ -258,8 +258,10 @@ Public Class clsHipotecario
               objPagos.RefreshData()
               If objPagos.Items.Count = 1 Then
                 item.GuidPago = objPagos.Items.First.GuidPago
+                item.FechaUltimaImportacion = objPagos.Items.First.FechaUltimaImportacion
                 If (item.ImporteADebitar = item.importeDebitado) AndAlso String.IsNullOrWhiteSpace(item.MotivoRechazo) Then
                   item.Importar = True
+
                 End If
 
               End If
@@ -323,6 +325,7 @@ Public Class clsHipotecario
           Dim objDebitoActualizado As manDB.clsInfoPagos = objDebitos.Items.First.Clone
           objDebitoActualizado.EstadoPago = E_EstadoPago.Pago
           objDebitoActualizado.FechaPago = item.FechaDebito
+          objDebitoActualizado.FechaUltimaImportacion = g_Today
           If clsPago.Save(objDebitoActualizado) <> Result.OK Then
             'TODO: take error
             rMessage = "No pudo guardarse el proceso"
@@ -348,13 +351,19 @@ Public Class clsHipotecario
 
   Public ReadOnly Property countRegistrosAExportar As Integer
     Get
+      Return m_RegistrosExportar.Where(Function(c) c.Exportar = True).Count
+    End Get
+  End Property
+
+  Public ReadOnly Property countTotalRegistros As Integer
+    Get
       Return m_RegistrosExportar.Count
     End Get
   End Property
 
-  Public ReadOnly Property ImporteTotalAExportar As String
+  Public ReadOnly Property ImporteTotalAExportar As Decimal
     Get
-      Return m_RegistrosExportar.Sum(Function(c) c.Importe).ToString
+      Return m_RegistrosExportar.Where(Function(c) c.Exportar = True).Sum(Function(c) c.Importe)
     End Get
   End Property
 
@@ -457,7 +466,9 @@ Public Class clsHipotecario
           .FechaVencimiento = m_FechaVencimiento
           .CuotaActual = item.NumCuota
           .Nombre = lstCliente.Items.First.ToString
-
+          .FechaUltimaExportacion = item.FechaUltimaExportacion
+          .GuidPago = item.GuidPago
+          .Exportar = True
         End With
         m_RegistrosExportar.Add(movimiento)
       Next
@@ -492,7 +503,8 @@ Public Class clsHipotecario
   Private Sub taskGenerarExportacion(ByRef rResult As Result, ByRef rMessage As String)
     Try
       Dim lineas As New List(Of String)
-      If GetExportedFile(m_RegistrosExportar, lineas) <> Result.OK Then
+      Dim Exportable As List(Of clsInfoExportarHipotecario) = m_RegistrosExportar.Where(Function(c) c.Exportar = True).ToList
+      If GetExportedFile(Exportable, lineas) <> Result.OK Then
         rMessage = "Fallo generar archivo"
         rResult = Result.NOK
         Exit Sub
@@ -512,6 +524,25 @@ Public Class clsHipotecario
 
         FileSystem.Rename(FullFileName, IO.Path.Combine(GetFolderExportacion, chFilename))
       End If
+      ''GUARDAR FECHA DE EXPORTACION
+      For Each item In Exportable
+        Dim objDebitos As New clsListPagos
+        'FALTA CARGAR GUID de pago
+        objDebitos.Cfg_Filtro = "WHERE GuidPago={" & item.GuidPago.ToString & "}"
+        objDebitos.RefreshData()
+        If objDebitos.Items.Count = 1 Then
+          Dim objDebitoActualizado As manDB.clsInfoPagos = objDebitos.Items.First.Clone
+          objDebitoActualizado.FechaUltimaExportacion = m_FechaGeneracion 'Date.MinValue '
+          If clsPago.Save(objDebitoActualizado) <> Result.OK Then
+            'TODO: take error
+            rMessage = "No pudo guardarse el proceso"
+            rResult = Result.NOK
+          End If
+        End If
+      Next
+
+
+
       If Save(IO.Path.Combine(GetFolderExportacion, FileName), lineas) <> Result.OK Then
         rMessage = "Fallo guardando archivo"
         rResult = Result.NOK
@@ -653,7 +684,12 @@ Public Class clsHipotecario
       sResult += vMov.CodigoBanco.ToString("000") 'D3")
       sResult += vMov.CodigoSucCuenta.ToString("D4") 'vMov.CBU.Substring(0, 4) ' codsucCuenta.ToString("D4")
       sResult += String.Format("{0,1}", vMov.TipoCuenta)
-      sResult += vMov.CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
+      If vMov.CodigoBanco = CDec(44) Then
+        'hipotecario
+        sResult += vMov.CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
+      Else
+        sResult += "0" + vMov.CBU.Substring(8, 14) ' CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
+      End If
       sResult += String.Format("{0,-22}", vMov.NumeroContrato)
       sResult += String.Format("{0,-15}", m_IdDebito)
       sResult += String.Format("{0,2}", " ")

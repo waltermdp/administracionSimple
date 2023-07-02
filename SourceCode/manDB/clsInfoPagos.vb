@@ -11,6 +11,27 @@
   Private m_FechaPago As Date
   Private m_EstadoPago As libCommon.Comunes.E_EstadoPago
   Private m_NumComprobante As Integer
+  Private m_FechaUltimaExportacion As Date
+  Private m_FechaUltimaImportacion As Date
+
+  Public Property FechaUltimaExportacion As Date
+    Get
+      Return m_FechaUltimaExportacion
+    End Get
+    Set(value As Date)
+      m_FechaUltimaExportacion = value
+    End Set
+  End Property
+
+  Public Property FechaUltimaImportacion As Date
+    Get
+      Return m_FechaUltimaImportacion
+    End Get
+    Set(value As Date)
+      m_FechaUltimaImportacion = value
+    End Set
+  End Property
+
 
   Public Property IdPago As Integer
     Get
@@ -108,7 +129,8 @@
       FechaPago = Nothing
       EstadoPago = libCommon.Comunes.E_EstadoPago.NA
       NumComprobante = -1
-
+      FechaUltimaExportacion = Date.MinValue
+      FechaUltimaImportacion = Date.MinValue
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)
     End Try

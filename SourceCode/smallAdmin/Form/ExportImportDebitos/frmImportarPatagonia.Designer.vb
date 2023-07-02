@@ -31,6 +31,7 @@ Partial Class frmImportarPatagonia
     Me.txtCUITEmpresa = New System.Windows.Forms.TextBox()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.ClsInfoImportarPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.btnReload = New System.Windows.Forms.Button()
     Me.btnProcesar = New System.Windows.Forms.Button()
@@ -39,6 +40,7 @@ Partial Class frmImportarPatagonia
     Me.Label4 = New System.Windows.Forms.Label()
     Me.Label5 = New System.Windows.Forms.Label()
     Me.ImportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+    Me.FechaUltimaImportacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DNIIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,7 +53,6 @@ Partial Class frmImportarPatagonia
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoImportarPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoImportarPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -126,7 +127,7 @@ Partial Class frmImportarPatagonia
     Me.dgvResumen.AutoGenerateColumns = False
     Me.dgvResumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ImportarDataGridViewCheckBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.DNIIDDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.CuotaDataGridViewTextBoxColumn, Me.ImporteDebitadoDataGridViewTextBoxColumn, Me.FechaDebitoDataGridViewTextBoxColumn, Me.MotivoRechazoDataGridViewTextBoxColumn, Me.ImporteADebitarDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn})
+    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ImportarDataGridViewCheckBoxColumn, Me.FechaUltimaImportacion, Me.NombreDataGridViewTextBoxColumn, Me.DNIIDDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.CuotaDataGridViewTextBoxColumn, Me.ImporteDebitadoDataGridViewTextBoxColumn, Me.FechaDebitoDataGridViewTextBoxColumn, Me.MotivoRechazoDataGridViewTextBoxColumn, Me.ImporteADebitarDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoImportarPatagoniaBindingSource
     Me.dgvResumen.Location = New System.Drawing.Point(172, 105)
     Me.dgvResumen.Name = "dgvResumen"
@@ -134,6 +135,10 @@ Partial Class frmImportarPatagonia
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 66
+    '
+    'ClsInfoImportarPatagoniaBindingSource
+    '
+    Me.ClsInfoImportarPatagoniaBindingSource.DataSource = GetType(main.clsInfoImportarPatagonia)
     '
     'lblResumen
     '
@@ -224,6 +229,13 @@ Partial Class frmImportarPatagonia
     Me.ImportarDataGridViewCheckBoxColumn.Name = "ImportarDataGridViewCheckBoxColumn"
     Me.ImportarDataGridViewCheckBoxColumn.ReadOnly = True
     '
+    'FechaUltimaImportacion
+    '
+    Me.FechaUltimaImportacion.DataPropertyName = "FechaUltimaImportacion"
+    Me.FechaUltimaImportacion.HeaderText = "FechaUltimaImportacion"
+    Me.FechaUltimaImportacion.Name = "FechaUltimaImportacion"
+    Me.FechaUltimaImportacion.ReadOnly = True
+    '
     'NombreDataGridViewTextBoxColumn
     '
     Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
@@ -312,10 +324,6 @@ Partial Class frmImportarPatagonia
     Me.GuidCuentaDataGridViewTextBoxColumn.ReadOnly = True
     Me.GuidCuentaDataGridViewTextBoxColumn.Visible = False
     '
-    'ClsInfoImportarPatagoniaBindingSource
-    '
-    Me.ClsInfoImportarPatagoniaBindingSource.DataSource = GetType(main.clsInfoImportarPatagonia)
-    '
     'frmImportarPatagonia
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -371,6 +379,7 @@ Partial Class frmImportarPatagonia
   Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents Label5 As System.Windows.Forms.Label
   Friend WithEvents ImportarDataGridViewCheckBoxColumn As System.Windows.Forms.DataGridViewCheckBoxColumn
+  Friend WithEvents FechaUltimaImportacion As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DNIIDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CBUDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn

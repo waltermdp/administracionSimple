@@ -17,6 +17,16 @@ Public Class clsInfoImportarPatagonia
   Private m_GuidPago As Guid
   Private m_GuidCuenta As Guid
   Private m_Nombre As String
+  Private m_FechaUltimaImportacion As Date
+
+  Public Property FechaUltimaImportacion As Date
+    Get
+      Return m_FechaUltimaImportacion
+    End Get
+    Set(value As Date)
+      m_FechaUltimaImportacion = value
+    End Set
+  End Property
 
   Public Property DNI_ID As Decimal
     Get
@@ -153,6 +163,7 @@ Public Class clsInfoImportarPatagonia
       m_GuidPago = Guid.Empty
       m_GuidProducto = Guid.Empty
       m_Nombre = String.Empty
+      m_FechaUltimaImportacion = Date.MinValue
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

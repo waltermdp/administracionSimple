@@ -195,6 +195,29 @@ Public Class clsPago
           Call Print_msg(ex.Message)
         End Try
 
+        Try
+          vInfoPago.FechaUltimaExportacion = CDate(IIf(IsDBNull(.Item("FechaUltimaExportacion")), Date.MinValue, .Item("FechaUltimaExportacion")))
+          'If IsDBNull(.Item("FechaUltimaExportacion")) Then
+          '  Dim j As Integer = 0
+          'Else
+          '  Dim k As Date = CDate(.Item("FechaUltimaExportacion"))
+          '  Dim jj As Long = k.Ticks
+          '  k = Date.MinValue
+          '  jj = k.Ticks
+          '  Dim ll As String = k.ToShortDateString
+          '  Dim g As Integer = 9
+          'End If
+        Catch ex As Exception
+          vInfoPago.FechaUltimaExportacion = Date.MinValue
+          Call Print_msg(ex.Message)
+        End Try
+        Try
+          vInfoPago.FechaUltimaImportacion = CDate(IIf(IsDBNull(.Item("FechaUltimaImportacion")), Date.MinValue, .Item("FechaUltimaImportacion")))
+        Catch ex As Exception
+          vInfoPago.FechaUltimaImportacion = Date.MinValue
+          Call Print_msg(ex.Message)
+        End Try
+
       End With
 
       Return Result.OK
@@ -235,7 +258,9 @@ Public Class clsPago
             strSQL.Append("[VencimientoCuota],")
             strSQL.Append("[FechaPago],")
             strSQL.Append("[EstadoPago],")
-            strSQL.Append("[NumComprobante]")
+            strSQL.Append("[NumComprobante],")
+            strSQL.Append("[FechaUltimaExportacion],")
+            strSQL.Append("[FechaUltimaImportacion]")
 
             strSQL.Append(") VALUES (")
 
@@ -246,7 +271,9 @@ Public Class clsPago
             strSQL.Append("""" & .VencimientoCuota & """,")
             strSQL.Append("""" & .FechaPago & """,")
             strSQL.Append("""" & .EstadoPago & """,")
-            strSQL.Append("""" & .NumComprobante & """")
+            strSQL.Append("""" & .NumComprobante & """,")
+            strSQL.Append("""" & .FechaUltimaExportacion & """,")
+            strSQL.Append("""" & .FechaUltimaImportacion & """")
 
             strSQL.Append(")")
 
@@ -272,7 +299,9 @@ Public Class clsPago
             strSQL.Append("[VencimientoCuota]=""" & .VencimientoCuota & """,")
             strSQL.Append("[FechaPago]=""" & .FechaPago & """,")
             strSQL.Append("[EstadoPago]=""" & .EstadoPago & """,")
-            strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """")
+            strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """,")
+            strSQL.Append("[FechaUltimaExportacion]=""" & .FechaUltimaExportacion & """,")
+            strSQL.Append("[FechaUltimaImportacion]=""" & .FechaUltimaImportacion & """")
 
             strSQL.Append(" WHERE [IdPago]=" & .IdPago)
 

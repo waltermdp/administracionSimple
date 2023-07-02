@@ -13,8 +13,36 @@
   Private m_Nombre As String
   Private m_CuotaActual As Integer
   Private m_UltimaFechaPago As Date
+  Private m_exportar As Boolean
+  Private m_FechaUltimaExportacion As Date
+  Private m_GuidPago As Guid
 
+  Public Property GuidPago As Guid
+    Get
+      Return m_GuidPago
+    End Get
+    Set(value As Guid)
+      m_GuidPago = value
+    End Set
+  End Property
 
+  Public Property FechaUltimaExportacion As Date
+    Get
+      Return m_FechaUltimaExportacion
+    End Get
+    Set(value As Date)
+      m_FechaUltimaExportacion = value
+    End Set
+  End Property
+
+  Public Property Exportar As Boolean
+    Get
+      Return m_exportar
+    End Get
+    Set(value As Boolean)
+      m_exportar = value
+    End Set
+  End Property
 
   Public Property CBU As String
     Get
@@ -128,7 +156,9 @@
     CuentaBanco = 0
     m_Nombre = String.Empty
     m_CuotaActual = 0
-
+    m_exportar = False
+    m_FechaUltimaExportacion = Date.MinValue
+    m_GuidPago = Guid.Empty
   End Sub
 
 End Class

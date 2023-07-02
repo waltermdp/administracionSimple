@@ -308,7 +308,7 @@
     <Compile Include="Modulos\Entidades\Hipotecario\clsInfoExportarHipotecario.vb" />
     <Compile Include="Modulos\Entidades\Hipotecario\clsInfoImportarHipotecario.vb" />
     <Compile Include="Modulos\Entidades\Patagonia\clsInfoImportarPatagonia.vb" />
-    <Compile Include="Modulos\Entidades\Patagonia\clsInfoPatagonia.vb" />
+    <Compile Include="Modulos\Entidades\Patagonia\clsInfoExportarPatagonia.vb" />
     <Compile Include="Modulos\clsPar.vb" />
     <Compile Include="Modulos\clsInfoMovimiento.vb" />
     <Compile Include="Modulos\clsParsear.vb" />

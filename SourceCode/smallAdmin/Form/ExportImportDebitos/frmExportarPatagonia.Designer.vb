@@ -34,6 +34,7 @@ Partial Class frmExportarPatagonia
     Me.Label3 = New System.Windows.Forms.Label()
     Me.txtImporteTotal = New System.Windows.Forms.TextBox()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.ClsInfoPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblResumen = New System.Windows.Forms.Label()
     Me.btnReload = New System.Windows.Forms.Button()
     Me.btnProcesar = New System.Windows.Forms.Button()
@@ -43,6 +44,8 @@ Partial Class frmExportarPatagonia
     Me.txtNroCUIT = New System.Windows.Forms.TextBox()
     Me.Label2 = New System.Windows.Forms.Label()
     Me.Label6 = New System.Windows.Forms.Label()
+    Me.Exportar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+    Me.FechaUltimaExportacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuitDNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CBUDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,7 +58,6 @@ Partial Class frmExportarPatagonia
     Me.ReferenciaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NroCuitEmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.TipoNovedadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoPatagoniaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPatagoniaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
@@ -151,14 +153,18 @@ Partial Class frmExportarPatagonia
     Me.dgvResumen.AutoGenerateColumns = False
     Me.dgvResumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NombreDataGridViewTextBoxColumn, Me.CuitDNIDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.FechaVtoDataGridViewTextBoxColumn, Me.ProductoDataGridViewTextBoxColumn, Me.TipoMonedaDataGridViewTextBoxColumn, Me.ReferenciaDebitoDataGridViewTextBoxColumn, Me.NroCuitEmpresaDataGridViewTextBoxColumn, Me.TipoNovedadDataGridViewTextBoxColumn})
+    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Exportar, Me.FechaUltimaExportacion, Me.NombreDataGridViewTextBoxColumn, Me.CuitDNIDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.FechaVtoDataGridViewTextBoxColumn, Me.ProductoDataGridViewTextBoxColumn, Me.TipoMonedaDataGridViewTextBoxColumn, Me.ReferenciaDebitoDataGridViewTextBoxColumn, Me.NroCuitEmpresaDataGridViewTextBoxColumn, Me.TipoNovedadDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoPatagoniaBindingSource
     Me.dgvResumen.Location = New System.Drawing.Point(172, 115)
     Me.dgvResumen.Name = "dgvResumen"
-    Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
+    Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
     Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
     Me.dgvResumen.TabIndex = 70
+    '
+    'ClsInfoPatagoniaBindingSource
+    '
+    Me.ClsInfoPatagoniaBindingSource.DataSource = GetType(main.clsInfoExportarPatagonia)
     '
     'lblResumen
     '
@@ -257,6 +263,20 @@ Partial Class frmExportarPatagonia
     Me.Label6.Text = "Patagonia: Exportar Debitos Directos"
     Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
+    'Exportar
+    '
+    Me.Exportar.DataPropertyName = "Exportar"
+    Me.Exportar.HeaderText = "Exportar"
+    Me.Exportar.Name = "Exportar"
+    Me.Exportar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+    '
+    'FechaUltimaExportacion
+    '
+    Me.FechaUltimaExportacion.DataPropertyName = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacion.HeaderText = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacion.Name = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacion.ReadOnly = True
+    '
     'NombreDataGridViewTextBoxColumn
     '
     Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
@@ -318,7 +338,6 @@ Partial Class frmExportarPatagonia
     Me.TipoMonedaDataGridViewTextBoxColumn.DataPropertyName = "TipoMoneda"
     Me.TipoMonedaDataGridViewTextBoxColumn.HeaderText = "TipoMoneda"
     Me.TipoMonedaDataGridViewTextBoxColumn.Name = "TipoMonedaDataGridViewTextBoxColumn"
-    Me.TipoMonedaDataGridViewTextBoxColumn.ReadOnly = True
     Me.TipoMonedaDataGridViewTextBoxColumn.Visible = False
     '
     'ReferenciaDebitoDataGridViewTextBoxColumn
@@ -326,7 +345,6 @@ Partial Class frmExportarPatagonia
     Me.ReferenciaDebitoDataGridViewTextBoxColumn.DataPropertyName = "ReferenciaDebito"
     Me.ReferenciaDebitoDataGridViewTextBoxColumn.HeaderText = "ReferenciaDebito"
     Me.ReferenciaDebitoDataGridViewTextBoxColumn.Name = "ReferenciaDebitoDataGridViewTextBoxColumn"
-    Me.ReferenciaDebitoDataGridViewTextBoxColumn.ReadOnly = True
     Me.ReferenciaDebitoDataGridViewTextBoxColumn.Visible = False
     '
     'NroCuitEmpresaDataGridViewTextBoxColumn
@@ -334,7 +352,6 @@ Partial Class frmExportarPatagonia
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.DataPropertyName = "NroCuitEmpresa"
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.HeaderText = "NroCuitEmpresa"
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.Name = "NroCuitEmpresaDataGridViewTextBoxColumn"
-    Me.NroCuitEmpresaDataGridViewTextBoxColumn.ReadOnly = True
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.Visible = False
     '
     'TipoNovedadDataGridViewTextBoxColumn
@@ -342,12 +359,7 @@ Partial Class frmExportarPatagonia
     Me.TipoNovedadDataGridViewTextBoxColumn.DataPropertyName = "TipoNovedad"
     Me.TipoNovedadDataGridViewTextBoxColumn.HeaderText = "TipoNovedad"
     Me.TipoNovedadDataGridViewTextBoxColumn.Name = "TipoNovedadDataGridViewTextBoxColumn"
-    Me.TipoNovedadDataGridViewTextBoxColumn.ReadOnly = True
     Me.TipoNovedadDataGridViewTextBoxColumn.Visible = False
-    '
-    'ClsInfoPatagoniaBindingSource
-    '
-    Me.ClsInfoPatagoniaBindingSource.DataSource = GetType(main.clsInfoPatagonia)
     '
     'frmExportarPatagonia
     '
@@ -408,6 +420,9 @@ Partial Class frmExportarPatagonia
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents IDClienteEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ClsInfoPatagoniaBindingSource As System.Windows.Forms.BindingSource
+  Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents Exportar As System.Windows.Forms.DataGridViewCheckBoxColumn
+  Friend WithEvents FechaUltimaExportacion As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NombreDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CuitDNIDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CBUDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -420,5 +435,4 @@ Partial Class frmExportarPatagonia
   Friend WithEvents ReferenciaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NroCuitEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents TipoNovedadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class
