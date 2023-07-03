@@ -303,6 +303,74 @@ Public Class frmDeben
     End Try
   End Sub
 
+  Private Sub btnEliminarVenta_Click(sender As Object, e As EventArgs) Handles btnEliminarVenta.Click
+    Try
+
+      Dim vResult As libCommon.Comunes.Result
+      vResult = clsProducto.Delete(New Guid("6f9f3b59-e694-44b2-b77b-c0cee41e2266"))
+      If vResult <> Result.OK Then
+        MsgBox("No se pudo eliminar la venta")
+      End If
+
+      If m_CurrentProducto Is Nothing Then
+        MsgBox("Debe seleccionar un producto para modificarlo.")
+        Exit Sub
+      End If
+
+      '1- RESTAURAR Articulos Vendidos a STOCK
+      Dim listArticulos As New List(Of clsInfoArticuloVendido)
+      vResult = clsRelArtProd.Load(listArticulos, m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Fallo cargar Articulos vendidos")
+        Exit Sub
+      End If
+
+      For Each articulo In listArticulos
+        'busco el art viejo en stock e imcremento la cantidad del art vendido
+        Dim auxStock As New manDB.clsInfoStock
+        auxStock.GuidArticulo = articulo.GuidArticulo
+        auxStock.GuidResponsable = New Guid("B7B5BDDF-8EA5-406A-A5BC-A01723CFD25D")
+        vResult = clsStock.Load(auxStock)
+        If vResult <> Result.OK Then
+          MsgBox("No se pudo cargar el articulo")
+        End If
+        auxStock.Cantidad = auxStock.Cantidad + articulo.Entregados
+        vResult = clsStock.Save(auxStock)
+        If vResult <> Result.OK Then
+          MsgBox("No se pudo guardar el articulo")
+        End If
+      Next
+
+      '2- ELIMINAR REL ARTICULO VENDIDO ASOCIADO A LA VENTA
+      vResult = clsRelArtProd.DeleteTodos(m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("No se pudo eliminar la relacion de productos vendidos")
+      End If
+
+      '3- ELIMINAR RELACIONES DE ADELANTOS
+      vResult = clsAdelantos.Delete(m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("No se pudo eliminar la relacion de Adelantos al vendedor")
+      End If
+
+      '4- ELIMNAR TODOS LOS TICKET de PAGO
+      vResult = clsPago.Delete(m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("No se pudo eliminar los ticket de cuotas generados")
+      End If
+
+      vResult = clsProducto.Delete(m_CurrentProducto.GuidProducto)
+      If vResult <> Result.OK Then
+        MsgBox("No se pudo eliminar la venta")
+      End If
+
+      'Refrescar grilla
+      Call MostrarDeben()
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Private Sub FillResumen()
     Try
       If m_objPrincipal Is Nothing Then
@@ -1075,104 +1143,7 @@ Public Class frmDeben
   'End Sub
 
 
-  Private Sub btnAnular_MouseClick(sender As Object, e As MouseEventArgs) Handles btnAnular.MouseClick
-    Try
-      Dim vResult As Result
-
-      If m_CurrentProducto Is Nothing Then
-        MsgBox("Debe seleccionar un producto")
-        Exit Sub
-      End If
-      Dim listArticulos As New List(Of clsInfoArticuloVendido)
-      vResult = clsRelArtProd.Load(listArticulos, m_CurrentProducto.GuidProducto)
-      If vResult <> Result.OK Then
-        MsgBox("Fallo cargar Articulos vendidos")
-        Exit Sub
-      End If
-
-      If listArticulos.Count <= 0 Then
-        MsgBox("No se encontraron articulos")
-
-      Else
-        MsgBox("Los articulos vendidos seran ingresados a la tabla de articulos en stock")
-        Dim descripcion As String = String.Empty
-        For Each art In listArticulos
-          If art.CantidadArticulos = art.Entregados Then
-            descripcion += String.Format("Art:{0}; Cantidad:{1}" + vbNewLine, art.Nombre, art.Entregados)
-          Else
-            descripcion += String.Format("Art:{0}; Cantidad:{1}/{2}" + vbNewLine, art.Nombre, art.CantidadArticulos, art.Entregados)
-          End If
-        Next
-        MsgBox(descripcion, MsgBoxStyle.OkOnly)
-
-        Dim ObjListaStock As clsListStock
-        Dim ArticuloDelDeposito As manDB.clsInfoStock
-        For Each art In listArticulos
-          ObjListaStock = New clsListStock
-          ObjListaStock.Cfg_Filtro = "where GuidArticulo={" & art.GuidArticulo.ToString & "} and GuidResponsable={B7B5BDDF-8EA5-406A-A5BC-A01723CFD25D}" 'B7B5BDDF-8EA5-406A-A5BC-A01723CFD25D
-          ObjListaStock.RefreshData()
-          If ObjListaStock.Items.Count >= 1 Then
-            ArticuloDelDeposito = ObjListaStock.Items(0).Clone
-            ArticuloDelDeposito.Cantidad += art.CantidadArticulos
-            clsStock.Save(ArticuloDelDeposito)
-          End If
-        Next
-
-        Dim objPagos As New clsListPagos
-        objPagos.Cfg_Filtro = "where GuidProducto={" & m_CurrentProducto.GuidProducto.ToString & "}"
-        objPagos.RefreshData()
-        If objPagos.Items.Count > 0 Then
-          Dim objInfoPago As New clsInfoPagos
-          For Each item In objPagos.Items
-            objInfoPago = item.Clone
-            objInfoPago.EstadoPago = E_EstadoPago.Eliminado
-            clsPago.Save(objInfoPago)
-          Next
-        End If
-        Dim objInfoProducto As New clsInfoProducto
-        If clsProducto.Load(m_CurrentProducto.GuidProducto, objInfoProducto) <> Result.OK Then
-          MsgBox("No se puede obtener datos del producto vendido o del cliente")
-          Exit Sub
-        End If
-        If clsPago.Load(objInfoProducto.ListaPagos, m_CurrentProducto.GuidProducto) <> Result.OK Then
-          MsgBox("No se puede obtener datos del producto vendido o del cliente")
-          Exit Sub
-        End If
-        If clsRelArtProd.Load(objInfoProducto.ListaArticulos, m_CurrentProducto.GuidProducto) <> Result.OK Then
-          MsgBox("No se puede obtener datos del producto vendido o del cliente")
-          Exit Sub
-        End If
-        If clsCuenta.Load(objInfoProducto.GuidCuenta, objInfoProducto.Cuenta) <> Result.OK Then
-          MsgBox("No se puede obtener datos del producto vendido o del cliente")
-          Exit Sub
-        End If
-
-        objInfoProducto.TotalCuotas = 0
-        objInfoProducto.ValorCuotaFija = 0
-        objInfoProducto.CuotasDebe = 0
-        objInfoProducto.Precio = 0
-
-        If clsProducto.Save(objInfoProducto) <> Result.OK Then
-          MsgBox("No se pudo guardar algunos cambios")
-          Exit Sub
-        End If
-
-      End If
-
-
-
-
-
-      Call MostrarDeben()
-
-
-
-
-
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
+  
 
 
 
@@ -1246,4 +1217,7 @@ Public Class frmDeben
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  
+
 End Class

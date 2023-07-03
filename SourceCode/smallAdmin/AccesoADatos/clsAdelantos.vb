@@ -45,6 +45,44 @@ Public Class clsAdelantos
   End Function
 
 
+  Public Shared Function Delete(ByVal vGuidProducto As Guid) As Result
+    Try
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+
+      Try
+
+
+        objDB = New libDB.clsAcceso
+
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = Delete(objDB, vGuidProducto)
+        If objResult <> Result.OK Then Exit Try
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+        objResult = Result.ErrorEx
+
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+      Return objResult
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
 
   Public Shared Function Save(ByRef rAdelanto As manDB.clsInfoAdelanto) As libCommon.Comunes.Result
     Try
@@ -52,7 +90,7 @@ Public Class clsAdelantos
       Dim objResult As Result = Result.OK
       Try
 
-        
+
 
         objDB = New libDB.clsAcceso
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
@@ -114,7 +152,7 @@ Public Class clsAdelantos
         Return Result.NOK
       End If
       rAdelanto = auxInfoAdelanto.Clone
-      
+
 
       Return objResult
 
@@ -124,6 +162,25 @@ Public Class clsAdelantos
 
     End Try
 
+  End Function
+
+  Private Shared Function Delete(ByVal vObjDB As libDB.clsAcceso, ByVal vGuidProducto As Guid) As Result
+    Try
+      Dim objResult As Result
+
+      '--- Comando en DB -->
+      Dim strCommand As String = "DELETE * FROM [Adelantos] WHERE [GuidProducto]={" & vGuidProducto.ToString & "}"
+
+
+      objResult = vObjDB.ExecuteNonQuery(strCommand)
+      If objResult <> Result.OK Then Return objResult
+      '<-- Comando en DB ---
+
+      Return objResult
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
   End Function
 
   Private Shared Function Save(ByVal vObjDB As libDB.clsAcceso, ByRef rInfoAdelanto As manDB.clsInfoAdelanto) As Result
@@ -184,7 +241,7 @@ Public Class clsAdelantos
             strSQL.Append("[Valor]=""" & .Valor.ToString & """,")
             strSQL.Append("[Fecha]=""" & .Fecha & """,")
             strSQL.Append("[Estado]=""" & .Estado.ToString & """,")
-            strSQL.Append("[Observacion]=""" & libDB.clsAcceso.Field_Correcting(.observacion) & """,")
+            strSQL.Append("[Observacion]=""" & libDB.clsAcceso.Field_Correcting(.Observacion) & """,")
             strSQL.Append("[GuidProducto]=""{" & .GuidProducto.ToString & "}""")
 
             strSQL.Append(" WHERE [IdAdelanto]=" & .IdAdelanto)
@@ -247,7 +304,7 @@ Public Class clsAdelantos
         Try
           vInfo.Estado = CInt(IIf(IsDBNull(.Item("Estado")), 0, .Item("Estado")))
         Catch ex As Exception
-          vInfo.estado = 0
+          vInfo.Estado = 0
           Call Print_msg(ex.Message)
         End Try
 

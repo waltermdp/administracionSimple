@@ -105,7 +105,7 @@ Public Class clsStock
       Dim dt As DataTable = Nothing
       Dim strCommand As String
 
-      strCommand = "SELECT * FROM [Stock] WHERE [IdStock]={" & vID.ToString & "}"
+      strCommand = "SELECT * FROM [Stock] WHERE [IdStock]=" & vID.ToString
 
 
       objResult = vObjDB.GetDato(strCommand, dt)
