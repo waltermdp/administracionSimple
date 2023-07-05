@@ -511,7 +511,7 @@ Public Class clsPatagonia
               If objPagos.Items.Count = 1 Then
                 item.GuidPago = objPagos.Items.First.GuidPago
                 item.FechaUltimaImportacion = objPagos.Items.First.FechaUltimaImportacion
-                If (item.importeDebitado > 0) AndAlso String.IsNullOrWhiteSpace(item.MotivoRechazo) Then
+                If (item.importeDebitado > 0) AndAlso (String.IsNullOrWhiteSpace(item.MotivoRechazo) Or item.MotivoRechazo = "R00") Then
                   item.Importar = True
                 End If
 
