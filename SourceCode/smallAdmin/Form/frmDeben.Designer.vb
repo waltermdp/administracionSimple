@@ -45,6 +45,22 @@ Partial Class frmDeben
     Me.btnUpPago = New System.Windows.Forms.Button()
     Me.btnDownPago = New System.Windows.Forms.Button()
     Me.dgvData = New System.Windows.Forms.DataGridView()
+    Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ComprobanteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ArticulosVendidosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.PrecioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotasTotalesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CuotasPagasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.MetodoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.VendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.AdelantoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ValorCuotaFijaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
     Me.btnLiquidVendedores = New System.Windows.Forms.Button()
     Me.btnConfiguracion = New System.Windows.Forms.Button()
     Me.txtBusqueda = New System.Windows.Forms.TextBox()
@@ -96,23 +112,8 @@ Partial Class frmDeben
     Me.lblFechaHoy = New System.Windows.Forms.Label()
     Me.lblSoftwareInfo = New System.Windows.Forms.Label()
     Me.btnEliminarVenta = New System.Windows.Forms.Button()
-    Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ComprobanteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ArticulosVendidosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.PrecioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotasTotalesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CuotasPagasDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.MetodoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaUltimoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.VendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.AdelantoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ValorCuotaFijaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
@@ -126,7 +127,6 @@ Partial Class frmDeben
     Me.gbModificarFormadePago.SuspendLayout()
     Me.gbAnularPago.SuspendLayout()
     Me.gpPagarCuota.SuspendLayout()
-    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'dateInicio
@@ -374,6 +374,118 @@ Partial Class frmDeben
     Me.dgvData.Size = New System.Drawing.Size(1107, 336)
     Me.dgvData.TabIndex = 44
     Me.dgvData.TabStop = False
+    '
+    'FechaVentaDataGridViewTextBoxColumn
+    '
+    Me.FechaVentaDataGridViewTextBoxColumn.DataPropertyName = "FechaVenta"
+    Me.FechaVentaDataGridViewTextBoxColumn.HeaderText = "FechaVenta"
+    Me.FechaVentaDataGridViewTextBoxColumn.Name = "FechaVentaDataGridViewTextBoxColumn"
+    Me.FechaVentaDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ComprobanteDataGridViewTextBoxColumn
+    '
+    Me.ComprobanteDataGridViewTextBoxColumn.DataPropertyName = "Comprobante"
+    Me.ComprobanteDataGridViewTextBoxColumn.HeaderText = "Comprobante"
+    Me.ComprobanteDataGridViewTextBoxColumn.Name = "ComprobanteDataGridViewTextBoxColumn"
+    Me.ComprobanteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ArticulosVendidosDataGridViewTextBoxColumn
+    '
+    Me.ArticulosVendidosDataGridViewTextBoxColumn.DataPropertyName = "ArticulosVendidos"
+    Me.ArticulosVendidosDataGridViewTextBoxColumn.HeaderText = "ArticulosVendidos"
+    Me.ArticulosVendidosDataGridViewTextBoxColumn.Name = "ArticulosVendidosDataGridViewTextBoxColumn"
+    Me.ArticulosVendidosDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'PrecioDataGridViewTextBoxColumn
+    '
+    Me.PrecioDataGridViewTextBoxColumn.DataPropertyName = "Precio"
+    Me.PrecioDataGridViewTextBoxColumn.HeaderText = "Precio"
+    Me.PrecioDataGridViewTextBoxColumn.Name = "PrecioDataGridViewTextBoxColumn"
+    Me.PrecioDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotasTotalesDataGridViewTextBoxColumn
+    '
+    Me.CuotasTotalesDataGridViewTextBoxColumn.DataPropertyName = "CuotasTotales"
+    Me.CuotasTotalesDataGridViewTextBoxColumn.HeaderText = "CuotasTotales"
+    Me.CuotasTotalesDataGridViewTextBoxColumn.Name = "CuotasTotalesDataGridViewTextBoxColumn"
+    Me.CuotasTotalesDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'CuotasPagasDataGridViewTextBoxColumn
+    '
+    Me.CuotasPagasDataGridViewTextBoxColumn.DataPropertyName = "CuotasPagas"
+    Me.CuotasPagasDataGridViewTextBoxColumn.HeaderText = "CuotasPagas"
+    Me.CuotasPagasDataGridViewTextBoxColumn.Name = "CuotasPagasDataGridViewTextBoxColumn"
+    Me.CuotasPagasDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ValorCuotaDataGridViewTextBoxColumn
+    '
+    Me.ValorCuotaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuota"
+    Me.ValorCuotaDataGridViewTextBoxColumn.HeaderText = "ValorCuota"
+    Me.ValorCuotaDataGridViewTextBoxColumn.Name = "ValorCuotaDataGridViewTextBoxColumn"
+    Me.ValorCuotaDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'MetodoPagoDataGridViewTextBoxColumn
+    '
+    Me.MetodoPagoDataGridViewTextBoxColumn.DataPropertyName = "MetodoPago"
+    Me.MetodoPagoDataGridViewTextBoxColumn.HeaderText = "MetodoPago"
+    Me.MetodoPagoDataGridViewTextBoxColumn.Name = "MetodoPagoDataGridViewTextBoxColumn"
+    Me.MetodoPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaUltimoPagoDataGridViewTextBoxColumn
+    '
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimoPago"
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.HeaderText = "FechaUltimoPago"
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.Name = "FechaUltimoPagoDataGridViewTextBoxColumn"
+    Me.FechaUltimoPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'NumClienteDataGridViewTextBoxColumn
+    '
+    Me.NumClienteDataGridViewTextBoxColumn.DataPropertyName = "NumCliente"
+    Me.NumClienteDataGridViewTextBoxColumn.HeaderText = "NumCliente"
+    Me.NumClienteDataGridViewTextBoxColumn.Name = "NumClienteDataGridViewTextBoxColumn"
+    Me.NumClienteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ClienteDataGridViewTextBoxColumn
+    '
+    Me.ClienteDataGridViewTextBoxColumn.DataPropertyName = "Cliente"
+    Me.ClienteDataGridViewTextBoxColumn.HeaderText = "Cliente"
+    Me.ClienteDataGridViewTextBoxColumn.Name = "ClienteDataGridViewTextBoxColumn"
+    Me.ClienteDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'VendedorDataGridViewTextBoxColumn
+    '
+    Me.VendedorDataGridViewTextBoxColumn.DataPropertyName = "Vendedor"
+    Me.VendedorDataGridViewTextBoxColumn.HeaderText = "Vendedor"
+    Me.VendedorDataGridViewTextBoxColumn.Name = "VendedorDataGridViewTextBoxColumn"
+    Me.VendedorDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
+    '
+    'AdelantoDataGridViewTextBoxColumn
+    '
+    Me.AdelantoDataGridViewTextBoxColumn.DataPropertyName = "Adelanto"
+    Me.AdelantoDataGridViewTextBoxColumn.HeaderText = "Adelanto"
+    Me.AdelantoDataGridViewTextBoxColumn.Name = "AdelantoDataGridViewTextBoxColumn"
+    Me.AdelantoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.AdelantoDataGridViewTextBoxColumn.Visible = False
+    '
+    'ValorCuotaFijaDataGridViewTextBoxColumn
+    '
+    Me.ValorCuotaFijaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuotaFija"
+    Me.ValorCuotaFijaDataGridViewTextBoxColumn.HeaderText = "ValorCuotaFija"
+    Me.ValorCuotaFijaDataGridViewTextBoxColumn.Name = "ValorCuotaFijaDataGridViewTextBoxColumn"
+    Me.ValorCuotaFijaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ValorCuotaFijaDataGridViewTextBoxColumn.Visible = False
+    '
+    'bsInfoPrincipal
+    '
+    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
     '
     'btnLiquidVendedores
     '
@@ -930,118 +1042,6 @@ Partial Class frmDeben
     Me.btnEliminarVenta.Text = "Eliminar Venta"
     Me.btnEliminarVenta.UseVisualStyleBackColor = False
     '
-    'FechaVentaDataGridViewTextBoxColumn
-    '
-    Me.FechaVentaDataGridViewTextBoxColumn.DataPropertyName = "FechaVenta"
-    Me.FechaVentaDataGridViewTextBoxColumn.HeaderText = "FechaVenta"
-    Me.FechaVentaDataGridViewTextBoxColumn.Name = "FechaVentaDataGridViewTextBoxColumn"
-    Me.FechaVentaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ComprobanteDataGridViewTextBoxColumn
-    '
-    Me.ComprobanteDataGridViewTextBoxColumn.DataPropertyName = "Comprobante"
-    Me.ComprobanteDataGridViewTextBoxColumn.HeaderText = "Comprobante"
-    Me.ComprobanteDataGridViewTextBoxColumn.Name = "ComprobanteDataGridViewTextBoxColumn"
-    Me.ComprobanteDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ArticulosVendidosDataGridViewTextBoxColumn
-    '
-    Me.ArticulosVendidosDataGridViewTextBoxColumn.DataPropertyName = "ArticulosVendidos"
-    Me.ArticulosVendidosDataGridViewTextBoxColumn.HeaderText = "ArticulosVendidos"
-    Me.ArticulosVendidosDataGridViewTextBoxColumn.Name = "ArticulosVendidosDataGridViewTextBoxColumn"
-    Me.ArticulosVendidosDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'PrecioDataGridViewTextBoxColumn
-    '
-    Me.PrecioDataGridViewTextBoxColumn.DataPropertyName = "Precio"
-    Me.PrecioDataGridViewTextBoxColumn.HeaderText = "Precio"
-    Me.PrecioDataGridViewTextBoxColumn.Name = "PrecioDataGridViewTextBoxColumn"
-    Me.PrecioDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CuotasTotalesDataGridViewTextBoxColumn
-    '
-    Me.CuotasTotalesDataGridViewTextBoxColumn.DataPropertyName = "CuotasTotales"
-    Me.CuotasTotalesDataGridViewTextBoxColumn.HeaderText = "CuotasTotales"
-    Me.CuotasTotalesDataGridViewTextBoxColumn.Name = "CuotasTotalesDataGridViewTextBoxColumn"
-    Me.CuotasTotalesDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'CuotasPagasDataGridViewTextBoxColumn
-    '
-    Me.CuotasPagasDataGridViewTextBoxColumn.DataPropertyName = "CuotasPagas"
-    Me.CuotasPagasDataGridViewTextBoxColumn.HeaderText = "CuotasPagas"
-    Me.CuotasPagasDataGridViewTextBoxColumn.Name = "CuotasPagasDataGridViewTextBoxColumn"
-    Me.CuotasPagasDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ValorCuotaDataGridViewTextBoxColumn
-    '
-    Me.ValorCuotaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuota"
-    Me.ValorCuotaDataGridViewTextBoxColumn.HeaderText = "ValorCuota"
-    Me.ValorCuotaDataGridViewTextBoxColumn.Name = "ValorCuotaDataGridViewTextBoxColumn"
-    Me.ValorCuotaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'MetodoPagoDataGridViewTextBoxColumn
-    '
-    Me.MetodoPagoDataGridViewTextBoxColumn.DataPropertyName = "MetodoPago"
-    Me.MetodoPagoDataGridViewTextBoxColumn.HeaderText = "MetodoPago"
-    Me.MetodoPagoDataGridViewTextBoxColumn.Name = "MetodoPagoDataGridViewTextBoxColumn"
-    Me.MetodoPagoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaUltimoPagoDataGridViewTextBoxColumn
-    '
-    Me.FechaUltimoPagoDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimoPago"
-    Me.FechaUltimoPagoDataGridViewTextBoxColumn.HeaderText = "FechaUltimoPago"
-    Me.FechaUltimoPagoDataGridViewTextBoxColumn.Name = "FechaUltimoPagoDataGridViewTextBoxColumn"
-    Me.FechaUltimoPagoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'NumClienteDataGridViewTextBoxColumn
-    '
-    Me.NumClienteDataGridViewTextBoxColumn.DataPropertyName = "NumCliente"
-    Me.NumClienteDataGridViewTextBoxColumn.HeaderText = "NumCliente"
-    Me.NumClienteDataGridViewTextBoxColumn.Name = "NumClienteDataGridViewTextBoxColumn"
-    Me.NumClienteDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ClienteDataGridViewTextBoxColumn
-    '
-    Me.ClienteDataGridViewTextBoxColumn.DataPropertyName = "Cliente"
-    Me.ClienteDataGridViewTextBoxColumn.HeaderText = "Cliente"
-    Me.ClienteDataGridViewTextBoxColumn.Name = "ClienteDataGridViewTextBoxColumn"
-    Me.ClienteDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'VendedorDataGridViewTextBoxColumn
-    '
-    Me.VendedorDataGridViewTextBoxColumn.DataPropertyName = "Vendedor"
-    Me.VendedorDataGridViewTextBoxColumn.HeaderText = "Vendedor"
-    Me.VendedorDataGridViewTextBoxColumn.Name = "VendedorDataGridViewTextBoxColumn"
-    Me.VendedorDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'GuidProductoDataGridViewTextBoxColumn
-    '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
-    '
-    'AdelantoDataGridViewTextBoxColumn
-    '
-    Me.AdelantoDataGridViewTextBoxColumn.DataPropertyName = "Adelanto"
-    Me.AdelantoDataGridViewTextBoxColumn.HeaderText = "Adelanto"
-    Me.AdelantoDataGridViewTextBoxColumn.Name = "AdelantoDataGridViewTextBoxColumn"
-    Me.AdelantoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.AdelantoDataGridViewTextBoxColumn.Visible = False
-    '
-    'ValorCuotaFijaDataGridViewTextBoxColumn
-    '
-    Me.ValorCuotaFijaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuotaFija"
-    Me.ValorCuotaFijaDataGridViewTextBoxColumn.HeaderText = "ValorCuotaFija"
-    Me.ValorCuotaFijaDataGridViewTextBoxColumn.Name = "ValorCuotaFijaDataGridViewTextBoxColumn"
-    Me.ValorCuotaFijaDataGridViewTextBoxColumn.ReadOnly = True
-    Me.ValorCuotaFijaDataGridViewTextBoxColumn.Visible = False
-    '
-    'bsInfoPrincipal
-    '
-    Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
-    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1073,6 +1073,7 @@ Partial Class frmDeben
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
     Me.Text = "frmDeben"
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.gpxBuscar.ResumeLayout(False)
     Me.gpxBuscar.PerformLayout()
     Me.Panel1.ResumeLayout(False)
@@ -1093,7 +1094,6 @@ Partial Class frmDeben
     Me.gbAnularPago.ResumeLayout(False)
     Me.gpPagarCuota.ResumeLayout(False)
     Me.gpPagarCuota.PerformLayout()
-    CType(Me.bsInfoPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
 
   End Sub
