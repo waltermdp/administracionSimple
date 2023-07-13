@@ -725,6 +725,26 @@ Public Class frmDeben
         Using objFormulario As New frmExportarHipotecario(vTipoPagoSeleccionado)
           objFormulario.ShowDialog(Me)
         End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_VISA_CREDITO) Then
+        Using objFormulario As New frmExportarVisaCredito(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_VISA_DEBITO) Then
+        Using objFormulario As New frmExportarVisaDebito(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_CBU) Then
+        Using objFormulario As New frmExportarCBU(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_EFECTIVO) Then
+        Using objFormulario As New frmExportarCBU(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_MERCADO_PAGO) Then
+        Using objFormulario As New frmExportarCBU(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
       Else
 
         Using objFormulario As New frmExportarResumen(vTipoPagoSeleccionado)

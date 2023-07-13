@@ -42,7 +42,7 @@ Public Class ucTarjeta
 
   Public Function GetData(ByRef rData As clsInfoCuenta) As Boolean
     Try
-      If UctxtNumTarjeta.Text.Length <> 22 Then Return False
+      'If UctxtNumTarjeta.Text.Length <> 22 Then Return False
       With rData
         .Codigo1 = UctxtNumTarjeta.GetDecimalValue.ToString
         .Codigo2 = uctxtCodSeguridad.GetDecimalValue.ToString
@@ -70,18 +70,18 @@ Public Class ucTarjeta
     End Try
   End Sub
 
-  Private Sub UctxtCBU_TextChanged(sender As Object, e As EventArgs) Handles UctxtNumTarjeta.TextChanged
+  Private Sub UctxtNumTarjeta_TextChanged(sender As Object, e As EventArgs) Handles UctxtNumTarjeta.TextChanged
     Try
-      If UctxtNumTarjeta.Text.Length <> 22 Then
-        uctxtCodSeguridad.Text = "0"
+      'If UctxtNumTarjeta.Text.Length <> 22 Then
+      '  uctxtCodSeguridad.Text = "0"
 
-        uctxtFechaVto.Text = "0"
+      '  uctxtFechaVto.Text = "0"
 
-      Else
-        uctxtCodSeguridad.Text = UctxtNumTarjeta.Text.Substring(0, 3) '"Codigo Banco"
-        uctxtFechaVto.Text = UctxtNumTarjeta.Text.Substring(3, 4) '"Numero Sucursal"
+      'Else
+      '  uctxtCodSeguridad.Text = UctxtNumTarjeta.Text.Substring(0, 3) '"Codigo Banco"
+      '  uctxtFechaVto.Text = UctxtNumTarjeta.Text.Substring(3, 4) '"Numero Sucursal"
 
-      End If
+      'End If
     Catch ex As Exception
 
     End Try
@@ -89,7 +89,10 @@ Public Class ucTarjeta
 
   Public Function EsValido() As Boolean
     Try
-      Return False
+      'TODO: verificar longitud de la tarjeta
+      'TODO: verificar longitud de la tarjeta codigo seguridad
+      'TODO: verificar formato fecha de vencimiento
+      Return True
     Catch ex As Exception
       Print_msg(ex.Message)
       Return False

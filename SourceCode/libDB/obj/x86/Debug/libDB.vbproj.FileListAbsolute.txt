@@ -58,3 +58,15 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\D
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.dll
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.xml
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.pdb
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\libDB.dll
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\libDB.pdb
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\libDB.xml
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.dll
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.pdb
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.xml
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbprojResolveAssemblyReference.cache
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.Resources.resources
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.GenerateResource.Cache
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.dll
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.xml
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.pdb
