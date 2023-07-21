@@ -147,6 +147,13 @@ Public Class clsPago
         End Try
 
         Try
+          vInfoPago.GuidCuenta = CType(IIf(IsDBNull(.Item("GuidCuenta")), Nothing, .Item("GuidCuenta")), Guid)
+        Catch ex As Exception
+          vInfoPago.GuidCuenta = Nothing
+          Call Print_msg(ex.Message)
+        End Try
+
+        Try
           vInfoPago.GuidProducto = CType(IIf(IsDBNull(.Item("GuidProducto")), Nothing, .Item("GuidProducto")), Guid)
         Catch ex As Exception
           vInfoPago.GuidProducto = Nothing
@@ -260,7 +267,8 @@ Public Class clsPago
             strSQL.Append("[EstadoPago],")
             strSQL.Append("[NumComprobante],")
             strSQL.Append("[FechaUltimaExportacion],")
-            strSQL.Append("[FechaUltimaImportacion]")
+            strSQL.Append("[FechaUltimaImportacion],")
+            strSQL.Append("[GuidCuenta]")
 
             strSQL.Append(") VALUES (")
 
@@ -273,7 +281,8 @@ Public Class clsPago
             strSQL.Append("""" & .EstadoPago & """,")
             strSQL.Append("""" & .NumComprobante & """,")
             strSQL.Append("""" & .FechaUltimaExportacion & """,")
-            strSQL.Append("""" & .FechaUltimaImportacion & """")
+            strSQL.Append("""" & .FechaUltimaImportacion & """,")
+            strSQL.Append("""{" & .GuidCuenta.ToString & "}""")
 
             strSQL.Append(")")
 
@@ -301,7 +310,8 @@ Public Class clsPago
             strSQL.Append("[EstadoPago]=""" & .EstadoPago & """,")
             strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """,")
             strSQL.Append("[FechaUltimaExportacion]=""" & .FechaUltimaExportacion & """,")
-            strSQL.Append("[FechaUltimaImportacion]=""" & .FechaUltimaImportacion & """")
+            strSQL.Append("[FechaUltimaImportacion]=""" & .FechaUltimaImportacion & """,")
+            strSQL.Append("[GuidCuenta]=""{" & .GuidCuenta.ToString & "}""")
 
             strSQL.Append(" WHERE [IdPago]=" & .IdPago)
 

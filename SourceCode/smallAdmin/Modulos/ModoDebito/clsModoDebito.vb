@@ -10,5 +10,35 @@
   Public Shared GUID_MASTER_DEBITO As New Guid("ea5d6084-90c3-4b66-82b2-9c4816c07523")
   Public Shared GUID_MERCADO_PAGO As New Guid("598878be-b8b3-4b1b-9261-f989f0800afc")
 
+  Public Shared Function ATexto(ByVal vGuid As Guid) As String
+    Try
+      Select Case vGuid
+        Case GUID_PATAGONIA
+          Return "Patagonia"
+        Case GUID_HIPOTECARIO
+          Return "Hipotecario"
+        Case GUID_HIPOTECARIO_7464
+          Return "Hipotecario_7464"
+        Case GUID_VISA_DEBITO
+          Return "Visa Debito"
+        Case GUID_VISA_CREDITO
+          Return "Visa Credito"
+        Case GUID_CBU
+          Return "CBU"
+        Case GUID_EFECTIVO
+          Return "Efectivo"
+        Case GUID_MASTER_DEBITO
+          Return "Master Debito"
+        Case GUID_MERCADO_PAGO
+          Return "Mercado Pago"
+        Case Else
+          Return String.Empty
+      End Select
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+      Return String.Empty
+    End Try
+  End Function
+
 
 End Class

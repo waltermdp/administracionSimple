@@ -141,6 +141,12 @@
     <Compile Include="Controles\ucTextBoxNumerico.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Form\frmEditarPagos.Designer.vb">
+      <DependentUpon>frmEditarPagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmEditarPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\ExportImportDebitos\frmExportarMercadoPago.Designer.vb">
       <DependentUpon>frmExportarMercadoPago.vb</DependentUpon>
     </Compile>
@@ -406,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmDetalle.resx">
       <DependentUpon>frmDetalle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmEditarPagos.resx">
+      <DependentUpon>frmEditarPagos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ExportImportDebitos\frmExportarMercadoPago.resx">
       <DependentUpon>frmExportarMercadoPago.vb</DependentUpon>

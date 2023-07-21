@@ -303,6 +303,28 @@ Public Class frmDeben
     End Try
   End Sub
 
+  Private Sub btnEditarPagos_Click(sender As Object, e As EventArgs) Handles btnEditarPagos.Click
+    Try
+      If m_CurrentProducto Is Nothing Then
+        MsgBox("Debe seleccionar un producto para modificarlo.")
+        Exit Sub
+      End If
+      Dim auxProducto As New clsInfoProducto
+      Dim vResult As Result = clsProducto.Load(m_CurrentProducto.GuidProducto, auxProducto)
+      If vResult <> Result.OK Then
+        MsgBox("Falla al cargar el producto seleccionado")
+      End If
+      Using objForm As New frmEditarPagos(auxProducto)
+        objForm.ShowDialog()
+      End Using
+      Call MostrarDeben()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+
   Private Sub btnEliminarVenta_Click(sender As Object, e As EventArgs) Handles btnEliminarVenta.Click
     Try
 
@@ -1240,5 +1262,7 @@ Public Class frmDeben
 
   
 
+
+  
 
 End Class
