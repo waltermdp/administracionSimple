@@ -81,6 +81,7 @@ Public Class frmEditarPagos
         ClsInfoPagosBindingSource.ResetBindings(False)
       End If
       With m_Producto
+        txtNumVenta.Text = .NumComprobante.ToString
         txtFechaVenta.Text = .FechaVenta.ToString("dd/MM/yyyy")
         txtPrecioTotal.Text = .Precio.ToString
         txtDiaVencimiento.Text = .FechaPrimerPago.Day.ToString
@@ -458,24 +459,7 @@ Public Class frmEditarPagos
     End Try
   End Sub
 
-  Private Function GetProximoComprobanteDisponible() As Integer
-    Try
-      Dim lstpagos As New clsListPagos
-      lstpagos.Cfg_Filtro = "WHERE NumComprobante=(SELECT max(NumComprobante) FROM Pagos);"
-      lstpagos.RefreshData()
-
-      If lstpagos.Items.Count > 0 Then
-        Return lstpagos.Items.First.NumComprobante + 1
-      Else
-        Return 1
-      End If
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      Return -1
-    End Try
-  End Function
-
+  
   Private Function EsValidoNumComprobante(ByVal vNumComprobante As Integer) As Boolean
     Try
       If vNumComprobante <= 0 Then Return False 'asumo que ya existe asi no se pueden utilizar
@@ -559,22 +543,47 @@ Public Class frmEditarPagos
           'establecer proxima cuota como debe
           'get proxima cuota->establecerla como debe
           Dim indice As Integer = m_lstPagos.FindIndex(Function(c) c.NumCuota = (m_CurrentCuota.NumCuota + 1))
+
           m_lstPagos(indice).EstadoPago = E_EstadoPago.Debe
-          For i As Integer = indice + 1 To m_Producto.TotalCuotas
-            m_lstPagos(i).EstadoPago = E_EstadoPago.DebeProximo
+          For i As Integer = indice + 1 To m_Producto.TotalCuotas - 1
+            If (i = indice + 1) Then
+              m_lstPagos(i).EstadoPago = E_EstadoPago.DebeProximo
+              Continue For
+            End If
+            m_lstPagos(i).EstadoPago = E_EstadoPago.DebePendiente
           Next
         End If
       End If
+      'ClsInfoPagosBindingSource.DataSource = m_lstPagos
+      ClsInfoPagosBindingSource.ResetBindings(False)
+      dgvResumen.Refresh()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
   End Sub
 
-  Private Sub btnClearPago_ChangeUICues(sender As Object, e As UICuesEventArgs) Handles btnClearPago.ChangeUICues
+
+  Private Sub btnClearPago_Click(sender As Object, e As EventArgs) Handles btnClearPago.Click
     Try
-      If m_CurrentCuota.EstadoPago = E_EstadoPago.Pago Then
+      If (m_CurrentCuota.EstadoPago = E_EstadoPago.Pago) AndAlso EsEditable() Then
+        m_CurrentCuota.EstadoPago = E_EstadoPago.Debe
+        m_CurrentCuota.FechaPago = Date.MinValue
+
+        Dim indice As Integer = m_lstPagos.FindIndex(Function(c) c.NumCuota = (m_CurrentCuota.NumCuota + 1))
+        If indice > 0 Then
+          For i As Integer = indice To m_Producto.TotalCuotas - 1
+            If (i = indice) Then
+              m_lstPagos(i).EstadoPago = E_EstadoPago.DebeProximo
+              Continue For
+            End If
+
+            m_lstPagos(i).EstadoPago = E_EstadoPago.DebePendiente
+          Next
+        End If
 
       End If
+      ClsInfoPagosBindingSource.ResetBindings(False)
+      dgvResumen.Refresh()
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try

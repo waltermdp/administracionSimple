@@ -1265,4 +1265,12 @@ Public Class frmDeben
 
   
 
+  Private Sub btnprocesar_Click(sender As Object, e As EventArgs) Handles btnprocesar.Click
+    Try
+      'completar metodo de pago en tabla de coutas.
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

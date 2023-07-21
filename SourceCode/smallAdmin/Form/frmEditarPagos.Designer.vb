@@ -38,17 +38,17 @@ Partial Class frmEditarPagos
     Me.Label7 = New System.Windows.Forms.Label()
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.txtDiaVencimiento = New System.Windows.Forms.TextBox()
+    Me.txtFechaVenta = New System.Windows.Forms.TextBox()
     Me.btnClearPago = New System.Windows.Forms.Button()
     Me.btnAplicaPago = New System.Windows.Forms.Button()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
-    Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.txtFechaVenta = New System.Windows.Forms.TextBox()
-    Me.txtDiaVencimiento = New System.Windows.Forms.TextBox()
     Me.NumCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.VencimientoCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.EstadoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaUltimaExportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaUltimaImportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IdPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -247,11 +247,33 @@ Partial Class frmEditarPagos
     Me.Panel1.Size = New System.Drawing.Size(1120, 662)
     Me.Panel1.TabIndex = 70
     '
+    'txtDiaVencimiento
+    '
+    Me.txtDiaVencimiento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.txtDiaVencimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtDiaVencimiento.Location = New System.Drawing.Point(193, 48)
+    Me.txtDiaVencimiento.Name = "txtDiaVencimiento"
+    Me.txtDiaVencimiento.ReadOnly = True
+    Me.txtDiaVencimiento.Size = New System.Drawing.Size(43, 22)
+    Me.txtDiaVencimiento.TabIndex = 78
+    Me.txtDiaVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'txtFechaVenta
+    '
+    Me.txtFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.txtFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtFechaVenta.Location = New System.Drawing.Point(193, 20)
+    Me.txtFechaVenta.Name = "txtFechaVenta"
+    Me.txtFechaVenta.ReadOnly = True
+    Me.txtFechaVenta.Size = New System.Drawing.Size(151, 22)
+    Me.txtFechaVenta.TabIndex = 77
+    Me.txtFechaVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
     'btnClearPago
     '
-    Me.btnClearPago.Location = New System.Drawing.Point(648, 532)
+    Me.btnClearPago.Location = New System.Drawing.Point(647, 529)
     Me.btnClearPago.Name = "btnClearPago"
-    Me.btnClearPago.Size = New System.Drawing.Size(133, 27)
+    Me.btnClearPago.Size = New System.Drawing.Size(139, 33)
     Me.btnClearPago.TabIndex = 76
     Me.btnClearPago.Text = "Debe"
     Me.btnClearPago.UseVisualStyleBackColor = True
@@ -280,37 +302,8 @@ Partial Class frmEditarPagos
     Me.dgvResumen.ReadOnly = True
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvResumen.Size = New System.Drawing.Size(732, 367)
+    Me.dgvResumen.Size = New System.Drawing.Size(1063, 367)
     Me.dgvResumen.TabIndex = 73
-    '
-    'Column1
-    '
-    Me.Column1.DataPropertyName = "MetodoPago"
-    Me.Column1.HeaderText = "MetodoPago"
-    Me.Column1.Name = "Column1"
-    Me.Column1.ReadOnly = True
-    '
-    'txtFechaVenta
-    '
-    Me.txtFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.txtFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtFechaVenta.Location = New System.Drawing.Point(193, 20)
-    Me.txtFechaVenta.Name = "txtFechaVenta"
-    Me.txtFechaVenta.ReadOnly = True
-    Me.txtFechaVenta.Size = New System.Drawing.Size(151, 22)
-    Me.txtFechaVenta.TabIndex = 77
-    Me.txtFechaVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'txtDiaVencimiento
-    '
-    Me.txtDiaVencimiento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.txtDiaVencimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtDiaVencimiento.Location = New System.Drawing.Point(193, 48)
-    Me.txtDiaVencimiento.Name = "txtDiaVencimiento"
-    Me.txtDiaVencimiento.ReadOnly = True
-    Me.txtDiaVencimiento.Size = New System.Drawing.Size(43, 22)
-    Me.txtDiaVencimiento.TabIndex = 78
-    Me.txtDiaVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'NumCuotaDataGridViewTextBoxColumn
     '
@@ -346,6 +339,13 @@ Partial Class frmEditarPagos
     Me.EstadoPagoDataGridViewTextBoxColumn.HeaderText = "EstadoPago"
     Me.EstadoPagoDataGridViewTextBoxColumn.Name = "EstadoPagoDataGridViewTextBoxColumn"
     Me.EstadoPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'Column1
+    '
+    Me.Column1.DataPropertyName = "MetodoPago"
+    Me.Column1.HeaderText = "MetodoPago"
+    Me.Column1.Name = "Column1"
+    Me.Column1.ReadOnly = True
     '
     'FechaUltimaExportacionDataGridViewTextBoxColumn
     '
@@ -398,7 +398,7 @@ Partial Class frmEditarPagos
     Me.txtPrecioTotal.ReadOnly = True
     Me.txtPrecioTotal.Size = New System.Drawing.Size(123, 22)
     Me.txtPrecioTotal.TabIndex = 70
-    Me.txtPrecioTotal.Text = "$ 0,00"
+    Me.txtPrecioTotal.Text = "$0,00"
     Me.txtPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'frmEditarPagos

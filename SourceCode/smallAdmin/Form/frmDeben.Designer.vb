@@ -97,6 +97,7 @@ Partial Class frmDeben
     Me.lblFechaHoy = New System.Windows.Forms.Label()
     Me.lblSoftwareInfo = New System.Windows.Forms.Label()
     Me.btnEliminarVenta = New System.Windows.Forms.Button()
+    Me.CheckBox1 = New System.Windows.Forms.CheckBox()
     Me.FechaVentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComprobanteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ArticulosVendidosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -113,6 +114,7 @@ Partial Class frmDeben
     Me.AdelantoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ValorCuotaFijaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.bsInfoPrincipal = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnprocesar = New System.Windows.Forms.Button()
     CType(Me.dgvData, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.gpxBuscar.SuspendLayout()
     Me.Panel1.SuspendLayout()
@@ -414,6 +416,7 @@ Partial Class frmDeben
     'gpxBuscar
     '
     Me.gpxBuscar.BackColor = System.Drawing.Color.White
+    Me.gpxBuscar.Controls.Add(Me.CheckBox1)
     Me.gpxBuscar.Controls.Add(Me.rbtnSinEntregar)
     Me.gpxBuscar.Controls.Add(Me.Panel1)
     Me.gpxBuscar.Controls.Add(Me.rbtnCuotaPagaron)
@@ -428,7 +431,7 @@ Partial Class frmDeben
     Me.gpxBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.gpxBuscar.Location = New System.Drawing.Point(6, 6)
     Me.gpxBuscar.Name = "gpxBuscar"
-    Me.gpxBuscar.Size = New System.Drawing.Size(707, 252)
+    Me.gpxBuscar.Size = New System.Drawing.Size(1022, 252)
     Me.gpxBuscar.TabIndex = 48
     Me.gpxBuscar.TabStop = False
     Me.gpxBuscar.Text = "Buscar Producto"
@@ -453,7 +456,7 @@ Partial Class frmDeben
     Me.Panel1.Controls.Add(Me.lblInfoFiltro)
     Me.Panel1.Controls.Add(Me.txtBusqueda)
     Me.Panel1.Controls.Add(Me.rbtnNombreVendedor)
-    Me.Panel1.Location = New System.Drawing.Point(14, 131)
+    Me.Panel1.Location = New System.Drawing.Point(18, 143)
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Size = New System.Drawing.Size(633, 91)
     Me.Panel1.TabIndex = 63
@@ -947,6 +950,16 @@ Partial Class frmDeben
     Me.btnEliminarVenta.Text = "Eliminar Venta"
     Me.btnEliminarVenta.UseVisualStyleBackColor = False
     '
+    'CheckBox1
+    '
+    Me.CheckBox1.AutoSize = True
+    Me.CheckBox1.Location = New System.Drawing.Point(708, 53)
+    Me.CheckBox1.Name = "CheckBox1"
+    Me.CheckBox1.Size = New System.Drawing.Size(110, 19)
+    Me.CheckBox1.TabIndex = 65
+    Me.CheckBox1.Text = "chkEnableDate"
+    Me.CheckBox1.UseVisualStyleBackColor = True
+    '
     'FechaVentaDataGridViewTextBoxColumn
     '
     Me.FechaVentaDataGridViewTextBoxColumn.DataPropertyName = "FechaVenta"
@@ -1059,6 +1072,15 @@ Partial Class frmDeben
     '
     Me.bsInfoPrincipal.DataSource = GetType(manDB.clsInfoPrincipal)
     '
+    'btnprocesar
+    '
+    Me.btnprocesar.Location = New System.Drawing.Point(601, 28)
+    Me.btnprocesar.Name = "btnprocesar"
+    Me.btnprocesar.Size = New System.Drawing.Size(75, 23)
+    Me.btnprocesar.TabIndex = 69
+    Me.btnprocesar.Text = "pro"
+    Me.btnprocesar.UseVisualStyleBackColor = True
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1067,6 +1089,7 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.btnprocesar)
     Me.Controls.Add(Me.btnEliminarVenta)
     Me.Controls.Add(Me.lblSoftwareInfo)
     Me.Controls.Add(Me.btnMinimize)
@@ -1206,4 +1229,6 @@ Partial Class frmDeben
   Friend WithEvents lblSoftwareInfo As System.Windows.Forms.Label
   Friend WithEvents btnEliminarVenta As System.Windows.Forms.Button
   Friend WithEvents btnEditarPagos As System.Windows.Forms.Button
+  Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+  Friend WithEvents btnprocesar As System.Windows.Forms.Button
 End Class
