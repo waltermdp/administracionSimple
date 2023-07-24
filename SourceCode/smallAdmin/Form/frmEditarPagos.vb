@@ -85,6 +85,15 @@ Public Class frmEditarPagos
         txtFechaVenta.Text = .FechaVenta.ToString("dd/MM/yyyy")
         txtPrecioTotal.Text = .Precio.ToString
         txtDiaVencimiento.Text = .FechaPrimerPago.Day.ToString
+        Dim vCliente As ClsInfoPersona = Nothing
+        If clsPersona.Load(.GuidCliente, vCliente) = Result.OK Then
+          txtNombreCliente.Text = vCliente.ToString
+        End If
+        Dim vVendedor As clsInfoVendedor = Nothing
+        If clsVendedor.Load(.GuidVendedor, vVendedor) = Result.OK Then
+          txtNombreVendedor.Text = vVendedor.ToString
+        End If
+
       End With
 
       'With m_Producto

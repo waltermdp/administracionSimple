@@ -1268,6 +1268,31 @@ Public Class frmDeben
   Private Sub btnprocesar_Click(sender As Object, e As EventArgs) Handles btnprocesar.Click
     Try
       'completar metodo de pago en tabla de coutas.
+      Dim objPrincipal = New clsListaPrincipal()
+      objPrincipal.RefreshData()
+      For Each venta In objPrincipal.Items
+        Dim infoVenta As New clsInfoProducto
+        If clsProducto.Load(venta.GuidProducto, infoVenta) = Result.OK Then
+          Dim ListaCuotas As New List(Of clsInfoPagos)
+          If clsPago.Load(ListaCuotas, venta.GuidProducto) = Result.OK Then
+            For Each cuota In ListaCuotas
+              cuota.GuidCuenta = infoVenta.GuidCuenta
+              If clsPago.Save(cuota) <> Result.OK Then
+                MsgBox("Revisar get info pagos")
+                Exit Sub
+              End If
+            Next
+
+          Else
+            MsgBox("Revisar get info pagos")
+            Exit Sub
+          End If
+        Else
+          MsgBox("Revisar get info pagos")
+          Exit Sub
+        End If
+      Next
+      Dim k As Integer = 0
 
     Catch ex As Exception
       Print_msg(ex.Message)

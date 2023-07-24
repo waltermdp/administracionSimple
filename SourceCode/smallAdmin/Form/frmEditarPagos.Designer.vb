@@ -56,6 +56,10 @@ Partial Class frmEditarPagos
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoPagosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.txtPrecioTotal = New main.ucTextBoxNumerico()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.txtNombreCliente = New System.Windows.Forms.TextBox()
+    Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
+    Me.Label8 = New System.Windows.Forms.Label()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPagosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,14 +88,14 @@ Partial Class frmEditarPagos
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(1280, 25)
     Me.Label1.TabIndex = 11
-    Me.Label1.Text = "CONTRATOS: EDICION"
+    Me.Label1.Text = "CONTRATO: EDICION"
     Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
     'txtNumVenta
     '
     Me.txtNumVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtNumVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtNumVenta.Location = New System.Drawing.Point(530, 20)
+    Me.txtNumVenta.Location = New System.Drawing.Point(193, 37)
     Me.txtNumVenta.Name = "txtNumVenta"
     Me.txtNumVenta.ReadOnly = True
     Me.txtNumVenta.Size = New System.Drawing.Size(151, 22)
@@ -100,11 +104,10 @@ Partial Class frmEditarPagos
     '
     'Label16
     '
-    Me.Label16.AutoSize = True
     Me.Label16.BackColor = System.Drawing.Color.Transparent
-    Me.Label16.Location = New System.Drawing.Point(364, 22)
+    Me.Label16.Location = New System.Drawing.Point(27, 39)
     Me.Label16.Name = "Label16"
-    Me.Label16.Size = New System.Drawing.Size(128, 16)
+    Me.Label16.Size = New System.Drawing.Size(155, 20)
     Me.Label16.TabIndex = 62
     Me.Label16.Text = "Numero de Contrato"
     '
@@ -112,7 +115,7 @@ Partial Class frmEditarPagos
     '
     Me.Label13.AutoSize = True
     Me.Label13.BackColor = System.Drawing.Color.Transparent
-    Me.Label13.Location = New System.Drawing.Point(149, 524)
+    Me.Label13.Location = New System.Drawing.Point(149, 536)
     Me.Label13.Name = "Label13"
     Me.Label13.Size = New System.Drawing.Size(103, 16)
     Me.Label13.TabIndex = 53
@@ -121,7 +124,7 @@ Partial Class frmEditarPagos
     'txtMedioPagoDescripcion
     '
     Me.txtMedioPagoDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(152, 540)
+    Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(152, 555)
     Me.txtMedioPagoDescripcion.Name = "txtMedioPagoDescripcion"
     Me.txtMedioPagoDescripcion.ReadOnly = True
     Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(273, 22)
@@ -135,7 +138,7 @@ Partial Class frmEditarPagos
     Me.btnSeleccionarCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnSeleccionarCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnSeleccionarCuenta.ForeColor = System.Drawing.Color.White
-    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(30, 527)
+    Me.btnSeleccionarCuenta.Location = New System.Drawing.Point(30, 542)
     Me.btnSeleccionarCuenta.Name = "btnSeleccionarCuenta"
     Me.btnSeleccionarCuenta.Size = New System.Drawing.Size(113, 46)
     Me.btnSeleccionarCuenta.TabIndex = 51
@@ -150,7 +153,7 @@ Partial Class frmEditarPagos
     Me.btnAddCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnAddCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnAddCuenta.ForeColor = System.Drawing.Color.White
-    Me.btnAddCuenta.Location = New System.Drawing.Point(193, 76)
+    Me.btnAddCuenta.Location = New System.Drawing.Point(193, 93)
     Me.btnAddCuenta.Name = "btnAddCuenta"
     Me.btnAddCuenta.Size = New System.Drawing.Size(113, 32)
     Me.btnAddCuenta.TabIndex = 50
@@ -159,39 +162,35 @@ Partial Class frmEditarPagos
     '
     'Label2
     '
-    Me.Label2.AutoSize = True
     Me.Label2.BackColor = System.Drawing.Color.Transparent
-    Me.Label2.Location = New System.Drawing.Point(27, 22)
+    Me.Label2.Location = New System.Drawing.Point(27, 67)
     Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(81, 16)
+    Me.Label2.Size = New System.Drawing.Size(143, 20)
     Me.Label2.TabIndex = 47
     Me.Label2.Text = "FechaVenta"
     '
     'Label3
     '
-    Me.Label3.AutoSize = True
     Me.Label3.BackColor = System.Drawing.Color.Transparent
-    Me.Label3.Location = New System.Drawing.Point(715, 22)
+    Me.Label3.Location = New System.Drawing.Point(489, 37)
     Me.Label3.Name = "Label3"
-    Me.Label3.Size = New System.Drawing.Size(47, 16)
+    Me.Label3.Size = New System.Drawing.Size(168, 20)
     Me.Label3.TabIndex = 42
     Me.Label3.Text = "Precio"
     '
     'Label4
     '
-    Me.Label4.AutoSize = True
     Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(27, 84)
+    Me.Label4.Location = New System.Drawing.Point(30, 101)
     Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(90, 16)
+    Me.Label4.Size = New System.Drawing.Size(140, 24)
     Me.Label4.TabIndex = 44
     Me.Label4.Text = "Tipo de pago"
     '
     'Label6
     '
-    Me.Label6.AutoSize = True
     Me.Label6.BackColor = System.Drawing.Color.Transparent
-    Me.Label6.Location = New System.Drawing.Point(27, 50)
+    Me.Label6.Location = New System.Drawing.Point(489, 67)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(134, 16)
     Me.Label6.TabIndex = 48
@@ -199,11 +198,10 @@ Partial Class frmEditarPagos
     '
     'Label7
     '
-    Me.Label7.AutoSize = True
     Me.Label7.BackColor = System.Drawing.Color.Transparent
-    Me.Label7.Location = New System.Drawing.Point(30, 120)
+    Me.Label7.Location = New System.Drawing.Point(33, 132)
     Me.Label7.Name = "Label7"
-    Me.Label7.Size = New System.Drawing.Size(97, 16)
+    Me.Label7.Size = New System.Drawing.Size(113, 24)
     Me.Label7.TabIndex = 68
     Me.Label7.Text = "Plan de Pagos"
     '
@@ -224,6 +222,10 @@ Partial Class frmEditarPagos
     'Panel1
     '
     Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.txtNombreVendedor)
+    Me.Panel1.Controls.Add(Me.Label8)
+    Me.Panel1.Controls.Add(Me.txtNombreCliente)
+    Me.Panel1.Controls.Add(Me.Label5)
     Me.Panel1.Controls.Add(Me.txtDiaVencimiento)
     Me.Panel1.Controls.Add(Me.txtFechaVenta)
     Me.Panel1.Controls.Add(Me.btnClearPago)
@@ -251,7 +253,7 @@ Partial Class frmEditarPagos
     '
     Me.txtDiaVencimiento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtDiaVencimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtDiaVencimiento.Location = New System.Drawing.Point(193, 48)
+    Me.txtDiaVencimiento.Location = New System.Drawing.Point(663, 65)
     Me.txtDiaVencimiento.Name = "txtDiaVencimiento"
     Me.txtDiaVencimiento.ReadOnly = True
     Me.txtDiaVencimiento.Size = New System.Drawing.Size(43, 22)
@@ -262,7 +264,7 @@ Partial Class frmEditarPagos
     '
     Me.txtFechaVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtFechaVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtFechaVenta.Location = New System.Drawing.Point(193, 20)
+    Me.txtFechaVenta.Location = New System.Drawing.Point(193, 65)
     Me.txtFechaVenta.Name = "txtFechaVenta"
     Me.txtFechaVenta.ReadOnly = True
     Me.txtFechaVenta.Size = New System.Drawing.Size(151, 22)
@@ -271,7 +273,7 @@ Partial Class frmEditarPagos
     '
     'btnClearPago
     '
-    Me.btnClearPago.Location = New System.Drawing.Point(647, 529)
+    Me.btnClearPago.Location = New System.Drawing.Point(647, 544)
     Me.btnClearPago.Name = "btnClearPago"
     Me.btnClearPago.Size = New System.Drawing.Size(139, 33)
     Me.btnClearPago.TabIndex = 76
@@ -280,7 +282,7 @@ Partial Class frmEditarPagos
     '
     'btnAplicaPago
     '
-    Me.btnAplicaPago.Location = New System.Drawing.Point(479, 529)
+    Me.btnAplicaPago.Location = New System.Drawing.Point(479, 544)
     Me.btnAplicaPago.Name = "btnAplicaPago"
     Me.btnAplicaPago.Size = New System.Drawing.Size(133, 33)
     Me.btnAplicaPago.TabIndex = 75
@@ -296,7 +298,7 @@ Partial Class frmEditarPagos
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn, Me.Column1, Me.FechaUltimaExportacionDataGridViewTextBoxColumn, Me.FechaUltimaImportacionDataGridViewTextBoxColumn, Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoPagosBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(30, 139)
+    Me.dgvResumen.Location = New System.Drawing.Point(30, 152)
     Me.dgvResumen.MultiSelect = False
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.ReadOnly = True
@@ -392,14 +394,46 @@ Partial Class frmEditarPagos
     'txtPrecioTotal
     '
     Me.txtPrecioTotal.Limite = 22
-    Me.txtPrecioTotal.Location = New System.Drawing.Point(804, 20)
+    Me.txtPrecioTotal.Location = New System.Drawing.Point(663, 34)
     Me.txtPrecioTotal.Moneda = True
     Me.txtPrecioTotal.Name = "txtPrecioTotal"
     Me.txtPrecioTotal.ReadOnly = True
     Me.txtPrecioTotal.Size = New System.Drawing.Size(123, 22)
     Me.txtPrecioTotal.TabIndex = 70
-    Me.txtPrecioTotal.Text = "$0,00"
+    Me.txtPrecioTotal.Text = "$ 0,00"
     Me.txtPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'Label5
+    '
+    Me.Label5.Location = New System.Drawing.Point(27, 12)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(155, 23)
+    Me.Label5.TabIndex = 79
+    Me.Label5.Text = "Nombre Cliente:"
+    '
+    'txtNombreCliente
+    '
+    Me.txtNombreCliente.Location = New System.Drawing.Point(193, 9)
+    Me.txtNombreCliente.Name = "txtNombreCliente"
+    Me.txtNombreCliente.ReadOnly = True
+    Me.txtNombreCliente.Size = New System.Drawing.Size(278, 22)
+    Me.txtNombreCliente.TabIndex = 80
+    '
+    'txtNombreVendedor
+    '
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(663, 6)
+    Me.txtNombreVendedor.Name = "txtNombreVendedor"
+    Me.txtNombreVendedor.ReadOnly = True
+    Me.txtNombreVendedor.Size = New System.Drawing.Size(264, 22)
+    Me.txtNombreVendedor.TabIndex = 82
+    '
+    'Label8
+    '
+    Me.Label8.Location = New System.Drawing.Point(489, 9)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(168, 22)
+    Me.Label8.TabIndex = 81
+    Me.Label8.Text = "Nombre Vendedor:"
     '
     'frmEditarPagos
     '
@@ -459,4 +493,8 @@ Partial Class frmEditarPagos
   Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents txtDiaVencimiento As System.Windows.Forms.TextBox
   Friend WithEvents txtFechaVenta As System.Windows.Forms.TextBox
+  Friend WithEvents txtNombreVendedor As System.Windows.Forms.TextBox
+  Friend WithEvents Label8 As System.Windows.Forms.Label
+  Friend WithEvents txtNombreCliente As System.Windows.Forms.TextBox
+  Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class
