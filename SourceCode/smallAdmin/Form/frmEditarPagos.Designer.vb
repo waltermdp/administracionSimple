@@ -30,36 +30,42 @@ Partial Class frmEditarPagos
     Me.Label13 = New System.Windows.Forms.Label()
     Me.txtMedioPagoDescripcion = New System.Windows.Forms.TextBox()
     Me.btnSeleccionarCuenta = New System.Windows.Forms.Button()
-    Me.btnAddCuenta = New System.Windows.Forms.Button()
     Me.Label2 = New System.Windows.Forms.Label()
     Me.Label3 = New System.Windows.Forms.Label()
-    Me.Label4 = New System.Windows.Forms.Label()
     Me.Label6 = New System.Windows.Forms.Label()
     Me.Label7 = New System.Windows.Forms.Label()
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.Label9 = New System.Windows.Forms.Label()
+    Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
+    Me.Label8 = New System.Windows.Forms.Label()
+    Me.txtNombreCliente = New System.Windows.Forms.TextBox()
+    Me.Label5 = New System.Windows.Forms.Label()
     Me.txtDiaVencimiento = New System.Windows.Forms.TextBox()
     Me.txtFechaVenta = New System.Windows.Forms.TextBox()
     Me.btnClearPago = New System.Windows.Forms.Button()
     Me.btnAplicaPago = New System.Windows.Forms.Button()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
+    Me.txtPrecioCuota = New main.ucTextBoxNumerico()
+    Me.ClsInfoPagosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.txtPrecioTotal = New main.ucTextBoxNumerico()
     Me.NumCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.VencimientoCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ToFechaDeVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ToFechaDePagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.EstadoPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.MetodoDePagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ToFechaUltimaExportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ToFechaUltimaimportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaUltimaExportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaUltimaImportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IdPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.NumComprobanteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoPagosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.txtPrecioTotal = New main.ucTextBoxNumerico()
-    Me.Label5 = New System.Windows.Forms.Label()
-    Me.txtNombreCliente = New System.Windows.Forms.TextBox()
-    Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
-    Me.Label8 = New System.Windows.Forms.Label()
+    Me.GuidCuentaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.VencimientoCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPagosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,7 +133,7 @@ Partial Class frmEditarPagos
     Me.txtMedioPagoDescripcion.Location = New System.Drawing.Point(152, 555)
     Me.txtMedioPagoDescripcion.Name = "txtMedioPagoDescripcion"
     Me.txtMedioPagoDescripcion.ReadOnly = True
-    Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(273, 22)
+    Me.txtMedioPagoDescripcion.Size = New System.Drawing.Size(319, 22)
     Me.txtMedioPagoDescripcion.TabIndex = 52
     '
     'btnSeleccionarCuenta
@@ -145,21 +151,6 @@ Partial Class frmEditarPagos
     Me.btnSeleccionarCuenta.Text = "Seleccionar"
     Me.btnSeleccionarCuenta.UseVisualStyleBackColor = False
     '
-    'btnAddCuenta
-    '
-    Me.btnAddCuenta.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnAddCuenta.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnAddCuenta.FlatAppearance.BorderSize = 2
-    Me.btnAddCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnAddCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnAddCuenta.ForeColor = System.Drawing.Color.White
-    Me.btnAddCuenta.Location = New System.Drawing.Point(193, 93)
-    Me.btnAddCuenta.Name = "btnAddCuenta"
-    Me.btnAddCuenta.Size = New System.Drawing.Size(113, 32)
-    Me.btnAddCuenta.TabIndex = 50
-    Me.btnAddCuenta.Text = "Nuevo"
-    Me.btnAddCuenta.UseVisualStyleBackColor = False
-    '
     'Label2
     '
     Me.Label2.BackColor = System.Drawing.Color.Transparent
@@ -176,21 +167,12 @@ Partial Class frmEditarPagos
     Me.Label3.Name = "Label3"
     Me.Label3.Size = New System.Drawing.Size(168, 20)
     Me.Label3.TabIndex = 42
-    Me.Label3.Text = "Precio"
-    '
-    'Label4
-    '
-    Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(30, 101)
-    Me.Label4.Name = "Label4"
-    Me.Label4.Size = New System.Drawing.Size(140, 24)
-    Me.Label4.TabIndex = 44
-    Me.Label4.Text = "Tipo de pago"
+    Me.Label3.Text = "Valor Total"
     '
     'Label6
     '
     Me.Label6.BackColor = System.Drawing.Color.Transparent
-    Me.Label6.Location = New System.Drawing.Point(489, 67)
+    Me.Label6.Location = New System.Drawing.Point(27, 95)
     Me.Label6.Name = "Label6"
     Me.Label6.Size = New System.Drawing.Size(134, 16)
     Me.Label6.TabIndex = 48
@@ -199,11 +181,12 @@ Partial Class frmEditarPagos
     'Label7
     '
     Me.Label7.BackColor = System.Drawing.Color.Transparent
-    Me.Label7.Location = New System.Drawing.Point(33, 132)
+    Me.Label7.Location = New System.Drawing.Point(27, 125)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(113, 24)
     Me.Label7.TabIndex = 68
     Me.Label7.Text = "Plan de Pagos"
+    Me.Label7.TextAlign = System.Drawing.ContentAlignment.BottomLeft
     '
     'btnGuardar
     '
@@ -222,6 +205,8 @@ Partial Class frmEditarPagos
     'Panel1
     '
     Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.txtPrecioCuota)
+    Me.Panel1.Controls.Add(Me.Label9)
     Me.Panel1.Controls.Add(Me.txtNombreVendedor)
     Me.Panel1.Controls.Add(Me.Label8)
     Me.Panel1.Controls.Add(Me.txtNombreCliente)
@@ -236,10 +221,8 @@ Partial Class frmEditarPagos
     Me.Panel1.Controls.Add(Me.Label7)
     Me.Panel1.Controls.Add(Me.Label6)
     Me.Panel1.Controls.Add(Me.txtNumVenta)
-    Me.Panel1.Controls.Add(Me.Label4)
     Me.Panel1.Controls.Add(Me.Label16)
     Me.Panel1.Controls.Add(Me.Label3)
-    Me.Panel1.Controls.Add(Me.btnAddCuenta)
     Me.Panel1.Controls.Add(Me.btnSeleccionarCuenta)
     Me.Panel1.Controls.Add(Me.txtMedioPagoDescripcion)
     Me.Panel1.Controls.Add(Me.Label13)
@@ -249,11 +232,52 @@ Partial Class frmEditarPagos
     Me.Panel1.Size = New System.Drawing.Size(1120, 662)
     Me.Panel1.TabIndex = 70
     '
+    'Label9
+    '
+    Me.Label9.BackColor = System.Drawing.Color.Transparent
+    Me.Label9.Location = New System.Drawing.Point(489, 65)
+    Me.Label9.Name = "Label9"
+    Me.Label9.Size = New System.Drawing.Size(135, 20)
+    Me.Label9.TabIndex = 83
+    Me.Label9.Text = "Valor Cuota"
+    '
+    'txtNombreVendedor
+    '
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(663, 6)
+    Me.txtNombreVendedor.Name = "txtNombreVendedor"
+    Me.txtNombreVendedor.ReadOnly = True
+    Me.txtNombreVendedor.Size = New System.Drawing.Size(264, 22)
+    Me.txtNombreVendedor.TabIndex = 82
+    '
+    'Label8
+    '
+    Me.Label8.Location = New System.Drawing.Point(489, 9)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(168, 22)
+    Me.Label8.TabIndex = 81
+    Me.Label8.Text = "Nombre Vendedor:"
+    '
+    'txtNombreCliente
+    '
+    Me.txtNombreCliente.Location = New System.Drawing.Point(193, 9)
+    Me.txtNombreCliente.Name = "txtNombreCliente"
+    Me.txtNombreCliente.ReadOnly = True
+    Me.txtNombreCliente.Size = New System.Drawing.Size(278, 22)
+    Me.txtNombreCliente.TabIndex = 80
+    '
+    'Label5
+    '
+    Me.Label5.Location = New System.Drawing.Point(27, 12)
+    Me.Label5.Name = "Label5"
+    Me.Label5.Size = New System.Drawing.Size(155, 23)
+    Me.Label5.TabIndex = 79
+    Me.Label5.Text = "Nombre Cliente:"
+    '
     'txtDiaVencimiento
     '
     Me.txtDiaVencimiento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
     Me.txtDiaVencimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtDiaVencimiento.Location = New System.Drawing.Point(663, 65)
+    Me.txtDiaVencimiento.Location = New System.Drawing.Point(193, 93)
     Me.txtDiaVencimiento.Name = "txtDiaVencimiento"
     Me.txtDiaVencimiento.ReadOnly = True
     Me.txtDiaVencimiento.Size = New System.Drawing.Size(43, 22)
@@ -273,7 +297,7 @@ Partial Class frmEditarPagos
     '
     'btnClearPago
     '
-    Me.btnClearPago.Location = New System.Drawing.Point(647, 544)
+    Me.btnClearPago.Location = New System.Drawing.Point(719, 549)
     Me.btnClearPago.Name = "btnClearPago"
     Me.btnClearPago.Size = New System.Drawing.Size(139, 33)
     Me.btnClearPago.TabIndex = 76
@@ -282,7 +306,7 @@ Partial Class frmEditarPagos
     '
     'btnAplicaPago
     '
-    Me.btnAplicaPago.Location = New System.Drawing.Point(479, 544)
+    Me.btnAplicaPago.Location = New System.Drawing.Point(551, 549)
     Me.btnAplicaPago.Name = "btnAplicaPago"
     Me.btnAplicaPago.Size = New System.Drawing.Size(133, 33)
     Me.btnAplicaPago.TabIndex = 75
@@ -296,7 +320,7 @@ Partial Class frmEditarPagos
     Me.dgvResumen.AutoGenerateColumns = False
     Me.dgvResumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn, Me.Column1, Me.FechaUltimaExportacionDataGridViewTextBoxColumn, Me.FechaUltimaImportacionDataGridViewTextBoxColumn, Me.IdPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn})
+    Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumCuotaDataGridViewTextBoxColumn, Me.ToFechaDeVencimientoDataGridViewTextBoxColumn, Me.ToFechaDePagoDataGridViewTextBoxColumn, Me.EstadoPagoDataGridViewTextBoxColumn, Me.MetodoDePagoDataGridViewTextBoxColumn, Me.ToFechaUltimaExportacionDataGridViewTextBoxColumn, Me.ToFechaUltimaimportacionDataGridViewTextBoxColumn, Me.FechaUltimaExportacionDataGridViewTextBoxColumn, Me.FechaUltimaImportacionDataGridViewTextBoxColumn, Me.IdPagoDataGridViewTextBoxColumn, Me.NumComprobanteDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidCuentaDataGridViewTextBoxColumn, Me.ValorCuotaDataGridViewTextBoxColumn, Me.VencimientoCuotaDataGridViewTextBoxColumn, Me.FechaPagoDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoPagosBindingSource
     Me.dgvResumen.Location = New System.Drawing.Point(30, 152)
     Me.dgvResumen.MultiSelect = False
@@ -307,85 +331,17 @@ Partial Class frmEditarPagos
     Me.dgvResumen.Size = New System.Drawing.Size(1063, 367)
     Me.dgvResumen.TabIndex = 73
     '
-    'NumCuotaDataGridViewTextBoxColumn
+    'txtPrecioCuota
     '
-    Me.NumCuotaDataGridViewTextBoxColumn.DataPropertyName = "NumCuota"
-    Me.NumCuotaDataGridViewTextBoxColumn.HeaderText = "NumCuota"
-    Me.NumCuotaDataGridViewTextBoxColumn.Name = "NumCuotaDataGridViewTextBoxColumn"
-    Me.NumCuotaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'VencimientoCuotaDataGridViewTextBoxColumn
-    '
-    Me.VencimientoCuotaDataGridViewTextBoxColumn.DataPropertyName = "VencimientoCuota"
-    Me.VencimientoCuotaDataGridViewTextBoxColumn.HeaderText = "VencimientoCuota"
-    Me.VencimientoCuotaDataGridViewTextBoxColumn.Name = "VencimientoCuotaDataGridViewTextBoxColumn"
-    Me.VencimientoCuotaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'ValorCuotaDataGridViewTextBoxColumn
-    '
-    Me.ValorCuotaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuota"
-    Me.ValorCuotaDataGridViewTextBoxColumn.HeaderText = "ValorCuota"
-    Me.ValorCuotaDataGridViewTextBoxColumn.Name = "ValorCuotaDataGridViewTextBoxColumn"
-    Me.ValorCuotaDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaPagoDataGridViewTextBoxColumn
-    '
-    Me.FechaPagoDataGridViewTextBoxColumn.DataPropertyName = "FechaPago"
-    Me.FechaPagoDataGridViewTextBoxColumn.HeaderText = "FechaPago"
-    Me.FechaPagoDataGridViewTextBoxColumn.Name = "FechaPagoDataGridViewTextBoxColumn"
-    Me.FechaPagoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'EstadoPagoDataGridViewTextBoxColumn
-    '
-    Me.EstadoPagoDataGridViewTextBoxColumn.DataPropertyName = "EstadoPago"
-    Me.EstadoPagoDataGridViewTextBoxColumn.HeaderText = "EstadoPago"
-    Me.EstadoPagoDataGridViewTextBoxColumn.Name = "EstadoPagoDataGridViewTextBoxColumn"
-    Me.EstadoPagoDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'Column1
-    '
-    Me.Column1.DataPropertyName = "MetodoPago"
-    Me.Column1.HeaderText = "MetodoPago"
-    Me.Column1.Name = "Column1"
-    Me.Column1.ReadOnly = True
-    '
-    'FechaUltimaExportacionDataGridViewTextBoxColumn
-    '
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimaExportacion"
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.HeaderText = "FechaUltimaExportacion"
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.Name = "FechaUltimaExportacionDataGridViewTextBoxColumn"
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'FechaUltimaImportacionDataGridViewTextBoxColumn
-    '
-    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimaImportacion"
-    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.HeaderText = "FechaUltimaImportacion"
-    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.Name = "FechaUltimaImportacionDataGridViewTextBoxColumn"
-    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.ReadOnly = True
-    '
-    'IdPagoDataGridViewTextBoxColumn
-    '
-    Me.IdPagoDataGridViewTextBoxColumn.DataPropertyName = "IdPago"
-    Me.IdPagoDataGridViewTextBoxColumn.HeaderText = "IdPago"
-    Me.IdPagoDataGridViewTextBoxColumn.Name = "IdPagoDataGridViewTextBoxColumn"
-    Me.IdPagoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.IdPagoDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidProductoDataGridViewTextBoxColumn
-    '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidPagoDataGridViewTextBoxColumn
-    '
-    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
-    Me.GuidPagoDataGridViewTextBoxColumn.ReadOnly = True
-    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
+    Me.txtPrecioCuota.Limite = 22
+    Me.txtPrecioCuota.Location = New System.Drawing.Point(663, 62)
+    Me.txtPrecioCuota.Moneda = True
+    Me.txtPrecioCuota.Name = "txtPrecioCuota"
+    Me.txtPrecioCuota.ReadOnly = True
+    Me.txtPrecioCuota.Size = New System.Drawing.Size(123, 22)
+    Me.txtPrecioCuota.TabIndex = 84
+    Me.txtPrecioCuota.Text = "$ 0,00"
+    Me.txtPrecioCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'ClsInfoPagosBindingSource
     '
@@ -403,37 +359,134 @@ Partial Class frmEditarPagos
     Me.txtPrecioTotal.Text = "$ 0,00"
     Me.txtPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
-    'Label5
+    'NumCuotaDataGridViewTextBoxColumn
     '
-    Me.Label5.Location = New System.Drawing.Point(27, 12)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(155, 23)
-    Me.Label5.TabIndex = 79
-    Me.Label5.Text = "Nombre Cliente:"
+    Me.NumCuotaDataGridViewTextBoxColumn.DataPropertyName = "NumCuota"
+    Me.NumCuotaDataGridViewTextBoxColumn.HeaderText = "Cuota"
+    Me.NumCuotaDataGridViewTextBoxColumn.Name = "NumCuotaDataGridViewTextBoxColumn"
+    Me.NumCuotaDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'txtNombreCliente
+    'ToFechaDeVencimientoDataGridViewTextBoxColumn
     '
-    Me.txtNombreCliente.Location = New System.Drawing.Point(193, 9)
-    Me.txtNombreCliente.Name = "txtNombreCliente"
-    Me.txtNombreCliente.ReadOnly = True
-    Me.txtNombreCliente.Size = New System.Drawing.Size(278, 22)
-    Me.txtNombreCliente.TabIndex = 80
+    Me.ToFechaDeVencimientoDataGridViewTextBoxColumn.DataPropertyName = "toFechaDeVencimiento"
+    Me.ToFechaDeVencimientoDataGridViewTextBoxColumn.HeaderText = "Vencimiento"
+    Me.ToFechaDeVencimientoDataGridViewTextBoxColumn.Name = "ToFechaDeVencimientoDataGridViewTextBoxColumn"
+    Me.ToFechaDeVencimientoDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'txtNombreVendedor
+    'ToFechaDePagoDataGridViewTextBoxColumn
     '
-    Me.txtNombreVendedor.Location = New System.Drawing.Point(663, 6)
-    Me.txtNombreVendedor.Name = "txtNombreVendedor"
-    Me.txtNombreVendedor.ReadOnly = True
-    Me.txtNombreVendedor.Size = New System.Drawing.Size(264, 22)
-    Me.txtNombreVendedor.TabIndex = 82
+    Me.ToFechaDePagoDataGridViewTextBoxColumn.DataPropertyName = "toFechaDePago"
+    Me.ToFechaDePagoDataGridViewTextBoxColumn.HeaderText = "Pago"
+    Me.ToFechaDePagoDataGridViewTextBoxColumn.Name = "ToFechaDePagoDataGridViewTextBoxColumn"
+    Me.ToFechaDePagoDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'Label8
+    'EstadoPagoDataGridViewTextBoxColumn
     '
-    Me.Label8.Location = New System.Drawing.Point(489, 9)
-    Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(168, 22)
-    Me.Label8.TabIndex = 81
-    Me.Label8.Text = "Nombre Vendedor:"
+    Me.EstadoPagoDataGridViewTextBoxColumn.DataPropertyName = "EstadoPago"
+    Me.EstadoPagoDataGridViewTextBoxColumn.HeaderText = "Estado de Pago"
+    Me.EstadoPagoDataGridViewTextBoxColumn.Name = "EstadoPagoDataGridViewTextBoxColumn"
+    Me.EstadoPagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'MetodoDePagoDataGridViewTextBoxColumn
+    '
+    Me.MetodoDePagoDataGridViewTextBoxColumn.DataPropertyName = "MetodoDePago"
+    Me.MetodoDePagoDataGridViewTextBoxColumn.HeaderText = "Tipo de Cuenta"
+    Me.MetodoDePagoDataGridViewTextBoxColumn.Name = "MetodoDePagoDataGridViewTextBoxColumn"
+    Me.MetodoDePagoDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ToFechaUltimaExportacionDataGridViewTextBoxColumn
+    '
+    Me.ToFechaUltimaExportacionDataGridViewTextBoxColumn.DataPropertyName = "toFechaUltimaExportacion"
+    Me.ToFechaUltimaExportacionDataGridViewTextBoxColumn.HeaderText = "Ultima Exportacion"
+    Me.ToFechaUltimaExportacionDataGridViewTextBoxColumn.Name = "ToFechaUltimaExportacionDataGridViewTextBoxColumn"
+    Me.ToFechaUltimaExportacionDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'ToFechaUltimaimportacionDataGridViewTextBoxColumn
+    '
+    Me.ToFechaUltimaimportacionDataGridViewTextBoxColumn.DataPropertyName = "toFechaUltimaimportacion"
+    Me.ToFechaUltimaimportacionDataGridViewTextBoxColumn.HeaderText = "Ultima Importacion"
+    Me.ToFechaUltimaimportacionDataGridViewTextBoxColumn.Name = "ToFechaUltimaimportacionDataGridViewTextBoxColumn"
+    Me.ToFechaUltimaimportacionDataGridViewTextBoxColumn.ReadOnly = True
+    '
+    'FechaUltimaExportacionDataGridViewTextBoxColumn
+    '
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.HeaderText = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.Name = "FechaUltimaExportacionDataGridViewTextBoxColumn"
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.Visible = False
+    '
+    'FechaUltimaImportacionDataGridViewTextBoxColumn
+    '
+    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimaImportacion"
+    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.HeaderText = "FechaUltimaImportacion"
+    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.Name = "FechaUltimaImportacionDataGridViewTextBoxColumn"
+    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaUltimaImportacionDataGridViewTextBoxColumn.Visible = False
+    '
+    'IdPagoDataGridViewTextBoxColumn
+    '
+    Me.IdPagoDataGridViewTextBoxColumn.DataPropertyName = "IdPago"
+    Me.IdPagoDataGridViewTextBoxColumn.HeaderText = "IdPago"
+    Me.IdPagoDataGridViewTextBoxColumn.Name = "IdPagoDataGridViewTextBoxColumn"
+    Me.IdPagoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.IdPagoDataGridViewTextBoxColumn.Visible = False
+    '
+    'NumComprobanteDataGridViewTextBoxColumn
+    '
+    Me.NumComprobanteDataGridViewTextBoxColumn.DataPropertyName = "NumComprobante"
+    Me.NumComprobanteDataGridViewTextBoxColumn.HeaderText = "NumComprobante"
+    Me.NumComprobanteDataGridViewTextBoxColumn.Name = "NumComprobanteDataGridViewTextBoxColumn"
+    Me.NumComprobanteDataGridViewTextBoxColumn.ReadOnly = True
+    Me.NumComprobanteDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidPagoDataGridViewTextBoxColumn
+    '
+    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
+    Me.GuidPagoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidCuentaDataGridViewTextBoxColumn
+    '
+    Me.GuidCuentaDataGridViewTextBoxColumn.DataPropertyName = "GuidCuenta"
+    Me.GuidCuentaDataGridViewTextBoxColumn.HeaderText = "GuidCuenta"
+    Me.GuidCuentaDataGridViewTextBoxColumn.Name = "GuidCuentaDataGridViewTextBoxColumn"
+    Me.GuidCuentaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.GuidCuentaDataGridViewTextBoxColumn.Visible = False
+    '
+    'ValorCuotaDataGridViewTextBoxColumn
+    '
+    Me.ValorCuotaDataGridViewTextBoxColumn.DataPropertyName = "ValorCuota"
+    Me.ValorCuotaDataGridViewTextBoxColumn.HeaderText = "ValorCuota"
+    Me.ValorCuotaDataGridViewTextBoxColumn.Name = "ValorCuotaDataGridViewTextBoxColumn"
+    Me.ValorCuotaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.ValorCuotaDataGridViewTextBoxColumn.Visible = False
+    '
+    'VencimientoCuotaDataGridViewTextBoxColumn
+    '
+    Me.VencimientoCuotaDataGridViewTextBoxColumn.DataPropertyName = "VencimientoCuota"
+    Me.VencimientoCuotaDataGridViewTextBoxColumn.HeaderText = "VencimientoCuota"
+    Me.VencimientoCuotaDataGridViewTextBoxColumn.Name = "VencimientoCuotaDataGridViewTextBoxColumn"
+    Me.VencimientoCuotaDataGridViewTextBoxColumn.ReadOnly = True
+    Me.VencimientoCuotaDataGridViewTextBoxColumn.Visible = False
+    '
+    'FechaPagoDataGridViewTextBoxColumn
+    '
+    Me.FechaPagoDataGridViewTextBoxColumn.DataPropertyName = "FechaPago"
+    Me.FechaPagoDataGridViewTextBoxColumn.HeaderText = "FechaPago"
+    Me.FechaPagoDataGridViewTextBoxColumn.Name = "FechaPagoDataGridViewTextBoxColumn"
+    Me.FechaPagoDataGridViewTextBoxColumn.ReadOnly = True
+    Me.FechaPagoDataGridViewTextBoxColumn.Visible = False
     '
     'frmEditarPagos
     '
@@ -467,10 +520,8 @@ Partial Class frmEditarPagos
   Friend WithEvents Label13 As System.Windows.Forms.Label
   Friend WithEvents txtMedioPagoDescripcion As System.Windows.Forms.TextBox
   Friend WithEvents btnSeleccionarCuenta As System.Windows.Forms.Button
-  Friend WithEvents btnAddCuenta As System.Windows.Forms.Button
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents Label3 As System.Windows.Forms.Label
-  Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents Label7 As System.Windows.Forms.Label
   Friend WithEvents btnGuardar As System.Windows.Forms.Button
@@ -480,21 +531,30 @@ Partial Class frmEditarPagos
   Friend WithEvents ClsInfoPagosBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents btnClearPago As System.Windows.Forms.Button
   Friend WithEvents btnAplicaPago As System.Windows.Forms.Button
-  Friend WithEvents NumCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents VencimientoCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents ValorCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents EstadoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaUltimaExportacionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents FechaUltimaImportacionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents IdPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents txtDiaVencimiento As System.Windows.Forms.TextBox
   Friend WithEvents txtFechaVenta As System.Windows.Forms.TextBox
   Friend WithEvents txtNombreVendedor As System.Windows.Forms.TextBox
   Friend WithEvents Label8 As System.Windows.Forms.Label
   Friend WithEvents txtNombreCliente As System.Windows.Forms.TextBox
   Friend WithEvents Label5 As System.Windows.Forms.Label
+  Friend WithEvents txtPrecioCuota As main.ucTextBoxNumerico
+  Friend WithEvents Label9 As System.Windows.Forms.Label
+  Friend WithEvents MetodoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NumCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ToFechaDeVencimientoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ToFechaDePagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents EstadoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents MetodoDePagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ToFechaUltimaExportacionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ToFechaUltimaimportacionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaUltimaExportacionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaUltimaImportacionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents IdPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents NumComprobanteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents GuidCuentaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents ValorCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents VencimientoCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents FechaPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

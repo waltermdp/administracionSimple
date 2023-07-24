@@ -14,12 +14,18 @@
   Private m_FechaUltimaExportacion As Date
   Private m_FechaUltimaImportacion As Date
   Private m_GuidCuenta As Guid
+  Private m_MetodoPago As String
 
-  Public ReadOnly Property MetodoPago As String
+  Public Property MetodoDePago As String
     Get
-      Return clsModoDebito.ATexto(m_GuidPago)
+      Return m_MetodoPago
     End Get
+    Set(value As String)
+      m_MetodoPago = value
+    End Set
   End Property
+
+
 
   Public Property FechaUltimaExportacion As Date
     Get
@@ -38,6 +44,7 @@
       m_FechaUltimaImportacion = value
     End Set
   End Property
+
 
 
   Public Property IdPago As Integer
@@ -132,6 +139,45 @@
   End Property
 
 
+  'FECHAS para datagridview
+  Public ReadOnly Property toFechaDePago As String
+    Get
+      Return Date2String(m_FechaPago)
+    End Get
+  End Property
+
+  Public ReadOnly Property toFechaDeVencimiento As String
+    Get
+      Return Date2String(m_VencimientoCuota)
+    End Get
+  End Property
+
+  Public ReadOnly Property toFechaUltimaExportacion As String
+    Get
+      Return Date2String(m_FechaUltimaExportacion)
+    End Get
+  End Property
+
+  Public ReadOnly Property toFechaUltimaimportacion As String
+    Get
+      Return Date2String(m_FechaUltimaImportacion)
+    End Get
+  End Property
+
+  Public Function Date2String(ByVal vFecha As Date) As String
+    Try
+
+      If vFecha <= Date.MinValue OrElse vFecha.Year < 1950 Then
+        Return String.Empty
+      Else
+        Return vFecha.ToString("dd/MM/yyyy")
+      End If
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+      Return String.Empty
+    End Try
+  End Function
+
   Public Sub New()
     MyBase.New()
     Try
@@ -147,6 +193,7 @@
       NumComprobante = -1
       FechaUltimaExportacion = Date.MinValue
       FechaUltimaImportacion = Date.MinValue
+      m_MetodoPago = String.Empty
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)
     End Try

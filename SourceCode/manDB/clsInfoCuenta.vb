@@ -148,8 +148,19 @@
       libCommon.Comunes.Print_msg(ex.Message)
       Return "--"
     End Try
+  End Function
 
+  Public Function GetSimpleString() As String
+    Try
 
+      Return String.Format("{0} - {1}", clsModoDebito.ATexto(m_TipoDeCuenta), Codigo1.ToString)
+    Catch ex As Exception
+      Return "--"
+    End Try
+  End Function
+
+  Public Function TipoCuentaToString() As String
+    Return clsModoDebito.ATexto(m_TipoDeCuenta)
   End Function
 
   Public Overrides Function Equals(ByVal obj As Object) As Boolean

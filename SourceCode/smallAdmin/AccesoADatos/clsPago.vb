@@ -3,6 +3,7 @@ Imports manDB
 
 Public Class clsPago
 
+
   Public Shared Function Load(ByRef rlistPagos As List(Of clsInfoPagos), ByVal vGuidProducto As Guid) As Result
     Try
       Dim objDB As libDB.clsAcceso = Nothing

@@ -117,6 +117,7 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="AccesoADatos\clsInfoPagosExt.vb" />
     <Compile Include="Controles\ucTarjeta.Designer.vb">
       <DependentUpon>ucTarjeta.vb</DependentUpon>
     </Compile>
