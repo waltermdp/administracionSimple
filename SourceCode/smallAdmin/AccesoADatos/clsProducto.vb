@@ -39,6 +39,43 @@ Public Class clsProducto
     End Try
   End Function
 
+  Public Shared Function SaveInfoProducto(ByRef rInfoProducto As manDB.clsInfoProducto) As Result
+    Try
+      Dim objDB As libDB.clsAcceso = Nothing
+      Dim objResult As Result = Result.OK
+      Try
+
+
+
+        objDB = New libDB.clsAcceso
+        objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
+        If objResult <> Result.OK Then Exit Try
+
+        objResult = SaveProducto(objDB, rInfoProducto)
+        If objResult <> Result.OK Then Exit Try
+
+
+
+      Catch ex As Exception
+        Call Print_msg(ex.Message)
+      Finally
+        If objDB IsNot Nothing Then
+          If objResult <> Result.OK Then
+            objDB.CloseDB()
+          Else
+            objResult = objDB.CloseDB()
+          End If
+        End If
+      End Try
+
+
+      Return objResult
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
   Public Shared Function Load(ByVal vGuid As Guid, ByRef rInfoProducto As clsInfoProducto) As Result
     Try
       Dim vResult As Result
@@ -329,6 +366,13 @@ Public Class clsProducto
           vInfoProducto.NumComprobante = -1
           Call Print_msg(ex.Message)
         End Try
+
+        Try
+          vInfoProducto.Estado = CInt(IIf(IsDBNull(.Item("Estado")), 0, .Item("Estado")))
+        Catch ex As Exception
+          vInfoProducto.NumComprobante = 0
+          Call Print_msg(ex.Message)
+        End Try
       End With
 
       Return Result.OK
@@ -491,7 +535,8 @@ Public Class clsProducto
             strSQL.Append("[GuidCuenta],")
             strSQL.Append("[Adelanto],")
             strSQL.Append("[ValorCuotaFija],")
-            strSQL.Append("[NumComprobante]")
+            strSQL.Append("[NumComprobante],")
+            strSQL.Append("[Estado]")
 
             strSQL.Append(") VALUES (")
 
@@ -507,7 +552,8 @@ Public Class clsProducto
             strSQL.Append("""{" & .GuidCuenta.ToString & "}"",")
             strSQL.Append("""" & .Adelanto.ToString & """,")
             strSQL.Append("""" & .ValorCuotaFija.ToString & """,")
-            strSQL.Append("""" & .NumComprobante.ToString & """")
+            strSQL.Append("""" & .NumComprobante.ToString & """,")
+            strSQL.Append("""" & .Estado.ToString & """")
             strSQL.Append(")")
 
             objResult = vObjDB.ExecuteNonQuery(strSQL.ToString)
@@ -537,7 +583,8 @@ Public Class clsProducto
             strSQL.Append("[GuidCuenta]=""{" & .GuidCuenta.ToString & "}"",")
             strSQL.Append("[Adelanto]=""" & .Adelanto.ToString & """,")
             strSQL.Append("[ValorCuotaFija]=""" & .ValorCuotaFija.ToString & """,")
-            strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """")
+            strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """,")
+            strSQL.Append("[Estado]=""" & .Estado.ToString & """")
 
             strSQL.Append(" WHERE [IdProducto]=" & .IdProducto)
 

@@ -32,9 +32,6 @@ Public Class frmEditarPagos
     Try
       m_skip = True
 
-
-
-
       DesactivarBotones()
 
 
@@ -47,6 +44,16 @@ Public Class frmEditarPagos
     End Try
   End Sub
 
+  Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+    Try
+      m_skip = True
+      DesactivarBotones()
+      InformacionCuotas()
+      m_skip = False
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
 
   Private Sub DesactivarBotones()
     Try
@@ -71,8 +78,10 @@ Public Class frmEditarPagos
   Public Sub InformacionCuotas()
     Try
 
+      cmbEstado.DataSource = [Enum].GetValues(GetType(manDB.clsInfoProducto.E_Estado))
+      cmbEstado.SelectedItem = CType(m_Producto.Estado, manDB.clsInfoProducto.E_Estado)
       Dim vResult As libCommon.Comunes.Result = clsPago.Load(m_lstPagos, m_Producto.GuidProducto) 'desde la base de datos
-
+      ClsInfoPagosBindingSource.DataSource = Nothing
       If vResult = Result.OK Then
         For Each cuota In m_lstPagos
           Dim objCuenta As New clsInfoCuenta
@@ -101,61 +110,6 @@ Public Class frmEditarPagos
       End With
 
 
-
-      'With m_Producto
-      '  If m_Producto.GuidProducto = Guid.Empty Then
-      '    'valores iniciales
-      '    DateVenta.Value = g_Today
-      '    dtProximoPago.Value = New Date(g_Today.Year, g_Today.AddMonths(1).Month, 1)
-      '    txtPrecioTotal.SetDecimalMonedaValue(0)
-      '    txtNumVenta.Text = GetProximoComprobanteDisponible().ToString
-      '    cmbCuotas.SelectedItem = 0
-      '    txtValorCuota.SetDecimalMonedaValue(0)
-      '    m_lstPagos.Clear()
-      '    lvPlanPagos.Items.Clear()
-      '    txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
-      '    txtAdelanto.SetDecimalMonedaValue(0)
-      '    txtAdelantoVendedor.SetDecimalMonedaValue(0)
-      '  Else
-      '    DateVenta.Value = .FechaVenta
-      '    dtProximoPago.MinDate = DateVenta.Value
-      '    dtProximoPago.Value = .FechaPrimerPago
-      '    txtPrecioTotal.SetDecimalMonedaValue(.Precio) '.Text = .Precio.ToString  'precio total
-      '    txtNumVenta.Text = .NumComprobante.ToString
-      '    For Each cuota In g_Cuotas
-      '      If cuota.Cantidad = .TotalCuotas Then
-      '        cmbCuotas.SelectedItem = cuota
-      '        Exit For
-      '      End If
-      '    Next
-      '    If .ListaPagos.Count > 0 Then
-      '      txtValorCuota.SetDecimalMonedaValue(.ValorCuotaFija) '.Text = .ValorCuotaFija.ToString
-      '    Else
-      '      txtValorCuota.SetDecimalMonedaValue(.Precio) '.Text = .Precio.ToString
-      '    End If
-      '    txtMedioPagoDescripcion.Text = FillMedioDePagoDescripcion()
-      '    lvPlanPagos.Items.Clear()
-      '    txtAdelanto.SetDecimalMonedaValue(.Adelanto)
-      '    If m_Adelanto IsNot Nothing Then
-      '      txtAdelantoVendedor.SetDecimalMonedaValue(m_Adelanto.Valor)
-      '    Else
-      '      txtAdelantoVendedor.SetDecimalMonedaValue(0)
-      '    End If
-
-      '    For Each pago As clsInfoPagos In .ListaPagos
-      '      Dim item As New ListViewItem
-      '      item.Text = pago.NumCuota.ToString
-      '      item.SubItems.Add(pago.VencimientoCuota.ToString("dd/MM/yyyy"))
-      '      item.SubItems.Add(pago.ValorCuota.ToString)
-      '      item.SubItems.Add(Date2String(pago.FechaPago)) 'fecha de pago
-      '      item.SubItems.Add(EstadoPagos2String(pago.EstadoPago)) 'fecha de pago
-      '      lvPlanPagos.Items.Add(item)
-      '      m_lstPagos.Add(pago)
-      '    Next
-
-      '  End If
-
-      'End With
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -166,13 +120,16 @@ Public Class frmEditarPagos
     Try
 
       Dim vResult As libCommon.Comunes.Result
+      m_Producto.Estado = CType(cmbEstado.SelectedItem, manDB.clsInfoProducto.E_Estado)
       For Each cuota In m_lstPagos
         vResult = clsPago.Save(cuota)
         If vResult <> Result.OK Then
           MsgBox("No se puede guardar la modificacion de cuota")
         End If
       Next
-
+      If clsProducto.SaveInfoProducto(m_Producto) <> Result.OK Then
+        MsgBox("No se puede guardar la modificacion del estado general de los pagos")
+      End If
       m_Result = Result.OK
       Me.Close()
     Catch ex As Exception
@@ -180,23 +137,6 @@ Public Class frmEditarPagos
       m_Result = Result.CANCEL
     End Try
   End Sub
-
-
-  
-
-
-
-
-
-
- 
-
- 
-
-
-  
-
-
 
 
   Private Sub btnSeleccionarCuenta_MouseClick(sender As Object, e As MouseEventArgs) Handles btnSeleccionarCuenta.MouseClick
@@ -306,7 +246,6 @@ Public Class frmEditarPagos
       If m_CurrentCuota Is Nothing Then Return False
       If m_CurrentCuota.EstadoPago = E_EstadoPago.Debe Then Return True
       If m_CurrentCuota.EstadoPago <> E_EstadoPago.Pago Then Return False
-      'estado=pago
       If m_lstPagos.Exists(Function(c) (c.NumCuota > m_CurrentCuota.NumCuota) AndAlso (c.EstadoPago = E_EstadoPago.Pago)) Then Return False
       Return True
     Catch ex As Exception
@@ -335,7 +274,7 @@ Public Class frmEditarPagos
           Next
         End If
       End If
-      'ClsInfoPagosBindingSource.DataSource = m_lstPagos
+
       ClsInfoPagosBindingSource.ResetBindings(False)
       dgvResumen.Refresh()
     Catch ex As Exception
@@ -366,7 +305,9 @@ Public Class frmEditarPagos
       ClsInfoPagosBindingSource.ResetBindings(False)
       dgvResumen.Refresh()
     Catch ex As Exception
-      Call Print_msg(ex.Message)
+
     End Try
   End Sub
+
+  
 End Class

@@ -723,7 +723,7 @@ Public Class frmDeben
 
   Private Sub btnExportar_MouseClick(sender As Object, e As MouseEventArgs) Handles btnExportar.MouseClick
     Try
-      Call clsCobros.ActualizarEstadosDePagos(g_Today)
+      Call clsCobros.ActualizarEstadosDePagos(g_Today.AddDays(2))
 
       Dim vTipoPagoSeleccionado As clsTipoPago = Nothing
 

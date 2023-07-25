@@ -21,6 +21,40 @@ Public Class clsInfoProducto
   Private m_Adelanto As Decimal
   Private m_ValorCuotaFija As Decimal
   Private m_NumComprobante As Integer
+  Private m_Estado As Integer
+  Private m_EstadoStr As String
+
+  Public Property Estado As Integer
+    Get
+      Return m_Estado
+    End Get
+    Set(value As Integer)
+      m_Estado = value
+    End Set
+  End Property
+
+  Public Enum E_Estado As Integer
+    Normal = 0
+    Aplazado = 1
+  End Enum
+
+  Private Function ConvertirEstadoToString(ByVal vEnum As E_Estado) As String
+    Try
+      If vEnum = E_Estado.Normal Then Return "Normal"
+      Return "Aplazado"
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+      Return String.Empty
+    End Try
+  End Function
+
+  Public ReadOnly Property EstadoToString As String
+    Get
+      Return ConvertirEstadoToString(m_Estado)
+    End Get
+  End Property
+    
+
 
   Public Property ListaPagos As List(Of clsInfoPagos)
     Get
@@ -184,8 +218,8 @@ Public Class clsInfoProducto
     GuidTipoPago = Nothing
     TotalCuotas = 0
     Precio = 0
-    FechaPrimerPago = GetAhora
-    FechaVenta = GetAhora
+    FechaPrimerPago = GetAhora()
+    FechaVenta = GetAhora()
     GuidCuenta = Nothing
     Adelanto = 0
     ValorCuotaFija = 0
@@ -194,6 +228,8 @@ Public Class clsInfoProducto
     m_listArticulos.Clear()
     NumComprobante = -1
     m_CuotasDebe = 0
+    m_Estado = 0
+
   End Sub
 
 

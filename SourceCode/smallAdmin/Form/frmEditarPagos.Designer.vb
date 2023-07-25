@@ -36,6 +36,7 @@ Partial Class frmEditarPagos
     Me.Label7 = New System.Windows.Forms.Label()
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.txtPrecioCuota = New main.ucTextBoxNumerico()
     Me.Label9 = New System.Windows.Forms.Label()
     Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
     Me.Label8 = New System.Windows.Forms.Label()
@@ -46,9 +47,6 @@ Partial Class frmEditarPagos
     Me.btnClearPago = New System.Windows.Forms.Button()
     Me.btnAplicaPago = New System.Windows.Forms.Button()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
-    Me.txtPrecioCuota = New main.ucTextBoxNumerico()
-    Me.ClsInfoPagosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.txtPrecioTotal = New main.ucTextBoxNumerico()
     Me.NumCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ToFechaDeVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ToFechaDePagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -66,6 +64,11 @@ Partial Class frmEditarPagos
     Me.ValorCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.VencimientoCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoPagosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.txtPrecioTotal = New main.ucTextBoxNumerico()
+    Me.btnReset = New System.Windows.Forms.Button()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.cmbEstado = New System.Windows.Forms.ComboBox()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPagosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -119,11 +122,10 @@ Partial Class frmEditarPagos
     '
     'Label13
     '
-    Me.Label13.AutoSize = True
     Me.Label13.BackColor = System.Drawing.Color.Transparent
     Me.Label13.Location = New System.Drawing.Point(149, 536)
     Me.Label13.Name = "Label13"
-    Me.Label13.Size = New System.Drawing.Size(103, 16)
+    Me.Label13.Size = New System.Drawing.Size(178, 16)
     Me.Label13.TabIndex = 53
     Me.Label13.Text = "Medio De Pago"
     '
@@ -205,6 +207,8 @@ Partial Class frmEditarPagos
     'Panel1
     '
     Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.cmbEstado)
+    Me.Panel1.Controls.Add(Me.Label4)
     Me.Panel1.Controls.Add(Me.txtPrecioCuota)
     Me.Panel1.Controls.Add(Me.Label9)
     Me.Panel1.Controls.Add(Me.txtNombreVendedor)
@@ -231,6 +235,18 @@ Partial Class frmEditarPagos
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Size = New System.Drawing.Size(1120, 662)
     Me.Panel1.TabIndex = 70
+    '
+    'txtPrecioCuota
+    '
+    Me.txtPrecioCuota.Limite = 22
+    Me.txtPrecioCuota.Location = New System.Drawing.Point(663, 62)
+    Me.txtPrecioCuota.Moneda = True
+    Me.txtPrecioCuota.Name = "txtPrecioCuota"
+    Me.txtPrecioCuota.ReadOnly = True
+    Me.txtPrecioCuota.Size = New System.Drawing.Size(123, 22)
+    Me.txtPrecioCuota.TabIndex = 84
+    Me.txtPrecioCuota.Text = "$ 0,00"
+    Me.txtPrecioCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'Label9
     '
@@ -330,34 +346,6 @@ Partial Class frmEditarPagos
     Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
     Me.dgvResumen.Size = New System.Drawing.Size(1063, 367)
     Me.dgvResumen.TabIndex = 73
-    '
-    'txtPrecioCuota
-    '
-    Me.txtPrecioCuota.Limite = 22
-    Me.txtPrecioCuota.Location = New System.Drawing.Point(663, 62)
-    Me.txtPrecioCuota.Moneda = True
-    Me.txtPrecioCuota.Name = "txtPrecioCuota"
-    Me.txtPrecioCuota.ReadOnly = True
-    Me.txtPrecioCuota.Size = New System.Drawing.Size(123, 22)
-    Me.txtPrecioCuota.TabIndex = 84
-    Me.txtPrecioCuota.Text = "$ 0,00"
-    Me.txtPrecioCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'ClsInfoPagosBindingSource
-    '
-    Me.ClsInfoPagosBindingSource.DataSource = GetType(manDB.clsInfoPagos)
-    '
-    'txtPrecioTotal
-    '
-    Me.txtPrecioTotal.Limite = 22
-    Me.txtPrecioTotal.Location = New System.Drawing.Point(663, 34)
-    Me.txtPrecioTotal.Moneda = True
-    Me.txtPrecioTotal.Name = "txtPrecioTotal"
-    Me.txtPrecioTotal.ReadOnly = True
-    Me.txtPrecioTotal.Size = New System.Drawing.Size(123, 22)
-    Me.txtPrecioTotal.TabIndex = 70
-    Me.txtPrecioTotal.Text = "$ 0,00"
-    Me.txtPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'NumCuotaDataGridViewTextBoxColumn
     '
@@ -488,12 +476,61 @@ Partial Class frmEditarPagos
     Me.FechaPagoDataGridViewTextBoxColumn.ReadOnly = True
     Me.FechaPagoDataGridViewTextBoxColumn.Visible = False
     '
+    'ClsInfoPagosBindingSource
+    '
+    Me.ClsInfoPagosBindingSource.DataSource = GetType(manDB.clsInfoPagos)
+    '
+    'txtPrecioTotal
+    '
+    Me.txtPrecioTotal.Limite = 22
+    Me.txtPrecioTotal.Location = New System.Drawing.Point(663, 34)
+    Me.txtPrecioTotal.Moneda = True
+    Me.txtPrecioTotal.Name = "txtPrecioTotal"
+    Me.txtPrecioTotal.ReadOnly = True
+    Me.txtPrecioTotal.Size = New System.Drawing.Size(123, 22)
+    Me.txtPrecioTotal.TabIndex = 70
+    Me.txtPrecioTotal.Text = "$ 0,00"
+    Me.txtPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+    '
+    'btnReset
+    '
+    Me.btnReset.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnReset.FlatAppearance.BorderSize = 0
+    Me.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnReset.ForeColor = System.Drawing.Color.White
+    Me.btnReset.Location = New System.Drawing.Point(10, 108)
+    Me.btnReset.Name = "btnReset"
+    Me.btnReset.Size = New System.Drawing.Size(110, 60)
+    Me.btnReset.TabIndex = 71
+    Me.btnReset.Text = "Reestablecer"
+    Me.btnReset.UseVisualStyleBackColor = False
+    '
+    'Label4
+    '
+    Me.Label4.BackColor = System.Drawing.Color.Transparent
+    Me.Label4.Location = New System.Drawing.Point(149, 591)
+    Me.Label4.Name = "Label4"
+    Me.Label4.Size = New System.Drawing.Size(178, 16)
+    Me.Label4.TabIndex = 86
+    Me.Label4.Text = "Estado del Contrato"
+    '
+    'cmbEstado
+    '
+    Me.cmbEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.cmbEstado.FormattingEnabled = True
+    Me.cmbEstado.Location = New System.Drawing.Point(333, 588)
+    Me.cmbEstado.Name = "cmbEstado"
+    Me.cmbEstado.Size = New System.Drawing.Size(138, 24)
+    Me.cmbEstado.TabIndex = 87
+    '
     'frmEditarPagos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.btnReset)
     Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.btnGuardar)
     Me.Controls.Add(Me.Label1)
@@ -557,4 +594,7 @@ Partial Class frmEditarPagos
   Friend WithEvents ValorCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents VencimientoCuotaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents btnReset As System.Windows.Forms.Button
+  Friend WithEvents cmbEstado As System.Windows.Forms.ComboBox
+  Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class

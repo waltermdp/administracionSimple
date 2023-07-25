@@ -221,6 +221,7 @@ Public Class frmEstablecerPagos
         For Each item In m_lstPagos
           item.GuidProducto = .GuidProducto
           item.NumComprobante = .NumComprobante
+          item.GuidCuenta = m_CurrentCuenta.GuidCuenta
           .ListaPagos.Add(item)
         Next
 
