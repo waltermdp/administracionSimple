@@ -13,6 +13,17 @@
   Private m_Nombre As String
   Private m_CuotaActual As Integer
   Private m_Exportar As Boolean
+  Private m_EstadoContrato As Integer
+
+
+  Public Property EstadoContrato As Integer
+    Get
+      Return m_EstadoContrato
+    End Get
+    Set(value As Integer)
+      m_EstadoContrato = value
+    End Set
+  End Property
 
   Public Property GuidPago As Guid
     Get
@@ -116,6 +127,7 @@
       m_Nombre = ""
       m_CuotaActual = 0
       m_Exportar = False
+      m_EstadoContrato = 0
       m_GuidPago = Guid.Empty
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)

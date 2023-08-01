@@ -114,9 +114,11 @@
     <Compile Include="AccesoADatos\clsArticulo.vb" />
     <Compile Include="AccesoADatos\clsCliente.vb" />
     <Compile Include="AccesoADatos\clsCobros.vb" />
+    <Compile Include="AccesoADatos\clsConsulta.vb" />
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="AccesoADatos\clsInfoConsultaVentas.vb" />
     <Compile Include="AccesoADatos\clsInfoPagosExt.vb" />
     <Compile Include="Controles\ucTarjeta.Designer.vb">
       <DependentUpon>ucTarjeta.vb</DependentUpon>
@@ -515,6 +517,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\clsInfoConsultaVentas.datasource" />
     <None Include="My Project\DataSources\clsInfoExportarVisaCredito.datasource" />
     <None Include="My Project\DataSources\clsInfoHipotecario.datasource" />
     <None Include="My Project\DataSources\clsInfoImportarHipotecario.datasource" />

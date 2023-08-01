@@ -194,13 +194,19 @@ Public Class clsPatagonia
           .Contrato = lstProducto.Items.First.NumComprobante
           .Producto = Producto
           .FechaVto = FechaVencimiento ' lstCuenta.Items.First.Codigo3
+          .EstadoContrato = lstProducto.Items.First.Estado
+          .GuidProducto = lstProducto.Items.First.GuidProducto
           .Importe = item.ValorCuota
           .CuotaActual = item.NumCuota
           .NroCuitEmpresa = NroCuitEmpresa
           .ReferenciaDebito = ReferenciaDebito
           .FechaUltimaExportacion = item.FechaUltimaExportacion
           .GuidPago = item.GuidPago
-          .Exportar = True ' por defecto siempre lo lista para exportar
+          If .EstadoContrato <= 0 Then
+            .Exportar = True
+          Else
+            .Exportar = False
+          End If
         End With
         m_RegistrosExportar.Add(movimiento)
       Next

@@ -16,6 +16,16 @@ Public Class clsInfoImportarHipotecario
   Private m_GuidCuenta As Guid
   Private m_Nombre As String
   Private m_FechaUltimaImportacion As Date
+  Private m_EstadoContrato As Integer
+
+  Public Property EstadoContrato As Integer
+    Get
+      Return m_EstadoContrato
+    End Get
+    Set(value As Integer)
+      m_EstadoContrato = value
+    End Set
+  End Property
 
   Public Property FechaUltimaImportacion As Date
     Get
@@ -137,6 +147,7 @@ Public Class clsInfoImportarHipotecario
   End Property
 
   Public Sub New()
+
     Try
       m_NroAbonado = 0
       m_NroCuenta = "0000000000000000000000"  'CBU 22 digitos
@@ -152,6 +163,7 @@ Public Class clsInfoImportarHipotecario
       m_GuidProducto = Guid.Empty
       m_Nombre = String.Empty
       m_FechaUltimaImportacion = Date.MinValue
+      m_EstadoContrato = 0
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

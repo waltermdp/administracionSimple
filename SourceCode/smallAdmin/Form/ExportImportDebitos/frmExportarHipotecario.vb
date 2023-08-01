@@ -25,6 +25,8 @@ Public Class frmExportarHipotecario
     Try
       m_Banco = New clsHipotecario(m_TipoPago.GuidTipo)
       m_skip = True
+      cmbEstado.DataSource = [Enum].GetValues(GetType(manDB.clsInfoProducto.E_Estado))
+
       dtCurrent.Value = m_Banco.FechaGeneracion
       dtVencimiento.MinDate = dtCurrent.Value
       dtVencimiento.Value = Today.AddDays(2)
@@ -34,6 +36,7 @@ Public Class frmExportarHipotecario
       txtConcepto.Text = m_Banco.Concepto
       m_skip = False
       RecargarValores()
+
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -113,6 +116,8 @@ Public Class frmExportarHipotecario
       dtVencimiento.MinDate = dtCurrent.Value
       m_Banco.FechaGeneracion = dtCurrent.Value
       If auxVen <> dtVencimiento.Value Then
+        Call clsCobros.ActualizarEstadosDePagos(dtVencimiento.Value)
+        RecargarValores()
         m_Banco.UpdateFechaVencimientoExportar(dtVencimiento.Value)
         RefeshGrilla()
       End If
@@ -127,6 +132,8 @@ Public Class frmExportarHipotecario
     Try
       If m_skip Then Exit Sub
       m_skip = True
+      Call clsCobros.ActualizarEstadosDePagos(dtVencimiento.Value)
+      RecargarValores()
       m_Banco.UpdateFechaVencimientoExportar(dtVencimiento.Value)
       
       RefeshGrilla()
@@ -285,8 +292,27 @@ Public Class frmExportarHipotecario
     End Try
   End Sub
 
- 
+  Private Sub dgvResumen_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvResumen.CellMouseUp
+    Try
+      If e.ColumnIndex = 0 Then
+        Dim auxInfo As New clsInfoExportarHipotecario
+        auxInfo = CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarHipotecario)
+        If auxInfo.EstadoContrato > 0 Then
+          CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarHipotecario).Exportar = False
+        Else
+          CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarHipotecario).Exportar = Not CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarHipotecario).Exportar
+        End If
+        ClsInfoHipotecarioBindingSource.ResetBindings(False)
+        dgvResumen.Refresh()
+        lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
+        txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
+      End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
+  
 
   Private Sub dgvResumen_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvResumen.ColumnHeaderMouseClick
     Try
@@ -319,14 +345,108 @@ Public Class frmExportarHipotecario
   End Sub
 
 
-  Private Sub dgvResumen_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvResumen.CurrentCellDirtyStateChanged
+  'Private Sub dgvResumen_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvResumen.CurrentCellDirtyStateChanged
+  '  Try
+
+  '    dgvResumen.EndEdit()
+  '    lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
+  '    txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
+
+  Private Sub dgvResumen_SelectionChanged(sender As Object, e As EventArgs) Handles dgvResumen.SelectionChanged
     Try
-      dgvResumen.EndEdit()
-      lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
-      txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
+
+      If dgvResumen.SelectedRows.Count <> 1 Then Exit Sub
+      Call Refresh_Selection(dgvResumen.SelectedRows(0).Index)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
+  Private Sub Refresh_Selection(ByVal indice As Integer)
+    Try
+      If indice < 0 Then
+        dgvResumen.ClearSelection()
+        Exit Sub
+      End If
+      If (indice >= 0) Then
+        Dim auxInfo As New clsInfoExportarHipotecario
+        auxInfo = CType(dgvResumen.Rows(indice).DataBoundItem, clsInfoExportarHipotecario)
+        cmbEstado.SelectedItem = CType(auxInfo.EstadoContrato, manDB.clsInfoProducto.E_Estado)
+
+      End If
+      If dgvResumen.Rows(indice).Selected <> True Then
+        dgvResumen.Rows(indice).Selected = True
+      End If
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub cmbEstado_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbEstado.SelectionChangeCommitted
+    Try
+      If dgvResumen.SelectedRows.Count <> 1 Then Exit Sub
+      If (dgvResumen.SelectedRows(0).Index >= 0) Then
+        Dim auxInfo As New clsInfoExportarHipotecario
+        auxInfo = CType(dgvResumen.Rows(dgvResumen.SelectedRows(0).Index).DataBoundItem, clsInfoExportarHipotecario)
+        Dim indiceContrato As Integer = m_Banco.m_RegistrosExportar.FindIndex(Function(c) c.NumeroContrato = auxInfo.NumeroContrato)
+        If indiceContrato >= 0 Then
+          m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato = CInt(cmbEstado.SelectedItem)
+          
+          If m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato > 0 Then
+            m_Banco.m_RegistrosExportar(indiceContrato).Exportar = False
+            CType(dgvResumen.SelectedRows(0).Cells(0), DataGridViewCheckBoxCell).ReadOnly = True
+          End If
+
+          Dim auxProducto As New clsInfoProducto
+          If clsProducto.Load(m_Banco.m_RegistrosExportar(indiceContrato).GuidProducto, auxProducto) = Result.OK Then
+            auxProducto.Estado = m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato
+            clsProducto.Save(auxProducto)
+          Else
+            MsgBox("No se puede guardar el cambio de Estado")
+          End If
+          ClsInfoHipotecarioBindingSource.ResetBindings(False)
+          dgvResumen.Refresh()
+        End If
+
+
+      End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  'Private Sub cmbEstado_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbEstado.SelectedValueChanged
+  '  Try
+  '    'If dgvResumen.SelectedRows.Count <> 1 Then Exit Sub
+  '    'If (dgvResumen.SelectedRows(0).Index >= 0) Then
+  '    '  Dim auxInfo As New clsInfoExportarHipotecario
+  '    '  auxInfo = CType(dgvResumen.Rows(dgvResumen.SelectedRows(0).Index).DataBoundItem, clsInfoExportarHipotecario)
+  '    '  Dim indiceContrato As Integer = m_Banco.m_RegistrosExportar.FindIndex(Function(c) c.NumeroContrato = auxInfo.NumeroContrato)
+  '    '  If indiceContrato >= 0 Then
+  '    '    m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato = CInt(cmbEstado.SelectedItem)
+  '    '    If m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato > 0 Then m_Banco.m_RegistrosExportar(indiceContrato).Exportar = False
+  '    '    Dim auxProducto As New clsInfoProducto
+  '    '    If clsProducto.Load(m_Banco.m_RegistrosExportar(indiceContrato).GuidProducto, auxProducto) = Result.OK Then
+  '    '      auxProducto.Estado = m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato
+  '    '      clsProducto.Save(auxProducto)
+  '    '    Else
+  '    '      MsgBox("No se puede guardar el cambio de Estado")
+  '    '    End If
+  '    '    'ClsInfoHipotecarioBindingSource.ResetBindings(False)
+  '    '    'dgvResumen.Refresh()
+  '    '  End If
+
+
+  '    'End If
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
+
+  
 End Class

@@ -22,9 +22,12 @@ Public Class clsInfoExportarPatagonia
   Private m_Nombre As String
   Private m_CuotaActual As Integer
   Private m_Exportar As Boolean
+  Private m_EstadoContrato As Integer
 
   Private m_FechaUltimaExportacion As Date
   Private m_GuidPago As Guid
+  Private m_GuidProducto As Guid
+
 
   Public Property GuidPago As Guid
     Get
@@ -34,6 +37,8 @@ Public Class clsInfoExportarPatagonia
       m_GuidPago = value
     End Set
   End Property
+
+  
 
   Public Property FechaUltimaExportacion As Date
     Get
@@ -50,6 +55,24 @@ Public Class clsInfoExportarPatagonia
     End Get
     Set(value As Boolean)
       m_Exportar = value
+    End Set
+  End Property
+
+  Public Property GuidProducto As Guid
+    Get
+      Return m_GuidProducto
+    End Get
+    Set(value As Guid)
+      m_GuidProducto = value
+    End Set
+  End Property
+
+  Public Property EstadoContrato As Integer
+    Get
+      Return m_EstadoContrato
+    End Get
+    Set(value As Integer)
+      m_EstadoContrato = value
     End Set
   End Property
 
@@ -179,7 +202,9 @@ Public Class clsInfoExportarPatagonia
       m_Nombre = ""
       m_CuotaActual = 0
       m_FechaUltimaExportacion = Date.MinValue
+      m_EstadoContrato = 0
       m_GuidPago = Guid.Empty
+      m_GuidProducto = Guid.Empty
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

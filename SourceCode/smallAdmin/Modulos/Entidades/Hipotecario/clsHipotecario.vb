@@ -460,6 +460,8 @@ Public Class clsHipotecario
           .CuentaBanco = CDec(lstCuenta.Items.First.Codigo4)
           .TipoCuenta = lstCuenta.Items.First.Codigo5
           .NumeroContrato = lstProducto.Items.First.NumComprobante
+          .EstadoContrato = lstProducto.Items.First.Estado
+          .GuidProducto = lstProducto.Items.First.GuidProducto
           .Importe = item.ValorCuota
           .idCliente = lstCliente.Items.First.NumCliente
 
@@ -468,7 +470,12 @@ Public Class clsHipotecario
           .Nombre = lstCliente.Items.First.ToString
           .FechaUltimaExportacion = item.FechaUltimaExportacion
           .GuidPago = item.GuidPago
-          .Exportar = True
+          If .EstadoContrato <= 0 Then
+            .Exportar = True
+          Else
+            .Exportar = False
+          End If
+
         End With
         m_RegistrosExportar.Add(movimiento)
       Next
