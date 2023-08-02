@@ -27,9 +27,9 @@ Partial Class frmDeben
     Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDeben))
-    Me.dateInicio = New System.Windows.Forms.DateTimePicker()
+    Me.dtVendidosHasta = New System.Windows.Forms.DateTimePicker()
     Me.btnBack = New System.Windows.Forms.Button()
-    Me.dateFin = New System.Windows.Forms.DateTimePicker()
+    Me.dtVendidosDesde = New System.Windows.Forms.DateTimePicker()
     Me.btnBuscar = New System.Windows.Forms.Button()
     Me.btnLstVendedores = New System.Windows.Forms.Button()
     Me.btnListaClientes = New System.Windows.Forms.Button()
@@ -42,8 +42,8 @@ Partial Class frmDeben
     Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
     Me.cmbMetodosDePago = New System.Windows.Forms.ComboBox()
     Me.txtNombreCliente = New System.Windows.Forms.TextBox()
-    Me.chkEnableDateTo = New System.Windows.Forms.CheckBox()
-    Me.chkEnableDateFrom = New System.Windows.Forms.CheckBox()
+    Me.chkVendidosHasta = New System.Windows.Forms.CheckBox()
+    Me.chkVendidosDesde = New System.Windows.Forms.CheckBox()
     Me.btnMinimize = New System.Windows.Forms.Button()
     Me.lblTitulo = New System.Windows.Forms.Label()
     Me.btnImportar = New System.Windows.Forms.Button()
@@ -58,8 +58,9 @@ Partial Class frmDeben
     Me.lblPrecioTotal = New System.Windows.Forms.Label()
     Me.TabControl1 = New System.Windows.Forms.TabControl()
     Me.tbBuscar = New System.Windows.Forms.TabPage()
+    Me.btnLimpiarCampos = New System.Windows.Forms.Button()
     Me.dtDebenHasta = New System.Windows.Forms.DateTimePicker()
-    Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+    Me.chkDebenHasta = New System.Windows.Forms.CheckBox()
     Me.Label7 = New System.Windows.Forms.Label()
     Me.Label6 = New System.Windows.Forms.Label()
     Me.tbResumen = New System.Windows.Forms.TabPage()
@@ -71,6 +72,13 @@ Partial Class frmDeben
     Me.lblSoftwareInfo = New System.Windows.Forms.Label()
     Me.btnEliminarVenta = New System.Windows.Forms.Button()
     Me.dgvVentas = New System.Windows.Forms.DataGridView()
+    Me.lblCount = New System.Windows.Forms.Label()
+    Me.lblValorCuota = New System.Windows.Forms.Label()
+    Me.lblFechaUltimoPago = New System.Windows.Forms.Label()
+    Me.lblCuotasConvenio = New System.Windows.Forms.Label()
+    Me.txtPagosYTipos = New System.Windows.Forms.TextBox()
+    Me.lblNumUltimaCuotaPaga = New System.Windows.Forms.Label()
+    Me.Panel1 = New System.Windows.Forms.Panel()
     Me.IDContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClienteDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -94,16 +102,17 @@ Partial Class frmDeben
     Me.tbResumen.SuspendLayout()
     Me.tbOperaciones.SuspendLayout()
     CType(Me.dgvVentas, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.Panel1.SuspendLayout()
     CType(Me.ClsInfoConsultaVentasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
-    'dateInicio
+    'dtVendidosHasta
     '
-    Me.dateInicio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.dateInicio.Location = New System.Drawing.Point(639, 9)
-    Me.dateInicio.Name = "dateInicio"
-    Me.dateInicio.Size = New System.Drawing.Size(235, 22)
-    Me.dateInicio.TabIndex = 2
+    Me.dtVendidosHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.dtVendidosHasta.Location = New System.Drawing.Point(639, 9)
+    Me.dtVendidosHasta.Name = "dtVendidosHasta"
+    Me.dtVendidosHasta.Size = New System.Drawing.Size(235, 22)
+    Me.dtVendidosHasta.TabIndex = 2
     '
     'btnBack
     '
@@ -121,13 +130,13 @@ Partial Class frmDeben
     Me.btnBack.Text = "Cerrar"
     Me.btnBack.UseVisualStyleBackColor = False
     '
-    'dateFin
+    'dtVendidosDesde
     '
-    Me.dateFin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.dateFin.Location = New System.Drawing.Point(639, 37)
-    Me.dateFin.Name = "dateFin"
-    Me.dateFin.Size = New System.Drawing.Size(235, 22)
-    Me.dateFin.TabIndex = 28
+    Me.dtVendidosDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.dtVendidosDesde.Location = New System.Drawing.Point(639, 37)
+    Me.dtVendidosDesde.Name = "dtVendidosDesde"
+    Me.dtVendidosDesde.Size = New System.Drawing.Size(235, 22)
+    Me.dtVendidosDesde.TabIndex = 28
     '
     'btnBuscar
     '
@@ -135,7 +144,7 @@ Partial Class frmDeben
     Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
     Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.btnBuscar.ForeColor = System.Drawing.Color.White
-    Me.btnBuscar.Location = New System.Drawing.Point(927, 27)
+    Me.btnBuscar.Location = New System.Drawing.Point(945, 6)
     Me.btnBuscar.Name = "btnBuscar"
     Me.btnBuscar.Size = New System.Drawing.Size(110, 60)
     Me.btnBuscar.TabIndex = 29
@@ -279,25 +288,25 @@ Partial Class frmDeben
     Me.txtNombreCliente.Size = New System.Drawing.Size(275, 22)
     Me.txtNombreCliente.TabIndex = 67
     '
-    'chkEnableDateTo
+    'chkVendidosHasta
     '
-    Me.chkEnableDateTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkEnableDateTo.Location = New System.Drawing.Point(488, 12)
-    Me.chkEnableDateTo.Name = "chkEnableDateTo"
-    Me.chkEnableDateTo.Size = New System.Drawing.Size(145, 19)
-    Me.chkEnableDateTo.TabIndex = 66
-    Me.chkEnableDateTo.Text = "Vendidos Hasta"
-    Me.chkEnableDateTo.UseVisualStyleBackColor = True
+    Me.chkVendidosHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.chkVendidosHasta.Location = New System.Drawing.Point(488, 12)
+    Me.chkVendidosHasta.Name = "chkVendidosHasta"
+    Me.chkVendidosHasta.Size = New System.Drawing.Size(145, 19)
+    Me.chkVendidosHasta.TabIndex = 66
+    Me.chkVendidosHasta.Text = "Vendidos Hasta"
+    Me.chkVendidosHasta.UseVisualStyleBackColor = True
     '
-    'chkEnableDateFrom
+    'chkVendidosDesde
     '
-    Me.chkEnableDateFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkEnableDateFrom.Location = New System.Drawing.Point(488, 36)
-    Me.chkEnableDateFrom.Name = "chkEnableDateFrom"
-    Me.chkEnableDateFrom.Size = New System.Drawing.Size(145, 23)
-    Me.chkEnableDateFrom.TabIndex = 65
-    Me.chkEnableDateFrom.Text = "Vendido Desde"
-    Me.chkEnableDateFrom.UseVisualStyleBackColor = True
+    Me.chkVendidosDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.chkVendidosDesde.Location = New System.Drawing.Point(488, 36)
+    Me.chkVendidosDesde.Name = "chkVendidosDesde"
+    Me.chkVendidosDesde.Size = New System.Drawing.Size(145, 23)
+    Me.chkVendidosDesde.TabIndex = 65
+    Me.chkVendidosDesde.Text = "Vendido Desde"
+    Me.chkVendidosDesde.UseVisualStyleBackColor = True
     '
     'btnMinimize
     '
@@ -448,13 +457,14 @@ Partial Class frmDeben
     '
     'tbBuscar
     '
+    Me.tbBuscar.Controls.Add(Me.btnLimpiarCampos)
     Me.tbBuscar.Controls.Add(Me.dtDebenHasta)
-    Me.tbBuscar.Controls.Add(Me.CheckBox1)
-    Me.tbBuscar.Controls.Add(Me.chkEnableDateTo)
-    Me.tbBuscar.Controls.Add(Me.dateInicio)
-    Me.tbBuscar.Controls.Add(Me.dateFin)
+    Me.tbBuscar.Controls.Add(Me.chkDebenHasta)
+    Me.tbBuscar.Controls.Add(Me.chkVendidosHasta)
+    Me.tbBuscar.Controls.Add(Me.dtVendidosHasta)
+    Me.tbBuscar.Controls.Add(Me.dtVendidosDesde)
     Me.tbBuscar.Controls.Add(Me.chkMetodoPago)
-    Me.tbBuscar.Controls.Add(Me.chkEnableDateFrom)
+    Me.tbBuscar.Controls.Add(Me.chkVendidosDesde)
     Me.tbBuscar.Controls.Add(Me.Label7)
     Me.tbBuscar.Controls.Add(Me.Label6)
     Me.tbBuscar.Controls.Add(Me.txtNombreCliente)
@@ -469,6 +479,19 @@ Partial Class frmDeben
     Me.tbBuscar.Text = "Filtros"
     Me.tbBuscar.UseVisualStyleBackColor = True
     '
+    'btnLimpiarCampos
+    '
+    Me.btnLimpiarCampos.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnLimpiarCampos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnLimpiarCampos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnLimpiarCampos.ForeColor = System.Drawing.Color.White
+    Me.btnLimpiarCampos.Location = New System.Drawing.Point(945, 72)
+    Me.btnLimpiarCampos.Name = "btnLimpiarCampos"
+    Me.btnLimpiarCampos.Size = New System.Drawing.Size(110, 60)
+    Me.btnLimpiarCampos.TabIndex = 76
+    Me.btnLimpiarCampos.Text = "Limpiar campos"
+    Me.btnLimpiarCampos.UseVisualStyleBackColor = False
+    '
     'dtDebenHasta
     '
     Me.dtDebenHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -477,15 +500,15 @@ Partial Class frmDeben
     Me.dtDebenHasta.Size = New System.Drawing.Size(259, 22)
     Me.dtDebenHasta.TabIndex = 75
     '
-    'CheckBox1
+    'chkDebenHasta
     '
-    Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.CheckBox1.Location = New System.Drawing.Point(17, 93)
-    Me.CheckBox1.Name = "CheckBox1"
-    Me.CheckBox1.Size = New System.Drawing.Size(154, 23)
-    Me.CheckBox1.TabIndex = 74
-    Me.CheckBox1.Text = "Deben Hasta"
-    Me.CheckBox1.UseVisualStyleBackColor = True
+    Me.chkDebenHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.chkDebenHasta.Location = New System.Drawing.Point(17, 93)
+    Me.chkDebenHasta.Name = "chkDebenHasta"
+    Me.chkDebenHasta.Size = New System.Drawing.Size(154, 23)
+    Me.chkDebenHasta.TabIndex = 74
+    Me.chkDebenHasta.Text = "Deben Hasta"
+    Me.chkDebenHasta.UseVisualStyleBackColor = True
     '
     'Label7
     '
@@ -655,9 +678,87 @@ Partial Class frmDeben
     Me.dgvVentas.RowHeadersVisible = False
     Me.dgvVentas.RowTemplate.Height = 24
     Me.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvVentas.Size = New System.Drawing.Size(768, 356)
+    Me.dgvVentas.Size = New System.Drawing.Size(768, 345)
     Me.dgvVentas.TabIndex = 70
     Me.dgvVentas.TabStop = False
+    '
+    'lblCount
+    '
+    Me.lblCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.lblCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCount.Location = New System.Drawing.Point(149, 380)
+    Me.lblCount.Name = "lblCount"
+    Me.lblCount.Size = New System.Drawing.Size(767, 23)
+    Me.lblCount.TabIndex = 77
+    Me.lblCount.Text = "Cantidad: 000"
+    Me.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+    '
+    'lblValorCuota
+    '
+    Me.lblValorCuota.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblValorCuota.Location = New System.Drawing.Point(5, 34)
+    Me.lblValorCuota.Name = "lblValorCuota"
+    Me.lblValorCuota.Size = New System.Drawing.Size(307, 23)
+    Me.lblValorCuota.TabIndex = 79
+    Me.lblValorCuota.Text = "Label2"
+    Me.lblValorCuota.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'lblFechaUltimoPago
+    '
+    Me.lblFechaUltimoPago.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblFechaUltimoPago.Location = New System.Drawing.Point(5, 57)
+    Me.lblFechaUltimoPago.Name = "lblFechaUltimoPago"
+    Me.lblFechaUltimoPago.Size = New System.Drawing.Size(307, 23)
+    Me.lblFechaUltimoPago.TabIndex = 80
+    Me.lblFechaUltimoPago.Text = "Label2"
+    Me.lblFechaUltimoPago.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'lblCuotasConvenio
+    '
+    Me.lblCuotasConvenio.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCuotasConvenio.Location = New System.Drawing.Point(5, 107)
+    Me.lblCuotasConvenio.Name = "lblCuotasConvenio"
+    Me.lblCuotasConvenio.Size = New System.Drawing.Size(307, 23)
+    Me.lblCuotasConvenio.TabIndex = 81
+    Me.lblCuotasConvenio.Text = "Label2"
+    Me.lblCuotasConvenio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtPagosYTipos
+    '
+    Me.txtPagosYTipos.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.txtPagosYTipos.BorderStyle = System.Windows.Forms.BorderStyle.None
+    Me.txtPagosYTipos.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtPagosYTipos.Location = New System.Drawing.Point(8, 133)
+    Me.txtPagosYTipos.Multiline = True
+    Me.txtPagosYTipos.Name = "txtPagosYTipos"
+    Me.txtPagosYTipos.ReadOnly = True
+    Me.txtPagosYTipos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+    Me.txtPagosYTipos.Size = New System.Drawing.Size(304, 232)
+    Me.txtPagosYTipos.TabIndex = 82
+    Me.txtPagosYTipos.Text = "List"
+    '
+    'lblNumUltimaCuotaPaga
+    '
+    Me.lblNumUltimaCuotaPaga.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblNumUltimaCuotaPaga.Location = New System.Drawing.Point(5, 80)
+    Me.lblNumUltimaCuotaPaga.Name = "lblNumUltimaCuotaPaga"
+    Me.lblNumUltimaCuotaPaga.Size = New System.Drawing.Size(307, 23)
+    Me.lblNumUltimaCuotaPaga.TabIndex = 83
+    Me.lblNumUltimaCuotaPaga.Text = "Label2"
+    Me.lblNumUltimaCuotaPaga.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.Panel1.Controls.Add(Me.lblValorCuota)
+    Me.Panel1.Controls.Add(Me.lblNumUltimaCuotaPaga)
+    Me.Panel1.Controls.Add(Me.lblFechaUltimoPago)
+    Me.Panel1.Controls.Add(Me.txtPagosYTipos)
+    Me.Panel1.Controls.Add(Me.lblCuotasConvenio)
+    Me.Panel1.Location = New System.Drawing.Point(935, 35)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(320, 368)
+    Me.Panel1.TabIndex = 84
     '
     'IDContratoDataGridViewTextBoxColumn
     '
@@ -794,6 +895,8 @@ Partial Class frmDeben
     Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
     Me.ClientSize = New System.Drawing.Size(1280, 720)
     Me.ControlBox = False
+    Me.Controls.Add(Me.Panel1)
+    Me.Controls.Add(Me.lblCount)
     Me.Controls.Add(Me.btnImportar)
     Me.Controls.Add(Me.btnEditarPagos)
     Me.Controls.Add(Me.btnExportar)
@@ -821,15 +924,17 @@ Partial Class frmDeben
     Me.tbResumen.ResumeLayout(False)
     Me.tbOperaciones.ResumeLayout(False)
     CType(Me.dgvVentas, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.Panel1.ResumeLayout(False)
+    Me.Panel1.PerformLayout()
     CType(Me.ClsInfoConsultaVentasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
 
   End Sub
-  Friend WithEvents dateInicio As System.Windows.Forms.DateTimePicker
+  Friend WithEvents dtVendidosHasta As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnBack As System.Windows.Forms.Button
   Friend WithEvents TipoPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents dateFin As System.Windows.Forms.DateTimePicker
+  Friend WithEvents dtVendidosDesde As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnBuscar As System.Windows.Forms.Button
   Friend WithEvents btnLstVendedores As System.Windows.Forms.Button
   Friend WithEvents btnListaClientes As System.Windows.Forms.Button
@@ -864,9 +969,9 @@ Partial Class frmDeben
   Friend WithEvents lblSoftwareInfo As System.Windows.Forms.Label
   Friend WithEvents btnEliminarVenta As System.Windows.Forms.Button
   Friend WithEvents btnEditarPagos As System.Windows.Forms.Button
-  Friend WithEvents chkEnableDateFrom As System.Windows.Forms.CheckBox
+  Friend WithEvents chkVendidosDesde As System.Windows.Forms.CheckBox
   Friend WithEvents btnprocesar As System.Windows.Forms.Button
-  Friend WithEvents chkEnableDateTo As System.Windows.Forms.CheckBox
+  Friend WithEvents chkVendidosHasta As System.Windows.Forms.CheckBox
   Friend WithEvents txtNombreVendedor As System.Windows.Forms.TextBox
   Friend WithEvents txtNombreCliente As System.Windows.Forms.TextBox
   Public WithEvents dgvVentas As System.Windows.Forms.DataGridView
@@ -891,5 +996,13 @@ Partial Class frmDeben
   Friend WithEvents Label7 As System.Windows.Forms.Label
   Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents dtDebenHasta As System.Windows.Forms.DateTimePicker
-  Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+  Friend WithEvents chkDebenHasta As System.Windows.Forms.CheckBox
+  Friend WithEvents btnLimpiarCampos As System.Windows.Forms.Button
+  Friend WithEvents lblCount As System.Windows.Forms.Label
+  Friend WithEvents lblValorCuota As System.Windows.Forms.Label
+  Friend WithEvents lblFechaUltimoPago As System.Windows.Forms.Label
+  Friend WithEvents lblCuotasConvenio As System.Windows.Forms.Label
+  Friend WithEvents txtPagosYTipos As System.Windows.Forms.TextBox
+  Friend WithEvents lblNumUltimaCuotaPaga As System.Windows.Forms.Label
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

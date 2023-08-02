@@ -22,3 +22,11 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.dll
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.xml
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.pdb
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\libCommon.dll
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\libCommon.pdb
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\libCommon.xml
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.Resources.resources
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.vbproj.GenerateResource.Cache
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.dll
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.xml
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.pdb

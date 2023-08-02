@@ -16,7 +16,16 @@
   Private m_GuidCliente As Guid
   Private m_GuidProducto As Guid
   Private m_GuidVendedor As Guid
+  Private m_ValorCuota As Decimal
 
+  Public Property ValorCuota As Decimal
+    Get
+      Return m_ValorCuota
+    End Get
+    Set(value As Decimal)
+      m_ValorCuota = value
+    End Set
+  End Property
 
   Public ReadOnly Property Cliente As String
     Get
@@ -84,6 +93,7 @@
       m_IDContrato = value
     End Set
   End Property
+
 
   Public Property MetodoPago As String
     Get
@@ -176,7 +186,7 @@
       m_GuidCliente = Guid.Empty
       m_GuidProducto = Guid.Empty
       m_GuidVendedor = Guid.Empty
-
+      m_ValorCuota = 0
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)
     End Try
