@@ -144,6 +144,13 @@
     <Compile Include="Controles\ucTextBoxNumerico.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Form\ExportImportDebitos\ClsInfoImportarVisaCreditoBindingSource.vb" />
+    <Compile Include="Form\ExportImportDebitos\frmImportarVisaDebito.Designer.vb">
+      <DependentUpon>frmImportarVisaDebito.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ExportImportDebitos\frmImportarVisaDebito.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmEditarPagos.Designer.vb">
       <DependentUpon>frmEditarPagos.vb</DependentUpon>
     </Compile>
@@ -232,24 +239,6 @@
       <DependentUpon>frmArticulo.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Auxiliar\frmArticulo.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Auxiliar\frmDetalle.Designer.vb">
-      <DependentUpon>frmDetalle.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Auxiliar\frmDetalle.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\ExportImportDebitos\frmExportarResumen.Designer.vb">
-      <DependentUpon>frmExportarResumen.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\ExportImportDebitos\frmExportarResumen.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Auxiliar\frmResumen.Designer.vb">
-      <DependentUpon>frmResumen.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Auxiliar\frmResumen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Auxiliar\frmTipoDeArchivo.Designer.vb">
@@ -413,8 +402,8 @@
     <EmbeddedResource Include="Form\Auxiliar\frmArticulo.resx">
       <DependentUpon>frmArticulo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Auxiliar\frmDetalle.resx">
-      <DependentUpon>frmDetalle.vb</DependentUpon>
+    <EmbeddedResource Include="Form\ExportImportDebitos\frmImportarVisaDebito.resx">
+      <DependentUpon>frmImportarVisaDebito.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmEditarPagos.resx">
       <DependentUpon>frmEditarPagos.vb</DependentUpon>
@@ -436,12 +425,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ExportImportDebitos\frmImportarVisaCredito.resx">
       <DependentUpon>frmImportarVisaCredito.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\ExportImportDebitos\frmExportarResumen.resx">
-      <DependentUpon>frmExportarResumen.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Auxiliar\frmResumen.resx">
-      <DependentUpon>frmResumen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmTipoDeArchivo.resx">
       <DependentUpon>frmTipoDeArchivo.vb</DependentUpon>
@@ -518,10 +501,15 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\clsInfoConsultaVentas.datasource" />
+    <None Include="My Project\DataSources\clsInfoExportarEfectivo.datasource" />
+    <None Include="My Project\DataSources\clsInfoExportarMercadoPago.datasource" />
     <None Include="My Project\DataSources\clsInfoExportarVisaCredito.datasource" />
+    <None Include="My Project\DataSources\clsInfoExportarVisaDebito.datasource" />
     <None Include="My Project\DataSources\clsInfoHipotecario.datasource" />
     <None Include="My Project\DataSources\clsInfoImportarHipotecario.datasource" />
     <None Include="My Project\DataSources\clsInfoImportarPatagonia.datasource" />
+    <None Include="My Project\DataSources\clsInfoImportarVisaCredito.datasource" />
+    <None Include="My Project\DataSources\clsInfoImportarVisaDebito.datasource" />
     <None Include="My Project\DataSources\clsInfoPatagonia.datasource" />
     <None Include="My Project\DataSources\clsListaStorage.datasource" />
     <None Include="My Project\DataSources\manDB.clsInfoArticulos.datasource" />

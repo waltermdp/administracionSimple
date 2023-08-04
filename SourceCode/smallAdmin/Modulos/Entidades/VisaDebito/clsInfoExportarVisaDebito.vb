@@ -6,13 +6,33 @@
   Private m_IdentificadorDebito As Decimal
   Private m_CodigoDeALta As String
   Private m_GuidPago As Guid
-
+  Private m_GuidProducto As Guid
+  Private m_FechaUltimaExportacion As Date
 
 
   'Personales
   Private m_Nombre As String
   Private m_CuotaActual As Integer
   Private m_Exportar As Boolean
+  Private m_EstadoContrato As Integer
+
+  Public Property FechaUltimaExportacion As Date
+    Get
+      Return m_FechaUltimaExportacion
+    End Get
+    Set(value As Date)
+      m_FechaUltimaExportacion = value
+    End Set
+  End Property
+
+  Public Property EstadoContrato As Integer
+    Get
+      Return m_EstadoContrato
+    End Get
+    Set(value As Integer)
+      m_EstadoContrato = value
+    End Set
+  End Property
 
   Public Property GuidPago As Guid
     Get
@@ -20,6 +40,15 @@
     End Get
     Set(value As Guid)
       m_GuidPago = value
+    End Set
+  End Property
+
+  Public Property GuidProducto As Guid
+    Get
+      Return m_GuidProducto
+    End Get
+    Set(value As Guid)
+      m_GuidProducto = value
     End Set
   End Property
 
@@ -112,11 +141,13 @@
       m_Importe = 0
       m_IdentificadorDebito = 0
       m_CodigoDeALta = ""
-
+      m_FechaUltimaExportacion = Date.MinValue
       m_Nombre = ""
       m_CuotaActual = 0
       m_Exportar = False
       m_GuidPago = Guid.Empty
+      m_GuidProducto = Guid.Empty
+      m_EstadoContrato = 0
     Catch ex As Exception
       libCommon.Comunes.Print_msg(ex.Message)
     End Try

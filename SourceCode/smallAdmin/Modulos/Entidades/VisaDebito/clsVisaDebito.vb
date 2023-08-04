@@ -1,13 +1,14 @@
 ﻿Option Strict Off
 Imports Excel = Microsoft.Office.Interop.Excel
 Imports libCommon.Comunes
+Imports manDB
 
 Public Class clsVisaDebito
   Private m_GuidTipoPago As Guid
   Private m_FechaVto As Date
   Private m_FechaPresentacion As Date
 
-  Public m_RegistrosExportar As New List(Of clsInfoExportarVisaCredito)
+  Public m_RegistrosExportar As New List(Of clsInfoExportarVisaDebito)
 
   Public Property FechaPresentacion As Date
     Get
@@ -87,15 +88,15 @@ Public Class clsVisaDebito
     Try
 
       Dim lstPago As New clsListPagos
-      m_RegistrosExportar = New List(Of clsInfoExportarVisaCredito)
-      Dim movimiento As clsInfoExportarVisaCredito
+      m_RegistrosExportar = New List(Of clsInfoExportarVisaDebito)
+      Dim movimiento As clsInfoExportarVisaDebito
 
       lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
       lstPago.RefreshData()
 
 
       For Each item In lstPago.Items
-        movimiento = New clsInfoExportarVisaCredito
+        movimiento = New clsInfoExportarVisaDebito
 
         Dim lstProducto As New clsListProductos
         lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
@@ -149,9 +150,20 @@ Public Class clsVisaDebito
           .CuotaActual = item.NumCuota
           '.NroCuitEmpresa = NroCuitEmpresa
           '.ReferenciaDebito = ReferenciaDebito
-          '.FechaUltimaExportacion = item.FechaUltimaExportacion
-          '.GuidPago = item.GuidPago
-          .Exportar = True ' por defecto siempre lo lista para exportar
+          .FechaUltimaExportacion = item.FechaUltimaExportacion
+          .GuidPago = item.GuidPago
+          .EstadoContrato = lstProducto.Items.First.Estado
+          .GuidProducto = lstProducto.Items.First.GuidProducto
+          If bCodigoAlta Then
+            .CodigoDeAlta = "E"
+          Else
+            .CodigoDeAlta = "N"
+          End If
+          If .EstadoContrato <= 0 Then
+            .Exportar = True
+          Else
+            .Exportar = False
+          End If
         End With
         m_RegistrosExportar.Add(movimiento)
       Next
@@ -186,7 +198,7 @@ Public Class clsVisaDebito
     Try
       Dim lineas As New List(Of String)
       'todo: pasar solo los check exportar=true
-      Dim Exportable As List(Of clsInfoExportarVisaCredito) = m_RegistrosExportar.Where(Function(c) c.Exportar = True).ToList
+      Dim Exportable As List(Of clsInfoExportarVisaDebito) = m_RegistrosExportar.Where(Function(c) c.Exportar = True).ToList
 
       If GetExportedFile(Exportable, lineas) <> Result.OK Then
         rMessage = "Fallo generar archivo"
@@ -231,6 +243,10 @@ Public Class clsVisaDebito
         Exit Sub
       End If
 
+      'GENERAR segundo Archivo
+      ExportarAVisaDebito(Exportable)
+
+
       rMessage = "Finalizado OK"
       rResult = Result.OK
     Catch ex As Exception
@@ -251,7 +267,7 @@ Public Class clsVisaDebito
     End Try
   End Sub
 
-  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoExportarVisaCredito), ByRef rlineas As List(Of String)) As Result
+  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoExportarVisaDebito), ByRef rlineas As List(Of String)) As Result
     Try
       Dim auxLinea As String = String.Empty
       Dim lstResult As New List(Of String)
@@ -264,7 +280,8 @@ Public Class clsVisaDebito
 
 
 
-      ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
+      'ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
+      ExportVisaTXT(vlstRegistros, "DEBLIQD", rlineas)
       'If GenerateHeader(auxLinea) <> Result.OK Then
       '  MsgBox("No se puede generar encabezado del debito")
       '  Return Result.NOK
@@ -284,9 +301,9 @@ Public Class clsVisaDebito
       '  MsgBox("No se puede generar final del archivo de debito")
       '  Return Result.NOK
       'End If
-      lstResult.Add(auxLinea)
-      rlineas = New List(Of String)
-      rlineas.AddRange(lstResult.ToList)
+      'lstResult.Add(auxLinea)
+      'rlineas = New List(Of String)
+      'rlineas.AddRange(lstResult.ToList)
 
       Return Result.OK
     Catch ex As Exception
@@ -295,17 +312,17 @@ Public Class clsVisaDebito
     End Try
   End Function
 
-  Private Shared Function ExportarAVisaCredito(ByVal vMovimientos As List(Of clsInfoExportarVisaCredito)) As Result
+  Private Shared Function ExportarAVisaDebito(ByVal vMovimientos As List(Of clsInfoExportarVisaDebito)) As Result
     Try
-      ExportVisaTXT(vMovimientos, "DEBLIQC")
+
       Dim xls As New Excel.Application
       Dim worksheet As Excel.Worksheet
       Dim workbook As Excel.Workbook
-      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "DEBLIQCempty.xls"), IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"), True)
-      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"))
+      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "DEBLIQDempty.xls"), IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"), True)
+      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQD.xls"))
       Try
         worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
-        Dim lista As List(Of clsInfoExportarVisaCredito) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
+        Dim lista As List(Of clsInfoExportarVisaDebito) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
         For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
 
           worksheet.Cells(i + 2, 1).value = lista(i).NumeroTarjeta
@@ -316,13 +333,13 @@ Public Class clsVisaDebito
           worksheet.Cells(i + 2, 6).value = lista(i).CodigoDeAlta  ' N o E ver especificacion
         Next
 
-        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
+        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQD.10.xls"))
 
       Finally
         workbook.Close(False)
       End Try
 
-      MsgBox("Finalizo GeneracionArchivo")
+      MsgBox("Finalizo exportacion a excel")
 
 
       Return Result.OK
@@ -353,9 +370,10 @@ Public Class clsVisaDebito
   '  End Try
   'End Function
 
-  Private Shared Function ExportVisaTXT(ByVal vMovimientos As List(Of clsInfoExportarVisaCredito), ByVal constante As String) As Result
+  Private Shared Function ExportVisaTXT(ByVal vMovimientos As List(Of clsInfoExportarVisaDebito), ByVal constante As String, ByRef rLineas As List(Of String)) As Result
     Try
       Dim lineas As New List(Of String)
+      rLineas = New List(Of String)
       Dim aux As String = String.Empty
       Dim FechaGeneracion As Date = GetAhora()
       'HEADER
@@ -401,8 +419,9 @@ Public Class clsVisaDebito
       aux += "*".PadLeft(1)
       lineas.Add(aux)
 
-      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, FechaGeneracion.ToString("yyyyMMddhhmm") & "_" & constante & ".txt"), lineas)
-      Return vResult
+      rLineas.AddRange(lineas.ToArray)
+      'Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, FechaGeneracion.ToString("yyyyMMddhhmm") & "_" & constante & ".txt"), lineas)
+      Return Result.OK
     Catch ex As Exception
       Call Print_msg(ex.Message)
       Return Result.ErrorEx
@@ -412,7 +431,7 @@ Public Class clsVisaDebito
   Public Function GetFileNameExport(ByRef rName As String) As Result
     Try
       'ORIddmms.nnn (ddmm/Dia/Mes - s/Secuencia -nnn/Numero de Origen)
-      rName = "FILENAME"
+      rName = g_Today.ToString("yyyyMMddhhmm") & "_" & "DEBLIQD" & ".txt"
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -422,7 +441,7 @@ Public Class clsVisaDebito
 
   Public Function GetFolderExportacion() As String
     Try
-      Dim pathExportacion As String = IO.Path.Combine(EXPORT_PATH, "VisaCredito")
+      Dim pathExportacion As String = IO.Path.Combine(EXPORT_PATH, "VisaDebito")
       If Not IO.Directory.Exists(pathExportacion) Then
         IO.Directory.CreateDirectory(pathExportacion)
         If Not IO.Directory.Exists(pathExportacion) Then
@@ -441,7 +460,277 @@ Public Class clsVisaDebito
 
 #Region "importacion"
 
+  Private m_LineasArchivo As New List(Of String)
+  Public m_Registros As New List(Of clsInfoImportarVisaDebito)
+  Private m_FechaEjecucion As Date
+  Private m_TotalImporte As Decimal
+  Private m_CUITEmpresa As Decimal
 
+  Public ReadOnly Property CUIT_empresa As String
+    Get
+      Return m_CUITEmpresa.ToString
+    End Get
+  End Property
+  Public ReadOnly Property ImporteTotalImportado As Decimal
+    Get
+      Return m_TotalImporte
+    End Get
+  End Property
+
+  Public ReadOnly Property FechaEjecucion As Date
+    Get
+      Return m_FechaEjecucion
+    End Get
+  End Property
+
+  Public ReadOnly Property RegistrosCargados As Integer
+    Get
+      Return m_Registros.Count
+    End Get
+  End Property
+
+  Public ReadOnly Property RegistrosAceptados As Integer
+    Get
+      Return m_Registros.Where(Function(c) c.Importar = True).Count()
+    End Get
+  End Property
+
+  Public ReadOnly Property RegistrosRechazados As Integer
+    Get
+      Return RegistrosCargados - RegistrosAceptados
+    End Get
+  End Property
+
+  Public Function LoadImportedFile(ByVal vOwn As IWin32Window) As libCommon.Comunes.Result
+    Try
+      Dim AbrirArchivo As New OpenFileDialog
+      If AbrirArchivo.ShowDialog(vOwn) <> Windows.Forms.DialogResult.OK Then
+        Return Result.CANCEL
+      End If
+
+      m_LineasArchivo = New List(Of String)
+      If modFile.Load(AbrirArchivo.FileName, m_LineasArchivo) <> Result.OK Then
+        MsgBox("Error al abrir archivo")
+        Return Result.NOK
+      End If
+      Dim s As String = IO.Path.Combine(IMPORT_PATH, GetAhora.ToString("yyyyMMddhhmmss") & "_" & AbrirArchivo.SafeFileName)
+
+      IO.File.Copy(AbrirArchivo.FileName, s)
+      Dim vResult As Result
+      Dim vMessge As String
+      Using objForm As New frmProgreso(AddressOf CargarInicioImp)
+        objForm.ShowDialog(vOwn)
+        vResult = objForm.ResultProcess
+        vMessge = objForm.ResultMessage
+      End Using
+      If vResult <> Result.OK Then
+        MsgBox(vMessge)
+      End If
+
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Public Function GetCuerpoVISADebito(ByVal vLineas As List(Of String), ByRef rMovimiento As List(Of clsInfoImportarVisaDebito)) As Result
+    Try
+
+      rMovimiento = New List(Of clsInfoImportarVisaDebito)
+      If vLineas.Count <= 0 Then Return Result.NOK
+      If vLineas.GetRange(1, vLineas.Count - 2).TrueForAll(Function(c) c.First = "1" AndAlso c.Last = "*") = False Then Return Result.NOK
+      Dim aux As String = String.Empty
+      Dim movimiento As clsInfoImportarVisaDebito
+      m_FechaEjecucion = New Date(CInt(vLineas(0).Substring(29, 4)), CInt(vLineas(0).Substring(33, 2)), CInt(vLineas(0).Substring(35, 2)))
+      m_CUITEmpresa = CDec(vLineas(0).Substring(19, 10))
+      For Each linea In vLineas.GetRange(1, vLineas.Count - 2)
+        movimiento = New clsInfoImportarVisaDebito
+        With movimiento
+          
+          .NumeroTarjeta = CDec(linea.Substring(1, 16)) 'num tar
+          .Contrato = CDec(linea.Substring(20, 8)) 'num comprobante
+          .importeDebitado = CDec(CDec(linea.Substring(40, 15)) / 100) 'importe incluye 2 dec
+          .DNI_ID = CDec(linea.Substring(55, 15)) 'identificador debito
+          .FechaDebito = New Date(CInt(linea.Substring(28, 4)), CInt(linea.Substring(32, 2)), CInt(linea.Substring(34, 2))) 'fecha AAAAMMDD 'linea.Substring(224, 6)
+        
+
+          'aux = linea.Substring(36, 4) 'c transac = 0005
+
+          ''11 espacios
+          '.Param1 = linea.Substring(81, 1) 'param1
+          ''2 espacio 
+          '.Param2 = linea.Substring(84, 1) 'param2
+          ''15 espacios
+          .Codigo = linea.Substring(100, 3) 'estado del movimiento 
+          .MotivoRechazo = linea.Substring(103, 40) 'yy: Rechazo Código Motivo 1
+          '.Detalle = linea.Substring(132, 29) 'descripcion 1 del codigo 1
+
+          .Importar = False
+          .cuota = 0
+        End With
+        rMovimiento.Add(movimiento)
+      Next
+
+
+      Return Result.OK
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+
+
+  Private Sub CargarInicioImp(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+      m_Registros = New List(Of clsInfoImportarVisaDebito)
+      Dim length As Integer = m_LineasArchivo.Count
+      Dim vResult As libCommon.Comunes.Result = Result.NOK
+      Dim validacionBloque1 As String = String.Empty
+
+      If length > 1 Then
+
+        vResult = GetCuerpoVISADebito(m_LineasArchivo, m_Registros)
+        If vResult <> Result.OK Then Exit Sub
+
+      End If
+
+      Procesar()
+      'm_TotalImporte = m_Registros.Where(Function(c) c.Importar = True).Sum(Function(c) c.ImporteADebitar)
+      rResult = vResult
+      rMessage = "Finalizado OK"
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      rResult = Result.ErrorEx
+      rMessage = ex.Message
+    End Try
+  End Sub
+
+  Private Sub FillEncabezado(ByVal vLineaEncabezado As String, ByRef rFechaEjecucion As Date, ByRef rCUITEmpresa As Decimal)
+    Try
+      'validar encabezado
+      'vLineaEncabezado.Length =xx
+      If vLineaEncabezado.Substring(0, 1) <> "H" Then Exit Sub
+      rFechaEjecucion = New Date(CInt(vLineaEncabezado.Substring(29, 4)), CInt(vLineaEncabezado.Substring(27, 2)), CInt(vLineaEncabezado.Substring(25, 2)))
+      rCUITEmpresa = CDec(vLineaEncabezado.Substring(1, 11))
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub ProcesarTail(ByVal vLineaTail As String, ByRef rCantidadRegistros As Integer, ByRef rImporte As Decimal)
+    Try
+      If vLineaTail.Substring(0, 1) <> "T" Then Exit Sub
+      rCantidadRegistros = CInt(vLineaTail.Substring(1, 7))
+      rImporte = CDec(CDec(vLineaTail.Substring(8, 15)) / 100)
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub Procesar()
+    Try
+      'toma cada registro y aplica si se realizo el pago correspondiente
+      'validar cbu, id y valor debito contra db
+      For Each item In m_Registros ' tmpRegistros
+        ' If item.ImporteADebitar <> item.importeDebitado OrElse item.MotivoRechazo <> String.Empty Then Continue For
+        Dim objVenta As New clsListProductos
+        objVenta.Cfg_Filtro = "WHERE NumComprobante=" & item.Contrato.ToString & " and ValorCuotaFija=" & item.importeDebitado & " and GuidTipoPago={d167e036-b175-4a67-9305-a47c116e8f5c}"
+        objVenta.RefreshData()
+        If objVenta.Items.Count = 1 Then
+          item.GuidProducto = objVenta.Items.First.GuidProducto
+          'asocio un nombre
+          Dim objCliente As New clsListDatabase
+          objCliente.Cfg_Filtro = "Where GuidCliente={" & objVenta.Items.First.GuidCliente.ToString.ToUpper & "}"
+          objCliente.RefreshData()
+          If objCliente.Items.Count = 1 Then
+            item.Nombre = objCliente.Items.First.ToString
+          End If
+          Dim objCuentas As New clsListaCuentas
+          objCuentas.Cfg_Filtro = "WHERE GuidCuenta={" & objVenta.Items.First.GuidCuenta.ToString & "} and TipoDeCuenta={d167e036-b175-4a67-9305-a47c116e8f5c}"
+          objCuentas.RefreshData()
+          If objCuentas.Items.Count = 1 Then
+            'comparo CBU con codigo1
+            item.GuidCuenta = objCuentas.Items.First.GuidCuenta
+            If item.NumeroTarjeta = CDec(objCuentas.Items.First.Codigo1) Then
+              'confirmado
+              'aplicar pago cuota actual a debitar
+              Dim objPagos As New clsListPagos
+              objPagos.Cfg_Filtro = "WHERE GuidProducto={" & objVenta.Items.First.GuidProducto.ToString & "} and EstadoPago=" & CInt(E_EstadoPago.Debe).ToString
+              objPagos.RefreshData()
+              If objPagos.Items.Count = 1 Then
+                item.GuidPago = objPagos.Items.First.GuidPago
+                item.FechaUltimaImportacion = objPagos.Items.First.FechaUltimaImportacion
+                If (item.importeDebitado > 0) AndAlso (String.IsNullOrWhiteSpace(item.MotivoRechazo) Or item.MotivoRechazo = "R00") Then
+                  item.Importar = True
+                End If
+
+                item.cuota = objPagos.Items.First.NumCuota
+              End If
+            End If
+          End If
+        Else
+          'Marcar como rechazado
+          item.Importar = False
+
+
+          'MsgBox("no encontrado, marcar")
+        End If
+
+      Next
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Public Function ImportarSeleccionados(ByVal vHWND As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim vMessge As String
+      Using objForm As New frmProgreso(AddressOf taskImportarSeleccionados)
+        objForm.ShowDialog(vHWND)
+        vResult = objForm.ResultProcess
+        vMessge = objForm.ResultMessage
+      End Using
+
+      If vResult <> Result.OK Then
+        MsgBox(vMessge)
+      End If
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
+
+  Private Sub taskImportarSeleccionados(ByRef rResult As Result, ByRef rMessage As String)
+    Try
+      For Each item In m_Registros
+        If item.Importar <> True Then Continue For
+        Dim objDebitos As New clsListPagos
+        objDebitos.Cfg_Filtro = "WHERE GuidPago={" & item.GuidPago.ToString & "}"
+        objDebitos.RefreshData()
+        If objDebitos.Items.Count = 1 Then
+          Dim objDebitoActualizado As clsInfoPagos = objDebitos.Items.First.Clone
+          objDebitoActualizado.EstadoPago = E_EstadoPago.Pago
+          objDebitoActualizado.FechaPago = item.FechaDebito
+          If clsPago.Save(objDebitoActualizado) <> Result.OK Then
+            'TODO: take error
+          End If
+        End If
+
+      Next
+      rMessage = "Finalizado OK"
+      rResult = Result.OK
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      rMessage = ex.Message
+      rResult = Result.ErrorEx
+    End Try
+  End Sub
 
 #End Region
 

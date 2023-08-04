@@ -140,7 +140,6 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucCBU.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucDDHipotecario.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmArticulo.resources
-d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmDetalle.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmEditarPagos.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarMercadoPago.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarEfectivo.resources
@@ -148,8 +147,6 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarVisaDebito.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarVisaCredito.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarVisaCredito.resources
-d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarResumen.resources
-d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmResumen.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmTipoDeArchivo.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmArticulos.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmArticulosVendidos.resources
@@ -172,3 +169,4 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.Resources.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucProgreso.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.vbproj.GenerateResource.Cache
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarVisaDebito.resources

@@ -3,16 +3,12 @@ Imports manDB
 
 Public Class frmImportarPatagonia
   Private m_Result As libCommon.Comunes.Result = Result.CANCEL
-  'Private m_Registros As New List(Of clsInfoImportarPatagonia)
+
   Private m_Banco As clsPatagonia
-  'Private m_LineasArchivo As New List(Of String)
+
   Private m_TipoPago As clsTipoPago
 
-  'Private m_FechaEjecucion As Date
-  'Private m_CUITEmpresa As Decimal
-  'Private m_TotalImporte As Decimal
-  'Private m_totalRegistros As Integer
-  'Private m_totalRegistosADebitar As Integer
+
 
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
 

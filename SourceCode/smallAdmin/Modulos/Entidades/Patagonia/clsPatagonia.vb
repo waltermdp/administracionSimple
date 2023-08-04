@@ -1,5 +1,6 @@
 ﻿Imports libCommon.Comunes
 Imports manDB
+
 Public Class clsPatagonia
   'header
   Private m_NroCuitEmpresa As Decimal

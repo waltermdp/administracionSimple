@@ -139,7 +139,7 @@ Public Class clsEfectivo
         End If
 
         With movimiento
-          .NumeroTarjeta = CDec(lstCuenta.Items.First.Codigo1)
+
           .IdentificadorDebito = CDec(lstCliente.Items.First.DNI) ' lstCuenta.Items.First.Codigo2)
           .Nombre = lstCliente.Items.First.ToString
           .NumeroComprobante = lstProducto.Items.First.NumComprobante
@@ -151,7 +151,15 @@ Public Class clsEfectivo
           '.ReferenciaDebito = ReferenciaDebito
           '.FechaUltimaExportacion = item.FechaUltimaExportacion
           '.GuidPago = item.GuidPago
-          .Exportar = True ' por defecto siempre lo lista para exportar
+          .FechaUltimaExportacion = item.FechaUltimaExportacion
+          .GuidPago = item.GuidPago
+          .EstadoContrato = lstProducto.Items.First.Estado
+          .GuidProducto = lstProducto.Items.First.GuidProducto
+          If .EstadoContrato <= 0 Then
+            .Exportar = True
+          Else
+            .Exportar = False
+          End If
         End With
         m_RegistrosExportar.Add(movimiento)
       Next
@@ -265,6 +273,7 @@ Public Class clsEfectivo
 
 
       ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
+      ExportTXT(vlstRegistros, rlineas)
       'If GenerateHeader(auxLinea) <> Result.OK Then
       '  MsgBox("No se puede generar encabezado del debito")
       '  Return Result.NOK
@@ -284,9 +293,9 @@ Public Class clsEfectivo
       '  MsgBox("No se puede generar final del archivo de debito")
       '  Return Result.NOK
       'End If
-      lstResult.Add(auxLinea)
-      rlineas = New List(Of String)
-      rlineas.AddRange(lstResult.ToList)
+      'lstResult.Add(auxLinea)
+      'rlineas = New List(Of String)
+      'rlineas.AddRange(lstResult.ToList)
 
       Return Result.OK
     Catch ex As Exception
@@ -295,35 +304,36 @@ Public Class clsEfectivo
     End Try
   End Function
 
-  Private Shared Function ExportarAVisaCredito(ByVal vMovimientos As List(Of clsInfoExportarEfectivo)) As Result
+  Private Shared Function ExportTXT(ByVal vMovimientos As List(Of clsInfoExportarEfectivo), ByRef rLineas As List(Of String)) As Result
     Try
-      ExportVisaTXT(vMovimientos, "DEBLIQC")
-      Dim xls As New Excel.Application
-      Dim worksheet As Excel.Worksheet
-      Dim workbook As Excel.Workbook
-      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "DEBLIQCempty.xls"), IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"), True)
-      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"))
-      Try
-        worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
-        Dim lista As List(Of clsInfoExportarEfectivo) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
-        For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+      Dim lineas As New List(Of String)
+      rLineas = New List(Of String)
+      Dim aux As String = String.Empty
+      Dim FechaGeneracion As Date = GetAhora()
+      'HEADER
+      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
 
-          worksheet.Cells(i + 2, 1).value = lista(i).NumeroTarjeta
-          worksheet.Cells(i + 2, 2).value = lista(i).NumeroComprobante
-          worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-          worksheet.Cells(i + 2, 4).value = lista(i).Importe 'acepta 1.23
-          worksheet.Cells(i + 2, 5).value = lista(i).IdentificadorDebito
-          worksheet.Cells(i + 2, 6).value = lista(i).CodigoDeAlta  ' N o E ver especificacion
-        Next
+      lineas.Add(aux)
 
-        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
+      'BODY
 
-      Finally
-        workbook.Close(False)
-      End Try
+      For Each movimiento In vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante))
+        With movimiento
+          aux = String.Format("{0,25}", CStr(.NumeroComprobante))
+          aux += String.Format("{0,25}", CStr(.Nombre))
+          aux += String.Format("{0,25}", CStr(.Importe))
+          aux += String.Format("{0,25}", CStr(.FechaVto.ToString("yyyy/MM/dd")))
+          aux += String.Format("{0,25}", CStr(.CuotaActual))
 
-      MsgBox("Finalizo GeneracionArchivo")
+        End With
+        lineas.Add(aux)
+      Next
 
+      'TAIL
+      aux += CInt(vMovimientos.Sum(Function(c) CSng(c.Importe)) * 100).ToString.PadLeft(15, "0")
+
+      lineas.Add(aux)
+      rLineas.AddRange(lineas.ToArray)
 
       Return Result.OK
     Catch ex As Exception
@@ -353,66 +363,12 @@ Public Class clsEfectivo
   '  End Try
   'End Function
 
-  Private Shared Function ExportVisaTXT(ByVal vMovimientos As List(Of clsInfoExportarEfectivo), ByVal constante As String) As Result
-    Try
-      Dim lineas As New List(Of String)
-      Dim aux As String = String.Empty
-      Dim FechaGeneracion As Date = GetAhora()
-      'HEADER
-      aux = "0"
-      aux += constante.PadRight(8, " ")
-      aux += "40832883".PadLeft(10, "0") 'NUMERO DE ESTABLECIMIENTO 900000
-      aux += "900000".PadRight(10, " ")
-      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
-      aux += FechaGeneracion.ToString("hhmm").PadLeft(4)
-      aux += "0".PadLeft(1)
-      aux += " ".PadLeft(2, " ")
-      aux += " ".PadLeft(55, " ")
-      aux += "*".PadLeft(1)
-      lineas.Add(aux)
-
-      'BODY
-      For Each movimiento In vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante))
-        aux = "1"
-        aux += movimiento.NumeroTarjeta.ToString.PadLeft(16)
-        aux += " ".PadLeft(3, " ")
-        aux += movimiento.NumeroComprobante.ToString.PadLeft(8, "0")
-        aux += GetHoy.ToString("yyyyMMdd").PadLeft(8)
-        aux += "0005".PadLeft(4)
-        aux += CInt(CSng(movimiento.Importe) * 100).ToString.PadLeft(15, "0")
-        aux += movimiento.IdentificadorDebito.ToString.PadLeft(15, "0")
-        aux += IIf(movimiento.CodigoDeAlta = "E", "E", " ").ToString
-        aux += " ".PadLeft(2, " ")
-        aux += " ".PadLeft(26, " ")
-        aux += "*".PadLeft(1)
-        lineas.Add(aux)
-      Next
-
-      'TAIL
-      aux = "9"
-      aux += constante.PadRight(8, " ")
-      aux += "40832883".PadLeft(10, "0") 'NUMERO DE ESTABLECIMIENTO
-      aux += "900000".PadRight(10, " ")
-      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
-      aux += FechaGeneracion.ToString("hhmm").PadLeft(4)
-      aux += vMovimientos.Count.ToString.PadLeft(7, "0")
-      aux += CInt(vMovimientos.Sum(Function(c) CSng(c.Importe)) * 100).ToString.PadLeft(15, "0")
-      aux += " ".PadLeft(36, " ")
-      aux += "*".PadLeft(1)
-      lineas.Add(aux)
-
-      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, FechaGeneracion.ToString("yyyyMMddhhmm") & "_" & constante & ".txt"), lineas)
-      Return vResult
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Function
+  
 
   Public Function GetFileNameExport(ByRef rName As String) As Result
     Try
-      'ORIddmms.nnn (ddmm/Dia/Mes - s/Secuencia -nnn/Numero de Origen)
-      rName = "FILENAME"
+
+      rName = g_Today.ToString("yyyyMMddhhmm") & "_" & "Efectivo" & ".txt"
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -422,7 +378,7 @@ Public Class clsEfectivo
 
   Public Function GetFolderExportacion() As String
     Try
-      Dim pathExportacion As String = IO.Path.Combine(EXPORT_PATH, "VisaCredito")
+      Dim pathExportacion As String = IO.Path.Combine(EXPORT_PATH, "Efectivo")
       If Not IO.Directory.Exists(pathExportacion) Then
         IO.Directory.CreateDirectory(pathExportacion)
         If Not IO.Directory.Exists(pathExportacion) Then

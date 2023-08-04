@@ -4,9 +4,7 @@ Public Class frmExportarVisaDebito
 
   Public m_Result As libCommon.Comunes.Result = Result.CANCEL
   Private m_TipoPago As clsTipoPago
-
-  '
-  Private m_Banco As clsPatagonia
+  Private m_Banco As clsVisaDebito
   Private m_skip As Boolean = False
 
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
@@ -23,19 +21,20 @@ Public Class frmExportarVisaDebito
 
 
 
-  Private Sub frmExportarPatagonia_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+  Private Sub frmExportarPatagonia_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
     Try
-      m_Banco = New clsPatagonia(m_TipoPago.GuidTipo)
+      m_Banco = New clsVisaDebito(m_TipoPago.GuidTipo)
       m_skip = True
+      cmbEstado.DataSource = [Enum].GetValues(GetType(manDB.clsInfoProducto.E_Estado))
       dtCurrent.Value = m_Banco.FechaPresentacion
       dtVencimiento.MinDate = dtCurrent.Value
       dtVencimiento.Value = Today.AddDays(2)
       m_Banco.FechaVencimiento = dtVencimiento.Value
       m_Banco.FechaPresentacion = dtCurrent.Value
-      txtProducto.Text = m_Banco.Producto
-      txtRazonSocial.Text = m_Banco.RazonSocial
-      txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
-      txtReferencia.Text = m_Banco.ReferenciaDebito
+      'txtProducto.Text = m_Banco.Producto
+      'txtRazonSocial.Text = m_Banco.RazonSocial
+      txtNroCUIT.Text = "COMPLETAR" ' m_Banco.NroCuitEmpresa.ToString
+      'txtReferencia.Text = m_Banco.ReferenciaDebito
       m_skip = False
       RecargarValores()
 
@@ -48,14 +47,14 @@ Public Class frmExportarVisaDebito
     Try
       Dim vResult As Result = m_Banco.CargarContratosAExportar(Me)
 
-      ClsInfoPatagoniaBindingSource.DataSource = m_Banco.m_RegistrosExportar
-      ClsInfoPatagoniaBindingSource.ResetBindings(False)
+      ClsInfoExportarVisaDebitoBindingSource.DataSource = m_Banco.m_RegistrosExportar
+      ClsInfoExportarVisaDebitoBindingSource.ResetBindings(False)
       lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
       txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
-      txtProducto.Text = m_Banco.Producto
-      txtRazonSocial.Text = m_Banco.RazonSocial
-      txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
-      txtReferencia.Text = m_Banco.ReferenciaDebito
+      'txtProducto.Text = m_Banco.Producto
+      'txtRazonSocial.Text = m_Banco.RazonSocial
+      'txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
+      'txtReferencia.Text = m_Banco.ReferenciaDebito
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -79,9 +78,9 @@ Public Class frmExportarVisaDebito
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try
       With m_Banco
-        .RazonSocial = txtRazonSocial.Text
-        .Producto = txtProducto.Text
-        .NroCuitEmpresa = CDec(txtNroCUIT.Text)
+        '.RazonSocial = txtRazonSocial.Text
+        '.Producto = txtProducto.Text
+        '.NroCuitEmpresa = CDec(txtNroCUIT.Text)
         .FechaPresentacion = dtCurrent.Value
         .FechaVencimiento = dtVencimiento.Value
       End With
@@ -121,6 +120,8 @@ Public Class frmExportarVisaDebito
       dtVencimiento.MinDate = dtCurrent.Value
       m_Banco.FechaPresentacion = dtCurrent.Value
       If auxVen <> dtVencimiento.Value Then
+        Call clsCobros.ActualizarEstadosDePagos(dtVencimiento.Value)
+        RecargarValores()
         m_Banco.UpdateFechaVencimientoExportar(dtVencimiento.Value)
         RefeshGrilla()
       End If
@@ -135,6 +136,8 @@ Public Class frmExportarVisaDebito
     Try
       If m_skip Then Exit Sub
       m_skip = True
+      Call clsCobros.ActualizarEstadosDePagos(dtVencimiento.Value)
+      RecargarValores()
       m_Banco.UpdateFechaVencimientoExportar(dtVencimiento.Value)
       RefeshGrilla()
       m_skip = False
@@ -175,12 +178,10 @@ Public Class frmExportarVisaDebito
         Exit Sub
       End If
 
-      'If txtNumeroConvenio.Text.Length <= 0 Then txtNumeroConvenio.Text = 0
-      'If txtNumeroConvenio.Text.Length > 5 Then txtNumeroConvenio.Text = txtNumeroConvenio.Text.Substring(0, 5)
-      m_Banco.NroCuitEmpresa = CDec(txtNroCUIT.Text)
-      For Each registro In m_Banco.m_RegistrosExportar
-        registro.NroCuitEmpresa = m_Banco.NroCuitEmpresa
-      Next
+      'm_Banco.NroCuitEmpresa = CDec(txtNroCUIT.Text)
+      'For Each registro In m_Banco.m_RegistrosExportar
+      '  registro.NroCuitEmpresa = m_Banco.NroCuitEmpresa
+      'Next
       RefeshGrilla()
       m_skip = False
     Catch ex As Exception
@@ -189,107 +190,127 @@ Public Class frmExportarVisaDebito
     End Try
   End Sub
 
-  Private Sub txtReferencia_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtReferencia.KeyPress
-    Try
-      'maximo 15
-      If m_skip Then Exit Sub
-      m_skip = True
-      If txtReferencia.Text.Length >= 15 Then
-        If Not Char.IsControl(e.KeyChar) Then
-          e.Handled = True
-        End If
-      End If
+  'Private Sub txtReferencia_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtReferencia.KeyPress
+  '  Try
+  '    'maximo 15
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    If txtReferencia.Text.Length >= 15 Then
+  '      If Not Char.IsControl(e.KeyChar) Then
+  '        e.Handled = True
+  '      End If
+  '    End If
 
-      m_skip = False
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      m_skip = False
-    End Try
-  End Sub
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    m_skip = False
+  '  End Try
+  'End Sub
 
-  Private Sub txtReferencia_TextChanged(sender As Object, e As EventArgs) Handles txtReferencia.TextChanged
-    Try
-      'maximo 15
-      If m_skip Then Exit Sub
-      m_skip = True
-      m_Banco.ReferenciaDebito = txtReferencia.Text
-      For Each registro In m_Banco.m_RegistrosExportar
-        registro.ReferenciaDebito = m_Banco.ReferenciaDebito
-      Next
-      RefeshGrilla()
-      m_skip = False
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      m_skip = False
-    End Try
-  End Sub
+  'Private Sub txtReferencia_TextChanged(sender As Object, e As EventArgs) Handles txtReferencia.TextChanged
+  '  Try
+  '    'maximo 15
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    m_Banco.ReferenciaDebito = txtReferencia.Text
+  '    For Each registro In m_Banco.m_RegistrosExportar
+  '      registro.ReferenciaDebito = m_Banco.ReferenciaDebito
+  '    Next
+  '    RefeshGrilla()
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    m_skip = False
+  '  End Try
+  'End Sub
 
 
   Private Sub RefeshGrilla()
     Try
-      ClsInfoPatagoniaBindingSource.ResetBindings(False)
+      ClsInfoExportarVisaDebitoBindingSource.ResetBindings(False)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
-  Private Sub txtProducto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProducto.KeyPress
+  'Private Sub txtProducto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProducto.KeyPress
+  '  Try
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    If txtProducto.Text.Length >= 10 Then
+  '      If Not Char.IsControl(e.KeyChar) Then
+  '        e.Handled = True
+  '      End If
+  '    End If
+
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    m_skip = False
+  '  End Try
+  'End Sub
+
+  'Private Sub txtProducto_TextChanged(sender As Object, e As EventArgs) Handles txtProducto.TextChanged
+  '  Try
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    m_Banco.Producto = txtProducto.Text
+  '    For Each registro In m_Banco.m_RegistrosExportar
+  '      registro.Producto = m_Banco.Producto
+  '    Next
+  '    RefeshGrilla()
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    m_skip = False
+  '  End Try
+  'End Sub
+
+  'Private Sub txtRazonSocial_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRazonSocial.KeyPress
+  '  Try
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    If txtRazonSocial.Text.Length >= 35 Then
+  '      If Not Char.IsControl(e.KeyChar) Then
+  '        e.Handled = True
+  '      End If
+  '    End If
+
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    m_skip = False
+  '  End Try
+  'End Sub
+
+  'Private Sub txtRazonSocial_TextChanged(sender As Object, e As EventArgs) Handles txtRazonSocial.TextChanged
+  '  Try
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    m_Banco.RazonSocial = txtRazonSocial.Text
+  '    RefeshGrilla()
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
+
+  Private Sub dgvResumen_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvResumen.CellMouseUp
     Try
-      If m_skip Then Exit Sub
-      m_skip = True
-      If txtProducto.Text.Length >= 10 Then
-        If Not Char.IsControl(e.KeyChar) Then
-          e.Handled = True
+      If e.ColumnIndex = 0 Then
+        Dim auxInfo As New clsInfoExportarVisaDebito
+        auxInfo = CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarVisaDebito)
+        If auxInfo.EstadoContrato > 0 Then
+          CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarVisaDebito).Exportar = False
+        Else
+          CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarVisaDebito).Exportar = Not CType(dgvResumen.Rows(e.RowIndex).DataBoundItem, clsInfoExportarVisaDebito).Exportar
         End If
+        ClsInfoExportarVisaDebitoBindingSource.ResetBindings(False)
+        dgvResumen.Refresh()
+        lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
+        txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
       End If
-
-      m_skip = False
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      m_skip = False
-    End Try
-  End Sub
-
-  Private Sub txtProducto_TextChanged(sender As Object, e As EventArgs) Handles txtProducto.TextChanged
-    Try
-      If m_skip Then Exit Sub
-      m_skip = True
-      m_Banco.Producto = txtProducto.Text
-      For Each registro In m_Banco.m_RegistrosExportar
-        registro.Producto = m_Banco.Producto
-      Next
-      RefeshGrilla()
-      m_skip = False
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      m_skip = False
-    End Try
-  End Sub
-
-  Private Sub txtRazonSocial_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRazonSocial.KeyPress
-    Try
-      If m_skip Then Exit Sub
-      m_skip = True
-      If txtRazonSocial.Text.Length >= 35 Then
-        If Not Char.IsControl(e.KeyChar) Then
-          e.Handled = True
-        End If
-      End If
-
-      m_skip = False
-    Catch ex As Exception
-      Print_msg(ex.Message)
-      m_skip = False
-    End Try
-  End Sub
-
-  Private Sub txtRazonSocial_TextChanged(sender As Object, e As EventArgs) Handles txtRazonSocial.TextChanged
-    Try
-      If m_skip Then Exit Sub
-      m_skip = True
-      m_Banco.RazonSocial = txtRazonSocial.Text
-      RefeshGrilla()
-      m_skip = False
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -303,20 +324,20 @@ Public Class frmExportarVisaDebito
         For Each col As DataGridViewColumn In dgvResumen.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        ClsInfoPatagoniaBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
+        ClsInfoExportarVisaDebitoBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
-        ClsInfoPatagoniaBindingSource.ResetBindings(False)
+        ClsInfoExportarVisaDebitoBindingSource.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
       Else
         For Each col As DataGridViewColumn In dgvResumen.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
 
-        ClsInfoPatagoniaBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
+        ClsInfoExportarVisaDebitoBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
-        ClsInfoPatagoniaBindingSource.ResetBindings(False)
+        ClsInfoExportarVisaDebitoBindingSource.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
       End If
 
@@ -326,13 +347,77 @@ Public Class frmExportarVisaDebito
   End Sub
 
 
-  Private Sub dgvResumen_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvResumen.CurrentCellDirtyStateChanged
+  'Private Sub dgvResumen_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvResumen.CurrentCellDirtyStateChanged
+  '  Try
+  '    dgvResumen.EndEdit()
+  '    lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
+  '    txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '  End Try
+  'End Sub
+
+  Private Sub dgvResumen_SelectionChanged(sender As Object, e As EventArgs) Handles dgvResumen.SelectionChanged
     Try
-      dgvResumen.EndEdit()
-      lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
-      txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
+      If dgvResumen.SelectedRows.Count <> 1 Then Exit Sub
+      Call Refresh_Selection(dgvResumen.SelectedRows(0).Index)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub Refresh_Selection(ByVal indice As Integer)
+    Try
+      If indice < 0 Then
+        dgvResumen.ClearSelection()
+        Exit Sub
+      End If
+      If (indice >= 0) Then
+        Dim auxInfo As New clsInfoExportarVisaCredito
+        auxInfo = CType(dgvResumen.Rows(indice).DataBoundItem, clsInfoExportarVisaCredito)
+        cmbEstado.SelectedItem = CType(auxInfo.EstadoContrato, manDB.clsInfoProducto.E_Estado)
+
+      End If
+      If dgvResumen.Rows(indice).Selected <> True Then
+        dgvResumen.Rows(indice).Selected = True
+      End If
+
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub cmbEstado_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbEstado.SelectionChangeCommitted
+    Try
+      If dgvResumen.SelectedRows.Count <> 1 Then Exit Sub
+      If (dgvResumen.SelectedRows(0).Index >= 0) Then
+        Dim auxInfo As New clsInfoExportarVisaDebito
+        auxInfo = CType(dgvResumen.Rows(dgvResumen.SelectedRows(0).Index).DataBoundItem, clsInfoExportarVisaDebito)
+        Dim indiceContrato As Integer = m_Banco.m_RegistrosExportar.FindIndex(Function(c) c.NumeroComprobante = auxInfo.NumeroComprobante)
+        If indiceContrato >= 0 Then
+          m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato = CInt(cmbEstado.SelectedItem)
+
+          If m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato > 0 Then
+            m_Banco.m_RegistrosExportar(indiceContrato).Exportar = False
+            CType(dgvResumen.SelectedRows(0).Cells(0), DataGridViewCheckBoxCell).ReadOnly = True
+          End If
+
+          Dim auxProducto As New clsInfoProducto
+          If clsProducto.Load(m_Banco.m_RegistrosExportar(indiceContrato).GuidProducto, auxProducto) = Result.OK Then
+            auxProducto.Estado = m_Banco.m_RegistrosExportar(indiceContrato).EstadoContrato
+            clsProducto.Save(auxProducto)
+          Else
+            MsgBox("No se puede guardar el cambio de Estado")
+          End If
+          ClsInfoExportarVisaDebitoBindingSource.ResetBindings(False)
+          dgvResumen.Refresh()
+        End If
+
+
+      End If
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
 End Class

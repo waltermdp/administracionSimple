@@ -72,6 +72,7 @@ Partial Class frmDeben
     Me.lblSoftwareInfo = New System.Windows.Forms.Label()
     Me.btnEliminarVenta = New System.Windows.Forms.Button()
     Me.dgvVentas = New System.Windows.Forms.DataGridView()
+    Me.ClsInfoConsultaVentasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblCount = New System.Windows.Forms.Label()
     Me.lblValorCuota = New System.Windows.Forms.Label()
     Me.lblFechaUltimoPago = New System.Windows.Forms.Label()
@@ -95,15 +96,14 @@ Partial Class frmDeben
     Me.GUIDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ClsInfoConsultaVentasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.GroupBox2.SuspendLayout()
     Me.TabControl1.SuspendLayout()
     Me.tbBuscar.SuspendLayout()
     Me.tbResumen.SuspendLayout()
     Me.tbOperaciones.SuspendLayout()
     CType(Me.dgvVentas, System.ComponentModel.ISupportInitialize).BeginInit()
-    Me.Panel1.SuspendLayout()
     CType(Me.ClsInfoConsultaVentasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
     '
     'dtVendidosHasta
@@ -682,6 +682,10 @@ Partial Class frmDeben
     Me.dgvVentas.TabIndex = 70
     Me.dgvVentas.TabStop = False
     '
+    'ClsInfoConsultaVentasBindingSource
+    '
+    Me.ClsInfoConsultaVentasBindingSource.DataSource = GetType(main.clsInfoConsultaVentas)
+    '
     'lblCount
     '
     Me.lblCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
@@ -794,6 +798,7 @@ Partial Class frmDeben
     Me.MetodoPagoDataGridViewTextBoxColumn1.HeaderText = "MetodoPago"
     Me.MetodoPagoDataGridViewTextBoxColumn1.Name = "MetodoPagoDataGridViewTextBoxColumn1"
     Me.MetodoPagoDataGridViewTextBoxColumn1.ReadOnly = True
+    Me.MetodoPagoDataGridViewTextBoxColumn1.Visible = False
     '
     'ClienteNombreDataGridViewTextBoxColumn
     '
@@ -883,10 +888,6 @@ Partial Class frmDeben
     Me.GuidVendedorDataGridViewTextBoxColumn.ReadOnly = True
     Me.GuidVendedorDataGridViewTextBoxColumn.Visible = False
     '
-    'ClsInfoConsultaVentasBindingSource
-    '
-    Me.ClsInfoConsultaVentasBindingSource.DataSource = GetType(main.clsInfoConsultaVentas)
-    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -924,9 +925,9 @@ Partial Class frmDeben
     Me.tbResumen.ResumeLayout(False)
     Me.tbOperaciones.ResumeLayout(False)
     CType(Me.dgvVentas, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.ClsInfoConsultaVentasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.Panel1.ResumeLayout(False)
     Me.Panel1.PerformLayout()
-    CType(Me.ClsInfoConsultaVentasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
 
   End Sub
@@ -977,6 +978,18 @@ Partial Class frmDeben
   Public WithEvents dgvVentas As System.Windows.Forms.DataGridView
   Friend WithEvents ClsInfoConsultaVentasBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents chkMetodoPago As System.Windows.Forms.CheckBox
+  Friend WithEvents Label7 As System.Windows.Forms.Label
+  Friend WithEvents Label6 As System.Windows.Forms.Label
+  Friend WithEvents dtDebenHasta As System.Windows.Forms.DateTimePicker
+  Friend WithEvents chkDebenHasta As System.Windows.Forms.CheckBox
+  Friend WithEvents btnLimpiarCampos As System.Windows.Forms.Button
+  Friend WithEvents lblCount As System.Windows.Forms.Label
+  Friend WithEvents lblValorCuota As System.Windows.Forms.Label
+  Friend WithEvents lblFechaUltimoPago As System.Windows.Forms.Label
+  Friend WithEvents lblCuotasConvenio As System.Windows.Forms.Label
+  Friend WithEvents txtPagosYTipos As System.Windows.Forms.TextBox
+  Friend WithEvents lblNumUltimaCuotaPaga As System.Windows.Forms.Label
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
   Friend WithEvents IDContratoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents IDClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ClienteDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -993,16 +1006,4 @@ Partial Class frmDeben
   Friend WithEvents GUIDClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidProductoDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents Label7 As System.Windows.Forms.Label
-  Friend WithEvents Label6 As System.Windows.Forms.Label
-  Friend WithEvents dtDebenHasta As System.Windows.Forms.DateTimePicker
-  Friend WithEvents chkDebenHasta As System.Windows.Forms.CheckBox
-  Friend WithEvents btnLimpiarCampos As System.Windows.Forms.Button
-  Friend WithEvents lblCount As System.Windows.Forms.Label
-  Friend WithEvents lblValorCuota As System.Windows.Forms.Label
-  Friend WithEvents lblFechaUltimoPago As System.Windows.Forms.Label
-  Friend WithEvents lblCuotasConvenio As System.Windows.Forms.Label
-  Friend WithEvents txtPagosYTipos As System.Windows.Forms.TextBox
-  Friend WithEvents lblNumUltimaCuotaPaga As System.Windows.Forms.Label
-  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

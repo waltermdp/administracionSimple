@@ -295,42 +295,7 @@ Public Class clsCBU
     End Try
   End Function
 
-  Private Shared Function ExportarAVisaCredito(ByVal vMovimientos As List(Of clsInfoExportarCBU)) As Result
-    Try
-      ExportVisaTXT(vMovimientos, "DEBLIQC")
-      Dim xls As New Excel.Application
-      Dim worksheet As Excel.Worksheet
-      Dim workbook As Excel.Workbook
-      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "DEBLIQCempty.xls"), IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"), True)
-      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "DEBLIQC.xls"))
-      Try
-        worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
-        Dim lista As List(Of clsInfoExportarCBU) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
-        For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
-
-          worksheet.Cells(i + 2, 1).value = lista(i).NumeroTarjeta
-          worksheet.Cells(i + 2, 2).value = lista(i).NumeroComprobante
-          worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-          worksheet.Cells(i + 2, 4).value = lista(i).Importe 'acepta 1.23
-          worksheet.Cells(i + 2, 5).value = lista(i).IdentificadorDebito
-          worksheet.Cells(i + 2, 6).value = lista(i).CodigoDeAlta  ' N o E ver especificacion
-        Next
-
-        workbook.SaveCopyAs(IO.Path.Combine(EXPORT_PATH, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
-
-      Finally
-        workbook.Close(False)
-      End Try
-
-      MsgBox("Finalizo GeneracionArchivo")
-
-
-      Return Result.OK
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Function
+ 
 
   'Private Function GenerateHeader(ByRef rLinea As String) As Result
   '  Try
@@ -353,61 +318,7 @@ Public Class clsCBU
   '  End Try
   'End Function
 
-  Private Shared Function ExportVisaTXT(ByVal vMovimientos As List(Of clsInfoExportarCBU), ByVal constante As String) As Result
-    Try
-      Dim lineas As New List(Of String)
-      Dim aux As String = String.Empty
-      Dim FechaGeneracion As Date = GetAhora()
-      'HEADER
-      aux = "0"
-      aux += constante.PadRight(8, " ")
-      aux += "40832883".PadLeft(10, "0") 'NUMERO DE ESTABLECIMIENTO 900000
-      aux += "900000".PadRight(10, " ")
-      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
-      aux += FechaGeneracion.ToString("hhmm").PadLeft(4)
-      aux += "0".PadLeft(1)
-      aux += " ".PadLeft(2, " ")
-      aux += " ".PadLeft(55, " ")
-      aux += "*".PadLeft(1)
-      lineas.Add(aux)
-
-      'BODY
-      For Each movimiento In vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante))
-        aux = "1"
-        aux += movimiento.NumeroTarjeta.ToString.PadLeft(16)
-        aux += " ".PadLeft(3, " ")
-        aux += movimiento.NumeroComprobante.ToString.PadLeft(8, "0")
-        aux += GetHoy.ToString("yyyyMMdd").PadLeft(8)
-        aux += "0005".PadLeft(4)
-        aux += CInt(CSng(movimiento.Importe) * 100).ToString.PadLeft(15, "0")
-        aux += movimiento.IdentificadorDebito.ToString.PadLeft(15, "0")
-        aux += IIf(movimiento.CodigoDeAlta = "E", "E", " ").ToString
-        aux += " ".PadLeft(2, " ")
-        aux += " ".PadLeft(26, " ")
-        aux += "*".PadLeft(1)
-        lineas.Add(aux)
-      Next
-
-      'TAIL
-      aux = "9"
-      aux += constante.PadRight(8, " ")
-      aux += "40832883".PadLeft(10, "0") 'NUMERO DE ESTABLECIMIENTO
-      aux += "900000".PadRight(10, " ")
-      aux += FechaGeneracion.ToString("yyyyMMdd").PadLeft(8)
-      aux += FechaGeneracion.ToString("hhmm").PadLeft(4)
-      aux += vMovimientos.Count.ToString.PadLeft(7, "0")
-      aux += CInt(vMovimientos.Sum(Function(c) CSng(c.Importe)) * 100).ToString.PadLeft(15, "0")
-      aux += " ".PadLeft(36, " ")
-      aux += "*".PadLeft(1)
-      lineas.Add(aux)
-
-      Dim vResult As Result = Save(IO.Path.Combine(EXPORT_PATH, FechaGeneracion.ToString("yyyyMMddhhmm") & "_" & constante & ".txt"), lineas)
-      Return vResult
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-      Return Result.ErrorEx
-    End Try
-  End Function
+  
 
   Public Function GetFileNameExport(ByRef rName As String) As Result
     Try

@@ -130,7 +130,7 @@ Public Class frmDeben
       End If
       Dim qVentasHasta As String = String.Empty
       If chkVendidosHasta.Checked = True Then
-        qVentasHasta = "Productos.FechaVenta<=#" & Format(dtVendidosDesde.Value, strFormatoAnsiStdFecha) & "#"
+        qVentasHasta = "Productos.FechaVenta<=#" & Format(dtVendidosHasta.Value, strFormatoAnsiStdFecha) & "#"
       End If
 
       If Not String.IsNullOrEmpty(qNombreCliente) Then
@@ -856,9 +856,7 @@ Public Class frmDeben
         End Using
       Else
 
-        Using objFormulario As New frmExportarResumen(vTipoPagoSeleccionado)
-          objFormulario.ShowDialog(Me)
-        End Using
+       
       End If
     Catch ex As Exception
       Call Print_msg(ex.Message)
@@ -896,12 +894,20 @@ Public Class frmDeben
         Using objFormImportar As New frmImportarHipotecario(vTipoPagoSeleccionado)
           objFormImportar.ShowDialog(Me)
         End Using
-      Else
-        Using objFormResumen As New frmResumen(vTipoPagoSeleccionado)
-          objFormResumen.ShowDialog(Me)
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_VISA_CREDITO) Then
+        Using objFormImportar As New frmImportarVisaCredito(vTipoPagoSeleccionado)
+          objFormImportar.ShowDialog(Me)
         End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_VISA_DEBITO) Then
+        Using objFormImportar As New frmImportarVisaDebito(vTipoPagoSeleccionado)
+          objFormImportar.ShowDialog(Me)
+        End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_CBU) Then
+        'Using objFormImportar As New frmImportarCBU(vTipoPagoSeleccionado)
+        '  objFormImportar.ShowDialog(Me)
+        'End Using
+      Else
 
-        Call MostrarDeben()
       End If
 
     Catch ex As Exception
