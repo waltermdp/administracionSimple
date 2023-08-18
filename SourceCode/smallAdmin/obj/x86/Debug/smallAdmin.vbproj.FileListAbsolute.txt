@@ -219,3 +219,5 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\De
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarVisaCredito.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarVisaCredito.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarVisaDebito.resources
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarMaster.resources
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarMaster.resources

@@ -6,7 +6,7 @@ Public Class frmExportarCBU
   Private m_TipoPago As clsTipoPago
 
   '
-  Private m_Banco As clsPatagonia
+  Private m_Banco As clsCBU
   Private m_skip As Boolean = False
 
   Public Sub New(ByVal vTipoPago As manDB.clsTipoPago)
@@ -25,17 +25,14 @@ Public Class frmExportarCBU
 
   Private Sub frmExportarPatagonia_Shown(sender As Object, e As EventArgs) Handles Me.Shown
     Try
-      m_Banco = New clsPatagonia(m_TipoPago.GuidTipo)
+      m_Banco = New clsCBU(m_TipoPago.GuidTipo)
       m_skip = True
       dtCurrent.Value = m_Banco.FechaPresentacion
       dtVencimiento.MinDate = dtCurrent.Value
       dtVencimiento.Value = Today.AddDays(2)
       m_Banco.FechaVencimiento = dtVencimiento.Value
       m_Banco.FechaPresentacion = dtCurrent.Value
-      txtProducto.Text = m_Banco.Producto
-      txtRazonSocial.Text = m_Banco.RazonSocial
-      txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
-      txtReferencia.Text = m_Banco.ReferenciaDebito
+ 
       m_skip = False
       RecargarValores()
 
@@ -48,14 +45,11 @@ Public Class frmExportarCBU
     Try
       Dim vResult As Result = m_Banco.CargarContratosAExportar(Me)
 
-      ClsInfoPatagoniaBindingSource.DataSource = m_Banco.m_RegistrosExportar
-      ClsInfoPatagoniaBindingSource.ResetBindings(False)
+      ClsInfoExportarCBUBindingSource.DataSource = m_Banco.m_RegistrosExportar
+      ClsInfoExportarCBUBindingSource.ResetBindings(False)
       lblResumen.Text = String.Format("Total de registros: {0}/{1}", m_Banco.countRegistrosAExportar, m_Banco.countTotalRegistros)
       txtImporteTotal.Text = m_Banco.ImporteTotalAExportar.ToString
-      txtProducto.Text = m_Banco.Producto
-      txtRazonSocial.Text = m_Banco.RazonSocial
-      txtNroCUIT.Text = m_Banco.NroCuitEmpresa.ToString
-      txtReferencia.Text = m_Banco.ReferenciaDebito
+    
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -79,9 +73,7 @@ Public Class frmExportarCBU
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try
       With m_Banco
-        .RazonSocial = txtRazonSocial.Text
-        .Producto = txtProducto.Text
-        .NroCuitEmpresa = CDec(txtNroCUIT.Text)
+       
         .FechaPresentacion = dtCurrent.Value
         .FechaVencimiento = dtVencimiento.Value
       End With
@@ -177,10 +169,7 @@ Public Class frmExportarCBU
 
       'If txtNumeroConvenio.Text.Length <= 0 Then txtNumeroConvenio.Text = 0
       'If txtNumeroConvenio.Text.Length > 5 Then txtNumeroConvenio.Text = txtNumeroConvenio.Text.Substring(0, 5)
-      m_Banco.NroCuitEmpresa = CDec(txtNroCUIT.Text)
-      For Each registro In m_Banco.m_RegistrosExportar
-        registro.NroCuitEmpresa = m_Banco.NroCuitEmpresa
-      Next
+      
       RefeshGrilla()
       m_skip = False
     Catch ex As Exception
@@ -212,10 +201,7 @@ Public Class frmExportarCBU
       'maximo 15
       If m_skip Then Exit Sub
       m_skip = True
-      m_Banco.ReferenciaDebito = txtReferencia.Text
-      For Each registro In m_Banco.m_RegistrosExportar
-        registro.ReferenciaDebito = m_Banco.ReferenciaDebito
-      Next
+     
       RefeshGrilla()
       m_skip = False
     Catch ex As Exception
@@ -227,7 +213,7 @@ Public Class frmExportarCBU
 
   Private Sub RefeshGrilla()
     Try
-      ClsInfoPatagoniaBindingSource.ResetBindings(False)
+      ClsInfoExportarCBUBindingSource.ResetBindings(False)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -254,10 +240,7 @@ Public Class frmExportarCBU
     Try
       If m_skip Then Exit Sub
       m_skip = True
-      m_Banco.Producto = txtProducto.Text
-      For Each registro In m_Banco.m_RegistrosExportar
-        registro.Producto = m_Banco.Producto
-      Next
+     
       RefeshGrilla()
       m_skip = False
     Catch ex As Exception
@@ -287,7 +270,7 @@ Public Class frmExportarCBU
     Try
       If m_skip Then Exit Sub
       m_skip = True
-      m_Banco.RazonSocial = txtRazonSocial.Text
+
       RefeshGrilla()
       m_skip = False
     Catch ex As Exception
@@ -303,20 +286,20 @@ Public Class frmExportarCBU
         For Each col As DataGridViewColumn In dgvResumen.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
-        ClsInfoPatagoniaBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
+        ClsInfoExportarCBUBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderBy(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
-        ClsInfoPatagoniaBindingSource.ResetBindings(False)
+        ClsInfoExportarCBUBindingSource.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Ascending, Windows.Forms.SortOrder)
       Else
         For Each col As DataGridViewColumn In dgvResumen.Columns
           col.HeaderCell.SortGlyphDirection = SortOrder.None
         Next
 
-        ClsInfoPatagoniaBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
+        ClsInfoExportarCBUBindingSource.DataSource = m_Banco.m_RegistrosExportar.OrderByDescending(Function(c) CStr(c.GetType.GetProperty(m_CurrentSortColumn.DataPropertyName).GetValue(c)), New clsComparar).ToList()
 
 
-        ClsInfoPatagoniaBindingSource.ResetBindings(False)
+        ClsInfoExportarCBUBindingSource.ResetBindings(False)
         m_CurrentSortColumn.HeaderCell.SortGlyphDirection = CType(SortOrder.Descending, Windows.Forms.SortOrder)
       End If
 

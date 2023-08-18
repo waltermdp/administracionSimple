@@ -854,6 +854,10 @@ Public Class frmDeben
         Using objFormulario As New frmExportarCBU(vTipoPagoSeleccionado)
           objFormulario.ShowDialog(Me)
         End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_MASTER_DEBITO) Then
+        Using objFormulario As New frmExportarMaster(vTipoPagoSeleccionado)
+          objFormulario.ShowDialog(Me)
+        End Using
       Else
 
        
@@ -906,6 +910,10 @@ Public Class frmDeben
         'Using objFormImportar As New frmImportarCBU(vTipoPagoSeleccionado)
         '  objFormImportar.ShowDialog(Me)
         'End Using
+      ElseIf vTipoPagoSeleccionado.Es(clsModoDebito.GUID_MASTER_DEBITO) Then
+        Using objFormImportar As New frmImportarMaster(vTipoPagoSeleccionado)
+          objFormImportar.ShowDialog(Me)
+        End Using
       Else
 
       End If

@@ -4,7 +4,7 @@ Imports manDB
 Public Class frmImportarPatagonia
   Private m_Result As libCommon.Comunes.Result = Result.CANCEL
 
-  Private m_Banco As clsPatagonia
+  Private m_Banco As clsMaster
 
   Private m_TipoPago As clsTipoPago
 
@@ -16,7 +16,7 @@ Public Class frmImportarPatagonia
     InitializeComponent()
     Try
       m_TipoPago = vTipoPago.Clone
-      m_Banco = New clsPatagonia(vTipoPago.GuidTipo)
+      m_Banco = New clsMaster(vTipoPago.GuidTipo)
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try

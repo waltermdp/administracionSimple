@@ -234,34 +234,34 @@ Public Class clsCobros
     End Try
   End Function
 
-  Public Shared Sub Exportar(ByVal vMovimientos As List(Of clsInfoMovimiento), ByVal vGuidTipoPago As Guid)
-    Try
-      Select Case vGuidTipoPago
-        Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
-          ExportAEfectivo(vMovimientos)
-        Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito 
-          ExportarAVisaDebito(vMovimientos)
-        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
-          ExportarACBU(vMovimientos)
-        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") 'CBU Hipotecario
-          ExportarADebitoHipotecario(vMovimientos, New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926"))
-        Case Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") 'CBU Hipotecario
-          ExportarADebitoHipotecario(vMovimientos, New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7"))
-        Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") 'CBU Patagonia
-          ExportarADebitoPatagonia(vMovimientos)
-        Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
-          ExportarAVisaCredito(vMovimientos)
-        Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
-          ExportAMaster(vMovimientos)
-        Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
-          ExportAMercadoPago(vMovimientos)
-        Case Else
-          MsgBox("No se encuentra tipo de pago")
-      End Select
-    Catch ex As Exception
-      Call Print_msg(ex.Message)
-    End Try
-  End Sub
+  'Public Shared Sub Exportar(ByVal vMovimientos As List(Of clsInfoMovimiento), ByVal vGuidTipoPago As Guid)
+  '  Try
+  '    Select Case vGuidTipoPago
+  '      Case Guid.Parse("9ebcf274-f84f-42ac-b3de-d375bb3bd314") 'efectivo
+  '        ExportAEfectivo(vMovimientos)
+  '      Case Guid.Parse("d167e036-b175-4a67-9305-a47c116e8f5c") 'visa debito 
+  '        ExportarAVisaDebito(vMovimientos)
+  '      Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117924") 'CBU
+  '        ExportarACBU(vMovimientos)
+  '      Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117926") 'CBU Hipotecario
+  '        ExportarADebitoHipotecario(vMovimientos, New Guid("c3daf694-fdef-4e67-b02b-b7b3a9117926"))
+  '      Case Guid.Parse("d1f63b6f-81a0-4699-924b-16a219b44ef7") 'CBU Hipotecario
+  '        ExportarADebitoHipotecario(vMovimientos, New Guid("d1f63b6f-81a0-4699-924b-16a219b44ef7"))
+  '      Case Guid.Parse("c3daf694-fdef-4e67-b02b-b7b3a9117927") 'CBU Patagonia
+  '        ExportarADebitoPatagonia(vMovimientos)
+  '      Case Guid.Parse("7580f2d4-d9ec-477b-9e3a-50afb7141ab5") 'visa credito
+  '        ExportarAVisaCredito(vMovimientos)
+  '      Case Guid.Parse("ea5d6084-90c3-4b66-82b2-9c4816c07523") 'master debito
+  '        ExportAMaster(vMovimientos)
+  '      Case Guid.Parse("598878be-b8b3-4b1b-9261-f989f0800afc") 'Mercado Pago
+  '        ExportAMercadoPago(vMovimientos)
+  '      Case Else
+  '        MsgBox("No se encuentra tipo de pago")
+  '    End Select
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
 
   'Verificado

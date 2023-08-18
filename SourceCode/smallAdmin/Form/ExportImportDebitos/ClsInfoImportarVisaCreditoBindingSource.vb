@@ -1,4 +1,0 @@
-﻿
-Class ClsInfoImportarVisaCreditoBindingSource
-
-End Class

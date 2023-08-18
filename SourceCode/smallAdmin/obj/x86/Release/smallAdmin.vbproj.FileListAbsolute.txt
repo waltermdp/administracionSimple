@@ -170,3 +170,5 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucProgreso.resources
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.vbproj.GenerateResource.Cache
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarVisaDebito.resources
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarMaster.resources
+d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarMaster.resources
