@@ -79,8 +79,13 @@ Public Class frmLiquidacionVendedores
 
   Private Sub frmLiquidacionVendedores_Load(sender As Object, e As EventArgs) Handles Me.Load
     Try
-      dtInicio.Format = DateTimePickerFormat.Custom
-      dtInicio.CustomFormat = "MMMM, yyyy"
+      'dtFrom.Format = DateTimePickerFormat.Custom
+      'dtTo.Format = DateTimePickerFormat.Custom
+      'dtInicio.CustomFormat = "MMMM, yyyy"
+      dtFrom.Value = New Date(g_Today.Year, g_Today.Month, 1)
+      dtTo.Value = New Date(g_Today.Year, g_Today.Month, Date.DaysInMonth(g_Today.Year, g_Today.Month))
+      dtTo.MinDate = dtFrom.Value
+      dtFrom.MaxDate = dtTo.Value
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -104,10 +109,10 @@ Public Class frmLiquidacionVendedores
       Call SearchAdelantos()
 
       Call ResolverLiquidacion()
-      pbxResumen.Size = New Size(pbxResumen.Size.Width, 80 * 20)
-      Call pbxResumen.Refresh()
-      pbxResumen.Height = m_CantidadRenglones * 20
-      Call pbxResumen.Refresh()
+      chkEnable.Size = New Size(chkEnable.Size.Width, 80 * 20)
+      Call chkEnable.Refresh()
+      chkEnable.Height = m_CantidadRenglones * 20
+      Call chkEnable.Refresh()
       btnImprimir.Visible = True
 
     Catch ex As Exception
@@ -122,8 +127,8 @@ Public Class frmLiquidacionVendedores
       If m_objListPagos IsNot Nothing Then m_objListPagos.Dispose()
 
 
-      m_FechaFin = New Date(dtInicio.Value.Year, dtInicio.Value.Month, Date.DaysInMonth(dtInicio.Value.Year, dtInicio.Value.Month))
-      m_FechaInicio = New Date(dtInicio.Value.Year, dtInicio.Value.Month, 1)
+      m_FechaFin = New Date(dtTo.Value.Year, dtTo.Value.Month, dtTo.Value.Day)
+      m_FechaInicio = New Date(dtFrom.Value.Year, dtFrom.Value.Month, dtFrom.Value.Day)
 
       m_objListPagos = New clsListPagos
       m_objListPagos.Cfg_Filtro = "where EstadoPago = " & E_EstadoPago.Pago & " and NumCuota=1 and FechaPago between #" & Format(m_FechaInicio, strFormatoAnsiStdFecha) & "# and #" & Format(m_FechaFin, strFormatoAnsiStdFecha) & "#"
@@ -168,9 +173,8 @@ Public Class frmLiquidacionVendedores
 
       If m_objListPagos IsNot Nothing Then m_objListPagos.Dispose()
 
-
-      m_FechaFin = New Date(dtInicio.Value.Year, dtInicio.Value.Month, Date.DaysInMonth(dtInicio.Value.Year, dtInicio.Value.Month))
-      m_FechaInicio = New Date(dtInicio.Value.Year, dtInicio.Value.Month, 1)
+      m_FechaFin = New Date(dtTo.Value.Year, dtTo.Value.Month, dtTo.Value.Day)
+      m_FechaInicio = New Date(dtFrom.Value.Year, dtFrom.Value.Month, dtFrom.Value.Day)
 
       Dim Adelantos As New clsListAdelantos
       Adelantos.Cfg_Filtro = "where GuidVendedor={" & m_Vendedor.GuidVendedor.ToString & "} and Fecha between #" & Format(m_FechaInicio, strFormatoAnsiStdFecha) & "# and #" & Format(m_FechaFin, strFormatoAnsiStdFecha) & "#"
@@ -210,6 +214,7 @@ Public Class frmLiquidacionVendedores
           Exit Sub
         End If
         venta.Comision = CDec(venta.Importe * pVenta / 100)
+        'Aplicar aca si es % por cada producto vendido
       Next
 
       For i As Integer = 0 To 3
@@ -237,6 +242,7 @@ Public Class frmLiquidacionVendedores
         If chkAuto.Checked Then .Auto = Auto * m_Liq.ImporteTotal / 100
         If chkVendedores.Checked Then .Vendedores = Vendedores * m_Liq.ImporteTotal / 100
         If chkAguinaldo.Checked Then .Aguinaldo = Aguinaldo * m_Liq.ImporteTotal / 100
+        'Aplicar aca si es % sobre el importe total
         .Vales = Vales
         ImporteParcial = .ComisionTotal + .VLiquidadas50 + .VLiquidadas70 + .VLiquidadas90 + .VLiquidadas110 + .Zona + .PremMen80Vent + .CarpetaDeProb + .Auto + .Vendedores
         .Total = ImporteParcial - .Vales
@@ -259,7 +265,7 @@ Public Class frmLiquidacionVendedores
     End Try
   End Sub
 
-  Private Sub pbxResumen_Paint(sender As Object, e As PaintEventArgs) Handles pbxResumen.Paint
+  Private Sub pbxResumen_Paint(sender As Object, e As PaintEventArgs) Handles chkEnable.Paint
     Try
       If m_Liq.TotalesIntervalos Is Nothing Then Exit Sub
       e.Graphics.Clear(Color.White)
@@ -286,7 +292,7 @@ Public Class frmLiquidacionVendedores
       e.Graphics.ScaleTransform(0.8, 0.8)
 
       e.Graphics.TranslateTransform(40, CSng(-20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas))) 'desplazar n renglones con cada hoja extra
-      e.Graphics.Clip = New Region(New Rectangle(0, CInt(20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas)), pbxResumen.Width, 20 * MAX_RENGLONES))
+      e.Graphics.Clip = New Region(New Rectangle(0, CInt(20 * MAX_RENGLONES * (Math.Ceiling(m_CantidadRenglones / MAX_RENGLONES) - TotalPaginas)), chkEnable.Width, 20 * MAX_RENGLONES))
       e.Graphics.Clear(Color.White)
 
       Call Preview(e.Graphics)
@@ -318,7 +324,7 @@ Public Class frmLiquidacionVendedores
       Dim sf As New Drawing.StringFormat
       sf.Trimming = StringTrimming.Word
 
-      g.DrawString("LIQUIDACION " & MonthName(dtInicio.Value.Month).ToUpper & ": " & m_Vendedor.ToString, fuente, Brushes.Black, 0, 0)
+      g.DrawString("LIQUIDACION Desde " & dtFrom.Value.ToString("yyyy/MM/dd").ToUpper & " Hasta " & dtTo.Value.ToString("yyyy/MM/dd").ToUpper & ": " & m_Vendedor.ToString, fuente, Brushes.Black, 0, 0)
       g.DrawLine(New Pen(Brushes.Black, 3), New Point(0, RenAltura), New Point(300, RenAltura))
 
       'espacio
@@ -495,6 +501,22 @@ Public Class frmLiquidacionVendedores
     End Try
   End Sub
 
+  Private Sub dtTo_ValueChanged(sender As Object, e As EventArgs) Handles dtTo.ValueChanged
+    Try
 
+      dtFrom.MaxDate = dtTo.Value
+      dtTo.Refresh()
+    Catch ex As Exception
+      Call libCommon.Comunes.Print_msg(ex.Message)
+    End Try
+  End Sub
 
+  Private Sub dtFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtFrom.ValueChanged
+    Try
+      dtTo.MinDate = dtFrom.Value
+      dtFrom.Refresh()
+    Catch ex As Exception
+      Call libCommon.Comunes.Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

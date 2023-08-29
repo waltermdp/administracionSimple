@@ -26,9 +26,8 @@ Partial Class frmLiquidacionVendedores
     Me.lblFecha = New System.Windows.Forms.Label()
     Me.Label1 = New System.Windows.Forms.Label()
     Me.btnLiquidar = New System.Windows.Forms.Button()
-    Me.dtInicio = New System.Windows.Forms.DateTimePicker()
     Me.btnVolver = New System.Windows.Forms.Button()
-    Me.pbxResumen = New System.Windows.Forms.PictureBox()
+    Me.chkEnable = New System.Windows.Forms.PictureBox()
     Me.Panel1 = New System.Windows.Forms.Panel()
     Me.chkAuto = New System.Windows.Forms.CheckBox()
     Me.chkZona = New System.Windows.Forms.CheckBox()
@@ -47,22 +46,28 @@ Partial Class frmLiquidacionVendedores
     Me.txtVale = New System.Windows.Forms.TextBox()
     Me.bsVendedores = New System.Windows.Forms.BindingSource(Me.components)
     Me.lblTitulo = New System.Windows.Forms.Label()
-    CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.dtFrom = New System.Windows.Forms.DateTimePicker()
+    Me.dtTo = New System.Windows.Forms.DateTimePicker()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.chkEnablePorcentaje1 = New System.Windows.Forms.CheckBox()
+    Me.nPorcentaje1 = New System.Windows.Forms.NumericUpDown()
+    CType(Me.chkEnable, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.nPorcentaje1, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'lblFecha
     '
-    Me.lblFecha.AutoSize = True
     Me.lblFecha.BackColor = System.Drawing.Color.Transparent
     Me.lblFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblFecha.Location = New System.Drawing.Point(193, 72)
+    Me.lblFecha.Location = New System.Drawing.Point(193, 58)
     Me.lblFecha.Name = "lblFecha"
-    Me.lblFecha.Size = New System.Drawing.Size(50, 15)
+    Me.lblFecha.Size = New System.Drawing.Size(97, 22)
     Me.lblFecha.TabIndex = 0
-    Me.lblFecha.Text = "Periodo"
+    Me.lblFecha.Text = "Fecha Inicio:"
+    Me.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight
     '
     'Label1
     '
@@ -86,14 +91,6 @@ Partial Class frmLiquidacionVendedores
     Me.btnLiquidar.Text = "Liquidar"
     Me.btnLiquidar.UseVisualStyleBackColor = False
     '
-    'dtInicio
-    '
-    Me.dtInicio.Location = New System.Drawing.Point(255, 66)
-    Me.dtInicio.Name = "dtInicio"
-    Me.dtInicio.ShowUpDown = True
-    Me.dtInicio.Size = New System.Drawing.Size(200, 20)
-    Me.dtInicio.TabIndex = 37
-    '
     'btnVolver
     '
     Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
@@ -108,21 +105,21 @@ Partial Class frmLiquidacionVendedores
     Me.btnVolver.Text = "Volver"
     Me.btnVolver.UseVisualStyleBackColor = False
     '
-    'pbxResumen
+    'chkEnable
     '
-    Me.pbxResumen.BackColor = System.Drawing.Color.White
-    Me.pbxResumen.Location = New System.Drawing.Point(22, 26)
-    Me.pbxResumen.Name = "pbxResumen"
-    Me.pbxResumen.Size = New System.Drawing.Size(988, 537)
-    Me.pbxResumen.TabIndex = 41
-    Me.pbxResumen.TabStop = False
+    Me.chkEnable.BackColor = System.Drawing.Color.White
+    Me.chkEnable.Location = New System.Drawing.Point(22, 26)
+    Me.chkEnable.Name = "chkEnable"
+    Me.chkEnable.Size = New System.Drawing.Size(988, 537)
+    Me.chkEnable.TabIndex = 41
+    Me.chkEnable.TabStop = False
     '
     'Panel1
     '
     Me.Panel1.AutoScroll = True
     Me.Panel1.BackColor = System.Drawing.Color.Silver
     Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-    Me.Panel1.Controls.Add(Me.pbxResumen)
+    Me.Panel1.Controls.Add(Me.chkEnable)
     Me.Panel1.Location = New System.Drawing.Point(196, 213)
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Size = New System.Drawing.Size(1056, 485)
@@ -190,6 +187,8 @@ Partial Class frmLiquidacionVendedores
     'GroupBox1
     '
     Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.nPorcentaje1)
+    Me.GroupBox1.Controls.Add(Me.chkEnablePorcentaje1)
     Me.GroupBox1.Controls.Add(Me.chk110)
     Me.GroupBox1.Controls.Add(Me.chk90)
     Me.GroupBox1.Controls.Add(Me.chk70)
@@ -204,9 +203,9 @@ Partial Class frmLiquidacionVendedores
     Me.GroupBox1.Controls.Add(Me.chkVendedores)
     Me.GroupBox1.Controls.Add(Me.chkAguinaldo)
     Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.GroupBox1.Location = New System.Drawing.Point(196, 108)
+    Me.GroupBox1.Location = New System.Drawing.Point(196, 86)
     Me.GroupBox1.Name = "GroupBox1"
-    Me.GroupBox1.Size = New System.Drawing.Size(924, 66)
+    Me.GroupBox1.Size = New System.Drawing.Size(924, 107)
     Me.GroupBox1.TabIndex = 48
     Me.GroupBox1.TabStop = False
     Me.GroupBox1.Text = "Aplicar"
@@ -320,18 +319,70 @@ Partial Class frmLiquidacionVendedores
     Me.lblTitulo.Text = "VENDEDOR"
     Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
     '
+    'dtFrom
+    '
+    Me.dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+    Me.dtFrom.Location = New System.Drawing.Point(296, 60)
+    Me.dtFrom.Name = "dtFrom"
+    Me.dtFrom.Size = New System.Drawing.Size(141, 20)
+    Me.dtFrom.TabIndex = 50
+    '
+    'dtTo
+    '
+    Me.dtTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+    Me.dtTo.Location = New System.Drawing.Point(565, 58)
+    Me.dtTo.Name = "dtTo"
+    Me.dtTo.Size = New System.Drawing.Size(120, 20)
+    Me.dtTo.TabIndex = 51
+    '
+    'Label3
+    '
+    Me.Label3.BackColor = System.Drawing.Color.Transparent
+    Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label3.Location = New System.Drawing.Point(452, 58)
+    Me.Label3.Name = "Label3"
+    Me.Label3.Size = New System.Drawing.Size(97, 22)
+    Me.Label3.TabIndex = 52
+    Me.Label3.Text = "Fecha Fin:"
+    Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+    '
+    'chkEnablePorcentaje1
+    '
+    Me.chkEnablePorcentaje1.AutoSize = True
+    Me.chkEnablePorcentaje1.BackColor = System.Drawing.Color.White
+    Me.chkEnablePorcentaje1.Location = New System.Drawing.Point(6, 67)
+    Me.chkEnablePorcentaje1.Name = "chkEnablePorcentaje1"
+    Me.chkEnablePorcentaje1.Size = New System.Drawing.Size(90, 19)
+    Me.chkEnablePorcentaje1.TabIndex = 56
+    Me.chkEnablePorcentaje1.Text = "% PorVenta"
+    Me.chkEnablePorcentaje1.UseVisualStyleBackColor = False
+    '
+    'nPorcentaje1
+    '
+    Me.nPorcentaje1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.nPorcentaje1.DecimalPlaces = 1
+    Me.nPorcentaje1.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+    Me.nPorcentaje1.Location = New System.Drawing.Point(100, 66)
+    Me.nPorcentaje1.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+    Me.nPorcentaje1.Name = "nPorcentaje1"
+    Me.nPorcentaje1.Size = New System.Drawing.Size(81, 21)
+    Me.nPorcentaje1.TabIndex = 57
+    Me.nPorcentaje1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+    '
     'frmLiquidacionVendedores
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.Label3)
+    Me.Controls.Add(Me.dtTo)
+    Me.Controls.Add(Me.dtFrom)
     Me.Controls.Add(Me.lblTitulo)
     Me.Controls.Add(Me.GroupBox1)
     Me.Controls.Add(Me.btnImprimir)
     Me.Controls.Add(Me.Panel1)
     Me.Controls.Add(Me.btnVolver)
-    Me.Controls.Add(Me.dtInicio)
     Me.Controls.Add(Me.btnLiquidar)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.lblFecha)
@@ -339,11 +390,12 @@ Partial Class frmLiquidacionVendedores
     Me.Name = "frmLiquidacionVendedores"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmLiquidacionVendedores"
-    CType(Me.pbxResumen, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.chkEnable, System.ComponentModel.ISupportInitialize).EndInit()
     Me.Panel1.ResumeLayout(False)
     Me.GroupBox1.ResumeLayout(False)
     Me.GroupBox1.PerformLayout()
     CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.nPorcentaje1, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -352,9 +404,8 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents btnLiquidar As System.Windows.Forms.Button
   Friend WithEvents bsVendedores As System.Windows.Forms.BindingSource
-  Friend WithEvents dtInicio As System.Windows.Forms.DateTimePicker
   Friend WithEvents btnVolver As System.Windows.Forms.Button
-  Friend WithEvents pbxResumen As System.Windows.Forms.PictureBox
+  Friend WithEvents chkEnable As System.Windows.Forms.PictureBox
   Friend WithEvents Panel1 As System.Windows.Forms.Panel
   Friend WithEvents chkAuto As System.Windows.Forms.CheckBox
   Friend WithEvents chkZona As System.Windows.Forms.CheckBox
@@ -372,4 +423,9 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents chk70 As System.Windows.Forms.CheckBox
   Friend WithEvents chk50 As System.Windows.Forms.CheckBox
   Friend WithEvents chk110 As System.Windows.Forms.CheckBox
+  Friend WithEvents dtFrom As System.Windows.Forms.DateTimePicker
+  Friend WithEvents dtTo As System.Windows.Forms.DateTimePicker
+  Friend WithEvents nPorcentaje1 As System.Windows.Forms.NumericUpDown
+  Friend WithEvents chkEnablePorcentaje1 As System.Windows.Forms.CheckBox
+  Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class
