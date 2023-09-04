@@ -35,6 +35,8 @@ Partial Class frmLiquidacionVendedores
     Me.chkVendedores = New System.Windows.Forms.CheckBox()
     Me.btnImprimir = New System.Windows.Forms.Button()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+    Me.nPorcentaje1 = New System.Windows.Forms.NumericUpDown()
+    Me.chkEnablePorcentaje1 = New System.Windows.Forms.CheckBox()
     Me.chk110 = New System.Windows.Forms.CheckBox()
     Me.chk90 = New System.Windows.Forms.CheckBox()
     Me.chk70 = New System.Windows.Forms.CheckBox()
@@ -49,13 +51,14 @@ Partial Class frmLiquidacionVendedores
     Me.dtFrom = New System.Windows.Forms.DateTimePicker()
     Me.dtTo = New System.Windows.Forms.DateTimePicker()
     Me.Label3 = New System.Windows.Forms.Label()
-    Me.chkEnablePorcentaje1 = New System.Windows.Forms.CheckBox()
-    Me.nPorcentaje1 = New System.Windows.Forms.NumericUpDown()
+    Me.chkEnablePorcentaje2 = New System.Windows.Forms.CheckBox()
+    Me.nPorcentaje2 = New System.Windows.Forms.NumericUpDown()
     CType(Me.chkEnable, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
     Me.GroupBox1.SuspendLayout()
-    CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nPorcentaje1, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.nPorcentaje2, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'lblFecha
@@ -187,6 +190,8 @@ Partial Class frmLiquidacionVendedores
     'GroupBox1
     '
     Me.GroupBox1.BackColor = System.Drawing.Color.White
+    Me.GroupBox1.Controls.Add(Me.nPorcentaje2)
+    Me.GroupBox1.Controls.Add(Me.chkEnablePorcentaje2)
     Me.GroupBox1.Controls.Add(Me.nPorcentaje1)
     Me.GroupBox1.Controls.Add(Me.chkEnablePorcentaje1)
     Me.GroupBox1.Controls.Add(Me.chk110)
@@ -209,6 +214,29 @@ Partial Class frmLiquidacionVendedores
     Me.GroupBox1.TabIndex = 48
     Me.GroupBox1.TabStop = False
     Me.GroupBox1.Text = "Aplicar"
+    '
+    'nPorcentaje1
+    '
+    Me.nPorcentaje1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.nPorcentaje1.DecimalPlaces = 1
+    Me.nPorcentaje1.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+    Me.nPorcentaje1.Location = New System.Drawing.Point(100, 66)
+    Me.nPorcentaje1.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+    Me.nPorcentaje1.Name = "nPorcentaje1"
+    Me.nPorcentaje1.Size = New System.Drawing.Size(81, 21)
+    Me.nPorcentaje1.TabIndex = 57
+    Me.nPorcentaje1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+    '
+    'chkEnablePorcentaje1
+    '
+    Me.chkEnablePorcentaje1.AutoSize = True
+    Me.chkEnablePorcentaje1.BackColor = System.Drawing.Color.White
+    Me.chkEnablePorcentaje1.Location = New System.Drawing.Point(6, 67)
+    Me.chkEnablePorcentaje1.Name = "chkEnablePorcentaje1"
+    Me.chkEnablePorcentaje1.Size = New System.Drawing.Size(90, 19)
+    Me.chkEnablePorcentaje1.TabIndex = 56
+    Me.chkEnablePorcentaje1.Text = "% PorVenta"
+    Me.chkEnablePorcentaje1.UseVisualStyleBackColor = False
     '
     'chk110
     '
@@ -346,28 +374,28 @@ Partial Class frmLiquidacionVendedores
     Me.Label3.Text = "Fecha Fin:"
     Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
     '
-    'chkEnablePorcentaje1
+    'chkEnablePorcentaje2
     '
-    Me.chkEnablePorcentaje1.AutoSize = True
-    Me.chkEnablePorcentaje1.BackColor = System.Drawing.Color.White
-    Me.chkEnablePorcentaje1.Location = New System.Drawing.Point(6, 67)
-    Me.chkEnablePorcentaje1.Name = "chkEnablePorcentaje1"
-    Me.chkEnablePorcentaje1.Size = New System.Drawing.Size(90, 19)
-    Me.chkEnablePorcentaje1.TabIndex = 56
-    Me.chkEnablePorcentaje1.Text = "% PorVenta"
-    Me.chkEnablePorcentaje1.UseVisualStyleBackColor = False
+    Me.chkEnablePorcentaje2.AutoSize = True
+    Me.chkEnablePorcentaje2.BackColor = System.Drawing.Color.White
+    Me.chkEnablePorcentaje2.Location = New System.Drawing.Point(203, 67)
+    Me.chkEnablePorcentaje2.Name = "chkEnablePorcentaje2"
+    Me.chkEnablePorcentaje2.Size = New System.Drawing.Size(95, 19)
+    Me.chkEnablePorcentaje2.TabIndex = 58
+    Me.chkEnablePorcentaje2.Text = "% PorGlobal"
+    Me.chkEnablePorcentaje2.UseVisualStyleBackColor = False
     '
-    'nPorcentaje1
+    'nPorcentaje2
     '
-    Me.nPorcentaje1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-    Me.nPorcentaje1.DecimalPlaces = 1
-    Me.nPorcentaje1.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-    Me.nPorcentaje1.Location = New System.Drawing.Point(100, 66)
-    Me.nPorcentaje1.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
-    Me.nPorcentaje1.Name = "nPorcentaje1"
-    Me.nPorcentaje1.Size = New System.Drawing.Size(81, 21)
-    Me.nPorcentaje1.TabIndex = 57
-    Me.nPorcentaje1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+    Me.nPorcentaje2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    Me.nPorcentaje2.DecimalPlaces = 1
+    Me.nPorcentaje2.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+    Me.nPorcentaje2.Location = New System.Drawing.Point(304, 65)
+    Me.nPorcentaje2.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+    Me.nPorcentaje2.Name = "nPorcentaje2"
+    Me.nPorcentaje2.Size = New System.Drawing.Size(81, 21)
+    Me.nPorcentaje2.TabIndex = 59
+    Me.nPorcentaje2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
     '
     'frmLiquidacionVendedores
     '
@@ -394,8 +422,9 @@ Partial Class frmLiquidacionVendedores
     Me.Panel1.ResumeLayout(False)
     Me.GroupBox1.ResumeLayout(False)
     Me.GroupBox1.PerformLayout()
-    CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.nPorcentaje1, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.bsVendedores, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.nPorcentaje2, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -428,4 +457,6 @@ Partial Class frmLiquidacionVendedores
   Friend WithEvents nPorcentaje1 As System.Windows.Forms.NumericUpDown
   Friend WithEvents chkEnablePorcentaje1 As System.Windows.Forms.CheckBox
   Friend WithEvents Label3 As System.Windows.Forms.Label
+  Friend WithEvents nPorcentaje2 As System.Windows.Forms.NumericUpDown
+  Friend WithEvents chkEnablePorcentaje2 As System.Windows.Forms.CheckBox
 End Class

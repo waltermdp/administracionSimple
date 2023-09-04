@@ -8,6 +8,8 @@
   Private m_Vendedor As String
   Private m_Periodo As String
   Private m_Comision As Decimal
+  Private m_IDContrato As Integer
+  Private m_Fecha1ErPago As Date
 
   Public Property Cliente As String
     Get
@@ -33,6 +35,24 @@
     End Get
     Set(value As Date)
       m_Fecha = value
+    End Set
+  End Property
+
+  Public Property Fecha1erPago As Date
+    Get
+      Return m_Fecha1ErPago
+    End Get
+    Set(value As Date)
+      m_Fecha1ErPago = value
+    End Set
+  End Property
+
+  Public Property IDContrato As Integer
+    Get
+      Return m_IDContrato
+    End Get
+    Set(value As Integer)
+      m_IDContrato = value
     End Set
   End Property
 
