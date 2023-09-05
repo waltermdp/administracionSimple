@@ -33,7 +33,7 @@ Public Class frmEditarPagos
       m_skip = True
 
       DesactivarBotones()
-
+      dtFechaPago.Value = g_Today
 
       InformacionCuotas()
 
@@ -60,6 +60,7 @@ Public Class frmEditarPagos
       btnAplicaPago.Enabled = False
       btnClearPago.Enabled = False
       btnSeleccionarCuenta.Enabled = False
+      dtFechaPago.Enabled = False
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -229,6 +230,7 @@ Public Class frmEditarPagos
         End If
         If m_CurrentCuota.EstadoPago = E_EstadoPago.Debe Then
           btnAplicaPago.Enabled = True
+          dtFechaPago.Enabled = True
           btnSeleccionarCuenta.Enabled = True
         End If
       End If
@@ -258,7 +260,7 @@ Public Class frmEditarPagos
     Try
       If m_CurrentCuota.EstadoPago = E_EstadoPago.Debe Then
         m_CurrentCuota.EstadoPago = E_EstadoPago.Pago
-        m_CurrentCuota.FechaPago = g_Today
+        m_CurrentCuota.FechaPago = dtFechaPago.Value  'g_Today
         If m_CurrentCuota.NumCuota < m_Producto.TotalCuotas Then
           'establecer proxima cuota como debe
           'get proxima cuota->establecerla como debe

@@ -379,7 +379,9 @@ Public Class frmDeben
 
 
         lblValorCuota.Text = String.Format("{0,-21}", "Precio Cuota:") & String.Format("{0,12}", String.Format(g_Cultura, "{0:C}", m_CurrentVenta.ValorCuota))
-        lblCuotasConvenio.Text = String.Format("{0,-21}", "Cuotas Contrato:") & String.Format("{0,12}", Cuotas.Count.ToString("00"))
+        Dim nPagadas As Integer = Cuotas.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
+        lblCuotasConvenio.Text = String.Format("{0,-21}", "Cuotas Pagadas/Contrato:") & String.Format("{0,6}/{1}", nPagadas.ToString("00"), Cuotas.Count.ToString("00"))
+
         txtPagosYTipos.Text = String.Join(vbNewLine, lstCuotas)
 
 

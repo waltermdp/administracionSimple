@@ -305,8 +305,12 @@ Public Class frmEstablecerPagos
             End If
             cuotaPagar.FechaPago = Date.MinValue
             If SetPrimerPago Then
-              cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebeProximo
-              SetPrimerPago = False
+              If cuotaPagar.VencimientoCuota > g_Today Then
+                cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebeProximo
+                SetPrimerPago = False
+              Else
+                cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.Debe
+              End If
             Else
               cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebePendiente
             End If

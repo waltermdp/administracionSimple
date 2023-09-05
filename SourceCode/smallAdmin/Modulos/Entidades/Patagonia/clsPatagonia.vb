@@ -503,6 +503,7 @@ Public Class clsPatagonia
           If objCliente.Items.Count = 1 Then
             item.Nombre = objCliente.Items.First.ToString
           End If
+         
           Dim objCuentas As New clsListaCuentas
           objCuentas.Cfg_Filtro = "WHERE GuidCuenta={" & objVenta.Items.First.GuidCuenta.ToString & "} and TipoDeCuenta={c3daf694-fdef-4e67-b02b-b7b3a9117927}"
           objCuentas.RefreshData()
