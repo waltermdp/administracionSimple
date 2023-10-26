@@ -73,4 +73,12 @@ Public Class frmTipoDeArchivo
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  Private Sub btnContinuarImpExp_Click(sender As Object, e As EventArgs) Handles btnContinuarImpExp.Click
+    Try
+
+    Catch ex As Exception
+
+    End Try
+  End Sub
 End Class

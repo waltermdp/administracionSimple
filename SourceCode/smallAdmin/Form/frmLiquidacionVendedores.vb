@@ -92,6 +92,24 @@ Public Class frmLiquidacionVendedores
 
       m_porcentajeVentaPorCuota = {10, 10, 10, 10}
 
+      chk110.Enabled = False
+      chk50.Enabled = False
+      chk70.Enabled = False
+      chk90.Enabled = False
+      chkCarpetaProb.Enabled = False
+      chkPremio80Vent.Enabled = False
+      chkVendedores.Enabled = False
+      chkZona.Enabled = False
+
+      chk110.Visible = False
+      chk50.Visible = False
+      chk70.Visible = False
+      chk90.Visible = False
+      chkCarpetaProb.Visible = False
+      chkPremio80Vent.Visible = False
+      chkVendedores.Visible = False
+      chkZona.Visible = False
+
     Catch ex As Exception
       Call Print_msg(ex.Message)
     End Try
@@ -322,12 +340,13 @@ Public Class frmLiquidacionVendedores
     End Try
   End Sub
 
+
   Private Sub Preview(ByRef g As Graphics)
     Try
       Dim renglon As Integer = 1
       Dim RenAltura As Integer = 20
       Dim Columna As Integer = 150
-      Dim Comision() As String = {"1 A 4 CUOTAS", "5 A 8 CUOTAS", "9 A 12 CUOTAS", "12 A 18 CUOTAS"}
+      'Dim Comision() As String = {"1 A 4 CUOTAS", "5 A 8 CUOTAS", "9 A 12 CUOTAS", "12 A 18 CUOTAS"}
       Dim Intervalos(,) As Integer = {{1, 4}, {5, 8}, {9, 12}, {13, 18}}
 
       Dim CantidadItems As Integer = 0
@@ -343,44 +362,45 @@ Public Class frmLiquidacionVendedores
 
       renglon = 2
 
-      For i As Integer = 0 To 3
+
+      renglon += 1
+      g.DrawString("VENTAS", m_fuenteBold, Brushes.Black, 0, RenAltura * renglon)
+      g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon + 1)), New Point(200, RenAltura * (renglon + 1)))
+      renglon += 1
+      g.DrawString("FECHA", fuente, Brushes.Black, 0, RenAltura * renglon)
+      g.DrawString("NOMBRE", fuente, Brushes.Black, 100, RenAltura * renglon)
+      g.DrawString("DOCUMENTO", fuente, Brushes.Black, 450, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawString("CANT ITEMS", fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawString("IMPORTE", fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawString(String.Format("COMISION {0}%", m_porcentajeVentaPorCuota(0)), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+
+      'llenar los campos
+      CantidadItems = 0
+      SumImporte = 0
+      SumComision = 0
+      g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon + 1)), New Point(Columna * 6, RenAltura * (renglon + 1)))
+      For Each item In m_lstResumenVentas.OrderBy(Function(c) c.Fecha)
         renglon += 1
-        g.DrawString(Comision(i), m_fuenteBold, Brushes.Black, 0, RenAltura * renglon)
-        g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon + 1)), New Point(200, RenAltura * (renglon + 1)))
-        renglon += 1
-        g.DrawString("FECHA", fuente, Brushes.Black, 0, RenAltura * renglon)
-        g.DrawString("NOMBRE", fuente, Brushes.Black, 100, RenAltura * renglon)
-        g.DrawString("DOCUMENTO", fuente, Brushes.Black, 450, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-        g.DrawString("CANT ITEMS", fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-        g.DrawString("IMPORTE", fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-        g.DrawString(String.Format("COMISION {0}%", m_porcentajeVentaPorCuota(i)), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-       
-        'llenar los campos
-        CantidadItems = 0
-        SumImporte = 0
-        SumComision = 0
-        g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon + 1)), New Point(Columna * 6, RenAltura * (renglon + 1)))
-        For Each item In m_lstResumenVentas.Where(Function(c) c.Cuotas >= Intervalos(i, 0) AndAlso c.Cuotas <= Intervalos(i, 1)).OrderBy(Function(c) c.Fecha)
-          renglon += 1
-          g.DrawString(item.Fecha.ToString("dd/MM/yyyy"), fuente, Brushes.Black, 0, RenAltura * renglon)
-          g.DrawString(item.Cliente, fuente, Brushes.Black, New Rectangle(100, RenAltura * renglon, 250, RenAltura))
-          g.DrawString(item.DNI, fuente, Brushes.Black, 450, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-          sf.Alignment = StringAlignment.Center
-          g.DrawString(item.CantItems.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon, sf)
-          g.DrawString(String.Format(g_Cultura, "{0:C}", item.Importe), fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-          g.DrawString(String.Format(g_Cultura, "{0:C}", item.Comision), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-          CantidadItems += item.CantItems
-          SumImporte += item.Importe
-          SumComision += item.Comision
-        Next
-        renglon += 1
-        g.DrawString("TOTAL", fuente, Brushes.Black, 0, RenAltura * renglon)
-        g.DrawString(CantidadItems.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
-        g.DrawString(String.Format(g_Cultura, "{0:C}", SumImporte), fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-        g.DrawString(String.Format(g_Cultura, "{0:C}", SumComision), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-        g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
-        renglon += 1
+        g.DrawString(item.Fecha.ToString("dd/MM/yyyy"), fuente, Brushes.Black, 0, RenAltura * renglon)
+        g.DrawString(item.Cliente, fuente, Brushes.Black, New Rectangle(100, RenAltura * renglon, 250, RenAltura))
+        g.DrawString(item.DNI, fuente, Brushes.Black, 450, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+        sf.Alignment = StringAlignment.Center
+        g.DrawString(item.CantItems.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon, sf)
+        g.DrawString(String.Format(g_Cultura, "{0:C}", item.Importe), fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+        g.DrawString(String.Format(g_Cultura, "{0:C}", item.Comision), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+        CantidadItems += item.CantItems
+        SumImporte += item.Importe
+        SumComision += item.Comision
       Next
+      renglon += 1
+      g.DrawString("TOTAL", fuente, Brushes.Black, 0, RenAltura * renglon)
+      g.DrawString(CantidadItems.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
+      g.DrawString(String.Format(g_Cultura, "{0:C}", SumImporte), fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawString(String.Format(g_Cultura, "{0:C}", SumComision), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
+      renglon += 1
+
+
       renglon += 1
       renglon += 1
       renglon += 1
@@ -402,72 +422,13 @@ Public Class frmLiquidacionVendedores
       renglon += 1
       sf = New StringFormat(StringFormatFlags.DirectionRightToLeft)
       sf.Alignment = StringAlignment.Center
-      g.DrawString(Comision(0), fuente, Brushes.Black, 0, RenAltura * renglon)
+      g.DrawString("VENTA", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(m_porcentajeVentaPorCuota(0) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(0)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(0)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.ComisionTotal), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
       renglon += 1
-      g.DrawString(Comision(1), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_porcentajeVentaPorCuota(1) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(1)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(1)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString(Comision(2), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_porcentajeVentaPorCuota(2) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(2)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(2)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString(Comision(3), fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(m_porcentajeVentaPorCuota(3) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.TotalesIntervalos(3)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(3)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
+      
 
-      g.DrawString("ZONA", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(Zona & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Zona), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("V. LIQUIDADAS 50", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas50 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas50), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("V. LIQUIDADAS 70", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas70 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas70), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("V. LIQUIDADAS 90", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas90 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas90), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("V. LIQUIDADAS 110", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(VLiquidadas110 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas110), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("PREMIO MENSUAL 80 VTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(PremMen80Vent & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.PremMen80Vent), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("CARPETA DE PROBLEMAS + DE 5", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(CarpetaDeProb & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.CarpetaDeProb), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("AUTO", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(Auto & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Auto), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
-      g.DrawString("VENDEDORES", fuente, Brushes.Black, 0, RenAltura * renglon)
-      g.DrawString(Vendedores & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
-      g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Vendedores), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
-      renglon += 1
       g.DrawString("FIJO", fuente, Brushes.Black, 0, RenAltura * renglon)
       g.DrawString(String.Format("{0}%", nPorcentaje1.Value), fuente, Brushes.Black, aux1, RenAltura * renglon)
       g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
@@ -507,6 +468,192 @@ Public Class frmLiquidacionVendedores
       Call Print_msg(ex.Message)
     End Try
   End Sub
+
+  'Private Sub Preview(ByRef g As Graphics)
+  '  Try
+  '    Dim renglon As Integer = 1
+  '    Dim RenAltura As Integer = 20
+  '    Dim Columna As Integer = 150
+  '    Dim Comision() As String = {"1 A 4 CUOTAS", "5 A 8 CUOTAS", "9 A 12 CUOTAS", "12 A 18 CUOTAS"}
+  '    Dim Intervalos(,) As Integer = {{1, 4}, {5, 8}, {9, 12}, {13, 18}}
+
+  '    Dim CantidadItems As Integer = 0
+  '    Dim SumImporte As Decimal = 0
+  '    Dim SumComision As Decimal = 0
+  '    Dim sf As New Drawing.StringFormat
+  '    sf.Trimming = StringTrimming.Word
+
+  '    g.DrawString("LIQUIDACION Desde " & dtFrom.Value.ToString("yyyy/MM/dd").ToUpper & " Hasta " & dtTo.Value.ToString("yyyy/MM/dd").ToUpper & ": " & m_Vendedor.ToString, m_fuenteBold, Brushes.Black, 0, 0)
+  '    g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura), New Point(500, RenAltura))
+
+  '    'espacio
+
+  '    renglon = 2
+
+  '    For i As Integer = 0 To 3
+  '      renglon += 1
+  '      g.DrawString(Comision(i), m_fuenteBold, Brushes.Black, 0, RenAltura * renglon)
+  '      g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon + 1)), New Point(200, RenAltura * (renglon + 1)))
+  '      renglon += 1
+  '      g.DrawString("FECHA", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '      g.DrawString("NOMBRE", fuente, Brushes.Black, 100, RenAltura * renglon)
+  '      g.DrawString("DOCUMENTO", fuente, Brushes.Black, 450, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '      g.DrawString("CANT ITEMS", fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '      g.DrawString("IMPORTE", fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '      g.DrawString(String.Format("COMISION {0}%", m_porcentajeVentaPorCuota(i)), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+
+  '      'llenar los campos
+  '      CantidadItems = 0
+  '      SumImporte = 0
+  '      SumComision = 0
+  '      g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon + 1)), New Point(Columna * 6, RenAltura * (renglon + 1)))
+  '      For Each item In m_lstResumenVentas.Where(Function(c) c.Cuotas >= Intervalos(i, 0) AndAlso c.Cuotas <= Intervalos(i, 1)).OrderBy(Function(c) c.Fecha)
+  '        renglon += 1
+  '        g.DrawString(item.Fecha.ToString("dd/MM/yyyy"), fuente, Brushes.Black, 0, RenAltura * renglon)
+  '        g.DrawString(item.Cliente, fuente, Brushes.Black, New Rectangle(100, RenAltura * renglon, 250, RenAltura))
+  '        g.DrawString(item.DNI, fuente, Brushes.Black, 450, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '        sf.Alignment = StringAlignment.Center
+  '        g.DrawString(item.CantItems.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon, sf)
+  '        g.DrawString(String.Format(g_Cultura, "{0:C}", item.Importe), fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '        g.DrawString(String.Format(g_Cultura, "{0:C}", item.Comision), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '        CantidadItems += item.CantItems
+  '        SumImporte += item.Importe
+  '        SumComision += item.Comision
+  '      Next
+  '      renglon += 1
+  '      g.DrawString("TOTAL", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '      g.DrawString(CantidadItems.ToString, fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
+  '      g.DrawString(String.Format(g_Cultura, "{0:C}", SumImporte), fuente, Brushes.Black, Columna * 5, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '      g.DrawString(String.Format(g_Cultura, "{0:C}", SumComision), fuente, Brushes.Black, Columna * 6, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '      g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
+  '      renglon += 1
+  '    Next
+  '    renglon += 1
+  '    renglon += 1
+  '    renglon += 1
+  '    'Comisiones
+  '    Dim aux1 As Integer = 250
+  '    g.DrawString("COMISIONES VENTA", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    renglon += 2
+  '    g.DrawString("TOTAL DE ITEMS", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(m_Liq.CantidadLibros.ToString, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
+  '    renglon += 1
+  '    g.DrawString("TOTAL VENDIDO", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 1, RenAltura * renglon)
+  '    renglon += 2
+  '    g.DrawString("VENTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString("%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString("REFERENCIA", fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString("IMPORTE", fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    'g.DrawString("TOTAL", fuente, Brushes.Black, Columna * 4, RenAltura * renglon)
+  '    renglon += 1
+  '    sf = New StringFormat(StringFormatFlags.DirectionRightToLeft)
+  '    sf.Alignment = StringAlignment.Center
+  '    g.DrawString(Comision(0), fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(m_porcentajeVentaPorCuota(0) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.TotalesIntervalos(0)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(0)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString(Comision(1), fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(m_porcentajeVentaPorCuota(1) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.TotalesIntervalos(1)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(1)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString(Comision(2), fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(m_porcentajeVentaPorCuota(2) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.TotalesIntervalos(2)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(2)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString(Comision(3), fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(m_porcentajeVentaPorCuota(3) & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.TotalesIntervalos(3)(3).ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.TotalesIntervalos(3)(4)), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+
+  '    g.DrawString("ZONA", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(Zona & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Zona), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("V. LIQUIDADAS 50", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(VLiquidadas50 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas50), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("V. LIQUIDADAS 70", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(VLiquidadas70 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas70), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("V. LIQUIDADAS 90", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(VLiquidadas90 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas90), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("V. LIQUIDADAS 110", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(VLiquidadas110 & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.VLiquidadas110), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("PREMIO MENSUAL 80 VTAS", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(PremMen80Vent & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.PremMen80Vent), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("CARPETA DE PROBLEMAS + DE 5", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(CarpetaDeProb & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.CarpetaDeProb), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("AUTO", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(Auto & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Auto), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("VENDEDORES", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(Vendedores & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Vendedores), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawString("FIJO", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(String.Format("{0}%", nPorcentaje1.Value), fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    g.DrawString(m_Liq.ImporteTotal.ToString, fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.PorcentajeFijoPorVenta), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
+  '    g.DrawString("PARCIAL", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", ImporteParcial), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    renglon += 1
+  '    g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(Columna * 6, RenAltura * (renglon)))
+  '    g.DrawString("VALES", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Vales), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    renglon += 1
+
+  '    g.DrawString("TOTAL", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Total), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    renglon += 1
+  '    g.DrawLine(New Pen(Brushes.Black, 2), New Point(0, RenAltura * (renglon - 1)), New Point(Columna * 6, RenAltura * (renglon - 1)))
+  '    'g.DrawString("AGUINALDO", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    'g.DrawString(Aguinaldo & "%", fuente, Brushes.Black, aux1, RenAltura * renglon)
+  '    'g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.ImporteTotal), fuente, Brushes.Black, Columna * 3, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+  '    'g.DrawString(String.Format(g_Cultura, "{0:C}", m_Liq.Aguinaldo), fuente, Brushes.Black, Columna * 4, RenAltura * renglon, New StringFormat(StringFormatFlags.DirectionRightToLeft))
+
+  '    renglon += 4
+  '    g.DrawString("FIRMA", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(500, RenAltura * (renglon)))
+  '    renglon += 2
+  '    g.DrawString("ACLARACION", fuente, Brushes.Black, 0, RenAltura * renglon)
+  '    g.DrawLine(New Pen(Brushes.Black, 1), New Point(0, RenAltura * (renglon)), New Point(500, RenAltura * (renglon)))
+
+
+  '    m_CantidadRenglones = renglon
+
+  '  Catch ex As Exception
+  '    Call Print_msg(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub btnImprimir_MouseClick(sender As Object, e As MouseEventArgs) Handles btnImprimir.MouseClick
     Try

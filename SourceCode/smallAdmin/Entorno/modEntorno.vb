@@ -185,8 +185,8 @@ Module Entorno
     Try
 
       Return Result.NOK
-      Dim Fila As Integer
-      Dim objResult As Result
+      Dim Fila As Integer = -1
+      Dim objResult As Result = Result.OK
 
       Fila = FreeFile()
 

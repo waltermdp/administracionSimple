@@ -61,6 +61,7 @@ Public Class frmEditarPagos
       btnClearPago.Enabled = False
       btnSeleccionarCuenta.Enabled = False
       dtFechaPago.Enabled = False
+      btnEditarFechaDebe.Enabled = False
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -232,6 +233,7 @@ Public Class frmEditarPagos
           btnAplicaPago.Enabled = True
           dtFechaPago.Enabled = True
           btnSeleccionarCuenta.Enabled = True
+          btnEditarFechaDebe.Enabled = True
         End If
       End If
 
@@ -307,9 +309,49 @@ Public Class frmEditarPagos
       ClsInfoPagosBindingSource.ResetBindings(False)
       dgvResumen.Refresh()
     Catch ex As Exception
-
+      libCommon.Comunes.Print_msg(ex.Message)
     End Try
   End Sub
 
   
+  Private Sub btnEditarFechaDebe_Click(sender As Object, e As EventArgs) Handles btnEditarFechaDebe.Click
+    Try
+      If (m_CurrentCuota.EstadoPago = E_EstadoPago.Debe) Then
+        'buscar ultima fecha de pago
+        Dim iActual As Integer = m_lstPagos.FindIndex(Function(c) c.NumCuota = m_CurrentCuota.NumCuota)
+
+        Dim ii As Integer = m_lstPagos.FindIndex(Function(c) c.EstadoPago = E_EstadoPago.Pago AndAlso c.FechaPago = m_lstPagos.Max(Function(j) j.FechaPago))
+
+        'Dim aux As clsInfoPagos = m_lstPagos.FindLast(Function(c) c.EstadoPago = E_EstadoPago.Pago)
+        Dim minDate As Date
+        If ii >= 0 Then ' aux IsNot Nothing Then
+          minDate = m_lstPagos(ii).FechaPago  'aux.FechaPago
+        Else
+          minDate = New Date(m_CurrentCuota.VencimientoCuota.Year, m_CurrentCuota.VencimientoCuota.Month, 1)
+        End If
+        Dim SelectedDate As Date = minDate
+        Dim vResult As libCommon.Comunes.Result
+        Using objForm As New frmSelectDate(minDate)
+          objForm.ShowDialog(Me)
+          vResult = objForm.GetResult(SelectedDate)
+        End Using
+        If vResult <> Result.OK Then Exit Sub
+
+        Dim indice As Integer = m_lstPagos.FindIndex(Function(c) c.NumCuota = m_CurrentCuota.NumCuota)
+        If indice >= 0 Then
+          Dim nextPay As Integer = 0
+          For i As Integer = indice To m_Producto.TotalCuotas - 1
+            m_lstPagos(i).VencimientoCuota = DateAdd(DateInterval.Month, nextPay, SelectedDate)
+            nextPay += 1
+          Next
+        End If
+       
+      End If
+      ClsInfoPagosBindingSource.ResetBindings(False)
+      dgvResumen.Refresh()
+
+    Catch ex As Exception
+      libCommon.Comunes.Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

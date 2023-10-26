@@ -144,6 +144,12 @@
     <Compile Include="Controles\ucTextBoxNumerico.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Form\Auxiliar\frmSelectDate.Designer.vb">
+      <DependentUpon>frmSelectDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Auxiliar\frmSelectDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\ExportImportDebitos\frmExportarMaster.Designer.vb">
       <DependentUpon>frmExportarMaster.vb</DependentUpon>
     </Compile>
@@ -415,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmArticulo.resx">
       <DependentUpon>frmArticulo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Auxiliar\frmSelectDate.resx">
+      <DependentUpon>frmSelectDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ExportImportDebitos\frmExportarMaster.resx">
       <DependentUpon>frmExportarMaster.vb</DependentUpon>

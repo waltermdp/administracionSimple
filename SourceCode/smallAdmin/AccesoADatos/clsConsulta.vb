@@ -46,6 +46,7 @@ Public Class clsConsulta
       '"SELECT GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & "D1F63B6F-81A0-4699-924B-16A219B44EF7" & "}"
       'strSQL = "SELECT DISTINCT GuidProducto FROM Pagos WHERE GuidCuenta IN (SELECT GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & "D1F63B6F-81A0-4699-924B-16A219B44EF7" & "})"
       'strSQL = "SELECT Clientes.NumCliente, Clientes.Nombre, Clientes.Apellido, Vendedores.Nombre, Vendedores.Apellido, Productos.TotalCuotas, Productos.NumComprobante, Productos.GuidProducto, Productos.GuidCliente, Productos.GuidVendedor FROM Clientes, Productos, Vendedores WHERE (Clientes.GuidCliente=Productos.GuidCliente) AND (Vendedores.GuidVendedor=Productos.GuidVendedor) AND " & "Productos.GuidProducto IN (SELECT DISTINCT GuidProducto FROM Pagos WHERE GuidCuenta IN (SELECT GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & "D1F63B6F-81A0-4699-924B-16A219B44EF7" & "}))"
+      'strSQL = "SELECT Clientes.NumCliente, Clientes.Nombre, Clientes.Apellido, Vendedores.Nombre, Vendedores.Apellido, Productos.TotalCuotas, Productos.NumComprobante, Productos.GuidProducto, Productos.GuidCliente, Productos.GuidVendedor, Productos.ValorCuotaFija FROM Clientes, Productos, Vendedores WHERE (Clientes.GuidCliente=Productos.GuidCliente) AND (Vendedores.GuidVendedor=Productos.GuidVendedor) AND (Productos.NumComprobante Like '%15%')"
       objResult = vObjDB.GetDato(strSQL, dt)
 
       '--- Devuelvo OK cuando no hay resultados -->

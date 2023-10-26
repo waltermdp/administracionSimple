@@ -102,13 +102,20 @@ Public Class frmDeben
       Dim qNombreCliente As String = String.Empty
       If Not String.IsNullOrEmpty(txtNombreCliente.Text.Trim) Then
         'crear consulta nombre, apellido
-        qNombreCliente = " Clientes.GuidCliente IN (SELECT Clientes.GuidCliente FROM Clientes WHERE (Clientes.Nombre Like '%" & txtNombreCliente.Text.Trim & "%' OR Clientes.Apellido Like '%" & txtNombreCliente.Text.Trim & "%'))"
+        qNombreCliente = "Clientes.GuidCliente IN (SELECT Clientes.GuidCliente FROM Clientes WHERE (Clientes.Nombre Like '%" & txtNombreCliente.Text.Trim & "%' OR Clientes.Apellido Like '%" & txtNombreCliente.Text.Trim & "%' OR Clientes.ID Like '%" & txtNombreCliente.Text.Trim & "%'))"
       End If
       Dim qNombreVendedor As String = String.Empty
       If Not String.IsNullOrEmpty(txtNombreVendedor.Text.Trim) Then
         'crear consulta nombre, apellido
         qNombreVendedor = "Vendedores.GuidVendedor IN (SELECT Vendedores.GuidVendedor FROM Vendedores WHERE (Vendedores.Nombre Like '%" & txtNombreVendedor.Text.Trim & "%' OR Vendedores.Apellido Like '%" & txtNombreVendedor.Text.Trim & "%'))"
       End If
+      Dim qNroContrato As String = String.Empty
+      If Not String.IsNullOrEmpty(txtNroContrato.Text.Trim) Then
+        'crear consulta nombre, apellido
+        qNroContrato = "Productos.NumComprobante Like '%" & txtNroContrato.Text.Trim & "%'" ' "Productos.GuidCliente IN (SELECT Productos.GuidCliente FROM Productos WHERE (Productos.NumComprobante Like '%" & txtNroContrato.Text.Trim & "%'))"
+      End If
+      
+
       'cuotas pagas
       Dim qGuidMetodoPago As String = String.Empty
       If chkMetodoPago.Checked Then
@@ -141,6 +148,11 @@ Public Class frmDeben
         If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "
         rconsulta = rconsulta & qNombreVendedor
       End If
+      If Not String.IsNullOrEmpty(qNroContrato) Then
+        If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "
+        rconsulta = rconsulta & qNroContrato
+      End If
+
       If Not String.IsNullOrEmpty(qGuidMetodoPago) AndAlso chkMetodoPago.Checked Then
         If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "
         rconsulta = rconsulta & qGuidMetodoPago
@@ -183,6 +195,14 @@ Public Class frmDeben
       End If
       ClsInfoConsultaVentasBindingSource.DataSource = m_lstConsulta
       ClsInfoConsultaVentasBindingSource.ResetBindings(False)
+      Dim resultxmetodo As String = String.Empty
+      'For Each metodoPago As clsTipoPago In cmbMetodosDePago.Items
+
+      '  Dim encontrados As Integer = m_lstConsulta.FindAll(Function(c) c.MetodoPago.ToUpper.Equals(metodoPago.Nombre.ToUpper)).Count
+      '  If encontrados > 0 Then
+      '    resultxmetodo = resultxmetodo & encontrados.ToString
+      '  End If
+      'Next
       lblCount.Text = String.Format("Cantidad: {0}", m_lstConsulta.Count.ToString("00"))
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -493,6 +513,9 @@ Public Class frmDeben
         Exit Sub
       End If
 
+      If MsgBox("Desea eliminar la siguiente VENTA?") <> MsgBoxResult.Yes Then
+        Exit Sub
+      End If
       '1- RESTAURAR Articulos Vendidos a STOCK
       Dim listArticulos As New List(Of clsInfoArticuloVendido)
       vResult = clsRelArtProd.Load(listArticulos, m_CurrentVenta.Guid_Producto)

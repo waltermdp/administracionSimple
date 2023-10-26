@@ -72,14 +72,6 @@ Partial Class frmDeben
     Me.lblSoftwareInfo = New System.Windows.Forms.Label()
     Me.btnEliminarVenta = New System.Windows.Forms.Button()
     Me.dgvVentas = New System.Windows.Forms.DataGridView()
-    Me.ClsInfoConsultaVentasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.lblCount = New System.Windows.Forms.Label()
-    Me.lblValorCuota = New System.Windows.Forms.Label()
-    Me.lblFechaUltimoPago = New System.Windows.Forms.Label()
-    Me.lblCuotasConvenio = New System.Windows.Forms.Label()
-    Me.txtPagosYTipos = New System.Windows.Forms.TextBox()
-    Me.lblNumUltimaCuotaPaga = New System.Windows.Forms.Label()
-    Me.Panel1 = New System.Windows.Forms.Panel()
     Me.IDContratoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClienteDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -96,6 +88,16 @@ Partial Class frmDeben
     Me.GUIDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidVendedorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoConsultaVentasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.lblCount = New System.Windows.Forms.Label()
+    Me.lblValorCuota = New System.Windows.Forms.Label()
+    Me.lblFechaUltimoPago = New System.Windows.Forms.Label()
+    Me.lblCuotasConvenio = New System.Windows.Forms.Label()
+    Me.txtPagosYTipos = New System.Windows.Forms.TextBox()
+    Me.lblNumUltimaCuotaPaga = New System.Windows.Forms.Label()
+    Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.lblNroContrato = New System.Windows.Forms.Label()
+    Me.txtNroContrato = New System.Windows.Forms.TextBox()
     Me.GroupBox2.SuspendLayout()
     Me.TabControl1.SuspendLayout()
     Me.tbBuscar.SuspendLayout()
@@ -256,7 +258,7 @@ Partial Class frmDeben
     'chkMetodoPago
     '
     Me.chkMetodoPago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkMetodoPago.Location = New System.Drawing.Point(17, 64)
+    Me.chkMetodoPago.Location = New System.Drawing.Point(17, 94)
     Me.chkMetodoPago.Name = "chkMetodoPago"
     Me.chkMetodoPago.Size = New System.Drawing.Size(154, 23)
     Me.chkMetodoPago.TabIndex = 71
@@ -266,7 +268,7 @@ Partial Class frmDeben
     'txtNombreVendedor
     '
     Me.txtNombreVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtNombreVendedor.Location = New System.Drawing.Point(161, 37)
+    Me.txtNombreVendedor.Location = New System.Drawing.Point(161, 38)
     Me.txtNombreVendedor.Name = "txtNombreVendedor"
     Me.txtNombreVendedor.Size = New System.Drawing.Size(275, 22)
     Me.txtNombreVendedor.TabIndex = 68
@@ -275,7 +277,7 @@ Partial Class frmDeben
     '
     Me.cmbMetodosDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbMetodosDePago.FormattingEnabled = True
-    Me.cmbMetodosDePago.Location = New System.Drawing.Point(177, 65)
+    Me.cmbMetodosDePago.Location = New System.Drawing.Point(177, 95)
     Me.cmbMetodosDePago.Name = "cmbMetodosDePago"
     Me.cmbMetodosDePago.Size = New System.Drawing.Size(259, 24)
     Me.cmbMetodosDePago.TabIndex = 50
@@ -457,6 +459,8 @@ Partial Class frmDeben
     '
     'tbBuscar
     '
+    Me.tbBuscar.Controls.Add(Me.lblNroContrato)
+    Me.tbBuscar.Controls.Add(Me.txtNroContrato)
     Me.tbBuscar.Controls.Add(Me.btnLimpiarCampos)
     Me.tbBuscar.Controls.Add(Me.dtDebenHasta)
     Me.tbBuscar.Controls.Add(Me.chkDebenHasta)
@@ -495,7 +499,7 @@ Partial Class frmDeben
     'dtDebenHasta
     '
     Me.dtDebenHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.dtDebenHasta.Location = New System.Drawing.Point(177, 92)
+    Me.dtDebenHasta.Location = New System.Drawing.Point(177, 122)
     Me.dtDebenHasta.Name = "dtDebenHasta"
     Me.dtDebenHasta.Size = New System.Drawing.Size(259, 22)
     Me.dtDebenHasta.TabIndex = 75
@@ -503,7 +507,7 @@ Partial Class frmDeben
     'chkDebenHasta
     '
     Me.chkDebenHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkDebenHasta.Location = New System.Drawing.Point(17, 93)
+    Me.chkDebenHasta.Location = New System.Drawing.Point(17, 123)
     Me.chkDebenHasta.Name = "chkDebenHasta"
     Me.chkDebenHasta.Size = New System.Drawing.Size(154, 23)
     Me.chkDebenHasta.TabIndex = 74
@@ -513,7 +517,7 @@ Partial Class frmDeben
     'Label7
     '
     Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label7.Location = New System.Drawing.Point(14, 35)
+    Me.Label7.Location = New System.Drawing.Point(14, 36)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(100, 23)
     Me.Label7.TabIndex = 73
@@ -682,88 +686,6 @@ Partial Class frmDeben
     Me.dgvVentas.TabIndex = 70
     Me.dgvVentas.TabStop = False
     '
-    'ClsInfoConsultaVentasBindingSource
-    '
-    Me.ClsInfoConsultaVentasBindingSource.DataSource = GetType(main.clsInfoConsultaVentas)
-    '
-    'lblCount
-    '
-    Me.lblCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.lblCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCount.Location = New System.Drawing.Point(149, 380)
-    Me.lblCount.Name = "lblCount"
-    Me.lblCount.Size = New System.Drawing.Size(767, 23)
-    Me.lblCount.TabIndex = 77
-    Me.lblCount.Text = "Cantidad: 000"
-    Me.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-    '
-    'lblValorCuota
-    '
-    Me.lblValorCuota.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblValorCuota.Location = New System.Drawing.Point(5, 34)
-    Me.lblValorCuota.Name = "lblValorCuota"
-    Me.lblValorCuota.Size = New System.Drawing.Size(307, 23)
-    Me.lblValorCuota.TabIndex = 79
-    Me.lblValorCuota.Text = "Label2"
-    Me.lblValorCuota.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'lblFechaUltimoPago
-    '
-    Me.lblFechaUltimoPago.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblFechaUltimoPago.Location = New System.Drawing.Point(5, 57)
-    Me.lblFechaUltimoPago.Name = "lblFechaUltimoPago"
-    Me.lblFechaUltimoPago.Size = New System.Drawing.Size(307, 23)
-    Me.lblFechaUltimoPago.TabIndex = 80
-    Me.lblFechaUltimoPago.Text = "Label2"
-    Me.lblFechaUltimoPago.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'lblCuotasConvenio
-    '
-    Me.lblCuotasConvenio.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblCuotasConvenio.Location = New System.Drawing.Point(5, 107)
-    Me.lblCuotasConvenio.Name = "lblCuotasConvenio"
-    Me.lblCuotasConvenio.Size = New System.Drawing.Size(307, 23)
-    Me.lblCuotasConvenio.TabIndex = 81
-    Me.lblCuotasConvenio.Text = "Label2"
-    Me.lblCuotasConvenio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'txtPagosYTipos
-    '
-    Me.txtPagosYTipos.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.txtPagosYTipos.BorderStyle = System.Windows.Forms.BorderStyle.None
-    Me.txtPagosYTipos.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtPagosYTipos.Location = New System.Drawing.Point(8, 133)
-    Me.txtPagosYTipos.Multiline = True
-    Me.txtPagosYTipos.Name = "txtPagosYTipos"
-    Me.txtPagosYTipos.ReadOnly = True
-    Me.txtPagosYTipos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-    Me.txtPagosYTipos.Size = New System.Drawing.Size(304, 232)
-    Me.txtPagosYTipos.TabIndex = 82
-    Me.txtPagosYTipos.Text = "List"
-    '
-    'lblNumUltimaCuotaPaga
-    '
-    Me.lblNumUltimaCuotaPaga.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblNumUltimaCuotaPaga.Location = New System.Drawing.Point(5, 80)
-    Me.lblNumUltimaCuotaPaga.Name = "lblNumUltimaCuotaPaga"
-    Me.lblNumUltimaCuotaPaga.Size = New System.Drawing.Size(307, 23)
-    Me.lblNumUltimaCuotaPaga.TabIndex = 83
-    Me.lblNumUltimaCuotaPaga.Text = "Label2"
-    Me.lblNumUltimaCuotaPaga.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'Panel1
-    '
-    Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
-    Me.Panel1.Controls.Add(Me.lblValorCuota)
-    Me.Panel1.Controls.Add(Me.lblNumUltimaCuotaPaga)
-    Me.Panel1.Controls.Add(Me.lblFechaUltimoPago)
-    Me.Panel1.Controls.Add(Me.txtPagosYTipos)
-    Me.Panel1.Controls.Add(Me.lblCuotasConvenio)
-    Me.Panel1.Location = New System.Drawing.Point(935, 35)
-    Me.Panel1.Name = "Panel1"
-    Me.Panel1.Size = New System.Drawing.Size(320, 368)
-    Me.Panel1.TabIndex = 84
-    '
     'IDContratoDataGridViewTextBoxColumn
     '
     Me.IDContratoDataGridViewTextBoxColumn.DataPropertyName = "IDContrato"
@@ -888,6 +810,106 @@ Partial Class frmDeben
     Me.GuidVendedorDataGridViewTextBoxColumn.ReadOnly = True
     Me.GuidVendedorDataGridViewTextBoxColumn.Visible = False
     '
+    'ClsInfoConsultaVentasBindingSource
+    '
+    Me.ClsInfoConsultaVentasBindingSource.DataSource = GetType(main.clsInfoConsultaVentas)
+    '
+    'lblCount
+    '
+    Me.lblCount.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.lblCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCount.Location = New System.Drawing.Point(149, 380)
+    Me.lblCount.Name = "lblCount"
+    Me.lblCount.Size = New System.Drawing.Size(767, 23)
+    Me.lblCount.TabIndex = 77
+    Me.lblCount.Text = "Cantidad: 000"
+    Me.lblCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+    '
+    'lblValorCuota
+    '
+    Me.lblValorCuota.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblValorCuota.Location = New System.Drawing.Point(5, 34)
+    Me.lblValorCuota.Name = "lblValorCuota"
+    Me.lblValorCuota.Size = New System.Drawing.Size(307, 23)
+    Me.lblValorCuota.TabIndex = 79
+    Me.lblValorCuota.Text = "Label2"
+    Me.lblValorCuota.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'lblFechaUltimoPago
+    '
+    Me.lblFechaUltimoPago.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblFechaUltimoPago.Location = New System.Drawing.Point(5, 57)
+    Me.lblFechaUltimoPago.Name = "lblFechaUltimoPago"
+    Me.lblFechaUltimoPago.Size = New System.Drawing.Size(307, 23)
+    Me.lblFechaUltimoPago.TabIndex = 80
+    Me.lblFechaUltimoPago.Text = "Label2"
+    Me.lblFechaUltimoPago.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'lblCuotasConvenio
+    '
+    Me.lblCuotasConvenio.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblCuotasConvenio.Location = New System.Drawing.Point(5, 107)
+    Me.lblCuotasConvenio.Name = "lblCuotasConvenio"
+    Me.lblCuotasConvenio.Size = New System.Drawing.Size(307, 23)
+    Me.lblCuotasConvenio.TabIndex = 81
+    Me.lblCuotasConvenio.Text = "Label2"
+    Me.lblCuotasConvenio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtPagosYTipos
+    '
+    Me.txtPagosYTipos.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.txtPagosYTipos.BorderStyle = System.Windows.Forms.BorderStyle.None
+    Me.txtPagosYTipos.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtPagosYTipos.Location = New System.Drawing.Point(8, 133)
+    Me.txtPagosYTipos.Multiline = True
+    Me.txtPagosYTipos.Name = "txtPagosYTipos"
+    Me.txtPagosYTipos.ReadOnly = True
+    Me.txtPagosYTipos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+    Me.txtPagosYTipos.Size = New System.Drawing.Size(304, 232)
+    Me.txtPagosYTipos.TabIndex = 82
+    Me.txtPagosYTipos.Text = "List"
+    '
+    'lblNumUltimaCuotaPaga
+    '
+    Me.lblNumUltimaCuotaPaga.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblNumUltimaCuotaPaga.Location = New System.Drawing.Point(5, 80)
+    Me.lblNumUltimaCuotaPaga.Name = "lblNumUltimaCuotaPaga"
+    Me.lblNumUltimaCuotaPaga.Size = New System.Drawing.Size(307, 23)
+    Me.lblNumUltimaCuotaPaga.TabIndex = 83
+    Me.lblNumUltimaCuotaPaga.Text = "Label2"
+    Me.lblNumUltimaCuotaPaga.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(199, Byte), Integer))
+    Me.Panel1.Controls.Add(Me.lblValorCuota)
+    Me.Panel1.Controls.Add(Me.lblNumUltimaCuotaPaga)
+    Me.Panel1.Controls.Add(Me.lblFechaUltimoPago)
+    Me.Panel1.Controls.Add(Me.txtPagosYTipos)
+    Me.Panel1.Controls.Add(Me.lblCuotasConvenio)
+    Me.Panel1.Location = New System.Drawing.Point(935, 35)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(320, 368)
+    Me.Panel1.TabIndex = 84
+    '
+    'lblNroContrato
+    '
+    Me.lblNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblNroContrato.Location = New System.Drawing.Point(14, 64)
+    Me.lblNroContrato.Name = "lblNroContrato"
+    Me.lblNroContrato.Size = New System.Drawing.Size(100, 23)
+    Me.lblNroContrato.TabIndex = 78
+    Me.lblNroContrato.Text = "Nro Contrato:"
+    Me.lblNroContrato.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtNroContrato
+    '
+    Me.txtNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNroContrato.Location = New System.Drawing.Point(161, 66)
+    Me.txtNroContrato.Name = "txtNroContrato"
+    Me.txtNroContrato.Size = New System.Drawing.Size(275, 22)
+    Me.txtNroContrato.TabIndex = 77
+    '
     'frmDeben
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1006,4 +1028,6 @@ Partial Class frmDeben
   Friend WithEvents GUIDClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidProductoDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents lblNroContrato As System.Windows.Forms.Label
+  Friend WithEvents txtNroContrato As System.Windows.Forms.TextBox
 End Class

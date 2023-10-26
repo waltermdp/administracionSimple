@@ -36,8 +36,11 @@ Partial Class frmEditarPagos
     Me.Label7 = New System.Windows.Forms.Label()
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.Label10 = New System.Windows.Forms.Label()
+    Me.dtFechaPago = New System.Windows.Forms.DateTimePicker()
     Me.cmbEstado = New System.Windows.Forms.ComboBox()
     Me.Label4 = New System.Windows.Forms.Label()
+    Me.txtPrecioCuota = New main.ucTextBoxNumerico()
     Me.Label9 = New System.Windows.Forms.Label()
     Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
     Me.Label8 = New System.Windows.Forms.Label()
@@ -48,10 +51,6 @@ Partial Class frmEditarPagos
     Me.btnClearPago = New System.Windows.Forms.Button()
     Me.btnAplicaPago = New System.Windows.Forms.Button()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
-    Me.btnReset = New System.Windows.Forms.Button()
-    Me.dtFechaPago = New System.Windows.Forms.DateTimePicker()
-    Me.Label10 = New System.Windows.Forms.Label()
-    Me.txtPrecioCuota = New main.ucTextBoxNumerico()
     Me.NumCuotaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ToFechaDeVencimientoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ToFechaDePagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -71,6 +70,8 @@ Partial Class frmEditarPagos
     Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ClsInfoPagosBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.txtPrecioTotal = New main.ucTextBoxNumerico()
+    Me.btnReset = New System.Windows.Forms.Button()
+    Me.btnEditarFechaDebe = New System.Windows.Forms.Button()
     Me.Panel1.SuspendLayout()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoPagosBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -209,6 +210,7 @@ Partial Class frmEditarPagos
     'Panel1
     '
     Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.btnEditarFechaDebe)
     Me.Panel1.Controls.Add(Me.Label10)
     Me.Panel1.Controls.Add(Me.dtFechaPago)
     Me.Panel1.Controls.Add(Me.cmbEstado)
@@ -240,6 +242,22 @@ Partial Class frmEditarPagos
     Me.Panel1.Size = New System.Drawing.Size(1120, 662)
     Me.Panel1.TabIndex = 70
     '
+    'Label10
+    '
+    Me.Label10.BackColor = System.Drawing.Color.Transparent
+    Me.Label10.Location = New System.Drawing.Point(479, 536)
+    Me.Label10.Name = "Label10"
+    Me.Label10.Size = New System.Drawing.Size(178, 16)
+    Me.Label10.TabIndex = 89
+    Me.Label10.Text = "Fecha Aplica Pago"
+    '
+    'dtFechaPago
+    '
+    Me.dtFechaPago.Location = New System.Drawing.Point(477, 555)
+    Me.dtFechaPago.Name = "dtFechaPago"
+    Me.dtFechaPago.Size = New System.Drawing.Size(223, 22)
+    Me.dtFechaPago.TabIndex = 88
+    '
     'cmbEstado
     '
     Me.cmbEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -257,6 +275,18 @@ Partial Class frmEditarPagos
     Me.Label4.Size = New System.Drawing.Size(178, 16)
     Me.Label4.TabIndex = 86
     Me.Label4.Text = "Estado del Contrato"
+    '
+    'txtPrecioCuota
+    '
+    Me.txtPrecioCuota.Limite = 22
+    Me.txtPrecioCuota.Location = New System.Drawing.Point(663, 62)
+    Me.txtPrecioCuota.Moneda = True
+    Me.txtPrecioCuota.Name = "txtPrecioCuota"
+    Me.txtPrecioCuota.ReadOnly = True
+    Me.txtPrecioCuota.Size = New System.Drawing.Size(123, 22)
+    Me.txtPrecioCuota.TabIndex = 84
+    Me.txtPrecioCuota.Text = "$ 0,00"
+    Me.txtPrecioCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'Label9
     '
@@ -356,48 +386,6 @@ Partial Class frmEditarPagos
     Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
     Me.dgvResumen.Size = New System.Drawing.Size(1063, 367)
     Me.dgvResumen.TabIndex = 73
-    '
-    'btnReset
-    '
-    Me.btnReset.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnReset.FlatAppearance.BorderSize = 0
-    Me.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnReset.ForeColor = System.Drawing.Color.White
-    Me.btnReset.Location = New System.Drawing.Point(10, 108)
-    Me.btnReset.Name = "btnReset"
-    Me.btnReset.Size = New System.Drawing.Size(110, 60)
-    Me.btnReset.TabIndex = 71
-    Me.btnReset.Text = "Reestablecer"
-    Me.btnReset.UseVisualStyleBackColor = False
-    '
-    'dtFechaPago
-    '
-    Me.dtFechaPago.Location = New System.Drawing.Point(477, 555)
-    Me.dtFechaPago.Name = "dtFechaPago"
-    Me.dtFechaPago.Size = New System.Drawing.Size(223, 22)
-    Me.dtFechaPago.TabIndex = 88
-    '
-    'Label10
-    '
-    Me.Label10.BackColor = System.Drawing.Color.Transparent
-    Me.Label10.Location = New System.Drawing.Point(479, 536)
-    Me.Label10.Name = "Label10"
-    Me.Label10.Size = New System.Drawing.Size(178, 16)
-    Me.Label10.TabIndex = 89
-    Me.Label10.Text = "Fecha Aplica Pago"
-    '
-    'txtPrecioCuota
-    '
-    Me.txtPrecioCuota.Limite = 22
-    Me.txtPrecioCuota.Location = New System.Drawing.Point(663, 62)
-    Me.txtPrecioCuota.Moneda = True
-    Me.txtPrecioCuota.Name = "txtPrecioCuota"
-    Me.txtPrecioCuota.ReadOnly = True
-    Me.txtPrecioCuota.Size = New System.Drawing.Size(123, 22)
-    Me.txtPrecioCuota.TabIndex = 84
-    Me.txtPrecioCuota.Text = "$ 0,00"
-    Me.txtPrecioCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
     'NumCuotaDataGridViewTextBoxColumn
     '
@@ -544,6 +532,29 @@ Partial Class frmEditarPagos
     Me.txtPrecioTotal.Text = "$ 0,00"
     Me.txtPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
     '
+    'btnReset
+    '
+    Me.btnReset.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnReset.FlatAppearance.BorderSize = 0
+    Me.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnReset.ForeColor = System.Drawing.Color.White
+    Me.btnReset.Location = New System.Drawing.Point(10, 108)
+    Me.btnReset.Name = "btnReset"
+    Me.btnReset.Size = New System.Drawing.Size(110, 60)
+    Me.btnReset.TabIndex = 71
+    Me.btnReset.Text = "Reestablecer"
+    Me.btnReset.UseVisualStyleBackColor = False
+    '
+    'btnEditarFechaDebe
+    '
+    Me.btnEditarFechaDebe.Location = New System.Drawing.Point(30, 616)
+    Me.btnEditarFechaDebe.Name = "btnEditarFechaDebe"
+    Me.btnEditarFechaDebe.Size = New System.Drawing.Size(139, 33)
+    Me.btnEditarFechaDebe.TabIndex = 90
+    Me.btnEditarFechaDebe.Text = "Editar Fecha Debe"
+    Me.btnEditarFechaDebe.UseVisualStyleBackColor = True
+    '
     'frmEditarPagos
     '
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -619,4 +630,5 @@ Partial Class frmEditarPagos
   Friend WithEvents Label4 As System.Windows.Forms.Label
   Friend WithEvents Label10 As System.Windows.Forms.Label
   Friend WithEvents dtFechaPago As System.Windows.Forms.DateTimePicker
+  Friend WithEvents btnEditarFechaDebe As System.Windows.Forms.Button
 End Class
