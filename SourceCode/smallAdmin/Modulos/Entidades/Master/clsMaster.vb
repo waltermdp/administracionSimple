@@ -137,7 +137,7 @@ Public Class clsMaster
       m_RegistrosExportar = New List(Of clsInfoExportarMaster)
       Dim movimiento As clsInfoExportarMaster
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
       lstPago.RefreshData()
 
 
@@ -145,7 +145,7 @@ Public Class clsMaster
         movimiento = New clsInfoExportarMaster
 
         Dim lstProducto As New clsListProductos
-        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "}" ' and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"
         lstProducto.RefreshData()
         If lstProducto.Items.Count <= 0 Then Continue For
 

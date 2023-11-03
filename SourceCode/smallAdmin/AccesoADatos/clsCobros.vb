@@ -84,10 +84,15 @@ Public Class clsCobros
           Else
             Dim nextCuota As Integer = item.ToList(indiceNewDebe).NumCuota + 1
             indiceNewProximo = item.ToList.FindIndex(Function(c) (c.EstadoPago = E_EstadoPago.DebePendiente) AndAlso (c.NumCuota = item.ToList(indiceNewDebe).NumCuota + 1))
-            auxPago = New manDB.clsInfoPagos
-            auxPago = item.ToList(indiceNewProximo).Clone
-            auxPago.EstadoPago = E_EstadoPago.DebeProximo
-            auxLista.Add(auxPago)
+            If indiceNewProximo >= 0 Then
+              auxPago = New manDB.clsInfoPagos
+              auxPago = item.ToList(indiceNewProximo).Clone
+              auxPago.EstadoPago = E_EstadoPago.DebeProximo
+              auxLista.Add(auxPago)
+            Else
+              'Dim j As Integer = 9
+            End If
+            
           End If
           'guardar cambios
           For Each pagoModificado In auxLista

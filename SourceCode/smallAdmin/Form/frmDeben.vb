@@ -114,6 +114,12 @@ Public Class frmDeben
         'crear consulta nombre, apellido
         qNroContrato = "Productos.NumComprobante Like '%" & txtNroContrato.Text.Trim & "%'" ' "Productos.GuidCliente IN (SELECT Productos.GuidCliente FROM Productos WHERE (Productos.NumComprobante Like '%" & txtNroContrato.Text.Trim & "%'))"
       End If
+      Dim qNombreProducto As String = String.Empty
+      If Not String.IsNullOrEmpty(txtNombreProducto.Text.Trim) Then
+        'crear consulta nombre, apellido
+        'RelArtProd
+        qNombreProducto = "GuidProducto IN (SELECT DISTINCT GuidProducto From RelArtProd WHERE GuidArticulo IN (SELECT Articulos.GuidArticulo FROM Articulos WHERE (Articulos.Nombre Like '%" & txtNombreCliente.Text.Trim & "%' OR Articulos.Codigo Like '%" & txtNombreCliente.Text.Trim & "%' OR Articulos.CodigoBarras Like '%" & txtNombreCliente.Text.Trim & "%')))"
+      End If
       
 
       'cuotas pagas
@@ -152,6 +158,12 @@ Public Class frmDeben
         If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "
         rconsulta = rconsulta & qNroContrato
       End If
+      If Not String.IsNullOrEmpty(qNombreProducto) Then
+        If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "
+        rconsulta = rconsulta & qNombreProducto
+      End If
+
+
 
       If Not String.IsNullOrEmpty(qGuidMetodoPago) AndAlso chkMetodoPago.Checked Then
         If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "

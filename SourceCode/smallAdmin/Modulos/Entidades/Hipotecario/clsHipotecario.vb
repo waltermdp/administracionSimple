@@ -5,7 +5,7 @@ Public Class clsHipotecario
 
   Private Const MONEDA As Integer = 80
   Private Const TIPOMOV As Integer = 1 '01 debitos 05 revisiones debito
-
+  Private Const NRO_ENTIDAD As String = "044"
   Private NROSERVICIO As String = " "
   Private NROEMPRESA As Integer = 0
   Private TIPOCUENTA As String = " "
@@ -398,6 +398,8 @@ Public Class clsHipotecario
     End Try
   End Function
 
+  Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
+
   Private Sub taskGenerateResumen(ByRef rResult As Result, ByRef rMessage As String)
     Try
 
@@ -405,7 +407,7 @@ Public Class clsHipotecario
       m_RegistrosExportar = New List(Of clsInfoExportarHipotecario)
       Dim movimiento As clsInfoExportarHipotecario
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota<=#" & Format(g_Today, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
       lstPago.RefreshData()
 
 
@@ -413,10 +415,12 @@ Public Class clsHipotecario
         movimiento = New clsInfoExportarHipotecario
 
         Dim lstProducto As New clsListProductos
-        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "}" ' and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
         lstProducto.RefreshData()
         If lstProducto.Items.Count <= 0 Then Continue For
-
+        If lstProducto.Items.First.NumComprobante = 133 Then
+          Dim k As Integer = 9
+        End If
 
         Dim lstCuenta As New clsListaCuentas
         lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
@@ -507,54 +511,83 @@ Public Class clsHipotecario
     End Try
   End Function
 
+  Private Function EsClienteEntidad(ByVal vCBU As String) As Boolean
+    Try
+      If vCBU.Length <> 22 Then Return False
+      If vCBU.Substring(0, 3).ToUpper <> NRO_ENTIDAD Then Return False
+      Return True
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
   Private Sub taskGenerarExportacion(ByRef rResult As Result, ByRef rMessage As String)
     Try
       Dim lineas As New List(Of String)
-      Dim Exportable As List(Of clsInfoExportarHipotecario) = m_RegistrosExportar.Where(Function(c) c.Exportar = True).ToList
-      If GetExportedFile(Exportable, lineas) <> Result.OK Then
-        rMessage = "Fallo generar archivo"
-        rResult = Result.NOK
-        Exit Sub
-      End If
-      Dim FileName As String = String.Empty
-      If GetFileNameExport(FileName) <> Result.OK Then
-        rMessage = "Fallo generar nombre"
-        rResult = Result.NOK
-        Exit Sub
-      End If
-      Dim FullFileName As String = IO.Path.Combine(GetFolderExportacion, FileName)
-      If IO.File.Exists(FullFileName) Then
 
-        Dim chFilename As String = String.Empty
+      Dim Exportable As List(Of clsInfoExportarHipotecario) = m_RegistrosExportar.Where(Function(c) c.Exportar = True And Not EsClienteEntidad(c.CBU)).ToList
+      Dim vConvenio As Integer = m_Convenio
+      Dim vSecuencial As Decimal = m_Secuencial
+      Dim Pasos As Integer = 0
 
-        chFilename = FileName.Insert(FileName.IndexOf("."), "_" & Date.Now.ToString("yyyyMMddhhmmss"))
-
-        FileSystem.Rename(FullFileName, IO.Path.Combine(GetFolderExportacion, chFilename))
-      End If
-      ''GUARDAR FECHA DE EXPORTACION
-      For Each item In Exportable
-        Dim objDebitos As New clsListPagos
-        'FALTA CARGAR GUID de pago
-        objDebitos.Cfg_Filtro = "WHERE GuidPago={" & item.GuidPago.ToString & "}"
-        objDebitos.RefreshData()
-        If objDebitos.Items.Count = 1 Then
-          Dim objDebitoActualizado As manDB.clsInfoPagos = objDebitos.Items.First.Clone
-          objDebitoActualizado.FechaUltimaExportacion = m_FechaGeneracion 'Date.MinValue '
-          If clsPago.Save(objDebitoActualizado) <> Result.OK Then
-            'TODO: take error
-            rMessage = "No pudo guardarse el proceso"
-            rResult = Result.NOK
-          End If
+      Do
+        Pasos += 1
+        If GetExportedFile(vConvenio, vSecuencial, Exportable, lineas) <> Result.OK Then
+          rMessage = "Fallo generar archivo"
+          rResult = Result.NOK
+          Exit Sub
         End If
-      Next
+        Dim FileName As String = String.Empty
+        If GetFileNameExport(vConvenio, vSecuencial, FileName) <> Result.OK Then
+          rMessage = "Fallo generar nombre"
+          rResult = Result.NOK
+          Exit Sub
+        End If
+        Dim FullFileName As String = IO.Path.Combine(GetFolderExportacion, FileName)
+        If IO.File.Exists(FullFileName) Then
+          Dim chFilename As String = String.Empty
+          chFilename = FileName.Insert(FileName.IndexOf("."), "_" & Date.Now.ToString("yyyyMMddhhmmss"))
+          FileSystem.Rename(FullFileName, IO.Path.Combine(GetFolderExportacion, chFilename))
+        End If
+        ''GUARDAR FECHA DE EXPORTACION
+        For Each item In Exportable
+          Dim objDebitos As New clsListPagos
+          'FALTA CARGAR GUID de pago
+          objDebitos.Cfg_Filtro = "WHERE GuidPago={" & item.GuidPago.ToString & "}"
+          objDebitos.RefreshData()
+          If objDebitos.Items.Count = 1 Then
+            Dim objDebitoActualizado As manDB.clsInfoPagos = objDebitos.Items.First.Clone
+            objDebitoActualizado.FechaUltimaExportacion = m_FechaGeneracion 'Date.MinValue '
+            If clsPago.Save(objDebitoActualizado) <> Result.OK Then
+              'TODO: take error
+              rMessage = "No pudo guardarse el proceso"
+              rResult = Result.NOK
+            End If
+          End If
+        Next
+
+        If Save(IO.Path.Combine(GetFolderExportacion, FileName), lineas) <> Result.OK Then
+          rMessage = "Fallo guardando archivo"
+          rResult = Result.NOK
+          Exit Sub
+        End If
+
+        'evaluar si existen cliente del hipotecario
+        If Pasos >= 2 OrElse Pasos <= 0 Then Exit Do
+        Exportable = m_RegistrosExportar.Where(Function(c) c.Exportar = True And EsClienteEntidad(c.CBU)).ToList
+        If Exportable.Count <= 0 Then
+          Pasos = 2
+        Else
+          vConvenio = 7464
+          vSecuencial = m_Secuencial + 1
+        End If
+
+      Loop While Pasos = 1
 
 
+     
 
-      If Save(IO.Path.Combine(GetFolderExportacion, FileName), lineas) <> Result.OK Then
-        rMessage = "Fallo guardando archivo"
-        rResult = Result.NOK
-        Exit Sub
-      End If
       rMessage = "Finalizado OK"
       rResult = Result.OK
     Catch ex As Exception
@@ -564,7 +597,7 @@ Public Class clsHipotecario
     End Try
   End Sub
 
-  Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoExportarHipotecario), ByRef rlineas As List(Of String)) As Result
+  Public Function GetExportedFile(ByVal vConvenio As Integer, ByVal vSecuencial As Decimal, ByVal vlstRegistros As List(Of clsInfoExportarHipotecario), ByRef rlineas As List(Of String)) As Result
     Try
       Dim auxLinea As String = String.Empty
       Dim lstResult As New List(Of String)
@@ -593,7 +626,7 @@ Public Class clsHipotecario
 
       ImporteTotal = vlstRegistros.Sum(Function(c) c.Importe)
 
-      If GenerarHeaderDebito(auxLinea, CInt(ImporteTotal), m_FechaGeneracion, CInt(m_Secuencial)) <> Result.OK Then
+      If GenerarHeaderDebito(auxLinea, vConvenio, CInt(ImporteTotal), m_FechaGeneracion, CInt(vSecuencial)) <> Result.OK Then
         MsgBox("No se puede generar encabezado de debito Hipotecario")
         Return Result.NOK
       End If
@@ -601,7 +634,7 @@ Public Class clsHipotecario
       For Each mov In vlstRegistros
         auxLinea = String.Empty
 
-        If GenerarDetalle(mov, auxLinea) <> Result.OK Then
+        If GenerarDetalle(vConvenio, mov, auxLinea) <> Result.OK Then
           MsgBox("No se puede generar el registro de debito Hipotecario")
           Return Result.NOK
         End If
@@ -622,12 +655,12 @@ Public Class clsHipotecario
 
 
 
-  Private Function GenerarHeaderDebito(ByRef rHeader As String, ByVal vImporteTotal As Integer, ByVal vFechaGen As Date, ByVal vSecuencial As Integer) As Result
+  Private Function GenerarHeaderDebito(ByRef rHeader As String, ByVal vConvenio As Integer, ByVal vImporteTotal As Integer, ByVal vFechaGen As Date, ByVal vSecuencial As Integer) As Result
     Try
       Dim sResult As String = String.Empty
 
       sResult += "1"
-      sResult += m_Convenio.ToString("D5")
+      sResult += vConvenio.ToString("D5")
       sResult += String.Format("{0,10}", " ")
       sResult += New String("0"c, 5) ' String.Format("D5", "0")
       sResult += vFechaGen.ToString("yyyyMMdd")
@@ -647,10 +680,10 @@ Public Class clsHipotecario
     End Try
   End Function
 
-  Public Function GetFileNameExport(ByRef rName As String) As Result
+  Public Function GetFileNameExport(ByVal vConvenio As Integer, ByVal vSecuencial As Decimal, ByRef rName As String) As Result
     Try
-      Dim aux As String = Secuencial.ToString("000")
-      rName = "ent" & m_Convenio.ToString & "_" & FechaGeneracion.ToString("yyMMdd") & "_sec_" & Secuencial.ToString("000") & ".txt"
+      Dim aux As String = vSecuencial.ToString("000")
+      rName = "ent" & vConvenio.ToString & "_" & FechaGeneracion.ToString("yyMMdd") & "_sec_" & vSecuencial.ToString("000") & ".txt"
       Return Result.OK
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -674,7 +707,7 @@ Public Class clsHipotecario
     End Try
   End Function
 
-  Private Function GenerarDetalle(ByVal vMov As clsInfoExportarHipotecario, ByRef rBody As String) As Result
+  Private Function GenerarDetalle(ByVal vConvenio As Integer, ByVal vMov As clsInfoExportarHipotecario, ByRef rBody As String) As Result
     Try
       Dim sResult As String = String.Empty
       'Dim codBanco As Integer = 888 '!!!consultar
@@ -685,16 +718,18 @@ Public Class clsHipotecario
       'Dim importeadebitar As Integer = 3400 'sin decimal
 
       sResult += "0"
-      sResult += m_Convenio.ToString("D5")
+      sResult += vConvenio.ToString("D5")
       sResult += String.Format("{0,10}", " ")
       sResult += NROEMPRESA.ToString("D5")
       sResult += vMov.CodigoBanco.ToString("000") 'D3")
       sResult += vMov.CodigoSucCuenta.ToString("D4") 'vMov.CBU.Substring(0, 4) ' codsucCuenta.ToString("D4")
-      sResult += String.Format("{0,1}", vMov.TipoCuenta)
+
       If vMov.CodigoBanco = CDec(44) Then
         'hipotecario
-        sResult += vMov.CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
+        sResult += String.Format("{0,1}", 3)
+        sResult += "0" + vMov.CBU.Substring(8, 14) ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
       Else
+        sResult += String.Format("{0,1}", vMov.TipoCuenta)
         sResult += "0" + vMov.CBU.Substring(8, 14) ' CuentaBanco.ToString("000000000000000") ' CBU.Substring(0, 15) 'cuentabanc.ToString("D15")
       End If
       sResult += String.Format("{0,-22}", vMov.NumeroContrato)

@@ -90,7 +90,7 @@ Public Class clsCBU
       m_RegistrosExportar = New List(Of clsInfoExportarCBU)
       Dim movimiento As clsInfoExportarCBU
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
       lstPago.RefreshData()
 
 
@@ -98,7 +98,7 @@ Public Class clsCBU
         movimiento = New clsInfoExportarCBU
 
         Dim lstProducto As New clsListProductos
-        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "} and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
+        lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "}" ' and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
         lstProducto.RefreshData()
         If lstProducto.Items.Count <= 0 Then Continue For
 

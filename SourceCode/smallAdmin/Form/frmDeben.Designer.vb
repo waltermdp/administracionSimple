@@ -58,6 +58,8 @@ Partial Class frmDeben
     Me.lblPrecioTotal = New System.Windows.Forms.Label()
     Me.TabControl1 = New System.Windows.Forms.TabControl()
     Me.tbBuscar = New System.Windows.Forms.TabPage()
+    Me.lblNroContrato = New System.Windows.Forms.Label()
+    Me.txtNroContrato = New System.Windows.Forms.TextBox()
     Me.btnLimpiarCampos = New System.Windows.Forms.Button()
     Me.dtDebenHasta = New System.Windows.Forms.DateTimePicker()
     Me.chkDebenHasta = New System.Windows.Forms.CheckBox()
@@ -96,8 +98,8 @@ Partial Class frmDeben
     Me.txtPagosYTipos = New System.Windows.Forms.TextBox()
     Me.lblNumUltimaCuotaPaga = New System.Windows.Forms.Label()
     Me.Panel1 = New System.Windows.Forms.Panel()
-    Me.lblNroContrato = New System.Windows.Forms.Label()
-    Me.txtNroContrato = New System.Windows.Forms.TextBox()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.txtNombreProducto = New System.Windows.Forms.TextBox()
     Me.GroupBox2.SuspendLayout()
     Me.TabControl1.SuspendLayout()
     Me.tbBuscar.SuspendLayout()
@@ -258,7 +260,7 @@ Partial Class frmDeben
     'chkMetodoPago
     '
     Me.chkMetodoPago.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkMetodoPago.Location = New System.Drawing.Point(17, 94)
+    Me.chkMetodoPago.Location = New System.Drawing.Point(17, 123)
     Me.chkMetodoPago.Name = "chkMetodoPago"
     Me.chkMetodoPago.Size = New System.Drawing.Size(154, 23)
     Me.chkMetodoPago.TabIndex = 71
@@ -277,7 +279,7 @@ Partial Class frmDeben
     '
     Me.cmbMetodosDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
     Me.cmbMetodosDePago.FormattingEnabled = True
-    Me.cmbMetodosDePago.Location = New System.Drawing.Point(177, 95)
+    Me.cmbMetodosDePago.Location = New System.Drawing.Point(177, 124)
     Me.cmbMetodosDePago.Name = "cmbMetodosDePago"
     Me.cmbMetodosDePago.Size = New System.Drawing.Size(259, 24)
     Me.cmbMetodosDePago.TabIndex = 50
@@ -459,6 +461,8 @@ Partial Class frmDeben
     '
     'tbBuscar
     '
+    Me.tbBuscar.Controls.Add(Me.Label1)
+    Me.tbBuscar.Controls.Add(Me.txtNombreProducto)
     Me.tbBuscar.Controls.Add(Me.lblNroContrato)
     Me.tbBuscar.Controls.Add(Me.txtNroContrato)
     Me.tbBuscar.Controls.Add(Me.btnLimpiarCampos)
@@ -483,6 +487,24 @@ Partial Class frmDeben
     Me.tbBuscar.Text = "Filtros"
     Me.tbBuscar.UseVisualStyleBackColor = True
     '
+    'lblNroContrato
+    '
+    Me.lblNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.lblNroContrato.Location = New System.Drawing.Point(14, 64)
+    Me.lblNroContrato.Name = "lblNroContrato"
+    Me.lblNroContrato.Size = New System.Drawing.Size(100, 23)
+    Me.lblNroContrato.TabIndex = 78
+    Me.lblNroContrato.Text = "Nro Contrato:"
+    Me.lblNroContrato.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtNroContrato
+    '
+    Me.txtNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNroContrato.Location = New System.Drawing.Point(161, 66)
+    Me.txtNroContrato.Name = "txtNroContrato"
+    Me.txtNroContrato.Size = New System.Drawing.Size(275, 22)
+    Me.txtNroContrato.TabIndex = 77
+    '
     'btnLimpiarCampos
     '
     Me.btnLimpiarCampos.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
@@ -499,7 +521,7 @@ Partial Class frmDeben
     'dtDebenHasta
     '
     Me.dtDebenHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.dtDebenHasta.Location = New System.Drawing.Point(177, 122)
+    Me.dtDebenHasta.Location = New System.Drawing.Point(177, 151)
     Me.dtDebenHasta.Name = "dtDebenHasta"
     Me.dtDebenHasta.Size = New System.Drawing.Size(259, 22)
     Me.dtDebenHasta.TabIndex = 75
@@ -507,7 +529,7 @@ Partial Class frmDeben
     'chkDebenHasta
     '
     Me.chkDebenHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.chkDebenHasta.Location = New System.Drawing.Point(17, 123)
+    Me.chkDebenHasta.Location = New System.Drawing.Point(17, 152)
     Me.chkDebenHasta.Name = "chkDebenHasta"
     Me.chkDebenHasta.Size = New System.Drawing.Size(154, 23)
     Me.chkDebenHasta.TabIndex = 74
@@ -892,23 +914,23 @@ Partial Class frmDeben
     Me.Panel1.Size = New System.Drawing.Size(320, 368)
     Me.Panel1.TabIndex = 84
     '
-    'lblNroContrato
+    'Label1
     '
-    Me.lblNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblNroContrato.Location = New System.Drawing.Point(14, 64)
-    Me.lblNroContrato.Name = "lblNroContrato"
-    Me.lblNroContrato.Size = New System.Drawing.Size(100, 23)
-    Me.lblNroContrato.TabIndex = 78
-    Me.lblNroContrato.Text = "Nro Contrato:"
-    Me.lblNroContrato.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.Location = New System.Drawing.Point(14, 92)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(100, 23)
+    Me.Label1.TabIndex = 80
+    Me.Label1.Text = "Producto:"
+    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
     '
-    'txtNroContrato
+    'txtNombreProducto
     '
-    Me.txtNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtNroContrato.Location = New System.Drawing.Point(161, 66)
-    Me.txtNroContrato.Name = "txtNroContrato"
-    Me.txtNroContrato.Size = New System.Drawing.Size(275, 22)
-    Me.txtNroContrato.TabIndex = 77
+    Me.txtNombreProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNombreProducto.Location = New System.Drawing.Point(161, 94)
+    Me.txtNombreProducto.Name = "txtNombreProducto"
+    Me.txtNombreProducto.Size = New System.Drawing.Size(275, 22)
+    Me.txtNombreProducto.TabIndex = 79
     '
     'frmDeben
     '
@@ -1030,4 +1052,6 @@ Partial Class frmDeben
   Friend WithEvents GuidVendedorDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents lblNroContrato As System.Windows.Forms.Label
   Friend WithEvents txtNroContrato As System.Windows.Forms.TextBox
+  Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents txtNombreProducto As System.Windows.Forms.TextBox
 End Class
