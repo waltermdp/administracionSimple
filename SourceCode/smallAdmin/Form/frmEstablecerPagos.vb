@@ -78,7 +78,8 @@ Public Class frmEstablecerPagos
         If m_Producto.GuidProducto = Guid.Empty Then
           'valores iniciales
           DateVenta.Value = g_Today
-          dtProximoPago.Value = New Date(g_Today.Year, g_Today.AddMonths(1).Month, 1)
+          Dim auxFecha As Date = g_Today.AddMonths(1)
+          dtProximoPago.Value = New Date(auxFecha.Year, auxFecha.Month, 1)
           txtPrecioTotal.SetDecimalMonedaValue(0)
           txtNumVenta.Text = GetProximoComprobanteDisponible().ToString
           cmbCuotas.SelectedItem = 0

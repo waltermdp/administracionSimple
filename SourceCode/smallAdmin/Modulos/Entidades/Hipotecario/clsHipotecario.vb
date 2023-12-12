@@ -407,7 +407,8 @@ Public Class clsHipotecario
       m_RegistrosExportar = New List(Of clsInfoExportarHipotecario)
       Dim movimiento As clsInfoExportarHipotecario
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota<=#" & Format(g_Today, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      'lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota<=#" & Format(g_Today, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
       lstPago.RefreshData()
 
 
