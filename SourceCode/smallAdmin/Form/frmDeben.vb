@@ -525,7 +525,7 @@ Public Class frmDeben
         Exit Sub
       End If
 
-      If MsgBox("Desea eliminar la siguiente VENTA?") <> MsgBoxResult.Yes Then
+      If MsgBox("Desea eliminar la siguiente VENTA?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
         Exit Sub
       End If
       '1- RESTAURAR Articulos Vendidos a STOCK

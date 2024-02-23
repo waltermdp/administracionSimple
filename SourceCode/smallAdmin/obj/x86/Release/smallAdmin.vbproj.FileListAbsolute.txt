@@ -60,7 +60,6 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Re
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.vbproj.GenerateResource.Cache
 c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmResumen.resources
 c:\repositorio\personal\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmTipoDeArchivo.resources
-c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmResumen.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmTipoDeArchivo.resources
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Release\smallAdmin.exe.config
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.exe
@@ -101,8 +100,6 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucProgreso.resources
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.vbproj.GenerateResource.Cache
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmArticulo.resources
-c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmDetalle.resources
-c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarResumen.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmArticulosVendidos.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmEstablecerPagos.resources
 c:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarHipotecario.resources
@@ -180,3 +177,17 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarVisaCredito.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarVisaCredito.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmSelectDate.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucTarjeta.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucCBU.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.ucDDHipotecario.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmSelectDate.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarMaster.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarMaster.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarVisaDebito.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmEditarPagos.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarMercadoPago.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarEfectivo.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarCBU.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarVisaDebito.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmExportarVisaCredito.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmImportarVisaCredito.resources

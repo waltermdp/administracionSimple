@@ -74,9 +74,6 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbprojResolveAssemblyReference.cache
-C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmDetalle.resources
-C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarResumen.resources
-C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmResumen.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmTipoDeArchivo.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmArticulos.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmCliente.resources
@@ -229,3 +226,7 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarVisaCredito.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarVisaCredito.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmSelectDate.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmSelectDate.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmExportarMaster.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarMaster.resources
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.frmImportarVisaDebito.resources
