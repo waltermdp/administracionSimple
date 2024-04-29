@@ -1040,4 +1040,5 @@ Public Class frmArticulos
       Print_msg(ex.Message)
     End Try
   End Sub
+
 End Class

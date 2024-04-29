@@ -445,6 +445,11 @@ Public Class frmDeben
     Try
       Using objForm As New frmListaClientes
         objForm.ShowDialog()
+        Dim rInfoPersonal As New manDB.ClsInfoPersona
+        objForm.GetClienteSelected(rInfoPersonal)
+        Using objInforPersonal As New frmCliente(rInfoPersonal, True)
+          objInforPersonal.ShowDialog(Me)
+        End Using
       End Using
       Call MostrarDeben()
     Catch ex As Exception

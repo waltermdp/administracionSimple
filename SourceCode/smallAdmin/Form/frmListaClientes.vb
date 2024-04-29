@@ -1,5 +1,7 @@
 ﻿Imports libCommon.Comunes
 Imports manDB
+Imports Excel = Microsoft.Office.Interop.Excel
+
 Public Class frmListaClientes
 
   Private m_CurrentSortColumnName As String
@@ -74,6 +76,15 @@ Public Class frmListaClientes
     End Try
   End Sub
 
+  Private Sub chkAddCiudad_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddCiudad.CheckedChanged, chkAddProfesion.CheckedChanged, chkAddComentarios.CheckedChanged
+    Try
+      Call MostrarClientes()
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
   Private Function GetFiltro() As String
     Try
       If txtFiltro.Text = "*" Then
@@ -83,6 +94,16 @@ Public Class frmListaClientes
                               "%' OR Apellido Like '%" & txtFiltro.Text.Trim & _
                               "%' OR ID Like '%" & txtFiltro.Text.Trim & _
                               "%' OR NumCliente Like '%" & txtFiltro.Text.Trim & "%'"
+
+      If chkAddCiudad.Checked Then
+        Command = Command & " OR Ciudad LIKE '%" & txtFiltro.Text.Trim & "%' OR Provincia LIKE '%" & txtFiltro.Text.Trim & "%'"
+      End If
+      If chkAddProfesion.Checked Then
+        Command = Command & " OR Profesion LIKE '%" & txtFiltro.Text.Trim & "%'"
+      End If
+      If chkAddComentarios.Checked Then
+        Command = Command & " OR Comentarios LIKE '%" & txtFiltro.Text.Trim & "%'"
+      End If
 
       Return Command
     Catch ex As Exception
@@ -100,6 +121,9 @@ Public Class frmListaClientes
       Print_msg(ex.Message)
     End Try
   End Sub
+
+  
+  
 
   Private Sub dgvData1_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData1.ColumnHeaderMouseClick
     Try
@@ -297,8 +321,8 @@ Public Class frmListaClientes
     End Try
   End Sub
 
- 
-  Private Sub dgvData1_DoubleClick(sender As Object, e As EventArgs) Handles dgvData1.DoubleClick
+
+  Private Sub dgvData1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvData1.CellContentDoubleClick
     Try
 
       If m_objPersona_Current Is Nothing Then Exit Sub
@@ -308,6 +332,27 @@ Public Class frmListaClientes
         Exit Sub
       End If
       btnSeleccionar.PerformClick()
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+
+  Private Sub dgvData1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvData1.CellDoubleClick
+  
+  End Sub
+ 
+  Private Sub dgvData1_DoubleClick(sender As Object, e As EventArgs) Handles dgvData1.DoubleClick
+    Try
+
+      'If m_objPersona_Current Is Nothing Then Exit Sub
+
+      'Dim vResult As Result = clsCliente.Cliente_Load(m_objPersona_Current.GuidCliente, m_SelectedClient)
+      'If vResult <> Result.OK Then
+      '  Exit Sub
+      'End If
+      'btnSeleccionar.PerformClick()
 
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -350,4 +395,74 @@ Public Class frmListaClientes
   End Sub
 
 
+ 
+
+
+  Private Sub dgvData1_ColumnHeaderMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvData1.ColumnHeaderMouseDoubleClick
+    Try
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  'Private Sub Exportar (ByVal path As String, ByVal Lista
+
+  Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
+    Try
+      If m_objDatabaseList Is Nothing Then Exit Sub
+      If m_objDatabaseList.Items.Count <= 0 Then Exit Sub
+      Dim vResult As DialogResult
+      Dim pathFileFullName As String
+      Using dialogGuardarFile As New Windows.Forms.SaveFileDialog
+        dialogGuardarFile.AddExtension = True
+        dialogGuardarFile.DefaultExt = "xls"
+        dialogGuardarFile.OverwritePrompt = True
+        dialogGuardarFile.Filter = "Excel files (*.xls)|*.xls"
+
+        vResult = dialogGuardarFile.ShowDialog(Me)
+        pathFileFullName = dialogGuardarFile.FileName
+      End Using
+      If vResult <> Windows.Forms.DialogResult.OK Then Exit Sub
+
+      Dim xls As New Excel.Application
+      Dim misValue As Object = System.Reflection.Missing.Value
+      Dim workbook As Excel.Workbook = xls.Workbooks.Add(misValue)
+      Dim worksheet As Excel.Worksheet = CType(workbook.Worksheets(1), Excel.Worksheet)
+
+      Try
+        worksheet.Cells(1, 1) = "23"
+        '  worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
+        '  Dim lista As List(Of clsInfoExportarVisaCredito) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
+        '  For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
+
+        '  worksheet.Cells(i + 2, 1).value = lista(i).NumeroTarjeta.ToString
+        '  worksheet.Cells(i + 2, 2).value = lista(i).NumeroComprobante
+        '  worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
+        '  worksheet.Cells(i + 2, 4).value = lista(i).Importe 'acepta 1.23
+        '  worksheet.Cells(i + 2, 5).value = lista(i).IdentificadorDebito
+        '  worksheet.Cells(i + 2, 6).value = lista(i).CodigoDeAlta  ' N o E ver especificacion
+        '  Next
+
+        '  workbook.SaveCopyAs(IO.Path.Combine(GetFolderExportacion, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
+        worksheet.SaveAs(pathFileFullName)
+
+        workbook.Close(False)
+        worksheet = Nothing
+        workbook = Nothing
+        xls = Nothing
+      Finally
+
+
+      End Try
+
+
+
+
+
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 End Class

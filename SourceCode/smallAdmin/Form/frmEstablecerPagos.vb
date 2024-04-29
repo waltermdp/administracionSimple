@@ -13,6 +13,26 @@ Public Class frmEstablecerPagos
 
   Private m_Result As Result = Result.CANCEL
 
+  'lista los meses desde el mes actual
+  Private Function GenerarMeses() As String()
+    Try
+      Dim meses(11) As String
+      Dim mesInicial As Integer = CInt(g_Today.Month)
+      For i As Integer = 0 To 11
+        If ((mesInicial + i) <= 12) Then
+          meses(i) = MonthName(mesInicial + i)
+        Else
+          meses(i) = MonthName(mesInicial + i - 12)
+        End If
+
+      Next
+      Return meses
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return New String() {"Enero", "Febrero", "Marzo", "Abril"}
+    End Try
+  End Function
+
   Public Sub New(ByVal vProducto As clsInfoProducto, ByVal vCliente As ClsInfoPersona, ByVal vVendedor As clsInfoVendedor, ByVal vAdelantoVendedor As clsInfoAdelanto)
 
     ' This call is required by the designer.
@@ -49,7 +69,8 @@ Public Class frmEstablecerPagos
       cmbCuotas.DataSource = g_Cuotas
       chkEditarCuotas.Checked = True
       txtValorCuota.Enabled = True
-    
+      cmbMesPrimerCobro.DataSource = GenerarMeses()
+      cmbMesPrimerCobro.SelectedIndex = 0
 
       vResult = clsCuenta.Load(m_Producto.GuidCuenta, m_CurrentCuenta)
       If vResult <> Result.OK Then
@@ -278,6 +299,7 @@ Public Class frmEstablecerPagos
         lvPlanPagos.Items.Clear()
         Dim Diferencia As Integer = 0
         Dim SetPrimerPago As Boolean = True
+        Dim NumCuotasSinPagar As Integer = 0
         For i As Integer = 1 To Cuota.Cantidad
           Dim item As New ListViewItem
           Dim auxFechaDebitoCuota As Date
@@ -297,14 +319,18 @@ Public Class frmEstablecerPagos
             cuotaPagar.ValorCuota = ValorCuota
             cuotaPagar.FechaPago = DateVenta.Value
             cuotaPagar.EstadoPago = E_EstadoPago.Pago
-
+            cuotaPagar.VencimientoCuota = DateVenta.Value
           Else
+            'diferencia a pagar
             If (ValorCuota * i - adelantoCuota) < ValorCuota Then
               cuotaPagar.ValorCuota = ValorCuota * i - adelantoCuota
             Else
               cuotaPagar.ValorCuota = ValorCuota
             End If
+
             cuotaPagar.FechaPago = Date.MinValue
+
+            cuotaPagar.VencimientoCuota = DateAdd(DateInterval.Month, NumCuotasSinPagar, dtProximoPago.Value)  'DateAdd(DateInterval.Month, nCuota - 1, vFPrimerPago)
             If SetPrimerPago Then
               If cuotaPagar.VencimientoCuota > g_Today Then
                 cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebeProximo
@@ -315,12 +341,12 @@ Public Class frmEstablecerPagos
             Else
               cuotaPagar.EstadoPago = libCommon.Comunes.E_EstadoPago.DebePendiente
             End If
-
+            NumCuotasSinPagar = NumCuotasSinPagar + 1
 
           End If
 
           item.Text = cuotaPagar.NumCuota.ToString
-          item.SubItems.Add(Date2String(auxFechaDebitoCuota))
+          item.SubItems.Add(Date2String(cuotaPagar.VencimientoCuota))
           item.SubItems.Add(cuotaPagar.ValorCuota.ToString)
           item.SubItems.Add(Date2String(cuotaPagar.FechaPago)) 'fecha de pago
           item.SubItems.Add(EstadoPagos2String(cuotaPagar.EstadoPago)) 'fecha de pago
@@ -353,6 +379,8 @@ Public Class frmEstablecerPagos
       Return Result.ErrorEx
     End Try
   End Function
+
+  
 
   Private Function GetAdelanto(ByRef rValor As Decimal) As Result
     Try

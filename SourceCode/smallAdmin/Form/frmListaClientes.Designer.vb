@@ -28,6 +28,23 @@ Partial Class frmListaClientes
     Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
     Me.btnEdit = New System.Windows.Forms.Button()
     Me.dgvData1 = New System.Windows.Forms.DataGridView()
+    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
+    Me.btnNuevo = New System.Windows.Forms.Button()
+    Me.btnEliminar = New System.Windows.Forms.Button()
+    Me.btnVolver = New System.Windows.Forms.Button()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.btnBuscar = New System.Windows.Forms.Button()
+    Me.txtFiltro = New System.Windows.Forms.TextBox()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.btnMostrarErrores = New System.Windows.Forms.Button()
+    Me.btnMostrarDuplicados = New System.Windows.Forms.Button()
+    Me.lblInfo = New System.Windows.Forms.Label()
+    Me.btnSeleccionar = New System.Windows.Forms.Button()
+    Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.chkAddComentarios = New System.Windows.Forms.CheckBox()
+    Me.chkAddProfesion = New System.Windows.Forms.CheckBox()
+    Me.chkAddCiudad = New System.Windows.Forms.CheckBox()
+    Me.btnExportar = New System.Windows.Forms.Button()
     Me.IDClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NumClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,25 +59,12 @@ Partial Class frmListaClientes
     Me.NumCalleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.FechaIngresoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.Tel2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.CiudadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ProvinciaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.CiudadDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.Calle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NumCalle2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoPostalDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ComentariosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.bsInfoCliente = New System.Windows.Forms.BindingSource(Me.components)
-    Me.btnNuevo = New System.Windows.Forms.Button()
-    Me.btnEliminar = New System.Windows.Forms.Button()
-    Me.btnVolver = New System.Windows.Forms.Button()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.btnBuscar = New System.Windows.Forms.Button()
-    Me.txtFiltro = New System.Windows.Forms.TextBox()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.btnMostrarErrores = New System.Windows.Forms.Button()
-    Me.btnMostrarDuplicados = New System.Windows.Forms.Button()
-    Me.lblInfo = New System.Windows.Forms.Label()
-    Me.btnSeleccionar = New System.Windows.Forms.Button()
-    Me.Panel1 = New System.Windows.Forms.Panel()
     CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.bsInfoCliente, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel1.SuspendLayout()
@@ -99,7 +103,7 @@ Partial Class frmListaClientes
     Me.dgvData1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.dgvData1.ColumnHeadersHeight = 24
     Me.dgvData1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-    Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn})
+    Me.dgvData1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDClienteDataGridViewTextBoxColumn, Me.GuidClienteDataGridViewTextBoxColumn, Me.NumClienteDataGridViewTextBoxColumn, Me.ApellidoDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.ProfesionDataGridViewTextBoxColumn, Me.Tel1DataGridViewTextBoxColumn, Me.EmailDataGridViewTextBoxColumn, Me.DNIDataGridViewTextBoxColumn, Me.FechaNacDataGridViewTextBoxColumn, Me.CalleDataGridViewTextBoxColumn, Me.NumCalleDataGridViewTextBoxColumn, Me.FechaIngresoDataGridViewTextBoxColumn, Me.Tel2DataGridViewTextBoxColumn, Me.ProvinciaDataGridViewTextBoxColumn, Me.CiudadDataGridViewTextBoxColumn, Me.Calle2DataGridViewTextBoxColumn, Me.NumCalle2DataGridViewTextBoxColumn, Me.CodigoPostalDataGridViewTextBoxColumn, Me.ComentariosDataGridViewTextBoxColumn})
     Me.dgvData1.DataSource = Me.bsInfoCliente
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(218, Byte), Integer))
@@ -131,6 +135,209 @@ Partial Class frmListaClientes
     Me.dgvData1.Size = New System.Drawing.Size(1071, 523)
     Me.dgvData1.TabIndex = 24
     Me.dgvData1.TabStop = False
+    '
+    'bsInfoCliente
+    '
+    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
+    '
+    'btnNuevo
+    '
+    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnNuevo.FlatAppearance.BorderSize = 0
+    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnNuevo.ForeColor = System.Drawing.Color.White
+    Me.btnNuevo.Location = New System.Drawing.Point(10, 105)
+    Me.btnNuevo.Name = "btnNuevo"
+    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
+    Me.btnNuevo.TabIndex = 25
+    Me.btnNuevo.Text = "Nuevo"
+    Me.btnNuevo.UseVisualStyleBackColor = False
+    '
+    'btnEliminar
+    '
+    Me.btnEliminar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnEliminar.FlatAppearance.BorderSize = 0
+    Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnEliminar.ForeColor = System.Drawing.Color.White
+    Me.btnEliminar.Location = New System.Drawing.Point(10, 242)
+    Me.btnEliminar.Name = "btnEliminar"
+    Me.btnEliminar.Size = New System.Drawing.Size(110, 60)
+    Me.btnEliminar.TabIndex = 26
+    Me.btnEliminar.Text = "Eliminar"
+    Me.btnEliminar.UseVisualStyleBackColor = False
+    '
+    'btnVolver
+    '
+    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnVolver.FlatAppearance.BorderSize = 0
+    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnVolver.ForeColor = System.Drawing.Color.White
+    Me.btnVolver.Location = New System.Drawing.Point(10, 637)
+    Me.btnVolver.Name = "btnVolver"
+    Me.btnVolver.Size = New System.Drawing.Size(110, 60)
+    Me.btnVolver.TabIndex = 28
+    Me.btnVolver.Text = "Volver"
+    Me.btnVolver.UseVisualStyleBackColor = False
+    '
+    'Label1
+    '
+    Me.Label1.BackColor = System.Drawing.Color.Transparent
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.ForeColor = System.Drawing.Color.White
+    Me.Label1.Location = New System.Drawing.Point(0, 0)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(1280, 25)
+    Me.Label1.TabIndex = 29
+    Me.Label1.Text = "LISTA DE CLIENTES"
+    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
+    'btnBuscar
+    '
+    Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnBuscar.FlatAppearance.BorderSize = 0
+    Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnBuscar.ForeColor = System.Drawing.Color.White
+    Me.btnBuscar.Location = New System.Drawing.Point(337, 11)
+    Me.btnBuscar.Name = "btnBuscar"
+    Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
+    Me.btnBuscar.TabIndex = 2
+    Me.btnBuscar.Text = "Buscar"
+    Me.btnBuscar.UseVisualStyleBackColor = False
+    '
+    'txtFiltro
+    '
+    Me.txtFiltro.Location = New System.Drawing.Point(23, 52)
+    Me.txtFiltro.Name = "txtFiltro"
+    Me.txtFiltro.Size = New System.Drawing.Size(292, 20)
+    Me.txtFiltro.TabIndex = 1
+    '
+    'Label2
+    '
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
+    Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label2.Location = New System.Drawing.Point(20, 11)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(311, 24)
+    Me.Label2.TabIndex = 35
+    Me.Label2.Text = "Filtro por DNI, Apellido, Nombre  o Numero de Cliente"
+    '
+    'btnMostrarErrores
+    '
+    Me.btnMostrarErrores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnMostrarErrores.FlatAppearance.BorderSize = 0
+    Me.btnMostrarErrores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMostrarErrores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMostrarErrores.ForeColor = System.Drawing.Color.White
+    Me.btnMostrarErrores.Location = New System.Drawing.Point(868, 11)
+    Me.btnMostrarErrores.Name = "btnMostrarErrores"
+    Me.btnMostrarErrores.Size = New System.Drawing.Size(110, 61)
+    Me.btnMostrarErrores.TabIndex = 38
+    Me.btnMostrarErrores.Text = "MostrarSinDNI o numCliente"
+    Me.btnMostrarErrores.UseVisualStyleBackColor = False
+    Me.btnMostrarErrores.Visible = False
+    '
+    'btnMostrarDuplicados
+    '
+    Me.btnMostrarDuplicados.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnMostrarDuplicados.FlatAppearance.BorderSize = 0
+    Me.btnMostrarDuplicados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMostrarDuplicados.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMostrarDuplicados.ForeColor = System.Drawing.Color.White
+    Me.btnMostrarDuplicados.Location = New System.Drawing.Point(984, 11)
+    Me.btnMostrarDuplicados.Name = "btnMostrarDuplicados"
+    Me.btnMostrarDuplicados.Size = New System.Drawing.Size(110, 61)
+    Me.btnMostrarDuplicados.TabIndex = 39
+    Me.btnMostrarDuplicados.Text = "Mostrar duplicados"
+    Me.btnMostrarDuplicados.UseVisualStyleBackColor = False
+    Me.btnMostrarDuplicados.Visible = False
+    '
+    'lblInfo
+    '
+    Me.lblInfo.AutoSize = True
+    Me.lblInfo.BackColor = System.Drawing.Color.White
+    Me.lblInfo.Location = New System.Drawing.Point(20, 83)
+    Me.lblInfo.Name = "lblInfo"
+    Me.lblInfo.Size = New System.Drawing.Size(10, 13)
+    Me.lblInfo.TabIndex = 40
+    Me.lblInfo.Text = " "
+    '
+    'btnSeleccionar
+    '
+    Me.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnSeleccionar.FlatAppearance.BorderSize = 0
+    Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
+    Me.btnSeleccionar.Location = New System.Drawing.Point(10, 35)
+    Me.btnSeleccionar.Name = "btnSeleccionar"
+    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 60)
+    Me.btnSeleccionar.TabIndex = 41
+    Me.btnSeleccionar.Text = "Seleccionar"
+    Me.btnSeleccionar.UseVisualStyleBackColor = False
+    '
+    'Panel1
+    '
+    Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+    Me.Panel1.Controls.Add(Me.btnExportar)
+    Me.Panel1.Controls.Add(Me.chkAddComentarios)
+    Me.Panel1.Controls.Add(Me.chkAddProfesion)
+    Me.Panel1.Controls.Add(Me.chkAddCiudad)
+    Me.Panel1.Controls.Add(Me.Label2)
+    Me.Panel1.Controls.Add(Me.dgvData1)
+    Me.Panel1.Controls.Add(Me.lblInfo)
+    Me.Panel1.Controls.Add(Me.txtFiltro)
+    Me.Panel1.Controls.Add(Me.btnMostrarDuplicados)
+    Me.Panel1.Controls.Add(Me.btnBuscar)
+    Me.Panel1.Controls.Add(Me.btnMostrarErrores)
+    Me.Panel1.Location = New System.Drawing.Point(138, 46)
+    Me.Panel1.Name = "Panel1"
+    Me.Panel1.Size = New System.Drawing.Size(1120, 662)
+    Me.Panel1.TabIndex = 42
+    '
+    'chkAddComentarios
+    '
+    Me.chkAddComentarios.Location = New System.Drawing.Point(485, 76)
+    Me.chkAddComentarios.Name = "chkAddComentarios"
+    Me.chkAddComentarios.Size = New System.Drawing.Size(135, 24)
+    Me.chkAddComentarios.TabIndex = 43
+    Me.chkAddComentarios.Text = "Comentarios"
+    Me.chkAddComentarios.UseVisualStyleBackColor = True
+    '
+    'chkAddProfesion
+    '
+    Me.chkAddProfesion.Location = New System.Drawing.Point(485, 47)
+    Me.chkAddProfesion.Name = "chkAddProfesion"
+    Me.chkAddProfesion.Size = New System.Drawing.Size(135, 24)
+    Me.chkAddProfesion.TabIndex = 42
+    Me.chkAddProfesion.Text = "Profesion"
+    Me.chkAddProfesion.UseVisualStyleBackColor = True
+    '
+    'chkAddCiudad
+    '
+    Me.chkAddCiudad.Location = New System.Drawing.Point(485, 17)
+    Me.chkAddCiudad.Name = "chkAddCiudad"
+    Me.chkAddCiudad.Size = New System.Drawing.Size(135, 24)
+    Me.chkAddCiudad.TabIndex = 41
+    Me.chkAddCiudad.Text = "Ciudad y provincia"
+    Me.chkAddCiudad.UseVisualStyleBackColor = True
+    '
+    'btnExportar
+    '
+    Me.btnExportar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnExportar.FlatAppearance.BorderSize = 0
+    Me.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnExportar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnExportar.ForeColor = System.Drawing.Color.White
+    Me.btnExportar.Location = New System.Drawing.Point(626, 12)
+    Me.btnExportar.Name = "btnExportar"
+    Me.btnExportar.Size = New System.Drawing.Size(110, 60)
+    Me.btnExportar.TabIndex = 44
+    Me.btnExportar.Text = "Exportar"
+    Me.btnExportar.UseVisualStyleBackColor = False
     '
     'IDClienteDataGridViewTextBoxColumn
     '
@@ -235,20 +442,19 @@ Partial Class frmListaClientes
     Me.Tel2DataGridViewTextBoxColumn.Name = "Tel2DataGridViewTextBoxColumn"
     Me.Tel2DataGridViewTextBoxColumn.ReadOnly = True
     '
-    'CiudadDataGridViewTextBoxColumn
-    '
-    Me.CiudadDataGridViewTextBoxColumn.DataPropertyName = "Ciudad"
-    Me.CiudadDataGridViewTextBoxColumn.HeaderText = "Ciudad"
-    Me.CiudadDataGridViewTextBoxColumn.Name = "CiudadDataGridViewTextBoxColumn"
-    Me.CiudadDataGridViewTextBoxColumn.ReadOnly = True
-    '
     'ProvinciaDataGridViewTextBoxColumn
     '
     Me.ProvinciaDataGridViewTextBoxColumn.DataPropertyName = "Provincia"
     Me.ProvinciaDataGridViewTextBoxColumn.HeaderText = "Provincia"
     Me.ProvinciaDataGridViewTextBoxColumn.Name = "ProvinciaDataGridViewTextBoxColumn"
     Me.ProvinciaDataGridViewTextBoxColumn.ReadOnly = True
-    Me.ProvinciaDataGridViewTextBoxColumn.Visible = False
+    '
+    'CiudadDataGridViewTextBoxColumn
+    '
+    Me.CiudadDataGridViewTextBoxColumn.DataPropertyName = "Ciudad"
+    Me.CiudadDataGridViewTextBoxColumn.HeaderText = "Ciudad"
+    Me.CiudadDataGridViewTextBoxColumn.Name = "CiudadDataGridViewTextBoxColumn"
+    Me.CiudadDataGridViewTextBoxColumn.ReadOnly = True
     '
     'Calle2DataGridViewTextBoxColumn
     '
@@ -281,164 +487,6 @@ Partial Class frmListaClientes
     Me.ComentariosDataGridViewTextBoxColumn.Name = "ComentariosDataGridViewTextBoxColumn"
     Me.ComentariosDataGridViewTextBoxColumn.ReadOnly = True
     '
-    'bsInfoCliente
-    '
-    Me.bsInfoCliente.DataSource = GetType(manDB.clsInfoDatabase)
-    '
-    'btnNuevo
-    '
-    Me.btnNuevo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnNuevo.FlatAppearance.BorderSize = 0
-    Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnNuevo.ForeColor = System.Drawing.Color.White
-    Me.btnNuevo.Location = New System.Drawing.Point(10, 105)
-    Me.btnNuevo.Name = "btnNuevo"
-    Me.btnNuevo.Size = New System.Drawing.Size(110, 60)
-    Me.btnNuevo.TabIndex = 25
-    Me.btnNuevo.Text = "Nuevo"
-    Me.btnNuevo.UseVisualStyleBackColor = False
-    '
-    'btnEliminar
-    '
-    Me.btnEliminar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnEliminar.FlatAppearance.BorderSize = 0
-    Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnEliminar.ForeColor = System.Drawing.Color.White
-    Me.btnEliminar.Location = New System.Drawing.Point(10, 245)
-    Me.btnEliminar.Name = "btnEliminar"
-    Me.btnEliminar.Size = New System.Drawing.Size(110, 60)
-    Me.btnEliminar.TabIndex = 26
-    Me.btnEliminar.Text = "Eliminar"
-    Me.btnEliminar.UseVisualStyleBackColor = False
-    '
-    'btnVolver
-    '
-    Me.btnVolver.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnVolver.FlatAppearance.BorderSize = 0
-    Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnVolver.ForeColor = System.Drawing.Color.White
-    Me.btnVolver.Location = New System.Drawing.Point(10, 637)
-    Me.btnVolver.Name = "btnVolver"
-    Me.btnVolver.Size = New System.Drawing.Size(110, 60)
-    Me.btnVolver.TabIndex = 28
-    Me.btnVolver.Text = "Volver"
-    Me.btnVolver.UseVisualStyleBackColor = False
-    '
-    'Label1
-    '
-    Me.Label1.BackColor = System.Drawing.Color.Transparent
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.ForeColor = System.Drawing.Color.White
-    Me.Label1.Location = New System.Drawing.Point(0, 0)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(1280, 25)
-    Me.Label1.TabIndex = 29
-    Me.Label1.Text = "LISTA DE CLIENTES"
-    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-    '
-    'btnBuscar
-    '
-    Me.btnBuscar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnBuscar.FlatAppearance.BorderSize = 0
-    Me.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnBuscar.ForeColor = System.Drawing.Color.White
-    Me.btnBuscar.Location = New System.Drawing.Point(337, 11)
-    Me.btnBuscar.Name = "btnBuscar"
-    Me.btnBuscar.Size = New System.Drawing.Size(110, 61)
-    Me.btnBuscar.TabIndex = 2
-    Me.btnBuscar.Text = "Buscar"
-    Me.btnBuscar.UseVisualStyleBackColor = False
-    '
-    'txtFiltro
-    '
-    Me.txtFiltro.Location = New System.Drawing.Point(23, 52)
-    Me.txtFiltro.Name = "txtFiltro"
-    Me.txtFiltro.Size = New System.Drawing.Size(292, 20)
-    Me.txtFiltro.TabIndex = 1
-    '
-    'Label2
-    '
-    Me.Label2.BackColor = System.Drawing.Color.Transparent
-    Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label2.Location = New System.Drawing.Point(20, 11)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(311, 24)
-    Me.Label2.TabIndex = 35
-    Me.Label2.Text = "Filtro por DNI, Apellido, Nombre  o Numero de Cliente"
-    '
-    'btnMostrarErrores
-    '
-    Me.btnMostrarErrores.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnMostrarErrores.FlatAppearance.BorderSize = 0
-    Me.btnMostrarErrores.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnMostrarErrores.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnMostrarErrores.ForeColor = System.Drawing.Color.White
-    Me.btnMostrarErrores.Location = New System.Drawing.Point(500, 11)
-    Me.btnMostrarErrores.Name = "btnMostrarErrores"
-    Me.btnMostrarErrores.Size = New System.Drawing.Size(110, 61)
-    Me.btnMostrarErrores.TabIndex = 38
-    Me.btnMostrarErrores.Text = "MostrarSinDNI o numCliente"
-    Me.btnMostrarErrores.UseVisualStyleBackColor = False
-    Me.btnMostrarErrores.Visible = False
-    '
-    'btnMostrarDuplicados
-    '
-    Me.btnMostrarDuplicados.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnMostrarDuplicados.FlatAppearance.BorderSize = 0
-    Me.btnMostrarDuplicados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnMostrarDuplicados.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnMostrarDuplicados.ForeColor = System.Drawing.Color.White
-    Me.btnMostrarDuplicados.Location = New System.Drawing.Point(646, 11)
-    Me.btnMostrarDuplicados.Name = "btnMostrarDuplicados"
-    Me.btnMostrarDuplicados.Size = New System.Drawing.Size(110, 61)
-    Me.btnMostrarDuplicados.TabIndex = 39
-    Me.btnMostrarDuplicados.Text = "Mostrar duplicados"
-    Me.btnMostrarDuplicados.UseVisualStyleBackColor = False
-    Me.btnMostrarDuplicados.Visible = False
-    '
-    'lblInfo
-    '
-    Me.lblInfo.AutoSize = True
-    Me.lblInfo.BackColor = System.Drawing.Color.White
-    Me.lblInfo.Location = New System.Drawing.Point(20, 90)
-    Me.lblInfo.Name = "lblInfo"
-    Me.lblInfo.Size = New System.Drawing.Size(10, 13)
-    Me.lblInfo.TabIndex = 40
-    Me.lblInfo.Text = " "
-    '
-    'btnSeleccionar
-    '
-    Me.btnSeleccionar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnSeleccionar.FlatAppearance.BorderSize = 0
-    Me.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnSeleccionar.ForeColor = System.Drawing.Color.White
-    Me.btnSeleccionar.Location = New System.Drawing.Point(10, 35)
-    Me.btnSeleccionar.Name = "btnSeleccionar"
-    Me.btnSeleccionar.Size = New System.Drawing.Size(110, 60)
-    Me.btnSeleccionar.TabIndex = 41
-    Me.btnSeleccionar.Text = "Seleccionar"
-    Me.btnSeleccionar.UseVisualStyleBackColor = False
-    '
-    'Panel1
-    '
-    Me.Panel1.BackColor = System.Drawing.SystemColors.AppWorkspace
-    Me.Panel1.Controls.Add(Me.Label2)
-    Me.Panel1.Controls.Add(Me.dgvData1)
-    Me.Panel1.Controls.Add(Me.lblInfo)
-    Me.Panel1.Controls.Add(Me.txtFiltro)
-    Me.Panel1.Controls.Add(Me.btnMostrarDuplicados)
-    Me.Panel1.Controls.Add(Me.btnBuscar)
-    Me.Panel1.Controls.Add(Me.btnMostrarErrores)
-    Me.Panel1.Location = New System.Drawing.Point(138, 46)
-    Me.Panel1.Name = "Panel1"
-    Me.Panel1.Size = New System.Drawing.Size(1120, 662)
-    Me.Panel1.TabIndex = 42
-    '
     'frmListaClientes
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -470,6 +518,18 @@ Partial Class frmListaClientes
   Friend WithEvents btnEliminar As System.Windows.Forms.Button
   Friend WithEvents btnVolver As System.Windows.Forms.Button
   Friend WithEvents Label1 As System.Windows.Forms.Label
+  Friend WithEvents btnBuscar As System.Windows.Forms.Button
+  Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
+  Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents btnMostrarErrores As System.Windows.Forms.Button
+  Friend WithEvents btnMostrarDuplicados As System.Windows.Forms.Button
+  Friend WithEvents lblInfo As System.Windows.Forms.Label
+  Friend WithEvents btnSeleccionar As System.Windows.Forms.Button
+  Friend WithEvents Panel1 As System.Windows.Forms.Panel
+  Friend WithEvents chkAddComentarios As System.Windows.Forms.CheckBox
+  Friend WithEvents chkAddProfesion As System.Windows.Forms.CheckBox
+  Friend WithEvents chkAddCiudad As System.Windows.Forms.CheckBox
+  Friend WithEvents btnExportar As System.Windows.Forms.Button
   Friend WithEvents IDClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NumClienteDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -484,19 +544,11 @@ Partial Class frmListaClientes
   Friend WithEvents NumCalleDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents FechaIngresoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents Tel2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents CiudadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ProvinciaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents CiudadDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents Calle2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NumCalle2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CodigoPostalDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ComentariosDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents btnBuscar As System.Windows.Forms.Button
-  Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
-  Friend WithEvents Label2 As System.Windows.Forms.Label
-  Friend WithEvents btnMostrarErrores As System.Windows.Forms.Button
-  Friend WithEvents btnMostrarDuplicados As System.Windows.Forms.Button
-  Friend WithEvents lblInfo As System.Windows.Forms.Label
-  Friend WithEvents btnSeleccionar As System.Windows.Forms.Button
-  Friend WithEvents Panel1 As System.Windows.Forms.Panel
 
 End Class

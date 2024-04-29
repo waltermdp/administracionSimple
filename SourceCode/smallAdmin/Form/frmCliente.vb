@@ -5,9 +5,9 @@ Public Class frmCliente
   Private WithEvents m_objProductList As clsListProductos = Nothing
   Private m_Persona As ClsInfoPersona
   Private m_PrimerEntrada As Boolean
+  Private m_SoloLectura As Boolean = False
 
-
-  Public Sub New(ByVal vPersona As ClsInfoPersona)
+  Public Sub New(ByVal vPersona As ClsInfoPersona, Optional ByVal SoloLectura As Boolean = False)
     InitializeComponent()
     Try
       If vPersona Is Nothing Then
@@ -20,6 +20,7 @@ Public Class frmCliente
         chkUsarDNI.Checked = False
         chkUsarDNI.Visible = False
         chkUsarDNI.Enabled = False
+        If SoloLectura Then btnGuardar.Enabled = False
       End If
     Catch ex As Exception
       Print_msg(ex.Message)

@@ -157,13 +157,17 @@ Public Class frmArticulo
       
       objArticulosList = New clsListArticulos()
       objArticulosList.Cfg_Orden = "ORDER BY Codigo ASC"
-      objArticulosList.Cfg_Filtro = "WHERE Codigo Like '%" & txtCodigo.Text.Trim & "%' OR CodigoBarras Like '%" & txtCodigoBarras.Text.Trim & "%'"
+      'objArticulosList.Cfg_Filtro = "WHERE Codigo Like '%" & txtCodigo.Text.Trim & "%' OR CodigoBarras Like '%" & txtCodigoBarras.Text.Trim & "%'"
+      objArticulosList.Cfg_Filtro = "WHERE Codigo like '%" & txtCodigo.Text.Trim & "%' OR CodigoBarras Like '%" & txtCodigoBarras.Text.Trim & "%'"
       objArticulosList.RefreshData()
+      Dim iguales As Integer = 0
       For Each item In objArticulosList.Items
-
+        If item.Codigo.Trim.ToUpper = txtCodigo.Text.Trim.ToUpper OrElse item.CodigoBarras.ToUpper = txtCodigoBarras.Text.Trim.ToUpper Then
+          iguales += 1
+        End If
       Next
 
-      If objArticulosList.Items.Count > 0 Then
+      If iguales > 0 Then
         Return Result.OK
       Else
         Return Result.NOK
