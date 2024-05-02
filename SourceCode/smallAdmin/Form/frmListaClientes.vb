@@ -1,4 +1,5 @@
-﻿Imports libCommon.Comunes
+﻿Option Strict Off
+Imports libCommon.Comunes
 Imports manDB
 Imports Excel = Microsoft.Office.Interop.Excel
 
@@ -431,20 +432,38 @@ Public Class frmListaClientes
       Dim worksheet As Excel.Worksheet = CType(workbook.Worksheets(1), Excel.Worksheet)
 
       Try
-        worksheet.Cells(1, 1) = "23"
+        'worksheet.Cells(1, 1) = "23"
         '  worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
         '  Dim lista As List(Of clsInfoExportarVisaCredito) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
-        '  For i As Integer = 0 To vMovimientos.Count - 1 ' Each Movimiento In vMovimientos
 
-        '  worksheet.Cells(i + 2, 1).value = lista(i).NumeroTarjeta.ToString
-        '  worksheet.Cells(i + 2, 2).value = lista(i).NumeroComprobante
-        '  worksheet.Cells(i + 2, 3).value = GetHoy.ToString("dd/MM/yyyy") ' vMovimientos(i - 2).Fecha
-        '  worksheet.Cells(i + 2, 4).value = lista(i).Importe 'acepta 1.23
-        '  worksheet.Cells(i + 2, 5).value = lista(i).IdentificadorDebito
-        '  worksheet.Cells(i + 2, 6).value = lista(i).CodigoDeAlta  ' N o E ver especificacion
-        '  Next
+        worksheet.Cells(1, 1).value = "Numero Cliente" ' dgvData1.Columns(i - 1).HeaderText
+        worksheet.Cells(1, 2).value = "Apellido"
+        worksheet.Cells(1, 3).value = "Nombre"
+        worksheet.Cells(1, 4).value = "Profesion"
+        worksheet.Cells(1, 5).value = "Telefono 1"
+        worksheet.Cells(1, 6).value = "Email"
+        worksheet.Cells(1, 7).value = "Calle"
+        worksheet.Cells(1, 8).value = "Numero"
+        worksheet.Cells(1, 9).value = "Telefono 2"
+        worksheet.Cells(1, 10).value = "Provincia"
+        worksheet.Cells(1, 11).value = "Ciudad"
+        worksheet.Cells(1, 12).value = "Comentarios"
 
-        '  workbook.SaveCopyAs(IO.Path.Combine(GetFolderExportacion, GetHoy.ToString("yyMMdd") & "_DEBLIQC.ree.xls"))
+        For i As Integer = 0 To m_objDatabaseList.Items.Count - 1 ' Each Movimiento In vMovimientos
+          worksheet.Cells(i + 2, 1).value = m_objDatabaseList.Items(i).NumCliente.ToString
+          worksheet.Cells(i + 2, 2).value = m_objDatabaseList.Items(i).Apellido.ToString
+          worksheet.Cells(i + 2, 3).value = m_objDatabaseList.Items(i).Nombre.ToString
+          worksheet.Cells(i + 2, 4).value = m_objDatabaseList.Items(i).Profesion.ToString
+          worksheet.Cells(i + 2, 5).value = m_objDatabaseList.Items(i).Tel1.ToString
+          worksheet.Cells(i + 2, 6).value = m_objDatabaseList.Items(i).Email.ToString
+          worksheet.Cells(i + 2, 7).value = m_objDatabaseList.Items(i).Calle.ToString
+          worksheet.Cells(i + 2, 8).value = m_objDatabaseList.Items(i).NumCalle.ToString
+          worksheet.Cells(i + 2, 9).value = m_objDatabaseList.Items(i).Tel2.ToString
+          worksheet.Cells(i + 2, 10).value = m_objDatabaseList.Items(i).Provincia.ToString
+          worksheet.Cells(i + 2, 11).value = m_objDatabaseList.Items(i).Ciudad.ToString
+          worksheet.Cells(i + 2, 12).value = m_objDatabaseList.Items(i).Comentarios.ToString
+        Next
+
         worksheet.SaveAs(pathFileFullName)
 
         workbook.Close(False)
