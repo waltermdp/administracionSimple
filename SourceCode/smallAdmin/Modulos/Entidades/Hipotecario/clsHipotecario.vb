@@ -1,7 +1,11 @@
 ﻿Imports libCommon.Comunes
 
 Public Class clsHipotecario
-
+  Public Enum E_FiltroMesesAnteriores
+    SOLO_MES_ACTUAL
+    MESES_ANT_CON_FILTRO
+    MESES_ANT_SIN_FILTRO
+  End Enum
 
   Private Const MONEDA As Integer = 80
   Private Const TIPOMOV As Integer = 1 '01 debitos 05 revisiones debito
@@ -21,6 +25,22 @@ Public Class clsHipotecario
   Private m_Secuencial As Decimal
 
   Private m_GuidTipoPago As Guid
+
+  Private m_HabilitarFiltradoFechas As Boolean
+  Private m_dayfrom As Integer
+  Private m_dayto As Integer
+  Private m_aplicarMesesAnteriores As E_FiltroMesesAnteriores
+
+  Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
+
+  Public Property ModoFiltrado As E_FiltroMesesAnteriores
+    Get
+      Return m_aplicarMesesAnteriores
+    End Get
+    Set(value As E_FiltroMesesAnteriores)
+      m_aplicarMesesAnteriores = value
+    End Set
+  End Property
 
   Public Property Convenio As Integer
     Get
@@ -46,6 +66,27 @@ Public Class clsHipotecario
     End Get
     Set(value As Date)
       m_FechaVencimiento = value
+    End Set
+  End Property
+
+
+
+
+  Public Property DayFrom As Integer
+    Get
+      Return m_dayfrom
+    End Get
+    Set(value As Integer)
+      m_dayfrom = value
+    End Set
+  End Property
+
+  Public Property DayTo As Integer
+    Get
+      Return m_dayto
+    End Get
+    Set(value As Integer)
+      m_dayto = value
     End Set
   End Property
 
@@ -95,9 +136,12 @@ Public Class clsHipotecario
         m_Convenio = 0
         MsgBox("Convenio no disponible")
       End If
-
+      m_dayto = m_FechaGeneracion.Day
+      m_dayfrom = 1
       m_IdDebito = "COBROCUOTA"
       m_Concepto = "CUOTA"
+      m_HabilitarFiltradoFechas = False
+      m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -378,6 +422,14 @@ Public Class clsHipotecario
     End Try
   End Sub
 
+  Public Sub AplicarFiltradoFechas(ByVal habilitar As Boolean)
+    Try
+      m_HabilitarFiltradoFechas = habilitar
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
   Public Function CargarContratosAExportar(ByVal win32 As IWin32Window) As Result
     Try
       Dim vResult As Result
@@ -398,7 +450,7 @@ Public Class clsHipotecario
     End Try
   End Function
 
-  Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
+
 
   Private Sub taskGenerateResumen(ByRef rResult As Result, ByRef rMessage As String)
     Try
@@ -408,7 +460,38 @@ Public Class clsHipotecario
       Dim movimiento As clsInfoExportarHipotecario
 
       'lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota<=#" & Format(g_Today, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      If m_HabilitarFiltradoFechas Then
+        'crear las fechas de busqueda con base al mes actual y al dia elegido
+        If m_dayto < m_dayfrom Then
+          MsgBox("El intevalo de busqueda no esta correctamente ingresado #Desde<=#hasta")
+          Exit Sub
+        End If
+        If Date.DaysInMonth(m_FechaGeneracion.Year, m_FechaGeneracion.Month) < m_dayfrom Then
+          MsgBox(String.Format("El dia ingresado {0} es mayor al maximo de dias en el mes actual.", m_dayfrom))
+        End If
+        If Date.DaysInMonth(m_FechaGeneracion.Year, m_FechaGeneracion.Month) < m_dayto Then
+          MsgBox(String.Format("El dia ingresado {0} es mayor al maximo de dias en el mes actual.", m_dayfrom))
+        End If
+        Dim FechaFrom As Date = New Date(m_FechaGeneracion.Year, m_FechaGeneracion.Month, m_dayfrom)
+        Dim FechaTo As Date = New Date(m_FechaGeneracion.Year, m_FechaGeneracion.Month, m_dayto)
+        If m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL Then
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota>=#" & Format(FechaFrom, strFormatoAnsiStdFecha) & "# AND VencimientoCuota<=#" & Format(FechaTo, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        ElseIf m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.MESES_ANT_SIN_FILTRO Then
+          Dim auxDate As Date = New Date(m_FechaGeneracion.Year, m_FechaGeneracion.Month, 1)
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND ((VencimientoCuota>=#" & Format(FechaFrom, strFormatoAnsiStdFecha) & "# AND VencimientoCuota<=#" & Format(FechaTo, strFormatoAnsiStdFecha) & "#) OR VencimientoCuota<#" & Format(auxDate, strFormatoAnsiStdFecha) & "# ) AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        ElseIf m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.MESES_ANT_CON_FILTRO Then
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND DAY(VencimientoCuota)>=" & m_dayfrom & " AND DAY(VencimientoCuota)<=" & m_dayto & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        Else
+          MsgBox("No se puede aplicar filtro")
+          Exit Sub
+        End If
+        
+
+
+      Else
+        lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      End If
+
       lstPago.RefreshData()
 
 
@@ -587,7 +670,7 @@ Public Class clsHipotecario
       Loop While Pasos = 1
 
 
-     
+
 
       rMessage = "Finalizado OK"
       rResult = Result.OK

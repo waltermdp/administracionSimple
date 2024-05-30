@@ -118,8 +118,15 @@
     <Compile Include="AccesoADatos\clsCuenta.vb" />
     <Compile Include="AccesoADatos\clsCuota.vb" />
     <Compile Include="AccesoADatos\clsGrupo.vb" />
+    <Compile Include="AccesoADatos\clsInfoConsultaPagos.vb" />
     <Compile Include="AccesoADatos\clsInfoConsultaVentas.vb" />
     <Compile Include="AccesoADatos\clsInfoPagosExt.vb" />
+    <Compile Include="Controles\ucServicioVirtual.Designer.vb">
+      <DependentUpon>ucServicioVirtual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ucServicioVirtual.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controles\ucTarjeta.Designer.vb">
       <DependentUpon>ucTarjeta.vb</DependentUpon>
     </Compile>
@@ -143,6 +150,12 @@
     </Compile>
     <Compile Include="Controles\ucTextBoxNumerico.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form\Auxiliar\frmMensajes.Designer.vb">
+      <DependentUpon>frmMensajes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Auxiliar\frmMensajes.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Auxiliar\frmSelectDate.Designer.vb">
       <DependentUpon>frmSelectDate.vb</DependentUpon>
@@ -410,6 +423,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controles\ucServicioVirtual.resx">
+      <DependentUpon>ucServicioVirtual.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controles\ucTarjeta.resx">
       <DependentUpon>ucTarjeta.vb</DependentUpon>
     </EmbeddedResource>
@@ -421,6 +437,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmArticulo.resx">
       <DependentUpon>frmArticulo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Auxiliar\frmMensajes.resx">
+      <DependentUpon>frmMensajes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Auxiliar\frmSelectDate.resx">
       <DependentUpon>frmSelectDate.vb</DependentUpon>
@@ -529,6 +548,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\clsInfoConsultaPagos.datasource" />
     <None Include="My Project\DataSources\clsInfoConsultaVentas.datasource" />
     <None Include="My Project\DataSources\clsInfoExportarCBU.datasource" />
     <None Include="My Project\DataSources\clsInfoExportarEfectivo.datasource" />

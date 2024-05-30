@@ -129,7 +129,6 @@ Public Class frmDeben
           Dim auxPago As clsTipoPago = CType(cmbMetodosDePago.SelectedItem, clsTipoPago)
           qGuidMetodoPago = "GuidProducto IN (SELECT DISTINCT GuidProducto FROM Pagos WHERE GuidCuenta IN (SELECT GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & auxPago.GuidTipo.ToString & "}))"
         End If
-
       End If
 
       Dim qVentaEstados As String = String.Empty
@@ -1024,7 +1023,15 @@ Public Class frmDeben
     End Try
   End Sub
 
-
+  Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnMensajes.Click
+    Try
+      Using objDialogo As New frmMensajes
+        objDialogo.ShowDialog(Me)
+      End Using
+    Catch ex As Exception
+      Call Print_msg(ex.Message)
+    End Try
+  End Sub
  
 
   
@@ -1253,4 +1260,5 @@ Public Class frmDeben
 
 
 
+  
 End Class

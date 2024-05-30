@@ -1,0 +1,40 @@
+Start-->Run --> regedit --> HKEY_CLASSES_ROOT-->TypeLib-->{000208D5-0000-0000-C000-000000000046} --> 1.9/1.8 (Eliminar esto)
+
+
+habilitar mercado pago
+
+Y OTRA COSA Q ME PASO ES QUE YO GENERE EL ARCHIVO PARA COBRAR EL PRIJMER DIA HABIL 
+
+Y CUANDO GENERO EL DEL QUINTO DIA POR EJEMPLO , COO TODAVIA NO LLEGARON LOS REPORTES DE COBRANZA, ME INCLUYE OTRA VEZ LOS MISMOS CONTRATOS 
+
+OSEA TENGO QUE FIJARME CUALES YA MANDE A COBRAR PARA NO ENVIARLOS DUPLICADOS 
+
+NO SE SI ME HICE ENTEDER 
+
+
+
+
+WALTER
+2:28 PM
+
+creo que si
+
+seria asi
+
+por ejemplo
+
+vos generas un dia el archivo para enviar a los bancos
+
+luego de por ejemplo 5 dias volves a generar el archivo pero no queres
+
+que esten los contratos que ya habias exportado
+
+2:29
+para no repetir el envio
+
+CLARO 
+
+RECIEN CUANDO LLEGAN SIN FONDOS LOS ENVIO OTRA VEZ 
+
+2:30
+ENVIO DISTINTOS DIAS XQ DEPENDE DE LA FECHA DE COBRO DE CADA CLIENTE 

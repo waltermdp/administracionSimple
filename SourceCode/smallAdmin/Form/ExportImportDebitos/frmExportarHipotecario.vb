@@ -99,8 +99,55 @@ Public Class frmExportarHipotecario
     End Try
   End Sub
 
+  Private Sub InitFiltrado()
+    Try
+      dnDayFrom.Minimum = 1
+      dnDayFrom.Maximum = Date.DaysInMonth(m_Banco.FechaGeneracion.Year, m_Banco.FechaGeneracion.Month)
+      dnDayTo.Minimum = 1
+      dnDayTo.Maximum = Date.DaysInMonth(m_Banco.FechaGeneracion.Year, m_Banco.FechaGeneracion.Month)
+      dnDayFrom.Value = 1
+      dnDayTo.Value = m_Banco.FechaGeneracion.Day
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
+
+  Private Function ValidarFiltro() As Boolean
+    Try
+      If dnDayFrom.Value > dnDayTo.Value Then
+        MsgBox("El intevalo de busqueda no esta correctamente ingresado #Desde<=#hasta")
+        dnDayFrom.Value = 1
+        Return False
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
+  Private Function updateOpcionesFiltrado() As Boolean
+    Try
+      m_Banco.AplicarFiltradoFechas(chkEnableFrom.Checked)
+      m_Banco.DayFrom = CInt(dnDayFrom.Value)
+      m_Banco.DayTo = CInt(dnDayTo.Value)
+      If rbAplicaMesesAnteriores.Checked Then
+        m_Banco.ModoFiltrado = clsHipotecario.E_FiltroMesesAnteriores.MESES_ANT_CON_FILTRO
+      ElseIf rbMesesAnterioresSinFiltro.Checked Then
+        m_Banco.ModoFiltrado = clsHipotecario.E_FiltroMesesAnteriores.MESES_ANT_SIN_FILTRO
+      Else
+        m_Banco.ModoFiltrado = clsHipotecario.E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
+        rbAplicaMesActual.Checked = True
+      End If
+
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
   Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
     Try
+
       RecargarValores()
 
     Catch ex As Exception
@@ -449,4 +496,36 @@ Public Class frmExportarHipotecario
   'End Sub
 
   
+  Private Sub chkEnableFrom_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableFrom.CheckedChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      pnlFiltrado.Enabled = chkEnableFrom.Checked
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
+
+  'Private Sub dtFrom_ValueChanged(sender As Object, e As EventArgs)
+  '  Try
+  '    If m_skip Then Exit Sub
+  '    m_skip = True
+  '    Dim auxVen As Date = dtFrom.Value
+  '    dtVencimiento.MinDate = dtCurrent.Value
+
+  '    m_Banco.FechaGeneracion = dtCurrent.Value
+  '    If auxVen <> dtVencimiento.Value Then
+  '      Call clsCobros.ActualizarEstadosDePagos(dtVencimiento.Value)
+  '      RecargarValores()
+  '      m_Banco.UpdateFechaVencimientoExportar(dtVencimiento.Value)
+  '      RefeshGrilla()
+  '    End If
+  '    m_skip = False
+  '  Catch ex As Exception
+  '    Print_msg(ex.Message)
+  '    m_skip = False
+  '  End Try
+  'End Sub
 End Class

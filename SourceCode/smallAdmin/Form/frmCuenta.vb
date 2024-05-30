@@ -58,6 +58,7 @@ Public Class frmCuenta
       UcCBU1.Enabled = permitir
       UcDDHipotecario1.Enabled = permitir
       UcTarjeta1.Enabled = permitir
+      UcServicioVirtual1.Enabled = permitir
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -68,6 +69,7 @@ Public Class frmCuenta
       UcCBU1.Visible = False
       UcDDHipotecario1.Visible = False
       UcTarjeta1.Visible = False
+      UcServicioVirtual1.Visible = False
 
       Call MostrarListaCuentas()
       m_objCuentaCurrent = Nothing
@@ -132,6 +134,8 @@ Public Class frmCuenta
         UcDDHipotecario1.GetData(m_objCuentaCurrent)
       ElseIf UcTarjeta1.Visible Then
         UcTarjeta1.GetData(m_objCuentaCurrent)
+      ElseIf UcServicioVirtual1.Visible Then
+        UcServicioVirtual1.GetData(m_objCuentaCurrent)
       End If
 
       If clsCuenta.Save(m_objCuentaCurrent) <> Result.OK Then
@@ -165,6 +169,8 @@ Public Class frmCuenta
         vResult = UcDDHipotecario1.EsValido
       ElseIf UcTarjeta1.Visible Then
         vResult = UcTarjeta1.EsValido
+      ElseIf UcServicioVirtual1.Visible Then
+        vResult = UcServicioVirtual1.EsValido
       End If
       Return vResult
     Catch ex As Exception
@@ -193,6 +199,8 @@ Public Class frmCuenta
           UcDDHipotecario1.SetData(m_objCuentaCurrent)
         ElseIf UcTarjeta1.Visible Then
           UcTarjeta1.SetData(m_objCuentaCurrent)
+        ElseIf UcServicioVirtual1.Visible Then
+          UcServicioVirtual1.SetData(m_objCuentaCurrent)
         End If
 
       End With
@@ -255,6 +263,7 @@ Public Class frmCuenta
       UcCBU1.Clear()
       UcDDHipotecario1.Clear()
       UcTarjeta1.Clear()
+      UcServicioVirtual1.Clear()
       Call FillCuentaData()
       Call AllowEditNew(True)
     Catch ex As Exception
@@ -267,7 +276,7 @@ Public Class frmCuenta
     Try
       Call AllowEditNew(False)
       m_objCuentaCurrent = New clsInfoCuenta
-      'Call FillCuentaData()
+
       m_objCuentaCurrent = Nothing
       Call Refresh_Selection(-1)
       Call MostrarListaCuentas()
@@ -296,6 +305,7 @@ Public Class frmCuenta
       UcCBU1.Visible = False
       UcDDHipotecario1.Visible = False
       UcTarjeta1.Visible = False
+      UcServicioVirtual1.Visible = False
 
       If objCMB.SelectedIndex >= 0 Then
         Dim TipodePago = CType(objCMB.SelectedItem, clsTipoPago)
@@ -311,6 +321,10 @@ Public Class frmCuenta
           m_objCuentaCurrent.TipoDeCuenta = TipodePago.GuidTipo
           UcTarjeta1.SetData(m_objCuentaCurrent)
           UcTarjeta1.Visible = True
+        ElseIf TipodePago.Es(clsModoDebito.GUID_MERCADO_PAGO) Then
+          m_objCuentaCurrent.TipoDeCuenta = TipodePago.GuidTipo
+          UcServicioVirtual1.SetData(m_objCuentaCurrent)
+          UcServicioVirtual1.Visible = True
         End If
       Else
         Dim j As Integer = 9

@@ -31,7 +31,6 @@
     Get
       Return String.Format("{0}, {1}", m_ClienteApellido, m_ClienteNombre)
     End Get
-    
   End Property
 
   Public Property ClienteNombre As String

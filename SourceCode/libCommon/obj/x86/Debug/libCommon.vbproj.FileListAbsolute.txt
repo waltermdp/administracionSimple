@@ -30,14 +30,6 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Deb
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.dll
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.pdb
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.xml
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.Resources.resources
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.GenerateResource.Cache
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.dll
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.pdb
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.xml
@@ -46,3 +38,11 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.dll
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.pdb
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\libCommon.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.Resources.resources
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.GenerateResource.Cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb

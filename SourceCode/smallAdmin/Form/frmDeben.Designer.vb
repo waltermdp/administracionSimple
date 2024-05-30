@@ -58,6 +58,8 @@ Partial Class frmDeben
     Me.lblPrecioTotal = New System.Windows.Forms.Label()
     Me.TabControl1 = New System.Windows.Forms.TabControl()
     Me.tbBuscar = New System.Windows.Forms.TabPage()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.txtNombreProducto = New System.Windows.Forms.TextBox()
     Me.lblNroContrato = New System.Windows.Forms.Label()
     Me.txtNroContrato = New System.Windows.Forms.TextBox()
     Me.btnLimpiarCampos = New System.Windows.Forms.Button()
@@ -98,8 +100,7 @@ Partial Class frmDeben
     Me.txtPagosYTipos = New System.Windows.Forms.TextBox()
     Me.lblNumUltimaCuotaPaga = New System.Windows.Forms.Label()
     Me.Panel1 = New System.Windows.Forms.Panel()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.txtNombreProducto = New System.Windows.Forms.TextBox()
+    Me.btnMensajes = New System.Windows.Forms.Button()
     Me.GroupBox2.SuspendLayout()
     Me.TabControl1.SuspendLayout()
     Me.tbBuscar.SuspendLayout()
@@ -487,6 +488,24 @@ Partial Class frmDeben
     Me.tbBuscar.Text = "Filtros"
     Me.tbBuscar.UseVisualStyleBackColor = True
     '
+    'Label1
+    '
+    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label1.Location = New System.Drawing.Point(14, 92)
+    Me.Label1.Name = "Label1"
+    Me.Label1.Size = New System.Drawing.Size(100, 23)
+    Me.Label1.TabIndex = 80
+    Me.Label1.Text = "Producto:"
+    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtNombreProducto
+    '
+    Me.txtNombreProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.txtNombreProducto.Location = New System.Drawing.Point(161, 94)
+    Me.txtNombreProducto.Name = "txtNombreProducto"
+    Me.txtNombreProducto.Size = New System.Drawing.Size(275, 22)
+    Me.txtNombreProducto.TabIndex = 79
+    '
     'lblNroContrato
     '
     Me.lblNroContrato.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -569,6 +588,7 @@ Partial Class frmDeben
     '
     'tbOperaciones
     '
+    Me.tbOperaciones.Controls.Add(Me.btnMensajes)
     Me.tbOperaciones.Controls.Add(Me.btnArticulos)
     Me.tbOperaciones.Controls.Add(Me.btnLiquidVendedores)
     Me.tbOperaciones.Controls.Add(Me.btnListaClientes)
@@ -914,23 +934,20 @@ Partial Class frmDeben
     Me.Panel1.Size = New System.Drawing.Size(320, 368)
     Me.Panel1.TabIndex = 84
     '
-    'Label1
+    'btnMensajes
     '
-    Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label1.Location = New System.Drawing.Point(14, 92)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(100, 23)
-    Me.Label1.TabIndex = 80
-    Me.Label1.Text = "Producto:"
-    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'txtNombreProducto
-    '
-    Me.txtNombreProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.txtNombreProducto.Location = New System.Drawing.Point(161, 94)
-    Me.txtNombreProducto.Name = "txtNombreProducto"
-    Me.txtNombreProducto.Size = New System.Drawing.Size(275, 22)
-    Me.txtNombreProducto.TabIndex = 79
+    Me.btnMensajes.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnMensajes.FlatAppearance.BorderSize = 0
+    Me.btnMensajes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnMensajes.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnMensajes.ForeColor = System.Drawing.Color.White
+    Me.btnMensajes.Location = New System.Drawing.Point(13, 90)
+    Me.btnMensajes.Margin = New System.Windows.Forms.Padding(10)
+    Me.btnMensajes.Name = "btnMensajes"
+    Me.btnMensajes.Size = New System.Drawing.Size(110, 60)
+    Me.btnMensajes.TabIndex = 70
+    Me.btnMensajes.Text = "Mensajes"
+    Me.btnMensajes.UseVisualStyleBackColor = False
     '
     'frmDeben
     '
@@ -1054,4 +1071,5 @@ Partial Class frmDeben
   Friend WithEvents txtNroContrato As System.Windows.Forms.TextBox
   Friend WithEvents Label1 As System.Windows.Forms.Label
   Friend WithEvents txtNombreProducto As System.Windows.Forms.TextBox
+  Friend WithEvents btnMensajes As System.Windows.Forms.Button
 End Class

@@ -52,3 +52,4 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.exe
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.xml
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\smallAdmin.pdb
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Release\main.frmMensajes.resources

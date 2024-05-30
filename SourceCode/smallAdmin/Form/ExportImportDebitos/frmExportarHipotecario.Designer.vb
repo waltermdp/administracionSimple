@@ -59,8 +59,20 @@ Partial Class frmExportarHipotecario
     Me.Label8 = New System.Windows.Forms.Label()
     Me.cmbEstado = New System.Windows.Forms.ComboBox()
     Me.Label9 = New System.Windows.Forms.Label()
+    Me.chkEnableFrom = New System.Windows.Forms.CheckBox()
+    Me.dnDayFrom = New System.Windows.Forms.NumericUpDown()
+    Me.dnDayTo = New System.Windows.Forms.NumericUpDown()
+    Me.Label10 = New System.Windows.Forms.Label()
+    Me.Label11 = New System.Windows.Forms.Label()
+    Me.pnlFiltrado = New System.Windows.Forms.Panel()
+    Me.rbAplicaMesActual = New System.Windows.Forms.RadioButton()
+    Me.rbMesesAnterioresSinFiltro = New System.Windows.Forms.RadioButton()
+    Me.rbAplicaMesesAnteriores = New System.Windows.Forms.RadioButton()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.dnDayTo, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.pnlFiltrado.SuspendLayout()
     Me.SuspendLayout()
     '
     'btnCancel
@@ -110,9 +122,9 @@ Partial Class frmExportarHipotecario
     '
     Me.lblResumen.BackColor = System.Drawing.Color.Transparent
     Me.lblResumen.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.lblResumen.Location = New System.Drawing.Point(174, 641)
+    Me.lblResumen.Location = New System.Drawing.Point(174, 646)
     Me.lblResumen.Name = "lblResumen"
-    Me.lblResumen.Size = New System.Drawing.Size(1078, 70)
+    Me.lblResumen.Size = New System.Drawing.Size(1078, 65)
     Me.lblResumen.TabIndex = 47
     Me.lblResumen.Text = "Resumen"
     '
@@ -127,12 +139,12 @@ Partial Class frmExportarHipotecario
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Exportar, Me.FechaUltimaExportacion, Me.IdClienteDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.CBUDataGridViewTextBoxColumn, Me.NumeroContratoDataGridViewTextBoxColumn, Me.FechaVencimientoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.CodigoBancoDataGridViewTextBoxColumn, Me.CodigoSucCuentaDataGridViewTextBoxColumn, Me.TipoCuentaDataGridViewTextBoxColumn, Me.CuentaBancoDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoHipotecarioBindingSource
     Me.dgvResumen.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvResumen.Location = New System.Drawing.Point(172, 115)
+    Me.dgvResumen.Location = New System.Drawing.Point(172, 158)
     Me.dgvResumen.MultiSelect = False
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
+    Me.dgvResumen.Size = New System.Drawing.Size(1080, 452)
     Me.dgvResumen.TabIndex = 49
     '
     'Exportar
@@ -283,7 +295,7 @@ Partial Class frmExportarHipotecario
     'Label4
     '
     Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(760, 46)
+    Me.Label4.Location = New System.Drawing.Point(773, 49)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
     Me.Label4.TabIndex = 54
@@ -292,7 +304,7 @@ Partial Class frmExportarHipotecario
     'Label5
     '
     Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Location = New System.Drawing.Point(1004, 49)
+    Me.Label5.Location = New System.Drawing.Point(1016, 49)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
     Me.Label5.TabIndex = 55
@@ -351,7 +363,7 @@ Partial Class frmExportarHipotecario
     '
     'txtConcepto
     '
-    Me.txtConcepto.Location = New System.Drawing.Point(763, 81)
+    Me.txtConcepto.Location = New System.Drawing.Point(252, 111)
     Me.txtConcepto.Name = "txtConcepto"
     Me.txtConcepto.Size = New System.Drawing.Size(489, 20)
     Me.txtConcepto.TabIndex = 65
@@ -359,7 +371,7 @@ Partial Class frmExportarHipotecario
     'Label7
     '
     Me.Label7.BackColor = System.Drawing.Color.Transparent
-    Me.Label7.Location = New System.Drawing.Point(685, 80)
+    Me.Label7.Location = New System.Drawing.Point(174, 110)
     Me.Label7.Name = "Label7"
     Me.Label7.Size = New System.Drawing.Size(72, 20)
     Me.Label7.TabIndex = 64
@@ -396,6 +408,101 @@ Partial Class frmExportarHipotecario
     Me.Label9.TabIndex = 88
     Me.Label9.Text = "Estado del Contrato"
     '
+    'chkEnableFrom
+    '
+    Me.chkEnableFrom.BackColor = System.Drawing.Color.Transparent
+    Me.chkEnableFrom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+    Me.chkEnableFrom.Location = New System.Drawing.Point(776, 75)
+    Me.chkEnableFrom.Name = "chkEnableFrom"
+    Me.chkEnableFrom.Size = New System.Drawing.Size(86, 24)
+    Me.chkEnableFrom.TabIndex = 92
+    Me.chkEnableFrom.Text = "Intervalo"
+    Me.chkEnableFrom.UseVisualStyleBackColor = False
+    '
+    'dnDayFrom
+    '
+    Me.dnDayFrom.Location = New System.Drawing.Point(90, 5)
+    Me.dnDayFrom.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+    Me.dnDayFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dnDayFrom.Name = "dnDayFrom"
+    Me.dnDayFrom.Size = New System.Drawing.Size(44, 20)
+    Me.dnDayFrom.TabIndex = 93
+    Me.dnDayFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
+    '
+    'dnDayTo
+    '
+    Me.dnDayTo.Location = New System.Drawing.Point(209, 5)
+    Me.dnDayTo.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+    Me.dnDayTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dnDayTo.Name = "dnDayTo"
+    Me.dnDayTo.Size = New System.Drawing.Size(44, 20)
+    Me.dnDayTo.TabIndex = 94
+    Me.dnDayTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
+    '
+    'Label10
+    '
+    Me.Label10.BackColor = System.Drawing.Color.Transparent
+    Me.Label10.Location = New System.Drawing.Point(18, 7)
+    Me.Label10.Name = "Label10"
+    Me.Label10.Size = New System.Drawing.Size(63, 23)
+    Me.Label10.TabIndex = 95
+    Me.Label10.Text = "Desde:"
+    '
+    'Label11
+    '
+    Me.Label11.BackColor = System.Drawing.Color.Transparent
+    Me.Label11.Location = New System.Drawing.Point(140, 7)
+    Me.Label11.Name = "Label11"
+    Me.Label11.Size = New System.Drawing.Size(63, 23)
+    Me.Label11.TabIndex = 96
+    Me.Label11.Text = "Hasta:"
+    '
+    'pnlFiltrado
+    '
+    Me.pnlFiltrado.Controls.Add(Me.rbAplicaMesesAnteriores)
+    Me.pnlFiltrado.Controls.Add(Me.rbMesesAnterioresSinFiltro)
+    Me.pnlFiltrado.Controls.Add(Me.rbAplicaMesActual)
+    Me.pnlFiltrado.Controls.Add(Me.dnDayFrom)
+    Me.pnlFiltrado.Controls.Add(Me.dnDayTo)
+    Me.pnlFiltrado.Controls.Add(Me.Label10)
+    Me.pnlFiltrado.Controls.Add(Me.Label11)
+    Me.pnlFiltrado.Location = New System.Drawing.Point(868, 75)
+    Me.pnlFiltrado.Name = "pnlFiltrado"
+    Me.pnlFiltrado.Size = New System.Drawing.Size(384, 77)
+    Me.pnlFiltrado.TabIndex = 99
+    '
+    'rbAplicaMesActual
+    '
+    Me.rbAplicaMesActual.AutoSize = True
+    Me.rbAplicaMesActual.Checked = True
+    Me.rbAplicaMesActual.Location = New System.Drawing.Point(21, 33)
+    Me.rbAplicaMesActual.Name = "rbAplicaMesActual"
+    Me.rbAplicaMesActual.Size = New System.Drawing.Size(99, 17)
+    Me.rbAplicaMesActual.TabIndex = 100
+    Me.rbAplicaMesActual.TabStop = True
+    Me.rbAplicaMesActual.Text = "Solo MesActual"
+    Me.rbAplicaMesActual.UseVisualStyleBackColor = True
+    '
+    'rbMesesAnterioresSinFiltro
+    '
+    Me.rbMesesAnterioresSinFiltro.AutoSize = True
+    Me.rbMesesAnterioresSinFiltro.Location = New System.Drawing.Point(21, 53)
+    Me.rbMesesAnterioresSinFiltro.Name = "rbMesesAnterioresSinFiltro"
+    Me.rbMesesAnterioresSinFiltro.Size = New System.Drawing.Size(185, 17)
+    Me.rbMesesAnterioresSinFiltro.TabIndex = 101
+    Me.rbMesesAnterioresSinFiltro.Text = "Incluir meses anteriores sin filtrado"
+    Me.rbMesesAnterioresSinFiltro.UseVisualStyleBackColor = True
+    '
+    'rbAplicaMesesAnteriores
+    '
+    Me.rbAplicaMesesAnteriores.AutoSize = True
+    Me.rbAplicaMesesAnteriores.Location = New System.Drawing.Point(163, 33)
+    Me.rbAplicaMesesAnteriores.Name = "rbAplicaMesesAnteriores"
+    Me.rbAplicaMesesAnteriores.Size = New System.Drawing.Size(148, 17)
+    Me.rbAplicaMesesAnteriores.TabIndex = 102
+    Me.rbAplicaMesesAnteriores.Text = "Aplicar a meses anteriores"
+    Me.rbAplicaMesesAnteriores.UseVisualStyleBackColor = True
+    '
     'frmExportarHipotecario
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -403,6 +510,8 @@ Partial Class frmExportarHipotecario
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.pnlFiltrado)
+    Me.Controls.Add(Me.chkEnableFrom)
     Me.Controls.Add(Me.cmbEstado)
     Me.Controls.Add(Me.Label9)
     Me.Controls.Add(Me.Label8)
@@ -433,6 +542,10 @@ Partial Class frmExportarHipotecario
     Me.Text = "frmExportarResumen"
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.dnDayTo, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.pnlFiltrado.ResumeLayout(False)
+    Me.pnlFiltrado.PerformLayout()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -473,4 +586,13 @@ Partial Class frmExportarHipotecario
   Friend WithEvents CuentaBancoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents cmbEstado As System.Windows.Forms.ComboBox
   Friend WithEvents Label9 As System.Windows.Forms.Label
+  Friend WithEvents chkEnableFrom As System.Windows.Forms.CheckBox
+  Friend WithEvents dnDayFrom As System.Windows.Forms.NumericUpDown
+  Friend WithEvents dnDayTo As System.Windows.Forms.NumericUpDown
+  Friend WithEvents Label10 As System.Windows.Forms.Label
+  Friend WithEvents Label11 As System.Windows.Forms.Label
+  Friend WithEvents pnlFiltrado As System.Windows.Forms.Panel
+  Friend WithEvents rbAplicaMesesAnteriores As System.Windows.Forms.RadioButton
+  Friend WithEvents rbMesesAnterioresSinFiltro As System.Windows.Forms.RadioButton
+  Friend WithEvents rbAplicaMesActual As System.Windows.Forms.RadioButton
 End Class

@@ -51,11 +51,11 @@ Partial Class frmEstablecerPagos
     Me.cEstado = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.btnGuardar = New System.Windows.Forms.Button()
     Me.Panel1 = New System.Windows.Forms.Panel()
+    Me.cmbMesPrimerCobro = New System.Windows.Forms.ComboBox()
     Me.txtAdelantoVendedor = New main.ucTextBoxNumerico()
     Me.txtAdelanto = New main.ucTextBoxNumerico()
     Me.txtPrecioTotal = New main.ucTextBoxNumerico()
     Me.txtValorCuota = New main.ucTextBoxNumerico()
-    Me.cmbMesPrimerCobro = New System.Windows.Forms.ComboBox()
     Me.Panel1.SuspendLayout()
     Me.SuspendLayout()
     '
@@ -364,6 +364,15 @@ Partial Class frmEstablecerPagos
     Me.Panel1.Size = New System.Drawing.Size(1120, 662)
     Me.Panel1.TabIndex = 70
     '
+    'cmbMesPrimerCobro
+    '
+    Me.cmbMesPrimerCobro.FormattingEnabled = True
+    Me.cmbMesPrimerCobro.Location = New System.Drawing.Point(738, 206)
+    Me.cmbMesPrimerCobro.Name = "cmbMesPrimerCobro"
+    Me.cmbMesPrimerCobro.Size = New System.Drawing.Size(227, 24)
+    Me.cmbMesPrimerCobro.TabIndex = 73
+    Me.cmbMesPrimerCobro.Visible = False
+    '
     'txtAdelantoVendedor
     '
     Me.txtAdelantoVendedor.Limite = 22
@@ -407,14 +416,6 @@ Partial Class frmEstablecerPagos
     Me.txtValorCuota.TabIndex = 69
     Me.txtValorCuota.Text = "$ 0,00"
     Me.txtValorCuota.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-    '
-    'cmbMesPrimerCobro
-    '
-    Me.cmbMesPrimerCobro.FormattingEnabled = True
-    Me.cmbMesPrimerCobro.Location = New System.Drawing.Point(738, 206)
-    Me.cmbMesPrimerCobro.Name = "cmbMesPrimerCobro"
-    Me.cmbMesPrimerCobro.Size = New System.Drawing.Size(227, 24)
-    Me.cmbMesPrimerCobro.TabIndex = 73
     '
     'frmEstablecerPagos
     '

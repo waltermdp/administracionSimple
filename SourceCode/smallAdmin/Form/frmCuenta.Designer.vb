@@ -34,10 +34,11 @@ Partial Class frmCuenta
     Me.btnCancelar = New System.Windows.Forms.Button()
     Me.btnSalirSinCambios = New System.Windows.Forms.Button()
     Me.btnEditar = New System.Windows.Forms.Button()
-    Me.UcDDHipotecario1 = New main.ucDDHipotecario()
-    Me.UcCBU1 = New main.ucCBU()
-    Me.UcTarjeta1 = New main.ucTarjeta()
     Me.Label2 = New System.Windows.Forms.Label()
+    Me.UcTarjeta1 = New main.ucTarjeta()
+    Me.UcCBU1 = New main.ucCBU()
+    Me.UcDDHipotecario1 = New main.ucDDHipotecario()
+    Me.UcServicioVirtual1 = New main.ucServicioVirtual()
     CType(Me.bsCuenta, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
@@ -167,27 +168,6 @@ Partial Class frmCuenta
     Me.btnEditar.Text = "Editar"
     Me.btnEditar.UseVisualStyleBackColor = False
     '
-    'UcDDHipotecario1
-    '
-    Me.UcDDHipotecario1.Location = New System.Drawing.Point(413, 65)
-    Me.UcDDHipotecario1.Name = "UcDDHipotecario1"
-    Me.UcDDHipotecario1.Size = New System.Drawing.Size(375, 219)
-    Me.UcDDHipotecario1.TabIndex = 18
-    '
-    'UcCBU1
-    '
-    Me.UcCBU1.Location = New System.Drawing.Point(413, 65)
-    Me.UcCBU1.Name = "UcCBU1"
-    Me.UcCBU1.Size = New System.Drawing.Size(375, 219)
-    Me.UcCBU1.TabIndex = 19
-    '
-    'UcTarjeta1
-    '
-    Me.UcTarjeta1.Location = New System.Drawing.Point(413, 65)
-    Me.UcTarjeta1.Name = "UcTarjeta1"
-    Me.UcTarjeta1.Size = New System.Drawing.Size(375, 219)
-    Me.UcTarjeta1.TabIndex = 20
-    '
     'Label2
     '
     Me.Label2.BackColor = System.Drawing.Color.Transparent
@@ -199,6 +179,34 @@ Partial Class frmCuenta
     Me.Label2.TabIndex = 21
     Me.Label2.Text = "MEDIO DE PAGO"
     Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
+    'UcTarjeta1
+    '
+    Me.UcTarjeta1.Location = New System.Drawing.Point(413, 65)
+    Me.UcTarjeta1.Name = "UcTarjeta1"
+    Me.UcTarjeta1.Size = New System.Drawing.Size(375, 219)
+    Me.UcTarjeta1.TabIndex = 20
+    '
+    'UcCBU1
+    '
+    Me.UcCBU1.Location = New System.Drawing.Point(413, 65)
+    Me.UcCBU1.Name = "UcCBU1"
+    Me.UcCBU1.Size = New System.Drawing.Size(375, 219)
+    Me.UcCBU1.TabIndex = 19
+    '
+    'UcDDHipotecario1
+    '
+    Me.UcDDHipotecario1.Location = New System.Drawing.Point(413, 65)
+    Me.UcDDHipotecario1.Name = "UcDDHipotecario1"
+    Me.UcDDHipotecario1.Size = New System.Drawing.Size(375, 219)
+    Me.UcDDHipotecario1.TabIndex = 18
+    '
+    'UcServicioVirtual1
+    '
+    Me.UcServicioVirtual1.Location = New System.Drawing.Point(413, 65)
+    Me.UcServicioVirtual1.Name = "UcServicioVirtual1"
+    Me.UcServicioVirtual1.Size = New System.Drawing.Size(375, 219)
+    Me.UcServicioVirtual1.TabIndex = 22
     '
     'frmCuenta
     '
@@ -221,6 +229,7 @@ Partial Class frmCuenta
     Me.Controls.Add(Me.btnVolver)
     Me.Controls.Add(Me.Label1)
     Me.Controls.Add(Me.cmbTipoDeCuenta)
+    Me.Controls.Add(Me.UcServicioVirtual1)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmCuenta"
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -244,4 +253,5 @@ Partial Class frmCuenta
   Friend WithEvents UcCBU1 As main.ucCBU
   Friend WithEvents UcTarjeta1 As main.ucTarjeta
   Friend WithEvents Label2 As System.Windows.Forms.Label
+  Friend WithEvents UcServicioVirtual1 As main.ucServicioVirtual
 End Class
