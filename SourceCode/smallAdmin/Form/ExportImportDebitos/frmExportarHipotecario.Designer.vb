@@ -65,9 +65,9 @@ Partial Class frmExportarHipotecario
     Me.Label10 = New System.Windows.Forms.Label()
     Me.Label11 = New System.Windows.Forms.Label()
     Me.pnlFiltrado = New System.Windows.Forms.Panel()
-    Me.rbAplicaMesActual = New System.Windows.Forms.RadioButton()
-    Me.rbMesesAnterioresSinFiltro = New System.Windows.Forms.RadioButton()
     Me.rbAplicaMesesAnteriores = New System.Windows.Forms.RadioButton()
+    Me.rbMesesAnterioresSinFiltro = New System.Windows.Forms.RadioButton()
+    Me.rbAplicaMesActual = New System.Windows.Forms.RadioButton()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoHipotecarioBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -471,17 +471,15 @@ Partial Class frmExportarHipotecario
     Me.pnlFiltrado.Size = New System.Drawing.Size(384, 77)
     Me.pnlFiltrado.TabIndex = 99
     '
-    'rbAplicaMesActual
+    'rbAplicaMesesAnteriores
     '
-    Me.rbAplicaMesActual.AutoSize = True
-    Me.rbAplicaMesActual.Checked = True
-    Me.rbAplicaMesActual.Location = New System.Drawing.Point(21, 33)
-    Me.rbAplicaMesActual.Name = "rbAplicaMesActual"
-    Me.rbAplicaMesActual.Size = New System.Drawing.Size(99, 17)
-    Me.rbAplicaMesActual.TabIndex = 100
-    Me.rbAplicaMesActual.TabStop = True
-    Me.rbAplicaMesActual.Text = "Solo MesActual"
-    Me.rbAplicaMesActual.UseVisualStyleBackColor = True
+    Me.rbAplicaMesesAnteriores.AutoSize = True
+    Me.rbAplicaMesesAnteriores.Location = New System.Drawing.Point(163, 33)
+    Me.rbAplicaMesesAnteriores.Name = "rbAplicaMesesAnteriores"
+    Me.rbAplicaMesesAnteriores.Size = New System.Drawing.Size(148, 17)
+    Me.rbAplicaMesesAnteriores.TabIndex = 102
+    Me.rbAplicaMesesAnteriores.Text = "Aplicar a meses anteriores"
+    Me.rbAplicaMesesAnteriores.UseVisualStyleBackColor = True
     '
     'rbMesesAnterioresSinFiltro
     '
@@ -493,15 +491,17 @@ Partial Class frmExportarHipotecario
     Me.rbMesesAnterioresSinFiltro.Text = "Incluir meses anteriores sin filtrado"
     Me.rbMesesAnterioresSinFiltro.UseVisualStyleBackColor = True
     '
-    'rbAplicaMesesAnteriores
+    'rbAplicaMesActual
     '
-    Me.rbAplicaMesesAnteriores.AutoSize = True
-    Me.rbAplicaMesesAnteriores.Location = New System.Drawing.Point(163, 33)
-    Me.rbAplicaMesesAnteriores.Name = "rbAplicaMesesAnteriores"
-    Me.rbAplicaMesesAnteriores.Size = New System.Drawing.Size(148, 17)
-    Me.rbAplicaMesesAnteriores.TabIndex = 102
-    Me.rbAplicaMesesAnteriores.Text = "Aplicar a meses anteriores"
-    Me.rbAplicaMesesAnteriores.UseVisualStyleBackColor = True
+    Me.rbAplicaMesActual.AutoSize = True
+    Me.rbAplicaMesActual.Checked = True
+    Me.rbAplicaMesActual.Location = New System.Drawing.Point(21, 33)
+    Me.rbAplicaMesActual.Name = "rbAplicaMesActual"
+    Me.rbAplicaMesActual.Size = New System.Drawing.Size(99, 17)
+    Me.rbAplicaMesActual.TabIndex = 100
+    Me.rbAplicaMesActual.TabStop = True
+    Me.rbAplicaMesActual.Text = "Solo MesActual"
+    Me.rbAplicaMesActual.UseVisualStyleBackColor = True
     '
     'frmExportarHipotecario
     '

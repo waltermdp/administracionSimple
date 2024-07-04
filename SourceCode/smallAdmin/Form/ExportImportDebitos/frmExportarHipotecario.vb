@@ -34,6 +34,9 @@ Public Class frmExportarHipotecario
       txtSecuencial.Text = m_Banco.Secuencial.ToString
       txtIdDebito.Text = m_Banco.ID_Debito
       txtConcepto.Text = m_Banco.Concepto
+      chkEnableFrom.Checked = False
+      pnlFiltrado.Enabled = False
+      InitFiltrado()
       m_skip = False
       RecargarValores()
 
@@ -45,6 +48,9 @@ Public Class frmExportarHipotecario
 
   Private Sub RecargarValores()
     Try
+      ValidarFiltro()
+      updateOpcionesFiltrado()
+
       m_Banco.CargarContratosAExportar(Me)
       ClsInfoHipotecarioBindingSource.DataSource = m_Banco.m_RegistrosExportar
       ClsInfoHipotecarioBindingSource.ResetBindings(False)
@@ -119,7 +125,7 @@ Public Class frmExportarHipotecario
         dnDayFrom.Value = 1
         Return False
       End If
-
+      Return True
     Catch ex As Exception
       Print_msg(ex.Message)
       Return False
@@ -139,7 +145,7 @@ Public Class frmExportarHipotecario
         m_Banco.ModoFiltrado = clsHipotecario.E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
         rbAplicaMesActual.Checked = True
       End If
-
+      Return True
     Catch ex As Exception
       Print_msg(ex.Message)
       Return False

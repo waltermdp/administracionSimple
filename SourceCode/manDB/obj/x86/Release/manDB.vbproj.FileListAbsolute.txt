@@ -58,3 +58,7 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\R
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.dll
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.xml
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml

@@ -6,30 +6,35 @@ smallAdmin
 </name>
 </assembly>
 <members>
+<member name="T:main.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
 <member name="P:main.My.Resources.Resources.ResourceManager">
-	<summary>
+<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
-</member><member name="P:main.My.Resources.Resources.Culture">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.Culture">
+<summary>
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
-</member><member name="P:main.My.Resources.Resources.Fondo810x370">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.Fondo810x370">
+<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:main.My.Resources.Resources.FondoGral">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.FondoGral">
+<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:main.My.Resources.Resources.FondoGral_960x540">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.FondoGral_960x540">
+<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
-</summary>
-</member><member name="T:main.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
 </member>
 </members>

@@ -35,6 +35,9 @@ Public Class frmExportarVisaDebito
       'txtRazonSocial.Text = m_Banco.RazonSocial
       txtNroCUIT.Text = "COMPLETAR" ' m_Banco.NroCuitEmpresa.ToString
       'txtReferencia.Text = m_Banco.ReferenciaDebito
+      chkEnableFrom.Checked = False
+      pnlFiltrado.Enabled = False
+      InitFiltrado()
       m_skip = False
       RecargarValores()
 
@@ -45,6 +48,9 @@ Public Class frmExportarVisaDebito
 
   Private Sub RecargarValores()
     Try
+      ValidarFiltro()
+      updateOpcionesFiltrado()
+
       Dim vResult As Result = m_Banco.CargarContratosAExportar(Me)
 
       ClsInfoExportarVisaDebitoBindingSource.DataSource = m_Banco.m_RegistrosExportar
@@ -61,8 +67,64 @@ Public Class frmExportarVisaDebito
     End Try
   End Sub
 
+  Private Sub InitFiltrado()
+    Try
+      dnDayFrom.Minimum = 1
+      dnDayFrom.Maximum = Date.DaysInMonth(m_Banco.FechaPresentacion.Year, m_Banco.FechaPresentacion.Month)
+      dnDayTo.Minimum = 1
+      dnDayTo.Maximum = Date.DaysInMonth(m_Banco.FechaPresentacion.Year, m_Banco.FechaPresentacion.Month)
+      dnDayFrom.Value = 1
+      dnDayTo.Value = m_Banco.FechaPresentacion.Day
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
+  Private Function ValidarFiltro() As Boolean
+    Try
+      If dnDayFrom.Value > dnDayTo.Value Then
+        MsgBox("El intevalo de busqueda no esta correctamente ingresado #Desde<=#hasta")
+        dnDayFrom.Value = 1
+        Return False
+      End If
+      Return True
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
 
+  Private Function updateOpcionesFiltrado() As Boolean
+    Try
+      m_Banco.AplicarFiltradoFechas(chkEnableFrom.Checked)
+      m_Banco.DayFrom = CInt(dnDayFrom.Value)
+      m_Banco.DayTo = CInt(dnDayTo.Value)
+      If rbAplicaMesesAnteriores.Checked Then
+        m_Banco.ModoFiltrado = clsVisaDebito.E_FiltroMesesAnteriores.MESES_ANT_CON_FILTRO
+      ElseIf rbMesesAnterioresSinFiltro.Checked Then
+        m_Banco.ModoFiltrado = clsVisaDebito.E_FiltroMesesAnteriores.MESES_ANT_SIN_FILTRO
+      Else
+        m_Banco.ModoFiltrado = clsVisaDebito.E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
+        rbAplicaMesActual.Checked = True
+      End If
+      Return True
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return False
+    End Try
+  End Function
+
+  Private Sub chkEnableFrom_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableFrom.CheckedChanged
+    Try
+      If m_skip Then Exit Sub
+      m_skip = True
+      pnlFiltrado.Enabled = chkEnableFrom.Checked
+      m_skip = False
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      m_skip = False
+    End Try
+  End Sub
 
   Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
     Try
@@ -77,6 +139,7 @@ Public Class frmExportarVisaDebito
 
   Private Sub btnProcesar_Click(sender As Object, e As EventArgs) Handles btnProcesar.Click
     Try
+      If MsgBox("Desea exportar el registro actual?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
       With m_Banco
         '.RazonSocial = txtRazonSocial.Text
         '.Producto = txtProducto.Text

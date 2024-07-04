@@ -34,18 +34,6 @@ Partial Class frmExportarMaster
     Me.Label3 = New System.Windows.Forms.Label()
     Me.txtImporteTotal = New System.Windows.Forms.TextBox()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
-    Me.lblResumen = New System.Windows.Forms.Label()
-    Me.btnReload = New System.Windows.Forms.Button()
-    Me.btnProcesar = New System.Windows.Forms.Button()
-    Me.btnCancel = New System.Windows.Forms.Button()
-    Me.txtReferencia = New System.Windows.Forms.TextBox()
-    Me.Label8 = New System.Windows.Forms.Label()
-    Me.txtNroComercio = New System.Windows.Forms.TextBox()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.Label6 = New System.Windows.Forms.Label()
-    Me.cmbEstado = New System.Windows.Forms.ComboBox()
-    Me.Label9 = New System.Windows.Forms.Label()
-    Me.ClsInfoExportarMasterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.ExportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
     Me.FechaUltimaExportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CuitDNIDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,8 +52,32 @@ Partial Class frmExportarMaster
     Me.TipoMonedaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.ReferenciaDebitoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NroCuitEmpresaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoExportarMasterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.lblResumen = New System.Windows.Forms.Label()
+    Me.btnReload = New System.Windows.Forms.Button()
+    Me.btnProcesar = New System.Windows.Forms.Button()
+    Me.btnCancel = New System.Windows.Forms.Button()
+    Me.txtReferencia = New System.Windows.Forms.TextBox()
+    Me.Label8 = New System.Windows.Forms.Label()
+    Me.txtNroComercio = New System.Windows.Forms.TextBox()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.Label6 = New System.Windows.Forms.Label()
+    Me.cmbEstado = New System.Windows.Forms.ComboBox()
+    Me.Label9 = New System.Windows.Forms.Label()
+    Me.pnlFiltrado = New System.Windows.Forms.Panel()
+    Me.rbAplicaMesesAnteriores = New System.Windows.Forms.RadioButton()
+    Me.rbMesesAnterioresSinFiltro = New System.Windows.Forms.RadioButton()
+    Me.rbAplicaMesActual = New System.Windows.Forms.RadioButton()
+    Me.dnDayFrom = New System.Windows.Forms.NumericUpDown()
+    Me.dnDayTo = New System.Windows.Forms.NumericUpDown()
+    Me.Label10 = New System.Windows.Forms.Label()
+    Me.Label11 = New System.Windows.Forms.Label()
+    Me.chkEnableFrom = New System.Windows.Forms.CheckBox()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoExportarMasterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.pnlFiltrado.SuspendLayout()
+    CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.dnDayTo, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtRazonSocial
@@ -87,7 +99,7 @@ Partial Class frmExportarMaster
     '
     'txtProducto
     '
-    Me.txtProducto.Location = New System.Drawing.Point(838, 41)
+    Me.txtProducto.Location = New System.Drawing.Point(247, 105)
     Me.txtProducto.Name = "txtProducto"
     Me.txtProducto.Size = New System.Drawing.Size(133, 20)
     Me.txtProducto.TabIndex = 82
@@ -95,7 +107,7 @@ Partial Class frmExportarMaster
     'Label1
     '
     Me.Label1.BackColor = System.Drawing.Color.Transparent
-    Me.Label1.Location = New System.Drawing.Point(760, 41)
+    Me.Label1.Location = New System.Drawing.Point(169, 105)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(72, 20)
     Me.Label1.TabIndex = 81
@@ -105,7 +117,7 @@ Partial Class frmExportarMaster
     'dtVencimiento
     '
     Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtVencimiento.Location = New System.Drawing.Point(1124, 75)
+    Me.dtVencimiento.Location = New System.Drawing.Point(1122, 43)
     Me.dtVencimiento.Name = "dtVencimiento"
     Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
     Me.dtVencimiento.TabIndex = 80
@@ -113,7 +125,7 @@ Partial Class frmExportarMaster
     'dtCurrent
     '
     Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtCurrent.Location = New System.Drawing.Point(838, 74)
+    Me.dtCurrent.Location = New System.Drawing.Point(836, 42)
     Me.dtCurrent.Name = "dtCurrent"
     Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
     Me.dtCurrent.TabIndex = 79
@@ -121,7 +133,7 @@ Partial Class frmExportarMaster
     'Label5
     '
     Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Location = New System.Drawing.Point(1018, 77)
+    Me.Label5.Location = New System.Drawing.Point(1016, 45)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
     Me.Label5.TabIndex = 76
@@ -130,7 +142,7 @@ Partial Class frmExportarMaster
     'Label4
     '
     Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(753, 77)
+    Me.Label4.Location = New System.Drawing.Point(751, 45)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
     Me.Label4.TabIndex = 75
@@ -164,131 +176,13 @@ Partial Class frmExportarMaster
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ExportarDataGridViewCheckBoxColumn, Me.FechaUltimaExportacionDataGridViewTextBoxColumn, Me.CuitDNIDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.NroTarjetaDataGridViewTextBoxColumn, Me.ContratoDataGridViewTextBoxColumn, Me.FechaVtoDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.EstadoContratoDataGridViewTextBoxColumn, Me.PlanCuotasDataGridViewTextBoxColumn, Me.TipoNovedadDataGridViewTextBoxColumn, Me.ProductoDataGridViewTextBoxColumn, Me.TipoMonedaDataGridViewTextBoxColumn, Me.ReferenciaDebitoDataGridViewTextBoxColumn, Me.NroCuitEmpresaDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoExportarMasterBindingSource
     Me.dgvResumen.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-    Me.dgvResumen.Location = New System.Drawing.Point(172, 115)
+    Me.dgvResumen.Location = New System.Drawing.Point(172, 154)
     Me.dgvResumen.MultiSelect = False
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
+    Me.dgvResumen.Size = New System.Drawing.Size(1080, 456)
     Me.dgvResumen.TabIndex = 70
-    '
-    'lblResumen
-    '
-    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
-    Me.lblResumen.Location = New System.Drawing.Point(169, 649)
-    Me.lblResumen.Name = "lblResumen"
-    Me.lblResumen.Size = New System.Drawing.Size(1083, 39)
-    Me.lblResumen.TabIndex = 69
-    Me.lblResumen.Text = "Resumen"
-    '
-    'btnReload
-    '
-    Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnReload.FlatAppearance.BorderSize = 0
-    Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnReload.ForeColor = System.Drawing.Color.White
-    Me.btnReload.Location = New System.Drawing.Point(10, 105)
-    Me.btnReload.Name = "btnReload"
-    Me.btnReload.Size = New System.Drawing.Size(110, 60)
-    Me.btnReload.TabIndex = 68
-    Me.btnReload.Text = "Volver a Cargar"
-    Me.btnReload.UseVisualStyleBackColor = False
-    '
-    'btnProcesar
-    '
-    Me.btnProcesar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnProcesar.FlatAppearance.BorderSize = 0
-    Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnProcesar.ForeColor = System.Drawing.Color.White
-    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
-    Me.btnProcesar.Name = "btnProcesar"
-    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
-    Me.btnProcesar.TabIndex = 67
-    Me.btnProcesar.Text = "Procesar"
-    Me.btnProcesar.UseVisualStyleBackColor = False
-    '
-    'btnCancel
-    '
-    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
-    Me.btnCancel.FlatAppearance.BorderSize = 0
-    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.btnCancel.ForeColor = System.Drawing.Color.White
-    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
-    Me.btnCancel.Name = "btnCancel"
-    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
-    Me.btnCancel.TabIndex = 66
-    Me.btnCancel.Text = "Cancelar"
-    Me.btnCancel.UseVisualStyleBackColor = False
-    '
-    'txtReferencia
-    '
-    Me.txtReferencia.Location = New System.Drawing.Point(539, 74)
-    Me.txtReferencia.Name = "txtReferencia"
-    Me.txtReferencia.Size = New System.Drawing.Size(191, 20)
-    Me.txtReferencia.TabIndex = 86
-    '
-    'Label8
-    '
-    Me.Label8.BackColor = System.Drawing.Color.Transparent
-    Me.Label8.Location = New System.Drawing.Point(432, 74)
-    Me.Label8.Name = "Label8"
-    Me.Label8.Size = New System.Drawing.Size(101, 20)
-    Me.Label8.TabIndex = 85
-    Me.Label8.Text = "Referencia Debito"
-    Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'txtNroComercio
-    '
-    Me.txtNroComercio.Location = New System.Drawing.Point(247, 42)
-    Me.txtNroComercio.Name = "txtNroComercio"
-    Me.txtNroComercio.Size = New System.Drawing.Size(100, 20)
-    Me.txtNroComercio.TabIndex = 88
-    '
-    'Label2
-    '
-    Me.Label2.BackColor = System.Drawing.Color.Transparent
-    Me.Label2.Location = New System.Drawing.Point(169, 46)
-    Me.Label2.Name = "Label2"
-    Me.Label2.Size = New System.Drawing.Size(72, 16)
-    Me.Label2.TabIndex = 87
-    Me.Label2.Text = "Nro Comercio"
-    '
-    'Label6
-    '
-    Me.Label6.BackColor = System.Drawing.Color.Transparent
-    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    Me.Label6.ForeColor = System.Drawing.Color.White
-    Me.Label6.Location = New System.Drawing.Point(0, 0)
-    Me.Label6.Name = "Label6"
-    Me.Label6.Size = New System.Drawing.Size(1280, 25)
-    Me.Label6.TabIndex = 89
-    Me.Label6.Text = "Master: Exportar Debitos Directos"
-    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-    '
-    'cmbEstado
-    '
-    Me.cmbEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-    Me.cmbEstado.FormattingEnabled = True
-    Me.cmbEstado.Location = New System.Drawing.Point(353, 618)
-    Me.cmbEstado.Name = "cmbEstado"
-    Me.cmbEstado.Size = New System.Drawing.Size(138, 21)
-    Me.cmbEstado.TabIndex = 91
-    '
-    'Label9
-    '
-    Me.Label9.BackColor = System.Drawing.Color.Transparent
-    Me.Label9.Location = New System.Drawing.Point(169, 621)
-    Me.Label9.Name = "Label9"
-    Me.Label9.Size = New System.Drawing.Size(178, 16)
-    Me.Label9.TabIndex = 90
-    Me.Label9.Text = "Estado del Contrato"
-    '
-    'ClsInfoExportarMasterBindingSource
-    '
-    Me.ClsInfoExportarMasterBindingSource.DataSource = GetType(main.clsInfoExportarMaster)
     '
     'ExportarDataGridViewCheckBoxColumn
     '
@@ -407,12 +301,227 @@ Partial Class frmExportarMaster
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.Name = "NroCuitEmpresaDataGridViewTextBoxColumn"
     Me.NroCuitEmpresaDataGridViewTextBoxColumn.Visible = False
     '
+    'ClsInfoExportarMasterBindingSource
+    '
+    Me.ClsInfoExportarMasterBindingSource.DataSource = GetType(main.clsInfoExportarMaster)
+    '
+    'lblResumen
+    '
+    Me.lblResumen.BackColor = System.Drawing.Color.Transparent
+    Me.lblResumen.Location = New System.Drawing.Point(169, 649)
+    Me.lblResumen.Name = "lblResumen"
+    Me.lblResumen.Size = New System.Drawing.Size(1083, 39)
+    Me.lblResumen.TabIndex = 69
+    Me.lblResumen.Text = "Resumen"
+    '
+    'btnReload
+    '
+    Me.btnReload.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnReload.FlatAppearance.BorderSize = 0
+    Me.btnReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnReload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnReload.ForeColor = System.Drawing.Color.White
+    Me.btnReload.Location = New System.Drawing.Point(10, 105)
+    Me.btnReload.Name = "btnReload"
+    Me.btnReload.Size = New System.Drawing.Size(110, 60)
+    Me.btnReload.TabIndex = 68
+    Me.btnReload.Text = "Volver a Cargar"
+    Me.btnReload.UseVisualStyleBackColor = False
+    '
+    'btnProcesar
+    '
+    Me.btnProcesar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnProcesar.FlatAppearance.BorderSize = 0
+    Me.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnProcesar.ForeColor = System.Drawing.Color.White
+    Me.btnProcesar.Location = New System.Drawing.Point(10, 35)
+    Me.btnProcesar.Name = "btnProcesar"
+    Me.btnProcesar.Size = New System.Drawing.Size(110, 60)
+    Me.btnProcesar.TabIndex = 67
+    Me.btnProcesar.Text = "Procesar"
+    Me.btnProcesar.UseVisualStyleBackColor = False
+    '
+    'btnCancel
+    '
+    Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(204, Byte), Integer))
+    Me.btnCancel.FlatAppearance.BorderSize = 0
+    Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.btnCancel.ForeColor = System.Drawing.Color.White
+    Me.btnCancel.Location = New System.Drawing.Point(10, 637)
+    Me.btnCancel.Name = "btnCancel"
+    Me.btnCancel.Size = New System.Drawing.Size(110, 60)
+    Me.btnCancel.TabIndex = 66
+    Me.btnCancel.Text = "Cancelar"
+    Me.btnCancel.UseVisualStyleBackColor = False
+    '
+    'txtReferencia
+    '
+    Me.txtReferencia.Location = New System.Drawing.Point(539, 74)
+    Me.txtReferencia.Name = "txtReferencia"
+    Me.txtReferencia.Size = New System.Drawing.Size(191, 20)
+    Me.txtReferencia.TabIndex = 86
+    '
+    'Label8
+    '
+    Me.Label8.BackColor = System.Drawing.Color.Transparent
+    Me.Label8.Location = New System.Drawing.Point(432, 74)
+    Me.Label8.Name = "Label8"
+    Me.Label8.Size = New System.Drawing.Size(101, 20)
+    Me.Label8.TabIndex = 85
+    Me.Label8.Text = "Referencia Debito"
+    Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+    '
+    'txtNroComercio
+    '
+    Me.txtNroComercio.Location = New System.Drawing.Point(247, 42)
+    Me.txtNroComercio.Name = "txtNroComercio"
+    Me.txtNroComercio.Size = New System.Drawing.Size(100, 20)
+    Me.txtNroComercio.TabIndex = 88
+    '
+    'Label2
+    '
+    Me.Label2.BackColor = System.Drawing.Color.Transparent
+    Me.Label2.Location = New System.Drawing.Point(169, 46)
+    Me.Label2.Name = "Label2"
+    Me.Label2.Size = New System.Drawing.Size(72, 16)
+    Me.Label2.TabIndex = 87
+    Me.Label2.Text = "Nro Comercio"
+    '
+    'Label6
+    '
+    Me.Label6.BackColor = System.Drawing.Color.Transparent
+    Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+    Me.Label6.ForeColor = System.Drawing.Color.White
+    Me.Label6.Location = New System.Drawing.Point(0, 0)
+    Me.Label6.Name = "Label6"
+    Me.Label6.Size = New System.Drawing.Size(1280, 25)
+    Me.Label6.TabIndex = 89
+    Me.Label6.Text = "Master: Exportar Debitos Directos"
+    Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+    '
+    'cmbEstado
+    '
+    Me.cmbEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+    Me.cmbEstado.FormattingEnabled = True
+    Me.cmbEstado.Location = New System.Drawing.Point(353, 618)
+    Me.cmbEstado.Name = "cmbEstado"
+    Me.cmbEstado.Size = New System.Drawing.Size(138, 21)
+    Me.cmbEstado.TabIndex = 91
+    '
+    'Label9
+    '
+    Me.Label9.BackColor = System.Drawing.Color.Transparent
+    Me.Label9.Location = New System.Drawing.Point(169, 621)
+    Me.Label9.Name = "Label9"
+    Me.Label9.Size = New System.Drawing.Size(178, 16)
+    Me.Label9.TabIndex = 90
+    Me.Label9.Text = "Estado del Contrato"
+    '
+    'pnlFiltrado
+    '
+    Me.pnlFiltrado.Controls.Add(Me.rbAplicaMesesAnteriores)
+    Me.pnlFiltrado.Controls.Add(Me.rbMesesAnterioresSinFiltro)
+    Me.pnlFiltrado.Controls.Add(Me.rbAplicaMesActual)
+    Me.pnlFiltrado.Controls.Add(Me.dnDayFrom)
+    Me.pnlFiltrado.Controls.Add(Me.dnDayTo)
+    Me.pnlFiltrado.Controls.Add(Me.Label10)
+    Me.pnlFiltrado.Controls.Add(Me.Label11)
+    Me.pnlFiltrado.Location = New System.Drawing.Point(868, 71)
+    Me.pnlFiltrado.Name = "pnlFiltrado"
+    Me.pnlFiltrado.Size = New System.Drawing.Size(384, 77)
+    Me.pnlFiltrado.TabIndex = 101
+    '
+    'rbAplicaMesesAnteriores
+    '
+    Me.rbAplicaMesesAnteriores.AutoSize = True
+    Me.rbAplicaMesesAnteriores.Location = New System.Drawing.Point(163, 33)
+    Me.rbAplicaMesesAnteriores.Name = "rbAplicaMesesAnteriores"
+    Me.rbAplicaMesesAnteriores.Size = New System.Drawing.Size(148, 17)
+    Me.rbAplicaMesesAnteriores.TabIndex = 102
+    Me.rbAplicaMesesAnteriores.Text = "Aplicar a meses anteriores"
+    Me.rbAplicaMesesAnteriores.UseVisualStyleBackColor = True
+    '
+    'rbMesesAnterioresSinFiltro
+    '
+    Me.rbMesesAnterioresSinFiltro.AutoSize = True
+    Me.rbMesesAnterioresSinFiltro.Location = New System.Drawing.Point(21, 53)
+    Me.rbMesesAnterioresSinFiltro.Name = "rbMesesAnterioresSinFiltro"
+    Me.rbMesesAnterioresSinFiltro.Size = New System.Drawing.Size(185, 17)
+    Me.rbMesesAnterioresSinFiltro.TabIndex = 101
+    Me.rbMesesAnterioresSinFiltro.Text = "Incluir meses anteriores sin filtrado"
+    Me.rbMesesAnterioresSinFiltro.UseVisualStyleBackColor = True
+    '
+    'rbAplicaMesActual
+    '
+    Me.rbAplicaMesActual.AutoSize = True
+    Me.rbAplicaMesActual.Checked = True
+    Me.rbAplicaMesActual.Location = New System.Drawing.Point(21, 33)
+    Me.rbAplicaMesActual.Name = "rbAplicaMesActual"
+    Me.rbAplicaMesActual.Size = New System.Drawing.Size(99, 17)
+    Me.rbAplicaMesActual.TabIndex = 100
+    Me.rbAplicaMesActual.TabStop = True
+    Me.rbAplicaMesActual.Text = "Solo MesActual"
+    Me.rbAplicaMesActual.UseVisualStyleBackColor = True
+    '
+    'dnDayFrom
+    '
+    Me.dnDayFrom.Location = New System.Drawing.Point(90, 5)
+    Me.dnDayFrom.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+    Me.dnDayFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dnDayFrom.Name = "dnDayFrom"
+    Me.dnDayFrom.Size = New System.Drawing.Size(44, 20)
+    Me.dnDayFrom.TabIndex = 93
+    Me.dnDayFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
+    '
+    'dnDayTo
+    '
+    Me.dnDayTo.Location = New System.Drawing.Point(209, 5)
+    Me.dnDayTo.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+    Me.dnDayTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dnDayTo.Name = "dnDayTo"
+    Me.dnDayTo.Size = New System.Drawing.Size(44, 20)
+    Me.dnDayTo.TabIndex = 94
+    Me.dnDayTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
+    '
+    'Label10
+    '
+    Me.Label10.BackColor = System.Drawing.Color.Transparent
+    Me.Label10.Location = New System.Drawing.Point(18, 7)
+    Me.Label10.Name = "Label10"
+    Me.Label10.Size = New System.Drawing.Size(63, 23)
+    Me.Label10.TabIndex = 95
+    Me.Label10.Text = "Desde:"
+    '
+    'Label11
+    '
+    Me.Label11.BackColor = System.Drawing.Color.Transparent
+    Me.Label11.Location = New System.Drawing.Point(140, 7)
+    Me.Label11.Name = "Label11"
+    Me.Label11.Size = New System.Drawing.Size(63, 23)
+    Me.Label11.TabIndex = 96
+    Me.Label11.Text = "Hasta:"
+    '
+    'chkEnableFrom
+    '
+    Me.chkEnableFrom.BackColor = System.Drawing.Color.Transparent
+    Me.chkEnableFrom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+    Me.chkEnableFrom.Location = New System.Drawing.Point(776, 71)
+    Me.chkEnableFrom.Name = "chkEnableFrom"
+    Me.chkEnableFrom.Size = New System.Drawing.Size(86, 24)
+    Me.chkEnableFrom.TabIndex = 100
+    Me.chkEnableFrom.Text = "Intervalo"
+    Me.chkEnableFrom.UseVisualStyleBackColor = False
+    '
     'frmExportarMaster
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.pnlFiltrado)
+    Me.Controls.Add(Me.chkEnableFrom)
     Me.Controls.Add(Me.cmbEstado)
     Me.Controls.Add(Me.Label9)
     Me.Controls.Add(Me.Label6)
@@ -443,6 +552,10 @@ Partial Class frmExportarMaster
     Me.Text = "frmExportarPatagonia"
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.ClsInfoExportarMasterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.pnlFiltrado.ResumeLayout(False)
+    Me.pnlFiltrado.PerformLayout()
+    CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.dnDayTo, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
     Me.PerformLayout()
 
@@ -490,4 +603,13 @@ Partial Class frmExportarMaster
   Friend WithEvents TipoMonedaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents ReferenciaDebitoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents NroCuitEmpresaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents pnlFiltrado As System.Windows.Forms.Panel
+  Friend WithEvents rbAplicaMesesAnteriores As System.Windows.Forms.RadioButton
+  Friend WithEvents rbMesesAnterioresSinFiltro As System.Windows.Forms.RadioButton
+  Friend WithEvents rbAplicaMesActual As System.Windows.Forms.RadioButton
+  Friend WithEvents dnDayFrom As System.Windows.Forms.NumericUpDown
+  Friend WithEvents dnDayTo As System.Windows.Forms.NumericUpDown
+  Friend WithEvents Label10 As System.Windows.Forms.Label
+  Friend WithEvents Label11 As System.Windows.Forms.Label
+  Friend WithEvents chkEnableFrom As System.Windows.Forms.CheckBox
 End Class

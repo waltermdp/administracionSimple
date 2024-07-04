@@ -136,11 +136,12 @@ Public Class clsHipotecario
         m_Convenio = 0
         MsgBox("Convenio no disponible")
       End If
-      m_dayto = m_FechaGeneracion.Day
-      m_dayfrom = 1
+      
       m_IdDebito = "COBROCUOTA"
       m_Concepto = "CUOTA"
       m_HabilitarFiltradoFechas = False
+      m_dayto = m_FechaGeneracion.Day
+      m_dayfrom = 1
       m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
     Catch ex As Exception
       Print_msg(ex.Message)
@@ -459,7 +460,7 @@ Public Class clsHipotecario
       m_RegistrosExportar = New List(Of clsInfoExportarHipotecario)
       Dim movimiento As clsInfoExportarHipotecario
 
-      'lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota<=#" & Format(g_Today, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+
       If m_HabilitarFiltradoFechas Then
         'crear las fechas de busqueda con base al mes actual y al dia elegido
         If m_dayto < m_dayfrom Then
@@ -501,14 +502,14 @@ Public Class clsHipotecario
         Dim lstProducto As New clsListProductos
         lstProducto.Cfg_Filtro = "where GuidProducto={" & item.GuidProducto.ToString & "}" ' and GuidTipoPago = {" & m_GuidTipoPago.ToString & "}"  '"where GuidProducto in (select GuidProducto from Pagos where NumComprobante=" & mov.NumeroComprobante & ")" '" and EstadoPago=" & E_EstadoPago.Debe & ")"
         lstProducto.RefreshData()
-        If lstProducto.Items.Count <= 0 Then Continue For
-        If lstProducto.Items.First.NumComprobante = 133 Then
-          Dim k As Integer = 9
-        End If
+            If lstProducto.Items.Count <= 0 Then Continue For
+            If lstProducto.Items.First.NumComprobante = 197 Then
+               Dim k As Integer = 9
+            End If
 
-        Dim lstCuenta As New clsListaCuentas
-        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
-        lstCuenta.RefreshData()
+            Dim lstCuenta As New clsListaCuentas
+            lstCuenta.Cfg_Filtro = "where GuidCuenta={" & item.GuidCuenta.ToString & "}" '  lstProducto.Items.First.GuidCuenta.ToString & "}"
+            lstCuenta.RefreshData()
 
         Dim lstCliente As New clsListDatabase
         lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
@@ -717,8 +718,10 @@ Public Class clsHipotecario
       lstResult.Add(auxLinea)
       For Each mov In vlstRegistros
         auxLinea = String.Empty
-
-        If GenerarDetalle(vConvenio, mov, auxLinea) <> Result.OK Then
+            If mov.NumeroContrato = 197 Then
+               Dim j As Integer = 9
+            End If
+            If GenerarDetalle(vConvenio, mov, auxLinea) <> Result.OK Then
           MsgBox("No se puede generar el registro de debito Hipotecario")
           Return Result.NOK
         End If

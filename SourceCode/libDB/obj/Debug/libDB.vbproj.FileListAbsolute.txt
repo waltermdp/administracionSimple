@@ -10,3 +10,17 @@ C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.vbproj.Gener
 C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.dll
 C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.xml
 C:\repositorio\personal\smallAdmin\SourceCode\libDB\obj\Debug\libDB.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\Debug\libDB.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\Debug\libDB.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\Debug\libDB.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\Debug\libCommon.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\Debug\libCommon.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\Debug\libCommon.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.vbproj.AssemblyReference.cache
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.Resources.resources
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.vbproj.GenerateResource.cache
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.vbproj.CoreCompileInputs.cache
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.vbproj.CopyComplete
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\Debug\libDB.pdb

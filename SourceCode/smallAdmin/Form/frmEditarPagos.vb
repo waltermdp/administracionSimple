@@ -61,7 +61,7 @@ Public Class frmEditarPagos
       btnClearPago.Enabled = False
       btnSeleccionarCuenta.Enabled = False
       dtFechaPago.Enabled = False
-      btnEditarFechaDebe.Enabled = False
+      'btnEditarFechaDebe.Enabled = False
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
@@ -233,7 +233,7 @@ Public Class frmEditarPagos
           btnAplicaPago.Enabled = True
           dtFechaPago.Enabled = True
           btnSeleccionarCuenta.Enabled = True
-          btnEditarFechaDebe.Enabled = True
+          'btnEditarFechaDebe.Enabled = True
         End If
       End If
 
@@ -316,7 +316,7 @@ Public Class frmEditarPagos
   
   Private Sub btnEditarFechaDebe_Click(sender As Object, e As EventArgs) Handles btnEditarFechaDebe.Click
     Try
-      If (m_CurrentCuota.EstadoPago = E_EstadoPago.Debe) Then
+      If (m_CurrentCuota.EstadoPago <> E_EstadoPago.Pago) Then 'm_CurrentCuota.EstadoPago = E_EstadoPago.Debe
         'buscar ultima fecha de pago
         Dim iActual As Integer = m_lstPagos.FindIndex(Function(c) c.NumCuota = m_CurrentCuota.NumCuota)
 
@@ -345,7 +345,7 @@ Public Class frmEditarPagos
             nextPay += 1
           Next
         End If
-       
+
       End If
       ClsInfoPagosBindingSource.ResetBindings(False)
       dgvResumen.Refresh()

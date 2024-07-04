@@ -30,3 +30,7 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.dll
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.xml
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml

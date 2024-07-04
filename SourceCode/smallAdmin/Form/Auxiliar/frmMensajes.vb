@@ -1,7 +1,9 @@
 ﻿Option Strict Off
 Imports libCommon.Comunes
 Imports manDB
-Imports Excel = Microsoft.Office.Interop.Excel
+Imports DocumentFormat.OpenXml
+Imports DocumentFormat.OpenXml.Packaging
+Imports DocumentFormat.OpenXml.Spreadsheet
 
 Public Class frmMensajes
 
@@ -56,8 +58,8 @@ Public Class frmMensajes
       Dim qPagosRealizados As String = String.Empty
       If chkPagosIngresados.Checked = True Then
 
-        qPagosRealizados = "(Pagos.FechaPago>=#" & Format(dtPagadosDesde.Value, strFormatoAnsiStdFecha) & "#) AND (Pagos.FechaPago<=#" & Format(dtPagadosHasta.Value, strFormatoAnsiStdFecha) & "#) AND (Pagos.EstadoPago=1)"
-      End If
+            qPagosRealizados = "(Pagos.FechaPago>=#" & String.Format(dtPagadosDesde.Value, strFormatoAnsiStdFecha) & "#) AND (Pagos.FechaPago<=#" & String.Format(dtPagadosHasta.Value, strFormatoAnsiStdFecha) & "#) AND (Pagos.EstadoPago=1)"
+         End If
 
       If Not String.IsNullOrEmpty(qPagosRealizados) Then
         If Not String.IsNullOrEmpty(rconsulta) Then rconsulta = rconsulta & " AND "
@@ -79,120 +81,187 @@ Public Class frmMensajes
     End Try
   End Sub
 
-  Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-    Try
-      Pagaron()
-
-    Catch ex As Exception
-      Print_msg(ex.Message)
-    End Try
-  End Sub
-
-  'Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
-  '  Try
-  '    If m_lstConsulta Is Nothing Then Exit Sub
-  '    If m_lstConsulta.Count <= 0 Then Exit Sub
-  '    Dim vResult As DialogResult
-  '    Dim pathFileFullName As String
-  '    Using dialogGuardarFile As New Windows.Forms.SaveFileDialog
-  '      dialogGuardarFile.AddExtension = True
-  '      dialogGuardarFile.DefaultExt = "xls"
-  '      dialogGuardarFile.OverwritePrompt = True
-  '      dialogGuardarFile.Filter = "Excel files (*.xls)|*.xls"
-
-  '      vResult = dialogGuardarFile.ShowDialog(Me)
-  '      pathFileFullName = dialogGuardarFile.FileName
-  '    End Using
-  '    If vResult <> Windows.Forms.DialogResult.OK Then Exit Sub
-
-  '    Dim xls As New Excel.Application
-  '    Dim misValue As Object = System.Reflection.Missing.Value
-  '    Dim workbook As Excel.Workbook = xls.Workbooks.Add(misValue)
-  '    Dim worksheet As Excel.Worksheet = CType(workbook.Worksheets(1), Excel.Worksheet)
-
-  '    Try
-  '      'worksheet.Cells(1, 1) = "23"
-  '      '  worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
-  '      '  Dim lista As List(Of clsInfoExportarVisaCredito) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
-
-  '      worksheet.Cells(1, 1).value = "Cliente" ' dgvData1.Columns(i - 1).HeaderText
-  '      worksheet.Cells(1, 2).value = "Telefono 1"
-  '      worksheet.Cells(1, 3).value = "Fecha Pago"
-  '      worksheet.Cells(1, 4).value = "Cuota #"
-  '      worksheet.Cells(1, 5).value = "Cuota Total"
-  '      worksheet.Cells(1, 6).value = "Valor cuota"
-  '      worksheet.Cells(1, 7).value = "Mensaje"
-
-  '      'Dim cell3 As Excel.Worksheet.CellRange = sheet.Range("B7")
-  '      'Dim fileLink As Excel.Hyperlink  HyperLink = sheet.HyperLinks.Add(cell3)
-  '      'fileLink.Type = HyperLinkType.File
-  '      'fileLink.TextToDisplay = "Link to an external file"
-  '      'fileLink.Address = "C:\\Users\\Administrator\\Desktop\\Report.xlsx"
-
-
-  '      For i As Integer = 0 To m_lstConsulta.Count - 1 ' Each Movimiento In vMovimientos
-  '        worksheet.Cells(i + 2, 1).value = m_lstConsulta(i).Cliente.ToString
-  '        worksheet.Cells(i + 2, 2).value = m_lstConsulta(i).Telefono1.ToString
-  '        worksheet.Cells(i + 2, 3).value = m_lstConsulta(i).FechaPago.ToString("dd/MM/yyyy")
-  '        worksheet.Cells(i + 2, 4).value = m_lstConsulta(i).CuotaNumero.ToString
-  '        worksheet.Cells(i + 2, 5).value = m_lstConsulta(i).TotalCuotas.ToString
-  '        worksheet.Cells(i + 2, 6).value = String.Format("{0:N2}", m_lstConsulta(i).ValorCuota)
-  '        worksheet.Hyperlinks.Add(worksheet.Cells(i + 2, 7), m_lstConsulta(i).Mensaje.ToString, , "WhatsApp", "LINK")
-  '        worksheet.Cells(i + 2, 8).value = m_lstConsulta(i).Mensaje.ToString  'a modo de saber lo que hay en el link mas rapido
-
-  '      Next
-
-  '      worksheet.SaveAs(pathFileFullName)
-
-  '      workbook.Close(False)
-  '      worksheet = Nothing
-  '      workbook = Nothing
-  '      xls = Nothing
-  '    Finally
-
-
-  '    End Try
-
-
-  '  Catch ex As Exception
-  '    Print_msg(ex.Message)
-  '  End Try
-  'End Sub
-
-
-  Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
-    Try
-
-      Dim xls As New Excel.Application
-      Dim worksheet As Excel.Worksheet
-      Dim workbook As Excel.Workbook
-      IO.File.Copy(IO.Path.Combine(MODEL_PATH, "msg.xls"), IO.Path.Combine(TEMP_PATH, "msg.xls"), True)
-      workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "msg.xls"))
+   Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
       Try
-        worksheet = CType(workbook.Worksheets("mensajes"), Excel.Worksheet)
 
-        For i As Integer = 0 To m_lstConsulta.Count - 1 ' Each Movimiento In vMovimientos
-          worksheet.Cells(i + 2, 1).value = m_lstConsulta(i).Cliente.ToString
-          worksheet.Cells(i + 2, 2).value = m_lstConsulta(i).Telefono1.ToString
-          worksheet.Cells(i + 2, 3).value = m_lstConsulta(i).FechaPago.ToString("dd/MM/yyyy")
-          worksheet.Cells(i + 2, 4).value = m_lstConsulta(i).CuotaNumero.ToString
-          worksheet.Cells(i + 2, 5).value = m_lstConsulta(i).TotalCuotas.ToString
-          worksheet.Cells(i + 2, 6).value = String.Format("{0:N2}", m_lstConsulta(i).ValorCuota)
-          worksheet.Hyperlinks.Add(worksheet.Cells(i + 2, 7), m_lstConsulta(i).Mensaje.ToString, , "WhatsApp", "LINK")
-          worksheet.Cells(i + 2, 8).value = m_lstConsulta(i).Mensaje.ToString  'a modo de saber lo que hay en el link mas rapido
+         Dim vResult As Result
+         Dim msgResult As String
+         Using objForm As New frmProgreso(AddressOf Pagaron)
+            objForm.ShowDialog(Me)
+            vResult = objForm.ResultProcess
+            msgResult = objForm.ResultMessage
+         End Using
+         If vResult <> Result.OK Then
+            MsgBox(msgResult)
+         End If
 
-        Next
 
-        workbook.SaveCopyAs(IO.Path.Combine(App_path, GetHoy.ToString("yyMMdd") & "_mensajes.xls"))
-
-      Finally
-        workbook.Close(False)
+      Catch ex As Exception
+         Print_msg(ex.Message)
       End Try
+   End Sub
 
-      MsgBox("Finalizo exportacion")
+   'Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
+   '  Try
+   '    If m_lstConsulta Is Nothing Then Exit Sub
+   '    If m_lstConsulta.Count <= 0 Then Exit Sub
+   '    Dim vResult As DialogResult
+   '    Dim pathFileFullName As String
+   '    Using dialogGuardarFile As New Windows.Forms.SaveFileDialog
+   '      dialogGuardarFile.AddExtension = True
+   '      dialogGuardarFile.DefaultExt = "xls"
+   '      dialogGuardarFile.OverwritePrompt = True
+   '      dialogGuardarFile.Filter = "Excel files (*.xls)|*.xls"
 
-    Catch ex As Exception
-      Print_msg(ex.Message)
+   '      vResult = dialogGuardarFile.ShowDialog(Me)
+   '      pathFileFullName = dialogGuardarFile.FileName
+   '    End Using
+   '    If vResult <> Windows.Forms.DialogResult.OK Then Exit Sub
+
+   '    Dim xls As New Excel.Application
+   '    Dim misValue As Object = System.Reflection.Missing.Value
+   '    Dim workbook As Excel.Workbook = xls.Workbooks.Add(misValue)
+   '    Dim worksheet As Excel.Worksheet = CType(workbook.Worksheets(1), Excel.Worksheet)
+
+   '    Try
+   '      'worksheet.Cells(1, 1) = "23"
+   '      '  worksheet = CType(workbook.Worksheets("Facturas"), Excel.Worksheet)
+   '      '  Dim lista As List(Of clsInfoExportarVisaCredito) = vMovimientos.OrderBy(Function(d) CInt(d.NumeroComprobante)).ToList
+
+   '      worksheet.Cells(1, 1).value = "Cliente" ' dgvData1.Columns(i - 1).HeaderText
+   '      worksheet.Cells(1, 2).value = "Telefono 1"
+   '      worksheet.Cells(1, 3).value = "Fecha Pago"
+   '      worksheet.Cells(1, 4).value = "Cuota #"
+   '      worksheet.Cells(1, 5).value = "Cuota Total"
+   '      worksheet.Cells(1, 6).value = "Valor cuota"
+   '      worksheet.Cells(1, 7).value = "Mensaje"
+
+   '      'Dim cell3 As Excel.Worksheet.CellRange = sheet.Range("B7")
+   '      'Dim fileLink As Excel.Hyperlink  HyperLink = sheet.HyperLinks.Add(cell3)
+   '      'fileLink.Type = HyperLinkType.File
+   '      'fileLink.TextToDisplay = "Link to an external file"
+   '      'fileLink.Address = "C:\\Users\\Administrator\\Desktop\\Report.xlsx"
+
+
+   '      For i As Integer = 0 To m_lstConsulta.Count - 1 ' Each Movimiento In vMovimientos
+   '        worksheet.Cells(i + 2, 1).value = m_lstConsulta(i).Cliente.ToString
+   '        worksheet.Cells(i + 2, 2).value = m_lstConsulta(i).Telefono1.ToString
+   '        worksheet.Cells(i + 2, 3).value = m_lstConsulta(i).FechaPago.ToString("dd/MM/yyyy")
+   '        worksheet.Cells(i + 2, 4).value = m_lstConsulta(i).CuotaNumero.ToString
+   '        worksheet.Cells(i + 2, 5).value = m_lstConsulta(i).TotalCuotas.ToString
+   '        worksheet.Cells(i + 2, 6).value = String.Format("{0:N2}", m_lstConsulta(i).ValorCuota)
+   '        worksheet.Hyperlinks.Add(worksheet.Cells(i + 2, 7), m_lstConsulta(i).Mensaje.ToString, , "WhatsApp", "LINK")
+   '        worksheet.Cells(i + 2, 8).value = m_lstConsulta(i).Mensaje.ToString  'a modo de saber lo que hay en el link mas rapido
+
+   '      Next
+
+   '      worksheet.SaveAs(pathFileFullName)
+
+   '      workbook.Close(False)
+   '      worksheet = Nothing
+   '      workbook = Nothing
+   '      xls = Nothing
+   '    Finally
+
+
+   '    End Try
+
+
+   '  Catch ex As Exception
+   '    Print_msg(ex.Message)
+   '  End Try
+   'End Sub
+
+
+   Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
+      Try
+
+         Dim spreadsheetDocument As SpreadsheetDocument = SpreadsheetDocument.Create("c:\test.xls", SpreadsheetDocumentType.Workbook)
+         Dim workbookpart As WorkbookPart = spreadsheetDocument.AddWorkbookPart
+         workbookpart.Workbook = New Workbook
+
+         ' Add a WorksheetPart to the WorkbookPart.
+         Dim worksheetPart As WorksheetPart = workbookpart.AddNewPart(Of WorksheetPart)()
+         worksheetPart.Worksheet = New Worksheet(New SheetData())
+
+         ' Add Sheets to the Workbook.
+         Dim sheets As Sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(Of Sheets)(New Sheets())
+
+         ' Append a new worksheet and associate it with the workbook.
+         Dim sheet As Sheet = New Sheet
+         sheet.Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart)
+         sheet.SheetId = 1
+         sheet.Name = "links"
+
+         Dim data As SheetData = New SheetData
+         Dim rowId As Integer = 0
+         Dim row As Row = New Row
+
+         For i As Integer = 0 To 7
+            Dim aux As Cell = New Cell
+            aux.DataType = New EnumValue(Of CellValues)(CellValues.SharedString)
+            aux.CellValue = New CellValue("22")
+            row.InsertAt(Of Cell)(aux, i)
+         Next
+         data.InsertAt(Of Row)(row, 0)
+         worksheetPart.Worksheet.Append(data)
+         worksheetPart.Worksheet.Save()
+
+         'For i As Integer = 0 To m_lstConsulta.Count - 1 ' Each Movimiento In vMovimientos
+
+         '      worksheet.Cells(i + 2, 1).value = m_lstConsulta(i).Cliente.ToString
+         '      worksheet.Cells(i + 2, 2).value = m_lstConsulta(i).Telefono1.ToString
+         '      worksheet.Cells(i + 2, 3).value = m_lstConsulta(i).FechaPago.ToString("dd/MM/yyyy")
+         '      worksheet.Cells(i + 2, 4).value = m_lstConsulta(i).CuotaNumero.ToString
+         '      worksheet.Cells(i + 2, 5).value = m_lstConsulta(i).TotalCuotas.ToString
+         '      worksheet.Cells(i + 2, 6).value = String.Format("{0:N2}", m_lstConsulta(i).ValorCuota)
+         '      worksheet.Hyperlinks.Add(worksheet.Cells(i + 2, 7), m_lstConsulta(i).Mensaje.ToString, , "WhatsApp", "LINK")
+         '      worksheet.Cells(i + 2, 8).value = m_lstConsulta(i).Mensaje.ToString  'a modo de saber lo que hay en el link mas rapido
+
+         '   Next
+
+         sheets.Append(sheet)
+
+         workbookpart.Workbook.Save()
+
+         ' Dispose the document.
+         spreadsheetDocument.Dispose()
+
+         MsgBox("fin test")
+
+         Exit Sub
+
+
+         'Dim xls As New Excel.Application
+         'Dim worksheet As Excel.Worksheet
+         'Dim workbook As Excel.Workbook
+         'IO.File.Copy(IO.Path.Combine(MODEL_PATH, "msg.xls"), IO.Path.Combine(TEMP_PATH, "msg.xls"), True)
+         'workbook = xls.Workbooks.Open(IO.Path.Combine(TEMP_PATH, "msg.xls"))
+         'Try
+         '   worksheet = CType(workbook.Worksheets("mensajes"), Excel.Worksheet)
+
+         '   For i As Integer = 0 To m_lstConsulta.Count - 1 ' Each Movimiento In vMovimientos
+         '      worksheet.Cells(i + 2, 1).value = m_lstConsulta(i).Cliente.ToString
+         '      worksheet.Cells(i + 2, 2).value = m_lstConsulta(i).Telefono1.ToString
+         '      worksheet.Cells(i + 2, 3).value = m_lstConsulta(i).FechaPago.ToString("dd/MM/yyyy")
+         '      worksheet.Cells(i + 2, 4).value = m_lstConsulta(i).CuotaNumero.ToString
+         '      worksheet.Cells(i + 2, 5).value = m_lstConsulta(i).TotalCuotas.ToString
+         '      worksheet.Cells(i + 2, 6).value = String.Format("{0:N2}", m_lstConsulta(i).ValorCuota)
+         '      worksheet.Hyperlinks.Add(worksheet.Cells(i + 2, 7), m_lstConsulta(i).Mensaje.ToString, , "WhatsApp", "LINK")
+         '      worksheet.Cells(i + 2, 8).value = m_lstConsulta(i).Mensaje.ToString  'a modo de saber lo que hay en el link mas rapido
+
+         '   Next
+
+         '   workbook.SaveCopyAs(IO.Path.Combine(App_path, GetHoy.ToString("yyMMdd") & "_mensajes.xls"))
+
+         'Finally
+         '   workbook.Close(False)
+         'End Try
+
+         'MsgBox("Finalizo exportacion")
+
+      Catch ex As Exception
+         Print_msg(ex.Message)
     End Try
   End Sub
 

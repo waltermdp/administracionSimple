@@ -11,7 +11,6 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\libDB.xml
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.pdb
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\manDB.xml
-e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbprojResolveAssemblyReference.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucTarjeta.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucCBU.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucDDHipotecario.resources
@@ -54,3 +53,10 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.xml
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.pdb
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\main.ucServicioVirtual.resources
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\DocumentFormat.OpenXml.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\DocumentFormat.OpenXml.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.AssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\smallAdmin\obj\x86\Debug\smallAdmin.vbproj.CopyComplete

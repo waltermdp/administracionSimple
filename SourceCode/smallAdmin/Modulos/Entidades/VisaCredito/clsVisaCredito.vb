@@ -4,85 +4,132 @@ Imports manDB
 Imports Excel = Microsoft.Office.Interop.Excel
 
 Public Class clsVisaCredito
-    Private m_GuidTipoPago As Guid
-    Private m_FechaVto As Date
-    Private m_FechaPresentacion As Date
+  Public Enum E_FiltroMesesAnteriores
+    SOLO_MES_ACTUAL
+    MESES_ANT_CON_FILTRO
+    MESES_ANT_SIN_FILTRO
+  End Enum
 
-    Public m_RegistrosExportar As New List(Of clsInfoExportarVisaCredito)
+  Private m_GuidTipoPago As Guid
+  Private m_FechaVto As Date
+  Private m_FechaPresentacion As Date
 
-    Public Property FechaPresentacion As Date
-        Get
-            Return m_FechaPresentacion
-        End Get
-        Set(value As Date)
-            m_FechaPresentacion = value
-        End Set
-    End Property
+  Public m_RegistrosExportar As New List(Of clsInfoExportarVisaCredito)
+  Private m_HabilitarFiltradoFechas As Boolean
+  Private m_dayfrom As Integer
+  Private m_dayto As Integer
+  Private m_aplicarMesesAnteriores As E_FiltroMesesAnteriores
+  Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
+  Public Property ModoFiltrado As E_FiltroMesesAnteriores
+    Get
+      Return m_aplicarMesesAnteriores
+    End Get
+    Set(value As E_FiltroMesesAnteriores)
+      m_aplicarMesesAnteriores = value
+    End Set
+  End Property
 
-    Public Property FechaVencimiento As Date
-        Get
-            Return m_FechaVto
-        End Get
-        Set(value As Date)
-            m_FechaVto = value
-        End Set
-    End Property
+  Public Property DayFrom As Integer
+    Get
+      Return m_dayfrom
+    End Get
+    Set(value As Integer)
+      m_dayfrom = value
+    End Set
+  End Property
+
+  Public Property DayTo As Integer
+    Get
+      Return m_dayto
+    End Get
+    Set(value As Integer)
+      m_dayto = value
+    End Set
+  End Property
+
+  Public Property FechaPresentacion As Date
+    Get
+      Return m_FechaPresentacion
+    End Get
+    Set(value As Date)
+      m_FechaPresentacion = value
+    End Set
+  End Property
+
+  Public Property FechaVencimiento As Date
+    Get
+      Return m_FechaVto
+    End Get
+    Set(value As Date)
+      m_FechaVto = value
+    End Set
+  End Property
 
 
 
-    Public Sub New(ByVal vGuidConvenio As Guid)
-        Try
-            
-            m_FechaPresentacion = g_Today
-            m_FechaVto = g_Today.AddDays(2)
-            
-            m_GuidTipoPago = vGuidConvenio
+  Public Sub New(ByVal vGuidConvenio As Guid)
+    Try
 
-        Catch ex As Exception
-            Print_msg(ex.Message)
-        End Try
-    End Sub
+      m_FechaPresentacion = g_Today
+      m_FechaVto = g_Today.AddDays(2)
+
+      m_GuidTipoPago = vGuidConvenio
+      m_dayto = m_FechaPresentacion.Day
+      m_dayfrom = 1
+      m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
 
 #Region "Exportacion"
 
-    Public ReadOnly Property countRegistrosAExportar As Integer
-        Get
-            Return m_RegistrosExportar.Where(Function(c) c.Exportar = True).Count
-        End Get
-    End Property
+  Public Sub AplicarFiltradoFechas(ByVal habilitar As Boolean)
+    Try
+      m_HabilitarFiltradoFechas = habilitar
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
-    Public ReadOnly Property countTotalRegistros As Integer
-        Get
-            Return m_RegistrosExportar.Count
-        End Get
-    End Property
+  Public ReadOnly Property countRegistrosAExportar As Integer
+    Get
+      Return m_RegistrosExportar.Where(Function(c) c.Exportar = True).Count
+    End Get
+  End Property
 
-    Public ReadOnly Property ImporteTotalAExportar As Decimal
-        Get
-            Return m_RegistrosExportar.Where(Function(c) c.Exportar = True).Sum(Function(c) c.Importe)
-        End Get
-    End Property
+  Public ReadOnly Property countTotalRegistros As Integer
+    Get
+      Return m_RegistrosExportar.Count
+    End Get
+  End Property
 
-    Public Function CargarContratosAExportar(ByVal win32 As IWin32Window) As Result
-        Try
-            Dim vResult As Result
-            Dim vMessge As String
-            Using objForm As New frmProgreso(AddressOf taskGenerateResumen)
-                objForm.ShowDialog(win32)
-                vResult = objForm.ResultProcess
-                vMessge = objForm.ResultMessage
-            End Using
-            If vResult <> Result.OK Then
-                MsgBox(vMessge)
-            End If
+  Public ReadOnly Property ImporteTotalAExportar As Decimal
+    Get
+      Return m_RegistrosExportar.Where(Function(c) c.Exportar = True).Sum(Function(c) c.Importe)
+    End Get
+  End Property
 
-            Return vResult
-        Catch ex As Exception
-            Print_msg(ex.Message)
-            Return Result.ErrorEx
-        End Try
-    End Function
+  Public Function CargarContratosAExportar(ByVal win32 As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim vMessge As String
+      Using objForm As New frmProgreso(AddressOf taskGenerateResumen)
+        objForm.ShowDialog(win32)
+        vResult = objForm.ResultProcess
+        vMessge = objForm.ResultMessage
+      End Using
+      If vResult <> Result.OK Then
+        MsgBox(vMessge)
+      End If
+
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
   Private Sub taskGenerateResumen(ByRef rResult As Result, ByRef rMessage As String)
     Try
@@ -90,8 +137,36 @@ Public Class clsVisaCredito
       Dim lstPago As New clsListPagos
       m_RegistrosExportar = New List(Of clsInfoExportarVisaCredito)
       Dim movimiento As clsInfoExportarVisaCredito
+      If m_HabilitarFiltradoFechas Then
+        'crear las fechas de busqueda con base al mes actual y al dia elegido
+        If m_dayto < m_dayfrom Then
+          MsgBox("El intevalo de busqueda no esta correctamente ingresado #Desde<=#hasta")
+          Exit Sub
+        End If
+        If Date.DaysInMonth(m_FechaPresentacion.Year, m_FechaPresentacion.Month) < m_dayfrom Then
+          MsgBox(String.Format("El dia ingresado {0} es mayor al maximo de dias en el mes actual.", m_dayfrom))
+        End If
+        If Date.DaysInMonth(m_FechaPresentacion.Year, m_FechaPresentacion.Month) < m_dayto Then
+          MsgBox(String.Format("El dia ingresado {0} es mayor al maximo de dias en el mes actual.", m_dayfrom))
+        End If
+        Dim FechaFrom As Date = New Date(m_FechaPresentacion.Year, m_FechaPresentacion.Month, m_dayfrom)
+        Dim FechaTo As Date = New Date(m_FechaPresentacion.Year, m_FechaPresentacion.Month, m_dayto)
+        If m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL Then
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota>=#" & Format(FechaFrom, strFormatoAnsiStdFecha) & "# AND VencimientoCuota<=#" & Format(FechaTo, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        ElseIf m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.MESES_ANT_SIN_FILTRO Then
+          Dim auxDate As Date = New Date(m_FechaPresentacion.Year, m_FechaPresentacion.Month, 1)
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND ((VencimientoCuota>=#" & Format(FechaFrom, strFormatoAnsiStdFecha) & "# AND VencimientoCuota<=#" & Format(FechaTo, strFormatoAnsiStdFecha) & "#) OR VencimientoCuota<#" & Format(auxDate, strFormatoAnsiStdFecha) & "# ) AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        ElseIf m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.MESES_ANT_CON_FILTRO Then
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND DAY(VencimientoCuota)>=" & m_dayfrom & " AND DAY(VencimientoCuota)<=" & m_dayto & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        Else
+          MsgBox("No se puede aplicar filtro")
+          Exit Sub
+        End If
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      Else
+        lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      End If
+
       lstPago.RefreshData()
 
 
@@ -105,8 +180,8 @@ Public Class clsVisaCredito
 
 
         Dim lstCuenta As New clsListaCuentas
-        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
-        lstCuenta.RefreshData()
+            lstCuenta.Cfg_Filtro = "where GuidCuenta={" & item.GuidCuenta.ToString & "}" '"where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
+            lstCuenta.RefreshData()
 
         Dim lstCliente As New clsListDatabase
         lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"
@@ -175,24 +250,24 @@ Public Class clsVisaCredito
     End Try
   End Sub
 
-    Public Function GenerarExportacion(ByVal win32 As IWin32Window) As Result
-        Try
-            Dim vResult As Result
-            Dim msgResult As String
-            Using objForm As New frmProgreso(AddressOf taskGenerarExportacion)
-                objForm.ShowDialog(win32)
-                vResult = objForm.ResultProcess
-                msgResult = objForm.ResultMessage
-            End Using
-            If vResult <> Result.OK Then
-                MsgBox(msgResult)
-            End If
-            Return vResult
-        Catch ex As Exception
-            Print_msg(ex.Message)
-            Return Result.ErrorEx
-        End Try
-    End Function
+  Public Function GenerarExportacion(ByVal win32 As IWin32Window) As Result
+    Try
+      Dim vResult As Result
+      Dim msgResult As String
+      Using objForm As New frmProgreso(AddressOf taskGenerarExportacion)
+        objForm.ShowDialog(win32)
+        vResult = objForm.ResultProcess
+        msgResult = objForm.ResultMessage
+      End Using
+      If vResult <> Result.OK Then
+        MsgBox(msgResult)
+      End If
+      Return vResult
+    Catch ex As Exception
+      Print_msg(ex.Message)
+      Return Result.ErrorEx
+    End Try
+  End Function
 
   Private Sub taskGenerarExportacion(ByRef rResult As Result, ByRef rMessage As String)
     Try
@@ -255,16 +330,16 @@ Public Class clsVisaCredito
     End Try
   End Sub
 
-    Public Sub UpdateFechaVencimientoExportar(ByVal vDate As Date)
-        Try
-            m_FechaVto = vDate
-            For Each registro In m_RegistrosExportar
-                registro.FechaVto = vDate
-            Next
-        Catch ex As Exception
-            Print_msg(ex.Message)
-        End Try
-    End Sub
+  Public Sub UpdateFechaVencimientoExportar(ByVal vDate As Date)
+    Try
+      m_FechaVto = vDate
+      For Each registro In m_RegistrosExportar
+        registro.FechaVto = vDate
+      Next
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
   Public Function GetExportedFile(ByVal vlstRegistros As List(Of clsInfoExportarVisaCredito), ByRef rlineas As List(Of String)) As Result
     Try

@@ -158,22 +158,20 @@ Public Class frmCliente
       obj.RefreshData()
       If obj.Items.Count > 0 Then
         'El numero de cliente ya existe
-        MsgBox(String.Format("El cliente ya existe, no pueden exisitr Duplicados."))
+        MsgBox(String.Format("El cliente numero: {0} ya existe, no pueden exisitr Duplicados.", vObj.NumCliente))
         vResult = Result.NOK
       End If
       obj.Cfg_Filtro = "where ID Like '%" & vObj.DNI & "%'"
       obj.RefreshData()
       If obj.Items.Count > 0 Then
         'El DNI del cliente existe pero el numero de cliente es diferente
-        Dim rta As MsgBoxResult = MsgBox(String.Format("El DNI introducido ya existe en otro cliente. Si continua existiran dos clientes con los mismos numeros de documentos. Desea continuar?"), MsgBoxStyle.YesNo)
-        If rta = MsgBoxResult.Yes Then
-          vResult = Result.OK
-        Else
-          vResult = Result.NOK
-        End If
-
-
-
+        MsgBox(String.Format("El DNI:{0} ya existe, no pueden exisitr Duplicados.", vObj.DNI))
+        'Dim rta As MsgBoxResult = MsgBox(String.Format("El DNI introducido ya existe en otro cliente. Si continua existiran dos clientes con los mismos numeros de documentos. Desea continuar?"), MsgBoxStyle.YesNo)
+        'If rta = MsgBoxResult.Yes Then
+        '  vResult = Result.OK
+        'Else
+        vResult = Result.NOK
+        'End If
       End If
 
       Return Result.OK

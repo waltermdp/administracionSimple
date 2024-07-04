@@ -3,6 +3,11 @@ Imports manDB
 
 Public Class clsMaster
   'header
+  Public Enum E_FiltroMesesAnteriores
+    SOLO_MES_ACTUAL
+    MESES_ANT_CON_FILTRO
+    MESES_ANT_SIN_FILTRO
+  End Enum
 
   Private m_Producto As String
   Private m_FechaPresentacion As Date
@@ -22,6 +27,38 @@ Public Class clsMaster
 
   Public m_RegistrosExportar As New List(Of clsInfoExportarMaster)
   Private m_GuidTipoPago As Guid
+
+  Private m_HabilitarFiltradoFechas As Boolean
+  Private m_dayfrom As Integer
+  Private m_dayto As Integer
+  Private m_aplicarMesesAnteriores As E_FiltroMesesAnteriores
+  Private Const strFormatoAnsiStdFecha As String = "yyyy/MM/dd HH:mm:ss"
+  Public Property ModoFiltrado As E_FiltroMesesAnteriores
+    Get
+      Return m_aplicarMesesAnteriores
+    End Get
+    Set(value As E_FiltroMesesAnteriores)
+      m_aplicarMesesAnteriores = value
+    End Set
+  End Property
+
+  Public Property DayFrom As Integer
+    Get
+      Return m_dayfrom
+    End Get
+    Set(value As Integer)
+      m_dayfrom = value
+    End Set
+  End Property
+
+  Public Property DayTo As Integer
+    Get
+      Return m_dayto
+    End Get
+    Set(value As Integer)
+      m_dayto = value
+    End Set
+  End Property
 
   Public Property Producto As String
     Get
@@ -85,12 +122,22 @@ Public Class clsMaster
       m_RazonSocial = "EDIT EL FARO"
       m_ReferenciaDebito = "EDIT EL FARO"
       m_GuidTipoPago = vGuidConvenio
+      m_dayto = m_FechaPresentacion.Day
+      m_dayfrom = 1
+      m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL
     Catch ex As Exception
       Print_msg(ex.Message)
     End Try
   End Sub
 
 #Region "Exportacion"
+  Public Sub AplicarFiltradoFechas(ByVal habilitar As Boolean)
+    Try
+      m_HabilitarFiltradoFechas = habilitar
+    Catch ex As Exception
+      Print_msg(ex.Message)
+    End Try
+  End Sub
 
   Public ReadOnly Property countRegistrosAExportar As Integer
     Get
@@ -137,7 +184,36 @@ Public Class clsMaster
       m_RegistrosExportar = New List(Of clsInfoExportarMaster)
       Dim movimiento As clsInfoExportarMaster
 
-      lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      If m_HabilitarFiltradoFechas Then
+        'crear las fechas de busqueda con base al mes actual y al dia elegido
+        If m_dayto < m_dayfrom Then
+          MsgBox("El intevalo de busqueda no esta correctamente ingresado #Desde<=#hasta")
+          Exit Sub
+        End If
+        If Date.DaysInMonth(m_FechaPresentacion.Year, m_FechaPresentacion.Month) < m_dayfrom Then
+          MsgBox(String.Format("El dia ingresado {0} es mayor al maximo de dias en el mes actual.", m_dayfrom))
+        End If
+        If Date.DaysInMonth(m_FechaPresentacion.Year, m_FechaPresentacion.Month) < m_dayto Then
+          MsgBox(String.Format("El dia ingresado {0} es mayor al maximo de dias en el mes actual.", m_dayfrom))
+        End If
+        Dim FechaFrom As Date = New Date(m_FechaPresentacion.Year, m_FechaPresentacion.Month, m_dayfrom)
+        Dim FechaTo As Date = New Date(m_FechaPresentacion.Year, m_FechaPresentacion.Month, m_dayto)
+        If m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.SOLO_MES_ACTUAL Then
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND VencimientoCuota>=#" & Format(FechaFrom, strFormatoAnsiStdFecha) & "# AND VencimientoCuota<=#" & Format(FechaTo, strFormatoAnsiStdFecha) & "# AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        ElseIf m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.MESES_ANT_SIN_FILTRO Then
+          Dim auxDate As Date = New Date(m_FechaPresentacion.Year, m_FechaPresentacion.Month, 1)
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND ((VencimientoCuota>=#" & Format(FechaFrom, strFormatoAnsiStdFecha) & "# AND VencimientoCuota<=#" & Format(FechaTo, strFormatoAnsiStdFecha) & "#) OR VencimientoCuota<#" & Format(auxDate, strFormatoAnsiStdFecha) & "# ) AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        ElseIf m_aplicarMesesAnteriores = E_FiltroMesesAnteriores.MESES_ANT_CON_FILTRO Then
+          lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND DAY(VencimientoCuota)>=" & m_dayfrom & " AND DAY(VencimientoCuota)<=" & m_dayto & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+        Else
+          MsgBox("No se puede aplicar filtro")
+          Exit Sub
+        End If
+
+      Else
+        lstPago.Cfg_Filtro = "where EstadoPago=" & E_EstadoPago.Debe & " AND GuidCuenta IN (SELECT Cuentas.GuidCuenta FROM Cuentas WHERE TipoDeCuenta={" & m_GuidTipoPago.ToString & "})"
+      End If
+
       lstPago.RefreshData()
 
 
@@ -151,8 +227,8 @@ Public Class clsMaster
 
 
         Dim lstCuenta As New clsListaCuentas
-        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
-        lstCuenta.RefreshData()
+            lstCuenta.Cfg_Filtro = "where GuidCuenta={" & item.GuidCuenta.ToString & "}" '"where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
+            lstCuenta.RefreshData()
 
         Dim lstCliente As New clsListDatabase
         lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"

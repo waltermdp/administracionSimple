@@ -46,3 +46,8 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.dll
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.xml
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
+E:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbprojResolveAssemblyReference.cache

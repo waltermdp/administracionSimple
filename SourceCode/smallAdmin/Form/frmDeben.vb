@@ -504,6 +504,7 @@ Public Class frmDeben
       If vResult <> Result.OK Then
         MsgBox("Falla al cargar el producto seleccionado")
       End If
+      Call clsCobros.ActualizarEstadosDePagos(g_Today)
       Using objForm As New frmEditarPagos(auxProducto)
         objForm.ShowDialog()
       End Using

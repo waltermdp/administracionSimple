@@ -82,9 +82,13 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\D
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\libCommon.xml
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\libDB.pdb
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\libDB.xml
-e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbprojResolveAssemblyReference.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.Resources.resources
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbproj.GenerateResource.Cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.dll
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.xml
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
+E:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbprojResolveAssemblyReference.cache

@@ -1,0 +1,19 @@
+Recently I was working on a problem where a customer received that error message when trying to open a TFS work item list in Excel triggered from Team Explorer.
+
+The error did not appear when opening Excel right away and accessing a TFS query.
+
+I was checking Process Monitor to see what was going on underneath using the comparison technique that I learned from Mark Russinovich.
+
+It turned out that Excel 2007 was installed and it’s COM Classes are registered in HKCR\TypeLib\{00020813-0000-0000-C000-000000000046}\1.6.
+
+In contrast when Team Explorer wanted call Excel through COM automation it used HKCR\TypeLib\{00020813-0000-0000-C000-000000000046}\1.7.
+
+Obviously TFS was trying to talk to Excel 2010 instead which was not present.
+
+So I rang the customer to discuss it further and it turned out that they installed Project 2010 to these boxes running Office 2007 that seemed to have added a newer automation class registry key for Excel though even though it was not even installed.
+
+Anyway, deleting the key HKCR\TypeLib\{00020813-0000-0000-C000-000000000046}\1.7 solved the issue for the customer.
+
+Project, Excel and Team Explorer work fine with that tiny little change.
+
+excel 16.0.17628.201110

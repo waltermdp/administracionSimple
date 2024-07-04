@@ -34,18 +34,6 @@ Partial Class frmExportarVisaCredito
     Me.Label3 = New System.Windows.Forms.Label()
     Me.txtImporteTotal = New System.Windows.Forms.TextBox()
     Me.dgvResumen = New System.Windows.Forms.DataGridView()
-    Me.lblResumen = New System.Windows.Forms.Label()
-    Me.btnReload = New System.Windows.Forms.Button()
-    Me.btnProcesar = New System.Windows.Forms.Button()
-    Me.btnCancel = New System.Windows.Forms.Button()
-    Me.txtReferencia = New System.Windows.Forms.TextBox()
-    Me.Label8 = New System.Windows.Forms.Label()
-    Me.txtNroCUIT = New System.Windows.Forms.TextBox()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.Label6 = New System.Windows.Forms.Label()
-    Me.cmbEstado = New System.Windows.Forms.ComboBox()
-    Me.Label9 = New System.Windows.Forms.Label()
-    Me.ClsInfoExportarVisaCreditoBindingSource = New System.Windows.Forms.BindingSource(Me.components)
     Me.ExportarDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
     Me.FechaUltimaExportacionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.NombreDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -59,8 +47,32 @@ Partial Class frmExportarVisaCredito
     Me.GuidPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.GuidProductoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.CodigoDeAltaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.ClsInfoExportarVisaCreditoBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.lblResumen = New System.Windows.Forms.Label()
+    Me.btnReload = New System.Windows.Forms.Button()
+    Me.btnProcesar = New System.Windows.Forms.Button()
+    Me.btnCancel = New System.Windows.Forms.Button()
+    Me.txtReferencia = New System.Windows.Forms.TextBox()
+    Me.Label8 = New System.Windows.Forms.Label()
+    Me.txtNroCUIT = New System.Windows.Forms.TextBox()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.Label6 = New System.Windows.Forms.Label()
+    Me.cmbEstado = New System.Windows.Forms.ComboBox()
+    Me.Label9 = New System.Windows.Forms.Label()
+    Me.pnlFiltrado = New System.Windows.Forms.Panel()
+    Me.rbAplicaMesesAnteriores = New System.Windows.Forms.RadioButton()
+    Me.rbMesesAnterioresSinFiltro = New System.Windows.Forms.RadioButton()
+    Me.rbAplicaMesActual = New System.Windows.Forms.RadioButton()
+    Me.dnDayFrom = New System.Windows.Forms.NumericUpDown()
+    Me.dnDayTo = New System.Windows.Forms.NumericUpDown()
+    Me.Label10 = New System.Windows.Forms.Label()
+    Me.Label11 = New System.Windows.Forms.Label()
+    Me.chkEnableFrom = New System.Windows.Forms.CheckBox()
     CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.ClsInfoExportarVisaCreditoBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+    Me.pnlFiltrado.SuspendLayout()
+    CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+    CType(Me.dnDayTo, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'txtRazonSocial
@@ -82,7 +94,7 @@ Partial Class frmExportarVisaCredito
     '
     'txtProducto
     '
-    Me.txtProducto.Location = New System.Drawing.Point(838, 41)
+    Me.txtProducto.Location = New System.Drawing.Point(247, 97)
     Me.txtProducto.Name = "txtProducto"
     Me.txtProducto.Size = New System.Drawing.Size(133, 20)
     Me.txtProducto.TabIndex = 82
@@ -90,7 +102,7 @@ Partial Class frmExportarVisaCredito
     'Label1
     '
     Me.Label1.BackColor = System.Drawing.Color.Transparent
-    Me.Label1.Location = New System.Drawing.Point(760, 41)
+    Me.Label1.Location = New System.Drawing.Point(169, 97)
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(72, 20)
     Me.Label1.TabIndex = 81
@@ -100,7 +112,7 @@ Partial Class frmExportarVisaCredito
     'dtVencimiento
     '
     Me.dtVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtVencimiento.Location = New System.Drawing.Point(1124, 75)
+    Me.dtVencimiento.Location = New System.Drawing.Point(1122, 40)
     Me.dtVencimiento.Name = "dtVencimiento"
     Me.dtVencimiento.Size = New System.Drawing.Size(130, 20)
     Me.dtVencimiento.TabIndex = 80
@@ -108,7 +120,7 @@ Partial Class frmExportarVisaCredito
     'dtCurrent
     '
     Me.dtCurrent.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-    Me.dtCurrent.Location = New System.Drawing.Point(838, 74)
+    Me.dtCurrent.Location = New System.Drawing.Point(836, 39)
     Me.dtCurrent.Name = "dtCurrent"
     Me.dtCurrent.Size = New System.Drawing.Size(130, 20)
     Me.dtCurrent.TabIndex = 79
@@ -116,7 +128,7 @@ Partial Class frmExportarVisaCredito
     'Label5
     '
     Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.Location = New System.Drawing.Point(1018, 77)
+    Me.Label5.Location = New System.Drawing.Point(1016, 42)
     Me.Label5.Name = "Label5"
     Me.Label5.Size = New System.Drawing.Size(100, 23)
     Me.Label5.TabIndex = 76
@@ -125,7 +137,7 @@ Partial Class frmExportarVisaCredito
     'Label4
     '
     Me.Label4.BackColor = System.Drawing.Color.Transparent
-    Me.Label4.Location = New System.Drawing.Point(753, 77)
+    Me.Label4.Location = New System.Drawing.Point(754, 42)
     Me.Label4.Name = "Label4"
     Me.Label4.Size = New System.Drawing.Size(79, 23)
     Me.Label4.TabIndex = 75
@@ -156,12 +168,97 @@ Partial Class frmExportarVisaCredito
     Me.dgvResumen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvResumen.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ExportarDataGridViewCheckBoxColumn, Me.FechaUltimaExportacionDataGridViewTextBoxColumn, Me.NombreDataGridViewTextBoxColumn, Me.IdentificadorDebitoDataGridViewTextBoxColumn, Me.NumeroTarjetaDataGridViewTextBoxColumn, Me.NumeroComprobanteDataGridViewTextBoxColumn, Me.ImporteDataGridViewTextBoxColumn, Me.CuotaActualDataGridViewTextBoxColumn, Me.FechaVtoDataGridViewTextBoxColumn, Me.EstadoContratoDataGridViewTextBoxColumn, Me.GuidPagoDataGridViewTextBoxColumn, Me.GuidProductoDataGridViewTextBoxColumn, Me.CodigoDeAltaDataGridViewTextBoxColumn})
     Me.dgvResumen.DataSource = Me.ClsInfoExportarVisaCreditoBindingSource
-    Me.dgvResumen.Location = New System.Drawing.Point(172, 115)
+    Me.dgvResumen.Location = New System.Drawing.Point(172, 148)
     Me.dgvResumen.Name = "dgvResumen"
     Me.dgvResumen.RowHeadersVisible = False
     Me.dgvResumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-    Me.dgvResumen.Size = New System.Drawing.Size(1080, 495)
+    Me.dgvResumen.Size = New System.Drawing.Size(1080, 462)
     Me.dgvResumen.TabIndex = 70
+    '
+    'ExportarDataGridViewCheckBoxColumn
+    '
+    Me.ExportarDataGridViewCheckBoxColumn.DataPropertyName = "Exportar"
+    Me.ExportarDataGridViewCheckBoxColumn.HeaderText = "Exportar"
+    Me.ExportarDataGridViewCheckBoxColumn.Name = "ExportarDataGridViewCheckBoxColumn"
+    '
+    'FechaUltimaExportacionDataGridViewTextBoxColumn
+    '
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.HeaderText = "FechaUltimaExportacion"
+    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.Name = "FechaUltimaExportacionDataGridViewTextBoxColumn"
+    '
+    'NombreDataGridViewTextBoxColumn
+    '
+    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
+    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    '
+    'IdentificadorDebitoDataGridViewTextBoxColumn
+    '
+    Me.IdentificadorDebitoDataGridViewTextBoxColumn.DataPropertyName = "IdentificadorDebito"
+    Me.IdentificadorDebitoDataGridViewTextBoxColumn.HeaderText = "IdentificadorDebito"
+    Me.IdentificadorDebitoDataGridViewTextBoxColumn.Name = "IdentificadorDebitoDataGridViewTextBoxColumn"
+    '
+    'NumeroTarjetaDataGridViewTextBoxColumn
+    '
+    Me.NumeroTarjetaDataGridViewTextBoxColumn.DataPropertyName = "NumeroTarjeta"
+    Me.NumeroTarjetaDataGridViewTextBoxColumn.HeaderText = "NumeroTarjeta"
+    Me.NumeroTarjetaDataGridViewTextBoxColumn.Name = "NumeroTarjetaDataGridViewTextBoxColumn"
+    '
+    'NumeroComprobanteDataGridViewTextBoxColumn
+    '
+    Me.NumeroComprobanteDataGridViewTextBoxColumn.DataPropertyName = "NumeroComprobante"
+    Me.NumeroComprobanteDataGridViewTextBoxColumn.HeaderText = "NumeroComprobante"
+    Me.NumeroComprobanteDataGridViewTextBoxColumn.Name = "NumeroComprobanteDataGridViewTextBoxColumn"
+    '
+    'ImporteDataGridViewTextBoxColumn
+    '
+    Me.ImporteDataGridViewTextBoxColumn.DataPropertyName = "Importe"
+    Me.ImporteDataGridViewTextBoxColumn.HeaderText = "Importe"
+    Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
+    '
+    'CuotaActualDataGridViewTextBoxColumn
+    '
+    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
+    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
+    '
+    'FechaVtoDataGridViewTextBoxColumn
+    '
+    Me.FechaVtoDataGridViewTextBoxColumn.DataPropertyName = "FechaVto"
+    Me.FechaVtoDataGridViewTextBoxColumn.HeaderText = "FechaVto"
+    Me.FechaVtoDataGridViewTextBoxColumn.Name = "FechaVtoDataGridViewTextBoxColumn"
+    '
+    'EstadoContratoDataGridViewTextBoxColumn
+    '
+    Me.EstadoContratoDataGridViewTextBoxColumn.DataPropertyName = "EstadoContrato"
+    Me.EstadoContratoDataGridViewTextBoxColumn.HeaderText = "EstadoContrato"
+    Me.EstadoContratoDataGridViewTextBoxColumn.Name = "EstadoContratoDataGridViewTextBoxColumn"
+    Me.EstadoContratoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidPagoDataGridViewTextBoxColumn
+    '
+    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
+    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
+    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
+    '
+    'GuidProductoDataGridViewTextBoxColumn
+    '
+    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
+    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
+    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
+    '
+    'CodigoDeAltaDataGridViewTextBoxColumn
+    '
+    Me.CodigoDeAltaDataGridViewTextBoxColumn.DataPropertyName = "CodigoDeAlta"
+    Me.CodigoDeAltaDataGridViewTextBoxColumn.HeaderText = "CodigoDeAlta"
+    Me.CodigoDeAltaDataGridViewTextBoxColumn.Name = "CodigoDeAltaDataGridViewTextBoxColumn"
+    '
+    'ClsInfoExportarVisaCreditoBindingSource
+    '
+    Me.ClsInfoExportarVisaCreditoBindingSource.DataSource = GetType(main.clsInfoExportarVisaCredito)
     '
     'lblResumen
     '
@@ -278,97 +375,109 @@ Partial Class frmExportarVisaCredito
     Me.Label9.TabIndex = 92
     Me.Label9.Text = "Estado del Contrato"
     '
-    'ClsInfoExportarVisaCreditoBindingSource
+    'pnlFiltrado
     '
-    Me.ClsInfoExportarVisaCreditoBindingSource.DataSource = GetType(main.clsInfoExportarVisaCredito)
+    Me.pnlFiltrado.Controls.Add(Me.rbAplicaMesesAnteriores)
+    Me.pnlFiltrado.Controls.Add(Me.rbMesesAnterioresSinFiltro)
+    Me.pnlFiltrado.Controls.Add(Me.rbAplicaMesActual)
+    Me.pnlFiltrado.Controls.Add(Me.dnDayFrom)
+    Me.pnlFiltrado.Controls.Add(Me.dnDayTo)
+    Me.pnlFiltrado.Controls.Add(Me.Label10)
+    Me.pnlFiltrado.Controls.Add(Me.Label11)
+    Me.pnlFiltrado.Location = New System.Drawing.Point(868, 65)
+    Me.pnlFiltrado.Name = "pnlFiltrado"
+    Me.pnlFiltrado.Size = New System.Drawing.Size(384, 77)
+    Me.pnlFiltrado.TabIndex = 101
     '
-    'ExportarDataGridViewCheckBoxColumn
+    'rbAplicaMesesAnteriores
     '
-    Me.ExportarDataGridViewCheckBoxColumn.DataPropertyName = "Exportar"
-    Me.ExportarDataGridViewCheckBoxColumn.HeaderText = "Exportar"
-    Me.ExportarDataGridViewCheckBoxColumn.Name = "ExportarDataGridViewCheckBoxColumn"
+    Me.rbAplicaMesesAnteriores.AutoSize = True
+    Me.rbAplicaMesesAnteriores.Location = New System.Drawing.Point(163, 33)
+    Me.rbAplicaMesesAnteriores.Name = "rbAplicaMesesAnteriores"
+    Me.rbAplicaMesesAnteriores.Size = New System.Drawing.Size(148, 17)
+    Me.rbAplicaMesesAnteriores.TabIndex = 102
+    Me.rbAplicaMesesAnteriores.Text = "Aplicar a meses anteriores"
+    Me.rbAplicaMesesAnteriores.UseVisualStyleBackColor = True
     '
-    'FechaUltimaExportacionDataGridViewTextBoxColumn
+    'rbMesesAnterioresSinFiltro
     '
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.DataPropertyName = "FechaUltimaExportacion"
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.HeaderText = "FechaUltimaExportacion"
-    Me.FechaUltimaExportacionDataGridViewTextBoxColumn.Name = "FechaUltimaExportacionDataGridViewTextBoxColumn"
+    Me.rbMesesAnterioresSinFiltro.AutoSize = True
+    Me.rbMesesAnterioresSinFiltro.Location = New System.Drawing.Point(21, 53)
+    Me.rbMesesAnterioresSinFiltro.Name = "rbMesesAnterioresSinFiltro"
+    Me.rbMesesAnterioresSinFiltro.Size = New System.Drawing.Size(185, 17)
+    Me.rbMesesAnterioresSinFiltro.TabIndex = 101
+    Me.rbMesesAnterioresSinFiltro.Text = "Incluir meses anteriores sin filtrado"
+    Me.rbMesesAnterioresSinFiltro.UseVisualStyleBackColor = True
     '
-    'NombreDataGridViewTextBoxColumn
+    'rbAplicaMesActual
     '
-    Me.NombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.HeaderText = "Nombre"
-    Me.NombreDataGridViewTextBoxColumn.Name = "NombreDataGridViewTextBoxColumn"
+    Me.rbAplicaMesActual.AutoSize = True
+    Me.rbAplicaMesActual.Checked = True
+    Me.rbAplicaMesActual.Location = New System.Drawing.Point(21, 33)
+    Me.rbAplicaMesActual.Name = "rbAplicaMesActual"
+    Me.rbAplicaMesActual.Size = New System.Drawing.Size(99, 17)
+    Me.rbAplicaMesActual.TabIndex = 100
+    Me.rbAplicaMesActual.TabStop = True
+    Me.rbAplicaMesActual.Text = "Solo MesActual"
+    Me.rbAplicaMesActual.UseVisualStyleBackColor = True
     '
-    'IdentificadorDebitoDataGridViewTextBoxColumn
+    'dnDayFrom
     '
-    Me.IdentificadorDebitoDataGridViewTextBoxColumn.DataPropertyName = "IdentificadorDebito"
-    Me.IdentificadorDebitoDataGridViewTextBoxColumn.HeaderText = "IdentificadorDebito"
-    Me.IdentificadorDebitoDataGridViewTextBoxColumn.Name = "IdentificadorDebitoDataGridViewTextBoxColumn"
+    Me.dnDayFrom.Location = New System.Drawing.Point(90, 5)
+    Me.dnDayFrom.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+    Me.dnDayFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dnDayFrom.Name = "dnDayFrom"
+    Me.dnDayFrom.Size = New System.Drawing.Size(44, 20)
+    Me.dnDayFrom.TabIndex = 93
+    Me.dnDayFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
     '
-    'NumeroTarjetaDataGridViewTextBoxColumn
+    'dnDayTo
     '
-    Me.NumeroTarjetaDataGridViewTextBoxColumn.DataPropertyName = "NumeroTarjeta"
-    Me.NumeroTarjetaDataGridViewTextBoxColumn.HeaderText = "NumeroTarjeta"
-    Me.NumeroTarjetaDataGridViewTextBoxColumn.Name = "NumeroTarjetaDataGridViewTextBoxColumn"
+    Me.dnDayTo.Location = New System.Drawing.Point(209, 5)
+    Me.dnDayTo.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
+    Me.dnDayTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+    Me.dnDayTo.Name = "dnDayTo"
+    Me.dnDayTo.Size = New System.Drawing.Size(44, 20)
+    Me.dnDayTo.TabIndex = 94
+    Me.dnDayTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
     '
-    'NumeroComprobanteDataGridViewTextBoxColumn
+    'Label10
     '
-    Me.NumeroComprobanteDataGridViewTextBoxColumn.DataPropertyName = "NumeroComprobante"
-    Me.NumeroComprobanteDataGridViewTextBoxColumn.HeaderText = "NumeroComprobante"
-    Me.NumeroComprobanteDataGridViewTextBoxColumn.Name = "NumeroComprobanteDataGridViewTextBoxColumn"
+    Me.Label10.BackColor = System.Drawing.Color.Transparent
+    Me.Label10.Location = New System.Drawing.Point(18, 7)
+    Me.Label10.Name = "Label10"
+    Me.Label10.Size = New System.Drawing.Size(63, 23)
+    Me.Label10.TabIndex = 95
+    Me.Label10.Text = "Desde:"
     '
-    'ImporteDataGridViewTextBoxColumn
+    'Label11
     '
-    Me.ImporteDataGridViewTextBoxColumn.DataPropertyName = "Importe"
-    Me.ImporteDataGridViewTextBoxColumn.HeaderText = "Importe"
-    Me.ImporteDataGridViewTextBoxColumn.Name = "ImporteDataGridViewTextBoxColumn"
+    Me.Label11.BackColor = System.Drawing.Color.Transparent
+    Me.Label11.Location = New System.Drawing.Point(140, 7)
+    Me.Label11.Name = "Label11"
+    Me.Label11.Size = New System.Drawing.Size(63, 23)
+    Me.Label11.TabIndex = 96
+    Me.Label11.Text = "Hasta:"
     '
-    'CuotaActualDataGridViewTextBoxColumn
+    'chkEnableFrom
     '
-    Me.CuotaActualDataGridViewTextBoxColumn.DataPropertyName = "CuotaActual"
-    Me.CuotaActualDataGridViewTextBoxColumn.HeaderText = "CuotaActual"
-    Me.CuotaActualDataGridViewTextBoxColumn.Name = "CuotaActualDataGridViewTextBoxColumn"
-    '
-    'FechaVtoDataGridViewTextBoxColumn
-    '
-    Me.FechaVtoDataGridViewTextBoxColumn.DataPropertyName = "FechaVto"
-    Me.FechaVtoDataGridViewTextBoxColumn.HeaderText = "FechaVto"
-    Me.FechaVtoDataGridViewTextBoxColumn.Name = "FechaVtoDataGridViewTextBoxColumn"
-    '
-    'EstadoContratoDataGridViewTextBoxColumn
-    '
-    Me.EstadoContratoDataGridViewTextBoxColumn.DataPropertyName = "EstadoContrato"
-    Me.EstadoContratoDataGridViewTextBoxColumn.HeaderText = "EstadoContrato"
-    Me.EstadoContratoDataGridViewTextBoxColumn.Name = "EstadoContratoDataGridViewTextBoxColumn"
-    Me.EstadoContratoDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidPagoDataGridViewTextBoxColumn
-    '
-    Me.GuidPagoDataGridViewTextBoxColumn.DataPropertyName = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.HeaderText = "GuidPago"
-    Me.GuidPagoDataGridViewTextBoxColumn.Name = "GuidPagoDataGridViewTextBoxColumn"
-    Me.GuidPagoDataGridViewTextBoxColumn.Visible = False
-    '
-    'GuidProductoDataGridViewTextBoxColumn
-    '
-    Me.GuidProductoDataGridViewTextBoxColumn.DataPropertyName = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.HeaderText = "GuidProducto"
-    Me.GuidProductoDataGridViewTextBoxColumn.Name = "GuidProductoDataGridViewTextBoxColumn"
-    Me.GuidProductoDataGridViewTextBoxColumn.Visible = False
-    '
-    'CodigoDeAltaDataGridViewTextBoxColumn
-    '
-    Me.CodigoDeAltaDataGridViewTextBoxColumn.DataPropertyName = "CodigoDeAlta"
-    Me.CodigoDeAltaDataGridViewTextBoxColumn.HeaderText = "CodigoDeAlta"
-    Me.CodigoDeAltaDataGridViewTextBoxColumn.Name = "CodigoDeAltaDataGridViewTextBoxColumn"
+    Me.chkEnableFrom.BackColor = System.Drawing.Color.Transparent
+    Me.chkEnableFrom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+    Me.chkEnableFrom.Location = New System.Drawing.Point(776, 65)
+    Me.chkEnableFrom.Name = "chkEnableFrom"
+    Me.chkEnableFrom.Size = New System.Drawing.Size(86, 24)
+    Me.chkEnableFrom.TabIndex = 100
+    Me.chkEnableFrom.Text = "Intervalo"
+    Me.chkEnableFrom.UseVisualStyleBackColor = False
     '
     'frmExportarVisaCredito
     '
-    Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.BackgroundImage = Global.main.My.Resources.Resources.FondoGral
     Me.ClientSize = New System.Drawing.Size(1280, 720)
+    Me.Controls.Add(Me.pnlFiltrado)
+    Me.Controls.Add(Me.chkEnableFrom)
     Me.Controls.Add(Me.cmbEstado)
     Me.Controls.Add(Me.Label9)
     Me.Controls.Add(Me.Label6)
@@ -393,13 +502,17 @@ Partial Class frmExportarVisaCredito
     Me.Controls.Add(Me.btnCancel)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
     Me.Name = "frmExportarVisaCredito"
-    Me.ShowIcon = false
-    Me.ShowInTaskbar = false
+    Me.ShowIcon = False
+    Me.ShowInTaskbar = False
     Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmExportarPatagonia"
-    CType(Me.dgvResumen,System.ComponentModel.ISupportInitialize).EndInit
-    CType(Me.ClsInfoExportarVisaCreditoBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-    Me.ResumeLayout(false)
+    CType(Me.dgvResumen, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.ClsInfoExportarVisaCreditoBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.pnlFiltrado.ResumeLayout(False)
+    Me.pnlFiltrado.PerformLayout()
+    CType(Me.dnDayFrom, System.ComponentModel.ISupportInitialize).EndInit()
+    CType(Me.dnDayTo, System.ComponentModel.ISupportInitialize).EndInit()
+    Me.ResumeLayout(False)
     Me.PerformLayout
 
 End Sub
@@ -440,4 +553,13 @@ End Sub
   Friend WithEvents GuidPagoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents GuidProductoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents CodigoDeAltaDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents pnlFiltrado As System.Windows.Forms.Panel
+  Friend WithEvents rbAplicaMesesAnteriores As System.Windows.Forms.RadioButton
+  Friend WithEvents rbMesesAnterioresSinFiltro As System.Windows.Forms.RadioButton
+  Friend WithEvents rbAplicaMesActual As System.Windows.Forms.RadioButton
+  Friend WithEvents dnDayFrom As System.Windows.Forms.NumericUpDown
+  Friend WithEvents dnDayTo As System.Windows.Forms.NumericUpDown
+  Friend WithEvents Label10 As System.Windows.Forms.Label
+  Friend WithEvents Label11 As System.Windows.Forms.Label
+  Friend WithEvents chkEnableFrom As System.Windows.Forms.CheckBox
 End Class

@@ -46,3 +46,7 @@ d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\R
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.dll
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.xml
 d:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.pdb
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.xml
+E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml

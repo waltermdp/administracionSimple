@@ -104,8 +104,8 @@ Public Class clsCBU
 
 
         Dim lstCuenta As New clsListaCuentas
-        lstCuenta.Cfg_Filtro = "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
-        lstCuenta.RefreshData()
+            lstCuenta.Cfg_Filtro = "where GuidCuenta={" & item.GuidCuenta.ToString & "}" ' "where GuidCuenta={" & lstProducto.Items.First.GuidCuenta.ToString & "}"
+            lstCuenta.RefreshData()
 
         Dim lstCliente As New clsListDatabase
         lstCliente.Cfg_Filtro = "where GuidCliente={" & lstProducto.Items.First.GuidCliente.ToString & "}"

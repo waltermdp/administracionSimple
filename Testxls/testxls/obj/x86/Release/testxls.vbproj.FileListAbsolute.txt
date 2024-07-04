@@ -1,0 +1,12 @@
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\bin\x86\Release\testxls.exe
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\bin\x86\Release\DocumentFormat.OpenXml.dll
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\bin\x86\Release\DocumentFormat.OpenXml.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.vbproj.AssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.Form1.resources
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.Resources.resources
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.vbproj.GenerateResource.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.vbproj.CopyComplete
+e:\Users\Walter\Documents\GitHub\administracionSimple\Testxls\testxls\obj\x86\Release\testxls.exe

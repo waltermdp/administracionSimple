@@ -98,6 +98,7 @@ Partial Class frmSelectDate
     Me.Name = "frmSelectDate"
     Me.ShowIcon = False
     Me.ShowInTaskbar = False
+    Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
     Me.Text = "frmSelectDate"
     Me.pnlSeleccionarPago.ResumeLayout(False)
     Me.ResumeLayout(False)
