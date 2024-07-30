@@ -45,7 +45,6 @@ Public Class clsConsulta
 
         objResult = objDB.OpenDB(Entorno.DB_SLocal_ConnectionString)
         If objResult <> Result.OK Then Exit Try
-
         objResult = queryPagos(objDB, query, lstConsulta)
         If objResult <> Result.OK Then Exit Try
 
@@ -110,15 +109,17 @@ Public Class clsConsulta
       Dim dt As DataTable = Nothing
       Dim strSQL As String
 
-      strSQL = "SELECT Clientes.NumCliente, Clientes.Nombre, Clientes.Apellido, Clientes.Tel1, Productos.NumComprobante, Productos.Precio, Productos.TotalCuotas, Productos.Precio, Pagos.FechaPago, Pagos.NumCuota, Pagos.ValorCuota, Pagos.GuidCuenta " &
+         strSQL = "SELECT Clientes.NumCliente, Clientes.Nombre, Clientes.Apellido, Clientes.Tel1, Productos.NumComprobante, Productos.Precio, Productos.TotalCuotas, Productos.Precio, Pagos.FechaPago, Pagos.NumCuota, Pagos.ValorCuota, Pagos.GuidCuenta " &
          "FROM (Productos INNER JOIN Pagos " &
          "ON Productos.GuidProducto=Pagos.GuidProducto) " &
          "INNER JOIN Clientes " &
          "ON Productos.GuidCliente=Clientes.GuidCliente " &
          "WHERE (" & vQquery & ")"
+
+
       '(FechaPago>=#" & Format(New Date(2024, 4, 1), "yyyy/MM/dd HH:mm:ss") & "#) AND (FechaPago<=#" & Format(Today, "yyyy/MM/dd HH:mm:ss") & "#) AND Pagos.EstadoPago=1"
 
-     
+
       objResult = vObjDB.GetDato(strSQL, dt)
 
       '--- Devuelvo OK cuando no hay resultados -->

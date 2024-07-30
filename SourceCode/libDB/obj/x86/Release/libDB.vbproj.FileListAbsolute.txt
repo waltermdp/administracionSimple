@@ -28,7 +28,6 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\R
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\libCommon.dll
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\libCommon.pdb
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\libCommon.xml
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbprojResolveAssemblyReference.cache
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.Resources.resources
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbproj.GenerateResource.Cache
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.dll
@@ -50,3 +49,6 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\R
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.xml
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbproj.AssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Release\libDB.vbproj.CopyComplete

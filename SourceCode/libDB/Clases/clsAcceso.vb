@@ -160,16 +160,16 @@ Public Class clsAcceso
 
             End If
 
-            intIndex += 1
-            If ((vTo <> -1) And (intIndex > vTo)) Then
-              Exit While
+                  intIndex += 1
+                  If ((vTo <> -1) And (intIndex > vTo)) Then
+                     Exit While
+                  End If
+
+               End While
+
             End If
 
-          End While
-
-        End If
-
-        objReader.Close()
+            objReader.Close()
 
         If rDataTable.Rows.Count = 0 Then
           Return libCommon.Comunes.Result.NOK

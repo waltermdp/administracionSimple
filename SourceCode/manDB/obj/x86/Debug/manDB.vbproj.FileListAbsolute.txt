@@ -91,4 +91,6 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\D
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.xml
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
-E:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbprojResolveAssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbproj.AssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Debug\manDB.vbproj.CopyComplete

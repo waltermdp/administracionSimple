@@ -50,4 +50,5 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.xml
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
-E:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbprojResolveAssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.CopyComplete

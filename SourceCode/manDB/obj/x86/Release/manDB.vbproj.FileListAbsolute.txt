@@ -37,7 +37,6 @@ e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\R
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\libCommon.xml
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\libDB.pdb
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\libDB.xml
-e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbprojResolveAssemblyReference.cache
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.Resources.resources
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbproj.GenerateResource.Cache
 e:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.dll
@@ -62,3 +61,6 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\R
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.xml
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbproj.AssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\manDB\obj\x86\Release\manDB.vbproj.CopyComplete

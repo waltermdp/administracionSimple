@@ -235,6 +235,11 @@ Public Class frmEditarPagos
           btnSeleccionarCuenta.Enabled = True
           'btnEditarFechaDebe.Enabled = True
         End If
+        If m_CurrentCuota.EstadoPago = E_EstadoPago.DebePendiente Then
+          btnAplicaPago.Enabled = True
+          dtFechaPago.Enabled = True
+          btnSeleccionarCuenta.Enabled = True
+        End If
       End If
 
 
@@ -248,8 +253,9 @@ Public Class frmEditarPagos
   Private Function EsEditable() As Boolean
     Try
       If m_CurrentCuota Is Nothing Then Return False
-      If m_CurrentCuota.EstadoPago = E_EstadoPago.Debe Then Return True
-      If m_CurrentCuota.EstadoPago <> E_EstadoPago.Pago Then Return False
+         If m_CurrentCuota.EstadoPago = E_EstadoPago.Debe Then Return True
+         If m_CurrentCuota.EstadoPago = E_EstadoPago.DebePendiente Then Return True
+         If m_CurrentCuota.EstadoPago <> E_EstadoPago.Pago Then Return False
       If m_lstPagos.Exists(Function(c) (c.NumCuota > m_CurrentCuota.NumCuota) AndAlso (c.EstadoPago = E_EstadoPago.Pago)) Then Return False
       Return True
     Catch ex As Exception
@@ -261,6 +267,24 @@ Public Class frmEditarPagos
   Private Sub btnAplicaPago_Click(sender As Object, e As EventArgs) Handles btnAplicaPago.Click
     Try
       If m_CurrentCuota.EstadoPago = E_EstadoPago.Debe Then
+        m_CurrentCuota.EstadoPago = E_EstadoPago.Pago
+        m_CurrentCuota.FechaPago = dtFechaPago.Value  'g_Today
+        If m_CurrentCuota.NumCuota < m_Producto.TotalCuotas Then
+          'establecer proxima cuota como debe
+          'get proxima cuota->establecerla como debe
+          Dim indice As Integer = m_lstPagos.FindIndex(Function(c) c.NumCuota = (m_CurrentCuota.NumCuota + 1))
+
+          m_lstPagos(indice).EstadoPago = E_EstadoPago.Debe
+          For i As Integer = indice + 1 To m_Producto.TotalCuotas - 1
+            If (i = indice + 1) Then
+              m_lstPagos(i).EstadoPago = E_EstadoPago.DebeProximo
+              Continue For
+            End If
+            m_lstPagos(i).EstadoPago = E_EstadoPago.DebePendiente
+          Next
+        End If
+      End If
+      If m_CurrentCuota.EstadoPago = E_EstadoPago.DebePendiente Then
         m_CurrentCuota.EstadoPago = E_EstadoPago.Pago
         m_CurrentCuota.FechaPago = dtFechaPago.Value  'g_Today
         If m_CurrentCuota.NumCuota < m_Producto.TotalCuotas Then

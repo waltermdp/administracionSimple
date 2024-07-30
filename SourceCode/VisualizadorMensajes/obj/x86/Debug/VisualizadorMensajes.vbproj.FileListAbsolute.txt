@@ -1,0 +1,9 @@
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\bin\x86\Debug\VisualizadorMensajes.exe
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\bin\x86\Debug\VisualizadorMensajes.pdb
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.Form1.resources
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.Resources.resources
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.vbproj.GenerateResource.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.exe
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.pdb
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Debug\VisualizadorMensajes.vbproj.AssemblyReference.cache

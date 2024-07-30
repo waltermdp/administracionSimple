@@ -38,63 +38,65 @@ Public Class clsExcel
          workbookStylesPart.Stylesheet = New DocumentFormat.OpenXml.Spreadsheet.Stylesheet()
          workbookStylesPart.Stylesheet.Save()
 
-
-         themePart1 = spreadSheet.WorkbookPart.AddNewPart(Of DocumentFormat.OpenXml.Packaging.ThemePart)()
-         Dim theme1 As A.Theme = New A.Theme() With {.Name = "tema basico"}
-         theme1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main")
-         Dim themeElements1 As A.ThemeElements = New A.ThemeElements
-         Dim colorScheme1 As A.ColorScheme = New A.ColorScheme() With {.Name = "basico"}
-         Dim hyperlink1 As A.Hyperlink = New A.Hyperlink
-         Dim rgbColorHex1 As A.RgbColorModelHex = New A.RgbColorModelHex() With {.Val = "0000FF"}
-         hyperlink1.Append(rgbColorHex1)
-
-         Dim followhyperlink1 As A.FollowedHyperlinkColor = New A.FollowedHyperlinkColor
-         Dim rgbColorHex2 As A.RgbColorModelHex = New A.RgbColorModelHex() With {.Val = "800080"}
-         followhyperlink1.Append(rgbColorHex2)
-
-         colorScheme1.Append(hyperlink1)
-         colorScheme1.Append(followhyperlink1)
-
-         Dim fontScheme3 As A.FontScheme = New A.FontScheme() With {.Name = "basico"}
-         Dim majorFont1 As A.MajorFont = New A.MajorFont()
-         Dim latinFont1 As A.LatinFont = New A.LatinFont() With {.Typeface = "Calibri Light", .Panose = "020F0302020204030204"}
-         majorFont1.Append(latinFont1)
-         Dim minorFont1 As A.MinorFont = New A.MinorFont()
-         Dim latinFont2 As A.LatinFont = New A.LatinFont() With {.Typeface = "Calibri", .Panose = "020F0502020204030204"}
-         minorFont1.Append(latinFont2)
-         fontScheme3.Append(majorFont1)
-         fontScheme3.Append(minorFont1)
-
-         Dim formatScheme1 As A.FormatScheme = New A.FormatScheme() With {.Name = "basico"}
-         Dim fillStyleList1 As A.FillStyleList = New A.FillStyleList()
-         Dim solidFill1 As A.SolidFill = New A.SolidFill()
-         Dim schemeColor1 As A.SchemeColor = New A.SchemeColor() With {.Val = A.SchemeColorValues.PhColor}
-
-         solidFill1.Append(schemeColor1)
-
-         fillStyleList1.Append(solidFill1)
-
-         Dim lineStyleList1 As A.LineStyleList = New A.LineStyleList()
-         Dim outline1 As A.Outline = New A.Outline() With {.Width = 6350, .CapType = A.LineCapValues.Flat, .CompoundLineType = A.CompoundLineValues.Single, .Alignment = A.PenAlignmentValues.Center}
-
-         .
-
-         formatScheme1.Append(fillStyleList1)
-         formatScheme1.Append(lineStyleList1)
-         'formatScheme1.Append(effectStyleList1)
-         'formatScheme1.Append(backgroundFillStyleList1)
+         If False Then
 
 
-         themeElements1.Append(colorScheme1)
-         themeElements1.Append(fontScheme3)
-         themeElements1.Append(formatScheme1)
+            themePart1 = spreadSheet.WorkbookPart.AddNewPart(Of DocumentFormat.OpenXml.Packaging.ThemePart)()
+            Dim theme1 As A.Theme = New A.Theme() With {.Name = "tema basico"}
+            theme1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main")
+            Dim themeElements1 As A.ThemeElements = New A.ThemeElements
+            Dim colorScheme1 As A.ColorScheme = New A.ColorScheme() With {.Name = "basico"}
+            Dim hyperlink1 As A.Hyperlink = New A.Hyperlink
+            Dim rgbColorHex1 As A.RgbColorModelHex = New A.RgbColorModelHex() With {.Val = "0000FF"}
+            hyperlink1.Append(rgbColorHex1)
 
-         theme1.Append(themeElements1)
-         themePart1.Theme = theme1
-         'themePart1.Theme.Save()
+            Dim followhyperlink1 As A.FollowedHyperlinkColor = New A.FollowedHyperlinkColor
+            Dim rgbColorHex2 As A.RgbColorModelHex = New A.RgbColorModelHex() With {.Val = "800080"}
+            followhyperlink1.Append(rgbColorHex2)
+
+            colorScheme1.Append(hyperlink1)
+            colorScheme1.Append(followhyperlink1)
+
+            Dim fontScheme3 As A.FontScheme = New A.FontScheme() With {.Name = "basico"}
+            Dim majorFont1 As A.MajorFont = New A.MajorFont()
+            Dim latinFont1 As A.LatinFont = New A.LatinFont() With {.Typeface = "Calibri Light", .Panose = "020F0302020204030204"}
+            majorFont1.Append(latinFont1)
+            Dim minorFont1 As A.MinorFont = New A.MinorFont()
+            Dim latinFont2 As A.LatinFont = New A.LatinFont() With {.Typeface = "Calibri", .Panose = "020F0502020204030204"}
+            minorFont1.Append(latinFont2)
+            fontScheme3.Append(majorFont1)
+            fontScheme3.Append(minorFont1)
+
+            Dim formatScheme1 As A.FormatScheme = New A.FormatScheme() With {.Name = "basico"}
+            Dim fillStyleList1 As A.FillStyleList = New A.FillStyleList()
+            Dim solidFill1 As A.SolidFill = New A.SolidFill()
+            Dim schemeColor1 As A.SchemeColor = New A.SchemeColor() With {.Val = A.SchemeColorValues.PhColor}
+
+            solidFill1.Append(schemeColor1)
+
+            fillStyleList1.Append(solidFill1)
+
+            Dim lineStyleList1 As A.LineStyleList = New A.LineStyleList()
+            Dim outline1 As A.Outline = New A.Outline() With {.Width = 6350, .CapType = A.LineCapValues.Flat, .CompoundLineType = A.CompoundLineValues.Single, .Alignment = A.PenAlignmentValues.Center}
 
 
-         'themePart1.Theme = theme1
+
+            formatScheme1.Append(fillStyleList1)
+            formatScheme1.Append(lineStyleList1)
+            'formatScheme1.Append(effectStyleList1)
+            'formatScheme1.Append(backgroundFillStyleList1)
+
+
+            themeElements1.Append(colorScheme1)
+            themeElements1.Append(fontScheme3)
+            themeElements1.Append(formatScheme1)
+
+            theme1.Append(themeElements1)
+            themePart1.Theme = theme1
+            'themePart1.Theme.Save()
+
+            'themePart1.Theme = theme1
+         End If
 
       Catch exception As System.Exception
          MessageBox.Show(exception.Message, "Excel OpenXML basics")
@@ -174,8 +176,8 @@ Public Class clsExcel
       fillStyleList1.Append(solidFill1)
 
       formatScheme1.Append(fillStyleList1)
-      formatScheme1.Append(lineStyleList1)
-      formatScheme1.Append(effectStyleList1)
+      'formatScheme1.Append(lineStyleList1)
+      'formatScheme1.Append(effectStyleList1)
       'formatScheme1.Append(backgroundFillStyleList1)
 
 

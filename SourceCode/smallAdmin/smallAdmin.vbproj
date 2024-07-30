@@ -236,6 +236,7 @@
     <Compile Include="Form\ExportImportDebitos\frmImportarPatagonia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modulos\ExcelExportar\clsExcel.vb" />
     <Compile Include="Modulos\Entidades\CBU\clsInfoExportarCBU.vb" />
     <Compile Include="Modulos\Entidades\CBU\clsInfoImportarCBU.vb" />
     <Compile Include="Modulos\Entidades\CBU\clsCBU.vb" />

@@ -6,31 +6,173 @@ smallAdmin
 </name>
 </assembly>
 <members>
+<member name="T:main.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
 <member name="P:main.My.Resources.Resources.ResourceManager">
-	<summary>
+<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
-</member><member name="P:main.My.Resources.Resources.Culture">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.Culture">
+<summary>
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
-</member><member name="P:main.My.Resources.Resources.Fondo810x370">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.Fondo810x370">
+<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:main.My.Resources.Resources.FondoGral">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.FondoGral">
+<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="P:main.My.Resources.Resources.FondoGral_960x540">
-	<summary>
+</member>
+<member name="P:main.My.Resources.Resources.FondoGral_960x540">
+<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
-</member><member name="T:main.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
+</member>
+<member name="M:main.CEXCEL.clsExcel.CreateWorkbook(System.String)">
+ <summary>
+ Creates the workbook
+ </summary>
+ <returns>Spreadsheet created</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.AddWorksheet(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+ <summary>
+ Adds a new worksheet to the workbook
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="name">Name of the worksheet</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.AddBasicStyles(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument)">
+ <summary>
+ Adds the basic styles to the workbook
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.AddSharedStrings(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.Collections.Generic.List{System.String})">
+ <summary>
+ Adds a list of strings to the shared strings table.
+ </summary>
+ <param name="spreadsheet">The spreadsheet</param>
+ <param name="stringList">Strings to add</param>
+ <returns></returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.AddSharedString(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String,System.Boolean)">
+ <summary>
+ Add a single string to shared strings table.
+ Shared string table is created if it doesn't exist.
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="stringItem">string to add</param>
+ <param name="save">Save the shared string table</param>
+ <returns></returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.IndexOfSharedString(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+ <summary>
+ Returns the index of a shared string.
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="stringItem">String to search for</param>
+ <returns>Index of a shared string. -1 if not found</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.ColumnNameFromIndex(System.UInt32)">
+ <summary>
+ Converts a column number to column name (i.e. A, B, C..., AA, AB...)
+ </summary>
+ <param name="columnIndex">Index of the column</param>
+ <returns>Column name</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.SetStringCellValue(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Spreadsheet.Worksheet,System.UInt32,System.UInt32,System.String,System.Boolean,System.Boolean)">
+ <summary>
+ Sets a string value to a cell
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="worksheet">Worksheet to use</param>
+ <param name="columnIndex">Index of the column</param>
+ <param name="rowIndex">Index of the row</param>
+ <param name="stringValue">String value to set</param>
+ <param name="useSharedString">Use shared strings? If true and the string isn't found in shared strings, it will be added</param>
+ <param name="save">Save the worksheet</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.SetDateCellValue(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Spreadsheet.Worksheet,System.UInt32,System.UInt32,System.DateTime,System.Nullable{System.UInt32},System.Boolean)">
+ <summary>
+ Sets a cell value with a date
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="worksheet">Worksheet to use</param>
+ <param name="columnIndex">Index of the column</param>
+ <param name="rowIndex">Index of the row</param>
+ <param name="datetimeValue">DateTime value</param>
+ <param name="styleIndex">Style to use</param>
+ <param name="save">Save the worksheet</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.SetDoubleCellValue(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Spreadsheet.Worksheet,System.UInt32,System.UInt32,System.Double,System.Nullable{System.UInt32},System.Boolean)">
+ <summary>
+ Sets a cell value with double number
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="worksheet">Worksheet to use</param>
+ <param name="columnIndex">Index of the column</param>
+ <param name="rowIndex">Index of the row</param>
+ <param name="doubleValue">Double value</param>
+ <param name="styleIndex">Style to use</param>
+ <param name="save">Save the worksheet</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.SetBooleanCellValue(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Spreadsheet.Worksheet,System.UInt32,System.UInt32,System.Boolean,System.Nullable{System.UInt32},System.Boolean)">
+ <summary>
+ Sets a cell value with boolean value
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="worksheet">Worksheet to use</param>
+ <param name="columnIndex">Index of the column</param>
+ <param name="rowIndex">Index of the row</param>
+ <param name="boolValue">Boolean value</param>
+ <param name="styleIndex">Style to use</param>
+ <param name="save">Save the worksheet</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.SetColumnWidth(DocumentFormat.OpenXml.Spreadsheet.Worksheet,System.Int32,System.Int32)">
+ <summary>
+ Sets the column width
+ </summary>
+ <param name="worksheet">Worksheet to use</param>
+ <param name="columnIndex">Index of the column</param>
+ <param name="width">Width to set</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.SetCellValue(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,DocumentFormat.OpenXml.Spreadsheet.Worksheet,System.UInt32,System.UInt32,DocumentFormat.OpenXml.Spreadsheet.CellValues,System.String,System.Nullable{System.UInt32},System.Boolean)">
+ <summary>
+ Sets a cell value. The row and the cell are created if they do not exist. If the cell exists, the contents of the cell is overwritten
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="worksheet">Worksheet to use</param>
+ <param name="columnIndex">Index of the column</param>
+ <param name="rowIndex">Index of the row</param>
+ <param name="valueType">Type of the value</param>
+ <param name="value">The actual value</param>
+ <param name="styleIndex">Index of the style to use. Null if no style is to be defined</param>
+ <param name="save">Save the worksheet?</param>
+ <returns>True if succesful</returns>
+</member>
+<member name="M:main.CEXCEL.clsExcel.AddPredefinedStyles(DocumentFormat.OpenXml.Packaging.SpreadsheetDocument,System.String)">
+ <summary>
+ Adds a predefined style from the given xml
+ </summary>
+ <param name="spreadsheet">Spreadsheet to use</param>
+ <param name="xml">Style definition as xml</param>
+ <returns>True if succesful</returns>
 </member>
 </members>
 </doc>

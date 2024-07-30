@@ -34,3 +34,5 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.Framework.dll
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.xml
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x86\Release\DocumentFormat.OpenXml.Framework.xml
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Release\libCommon.vbproj.CopyComplete

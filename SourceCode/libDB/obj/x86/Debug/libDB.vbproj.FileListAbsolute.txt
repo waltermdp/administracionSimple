@@ -73,4 +73,6 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\D
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.xml
 E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
-E:\Users\walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbprojResolveAssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.AssemblyReference.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.CoreCompileInputs.cache
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.CopyComplete

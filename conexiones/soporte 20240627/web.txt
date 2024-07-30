@@ -1,0 +1,27 @@
+66.113.227.94
+w00111529
+d0]vWi[CDdJ+*7W>
+
+test_w	123456789	7d74c0a6-d72e-4872-acf5-d7b1666db01d	ID=387
+Source File: D:\CustomerData\webspaces\webspace_00111529\wwwroot\endodigi.com\wucLeftBottom.ascx    Line: 49
+Source File: D:\CustomerData\webspaces\webspace_00111529\wwwroot\endodigi.com\wucRightBottom.ascx    Line: 21
+
+objWEB_Users.Get_Data(Username, _
+                                            Password, _
+                                            objWEB_User_Data, _
+                                            Entorno.Idioma, _
+                                            strMsgServer)
+devuelve nothing
+
+Public Function Get_Data -> devuelve nada->vInfoUser = Info.clsInfoUser.Get_User(vUsername, vPassword)
+
+ Public Shared Function Get_User.. -> retorna nada->   dt = ta.GetData_ByUserName(vUserName) hay 3 funciones mas que retorna nada ante error
+
+
+Connection string: Data Source=10.16.112.78;Initial Catalog=db1067552_data;Integrated Security=False;User ID=u1067552_user;Connect Timeout=15;Encrypt=False;Packet Size=4096
+Connection timeout: 15
+Database: db1067552_data
+Datasource: 10.16.112.78
+Network packet size: 4096
+Server version: 09.00.4053
+Work station id: WEBDATAADM01
