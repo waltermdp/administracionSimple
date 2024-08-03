@@ -1,4 +1,6 @@
 ﻿Imports System
+Imports System.Net
+Imports System.Text
 Public Class Form1
 
   Private m_lista As New List(Of clsIntercambio)
@@ -137,6 +139,26 @@ Public Class Form1
       If dgvData1.Rows.Count > 0 Then
         ttlineaactual.Text = dgvData1.SelectedRows(0).Index.ToString
       End If
+    Catch ex As Exception
+      MsgBox(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub EnviarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnviarToolStripMenuItem.Click
+    Try
+
+      Dim WebRequest As HttpWebRequest
+      WebRequest = CType(HttpWebRequest.Create("https://api.ultramsg.com/instance91356/messages/chat"), HttpWebRequest)
+      Dim postdata As String = "token=enl2yklbv7mp7i2z&to=+542235585794&body=WhatsApp API on UltraMsg.com works good"
+      Dim enc As UTF8Encoding = New System.Text.UTF8Encoding()
+      Dim postdatabytes As Byte() = enc.GetBytes(postdata)
+      WebRequest.Method = "POST"
+      WebRequest.ContentType = "application/x-www-form-urlencoded"
+      'WebRequest.GetRequestStream().Write(postdatabytes)
+      WebRequest.GetRequestStream().Write(postdatabytes, 0, postdatabytes.Length)
+      Dim ret As New System.IO.StreamReader(WebRequest.GetResponse().GetResponseStream())
+      Console.WriteLine(ret.ReadToEnd())
+
     Catch ex As Exception
       MsgBox(ex.Message)
     End Try

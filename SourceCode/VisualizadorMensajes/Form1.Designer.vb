@@ -30,11 +30,6 @@ Partial Class Form1
         Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AbrirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.dgvData1 = New System.Windows.Forms.DataGridView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ttCopiar = New System.Windows.Forms.ToolStripTextBox()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.tp01 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tp02 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ClienteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Telefono1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaPagoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,17 +39,24 @@ Partial Class Form1
         Me.WhatsappLinkDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewLinkColumn()
         Me.MensajeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClsIntercambioBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ttCopiar = New System.Windows.Forms.ToolStripTextBox()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.tp01 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tp02 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ttlineaactual = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.OtrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnviarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ClsIntercambioBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
-        CType(Me.ClsIntercambioBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArchivoToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArchivoToolStripMenuItem, Me.OtrosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(956, 24)
@@ -71,7 +73,7 @@ Partial Class Form1
         'AbrirToolStripMenuItem
         '
         Me.AbrirToolStripMenuItem.Name = "AbrirToolStripMenuItem"
-        Me.AbrirToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+        Me.AbrirToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AbrirToolStripMenuItem.Text = "Abrir"
         '
         'dgvData1
@@ -126,43 +128,6 @@ Partial Class Form1
         Me.dgvData1.Size = New System.Drawing.Size(956, 526)
         Me.dgvData1.TabIndex = 25
         Me.dgvData1.TabStop = False
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ttCopiar})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(161, 22)
-        '
-        'ttCopiar
-        '
-        Me.ttCopiar.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ttCopiar.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.ttCopiar.Name = "ttCopiar"
-        Me.ttCopiar.ReadOnly = True
-        Me.ttCopiar.Size = New System.Drawing.Size(100, 16)
-        Me.ttCopiar.Text = "Copiar"
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tp01, Me.tp02, Me.ttlineaactual})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 528)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(956, 22)
-        Me.StatusStrip1.TabIndex = 27
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'tp01
-        '
-        Me.tp01.Name = "tp01"
-        Me.tp01.Size = New System.Drawing.Size(119, 17)
-        Me.tp01.Text = "ToolStripStatusLabel1"
-        '
-        'tp02
-        '
-        Me.tp02.Name = "tp02"
-        Me.tp02.Size = New System.Drawing.Size(119, 17)
-        Me.tp02.Text = "ToolStripStatusLabel2"
         '
         'ClienteDataGridViewTextBoxColumn
         '
@@ -226,11 +191,61 @@ Partial Class Form1
         '
         Me.ClsIntercambioBindingSource1.DataSource = GetType(VisualizadorMensajes.clsIntercambio)
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ttCopiar})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(161, 22)
+        '
+        'ttCopiar
+        '
+        Me.ttCopiar.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.ttCopiar.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ttCopiar.Name = "ttCopiar"
+        Me.ttCopiar.ReadOnly = True
+        Me.ttCopiar.Size = New System.Drawing.Size(100, 16)
+        Me.ttCopiar.Text = "Copiar"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tp01, Me.tp02, Me.ttlineaactual})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 528)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(956, 22)
+        Me.StatusStrip1.TabIndex = 27
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'tp01
+        '
+        Me.tp01.Name = "tp01"
+        Me.tp01.Size = New System.Drawing.Size(119, 17)
+        Me.tp01.Text = "ToolStripStatusLabel1"
+        '
+        'tp02
+        '
+        Me.tp02.Name = "tp02"
+        Me.tp02.Size = New System.Drawing.Size(119, 17)
+        Me.tp02.Text = "ToolStripStatusLabel2"
+        '
         'ttlineaactual
         '
         Me.ttlineaactual.Name = "ttlineaactual"
         Me.ttlineaactual.Size = New System.Drawing.Size(10, 17)
         Me.ttlineaactual.Text = " "
+        '
+        'OtrosToolStripMenuItem
+        '
+        Me.OtrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnviarToolStripMenuItem})
+        Me.OtrosToolStripMenuItem.Name = "OtrosToolStripMenuItem"
+        Me.OtrosToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.OtrosToolStripMenuItem.Text = "Otros"
+        '
+        'EnviarToolStripMenuItem
+        '
+        Me.EnviarToolStripMenuItem.Name = "EnviarToolStripMenuItem"
+        Me.EnviarToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EnviarToolStripMenuItem.Text = "Enviar"
         '
         'Form1
         '
@@ -247,11 +262,11 @@ Partial Class Form1
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.dgvData1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ClsIntercambioBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ContextMenuStrip1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        CType(Me.ClsIntercambioBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -276,4 +291,6 @@ Partial Class Form1
     Friend WithEvents tp01 As ToolStripStatusLabel
     Friend WithEvents tp02 As ToolStripStatusLabel
     Friend WithEvents ttlineaactual As ToolStripStatusLabel
+    Friend WithEvents OtrosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EnviarToolStripMenuItem As ToolStripMenuItem
 End Class

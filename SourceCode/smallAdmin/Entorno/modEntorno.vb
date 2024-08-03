@@ -23,7 +23,7 @@ Module Entorno
 
   '
 
-  Private dbpw As String = String.Empty
+  Private dbpw As String = "PIC18f97j60!"
   Public DB_SLocal_ConnectionString As String = String.Empty
 
   Public g_TipoPago As New List(Of manDB.clsTipoPago)

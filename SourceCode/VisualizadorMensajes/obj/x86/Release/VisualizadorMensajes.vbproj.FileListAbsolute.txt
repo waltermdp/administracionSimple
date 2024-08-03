@@ -4,3 +4,4 @@ e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMen
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Release\VisualizadorMensajes.vbproj.GenerateResource.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Release\VisualizadorMensajes.vbproj.CoreCompileInputs.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Release\VisualizadorMensajes.exe
+e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\VisualizadorMensajes\obj\x86\Release\VisualizadorMensajes.vbproj.AssemblyReference.cache
