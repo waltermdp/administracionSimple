@@ -53,3 +53,10 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\bin\x
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.CoreCompileInputs.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.CopyComplete
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.AssemblyReference.cache
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.dll
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.xml
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.AssemblyReference.cache
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.CoreCompileInputs.cache
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libCommon\obj\x86\Debug\libCommon.vbproj.CopyComplete

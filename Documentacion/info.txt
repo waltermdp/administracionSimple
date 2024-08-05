@@ -1,0 +1,27 @@
+https://docs.google.com/document/d/1CejqnxK54585Fzxpc54NtruTX7Seilu5PuJpJoonyzI/edit
+
+Hola Walter buen día,
+
+los premios de los vendedores son por libros vendidos , las columnas que dicen las cuotas es xq depende de la cantidad de cuotas en que se hizo la venta, el porcentaje que sacan.
+En el primer cuadro esta detallado por venta , cliente dni cantidad de libros que compro y el importe final que es del que se sacan los premios 
+osea se suman las comisiones por venta y después se le agregan los premios que llego . El porcentaje de los premios se saca del total vendido.
+El precio de los libros varia según las cuotas o la cantidad de libros comprados, ya que de eso depende si hay algún descuento. Si necesitas te puedo enviar la lista de precios y el listin financiero que usan los chicos 
+Las liquidaciones las cierro a fin de mes y entran todas las ventas que se les cobro la primer cuota.
+
+Las formas de Pago son : 
+Efectivo 
+visa debito 
+visa credito 
+master debito 
+cbu
+y mercado pago 
+Y después puede haber algunas ventas con tarjetas de crédito pasada por el posnet , pero son las menos 
+
+Te paso los archivos de visa , cbu y máster que envió 
+ 
+CBU : QUINTO 
+VISA DEBITO  : DEBLIQD 
+VISA CREDITO:DEBLIQC
+MASTER:ARGENTINA_DIC
+
+ Bueno cualquier otra cosas que necesites o si me falto algo avísame , saludos 

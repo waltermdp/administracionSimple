@@ -178,7 +178,10 @@ Public Class frmVenta
        
         lblTotalCuotas.Text = .TotalCuotas.ToString
         lblTotal.Text = String.Format(g_Cultura, "{0:C}", .Precio)
-        lblCuota.Text = String.Format(g_Cultura, "{0:C}", .ValorCuotaFija)
+        If .TotalCuotas >= 1 Then
+          lblCuota.Text = String.Format(g_Cultura, "{0:C}", .Precio / .TotalCuotas)
+        End If
+
         lblNumeroVenta.Text = .NumComprobante.ToString
       End With
       lblMedioDePago.Text = FillMedioDePagoDescripcion()
@@ -358,12 +361,12 @@ Public Class frmVenta
           Exit Sub
         End If
       End If
-      'La lista de pagos ya esta en el objeto producto
+            'La lista de pagos ya esta en el objeto producto
 
-      'actualizar valor de debe
-      m_Producto.CuotasDebe = m_Producto.ListaPagos.Count - m_Producto.ListaPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
+            'actualizar valor de debe
+            'm_Producto.CuotasDebe = m_Producto.ListaPagos.Count - m_Producto.ListaPagos.Where(Function(c) c.EstadoPago = E_EstadoPago.Pago).Count
 
-      If clsProducto.Save(m_Producto) <> Result.OK Then
+            If clsProducto.Save(m_Producto) <> Result.OK Then
         MsgBox("Fallo al guardar la venta en la base de datos")
         Exit Sub
       End If
@@ -577,17 +580,20 @@ Public Class frmVenta
       If m_Producto Is Nothing Then Exit Sub
 
       'No se puede editar lo que ya esta pagado, se puede modificar en adelante, considerando lo ya pagado
-      Dim Precio As Decimal
-      Dim ValorCuota As Decimal
+      'Dim Precio As Decimal
+      'Dim ValorCuota As Decimal
       lblFechaVenta.Text = m_Producto.FechaVenta.ToString("dd/MM/yyyy")
       lblNumeroVenta.Text = m_Producto.NumComprobante.ToString
       lblMedioDePago.Text = FillMedioDePagoDescripcion()
       lblTotal.Text = String.Format(g_Cultura, "{0:C}", m_Producto.Precio)
       lblTotalCuotas.Text = m_Producto.TotalCuotas.ToString
-      lblCuota.Text = String.Format(g_Cultura, "{0:C}", m_Producto.ValorCuotaFija)
+      If m_Producto.TotalCuotas >= 1 Then
+        lblCuota.Text = String.Format(g_Cultura, "{0:C}", m_Producto.Precio / m_Producto.TotalCuotas)
+      End If
 
-      ConvStr2Dec(m_Producto.Precio.ToString, Precio)
-      ConvStr2Dec(m_Producto.ValorCuotaFija.ToString, ValorCuota)
+
+      'ConvStr2Dec(m_Producto.Precio.ToString, Precio)
+      'ConvStr2Dec(m_Producto.ValorCuotaFija.ToString, ValorCuota)
 
 
 

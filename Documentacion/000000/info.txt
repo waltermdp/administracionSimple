@@ -1,0 +1,8 @@
+-filtrar stock por cantidad, alarma
+-pendiente de entregado y entregado.
+-ver que articulos a entregar
+-deposito y responsable por grupos
+
+------------------
+export
+Fecha de presentacion

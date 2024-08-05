@@ -128,16 +128,16 @@ Public Class clsInfoProducto
     End Set
   End Property
 
-  Public Property CuotasDebe As Integer
-    Get
-      Return m_CuotasDebe
-    End Get
-    Set(value As Integer)
-      m_CuotasDebe = value
-    End Set
-  End Property
+    'Public Property CuotasDebe As Integer
+    '  Get
+    '    Return m_CuotasDebe
+    '  End Get
+    '  Set(value As Integer)
+    '    m_CuotasDebe = value
+    '  End Set
+    'End Property
 
-  Public Property FechaPrimerPago As Date
+    Public Property FechaPrimerPago As Date
     Get
       Return m_FechaPrimerPago
     End Get
@@ -182,16 +182,16 @@ Public Class clsInfoProducto
     End Set
   End Property
 
-  Public Property ValorCuotaFija As Decimal
-    Get
-      Return m_ValorCuotaFija
-    End Get
-    Set(value As Decimal)
-      m_ValorCuotaFija = value
-    End Set
-  End Property
+    'Public Property ValorCuotaFija As Decimal
+    '  Get
+    '    Return m_ValorCuotaFija
+    '  End Get
+    '  Set(value As Decimal)
+    '    m_ValorCuotaFija = value
+    '  End Set
+    'End Property
 
-  Public Property ListaArticulos As List(Of clsInfoArticuloVendido)
+    Public Property ListaArticulos As List(Of clsInfoArticuloVendido)
     Get
       Return m_listArticulos
     End Get
@@ -222,7 +222,7 @@ Public Class clsInfoProducto
     FechaVenta = GetAhora()
     GuidCuenta = Nothing
     Adelanto = 0
-    ValorCuotaFija = 0
+    'ValorCuotaFija = 0
     m_listPagos.Clear()
     Cuenta = New clsInfoCuenta
     m_listArticulos.Clear()

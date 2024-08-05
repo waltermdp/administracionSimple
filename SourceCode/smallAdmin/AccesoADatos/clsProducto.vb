@@ -317,12 +317,12 @@ Public Class clsProducto
           Call Print_msg(ex.Message)
         End Try
 
-        Try
-          vInfoProducto.CuotasDebe = CInt(IIf(IsDBNull(.Item("CuotasDebe")), -1, .Item("CuotasDebe")))
-        Catch ex As Exception
-          vInfoProducto.CuotasDebe = -1
-          Call Print_msg(ex.Message)
-        End Try
+        'Try
+        '  vInfoProducto.CuotasDebe = CInt(IIf(IsDBNull(.Item("CuotasDebe")), -1, .Item("CuotasDebe")))
+        'Catch ex As Exception
+        '  vInfoProducto.CuotasDebe = -1
+        '  Call Print_msg(ex.Message)
+        'End Try
 
 
         Try
@@ -353,12 +353,12 @@ Public Class clsProducto
           Call Print_msg(ex.Message)
         End Try
 
-        Try
-          vInfoProducto.ValorCuotaFija = CDec(IIf(IsDBNull(.Item("ValorCuotaFija")), -1, .Item("ValorCuotaFija")))
-        Catch ex As Exception
-          vInfoProducto.ValorCuotaFija = -1
-          Call Print_msg(ex.Message)
-        End Try
+        'Try
+        '  vInfoProducto.ValorCuotaFija = CDec(IIf(IsDBNull(.Item("ValorCuotaFija")), -1, .Item("ValorCuotaFija")))
+        'Catch ex As Exception
+        '  vInfoProducto.ValorCuotaFija = -1
+        '  Call Print_msg(ex.Message)
+        'End Try
 
         Try
           vInfoProducto.NumComprobante = CInt(IIf(IsDBNull(.Item("NumComprobante")), -1, .Item("NumComprobante")))
@@ -546,12 +546,12 @@ Public Class clsProducto
             strSQL.Append("""{" & .GuidTipoPago.ToString & "}"",")
             strSQL.Append("""" & .Precio.ToString & """,")
             strSQL.Append("""" & .TotalCuotas.ToString & """,")
-            strSQL.Append("""" & .CuotasDebe.ToString & """,")
+            'strSQL.Append("""" & .CuotasDebe.ToString & """,")
             strSQL.Append("""" & .FechaVenta & """,")
             strSQL.Append("""" & .FechaPrimerPago & """,")
             strSQL.Append("""{" & .GuidCuenta.ToString & "}"",")
             strSQL.Append("""" & .Adelanto.ToString & """,")
-            strSQL.Append("""" & .ValorCuotaFija.ToString & """,")
+            'strSQL.Append("""" & .ValorCuotaFija.ToString & """,")
             strSQL.Append("""" & .NumComprobante.ToString & """,")
             strSQL.Append("""" & .Estado.ToString & """")
             strSQL.Append(")")
@@ -577,12 +577,12 @@ Public Class clsProducto
             strSQL.Append("[GuidTipoPago]=""{" & .GuidTipoPago.ToString & "}"",")
             strSQL.Append("[Precio]=""" & .Precio.ToString & """,")
             strSQL.Append("[TotalCuotas]=""" & .TotalCuotas.ToString & """,")
-            strSQL.Append("[CuotasDebe]=""" & .CuotasDebe.ToString & """,")
+            'strSQL.Append("[CuotasDebe]=""" & .CuotasDebe.ToString & """,")
             strSQL.Append("[FechaVenta]=""" & .FechaVenta & """,")
             strSQL.Append("[FechaPrimerPago]=""" & .FechaPrimerPago & """,")
             strSQL.Append("[GuidCuenta]=""{" & .GuidCuenta.ToString & "}"",")
             strSQL.Append("[Adelanto]=""" & .Adelanto.ToString & """,")
-            strSQL.Append("[ValorCuotaFija]=""" & .ValorCuotaFija.ToString & """,")
+            'strSQL.Append("[ValorCuotaFija]=""" & .ValorCuotaFija.ToString & """,")
             strSQL.Append("[NumComprobante]=""" & .NumComprobante.ToString & """,")
             strSQL.Append("[Estado]=""" & .Estado.ToString & """")
 

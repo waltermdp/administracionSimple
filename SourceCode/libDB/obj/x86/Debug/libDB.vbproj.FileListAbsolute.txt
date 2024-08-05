@@ -40,7 +40,6 @@ C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\l
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.dll
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.pdb
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\libCommon.xml
-C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbprojResolveAssemblyReference.cache
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.Resources.resources
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.GenerateResource.Cache
 C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.dll
@@ -76,3 +75,10 @@ E:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\bin\x86\D
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.AssemblyReference.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.CoreCompileInputs.cache
 e:\Users\Walter\Documents\GitHub\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.CopyComplete
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.dll
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.dll
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.xml
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\bin\x86\Debug\DocumentFormat.OpenXml.Framework.xml
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.AssemblyReference.cache
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.CoreCompileInputs.cache
+C:\repositorio\AdminSimple\administracionSimple\SourceCode\libDB\obj\x86\Debug\libDB.vbproj.CopyComplete
