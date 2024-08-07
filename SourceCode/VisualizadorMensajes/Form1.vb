@@ -146,6 +146,10 @@ Public Class Form1
 
   Private Sub EnviarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnviarToolStripMenuItem.Click
     Try
+      If m_lista.Count <= 0 Then
+        MsgBox("No hay registros para enviar")
+        Exit Sub
+      End If
 
       Dim WebRequest As HttpWebRequest
       WebRequest = CType(HttpWebRequest.Create("https://api.ultramsg.com/instance91356/messages/chat"), HttpWebRequest)
