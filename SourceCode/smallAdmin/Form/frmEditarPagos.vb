@@ -100,7 +100,9 @@ Public Class frmEditarPagos
         txtFechaVenta.Text = .FechaVenta.ToString("dd/MM/yyyy")
         txtPrecioTotal.Text = .Precio.ToString
         txtDiaVencimiento.Text = .FechaPrimerPago.Day.ToString
-        txtPrecioCuota.Text = .ValorCuotaFija.ToString
+        If m_lstPagos.Count = 1 Then
+          txtPrecioCuota.Text = m_lstPagos.First.ValorCuota.ToString  ' .ValorCuotaFija.ToString
+        End If
         Dim vCliente As ClsInfoPersona = Nothing
         If clsPersona.Load(.GuidCliente, vCliente) = Result.OK Then
           txtNombreCliente.Text = vCliente.ToString

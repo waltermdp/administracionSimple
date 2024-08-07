@@ -34,7 +34,7 @@ Public Class frmDeben
       dtDebenHasta.Value = g_Today
 
       Dim MetodosBusqueda As New List(Of clsTipoPago)
-      'MetodosBusqueda.Add(New clsTipoPago With {.GuidTipo = Guid.Empty, .Nombre = "Todos Los Medios"})
+
       MetodosBusqueda.AddRange(g_TipoPago.ToList)
       cmbMetodosDePago.DataSource = MetodosBusqueda
       cmbMetodosDePago.SelectedIndex = 0
@@ -1255,11 +1255,4 @@ Public Class frmDeben
   End Function
 
 
-
-
-
-
-
-
-  
 End Class

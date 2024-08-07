@@ -123,7 +123,7 @@ Public Class frmEstablecerPagos
             End If
           Next
           If .ListaPagos.Count > 0 Then
-            txtValorCuota.SetDecimalMonedaValue(.ValorCuotaFija) '.Text = .ValorCuotaFija.ToString
+            txtValorCuota.SetDecimalMonedaValue(.Precio / .TotalCuotas) ' .ValorCuotaFija) '.Text = .ValorCuotaFija.ToString
           Else
             txtValorCuota.SetDecimalMonedaValue(.Precio) '.Text = .Precio.ToString
           End If
@@ -178,7 +178,7 @@ Public Class frmEstablecerPagos
       With m_Producto
         
         .Precio = txtPrecioTotal.GetDecimalMonedaValue
-        .ValorCuotaFija = txtValorCuota.GetDecimalMonedaValue
+        '.ValorCuotaFija = txtValorCuota.GetDecimalMonedaValue
         Dim Cuota As clsCuota = CType(cmbCuotas.SelectedItem, clsCuota)
         .TotalCuotas = Cuota.Cantidad
 

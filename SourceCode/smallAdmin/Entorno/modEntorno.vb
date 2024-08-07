@@ -138,9 +138,9 @@ Module Entorno
 
       CargarTipoPago(g_TipoPago)
       CargarCuotas(g_Cuotas)
-      
 
-      Call ActualizarCuotasVencidas()
+
+
 
       Return Result.OK
     Catch ex As Exception

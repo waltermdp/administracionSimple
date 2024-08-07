@@ -77,7 +77,7 @@ Public Class clsListaPrincipal
             objInfoPrincipal.CuotasTotales = objListProdInfo.TotalCuotas
             objInfoPrincipal.Precio = objListProdInfo.Precio
             objInfoPrincipal.Adelanto = objListProdInfo.Adelanto
-            objInfoPrincipal.ValorCuotaFija = objListProdInfo.ValorCuotaFija
+            'objInfoPrincipal.ValorCuotaFija = objListProdInfo.ValorCuotaFija
             objInfoPrincipal.Comprobante = objListProdInfo.NumComprobante.ToString
 
             Dim objPersona As New ClsInfoPersona
